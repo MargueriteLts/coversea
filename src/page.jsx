@@ -3,10 +3,10 @@ import './page.css'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 
-import CoverExample from './javascript/CoverExample.jsx'
+import ComponentExample from './javascript/ComponentExample.jsx'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('coverExample')
+  const container = document.getElementById('reactComponentRoot')
   const root = createRoot(container)
-  root.render(<CoverExample />)
+  root.render(<ComponentExample />)
 })

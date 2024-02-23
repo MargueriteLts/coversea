@@ -1,12 +1,8 @@
 import './index.css'
-
-import React from 'react'
-import { createRoot } from 'react-dom/client'
-
-import CoverExample from './javascript/CoverExample.jsx'
+import jpg from './images/image.jpg'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('coverExample')
-  const root = createRoot(container)
-  root.render(<CoverExample />)
+  const image = new Image()
+  image.src = jpg
+  document.querySelector('.images').appendChild(image)
 })
