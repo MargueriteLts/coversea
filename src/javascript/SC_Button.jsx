@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-export default class Button extends PureComponent {
+export default class SC_Button extends PureComponent {
   constructor(props) {
     super(props)
   }

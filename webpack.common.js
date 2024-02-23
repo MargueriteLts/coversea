@@ -9,7 +9,8 @@ const path = require('path')
 module.exports = {
   entry: {
     index: './src/index.js',
-    page: './src/page.jsx'
+    page: './src/page.jsx',
+    generatorfun: './src/generator-fun.jsx'
   },
   output: {
     filename: '[name].js',
@@ -104,59 +105,59 @@ module.exports = {
     // Generators
 
     //abstract
-    new HtmlWebpackPlugin({
-      hash: true,
-      scriptLoading: 'blocking',
-      template: './src/pages/generators/generator-abstract.html',
-      filename: './pages/generators/generator-abstract.html',
-      // chunks: ['page']
-    }),
+    // new HtmlWebpackPlugin({
+    //   hash: true,
+    //   scriptLoading: 'blocking',
+    //   template: './src/pages/generators/generator-abstract.html',
+    //   filename: './pages/generators/generator-abstract.html',
+    //   // chunks: ['page']
+    // }),
 
-    //acid
-    new HtmlWebpackPlugin({
-      hash: true,
-      scriptLoading: 'blocking',
-      template: './src/pages/generators/generator-acid.html',
-      filename: './pages/generators/generator-acid.html',
-      // chunks: ['page']
-    }),
+    // //acid
+    // new HtmlWebpackPlugin({
+    //   hash: true,
+    //   scriptLoading: 'blocking',
+    //   template: './src/pages/generators/generator-acid.html',
+    //   filename: './pages/generators/generator-acid.html',
+    //   // chunks: ['page']
+    // }),
 
     //digital
-    new HtmlWebpackPlugin({
-      hash: true,
-      scriptLoading: 'blocking',
-      template: './src/pages/generators/generator-digital.html',
-      filename: './pages/generators/generator-digital.html',
-      // chunks: ['page']
-    }),
+    // new HtmlWebpackPlugin({
+    //   hash: true,
+    //   scriptLoading: 'blocking',
+    //   template: './src/pages/generators/generator-digital.html',
+    //   filename: './pages/generators/generator-digital.html',
+    //   // chunks: ['page']
+    // }),
 
     //fun
     new HtmlWebpackPlugin({
       hash: true,
       scriptLoading: 'blocking',
-      template: './src/pages/generators/generator-fun.html',
-      filename: './pages/generators/generator-fun.html',
-      // chunks: ['page']
+      template: './src/generators/generator-fun.html',
+      filename: './generators/generator-fun.html',
+      chunks: ['generatorfun']
     }),
 
     //minimalist
-    new HtmlWebpackPlugin({
-      hash: true,
-      scriptLoading: 'blocking',
-      template: './src/pages/generators/generator-minimalist.html',
-      filename: './pages/generators/generator-minimalist.html',
-      // chunks: ['page']
-    }),
+    // new HtmlWebpackPlugin({
+    //   hash: true,
+    //   scriptLoading: 'blocking',
+    //   template: './src/pages/generators/generator-minimalist.html',
+    //   filename: './pages/generators/generator-minimalist.html',
+    //   // chunks: ['page']
+    // }),
 
     // Partials
-    new HtmlWebpackPartialsPlugin([
-      {
-        path: path.join(__dirname, './src/partials/analytics.html'),
-        location: 'analytics',
-        template_filename: '*',
-        priority: 'replace'
-      }
-    ])
+    // new HtmlWebpackPartialsPlugin([
+    //   {
+    //     path: path.join(__dirname, './src/partials/analytics.html'),
+    //     location: 'analytics',
+    //     template_filename: '*',
+    //     priority: 'replace'
+    //   }
+    // ])
   ],
   optimization: {
     minimizer: [new CssMinimizerPlugin()]

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-
-import Button from './Button.jsx'
+// import SC_ToggleButton from './SC_ToggleButton.jsx'
+import SC_Button from './SC_Button.jsx'
 import MyInput from './MyInput.jsx'
 // import html2canvas from "html2canvas";
 import { generateHash } from './utilities.js'
@@ -20,9 +20,7 @@ export default class Container extends Component {
       resetShoes,
       phrase,
       myArray : phrase,
-      isMainOpen : true,
-      value: "",
-      fonts: Array(22).fill(null)
+      isMainOpen : true
     }
   }
 
@@ -31,18 +29,18 @@ export default class Container extends Component {
   }
 
   ////////Render bouton reset
-  renderResetButton = () => {
-    const { resetDraw } = this.state
-    return (
-      <div className="interface">
-        <SC_ToggleButton
-          text="Reset design"
-          isOn={resetDraw}
-          handleClick={this.handleResetAction}
-        />
-      </div>
-    )
-  }
+  // renderResetButton = () => {
+  //   const { resetDraw } = this.state
+  //   return (
+  //     <div className="interface">
+  //       <SC_ToggleButton
+  //         text="Reset design"
+  //         isOn={resetDraw}
+  //         handleClick={this.handleResetAction}
+  //       />
+  //     </div>
+  //   )
+  // }
 
   /////Action bouton reset
   handleResetAction = () => {
@@ -69,34 +67,34 @@ export default class Container extends Component {
   }
 
   /////Render choices buttons
-  renderUIResetChoices = () => {
-    const { resetColor, resetShapes, resetCircle, resetShoes } = this.state
+  // renderUIResetChoices = () => {
+  //   const { resetColor, resetShapes, resetCircle, resetShoes } = this.state
 
-    return (
-      <div className="interface">
-        <SC_ToggleButton
-          text="Reset Color"
-          isOn={resetColor}
-          handleClick={this.handleResetColor}
-        />
-        <SC_ToggleButton
-          text="Reset Shapes"
-          isOn={resetShapes}
-          handleClick={this.handleResetShapes}
-        />
-        <SC_ToggleButton
-          text="Reset Circle"
-          isOn={resetCircle}
-          handleClick={this.handleResetCircle}
-        />
-        {/* <SC_ToggleButton
-          text="Reset Shoes"
-          isOn={resetShoes}
-          handleClick={this.handleResetShoes}
-        /> */}
-      </div>
-    )
-  }
+  //   return (
+  //     <div className="interface">
+  //       <SC_ToggleButton
+  //         text="Reset Color"
+  //         isOn={resetColor}
+  //         handleClick={this.handleResetColor}
+  //       />
+  //       <SC_ToggleButton
+  //         text="Reset Shapes"
+  //         isOn={resetShapes}
+  //         handleClick={this.handleResetShapes}
+  //       />
+  //       <SC_ToggleButton
+  //         text="Reset Circle"
+  //         isOn={resetCircle}
+  //         handleClick={this.handleResetCircle}
+  //       />
+  //       {/* <SC_ToggleButton
+  //         text="Reset Shoes"
+  //         isOn={resetShoes}
+  //         handleClick={this.handleResetShoes}
+  //       /> */}
+  //     </div>
+  //   )
+  // }
 
   handleResetColor = () => {
     const { setStoreResetColor } = this.props
@@ -150,64 +148,44 @@ export default class Container extends Component {
 
   ///////////////////////////////////
 
-  // handleChange = (event) => {
-  //   // this.coverLetters(event.target.value)
-  //   this.coverLetters(event.target.value)
-  //   this.setState({
-  //     phrase : event.target.value
-  //   })
-  // }
+  handleChange = (event) => {
+    // this.coverLetters(event.target.value)
+    this.coverLetters(event.target.value)
+    this.setState({
+      phrase : event.target.value
+    })
+  }
 
+  //////////////////////////////////////////////////
 
-  // coverLetters = () => {
-  //   const { setStoreMyArray } = this.props
-  //   const { phrase } = this.state
-  //   let { myArray } = this.state
-  //   const typefaces = ["poppins", "fasthand", "NHU", "IMVCR", "STATION", "ESENIN"]
+  coverLetters = () => {
+    const { setStoreMyArray } = this.props
+    const { phrase } = this.state
+    let { myArray } = this.state
+    const typefaces = ["poppins", "fasthand", "NHU", "IMVCR", "STATION", "ESENIN"]
 
-  //   myArray = phrase.split(" ").map((word, index) => <span className="word" key={index}> {word.split("").map((letter, index) => <span className={typefaces[Math.floor(Math.random() * typefaces.length)]} key={index}> {letter} </span>)} </span>)
+    myArray = phrase.split(" ").map((word, index) => <span className="word" key={index}> {word.split("").map((letter, index) => <span className={typefaces[Math.floor(Math.random() * typefaces.length)]} key={index}> {letter} </span>)} </span>)
 
-  //   setStoreMyArray(myArray)
-
-  //   this.setState({
-  //     myArray : myArray
-  //   })
-  // }
-
-  //
-
-/// not working chat GPT  
-  handleInputChange = (event) => {
-    const fontsList = ["poppins", "fasthand", "NHU", "IMVCR", "STATION", "ESENIN"]
-    const inputValue = event.target.value.slice(0, 22);
-    const fonts = this.state.fonts.slice();
-
-    for (let i = 0; i < inputValue.length; i++) {
-      if (fonts[i] === null) {
-        const randomIndex = Math.floor(Math.random() * fontsList.length);
-        fonts[i] = fontsList[randomIndex];
-      }
-    }
+    setStoreMyArray(myArray)
 
     this.setState({
-      value: inputValue,
-      fonts: fonts
-    });
+      myArray : myArray
+    })
   }
 
   ////////////////////
 
   
- DownloadImage = () => {
-    html2canvas(document.getElementById("cover")).then(function (canvas) {
-      let a = document.createElement("a");
-      a.href = canvas.toDataURL("image/jpeg");
-      a.download = `Cover-41-${generateHash()}.jpeg`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    });
-  };
+//  DownloadImage = () => {
+//     html2canvas(document.getElementById("cover")).then(function (canvas) {
+//       let a = document.createElement("a");
+//       a.href = canvas.toDataURL("image/jpeg");
+//       a.download = `Cover-41-${generateHash()}.jpeg`;
+//       document.body.appendChild(a);
+//       a.click();
+//       document.body.removeChild(a);
+//     });
+//   };
 
 
 
@@ -235,7 +213,7 @@ export default class Container extends Component {
   }
 
   render() {
-    const { fullRandom, phrase, myArray, isMainOpen, value, fonts } = this.state
+    const { fullRandom, phrase, myArray, isMainOpen } = this.state
 
     return (
       <div className="Container">
@@ -243,20 +221,14 @@ export default class Container extends Component {
         <div className="Editor">
           <div className="CoverFrame" id="cover">
             <div className="sketch" id="sketch"></div>
-            <div className='wrapper'>{value}</div>
+            <div className='wrapper'>{myArray}</div>
           </div>
           <div className="UIframe">
-            <div>
-              <MyInput value={value} handleChange={this.handleInputChange} />
-              <div>
-                {value.split("").map((char, index) => (
-                  <span key={index} style={{ fontFamily: fonts[index] }}>
-                    {char}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="interface">
+            <MyInput
+              handleChange={this.handleChange}
+              value={phrase}
+            />
+            {/* <div className="interface">
               <SC_ToggleButton
                 text="Toggle Full Random"
                 isOn={fullRandom}
@@ -267,8 +239,9 @@ export default class Container extends Component {
                 className="SaveButton"
                 handleClick={this.DownloadImage}
               />
-            </div>
-            {fullRandom ? this.renderResetButton() : this.renderUIResetChoices() }
+            </div> */}
+            {/* {fullRandom ? this.renderResetButton() : this.renderUIResetChoices() } */}
+            { this.renderUIResetChoices() }
           </div>
         </div>
       </div>
