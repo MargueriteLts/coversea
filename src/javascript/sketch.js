@@ -19,20 +19,16 @@ function sketch(p) {
   p.setup = () => {
     const canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
-    p.frameRate(10)
+    p.frameRate(100)
   }
   
   p.draw = () => {
 
+    p.background(0)
+
+    /////////////////////////////////////////////////////////// MODULE BACKGROUND
+
     if (config.modules.includes('PlainColorBackground')) {
-      // const sliderValue = getBackgroundValue()
-
-      // const index = 0
-      // r = (sliderValue.backgroundValue[index][0])
-      // g = (sliderValue.backgroundValue[index][1])
-      // b = (sliderValue.backgroundValue[index][2])
-
-      // p.background(r, g, b)
       const backgroundValue = getBackgroundValue()
 
       for (let index = 0; index < backgroundValue.sliderValue; index++) {
@@ -46,6 +42,8 @@ function sketch(p) {
     } else {
       p.background(0)
     }
+
+    /////////////////////////////////////////////////////////// MODULE SHAPES
 
     if (config.modules.includes('Shapes')) {
 
@@ -93,6 +91,8 @@ function sketch(p) {
       p.ellipse(yCenter, xCenterER2, hEV1, wEV2)
       p.ellipse(yCenter, xCenterEL2, hEV1, wEV2)
     }
+
+    /////////////////////////////////////////////////////////// MODULE PARTICLES
 
     if (config.modules.includes('Particles')) {
       const particlesValue = getParticlesValue()

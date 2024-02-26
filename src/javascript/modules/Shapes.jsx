@@ -9,18 +9,18 @@ export default class Shapes extends Component {
       sliderValue: this.props.sliderValue
     }
   }
-
+  
   handleInput = (e) => {
     this.props.setShapesValue(e.target.value)
     this.setState({sliderValue: e.target.value})
   }
-
+  
   render() {
     return <div className="Shapes">
       <input
         type="range"
-        min="10"
-        max="60"
+        min="2"
+        max="80"
         value={this.state.sliderValue}
         onInput={this.handleInput}
       />
