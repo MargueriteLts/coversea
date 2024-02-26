@@ -4,10 +4,15 @@ import ReactDOM from 'react-dom'
 export default class Shapes extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      sliderValue: this.props.sliderValue
+    }
   }
 
   handleInput = (e) => {
     this.props.setShapesValue(e.target.value)
+    this.setState({sliderValue: e.target.value})
   }
 
   render() {
@@ -16,6 +21,7 @@ export default class Shapes extends Component {
         type="range"
         min="10"
         max="60"
+        value={this.state.sliderValue}
         onInput={this.handleInput}
       />
     </div>
