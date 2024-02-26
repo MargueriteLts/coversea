@@ -20,7 +20,7 @@ export default class Shapes extends Component {
       <input
         type="range"
         min="2"
-        max="80"
+        max="74"
         value={this.state.sliderValue}
         onInput={this.handleInput}
       />

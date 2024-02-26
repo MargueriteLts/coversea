@@ -3,8 +3,6 @@ import { sample, getRandomArbitrary } from './utilities'
 let backgroundValue = {
   sliderValue: 0,
   color: []
-  // color: {}
-  // color: [0, 0, 0]
 }
 
 let particlesValue = {
@@ -12,10 +10,7 @@ let particlesValue = {
   particles: []
 }
 
-let shapesValue = 2
-// let shapesValue = {
-//   sliderValue: 0
-// }
+let shapesValue = 36
 
 let config = {}
 
@@ -38,14 +33,6 @@ function setBackgroundValue(nextValue) {
 
   backgroundValue.color = color
   backgroundValue.sliderValue = nextValue
-
-  // let r = 0
-  // let g = 0
-  // let b = 0
-  // const color = {r, g ,b}
-  // const color = [0, 0, 0]
-  // for (let index = 0; index < nextValue; index++) {
-  // }
 }
 
 ///////////////////////////////////////////////////////////////////// SHAPES
@@ -72,7 +59,7 @@ function setParticlesValue(nextValue) {
     particles.push([
       getRandomArbitrary(0, 600),
       getRandomArbitrary(0, 600),
-      getRandomArbitrary(2, 20)
+      getRandomArbitrary(1, 30)
     ])
   }
 

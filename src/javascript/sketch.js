@@ -20,6 +20,7 @@ function sketch(p) {
     const canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
     p.frameRate(100)
+    p.noStroke()
   }
   
   p.draw = () => {
@@ -47,21 +48,13 @@ function sketch(p) {
 
     if (config.modules.includes('Shapes')) {
 
-      // r = getRandomArbitrary(0, 255)
-      // g = getRandomArbitrary(0, 255)
-      // b = getRandomArbitrary(0, 255)
-      // p.fill(r, g, b)
       p.fill(255, 255, 255)
 
       const Value = getShapesValue()
-      // const canvasSizeValue = parseInt(Value)
       const wValue = parseInt(Value)
-
-      // canvasSize
 
       const xCenter = canvasSize / 2
       const yCenter = canvasSize / 2
-      // const w = getRandomArbitrary(10, 60) * canvasSize / 100
       const w = wValue * canvasSize / 100
       
       const paddingW = 3 * canvasSize / 100
@@ -98,7 +91,7 @@ function sketch(p) {
       const particlesValue = getParticlesValue()
 
       for (let index = 0; index < particlesValue.sliderValue; index++) {
-        p.fill(255)
+        p.fill(0)
         p.ellipse (
         particlesValue.particles[index][0],
         particlesValue.particles[index][1],
