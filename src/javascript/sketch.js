@@ -25,11 +25,24 @@ function sketch(p) {
   p.draw = () => {
 
     if (config.modules.includes('PlainColorBackground')) {
-      const sliderValue = parseInt(getBackgroundValue())
-      r = getRandomArbitrary(0, sliderValue)
-      g = getRandomArbitrary(0, sliderValue)
-      b = getRandomArbitrary(0, sliderValue)
-      p.background(r, g, b)
+      // const sliderValue = getBackgroundValue()
+
+      // const index = 0
+      // r = (sliderValue.backgroundValue[index][0])
+      // g = (sliderValue.backgroundValue[index][1])
+      // b = (sliderValue.backgroundValue[index][2])
+
+      // p.background(r, g, b)
+      const backgroundValue = getBackgroundValue()
+
+      for (let index = 0; index < backgroundValue.sliderValue; index++) {
+        p.background (
+        backgroundValue.color[index][0],
+        backgroundValue.color[index][1],
+        backgroundValue.color[index][2],
+        )
+      }
+
     } else {
       p.background(0)
     }
@@ -83,6 +96,7 @@ function sketch(p) {
 
     if (config.modules.includes('Particles')) {
       const particlesValue = getParticlesValue()
+
       for (let index = 0; index < particlesValue.sliderValue; index++) {
         p.fill(255)
         p.ellipse (
@@ -91,7 +105,9 @@ function sketch(p) {
         particlesValue.particles[index][2],
         )
       }
+
     }
+
   }
 }
 

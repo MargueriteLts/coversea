@@ -1,10 +1,19 @@
 import { sample, getRandomArbitrary } from './utilities'
-let backgroundValue = 0
+
+// let backgroundValue = []
+// let backgroundValue = 0
+let backgroundValue = {
+  sliderValue: 0,
+  color: []
+}
+
 let particlesValue = {
   sliderValue: 0,
   particles: []
 }
+
 let shapesValue = 0
+
 let config = {}
 
 function getBackgroundValue() {
@@ -12,7 +21,19 @@ function getBackgroundValue() {
 }
 
 function setBackgroundValue(nextValue) {
-  backgroundValue = nextValue
+  const color = []
+
+  for (let index = 0; index < nextValue; index++) {
+    color.push([
+      getRandomArbitrary(0, 255),
+      getRandomArbitrary(0, 255),
+      getRandomArbitrary(2, 255)
+    ])
+  }
+
+  backgroundValue.color = color
+  backgroundValue.sliderValue = nextValue
+  // backgroundValue = getRandomArbitrary(0, nextValue)
 }
 
 function getShapesValue() {
@@ -32,7 +53,6 @@ function setParticlesValue(nextValue) {
 
   for (let index = 0; index < nextValue; index++) {
     particles.push([
-      getRandomArbitrary(0, 255),
       getRandomArbitrary(0, 600),
       getRandomArbitrary(0, 600),
       getRandomArbitrary(2, 20)

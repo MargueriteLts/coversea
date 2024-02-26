@@ -21,7 +21,7 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'PlainColorBackground') {
         modules.push(
           <PlainColorBackground
-          sliderValue={this.props.backgroundValue}
+          sliderValue={this.props.backgroundValue.sliderValue}
           setBackgroundValue={this.props.setBackgroundValue}
           key={index} />
         )
