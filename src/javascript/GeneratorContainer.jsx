@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import PlainColorBackground from './modules/PlainColorBackground.jsx'
 import Shapes from './modules/Shapes.jsx'
 import Particles from './modules/Particles.jsx'
+import Image from './modules/Image.jsx'
 
 export default class GeneratorContainer extends Component {
   constructor(props) {
@@ -21,27 +22,39 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'PlainColorBackground') {
         modules.push(
           <PlainColorBackground
-          sliderValue={this.props.backgroundValue.sliderValue}
-          setBackgroundValue={this.props.setBackgroundValue}
-          key={index} />
+            sliderValue={this.props.backgroundValue.sliderValue}
+            setBackgroundValue={this.props.setBackgroundValue}
+            key={index}
+          />
         )
       }
 
       if (moduleName == 'Shapes') {
         modules.push(
           <Shapes
-          sliderValue={this.props.shapesValue}
-          setShapesValue={this.props.setShapesValue}
-          key={index} />
+            sliderValue={this.props.shapesValue}
+            setShapesValue={this.props.setShapesValue}
+            key={index}
+          />
         )
       }
 
       if (moduleName == 'Particles') {
         modules.push(
           <Particles
-          sliderValue={this.props.particlesValue.sliderValue}
-          setParticlesValue={this.props.setParticlesValue}
-          key={index} />
+            sliderValue={this.props.particlesValue.sliderValue}
+            setParticlesValue={this.props.setParticlesValue}
+            key={index}
+          />
+        )
+      }
+
+      if (moduleName == 'Image') {
+        modules.push(
+          <Image
+            setImageValue={this.props.setImageValue}
+            key={index}
+          />
         )
       }
     })

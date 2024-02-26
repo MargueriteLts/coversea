@@ -1,16 +1,25 @@
-import { sample, getRandomArbitrary } from './utilities'
+import { sample, getRandomArbitrary, importAll } from './utilities'
 
 let backgroundValue = {
   sliderValue: 0,
   color: []
 }
 
+let shapesValue = 36
+
 let particlesValue = {
   sliderValue: 0,
   particles: []
 }
 
-let shapesValue = 36
+const images = importAll(
+  require.context('../images', false, /\.(png|jpe?g|svg)$/)
+)
+
+let imageValue = {
+  images: images,
+  current: sample(Object.keys(images))
+}
 
 let config = {}
 
@@ -67,6 +76,18 @@ function setParticlesValue(nextValue) {
   particlesValue.particles = particles
 }
 
+///////////////////////////////////////////////////////////////////// PARTICLES
+
+function getImageValue() {
+  return imageValue
+}
+
+function setImageValue() {
+  imageValue.current = sample(Object.keys(images))
+}
+
+///////////////////////////////////////////////////////////////////// CONFIG
+
 function getConfig() {
   return config
 }
@@ -75,4 +96,17 @@ function setConfig(nextConfig) {
   config = nextConfig
 }
 
-export { getBackgroundValue, setBackgroundValue, getShapesValue, setShapesValue, getParticlesValue, setParticlesValue, getConfig, setConfig }
+///////////////////////////////////////////////////////////////////// EXPORT
+
+export {
+  getBackgroundValue,
+  setBackgroundValue,
+  getShapesValue,
+  setShapesValue,
+  getParticlesValue,
+  setParticlesValue,
+  getImageValue,
+  setImageValue,
+  getConfig,
+  setConfig
+}

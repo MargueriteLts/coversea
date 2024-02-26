@@ -1,20 +1,33 @@
 import p5 from 'p5'
-import { sample, getRandomArbitrary } from './utilities'
-import { getBackgroundValue, getShapesValue, getConfig, getParticlesValue } from './store'
+import {
+  getBackgroundValue,
+  getShapesValue,
+  getConfig,
+  getParticlesValue,
+  getImageValue
+} from './store'
 
 let config = {}
+
+let images = {}
 
 let canvasContainerId = ''
 
 let canvasSize = 600
 
-let r = 0
-let g = 0
-let b = 0
-
 //////////////////////////////////////////
 
 function sketch(p) {
+
+  p.preload = () => {
+    const imageFiles = getImageValue().images
+
+    Object.keys(imageFiles).forEach((key) => {
+      images = Object.assign({}, images, {
+        [`${key}`]: p.loadImage(imageFiles[key])
+      })
+    })
+  }
 
   p.setup = () => {
     const canvas = p.createCanvas(canvasSize, canvasSize)
@@ -99,6 +112,26 @@ function sketch(p) {
         )
       }
 
+    }
+
+    /////////////////////////////////////////////////////////// MODULE IMAGE
+
+    if (config.modules.includes('Image')) {
+      const { current } = getImageValue()
+      const image = images[current]
+
+      p.image(
+        image,
+        (canvasSize - image.width / 2) / 2,
+        (canvasSize - image.height / 2) / 2,
+        image.width / 2,
+        image.height / 2,
+        0,
+        0,
+        image.width,
+        image.height,
+        p.CONTAIN
+      )
     }
 
   }
