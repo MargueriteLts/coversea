@@ -11,19 +11,21 @@ export default class Particles extends Component {
   }
 
   handleInput = (e) => {
-    this.props.setParticlesValue(e.target.value)
+    this.props.setSliderValue(e.target.value)
     this.setState({sliderValue: e.target.value})
   }
 
   render() {
-    return <div className="Particles">
-      <input
-        type="range"
-        min="0"
-        max="500"
-        value={this.state.sliderValue}
-        onInput={this.handleInput}
-      />
-    </div>
+    return (
+      <div className="Particles">
+        <input
+          type="range"
+          min="0"
+          max="500"
+          value={this.state.sliderValue}
+          onInput={this.handleInput}
+        />
+      </div>
+    )
   }
 }

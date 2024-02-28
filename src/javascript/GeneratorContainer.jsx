@@ -16,14 +16,26 @@ export default class GeneratorContainer extends Component {
   }
 
   renderModules() {
+    const {
+      moduleList,
+      plainColorBackground,
+      shapes,
+      particles,
+      image,
+      setPlainColorBackgroundStore,
+      setShapesStore,
+      setParticlesStore,
+      setImageStore,
+    } = this.props
+
     const modules = []
 
-    this.props.config.modules.forEach((moduleName, index) => {
+    moduleList.forEach((moduleName, index) => {
       if (moduleName == 'PlainColorBackground') {
         modules.push(
           <PlainColorBackground
-            sliderValue={this.props.backgroundValue.sliderValue}
-            setBackgroundValue={this.props.setBackgroundValue}
+            sliderValue={plainColorBackground.sliderValue}
+            setSliderValue={setPlainColorBackgroundStore}
             key={index}
           />
         )
@@ -32,8 +44,8 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Shapes') {
         modules.push(
           <Shapes
-            sliderValue={this.props.shapesValue}
-            setShapesValue={this.props.setShapesValue}
+            sliderValue={shapes.shapesValue}
+            setSliderValue={setShapesStore}
             key={index}
           />
         )
@@ -42,8 +54,8 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Particles') {
         modules.push(
           <Particles
-            sliderValue={this.props.particlesValue.sliderValue}
-            setParticlesValue={this.props.setParticlesValue}
+            sliderValue={particles.sliderValue}
+            setSliderValue={setParticlesStore}
             key={index}
           />
         )
@@ -52,7 +64,7 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Image') {
         modules.push(
           <Image
-            setImageValue={this.props.setImageValue}
+            setImageValue={setImageStore}
             key={index}
           />
         )

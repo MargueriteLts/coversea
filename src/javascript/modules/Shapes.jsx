@@ -11,7 +11,7 @@ export default class Shapes extends Component {
   }
   
   handleInput = (e) => {
-    this.props.setShapesValue(e.target.value)
+    this.props.setSliderValue(e.target.value)
     this.setState({sliderValue: e.target.value})
   }
   
