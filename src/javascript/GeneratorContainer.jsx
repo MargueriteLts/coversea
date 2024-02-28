@@ -44,7 +44,7 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Shapes') {
         modules.push(
           <Shapes
-            sliderValue={shapes.shapesValue}
+            sliderValue={shapes.sliderValue}
             setSliderValue={setShapesStore}
             key={index}
           />

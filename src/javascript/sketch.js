@@ -51,19 +51,19 @@ function sketch(p) {
   
   p.draw = () => {
 
-    // p.background(0)
+    p.background(0)
 
     /////////////////////////////////////////////////////////// MODULE BACKGROUND
 
     if (moduleList.includes('PlainColorBackground')) {
       const plainColorBackground = getPlainColorBackgroundStore()
-      for (let index = 0; index < plainColorBackground.sliderValue; index++) {
+      // for (let index = 0; index < plainColorBackground.sliderValue; index++) {
         p.background (
-        plainColorBackground.color[index][0],
-        plainColorBackground.color[index][1],
-        plainColorBackground.color[index][2],
+        plainColorBackground.color[0],
+        plainColorBackground.color[1],
+        plainColorBackground.color[2],
         )
-      }
+      // }
     } else {
       p.background(0)
     }
@@ -87,9 +87,10 @@ function sketch(p) {
 
     if (moduleList.includes('Shapes')) {
 
-      p.fill(255, 255, 255)
+      // p.background(0)
+      p.fill(255, 0, 255)
 
-      const Value = getShapesStore()
+      const Value = getShapesStore().sliderValue
       const wValue = parseInt(Value)
 
       const xCenter = canvasSize / 2
@@ -110,7 +111,7 @@ function sketch(p) {
       const xCenterEL2 = canvasSize - xCenterER2
       const wEV2 = ((canvasSize - w) / 2) - (13 * canvasSize / 100) - paddingW
       const hEV2 = canvasSize - paddingH
-      
+
       p.ellipse(xCenter, yCenter, wCircle)
       
       p.ellipse(xCenterER1, yCenter, wEV1, hEV1)
@@ -130,7 +131,7 @@ function sketch(p) {
       const particles = getParticlesStore()
 
       for (let index = 0; index < particles.sliderValue; index++) {
-        p.fill(0)
+        p.fill(255)
         p.ellipse (
           particles.particles[index][0],
           particles.particles[index][1],

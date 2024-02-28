@@ -21,7 +21,7 @@ function initStore(generatorName) {
 
   moduleList.forEach(moduleName => {
     if (moduleName == 'PlainColorBackground') {
-      modulePlainColorBackgroundStore = initBackground(generators[generatorName].preset['PlainColorBackground'])
+      modulePlainColorBackgroundStore = initBackground(generators[generatorName].preset['PlainColorBackground'].sliderValue)
     }
 
     if (moduleName == 'Shapes') {
@@ -44,23 +44,21 @@ function getModuleList() {
 
 ///////////////////// BACKGROUND
 
-function initBackground(preset) {
+function initBackground(sliderValue) {
   return {
-    sliderValue: preset.sliderValue,
-    color: generateParticles(preset.sliderValue)
+    sliderValue: sliderValue,
+    color: generateColor(sliderValue)
   }
 }
 
 function generateColor(nextValue) {
   const color = []
 
-  for (let index = 0; index < nextValue; index++) {
-    color.push([
-      getRandomArbitrary(0, 255),
-      getRandomArbitrary(0, 255),
-      getRandomArbitrary(0, 255)
-    ])
-  }
+  // for (let index = 0; index < nextValue; index++) {
+    color.push(getRandomArbitrary(0, 255))
+    color.push(getRandomArbitrary(0, 255))
+    color.push(getRandomArbitrary(0, 255))
+  // }
 
   return color
 }
@@ -70,10 +68,7 @@ function getPlainColorBackgroundStore() {
 }
 
 function setPlainColorBackgroundStore(nextSliderValue) {
-  modulePlainColorBackgroundStore.sliderValue = {
-    sliderValue: nextSliderValue,
-    color: generateColor(nextSliderValue)
-  }
+  modulePlainColorBackgroundStore = initBackground(nextSliderValue)
 }
 
 ///////////////////// SHAPES
