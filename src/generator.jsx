@@ -13,7 +13,9 @@ import {
   getParticlesStore,
   setParticlesStore,
   getImageStore,
-  setImageStore
+  setImageStore,
+  setColorBackgroundStore,
+  getColorBackgroundStore
 } from './javascript/store.js'
 
 import { initSketch } from './javascript/sketch.js'
@@ -34,6 +36,7 @@ const actions = {
   setShapesStore,
   setParticlesStore,
   setImageStore,
+  setColorBackgroundStore,
   initSketch
 }
 
@@ -64,6 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (moduleName == 'Image') {
       props.image = getImageStore()
+    }
+
+    if (moduleName == 'ColorBackground') {
+      props.color = getColorBackgroundStore()
     }
   });
 

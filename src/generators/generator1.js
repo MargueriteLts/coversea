@@ -1,7 +1,8 @@
-const modules = ['PlainColorBackground', 'Shapes', 'Particles', 'Image']
+const modules = ['ColorBackground', 'Shapes', 'Particles', 'Image']
 
 const preset = {
-  PlainColorBackground : { sliderValue: 0 },
+  // PlainColorBackground : { sliderValue: 0 },
+  ColorBackground : {},
   Shapes: { sliderValue: 37 },
   Particles: { sliderValue: 0 },
   Image: {}

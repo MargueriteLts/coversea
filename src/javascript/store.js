@@ -14,7 +14,8 @@ let moduleList,
 modulePlainColorBackgroundStore,
 moduleShapesStore,
 moduleParticlesStore,
-moduleImageStore
+moduleImageStore,
+moduleColorBackgroundStore
 
 function initStore(generatorName) {
   moduleList = generators[generatorName].modules
@@ -34,6 +35,10 @@ function initStore(generatorName) {
 
     if (moduleName == 'Image') {
       moduleImageStore = initImages()
+    }
+
+    if (moduleName == 'ColorBackground') {
+      setColorBackgroundStore()
     }
   })
 }
@@ -136,6 +141,40 @@ function setImageStore() {
   moduleImageStore.current = sample(Object.keys(moduleImageStore.images))
 }
 
+///////////////////// COLOR BACKGROUND
+
+// function initColorBackground() {
+//   return {
+//     color: generateColor(sliderValue)
+//   }
+// }
+
+// function generateColor() {
+//   const color = []
+
+//     color.push(getRandomArbitrary(0, 255))
+//     color.push(getRandomArbitrary(0, 255))
+//     color.push(getRandomArbitrary(0, 255))
+
+//   return color
+// }
+
+function getColorBackgroundStore() {
+  return moduleColorBackgroundStore
+}
+
+function setColorBackgroundStore() {
+  const color = []
+
+  color.push(parseInt(getRandomArbitrary(0, 255)))
+  color.push(parseInt(getRandomArbitrary(0, 255)))
+  color.push(parseInt(getRandomArbitrary(0, 255)))
+
+  moduleColorBackgroundStore = color
+}
+
+
+
 ////////////////////////////////////OLDSTORE////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////// BACKGROUND
@@ -223,5 +262,7 @@ export {
   getParticlesStore,
   setParticlesStore,
   getImageStore,
-  setImageStore
+  setImageStore,
+  getColorBackgroundStore,
+  setColorBackgroundStore
 }

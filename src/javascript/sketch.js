@@ -5,7 +5,8 @@ import {
   getPlainColorBackgroundStore,
   getShapesStore,
   getParticlesStore,
-  getImageStore
+  getImageStore,
+  getColorBackgroundStore
 } from './store'
 
 let moduleList = {}
@@ -53,6 +54,20 @@ function sketch(p) {
 
     p.background(0)
 
+    /////////////////////////////////////////////////////////// MODULE COLORBACKGROUND
+
+    if (moduleList.includes('ColorBackground')) {
+      const colorBackground = getColorBackgroundStore()
+      // console.log(getColorBackgroundStore())
+      p.background (
+        colorBackground[0],
+        colorBackground[1],
+        colorBackground[2],
+      )
+    } else {
+      p.background(0)
+    }
+
     /////////////////////////////////////////////////////////// MODULE BACKGROUND
 
     if (moduleList.includes('PlainColorBackground')) {
@@ -64,8 +79,6 @@ function sketch(p) {
         plainColorBackground.color[2],
         )
       // }
-    } else {
-      p.background(0)
     }
 
     // if (config.modules.includes('PlainColorBackground')) {

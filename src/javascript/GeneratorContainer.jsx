@@ -5,6 +5,7 @@ import PlainColorBackground from './modules/PlainColorBackground.jsx'
 import Shapes from './modules/Shapes.jsx'
 import Particles from './modules/Particles.jsx'
 import Image from './modules/Image.jsx'
+import ColorBackground from './modules/ColorBackground.jsx'
 
 export default class GeneratorContainer extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ export default class GeneratorContainer extends Component {
       setShapesStore,
       setParticlesStore,
       setImageStore,
+      setColorBackgroundStore
     } = this.props
 
     const modules = []
@@ -65,6 +67,15 @@ export default class GeneratorContainer extends Component {
         modules.push(
           <Image
             setImageValue={setImageStore}
+            key={index}
+          />
+        )
+      }
+
+      if (moduleName == 'ColorBackground') {
+        modules.push(
+          <ColorBackground
+            setColorValue={setColorBackgroundStore}
             key={index}
           />
         )
