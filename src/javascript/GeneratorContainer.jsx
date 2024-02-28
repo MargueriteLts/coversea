@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import PlainColorBackground from './modules/PlainColorBackground.jsx'
 import Shapes from './modules/Shapes.jsx'
 import Particles from './modules/Particles.jsx'
 import Image from './modules/Image.jsx'
-import ColorBackground from './modules/ColorBackground.jsx'
+import Background from './modules/Background.jsx'
 
 export default class GeneratorContainer extends Component {
   constructor(props) {
@@ -19,30 +18,17 @@ export default class GeneratorContainer extends Component {
   renderModules() {
     const {
       moduleList,
-      plainColorBackground,
       shapes,
       particles,
-      image,
-      setPlainColorBackgroundStore,
       setShapesStore,
       setParticlesStore,
       setImageStore,
-      setColorBackgroundStore
+      setBackgroundStore
     } = this.props
 
     const modules = []
 
     moduleList.forEach((moduleName, index) => {
-      if (moduleName == 'PlainColorBackground') {
-        modules.push(
-          <PlainColorBackground
-            sliderValue={plainColorBackground.sliderValue}
-            setSliderValue={setPlainColorBackgroundStore}
-            key={index}
-          />
-        )
-      }
-
       if (moduleName == 'Shapes') {
         modules.push(
           <Shapes
@@ -72,10 +58,10 @@ export default class GeneratorContainer extends Component {
         )
       }
 
-      if (moduleName == 'ColorBackground') {
+      if (moduleName == 'Background') {
         modules.push(
-          <ColorBackground
-            setColorValue={setColorBackgroundStore}
+          <Background
+            // setColorValue={setPlainColorStore}
             key={index}
           />
         )

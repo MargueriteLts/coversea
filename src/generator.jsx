@@ -6,16 +6,14 @@ import { createRoot } from 'react-dom/client'
 import {
   initStore,
   getModuleList,
-  getPlainColorBackgroundStore,
-  setPlainColorBackgroundStore,
   getShapesStore,
   setShapesStore,
   getParticlesStore,
   setParticlesStore,
   getImageStore,
   setImageStore,
-  setColorBackgroundStore,
-  getColorBackgroundStore
+  setBackgroundStore,
+  getBackgroundStore
 } from './javascript/store.js'
 
 import { initSketch } from './javascript/sketch.js'
@@ -32,11 +30,10 @@ const generators = {
 }
 
 const actions = {
-  setPlainColorBackgroundStore,
   setShapesStore,
   setParticlesStore,
   setImageStore,
-  setColorBackgroundStore,
+  setBackgroundStore,
   initSketch
 }
 
@@ -53,10 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   config.modules.forEach(moduleName => {
-    if (moduleName == 'PlainColorBackground') {
-      props.plainColorBackground = getPlainColorBackgroundStore()
-    }
-
     if (moduleName == 'Shapes') {
       props.shapes = getShapesStore()
     }
@@ -69,8 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
       props.image = getImageStore()
     }
 
-    if (moduleName == 'ColorBackground') {
-      props.color = getColorBackgroundStore()
+    if (moduleName == 'Background') {
+      props.color = getBackgroundStore()
     }
   });
 

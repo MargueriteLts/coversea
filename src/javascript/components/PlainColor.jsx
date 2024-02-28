@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-export default class ColorBackground extends Component {
+export default class PlainColor extends Component {
   constructor(props) {
     super(props)
   }
@@ -11,7 +11,7 @@ export default class ColorBackground extends Component {
   }
 
   render() {
-    return <div className="PlainColorBackground">
+    return <div className="PlainColor">
       <div className="Button" onClick={this.handleClick}>Randomize color</div>
     </div>
   }
