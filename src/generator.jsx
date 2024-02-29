@@ -12,7 +12,11 @@ import {
   setParticlesStore,
   getImageStore,
   setImageStore,
-  getBackgroundStore
+  getBackgroundStore,
+  getBackgroundTypeList,
+  getBackgroundTypeStore,
+  getPlainColorStore,
+  getGradientStore
 } from './javascript/store.js'
 
 import { initSketch } from './javascript/sketch.js'
@@ -47,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const props = {
     moduleList: getModuleList()
+    // backgroundTypeList: getBackgroundTypeList()
   }
 
   config.modules.forEach(moduleName => {
@@ -64,6 +69,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (moduleName == 'Background') {
       props.background = getBackgroundStore()
+      props.backgroundTypeList = getBackgroundTypeList()
+      // const props = {backgroundTypeList: getBackgroundTypeList()}
+      props.backgroundType = getBackgroundTypeStore()
+
+      // config.backgroundTypeList.forEach(bgTypeName => {
+      //   if (bgTypeName == 'PlainColor') {
+      //     props.plainColor = getPlainColorStore()
+      //   }
+        
+      //   if (bgTypeName == 'Gradient') {
+      //     props.gradient = getGradientStore()
+      //   }
+      // })
+
+      props.plainColor = getPlainColorStore()
+      props.gradient = getGradientStore()
     }
   });
 

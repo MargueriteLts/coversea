@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import TabButton from './TabButton'
+import TabButton from './TabButton.jsx'
 
 export default class TabButtonSet extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ export default class TabButtonSet extends Component {
 
     return (
       <div className="TabButtonSet">
-        <div>{buttonElements}</div>
+        {buttonElements}
       </div>
     )
   }

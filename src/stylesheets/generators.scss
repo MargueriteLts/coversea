@@ -15,24 +15,52 @@ body.page {
   flex-direction: row;
 
 
-  .ModuleBackground {
+  .ModuleContainer {
     background-color: black;
-    color: white;
     display: flex;
     flex-direction: column;
     width: 816px;
-    padding: 24px 24px 8px 24px;
     height: 100%;
     margin-right: 20px;
     border-radius: 30px;
 
+    .TabButtonSet {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .TabButton {
+      color: grey;
+      margin-right: 12px;
+      padding: 8px;
+  
+      &:hover:not(.active) {
+        color: white;
+        background-color: grey;
+      }
+  
+      &.active {
+        background: grey;
+        text-transform: capitalize;
+        font-weight: 800;
+        color: rgb(255, 255, 255);
+      }
+    }
+
     .ModuleHeader {
+      padding: 24px 24px 8px 24px;
       display: flex;
       flex-direction: row;
 
       .ModuleTitle {
+        color: white;
         font-size: 30px;
       }
+    }
+
+    .ModuleContent{
+      padding: 24px;
+      height: 100%;
     }
   }
 }

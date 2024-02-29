@@ -1,12 +1,26 @@
 const modules = ['Background']
 
 const preset = {
-  Background : {
-    moduleName : 'Background'
-  // BackgroundType : ['PlainColor', 'Gradient'],
-  // PlainColor: {color: '#000000'},
-  // Gradient: {startColor: '#ffffff', endColor: '#000000'}
+  Background: {
+    moduleName: 'Background',
+    mode: 'tab2'
   }
 }
 
-export { modules, preset }
+const backgroundTypes = ['PlainColor', 'Gradient']
+
+const backgroundTypePreset = {
+  PlainColor: {
+    backgroundTypeName: 'Plain color',
+    defaultColor: '#000000'
+  },
+  Gradient: {
+    backgroundTypeName: 'Gradient',
+    defaultStartColor: '#000000',
+    defaultEndColor: '#ffffff'
+  }
+  // Texture: {
+  // }
+}
+
+export { modules, preset, backgroundTypes, backgroundTypePreset }

@@ -16,7 +16,11 @@ let moduleList,
 moduleShapesStore,
 moduleParticlesStore,
 moduleImageStore,
-moduleBackgroundStore
+moduleBackgroundStore,
+backgroundTypeList,
+backgroundTypeStore,
+backgroundTypePlainColorStore,
+backgroundTypeGradientStore
 
 function initStore(generatorName) {
   moduleList = generators[generatorName].modules
@@ -40,7 +44,21 @@ function initStore(generatorName) {
 
     if (moduleName == 'Background') {
       moduleBackgroundStore = generators[generatorName].preset['Background']
+      backgroundTypeList = generators[generatorName].backgroundTypes
+      backgroundTypeStore = generators[generatorName].backgroundTypePreset
+
+      backgroundTypeList.forEach(bgTypeName => {
+        if (bgTypeName == 'PlainColor') {
+          backgroundTypePlainColorStore = generators[generatorName].backgroundTypePreset['PlainColor']
+        }
+        if (bgTypeName == 'Gradient') {
+          backgroundTypeGradientStore = generators[generatorName].backgroundTypePreset['Gradient']
+        }
+      });
     }
+    // if (moduleName == 'Background') {
+    //   moduleBackgroundStore = initBackground()
+    // }
   })
 }
 
@@ -54,8 +72,33 @@ function getBackgroundStore() {
   return moduleBackgroundStore
 }
 
+function getBackgroundTypeList() {
+  return backgroundTypeList
+}
+
+function getBackgroundTypeStore() {
+  return backgroundTypeStore
+}
+
+function getPlainColorStore() {
+  return backgroundTypePlainColorStore
+}
+
+function getGradientStore() {
+  return backgroundTypeGradientStore
+}
+
+// function setBackgroundTypeList() {
+
+// }
+
 // function setBackgroundStore() {
 //   moduleBackgroundStore.moduleName 
+// }
+
+// function initBackground(generatorName) {
+//   moduleBackgroundStore = generators[generatorName].preset['Background']
+//   backgroundTypeList = moduleBackgroundStore.modules
 // }
 
 ////////////////////////////////////////////////////// SHAPES
@@ -134,5 +177,9 @@ export {
   setParticlesStore,
   getImageStore,
   setImageStore,
-  getBackgroundStore
+  getBackgroundStore,
+  getBackgroundTypeList,
+  getBackgroundTypeStore,
+  getPlainColorStore,
+  getGradientStore
 }
