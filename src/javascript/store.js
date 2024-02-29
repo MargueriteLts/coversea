@@ -3,27 +3,28 @@ import { sample, getRandomArbitrary, importAll } from './utilities'
 import * as generator1 from '../generators/generator1.js'
 import * as generator2 from '../generators/generator2.js'
 import * as generator3 from '../generators/generator3.js'
+import * as generator4 from '../generators/generator4.js'
 
 const generators = {
   generator1,
   generator2,
-  generator3
+  generator3,
+  generator4
 }
 
 let moduleList,
-modulePlainColorBackgroundStore,
 moduleShapesStore,
 moduleParticlesStore,
 moduleImageStore,
-moduleColorBackgroundStore
+moduleBackgroundStore
 
 function initStore(generatorName) {
   moduleList = generators[generatorName].modules
 
   moduleList.forEach(moduleName => {
-    if (moduleName == 'PlainColorBackground') {
-      modulePlainColorBackgroundStore = initBackground(generators[generatorName].preset['PlainColorBackground'].sliderValue)
-    }
+    // if (moduleName == 'PlainColorBackground') {
+    //   modulePlainColorBackgroundStore = initBackground(generators[generatorName].preset['PlainColorBackground'].sliderValue)
+    // }
 
     if (moduleName == 'Shapes') {
       moduleShapesStore = generators[generatorName].preset['Shapes']
@@ -37,8 +38,8 @@ function initStore(generatorName) {
       moduleImageStore = initImages()
     }
 
-    if (moduleName == 'ColorBackground') {
-      setColorBackgroundStore()
+    if (moduleName == 'Background') {
+      moduleBackgroundStore = generators[generatorName].preset['Background']
     }
   })
 }
@@ -49,34 +50,15 @@ function getModuleList() {
 
 ///////////////////// BACKGROUND
 
-function initBackground(sliderValue) {
-  return {
-    sliderValue: sliderValue,
-    color: generateColor(sliderValue)
-  }
+function getBackgroundStore() {
+  return moduleBackgroundStore
 }
 
-function generateColor(nextValue) {
-  const color = []
+// function setBackgroundStore() {
+//   moduleBackgroundStore.moduleName 
+// }
 
-  // for (let index = 0; index < nextValue; index++) {
-    color.push(getRandomArbitrary(0, 255))
-    color.push(getRandomArbitrary(0, 255))
-    color.push(getRandomArbitrary(0, 255))
-  // }
-
-  return color
-}
-
-function getPlainColorBackgroundStore() {
-  return modulePlainColorBackgroundStore
-}
-
-function setPlainColorBackgroundStore(nextSliderValue) {
-  modulePlainColorBackgroundStore = initBackground(nextSliderValue)
-}
-
-///////////////////// SHAPES
+////////////////////////////////////////////////////// SHAPES
 
 function getShapesStore() {
   return moduleShapesStore
@@ -86,7 +68,7 @@ function setShapesStore(nextSliderValue) {
   moduleShapesStore.sliderValue = nextSliderValue
 }
 
-///////////////////// PARTICLES
+////////////////////////////////////////////////////// PARTICLES
 
 function initParticles(preset) {
   return {
@@ -141,128 +123,16 @@ function setImageStore() {
   moduleImageStore.current = sample(Object.keys(moduleImageStore.images))
 }
 
-///////////////////// COLOR BACKGROUND
-
-// function initColorBackground() {
-//   return {
-//     color: generateColor(sliderValue)
-//   }
-// }
-
-// function generateColor() {
-//   const color = []
-
-//     color.push(getRandomArbitrary(0, 255))
-//     color.push(getRandomArbitrary(0, 255))
-//     color.push(getRandomArbitrary(0, 255))
-
-//   return color
-// }
-
-function getColorBackgroundStore() {
-  return moduleColorBackgroundStore
-}
-
-function setColorBackgroundStore() {
-  const color = []
-
-  color.push(parseInt(getRandomArbitrary(0, 255)))
-  color.push(parseInt(getRandomArbitrary(0, 255)))
-  color.push(parseInt(getRandomArbitrary(0, 255)))
-
-  moduleColorBackgroundStore = color
-}
-
-
-
-////////////////////////////////////OLDSTORE////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////// BACKGROUND
-
-// function getBackgroundValue() {
-//   return backgroundValue
-// }
-
-// function setBackgroundValue(nextValue) {
-//   const color = []
-
-//   for (let index = 0; index < nextValue; index++) {
-//     color.push([
-//       getRandomArbitrary(0, 255),
-//       getRandomArbitrary(0, 255),
-//       getRandomArbitrary(0, 255)
-//     ])
-//   }
-
-//   backgroundValue.color = color
-//   backgroundValue.sliderValue = nextValue
-// }
-
-///////////////////////////////////////////////////////////////////// SHAPES
-
-// function getShapesValue() {
-//   return shapesValue
-// }
-
-// function setShapesValue(nextValue) {
-//   shapesValue = nextValue
-//   // shapesValue.sliderValue = nextValue
-// }
-
-///////////////////////////////////////////////////////////////////// PARTICLES
-
-// function getParticlesValue() {
-//   return particlesValue
-// }
-
-// function setParticlesValue(nextValue) {
-//   const particles = []
-
-//   for (let index = 0; index < nextValue; index++) {
-//     particles.push([
-//       getRandomArbitrary(0, 600),
-//       getRandomArbitrary(0, 600),
-//       getRandomArbitrary(1, 30)
-//     ])
-//   }
-
-//   particlesValue.sliderValue = nextValue
-//   particlesValue.particles = particles
-// }
-
-///////////////////////////////////////////////////////////////////// IMAGE
-
-// function getImageValue() {
-//   return imageValue
-// }
-
-// function setImageValue() {
-//   imageValue.current = sample(Object.keys(images))
-// }
-
-///////////////////////////////////////////////////////////////////// CONFIG
-
-// function getConfig() {
-//   return config
-// }
-
-// function setConfig(nextConfig) {
-//   config = nextConfig
-// }
-
 ///////////////////////////////////////////////////////////////////// EXPORT
 
 export {
   initStore,
   getModuleList,
-  getPlainColorBackgroundStore,
-  setPlainColorBackgroundStore,
   getShapesStore,
   setShapesStore,
   getParticlesStore,
   setParticlesStore,
   getImageStore,
   setImageStore,
-  getColorBackgroundStore,
-  setColorBackgroundStore
+  getBackgroundStore
 }

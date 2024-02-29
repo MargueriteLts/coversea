@@ -9,3 +9,30 @@ body.page {
     margin: 10px 0;
   }
 }
+
+.GeneratorContainer{
+  display: flex;
+  flex-direction: row;
+
+
+  .ModuleBackground {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width: 816px;
+    padding: 24px 24px 8px 24px;
+    height: 100%;
+    margin-right: 20px;
+    border-radius: 30px;
+
+    .ModuleHeader {
+      display: flex;
+      flex-direction: row;
+
+      .ModuleTitle {
+        font-size: 30px;
+      }
+    }
+  }
+}

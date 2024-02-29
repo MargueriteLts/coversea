@@ -2,11 +2,9 @@ import p5 from 'p5'
 
 import {
   getModuleList,
-  getPlainColorBackgroundStore,
   getShapesStore,
   getParticlesStore,
-  getImageStore,
-  getColorBackgroundStore
+  getImageStore
 } from './store'
 
 let moduleList = {}

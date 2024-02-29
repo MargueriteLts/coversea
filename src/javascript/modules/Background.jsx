@@ -1,30 +1,20 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
+import HeaderModule from '../components/HeaderModule.jsx'
+
 export default class Background extends Component {
   constructor(props) {
     super(props)
   }
   
   render() {
-    return <div className="Background">
+    const { moduleName } = this.props
+
+    return <div className="ModuleBackground">
+      <HeaderModule
+        title={moduleName}
+      />
     </div>
-  }
-
-  /////////////////////////////////////////////////////////
-
-  renderBackgroundTypes() {
-    const {
-      backgroundTypeList,
-      setColorBackgroundStore,
-      setGradientStore,
-      setTextureStore
-    } = this.props
-
-    const types = []
-
-    backgroundTypeList.forEach((backgroundTypeName) => {
-      
-    });
   }
 }

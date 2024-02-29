@@ -23,7 +23,7 @@ export default class GeneratorContainer extends Component {
       setShapesStore,
       setParticlesStore,
       setImageStore,
-      setBackgroundStore
+      background
     } = this.props
 
     const modules = []
@@ -61,7 +61,7 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Background') {
         modules.push(
           <Background
-            // setColorValue={setPlainColorStore}
+            moduleName={background.moduleName}
             key={index}
           />
         )
@@ -73,8 +73,8 @@ export default class GeneratorContainer extends Component {
 
   render() {
     return <div className="GeneratorContainer">
-      <div className="sketch" id="sketch"></div>
       {this.renderModules()}
+      <div className="sketch" id="sketch"></div>
     </div>
   }
 }

@@ -6,13 +6,9 @@ export default class PlainColor extends Component {
     super(props)
   }
 
-  handleClick = () => {
-    this.props.setColorValue()
-  }
-
   render() {
     return <div className="PlainColor">
-      <div className="Button" onClick={this.handleClick}>Randomize color</div>
+      <div className="Button" onClick={this.handleClick}>Randomize background color</div>
     </div>
   }
 }
