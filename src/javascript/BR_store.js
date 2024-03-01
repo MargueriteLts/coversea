@@ -17,8 +17,10 @@ moduleShapesStore,
 moduleParticlesStore,
 moduleImageStore,
 moduleBackgroundStore,
-currentBgTypeStore,
-bgTypeList
+backgroundTypeList,
+backgroundTypeStore,
+backgroundTypePlainColorStore,
+backgroundTypeGradientStore
 
 function initStore(generatorName) {
   moduleList = generators[generatorName].modules
@@ -42,21 +44,21 @@ function initStore(generatorName) {
 
     if (moduleName == 'Background') {
       moduleBackgroundStore = generators[generatorName].preset['Background']
-      // availableBgTypeList = generators[generatorName].preset['Background'].bgTypes
-      // availableBgTypeList = moduleBackgroundStore.bgTypes
+      backgroundTypeList = generators[generatorName].backgroundTypes
+      backgroundTypeStore = generators[generatorName].backgroundTypePreset
 
-      // backgroundTypeList = generators[generatorName].backgroundTypes
-      // backgroundTypeStore = generators[generatorName].backgroundTypePreset
-
-      // backgroundTypeList.forEach(bgTypeName => {
-      //   if (bgTypeName == 'PlainColor') {
-      //     backgroundTypePlainColorStore = generators[generatorName].backgroundTypePreset['PlainColor']
-      //   }
-      //   if (bgTypeName == 'Gradient') {
-      //     backgroundTypeGradientStore = generators[generatorName].backgroundTypePreset['Gradient']
-      //   }
-      // });
+      backgroundTypeList.forEach(bgTypeName => {
+        if (bgTypeName == 'PlainColor') {
+          backgroundTypePlainColorStore = generators[generatorName].backgroundTypePreset['PlainColor']
+        }
+        if (bgTypeName == 'Gradient') {
+          backgroundTypeGradientStore = generators[generatorName].backgroundTypePreset['Gradient']
+        }
+      });
     }
+    // if (moduleName == 'Background') {
+    //   moduleBackgroundStore = initBackground()
+    // }
   })
 }
 
@@ -64,70 +66,39 @@ function getModuleList() {
   return moduleList
 }
 
-////////////////////////////////////////// BACKGROUND
+///////////////////// BACKGROUND
 
 function getBackgroundStore() {
   return moduleBackgroundStore
 }
 
-function getCurrentBgTypeStore() {
-  return currentBgTypeStore
+function getBackgroundTypeList() {
+  return backgroundTypeList
 }
 
-function setCurrentBgTypeStore(type) {
-  moduleBackgroundStore.currentBgTypeStore = type
+function getBackgroundTypeStore() {
+  return backgroundTypeStore
 }
 
-function getBgTypeList() {
-  return bgTypeList
-}
-
-////
-
-let backgroundTypePlainColorStore
-
-// function initBackgroundType(generatorName) {
-//   availableBgTypeList = generators[generatorName].preset['Background'].bgTypes
-
-//   backgroundTypeList.forEach(bgTypeName => {
-//   if (bgTypeName == 'PlainColor') {
-//       backgroundTypePlainColorStore = generators[generatorName].preset['Background'].preset['PlainColor']
-//     }
-//     // if (bgTypeName == 'Gradient') {
-//     //   backgroundTypeGradientStore = generators[generatorName].backgroundTypePreset['Gradient']
-//     // }
-//   });  
-// }
-
-function getPlainColorBackgroundStore() {
+function getPlainColorStore() {
   return backgroundTypePlainColorStore
 }
 
-function setPlainColorBackgroundStore() {
-  const color = []
-
-  color.push(parseInt(getRandomArbitrary(0, 255)))
-  color.push(parseInt(getRandomArbitrary(0, 255)))
-  color.push(parseInt(getRandomArbitrary(0, 255)))
-
-  backgroundTypePlainColorStore.color = color
+function getGradientStore() {
+  return backgroundTypeGradientStore
 }
 
+// function setBackgroundTypeList() {
 
-// function getBackgroundTypeList() {
-//   return backgroundTypeList
 // }
 
-// function getBackgroundTypeStore() {
-//   return backgroundTypeStore
+// function setBackgroundStore() {
+//   moduleBackgroundStore.moduleName 
 // }
 
-// function getPlainColorStore() {
-//   return backgroundTypePlainColorStore
-// }
-
-// function getGradientStore() {
-//   return backgroundTypeGradientStore
+// function initBackground(generatorName) {
+//   moduleBackgroundStore = generators[generatorName].preset['Background']
+//   backgroundTypeList = moduleBackgroundStore.modules
 // }
 
 ////////////////////////////////////////////////////// SHAPES
@@ -207,10 +178,8 @@ export {
   getImageStore,
   setImageStore,
   getBackgroundStore,
-  setCurrentBgTypeStore,
-  getCurrentBgTypeStore,
-  getBgTypeList,
-  // initBackgroundType,
-  setPlainColorBackgroundStore,
-  getPlainColorBackgroundStore
+  getBackgroundTypeList,
+  getBackgroundTypeStore,
+  getPlainColorStore,
+  getGradientStore
 }

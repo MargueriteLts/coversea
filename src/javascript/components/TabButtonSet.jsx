@@ -8,13 +8,13 @@ export default class TabButtonSet extends Component {
     super(props)
   }
 
-  handleChange = (value) => {
-    const { property, handleChange } = this.props
-    handleChange(property, value)
-  }
+  // handleClick = (option) => {
+  //   const { option, handleClick } = this.props
+  //   handleClick(option)
+  // }
 
   render() {
-    const { options, value } = this.props
+    const { options, value, handleClick } = this.props
     const buttonElements = []
 
     options.forEach((option, i) => {
@@ -22,7 +22,7 @@ export default class TabButtonSet extends Component {
         <TabButton
           text={option}
           isOn={option === value}
-          handleClick={() => this.handleChange(option)}
+          handleClick={() => handleClick(option)}
           key={i}
         />
       )

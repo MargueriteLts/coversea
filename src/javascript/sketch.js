@@ -4,7 +4,9 @@ import {
   getModuleList,
   getShapesStore,
   getParticlesStore,
-  getImageStore
+  getImageStore,
+  getBgTypeList,
+  getPlainColorStore
 } from './store'
 
 let moduleList = {}

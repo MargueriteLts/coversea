@@ -13,10 +13,11 @@ import {
   getImageStore,
   setImageStore,
   getBackgroundStore,
-  getBackgroundTypeList,
-  getBackgroundTypeStore,
-  getPlainColorStore,
-  getGradientStore
+  setCurrentBgTypeStore,
+  getCurrentBgTypeStore,
+  getBgTypeList,
+  setPlainColorBackgroundStore,
+  getPlainColorBackgroundStore
 } from './javascript/store.js'
 
 import { initSketch } from './javascript/sketch.js'
@@ -38,6 +39,8 @@ const actions = {
   setShapesStore,
   setParticlesStore,
   setImageStore,
+  setCurrentBgTypeStore,
+  setPlainColorBackgroundStore,
   initSketch
 }
 
@@ -69,9 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (moduleName == 'Background') {
       props.background = getBackgroundStore()
-      props.backgroundTypeList = getBackgroundTypeList()
-      // const props = {backgroundTypeList: getBackgroundTypeList()}
-      props.backgroundType = getBackgroundTypeStore()
+
+      props.setCurrentBgType = getCurrentBgTypeStore()
+      props.bgTypeList = getBgTypeList()
+      props.plainColor = getPlainColorBackgroundStore()
 
       // config.backgroundTypeList.forEach(bgTypeName => {
       //   if (bgTypeName == 'PlainColor') {
@@ -83,8 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
       //   }
       // })
 
-      props.plainColor = getPlainColorStore()
-      props.gradient = getGradientStore()
+      // props.plainColor = getPlainColorStore()
+      // props.gradient = getGradientStore()
     }
   });
 

@@ -24,10 +24,8 @@ export default class GeneratorContainer extends Component {
       setParticlesStore,
       setImageStore,
       background,
-      backgroundTypeList,
-      backgroundType,
-      plainColor,
-      gradient
+      setCurrentBgTypeStore,
+      setPlainColorBackgroundStore
     } = this.props
 
     const modules = []
@@ -66,10 +64,18 @@ export default class GeneratorContainer extends Component {
         modules.push(
           <Background
             moduleName={background.moduleName}
-            backgroundTypeList={backgroundTypeList}
-            backgroundMode={background.mode}
-            bgTypeName={backgroundType.backgroundTypeName}
+
+            availablebgTypes={background.bgTypes}
+
+            setCurrentBgType={setCurrentBgTypeStore}
+
+            currentBgType={background.currentBgType}
+
+            setColorValue={setPlainColorBackgroundStore}
+
             key={index}
+
+            
           />
         )
       }
