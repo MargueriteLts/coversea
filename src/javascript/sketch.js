@@ -6,8 +6,6 @@ import {
   getParticlesStore,
   getImageStore,
   getBgTypeList,
-  // getBgTypeList,
-  // getPlainColorStore
   getplainColorBackgroundStore
 } from './store'
 
@@ -58,30 +56,7 @@ function sketch(p) {
 
     p.background(0)
 
-    /////////////////////////////////////////////////////////// MODULE COLORBACKGROUND
-
-    // if (moduleList.includes('ColorBackground')) {
-    //   const colorBackground = getColorBackgroundStore()
-    //   // console.log(getColorBackgroundStore())
-    //   p.background (
-    //     colorBackground[0],
-    //     colorBackground[1],
-    //     colorBackground[2],
-    //   )
-    // } else {
-    //   p.background(0)
-    // }
-
     /////////////////////////////////////////////////////////// MODULE BACKGROUND
-
-    // if (moduleList.includes('PlainColorBackground')) {
-    //   const plainColorBackground = getPlainColorBackgroundStore()
-    //     p.background (
-    //     plainColorBackground.color[0],
-    //     plainColorBackground.color[1],
-    //     plainColorBackground.color[2],
-    //     )
-    // }
 
     if (moduleList.includes('Background')) {
       if (bgTypeList.includes('PlainColor')) {
@@ -91,7 +66,6 @@ function sketch(p) {
           plainColorBackground[1],
           plainColorBackground[2],
         )
-        console.log(plainColorBackground)
       } else {
         p.background(0)
       }

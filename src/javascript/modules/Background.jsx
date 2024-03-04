@@ -89,7 +89,7 @@ export default class Background extends Component {
 
   
   render() {
-    const { moduleName, availablebgTypes, BgTypeTitles } = this.props
+    const { moduleName, availablebgTypes, BgTypeTitle } = this.props
 
     return <div className="ModuleContainer">
       <HeaderModule
@@ -98,12 +98,13 @@ export default class Background extends Component {
       <div className="ModuleContent">
         <TabButtonSet
           options={availablebgTypes}
+          // title={bgType.name}
           // title={BgTypeTitles}
-          // title={availablebgTypes}
+          title={availablebgTypes}
           // title={this.state.currentBgTitle}
           // title={this.renderTitles}
           // title={setCurrentTitle}
-          title={this.state.currentBgType}
+          // title={this.state.currentBgType}
           value={this.state.currentBgType}
           handleClick={this.handleTabClick}
         />

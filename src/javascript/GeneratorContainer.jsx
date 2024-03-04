@@ -29,7 +29,7 @@ export default class GeneratorContainer extends Component {
       // currenBgTitle,
       // setTitleCurrentBgStore,
       // backgroundType,
-      // bgTypeTitles,
+      bgTypeTitles,
       setColorBackgroundStore
     } = this.props
 
@@ -75,7 +75,7 @@ export default class GeneratorContainer extends Component {
             setCurrentBgType={setCurrentBgTypeStore}
             currentBgType={background.currentBgType}
 
-            // BgTypeTitles={bgTypeTitles}
+            BgTypeTitles={bgTypeTitles}
 
             // setTitleCurrentBgType={setTitleCurrentBgStore}
             // currentBgTitle={currenBgTitle}

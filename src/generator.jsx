@@ -17,7 +17,7 @@ import {
   getCurrentBgTypeStore,
   getBgTypeList,
   setColorBackgroundStore,
-  // getBgTypeTitles
+  getBgTypeTitles
   // setTitleCurrentBgStore,
   // getTitleCurrentBgStore
   // getColorBackgroundStore
@@ -46,7 +46,7 @@ const actions = {
   setImageStore,
   setCurrentBgTypeStore,
   setColorBackgroundStore,
-  // getBgTypeTitles,
+  getBgTypeTitles,
   // setTitleCurrentBgStore,
   // getTitleCurrentBgStore,
   // setCurrentTitleStore,
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       props.setCurrentBgType = getCurrentBgTypeStore()
       props.bgTypeList = getBgTypeList()
-      // props.bgTypeTitles = getBgTypeTitles()
+      props.bgTypeTitles = getBgTypeTitles()
       // props.backgroundType = getBackgroundType()
 
       // config.backgroundTypeList.forEach(bgTypeName => {

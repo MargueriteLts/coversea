@@ -72,24 +72,24 @@ function getBgTypeList() {
   return bgTypeList
 }
 
-// function getBgTypeTitles() {
-//   let titles = []
-//   bgTypeList.forEach((bgTypeName, index) => {
-//     if (bgTypeName == 'PlainColor') {
-//       titles.push(index, plainColorBackgroundStore.bgName)
-//     }
-//     if (bgTypeName == 'Gradient') {
-//       titles.push(index, 'Gradient')
-//     }
-//   })
-//   return titles
-// }
+function getBgTypeTitles() {
+  const titles = []
+  bgTypeList.forEach((bgTypeName, index) => {
+    if (bgTypeName == 'PlainColor') {
+      titles.push(plainColorBackgroundStore.bgName)
+    }
+    if (bgTypeName == 'Gradient') {
+      titles.push('Gradient')
+    }
+  })
+  return titles
+}
 
 //////////////////// PLAIN COLOR BACKGROUND
 
 function initPlainColorBackground(plainColorPreset) {
   return plainColorPreset = {
-    bgName: 'Plain Color',
+    bgName: 'Plain color',
     color: generateColor()
   }
 }
@@ -194,7 +194,7 @@ export {
   setCurrentBgTypeStore,
   getCurrentBgTypeStore,
   getBgTypeList,
-  // getBgTypeTitles,
+  getBgTypeTitles,
   setColorBackgroundStore,
   getplainColorBackgroundStore
 }
