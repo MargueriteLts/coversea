@@ -6,7 +6,9 @@ import {
   getParticlesStore,
   getImageStore,
   getBgTypeList,
-  getplainColorBackgroundStore
+  getplainColorBackgroundStore,
+  setColorValueStore,
+  getColorValueStore
 } from './store'
 
 let moduleList = {}
@@ -65,6 +67,11 @@ function sketch(p) {
           plainColorBackground[0],
           plainColorBackground[1],
           plainColorBackground[2],
+        )
+      } if (bgTypeList.includes('ColorPicker')) {
+        const plainColorBackground = getColorValueStore()
+        p.background(
+          plainColorBackground
         )
       } else {
         p.background(0)

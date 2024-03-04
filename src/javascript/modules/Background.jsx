@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import HeaderModule from '../components/HeaderModule.jsx'
 import TabButtonSet from '../components/TabButtonSet.jsx'
 import PlainColor from '../components/PlainColor.jsx'
+import ColorPicker from '../components/ColorPicker.jsx'
 
 export default class Background extends Component {
   constructor(props) {
@@ -19,26 +20,10 @@ export default class Background extends Component {
     this.setState({
       currentBgType: type
     })
-    // console.log(currentBgTitle)
   }
 
-
-  // renderPlainColorContent() {
-  //   const { setColorBackgroundStore } = this.props
-
-  //   return <div className="PlainColorComponent">
-  //     <PlainColor
-  //       setColorValue={setColorBackgroundStore}
-  //       key={index}
-  //     />
-  //   </div>
-  // }
-
-  // renderGradientContent() {
-  // }
-
   renderBgContent() {
-    const { setColorBackgroundStore, index } = this.props
+    const { setColorBackgroundStore, index, setColorValueStore } = this.props
 
     if (this.state.currentBgType == 'PlainColor') {
       return <div className="PlainColorComponent">
@@ -47,44 +32,14 @@ export default class Background extends Component {
           key={index}
         />
       </div>
-    } else if (this.state.currentBgType == 'Gradient') {
-      // renderGradientContent()
+    } else if (this.state.currentBgType == 'ColorPicker') {
+      return <div>
+        <ColorPicker
+          setColorValueStore={setColorValueStore}
+        />
+      </div>
     }
   }
-
-  // renderTitles() {
-  //   const title = ''
-  //   if (this.state.currentBgType == 'PlainColor') {
-  //     title = 'Plain color'
-  //   }
-  //   if (this.state.currentBgType == 'Gradient') {
-  //     title = 'Gradient'
-  //   }
-  //   return title
-  // }
-
-  // renderTitle() {
-  //   const { setColorBackgroundStore } = this.props
-  //   const bgName = {}
-
-  //   if (this.state.currentBgType == 'PlainColor') {
-  //     bgName = setColorBackgroundStore().bgName
-  //     console.log(setColorBackgroundStore)
-  //   } else if (this.state.currentBgType == 'Gradient') {
-  //   }
-
-  //   return bgName
-  // }
-
-  // renderTitle() {
-  //   // const { getplainColorBackgroundStore } = this.props
-  //   let title = ''
-
-  //   if (this.state.currentBgType == 'PlainColor') {
-  //     title = 'Plain Color'
-  //   }
-  //   return title
-  // }
 
 
   
@@ -98,13 +53,7 @@ export default class Background extends Component {
       <div className="ModuleContent">
         <TabButtonSet
           options={availablebgTypes}
-          // title={bgType.name}
-          // title={BgTypeTitles}
           title={availablebgTypes}
-          // title={this.state.currentBgTitle}
-          // title={this.renderTitles}
-          // title={setCurrentTitle}
-          // title={this.state.currentBgType}
           value={this.state.currentBgType}
           handleClick={this.handleTabClick}
         />
