@@ -16,81 +16,80 @@ export default class Background extends Component {
 
   handleTabClick = (type) => {
     this.props.setCurrentBgType(type)
-    this.setState({currentBgType: type})
+    this.setState({
+      currentBgType: type
+    })
+    // console.log(currentBgTitle)
   }
 
-  //////////////////////////////// render content
 
-  // renderBgType = (type) => {
-  //   const {
-  //     setColorValue,
-  //     // availablebgTypes,
-  //     index
-  //   } = this.props
+  // renderPlainColorContent() {
+  //   const { setColorBackgroundStore } = this.props
 
-  //   const type = []
-
-  //   if (this.props.currentBgType == 'PlainColor') {
-  //     type.push(
-  //       <PlainColor 
-  //         setColorValue={setColorValue}
-  //         key={index}
-  //       />
-  //     )
-  //   }
-
-  //   // bgTypes = ['color', 'shapes', 'circle', 'disc']
-  //   // const bg = sample(bgTypes)
-
-  //   // switch (bg) {
-  //   //   case 'color':
-  //   //     p.background(r, g, b)
-  //   //     break;
-  //   //   case 'shapes':
-  //   //     drawShapes(p)
-  //   //     break;
-  //   //   case 'circle':
-  //   //     p.ellipse(xCenter, yCenter, bgCircleWidth)
-  //   //     break;
-  //   //   case 'disc':
-  //   //     p.background(0)
-  //   //     p.image(imgDisc, 0, 0, canvasSize, canvasSize)
-  //   //     break;
-
-  //   //   default:
-  //   //     break;
-  //   // }
-
-  //   // availablebgTypes.forEach((bgtype, index) => {
-  //     // if (bgtype == this.props.currentBgType == 'PlainColor') {
-  //     //   type.push(
-  //     //     <PlainColor 
-  //     //       setColorValue={setColorValue}
-  //     //       key={index}
-  //     //     />
-  //     //   )
-  //     // }
-  //   // })
-
-  //   return type
-
-  //   this.setState({
-  //     type
-  //   })
+  //   return <div className="PlainColorComponent">
+  //     <PlainColor
+  //       setColorValue={setColorBackgroundStore}
+  //       key={index}
+  //     />
+  //   </div>
   // }
 
-  renderBgType = (property, value) => {
-    // const { synthSettings } = this.state
-    // synth.oscillator.type = value
-    // synthSettings.oscillator.type = value
+  // renderGradientContent() {
+  // }
 
-    // this.setState({
-    //   synthSettings
-    // })
+  renderBgContent() {
+    const { setColorBackgroundStore, index } = this.props
+
+    if (this.state.currentBgType == 'PlainColor') {
+      return <div className="PlainColorComponent">
+        <PlainColor
+          setColorValue={setColorBackgroundStore}
+          key={index}
+        />
+      </div>
+    } else if (this.state.currentBgType == 'Gradient') {
+      // renderGradientContent()
+    }
   }
+
+  // renderTitles() {
+  //   const title = ''
+  //   if (this.state.currentBgType == 'PlainColor') {
+  //     title = 'Plain color'
+  //   }
+  //   if (this.state.currentBgType == 'Gradient') {
+  //     title = 'Gradient'
+  //   }
+  //   return title
+  // }
+
+  // renderTitle() {
+  //   const { setColorBackgroundStore } = this.props
+  //   const bgName = {}
+
+  //   if (this.state.currentBgType == 'PlainColor') {
+  //     bgName = setColorBackgroundStore().bgName
+  //     console.log(setColorBackgroundStore)
+  //   } else if (this.state.currentBgType == 'Gradient') {
+  //   }
+
+  //   return bgName
+  // }
+
+  // renderTitle() {
+  //   // const { getplainColorBackgroundStore } = this.props
+  //   let title = ''
+
+  //   if (this.state.currentBgType == 'PlainColor') {
+  //     title = 'Plain Color'
+  //   }
+  //   return title
+  // }
+
+
   
   render() {
-    const { moduleName, availablebgTypes } = this.props
+    const { moduleName, availablebgTypes, BgTypeTitles } = this.props
 
     return <div className="ModuleContainer">
       <HeaderModule
@@ -99,10 +98,16 @@ export default class Background extends Component {
       <div className="ModuleContent">
         <TabButtonSet
           options={availablebgTypes}
+          // title={BgTypeTitles}
+          // title={availablebgTypes}
+          // title={this.state.currentBgTitle}
+          // title={this.renderTitles}
+          // title={setCurrentTitle}
+          title={this.state.currentBgType}
           value={this.state.currentBgType}
           handleClick={this.handleTabClick}
         />
-        {this.renderBgType}
+        {this.renderBgContent()}
       </div>
     </div>
   }

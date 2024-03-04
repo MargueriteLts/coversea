@@ -19,13 +19,16 @@ moduleImageStore,
 moduleBackgroundStore,
 currentBgTypeStore,
 bgTypeList,
-titleBgType,
 plainColorBackgroundStore
 
 function initStore(generatorName) {
   moduleList = generators[generatorName].modules
 
   moduleList.forEach(moduleName => {
+    // if (moduleName == 'PlainColorBackground') {
+    //   modulePlainColorBackgroundStore = initBackground(generators[generatorName].preset['PlainColorBackground'].sliderValue)
+    // }
+
     if (moduleName == 'Shapes') {
       moduleShapesStore = generators[generatorName].preset['Shapes']
     }
@@ -40,10 +43,21 @@ function initStore(generatorName) {
 
     if (moduleName == 'Background') {
       moduleBackgroundStore = generators[generatorName].preset['Background']
-      // titleBgType = getBgTypeTitle(generators[generatorName].preset['Background'].bgTypes)
-      bgTypeList = generators[generatorName].preset['Background'].bgTypes
-
       plainColorBackgroundStore = initPlainColorBackground(generators[generatorName].preset['Background'].preset['PlainColor'])
+      // availableBgTypeList = generators[generatorName].preset['Background'].bgTypes
+      // availableBgTypeList = moduleBackgroundStore.bgTypes
+
+      // backgroundTypeList = generators[generatorName].backgroundTypes
+      // backgroundTypeStore = generators[generatorName].backgroundTypePreset
+
+      // backgroundTypeList.forEach(bgTypeName => {
+      //   if (bgTypeName == 'PlainColor') {
+      //     backgroundTypePlainColorStore = generators[generatorName].backgroundTypePreset['PlainColor']
+      //   }
+      //   if (bgTypeName == 'Gradient') {
+      //     backgroundTypeGradientStore = generators[generatorName].backgroundTypePreset['Gradient']
+      //   }
+      // });
     }
   })
 }
@@ -72,25 +86,35 @@ function getBgTypeList() {
   return bgTypeList
 }
 
-// function getBgTypeTitles() {
-//   let titles = []
-//   bgTypeList.forEach((bgTypeName, index) => {
-//     if (bgTypeName == 'PlainColor') {
-//       titles.push(index, plainColorBackgroundStore.bgName)
-//     }
-//     if (bgTypeName == 'Gradient') {
-//       titles.push(index, 'Gradient')
-//     }
-//   })
-//   return titles
+/////
+
+// let currentTitle
+
+// function setCurrentTitleStore() {
+//   if (currentBgTypeStore == 'PainColor') {
+//     return {
+//     sliderValue: preset.sliderValue,
+//     particles: generateParticles(preset.sliderValue)
+//   }
+
+
+//     bgName: 'Plain color'
+//     console.log(currentTitle)
+//   } else if (currentBgTypeStore == 'Gradient') {
+//     currentTitle = 'Gradient'
+//   }
+// }
+
+// function getCurrentTitleStore() {
+//   return currentTitle
 // }
 
 //////////////////// PLAIN COLOR BACKGROUND
 
-function initPlainColorBackground(plainColorPreset) {
-  return plainColorPreset = {
+function initPlainColorBackground(preset) {
+  return {
     bgName: 'Plain Color',
-    color: generateColor()
+    color: generateColor(preset.color)
   }
 }
 
@@ -104,6 +128,32 @@ function generateColor() {
   return color
 }
 
+function getTitleCurrentBgStore(type) {
+  if (type == 'PlainColor') {
+    return plainColorBackgroundStore.bgName
+  }
+}
+
+function setTitleCurrentBgStore() {
+  const titleCurrentBg = ''
+
+  if (currentBgTypeStore == 'PlainColor') {
+    titleCurrentBg = plainColorBackgroundStore.bgName
+  } else if (currentBgTypeStore == 'Graident') {
+    titleCurrentBg = 'Gradient'
+  }
+
+  return titleCurrentBg
+}
+
+// function setTitleCurrentBackgroundStore() {
+//   let title = ''
+//   if (currentBgTypeStore == 'PlainColor') {
+//     plainColorBackgroundStore.bgName = title
+//   }
+//   return title
+// }
+
 function getplainColorBackgroundStore() {
   return plainColorBackgroundStore
 }
@@ -113,6 +163,52 @@ function setColorBackgroundStore() {
     color: generateColor()
   }
 }
+
+// let backgroundTypePlainColorStore
+
+// function initBackgroundType(generatorName) {
+//   availableBgTypeList = generators[generatorName].preset['Background'].bgTypes
+
+//   backgroundTypeList.forEach(bgTypeName => {
+//   if (bgTypeName == 'PlainColor') {
+//       backgroundTypePlainColorStore = generators[generatorName].preset['Background'].preset['PlainColor']
+//     }
+//     // if (bgTypeName == 'Gradient') {
+//     //   backgroundTypeGradientStore = generators[generatorName].backgroundTypePreset['Gradient']
+//     // }
+//   });  
+// }
+
+// function getPlainColorBackgroundStore() {
+//   return backgroundTypePlainColorStore
+// }
+
+// function setPlainColorBackgroundStore() {
+//   const color = []
+
+//   color.push(parseInt(getRandomArbitrary(0, 255)))
+//   color.push(parseInt(getRandomArbitrary(0, 255)))
+//   color.push(parseInt(getRandomArbitrary(0, 255)))
+
+//   backgroundTypePlainColorStore.color = color
+// }
+
+
+// function getBackgroundTypeList() {
+//   return backgroundTypeList
+// }
+
+// function getBackgroundTypeStore() {
+//   return backgroundTypeStore
+// }
+
+// function getPlainColorStore() {
+//   return backgroundTypePlainColorStore
+// }
+
+// function getGradientStore() {
+//   return backgroundTypeGradientStore
+// }
 
 ////////////////////////////////////////////////////// SHAPES
 
@@ -194,7 +290,12 @@ export {
   setCurrentBgTypeStore,
   getCurrentBgTypeStore,
   getBgTypeList,
-  // getBgTypeTitles,
   setColorBackgroundStore,
+  setTitleCurrentBgStore,
+  getTitleCurrentBgStore,
   getplainColorBackgroundStore
+  // getColorBackgroundStore,
+  // setTitleCurrentBackgroundStore
+  // setCurrentTitleStore,
+  // getCurrentTitleStore
 }

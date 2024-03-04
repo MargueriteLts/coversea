@@ -8,6 +8,7 @@ export default class PlainColor extends Component {
 
   handleClick = () => {
     this.props.setColorValue()
+    console.log('click')
   }
 
   render() {

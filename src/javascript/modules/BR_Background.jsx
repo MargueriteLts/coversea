@@ -111,6 +111,77 @@ export default class Background extends Component {
   //   handlePresetSwitchClick(backgroundTypeList.backgroundTypeName, presetIndex)
   // }
 
+  //////////////////////////////// render content
+
+  // renderBgType = (type) => {
+  //   const {
+  //     setColorValue,
+  //     // availablebgTypes,
+  //     index
+  //   } = this.props
+
+  //   const type = []
+
+  //   if (this.props.currentBgType == 'PlainColor') {
+  //     type.push(
+  //       <PlainColor 
+  //         setColorValue={setColorValue}
+  //         key={index}
+  //       />
+  //     )
+  //   }
+
+  //   // bgTypes = ['color', 'shapes', 'circle', 'disc']
+  //   // const bg = sample(bgTypes)
+
+  //   // switch (bg) {
+  //   //   case 'color':
+  //   //     p.background(r, g, b)
+  //   //     break;
+  //   //   case 'shapes':
+  //   //     drawShapes(p)
+  //   //     break;
+  //   //   case 'circle':
+  //   //     p.ellipse(xCenter, yCenter, bgCircleWidth)
+  //   //     break;
+  //   //   case 'disc':
+  //   //     p.background(0)
+  //   //     p.image(imgDisc, 0, 0, canvasSize, canvasSize)
+  //   //     break;
+
+  //   //   default:
+  //   //     break;
+  //   // }
+
+  //   // availablebgTypes.forEach((bgtype, index) => {
+  //     // if (bgtype == this.props.currentBgType == 'PlainColor') {
+  //     //   type.push(
+  //     //     <PlainColor 
+  //     //       setColorValue={setColorValue}
+  //     //       key={index}
+  //     //     />
+  //     //   )
+  //     // }
+  //   // })
+
+  //   return type
+
+  //   this.setState({
+  //     type
+  //   })
+  // }
+
+  // renderBgType = (property, value) => {
+    // const { synthSettings } = this.state
+    // synth.oscillator.type = value
+    // synthSettings.oscillator.type = value
+
+    // this.setState({
+    //   synthSettings
+    // })
+  // }
+
+
   render() {
     const { getBackgroundStore, backgroundTypeList } = this.props
 

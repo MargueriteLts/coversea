@@ -14,13 +14,13 @@ export default class TabButtonSet extends Component {
   // }
 
   render() {
-    const { options, value, handleClick } = this.props
+    const { title, options, value, handleClick } = this.props
     const buttonElements = []
 
     options.forEach((option, i) => {
       buttonElements.push(
         <TabButton
-          text={option}
+          text={title}
           isOn={option === value}
           handleClick={() => handleClick(option)}
           key={i}

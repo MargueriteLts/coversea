@@ -5,14 +5,12 @@ import {
   getShapesStore,
   getParticlesStore,
   getImageStore,
-  getBgTypeList,
   // getBgTypeList,
   // getPlainColorStore
   getplainColorBackgroundStore
 } from './store'
 
 let moduleList = {}
-let bgTypeList = {}
 
 let canvasContainerId = ''
 
@@ -51,7 +49,6 @@ function sketch(p) {
     canvas.parent(canvasContainerId)
     p.frameRate(100)
     p.noStroke()
-    // p.noLoop()
   }
   
   p.draw = () => {
@@ -60,42 +57,45 @@ function sketch(p) {
 
     /////////////////////////////////////////////////////////// MODULE COLORBACKGROUND
 
-    // if (moduleList.includes('ColorBackground')) {
-    //   const colorBackground = getColorBackgroundStore()
-    //   // console.log(getColorBackgroundStore())
-    //   p.background (
-    //     colorBackground[0],
-    //     colorBackground[1],
-    //     colorBackground[2],
-    //   )
-    // } else {
-    //   p.background(0)
-    // }
+    if (moduleList.includes('ColorBackground')) {
+      const colorBackground = getColorBackgroundStore()
+      // console.log(getColorBackgroundStore())
+      p.background (
+        colorBackground[0],
+        colorBackground[1],
+        colorBackground[2],
+      )
+    } else {
+      p.background(0)
+    }
 
     /////////////////////////////////////////////////////////// MODULE BACKGROUND
 
-    // if (moduleList.includes('PlainColorBackground')) {
-    //   const plainColorBackground = getPlainColorBackgroundStore()
-    //     p.background (
-    //     plainColorBackground.color[0],
-    //     plainColorBackground.color[1],
-    //     plainColorBackground.color[2],
-    //     )
-    // }
-
-    if (moduleList.includes('Background')) {
-      if (bgTypeList.includes('PlainColor')) {
-        const plainColorBackground = getplainColorBackgroundStore().color
-        p.background(
-          plainColorBackground[0],
-          plainColorBackground[1],
-          plainColorBackground[2],
+    if (moduleList.includes('PlainColorBackground')) {
+      const plainColorBackground = getPlainColorBackgroundStore()
+      // for (let index = 0; index < plainColorBackground.sliderValue; index++) {
+        p.background (
+        plainColorBackground.color[0],
+        plainColorBackground.color[1],
+        plainColorBackground.color[2],
         )
-        console.log(plainColorBackground)
-      } else {
-        p.background(0)
-      }
+      // }
     }
+
+    // if (config.modules.includes('PlainColorBackground')) {
+    //   const backgroundValue = getBackgroundValue()
+
+    //   for (let index = 0; index < backgroundValue.sliderValue; index++) {
+    //     p.background (
+    //     backgroundValue.color[index][0],
+    //     backgroundValue.color[index][1],
+    //     backgroundValue.color[index][2],
+    //     )
+    //   }
+
+    // } else {
+    //   p.background(0)
+    // }
 
     /////////////////////////////////////////////////////////// MODULE SHAPES
 
@@ -154,6 +154,20 @@ function sketch(p) {
       }
     }
 
+    // if (config.modules.includes('Particles')) {
+    //   const particlesValue = getParticlesValue()
+
+    //   for (let index = 0; index < particlesValue.sliderValue; index++) {
+    //     p.fill(0)
+    //     p.ellipse (
+    //     particlesValue.particles[index][0],
+    //     particlesValue.particles[index][1],
+    //     particlesValue.particles[index][2],
+    //     )
+    //   }
+
+    // }
+
     /////////////////////////////////////////////////////////// MODULE IMAGE
 
     if (moduleList.includes('Image')) {
@@ -174,6 +188,24 @@ function sketch(p) {
       )
     }
 
+    // if (config.modules.includes('Image')) {
+    //   const { current } = getImageValue()
+    //   const image = images[current]
+
+    //   p.image(
+    //     image,
+    //     (canvasSize - image.width / 2) / 2,
+    //     (canvasSize - image.height / 2) / 2,
+    //     image.width / 2,
+    //     image.height / 2,
+    //     0,
+    //     0,
+    //     image.width,
+    //     image.height,
+    //     p.CONTAIN
+    //   )
+    // }
+
   }
 }
 
@@ -183,7 +215,6 @@ function initSketch(id) {
   canvasContainerId = id
 
   moduleList = getModuleList()
-  bgTypeList = getBgTypeList()
 
   new p5(sketch)
 }

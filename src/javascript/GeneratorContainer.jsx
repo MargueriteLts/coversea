@@ -25,7 +25,12 @@ export default class GeneratorContainer extends Component {
       setImageStore,
       background,
       setCurrentBgTypeStore,
-      setPlainColorBackgroundStore
+      // setTitleCurrentBackgroundStore,
+      // currenBgTitle,
+      // setTitleCurrentBgStore,
+      // backgroundType,
+      // bgTypeTitles,
+      setColorBackgroundStore
     } = this.props
 
     const modules = []
@@ -68,10 +73,16 @@ export default class GeneratorContainer extends Component {
             availablebgTypes={background.bgTypes}
 
             setCurrentBgType={setCurrentBgTypeStore}
-
             currentBgType={background.currentBgType}
 
-            setColorValue={setPlainColorBackgroundStore}
+            // BgTypeTitles={bgTypeTitles}
+
+            // setTitleCurrentBgType={setTitleCurrentBgStore}
+            // currentBgTitle={currenBgTitle}
+
+            // setCurrentTitle={setTitleCurrentBackgroundStore}
+
+            setColorBackgroundStore={setColorBackgroundStore}
 
             key={index}
 
