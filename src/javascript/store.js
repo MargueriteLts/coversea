@@ -41,11 +41,12 @@ function initStore(generatorName) {
     }
 
     if (moduleName == 'Background') {
-      moduleBackgroundStore = generators[generatorName].preset['Background']
+      moduleBackgroundStore = initBackgroundStore(generators[generatorName].preset['Background'])
+      // moduleBackgroundStore = generators[generatorName].preset['Background']
       // titleBgType = getBgTypeTitle(generators[generatorName].preset['Background'].bgTypes)
-      bgTypeList = generators[generatorName].preset['Background'].bgTypes
+      // bgTypeList = generators[generatorName].preset['Background'].bgTypes
 
-      plainColorBackgroundStore = initPlainColorBackground(generators[generatorName].preset['Background'].preset['PlainColor'])
+      // plainColorBackgroundStore = initPlainColorBackground(generators[generatorName].preset['Background'].preset['PlainColor'])
     }
   })
 }
@@ -56,36 +57,48 @@ function getModuleList() {
 
 ////////////////////////////////////////// BACKGROUND
 
+function initBackgroundStore(preset) {
+  preset.bgTypes.forEach((bgType) => {
+    if (bgType == 'PlainColor') {
+      preset.preset.PlainColor = Object.assign({}, preset.preset.PlainColor, { text: 'Some text', color: generateColor() })
+    }
+
+    if (bgType == 'ColorPicker') {
+      preset.preset.ColorPicker = Object.assign({}, preset.preset.ColorPicker, { text: 'Some text 2222', color: '#000000' })
+      // console.log(preset.preset.ColorPicker.color);
+    }
+  })
+
+  return preset
+}
+
 function getBackgroundStore() {
   return moduleBackgroundStore
 }
 
+function setBackgroundStore(type, value) {
+  if (type === 'PlainColor') {
+    moduleBackgroundStore.preset.PlainColor.color = generateColor()
+  }
+
+  if (type === 'ColorPicker') {
+    moduleBackgroundStore.preset.ColorPicker.color = value
+  }
+
+  if (type === 'CurrentTabChange') {
+    moduleBackgroundStore.currentBgType = value
+  }
+}
+
 //// CURRENT
 
-function getCurrentBgTypeStore() {
-  return currentBgTypeStore
-}
+// function getCurrentBgTypeStore() {
+//   return currentBgTypeStore
+// }
 
-function setCurrentBgTypeStore(type) {
-  moduleBackgroundStore.currentBgTypeStore = type
-}
-
-function getBgTypeList() {
-  return bgTypeList
-}
-
-function getBgTypeTitles() {
-  const titles = []
-  bgTypeList.forEach((bgTypeName, index) => {
-    if (bgTypeName == 'PlainColor') {
-      titles.push(plainColorBackgroundStore.bgName)
-    }
-    if (bgTypeName == 'Gradient') {
-      titles.push('Gradient')
-    }
-  })
-  return titles
-}
+// function setCurrentBgTypeStore(type) {
+//   moduleBackgroundStore.currentBgTypeStore = type
+// }
 
 //////////////////// PLAIN COLOR BACKGROUND
 
@@ -201,10 +214,7 @@ export {
   getImageStore,
   setImageStore,
   getBackgroundStore,
-  setCurrentBgTypeStore,
-  getCurrentBgTypeStore,
-  getBgTypeList,
-  getBgTypeTitles,
+  setBackgroundStore,
   setColorBackgroundStore,
   getplainColorBackgroundStore,
   setColorValueStore,

@@ -10,16 +10,18 @@ export default class ColorPicker extends Component {
 
   state = {
     displayColorPicker: false,
-    color: {
-      r: '241',
-      g: '112',
-      b: '19',
-      a: '1',
-    },
+    // color: {
+    //   r: '241',
+    //   g: '112',
+    //   b: '19',
+    //   a: '1',
+    // },
+    color: this.props.color
   };
 
   handleClick = () => {
     this.setState({ displayColorPicker: !this.state.displayColorPicker })
+    console.log(this.props.color);
   };
 
   handleClose = () => {
@@ -27,8 +29,8 @@ export default class ColorPicker extends Component {
   };
 
   handleChange = (color) => {
-    this.props.setColorValueStore(color.hex)
-    this.setState({ color: color.rgb })
+    this.props.setBackgroundStore('ColorPicker', color.hex)
+    this.setState({ color: color.hex })
   };
 
   render() {
@@ -39,7 +41,9 @@ export default class ColorPicker extends Component {
           width: '36px',
           height: '14px',
           borderRadius: '2px',
-          background: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,
+          // background: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,
+          background: this.state.color,
+          // background: `'${this.state.color}'`,
         },
         swatch: {
           padding: '5px',
@@ -70,7 +74,7 @@ export default class ColorPicker extends Component {
       { this.state.displayColorPicker ?
         <div style={ styles.popover }>
           <div style={ styles.cover } onClick={ this.handleClose }/>
-          <SketchPicker color={ this.state.color } onChange={ this.handleChange } />
+          <SketchPicker color={this.state.color} onChange={ this.handleChange } />
         </div> : null
       }
     </div>

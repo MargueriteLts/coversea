@@ -13,24 +13,16 @@ export default class TabButtonSet extends Component {
   //   handleClick(option)
   // }
 
-  // renderTitle() {
-  //   const { options, title } = this.props
-
-  //   options.forEach((option) => {
-  //     return title
-  //   })
-  // }
-
   render() {
-    const { title, options, value, handleClick } = this.props
+    const { options, value, handleClick } = this.props
     const buttonElements = []
 
-    options.forEach((option, i) => {
+    Object.keys(options).forEach((key, i) => {
       buttonElements.push(
         <TabButton
-          text={option}
-          isOn={option === value}
-          handleClick={() => handleClick(option)}
+          text={options[key].text}
+          isOn={key === value}
+          handleClick={() => handleClick(key)}
           key={i}
         />
       )

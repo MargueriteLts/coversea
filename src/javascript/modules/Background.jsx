@@ -11,31 +11,35 @@ export default class Background extends Component {
     super(props)
 
     this.state = {
-      currentBgType: this.props.currentBgType
+      currentBgType: this.props.background.currentBgType
     }
   }
 
   handleTabClick = (type) => {
-    this.props.setCurrentBgType(type)
+    this.props.setBackgroundStore('CurrentTabChange', type)
+
     this.setState({
       currentBgType: type
     })
   }
 
   renderBgContent() {
-    const { setColorBackgroundStore, index, setColorValueStore } = this.props
+    const { setBackgroundStore, background } = this.props
 
     if (this.state.currentBgType == 'PlainColor') {
       return <div className="PlainColorComponent">
         <PlainColor
-          setColorValue={setColorBackgroundStore}
-          key={index}
+          setBackgroundStore={setBackgroundStore}
+          key='PlainColor'
         />
       </div>
     } else if (this.state.currentBgType == 'ColorPicker') {
       return <div>
         <ColorPicker
-          setColorValueStore={setColorValueStore}
+          setBackgroundStore={setBackgroundStore}
+          color={background.preset.ColorPicker.color}
+          // getBackgroundStore={getBackgroundStore}
+          key='ColorPicker'
         />
       </div>
     }
@@ -44,16 +48,15 @@ export default class Background extends Component {
 
   
   render() {
-    const { moduleName, availablebgTypes, BgTypeTitle } = this.props
+    const { background } = this.props
 
     return <div className="ModuleContainer">
       <HeaderModule
-        title={moduleName}
+        title={background.moduleName}
       />
       <div className="ModuleContent">
         <TabButtonSet
-          options={availablebgTypes}
-          title={availablebgTypes}
+          options={background.preset}
           value={this.state.currentBgType}
           handleClick={this.handleTabClick}
         />

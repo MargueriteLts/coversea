@@ -8,15 +8,8 @@ const preset = {
     currentBgType: 'PlainColor',
 
     preset: {
-      PlainColor: {
-        bgName: 'Plain color',
-        color: {}
-      },
-      ColorPicker: {
-        bgName: 'Gradient',
-        defaultStartColor: '#000000',
-        defaultEndColor: '#ffffff'
-      }
+      PlainColor: {},
+      ColorPicker: {}
     }
   },
 }

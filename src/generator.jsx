@@ -13,12 +13,10 @@ import {
   getImageStore,
   setImageStore,
   getBackgroundStore,
-  setCurrentBgTypeStore,
-  getCurrentBgTypeStore,
   getBgTypeList,
   setColorBackgroundStore,
-  getBgTypeTitles,
-  setColorValueStore
+  setColorValueStore,
+  setBackgroundStore
   // setTitleCurrentBgStore,
   // getTitleCurrentBgStore
   // getColorBackgroundStore
@@ -47,10 +45,9 @@ const actions = {
   setShapesStore,
   setParticlesStore,
   setImageStore,
-  setCurrentBgTypeStore,
   setColorBackgroundStore,
-  getBgTypeTitles,
   setColorValueStore,
+  setBackgroundStore,
   // setTitleCurrentBgStore,
   // getTitleCurrentBgStore,
   // setCurrentTitleStore,
@@ -87,9 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (moduleName == 'Background') {
       props.background = getBackgroundStore()
 
-      props.setCurrentBgType = getCurrentBgTypeStore()
-      props.bgTypeList = getBgTypeList()
-      props.bgTypeTitles = getBgTypeTitles()
+      // props.setCurrentBgType = getCurrentBgTypeStore()
+      // props.bgTypeList = getBgTypeList()
+      // props.bgTypeTitles = getBgTypeTitles()
       // props.backgroundType = getBackgroundType()
 
       // config.backgroundTypeList.forEach(bgTypeName => {

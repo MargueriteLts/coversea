@@ -5,10 +5,10 @@ import {
   getShapesStore,
   getParticlesStore,
   getImageStore,
-  getBgTypeList,
   getplainColorBackgroundStore,
   setColorValueStore,
-  getColorValueStore
+  getColorValueStore,
+  getBackgroundStore
 } from './store'
 
 let moduleList = {}
@@ -61,15 +61,23 @@ function sketch(p) {
     /////////////////////////////////////////////////////////// MODULE BACKGROUND
 
     if (moduleList.includes('Background')) {
-      if (bgTypeList.includes('PlainColor')) {
-        const plainColorBackground = getplainColorBackgroundStore().color
+      const background = getBackgroundStore()
+
+      // console.log(background);
+
+      if (background.bgTypes.includes('PlainColor') && background.currentBgType === 'PlainColor') {
+        const plainColorBackground = background.preset.PlainColor.color
+
+        // console.log(plainColorBackground);
+
         p.background(
           plainColorBackground[0],
           plainColorBackground[1],
           plainColorBackground[2],
         )
-      } if (bgTypeList.includes('ColorPicker')) {
-        const plainColorBackground = getColorValueStore()
+      } else if (background.bgTypes.includes('ColorPicker') && background.currentBgType === 'ColorPicker') {
+        const plainColorBackground = background.preset.ColorPicker.color
+
         p.background(
           plainColorBackground
         )
@@ -164,7 +172,7 @@ function initSketch(id) {
   canvasContainerId = id
 
   moduleList = getModuleList()
-  bgTypeList = getBgTypeList()
+  // bgTypeList = getBgTypeList()
 
   new p5(sketch)
 }
