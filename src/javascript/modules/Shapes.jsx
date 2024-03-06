@@ -18,7 +18,7 @@ export default class Shapes extends Component {
   }
   
   render() {
-    const { shapes, setColorStore } = this.props
+    const { shapes, setColorPickerStore } = this.props
 
     return <div className="ModuleContainer">
       <HeaderModule
@@ -34,7 +34,7 @@ export default class Shapes extends Component {
         />
         <AllColorPicker
           object='shapes'
-          setColorStore={setColorStore}
+          setColorPickerStore={setColorPickerStore}
           color={shapes.settings.color}
           key='AllColorPicker'
         />

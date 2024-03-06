@@ -5,15 +5,11 @@ import {
   getShapesStore,
   getParticlesStore,
   getImageStore,
-  getplainColorBackgroundStore,
-  setColorValueStore,
-  getColorValueStore,
   getBackgroundStore,
-  getColorStore
+  getColorPickerStore
 } from './store'
 
 let moduleList = {}
-let bgTypeList = {}
 
 let canvasContainerId = ''
 
@@ -24,16 +20,6 @@ let images = {}
 //////////////////////////////////////////
 
 function sketch(p) {
-
-  // p.preload = () => {
-  //   const imageFiles = getImageValue().images
-
-  //   Object.keys(imageFiles).forEach((key) => {
-  //     images = Object.assign({}, images, {
-  //       [`${key}`]: p.loadImage(imageFiles[key])
-  //     })
-  //   })
-  // }
 
   p.preload = () => {
     if (moduleList.includes('Image')) {
@@ -64,12 +50,8 @@ function sketch(p) {
     if (moduleList.includes('Background')) {
       const background = getBackgroundStore()
 
-      // console.log(background);
-
       if (background.bgTypes.includes('PlainColor') && background.currentBgType === 'PlainColor') {
         const plainColorBackground = background.preset.PlainColor.color
-
-        // console.log(plainColorBackground);
 
         p.background(
           plainColorBackground[0],
@@ -90,10 +72,7 @@ function sketch(p) {
     /////////////////////////////////////////////////////////// MODULE SHAPES
 
     if (moduleList.includes('Shapes')) {
-      const color = getColorStore('shapes')
-      // const hexColor = color.preset.ColorPicker.color
-
-      // p.background(0)
+      const color = getColorPickerStore('shapes')
       p.fill(color)
 
       const Value = getShapesStore().settings.sliderValue
@@ -175,7 +154,6 @@ function initSketch(id) {
   canvasContainerId = id
 
   moduleList = getModuleList()
-  // bgTypeList = getBgTypeList()
 
   new p5(sketch)
 }

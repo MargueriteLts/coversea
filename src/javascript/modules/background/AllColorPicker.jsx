@@ -10,12 +10,6 @@ export default class AllColorPicker extends Component {
 
   state = {
     displayColorPicker: false,
-    // color: {
-    //   r: '241',
-    //   g: '112',
-    //   b: '19',
-    //   a: '1',
-    // },
     color: this.props.color
   };
 
@@ -30,7 +24,7 @@ export default class AllColorPicker extends Component {
 
   handleChange = (color) => {
     const {object} = this.props
-    this.props.setColorStore(object, color.hex)
+    this.props.setColorPickerStore(object, color.hex)
     this.setState({ color: color.hex })
   };
 
@@ -42,9 +36,7 @@ export default class AllColorPicker extends Component {
           width: '36px',
           height: '14px',
           borderRadius: '2px',
-          // background: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,
           background: this.state.color,
-          // background: `'${this.state.color}'`,
         },
         swatch: {
           padding: '5px',

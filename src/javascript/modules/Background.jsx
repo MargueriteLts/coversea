@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import HeaderModule from '../components/HeaderModule.jsx'
 import TabButtonSet from '../components/TabButtonSet.jsx'
 import PlainColor from './background/PlainColor.jsx'
-import ColorPicker from './background/ColorPicker.jsx'
+import AllColorPicker from './background/AllColorPicker.jsx'
 
 export default class Background extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ export default class Background extends Component {
   }
 
   renderBgContent() {
-    const { setBackgroundStore, background } = this.props
+    const { setBackgroundStore, background, setColorPickerStore } = this.props
 
     if (this.state.currentBgType == 'PlainColor') {
       return <div className="PlainColorComponent">
@@ -35,16 +35,15 @@ export default class Background extends Component {
       </div>
     } else if (this.state.currentBgType == 'ColorPicker') {
       return <div>
-        <ColorPicker
-          setBackgroundStore={setBackgroundStore}
+        <AllColorPicker
+          object='background'
+          setColorPickerStore={setColorPickerStore}
           color={background.preset.ColorPicker.color}
-          key='ColorPicker'
+          key='AllColorPicker'
         />
       </div>
     }
   }
-
-
   
   render() {
     const { background } = this.props

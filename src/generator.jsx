@@ -13,16 +13,8 @@ import {
   getImageStore,
   setImageStore,
   getBackgroundStore,
-  getBgTypeList,
-  setColorBackgroundStore,
-  setColorValueStore,
   setBackgroundStore,
-  setColorStore
-  // setTitleCurrentBgStore,
-  // getTitleCurrentBgStore
-  // getColorBackgroundStore
-  // setCurrentTitleStore
-  // setTitleCurrentBackgroundStore
+  setColorPickerStore
 } from './javascript/store.js'
 
 import { initSketch } from './javascript/sketch.js'
@@ -46,14 +38,8 @@ const actions = {
   setShapesStore,
   setParticlesStore,
   setImageStore,
-  setColorBackgroundStore,
-  setColorValueStore,
   setBackgroundStore,
-  setColorStore,
-  // setTitleCurrentBgStore,
-  // getTitleCurrentBgStore,
-  // setCurrentTitleStore,
-  // setTitleCurrentBackgroundStore,
+  setColorPickerStore,
   initSketch
 }
 
@@ -67,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const props = {
     moduleList: getModuleList()
-    // backgroundTypeList: getBackgroundTypeList()
   }
 
   config.modules.forEach(moduleName => {
@@ -85,24 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (moduleName == 'Background') {
       props.background = getBackgroundStore()
-
-      // props.setCurrentBgType = getCurrentBgTypeStore()
-      // props.bgTypeList = getBgTypeList()
-      // props.bgTypeTitles = getBgTypeTitles()
-      // props.backgroundType = getBackgroundType()
-
-      // config.backgroundTypeList.forEach(bgTypeName => {
-      //   if (bgTypeName == 'PlainColor') {
-      //     props.titleBgType = getPlainColorStore().bgName???
-      //   }
-        
-      //   else if (bgTypeName == 'Gradient') {
-      //     props.titleBgType = getGradientStore().bgName???
-      //   }
-      // })
-
-      // props.plainColor = getPlainColorStore()
-      // props.gradient = getGradientStore()
     }
   });
 

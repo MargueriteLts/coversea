@@ -25,11 +25,7 @@ export default class GeneratorContainer extends Component {
       setImageStore,
       background,
       setBackgroundStore,
-      setColorStore,
-      setCurrentBgTypeStore,
-      bgTypeTitles,
-      setColorBackgroundStore,
-      setColorValueStore
+      setColorPickerStore
     } = this.props
 
     const modules = []
@@ -40,7 +36,7 @@ export default class GeneratorContainer extends Component {
           <Shapes
             shapes={shapes}
             sliderValue={shapes.settings.sliderValue}
-            setColorStore={setColorStore}
+            setColorPickerStore={setColorPickerStore}
             setSliderValue={setShapesStore}
             key={index}
           />
@@ -71,6 +67,7 @@ export default class GeneratorContainer extends Component {
           <Background
             background={background}
             setBackgroundStore={setBackgroundStore}
+            setColorPickerStore={setColorPickerStore}
             key={index}
           />
         )

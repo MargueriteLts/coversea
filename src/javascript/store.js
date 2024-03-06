@@ -19,9 +19,6 @@ moduleShapesStore,
 moduleParticlesStore,
 moduleImageStore,
 moduleBackgroundStore,
-currentBgTypeStore,
-bgTypeList,
-titleBgType,
 plainColorBackgroundStore
 
 function initStore(generatorName) {
@@ -29,7 +26,6 @@ function initStore(generatorName) {
 
   moduleList.forEach(moduleName => {
     if (moduleName == 'Shapes') {
-      // moduleShapesStore = generators[generatorName].preset['Shapes']
       moduleShapesStore = initShapesStore(generators[generatorName].preset['Shapes'])
     }
 
@@ -43,11 +39,6 @@ function initStore(generatorName) {
 
     if (moduleName == 'Background') {
       moduleBackgroundStore = initBackgroundStore(generators[generatorName].preset['Background'])
-      // moduleBackgroundStore = generators[generatorName].preset['Background']
-      // titleBgType = getBgTypeTitle(generators[generatorName].preset['Background'].bgTypes)
-      // bgTypeList = generators[generatorName].preset['Background'].bgTypes
-
-      // plainColorBackgroundStore = initPlainColorBackground(generators[generatorName].preset['Background'].preset['PlainColor'])
     }
   })
 }
@@ -68,7 +59,6 @@ function initBackgroundStore(preset) {
 
     if (bgType == 'ColorPicker') {
       preset.preset.ColorPicker = Object.assign({}, preset.preset.ColorPicker, { text: 'Pick color', color: '#000000' })
-      // console.log(preset.preset.ColorPicker.color);
     }
   })
 
@@ -84,23 +74,12 @@ function setBackgroundStore(type, value) {
     moduleBackgroundStore.preset.PlainColor.color = generateColor()
   }
 
-  if (type === 'ColorPicker') {
-    moduleBackgroundStore.preset.ColorPicker.color = value
-  }
-
   if (type === 'CurrentTabChange') {
     moduleBackgroundStore.currentBgType = value
   }
 }
 
-//////////////////// PLAIN COLOR BACKGROUND
-
-function initPlainColorBackground(plainColorPreset) {
-  return plainColorPreset = {
-    bgName: 'Plain color',
-    color: generateColor()
-  }
-}
+////////////////////////////////////////////////////// GENERATE FUNCTIONS
 
 function generateColor() {
   const color = []
@@ -112,35 +91,23 @@ function generateColor() {
   return color
 }
 
-function getplainColorBackgroundStore() {
-  return plainColorBackgroundStore
-}
+////////////////////////////////////////////////////// COLORPICKER
 
-function setColorBackgroundStore() {
-  plainColorBackgroundStore = {
-    color: generateColor()
-  }
-}
-
-function setColorValueStore(nexColorValue) {
-  plainColorBackgroundStore.color = nexColorValue
-}
-
-function getColorValueStore() {
-  return plainColorBackgroundStore.color
-}
-
-////////////////// COLORPICKER
-
-function setColorStore(object, nextColorValue) {
+function setColorPickerStore(object, nextColorValue) {
   if (object === 'shapes') {
     moduleShapesStore.settings.color = nextColorValue
   }
+  if (object === 'background') {
+    moduleBackgroundStore.preset.ColorPicker.color = nextColorValue
+  }
 }
 
-function getColorStore(object) {
+function getColorPickerStore(object) {
   if (object === 'shapes') {
     return moduleShapesStore.settings.color
+  }
+  if (object === 'background') {
+    return moduleBackgroundStore.preset.ColorPicker.color
   }
 }
 
@@ -228,10 +195,6 @@ export {
   setImageStore,
   getBackgroundStore,
   setBackgroundStore,
-  setColorBackgroundStore,
-  getplainColorBackgroundStore,
-  setColorValueStore,
-  getColorValueStore,
-  setColorStore,
-  getColorStore
+  setColorPickerStore,
+  getColorPickerStore
 }
