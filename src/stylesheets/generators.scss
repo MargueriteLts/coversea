@@ -16,7 +16,7 @@ body.page {
 
 
   .ModuleContainer {
-    background-color: black;
+    background: var(--BgModul);
     display: flex;
     flex-direction: column;
     width: 816px;
