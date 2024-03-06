@@ -25,11 +25,8 @@ export default class GeneratorContainer extends Component {
       setImageStore,
       background,
       setBackgroundStore,
+      setColorStore,
       setCurrentBgTypeStore,
-      // setTitleCurrentBackgroundStore,
-      // currenBgTitle,
-      // setTitleCurrentBgStore,
-      // backgroundType,
       bgTypeTitles,
       setColorBackgroundStore,
       setColorValueStore
@@ -41,7 +38,9 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Shapes') {
         modules.push(
           <Shapes
-            sliderValue={shapes.sliderValue}
+            shapes={shapes}
+            sliderValue={shapes.settings.sliderValue}
+            setColorStore={setColorStore}
             setSliderValue={setShapesStore}
             key={index}
           />
@@ -83,7 +82,9 @@ export default class GeneratorContainer extends Component {
 
   render() {
     return <div className="GeneratorContainer">
+      <div className='wrapModules'>
       {this.renderModules()}
+      </div>
       <div className="sketch" id="sketch"></div>
     </div>
   }

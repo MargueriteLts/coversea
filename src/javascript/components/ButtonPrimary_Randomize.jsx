@@ -7,10 +7,10 @@ export default class ButtonPrimary_Randomize extends Component {
   }
 
   handleClick = () => {
-    this.props.setValue()
+    this.props.randomize()
   }
 
   render() {
-    return <div className="ButtonPrimary" onClick={this.handleClick}>Randomize background color</div>
+    return <div className="ButtonPrimary" onClick={this.handleClick}>Randomize</div>
   }
 }

@@ -1,8 +1,21 @@
-const modules = ['PlainColorBackground', 'Shapes', 'Particles']
+const modules = ['Background', 'Shapes', 'Particles']
 
 const preset = {
-  PlainColorBackground : { sliderValue: 0 },
-  Shapes: { sliderValue: 37 },
+  Background: {
+
+    bgTypes: ['PlainColor', 'ColorPicker'],
+    currentBgType: 'PlainColor',
+
+    preset: {
+      PlainColor: {},
+      ColorPicker: {}
+    }
+  },
+  Shapes: { 
+    settings: {
+      sliderValue: 37
+    }
+  },
   Particles: { sliderValue: 0 }
 }
 

@@ -29,7 +29,8 @@ function initStore(generatorName) {
 
   moduleList.forEach(moduleName => {
     if (moduleName == 'Shapes') {
-      moduleShapesStore = generators[generatorName].preset['Shapes']
+      // moduleShapesStore = generators[generatorName].preset['Shapes']
+      moduleShapesStore = initShapesStore(generators[generatorName].preset['Shapes'])
     }
 
     if (moduleName == 'Particles') {
@@ -58,13 +59,15 @@ function getModuleList() {
 ////////////////////////////////////////// BACKGROUND
 
 function initBackgroundStore(preset) {
+  preset = Object.assign({}, preset, { moduleName: 'Background' })
+
   preset.bgTypes.forEach((bgType) => {
     if (bgType == 'PlainColor') {
-      preset.preset.PlainColor = Object.assign({}, preset.preset.PlainColor, { text: 'Some text', color: generateColor() })
+      preset.preset.PlainColor = Object.assign({}, preset.preset.PlainColor, { text: 'Random plain color', color: generateColor() })
     }
 
     if (bgType == 'ColorPicker') {
-      preset.preset.ColorPicker = Object.assign({}, preset.preset.ColorPicker, { text: 'Some text 2222', color: '#000000' })
+      preset.preset.ColorPicker = Object.assign({}, preset.preset.ColorPicker, { text: 'Pick color', color: '#000000' })
       // console.log(preset.preset.ColorPicker.color);
     }
   })
@@ -89,16 +92,6 @@ function setBackgroundStore(type, value) {
     moduleBackgroundStore.currentBgType = value
   }
 }
-
-//// CURRENT
-
-// function getCurrentBgTypeStore() {
-//   return currentBgTypeStore
-// }
-
-// function setCurrentBgTypeStore(type) {
-//   moduleBackgroundStore.currentBgTypeStore = type
-// }
 
 //////////////////// PLAIN COLOR BACKGROUND
 
@@ -137,14 +130,34 @@ function getColorValueStore() {
   return plainColorBackgroundStore.color
 }
 
+////////////////// COLORPICKER
+
+function setColorStore(object, nextColorValue) {
+  if (object === 'shapes') {
+    moduleShapesStore.settings.color = nextColorValue
+  }
+}
+
+function getColorStore(object) {
+  if (object === 'shapes') {
+    return moduleShapesStore.settings.color
+  }
+}
+
 ////////////////////////////////////////////////////// SHAPES
+
+function initShapesStore(shapes) {
+  shapes = Object.assign({}, shapes, { moduleName: 'Shapes' })
+  shapes.settings = Object.assign({}, shapes.settings, { color: '#999999' })
+  return shapes
+}
 
 function getShapesStore() {
   return moduleShapesStore
 }
 
 function setShapesStore(nextSliderValue) {
-  moduleShapesStore.sliderValue = nextSliderValue
+  moduleShapesStore.settings.sliderValue = nextSliderValue
 }
 
 ////////////////////////////////////////////////////// PARTICLES
@@ -218,5 +231,7 @@ export {
   setColorBackgroundStore,
   getplainColorBackgroundStore,
   setColorValueStore,
-  getColorValueStore
+  getColorValueStore,
+  setColorStore,
+  getColorStore
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import HeaderModule from '../components/HeaderModule.jsx'
 
 export default class Image extends Component {
   constructor(props) {
@@ -11,8 +12,14 @@ export default class Image extends Component {
   }
 
   render() {
-    return <div className="Image">
-      <div className="Button" onClick={this.handleClick}>Random</div>
+    return <div className="ModuleContainer">
+      <HeaderModule
+        title='Random Image'
+        // randomize={}
+      />
+      <div className="ModuleContent">
+        <div className="Button" onClick={this.handleClick}>Randomize image</div>
+      </div>
     </div>
   }
 }

@@ -2,16 +2,14 @@ const modules = ['Background']
 
 const preset = {
   Background: {
-    moduleName: 'Background',
 
-    bgTypes: ['PlainColor', 'ColorPicker'],
-    currentBgType: 'PlainColor',
+    bgTypes: ['ColorPicker'],
+    currentBgType: 'ColorPicker',
 
     preset: {
-      PlainColor: {},
       ColorPicker: {}
     }
-  },
+  }
 }
 
 export { modules, preset }

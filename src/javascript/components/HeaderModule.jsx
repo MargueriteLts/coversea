@@ -14,7 +14,9 @@ export default class Image extends Component {
       <div className="ModuleTitle">
         {title}
       </div>
-      {/* <ButtonPrimary_Randomize /> */}
+      {/* <ButtonPrimary_Randomize
+        randomize={randomize}
+      /> */}
     </div>
   }
 }

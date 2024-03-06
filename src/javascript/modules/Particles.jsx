@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import HeaderModule from '../components/HeaderModule.jsx'
 
 export default class Particles extends Component {
   constructor(props) {
@@ -17,14 +18,19 @@ export default class Particles extends Component {
 
   render() {
     return (
-      <div className="Particles">
-        <input
-          type="range"
-          min="0"
-          max="500"
-          value={this.state.sliderValue}
-          onInput={this.handleInput}
+      <div className="ModuleContainer">
+        <HeaderModule
+          title='Particles'
         />
+        <div className="ModuleContent">
+          <input
+            type="range"
+            min="0"
+            max="500"
+            value={this.state.sliderValue}
+            onInput={this.handleInput}
+          />
+        </div>
       </div>
     )
   }

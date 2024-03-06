@@ -8,7 +8,8 @@ import {
   getplainColorBackgroundStore,
   setColorValueStore,
   getColorValueStore,
-  getBackgroundStore
+  getBackgroundStore,
+  getColorStore
 } from './store'
 
 let moduleList = {}
@@ -89,11 +90,13 @@ function sketch(p) {
     /////////////////////////////////////////////////////////// MODULE SHAPES
 
     if (moduleList.includes('Shapes')) {
+      const color = getColorStore('shapes')
+      // const hexColor = color.preset.ColorPicker.color
 
       // p.background(0)
-      p.fill(255, 0, 255)
+      p.fill(color)
 
-      const Value = getShapesStore().sliderValue
+      const Value = getShapesStore().settings.sliderValue
       const wValue = parseInt(Value)
 
       const xCenter = canvasSize / 2

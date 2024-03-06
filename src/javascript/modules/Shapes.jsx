@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import HeaderModule from '../components/HeaderModule.jsx'
+import AllColorPicker from './background/AllColorPicker.jsx'
 
 export default class Shapes extends Component {
   constructor(props) {
@@ -16,14 +18,27 @@ export default class Shapes extends Component {
   }
   
   render() {
-    return <div className="Shapes">
-      <input
-        type="range"
-        min="2"
-        max="74"
-        value={this.state.sliderValue}
-        onInput={this.handleInput}
+    const { shapes, setColorStore } = this.props
+
+    return <div className="ModuleContainer">
+      <HeaderModule
+        title={shapes.moduleName}
       />
+      <div className="ModuleContent flexRow">
+        <input
+          type="range"
+          min="2"
+          max="74"
+          value={this.state.sliderValue}
+          onInput={this.handleInput}
+        />
+        <AllColorPicker
+          object='shapes'
+          setColorStore={setColorStore}
+          color={shapes.settings.color}
+          key='AllColorPicker'
+        />
+      </div>
     </div>
   }
 }

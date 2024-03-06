@@ -16,7 +16,8 @@ import {
   getBgTypeList,
   setColorBackgroundStore,
   setColorValueStore,
-  setBackgroundStore
+  setBackgroundStore,
+  setColorStore
   // setTitleCurrentBgStore,
   // getTitleCurrentBgStore
   // getColorBackgroundStore
@@ -48,6 +49,7 @@ const actions = {
   setColorBackgroundStore,
   setColorValueStore,
   setBackgroundStore,
+  setColorStore,
   // setTitleCurrentBgStore,
   // getTitleCurrentBgStore,
   // setCurrentTitleStore,

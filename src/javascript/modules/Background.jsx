@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 
 import HeaderModule from '../components/HeaderModule.jsx'
 import TabButtonSet from '../components/TabButtonSet.jsx'
-import PlainColor from '../components/PlainColor.jsx'
-import ColorPicker from '../components/ColorPicker.jsx'
+import PlainColor from './background/PlainColor.jsx'
+import ColorPicker from './background/ColorPicker.jsx'
 
 export default class Background extends Component {
   constructor(props) {
@@ -38,7 +38,6 @@ export default class Background extends Component {
         <ColorPicker
           setBackgroundStore={setBackgroundStore}
           color={background.preset.ColorPicker.color}
-          // getBackgroundStore={getBackgroundStore}
           key='ColorPicker'
         />
       </div>
@@ -53,8 +52,9 @@ export default class Background extends Component {
     return <div className="ModuleContainer">
       <HeaderModule
         title={background.moduleName}
+        // randomize={}
       />
-      <div className="ModuleContent">
+      <div className="ModuleContent flexColumn">
         <TabButtonSet
           options={background.preset}
           value={this.state.currentBgType}

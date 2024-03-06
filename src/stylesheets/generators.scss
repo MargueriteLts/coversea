@@ -1,12 +1,16 @@
 body.page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
 
   & > div,
   & > a {
     margin: 10px 0;
+  }
+
+  .header {
+    color: var(--white);
   }
 }
 
@@ -14,19 +18,21 @@ body.page {
   display: flex;
   flex-direction: row;
 
+  .wrapModules {
+    display: flex;
+    flex-direction: column;
+    // column-gap: 20px;
+    row-gap: 20px;
+  }
+
 
   .ModuleContainer {
     background: var(--BgModul);
     display: flex;
     flex-direction: column;
     width: 816px;
-    height: 100%;
     margin-right: 20px;
     border-radius: 30px;
-
-    .Button {
-      color: white;
-    }
 
     .TabButtonSet {
       display: flex;
@@ -41,6 +47,7 @@ body.page {
       &:hover:not(.active) {
         color: white;
         background-color: grey;
+        cursor: pointer;
       }
   
       &.active {
@@ -48,6 +55,7 @@ body.page {
         text-transform: capitalize;
         font-weight: 800;
         color: rgb(255, 255, 255);
+        cursor: default;
       }
     }
 
@@ -62,9 +70,26 @@ body.page {
       }
     }
 
+    .flexColumn {
+      flex-direction: column;
+    }
+
+    .flexRow {
+      flex-direction: row;
+    }
+
     .ModuleContent{
+      display: flex;
+      row-gap: 12px;
+      column-gap: 12px;
       padding: 24px;
       height: 100%;
+      width: 100%;
+
+      input {
+        width: 50%;
+        // flex-grow: 1;
+      }
     }
   }
 }
