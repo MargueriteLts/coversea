@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import HeaderModule from '../components/HeaderModule.jsx'
-import AllColorPicker from './background/AllColorPicker.jsx'
+import AllColorPicker from './background/ColorPicker.jsx'
 
 export default class Shapes extends Component {
   constructor(props) {
