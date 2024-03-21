@@ -71,26 +71,6 @@ export default class Background extends Component {
       </div>)
     }
   }
-
-  //Une seule fonction avec un else if > 1 (au lieu de dans render + 2 fonctions)
-
-  // renderBgTypes() {
-  //   const { setBackgroundStore, background, setColorPickerStore } = this.props
-
-  //   if (background.bgTypes.length > 1) {
-  //       if this.state.current......
-  //       if this.state.current......
-  //   } else if {
-  //     const bgType = background.bgTypes
-      
-  //     if (bgType == 'PlainColor') {
-  //           ......
-  //     }
-  //     if (bgType == 'PlainColor') {
-  //       ......
-  //     }
-  //   }
-  // }
   
   render() {
     const { background } = this.props
@@ -116,5 +96,3 @@ export default class Background extends Component {
     </div>
   }
 }
-
-//{this.renderBgTypes}

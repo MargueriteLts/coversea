@@ -6,7 +6,8 @@ import {
   getParticlesStore,
   getImageStore,
   getBackgroundStore,
-  getColorPickerStore
+  getColorPickerStore,
+  getBlendStore
 } from './store'
 
 let moduleList = {}
@@ -18,6 +19,110 @@ let canvasSize = 600
 let images = {}
 
 //////////////////////////////////////////
+
+function drawModules(p) {
+
+  /////////////////////////////////////////////////////////// MODULE BACKGROUND
+
+  if (moduleList.includes('Background')) {
+    const background = getBackgroundStore()
+
+    if (background.bgTypes.includes('PlainColor') && background.currentBgType === 'PlainColor') {
+      const plainColorBackground = background.preset.PlainColor.color
+
+      p.background(
+        plainColorBackground[0],
+        plainColorBackground[1],
+        plainColorBackground[2],
+      )
+    } else if (background.bgTypes.includes('ColorPicker') && background.currentBgType === 'ColorPicker') {
+      const plainColorBackground = background.preset.ColorPicker.color
+
+      p.background(
+        plainColorBackground
+      )
+    } else {
+      p.background(0)
+    }
+  }
+
+  /////////////////////////////////////////////////////////// MODULE SHAPES
+
+  if (moduleList.includes('Shapes')) {
+
+    const color = getColorPickerStore('shapes')
+    p.fill(color)
+
+    const Value = getShapesStore().settings.sliderValue
+    const wValue = parseInt(Value)
+
+    const xCenter = canvasSize / 2
+    const yCenter = canvasSize / 2
+    const w = wValue * canvasSize / 100
+    
+    const paddingW = 3 * canvasSize / 100
+    const paddingH = 5 * canvasSize / 100
+    
+    const wCircle = w - paddingW
+    
+    const xCenterER1 = xCenter + (w / 2) + (6,5 * canvasSize / 100)
+    const xCenterEL1 = xCenter - (w / 2) - (6,5 * canvasSize / 100)
+    const wEV1 = (13 * canvasSize / 100) - paddingW
+    const hEV1 = w + (26 * canvasSize / 100) - paddingH
+    
+    const xCenterER2 = xCenterER1 + ((canvasSize - w) / 4)
+    const xCenterEL2 = canvasSize - xCenterER2
+    const wEV2 = ((canvasSize - w) / 2) - (13 * canvasSize / 100) - paddingW
+    const hEV2 = canvasSize - paddingH
+
+    p.ellipse(xCenter, yCenter, wCircle)
+    
+    p.ellipse(xCenterER1, yCenter, wEV1, hEV1)
+    p.ellipse(xCenterEL1, yCenter, wEV1, hEV1)
+    p.ellipse(xCenterER2, yCenter, wEV2, hEV2)
+    p.ellipse(xCenterEL2, yCenter, wEV2, hEV2)
+    
+    p.ellipse(yCenter, xCenterER1, wCircle, wEV1)
+    p.ellipse(yCenter, xCenterEL1, wCircle, wEV1)
+    p.ellipse(yCenter, xCenterER2, hEV1, wEV2)
+    p.ellipse(yCenter, xCenterEL2, hEV1, wEV2)
+  }
+
+  /////////////////////////////////////////////////////////// MODULE PARTICLES
+
+  if (moduleList.includes('Particles')) {
+    const particles = getParticlesStore()
+
+    for (let index = 0; index < particles.sliderValue; index++) {
+      p.fill(255)
+      p.ellipse (
+        particles.particles[index][0],
+        particles.particles[index][1],
+        particles.particles[index][2],
+      )
+    }
+  }
+
+  /////////////////////////////////////////////////////////// MODULE IMAGE
+
+  if (moduleList.includes('Image')) {
+    const { current } = getImageStore()
+    const image = images[current]
+
+    p.image(
+      image,
+      (canvasSize - image.width / 2) / 2,
+      (canvasSize - image.height / 2) / 2,
+      image.width / 2,
+      image.height / 2,
+      0,
+      0,
+      image.width,
+      image.height,
+      p.CONTAIN
+    )
+  }
+}
 
 function sketch(p) {
 
@@ -36,8 +141,15 @@ function sketch(p) {
   p.setup = () => {
     const canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
+    const blend = getBlendStore()
+    if (blend) {
+      p.blendMode(p.DIFFERENCE)
+    }
     p.frameRate(100)
     p.noStroke()
+    // if (blend) {
+    //   p.blendMode(p.DIFFERENCE)
+    // }
     // p.noLoop()
   }
   
@@ -45,105 +157,15 @@ function sketch(p) {
 
     p.background(0)
 
-    /////////////////////////////////////////////////////////// MODULE BACKGROUND
+    // const blend = getBlendStore()
+    // if (blend) {
+    //   p.blendMode(p.DIFFERENCE)
+    //   drawModules(p)
+    // } else {
+    //   drawModules(p)
+    // }
 
-    if (moduleList.includes('Background')) {
-      const background = getBackgroundStore()
-
-      if (background.bgTypes.includes('PlainColor') && background.currentBgType === 'PlainColor') {
-        const plainColorBackground = background.preset.PlainColor.color
-
-        p.background(
-          plainColorBackground[0],
-          plainColorBackground[1],
-          plainColorBackground[2],
-        )
-      } else if (background.bgTypes.includes('ColorPicker') && background.currentBgType === 'ColorPicker') {
-        const plainColorBackground = background.preset.ColorPicker.color
-
-        p.background(
-          plainColorBackground
-        )
-      } else {
-        p.background(0)
-      }
-    }
-
-    /////////////////////////////////////////////////////////// MODULE SHAPES
-
-    if (moduleList.includes('Shapes')) {
-      const color = getColorPickerStore('shapes')
-      p.fill(color)
-
-      const Value = getShapesStore().settings.sliderValue
-      const wValue = parseInt(Value)
-
-      const xCenter = canvasSize / 2
-      const yCenter = canvasSize / 2
-      const w = wValue * canvasSize / 100
-      
-      const paddingW = 3 * canvasSize / 100
-      const paddingH = 5 * canvasSize / 100
-      
-      const wCircle = w - paddingW
-      
-      const xCenterER1 = xCenter + (w / 2) + (6,5 * canvasSize / 100)
-      const xCenterEL1 = xCenter - (w / 2) - (6,5 * canvasSize / 100)
-      const wEV1 = (13 * canvasSize / 100) - paddingW
-      const hEV1 = w + (26 * canvasSize / 100) - paddingH
-      
-      const xCenterER2 = xCenterER1 + ((canvasSize - w) / 4)
-      const xCenterEL2 = canvasSize - xCenterER2
-      const wEV2 = ((canvasSize - w) / 2) - (13 * canvasSize / 100) - paddingW
-      const hEV2 = canvasSize - paddingH
-
-      p.ellipse(xCenter, yCenter, wCircle)
-      
-      p.ellipse(xCenterER1, yCenter, wEV1, hEV1)
-      p.ellipse(xCenterEL1, yCenter, wEV1, hEV1)
-      p.ellipse(xCenterER2, yCenter, wEV2, hEV2)
-      p.ellipse(xCenterEL2, yCenter, wEV2, hEV2)
-      
-      p.ellipse(yCenter, xCenterER1, wCircle, wEV1)
-      p.ellipse(yCenter, xCenterEL1, wCircle, wEV1)
-      p.ellipse(yCenter, xCenterER2, hEV1, wEV2)
-      p.ellipse(yCenter, xCenterEL2, hEV1, wEV2)
-    }
-
-    /////////////////////////////////////////////////////////// MODULE PARTICLES
-
-    if (moduleList.includes('Particles')) {
-      const particles = getParticlesStore()
-
-      for (let index = 0; index < particles.sliderValue; index++) {
-        p.fill(255)
-        p.ellipse (
-          particles.particles[index][0],
-          particles.particles[index][1],
-          particles.particles[index][2],
-        )
-      }
-    }
-
-    /////////////////////////////////////////////////////////// MODULE IMAGE
-
-    if (moduleList.includes('Image')) {
-      const { current } = getImageStore()
-      const image = images[current]
-
-      p.image(
-        image,
-        (canvasSize - image.width / 2) / 2,
-        (canvasSize - image.height / 2) / 2,
-        image.width / 2,
-        image.height / 2,
-        0,
-        0,
-        image.width,
-        image.height,
-        p.CONTAIN
-      )
-    }
+    drawModules(p)
 
   }
 }

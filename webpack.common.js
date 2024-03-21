@@ -125,6 +125,14 @@ module.exports = {
       chunks: ['generator']
     }),
 
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator6.html',
+      filename: './generators/generator6.html',
+      chunks: ['generator']
+    }),
+
     // Partials
     new HtmlWebpackPartialsPlugin([
       {

@@ -5,13 +5,15 @@ import * as generator2 from '../generators/generator2.js'
 import * as generator3 from '../generators/generator3.js'
 import * as generator4 from '../generators/generator4.js'
 import * as generator5 from '../generators/generator5.js'
+import * as generator6 from '../generators/generator6.js'
 
 const generators = {
   generator1,
   generator2,
   generator3,
   generator4,
-  generator5
+  generator5,
+  generator6
 }
 
 let moduleList,
@@ -19,10 +21,12 @@ moduleShapesStore,
 moduleParticlesStore,
 moduleImageStore,
 moduleBackgroundStore,
-plainColorBackgroundStore
+blendStore
 
 function initStore(generatorName) {
   moduleList = generators[generatorName].modules
+
+  blendStore = generators[generatorName].blend
 
   moduleList.forEach(moduleName => {
     if (moduleName == 'Shapes') {
@@ -45,6 +49,12 @@ function initStore(generatorName) {
 
 function getModuleList() {
   return moduleList
+}
+
+/////// BLEND
+
+function getBlendStore() {
+  return blendStore
 }
 
 ////////////////////////////////////////// BACKGROUND
@@ -196,5 +206,6 @@ export {
   getBackgroundStore,
   setBackgroundStore,
   setColorPickerStore,
-  getColorPickerStore
+  getColorPickerStore,
+  getBlendStore
 }
