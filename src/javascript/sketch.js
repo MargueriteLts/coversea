@@ -141,11 +141,11 @@ function sketch(p) {
   p.setup = () => {
     const canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
-    const blend = getBlendStore()
-    if (blend) {
-      p.blendMode(p.DIFFERENCE)
-    }
-    p.frameRate(100)
+    // const blend = getBlendStore()
+    // if (blend) {
+    //   p.blendMode(p.DIFFERENCE)
+    // }
+    // p.frameRate(100)
     p.noStroke()
     // if (blend) {
     //   p.blendMode(p.DIFFERENCE)
@@ -155,17 +155,19 @@ function sketch(p) {
   
   p.draw = () => {
 
-    p.background(0)
+    // p.background(0)
+    
+    const blend = getBlendStore()
+    
+    if (blend) {
+      p.clear()
+      p.blendMode(p.DIFFERENCE)
+      drawModules(p)
+    } else {
+      drawModules(p)
+    }
 
-    // const blend = getBlendStore()
-    // if (blend) {
-    //   p.blendMode(p.DIFFERENCE)
-    //   drawModules(p)
-    // } else {
-    //   drawModules(p)
-    // }
-
-    drawModules(p)
+    // drawModules(p)
 
   }
 }
