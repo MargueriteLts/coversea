@@ -70,6 +70,10 @@ function initBackgroundStore(preset) {
     if (bgType == 'ColorPicker') {
       preset.preset.ColorPicker = Object.assign({}, preset.preset.ColorPicker, { text: 'Pick color', color: '#000000' })
     }
+
+    if (bgType == 'Gradient') {
+      preset.preset.Gradient = Object.assign({}, preset.preset.Gradient, { text: 'Gradient', color1: '#ff0000', color2:'#00ff00' })
+    }
   })
 
   return preset

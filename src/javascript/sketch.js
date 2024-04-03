@@ -41,6 +41,23 @@ function drawModules(p) {
       p.background(
         plainColorBackground
       )
+    } else if (background.bgTypes.includes('Gradient') && background.currentBgType === 'Gradient') {
+      const color1 = background.preset.Gradient.color1
+      const color2 = background.preset.Gradient.color2
+      p.background(0)
+
+      let c1 = p.color(color1)
+      let c2 = p.color(color2)
+
+      for (let i = 0; i <= canvasSize; i++) {
+        let amt = p.map(i, 0, canvasSize, 0, 1)
+        let c3 = p.lerpColor(c1, c2, amt)
+        
+        p.stroke(c3)
+        p.line(i, 0, 1, canvasSize)
+      }
+
+
     } else {
       p.background(0)
     }
