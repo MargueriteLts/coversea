@@ -11,11 +11,11 @@ export default class AllColorPicker extends Component {
   state = {
     displayColorPicker: false,
     color: this.props.color
+    // color: this.props.getColorPickerStore(object)
   };
 
   handleClick = () => {
     this.setState({ displayColorPicker: !this.state.displayColorPicker })
-    console.log(this.props.color);
   };
 
   handleClose = () => {
@@ -27,6 +27,16 @@ export default class AllColorPicker extends Component {
     this.props.setColorPickerStore(object, color.hex)
     this.setState({ color: color.hex })
   };
+
+  // updateState = () => {
+  //   const { object, color } = this.props
+  //   if (object === 'gradient1') {
+  //     this.setState({ color: color})
+  //   }
+  //   if (object === 'gradient2') {
+  //     this.setState({ color: color})
+  //   }
+  // }
 
   render() {
 

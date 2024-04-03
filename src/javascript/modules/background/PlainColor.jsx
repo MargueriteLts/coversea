@@ -8,7 +8,6 @@ export default class PlainColor extends Component {
 
   handleClick = () => {
     this.props.setBackgroundStore('PlainColor')
-    console.log('click')
   }
 
   render() {

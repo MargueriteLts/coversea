@@ -72,7 +72,7 @@ function initBackgroundStore(preset) {
     }
 
     if (bgType == 'Gradient') {
-      preset.preset.Gradient = Object.assign({}, preset.preset.Gradient, { text: 'Gradient', color1: '#ff0000', color2:'#00ff00' })
+      preset.preset.Gradient = Object.assign({}, preset.preset.Gradient, { text: 'Gradient', color1: '#ff0000', color2:'#00ff00', angle:'vertical' })
     }
   })
 
@@ -84,13 +84,34 @@ function getBackgroundStore() {
 }
 
 function setBackgroundStore(type, value) {
+  if (type === 'CurrentTabChange') {
+    moduleBackgroundStore.currentBgType = value
+  }
+
   if (type === 'PlainColor') {
     moduleBackgroundStore.preset.PlainColor.color = generateColor()
   }
 
-  if (type === 'CurrentTabChange') {
-    moduleBackgroundStore.currentBgType = value
+  if (type === 'Gradient') {
+    moduleBackgroundStore.preset.Gradient.color1 = generateColor()
+    moduleBackgroundStore.preset.Gradient.color2 = generateColor()
   }
+  if (type === 'AngleGradient') {
+    moduleBackgroundStore.preset.Gradient.angle = changeGradientAngle()
+  }
+}
+
+function changeGradientAngle() {
+  let angle = ''
+
+  if (moduleBackgroundStore.preset.Gradient.angle === 'vertical') {
+    angle = 'horizontal'
+  }
+  if (moduleBackgroundStore.preset.Gradient.angle === 'horizontal') {
+    angle = 'vertical'
+  }
+
+  return angle
 }
 
 ////////////////////////////////////////////////////// GENERATE FUNCTIONS
@@ -114,6 +135,12 @@ function setColorPickerStore(object, nextColorValue) {
   if (object === 'background') {
     moduleBackgroundStore.preset.ColorPicker.color = nextColorValue
   }
+  if (object === 'gradient1') {
+    moduleBackgroundStore.preset.Gradient.color1 = nextColorValue
+  }
+  if (object === 'gradient2') {
+    moduleBackgroundStore.preset.Gradient.color2 = nextColorValue
+  }
 }
 
 function getColorPickerStore(object) {
@@ -122,6 +149,12 @@ function getColorPickerStore(object) {
   }
   if (object === 'background') {
     return moduleBackgroundStore.preset.ColorPicker.color
+  }
+  if (object === 'gradient1') {
+    return moduleBackgroundStore.preset.Gradient.color1
+  }
+  if (object === 'gradient2') {
+    return moduleBackgroundStore.preset.Gradient.color2
   }
 }
 

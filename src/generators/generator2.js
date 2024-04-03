@@ -4,7 +4,7 @@ const preset = {
   Background: {
 
     bgTypes: ['PlainColor', 'ColorPicker', 'Gradient'],
-    currentBgType: 'PlainColor',
+    currentBgType: 'Gradient',
 
     preset: {
       PlainColor: {},

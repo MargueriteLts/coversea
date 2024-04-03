@@ -23,6 +23,18 @@ export default class Background extends Component {
     })
   }
 
+  handleChangeColorGradient = () => {
+    this.props.setBackgroundStore('Gradient')
+  }
+
+  handleChangeAngleGradient = () => {
+    this.props.setBackgroundStore('AngleGradient')
+  }
+
+  // changeGradientColor = () => {
+
+  // }
+
   renderBgContent() {
     const { setBackgroundStore, background, setColorPickerStore } = this.props
 
@@ -33,7 +45,8 @@ export default class Background extends Component {
           key='PlainColor'
         />
       </div>
-    } else if (this.state.currentBgType == 'ColorPicker') {
+    }
+    if (this.state.currentBgType == 'ColorPicker') {
       return <div>
         <ColorPicker
           title=''
@@ -42,6 +55,26 @@ export default class Background extends Component {
           color={background.preset.ColorPicker.color}
           key='AllColorPicker'
         />
+      </div>
+    }
+    if (this.state.currentBgType == 'Gradient') {
+      return <div>
+        <ColorPicker
+          title=''
+          object='gradient1'
+          setColorPickerStore={setColorPickerStore}
+          color={background.preset.Gradient.color1}
+          key='Gradient1ColorPicker'
+        />
+        <ColorPicker
+          title=''
+          object='gradient2'
+          setColorPickerStore={setColorPickerStore}
+          color={background.preset.Gradient.color2}
+          key='Gradient2ColorPicker'
+        />
+      <div className="Button" onClick={this.handleChangeColorGradient}>Randomize Gradient</div>
+      <div className="Button" onClick={this.handleChangeAngleGradient}>Rotate</div>
       </div>
     }
   }

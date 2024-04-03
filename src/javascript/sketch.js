@@ -44,6 +44,7 @@ function drawModules(p) {
     } else if (background.bgTypes.includes('Gradient') && background.currentBgType === 'Gradient') {
       const color1 = background.preset.Gradient.color1
       const color2 = background.preset.Gradient.color2
+      const angle = background.preset.Gradient.angle
       p.background(0)
 
       let c1 = p.color(color1)
@@ -54,7 +55,12 @@ function drawModules(p) {
         let c3 = p.lerpColor(c1, c2, amt)
         
         p.stroke(c3)
-        p.line(i, 0, 1, canvasSize)
+        if (angle == 'vertical') {
+          p.line(0, i, canvasSize, i)
+        }
+        if (angle == 'horizontal') {
+          p.line(i, 0, i, canvasSize)
+        }
       }
 
 
@@ -66,6 +72,8 @@ function drawModules(p) {
   /////////////////////////////////////////////////////////// MODULE SHAPES
 
   if (moduleList.includes('Shapes')) {
+
+    p.noStroke()
 
     const color = getColorPickerStore('shapes')
     p.fill(color)
