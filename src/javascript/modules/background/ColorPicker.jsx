@@ -28,7 +28,7 @@ export default class AllColorPicker extends Component {
     this.setState({ color: color.hex })
   };
 
-  // updateState = () => {
+  // updateColor = () => {
   //   const { object, color } = this.props
   //   if (object === 'gradient1') {
   //     this.setState({ color: color})

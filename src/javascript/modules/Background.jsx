@@ -31,10 +31,6 @@ export default class Background extends Component {
     this.props.setBackgroundStore('AngleGradient')
   }
 
-  // changeGradientColor = () => {
-
-  // }
-
   renderBgContent() {
     const { setBackgroundStore, background, setColorPickerStore } = this.props
 
