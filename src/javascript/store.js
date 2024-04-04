@@ -289,7 +289,7 @@ function initVinylStore(preset) {
     require.context('../images/vinylPics/label', false, /\.(png|jpe?g|svg)$/)
   )
 
-  preset = Object.assign({}, preset, { moduleName: 'Vinyl Disc Picture' })
+  preset = Object.assign({}, preset, { moduleName: 'Vinyl Disc' })
 
   preset.vinylTypes.forEach((type) => {
     if (type === 'Whole') {
@@ -300,6 +300,8 @@ function initVinylStore(preset) {
       preset.preset.Label = Object.assign({}, preset.preset.Label, { text: 'Disc Label', images: collection2, current: sample(Object.keys(collection2)) })
     }
   })
+
+  console.log(preset.preset.sliderValue);
 
   return preset
 }
@@ -312,6 +314,10 @@ function setVinylStore(type, value) {
   if (type === 'CurrentTabChange') {
     moduleVinylStore.currentVinylType = value
   }
+}
+
+function setVinylSizeStore(nextSliderValue) {
+  moduleVinylStore.preset.sliderValue = nextSliderValue
 }
 
 ///////////////////////////////////////////////////////////////////// EXPORT
@@ -333,5 +339,6 @@ export {
   setBackgroundImageStore,
   getVinylStore,
   setVinylStore,
+  setVinylSizeStore,
   getBlendStore
 }

@@ -9,7 +9,8 @@ export default class Vinyl extends Component {
     super(props)
 
     this.state = {
-      currentVinylType: this.props.vinyl.currentVinylType
+      currentVinylType: this.props.vinyl.currentVinylType,
+      sliderValue: this.props.sliderValue
     }
   }
 
@@ -19,6 +20,11 @@ export default class Vinyl extends Component {
     this.setState({
       currentVinylType: type
     })
+  }
+
+  handleInput = (e) => {
+    this.props.setSliderValue(e.target.value)
+    this.setState({sliderValue: e.target.value})
   }
 
   // handleClick = () => {
@@ -46,6 +52,13 @@ export default class Vinyl extends Component {
           options={vinyl.preset}
           value={this.state.currentVinylType}
           handleClick={this.handleTabClick}
+        />
+        <input
+          type="range"
+          min="1"
+          max="600"
+          value={this.state.sliderValue}
+          onInput={this.handleInput}
         />
         {/* <div className="Button" onClick={this.handleClick}>Randomize image</div> */}
       </div>

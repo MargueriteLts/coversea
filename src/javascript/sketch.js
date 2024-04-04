@@ -177,19 +177,20 @@ function drawModules(p) {
       imageVinyl = imagesLabelVinyl[currentVinylImg]
     }
 
+    let imageSize = vinyl.preset.sliderValue
 
     p.image(
       imageVinyl,
-      (canvasSize - imageVinyl.width / 2) / 2,
-      (canvasSize - imageVinyl.height / 2) / 2,
-      imageVinyl.width / 2,
-      imageVinyl.height / 2,
+      (canvasSize - imageSize) / 2,
+      (canvasSize - imageSize) / 2,
+      imageSize,
+      imageSize,
       0,
       0,
       imageVinyl.width,
       imageVinyl.height,
       p.CONTAIN
-    )
+    );
   }
 
   /////////////////////////////////////////////////////////// MODULE IMAGE

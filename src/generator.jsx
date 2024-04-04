@@ -18,7 +18,8 @@ import {
   getBackgroundImageStore,
   setBackgroundImageStore,
   getVinylStore,
-  setVinylStore
+  setVinylStore,
+  setVinylSizeStore
 } from './javascript/store.js'
 
 import { initSketch } from './javascript/sketch.js'
@@ -48,6 +49,7 @@ const actions = {
   setColorPickerStore,
   setBackgroundImageStore,
   setVinylStore,
+  setVinylSizeStore,
   initSketch
 }
 

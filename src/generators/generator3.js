@@ -18,7 +18,8 @@ const preset = {
 
     preset: {
       Whole: {},
-      Label: {}
+      Label: {},
+      sliderValue: 300
     }
   },
   Image: {}
