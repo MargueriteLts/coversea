@@ -235,21 +235,21 @@ function setImageStore() {
 ////////////////////// BACKGROUND IMAGE
 
 function initBackgroundImageStore(preset) {
+  const collection1 = importAll(
+    require.context('../images/collection1NightClub', false, /\.(png|jpe?g|svg)$/)
+  )
+  const collection2 = importAll(
+    require.context('../images/collection2Cars', false, /\.(png|jpe?g|svg)$/)
+  )
 
   preset = Object.assign({}, preset, { moduleName: 'Background Image' })
 
   preset.collections.forEach((collection) => {
-    if (collection == 'NightClub') {
-      const collection1 = importAll(
-        require.context('../images/collection1NightClub', false, /\.(png|jpe?g|svg)$/)
-      )
+    if (collection === 'NightClub') {
       preset.preset.NightClub = Object.assign({}, preset.preset.NightClub, { text: 'Night Club', images: collection1, current: sample(Object.keys(collection1)) })
     }
 
-    if (collection == 'Cars') {
-      const collection2 = importAll(
-        require.context('../images/collection2Cars', false, /\.(png|jpe?g|svg)$/)
-      )
+    if (collection === 'Cars') {
       preset.preset.Cars = Object.assign({}, preset.preset.Cars, { text: 'Cars', images: collection2, current: sample(Object.keys(collection2)) })
     }
   })
@@ -266,12 +266,14 @@ function setBackgroundImageStore(type, value) {
     moduleBackgroundImageStore.currentCollection = value
   }
 
-  if (type === 'NightClub') {
-    moduleBackgroundImageStore.preset.NightClub.current = sample(Object.keys(moduleBackgroundImageStore.preset.NightClub.images))
-  }
-  if (type === 'Cars') {
-    moduleBackgroundImageStore.preset.Cars.current = sample(Object.keys(moduleBackgroundImageStore.preset.Cars.images))
-  }
+  console.log(value);
+
+  // if (type === 'NightClub') {
+  //   moduleBackgroundImageStore.preset.NightClub.current = sample(Object.keys(moduleBackgroundImageStore.preset.NightClub.images))
+  // }
+  // if (type === 'Cars') {
+  //   moduleBackgroundImageStore.preset.Cars.current = sample(Object.keys(moduleBackgroundImageStore.preset.Cars.images))
+  // }
 }
 
 ///////////////////////////////////////////////////////////////////// EXPORT

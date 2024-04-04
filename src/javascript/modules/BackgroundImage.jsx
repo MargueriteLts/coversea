@@ -15,7 +15,6 @@ export default class Background extends Component {
 
   handleTabClick = (type) => {
     this.props.setBackgroundImageStore('CurrentTabChange', type)
-    console.log('CLIK');
 
     this.setState({
       currentCollection: type
@@ -23,7 +22,7 @@ export default class Background extends Component {
   }
 
   // handleClick = () => {
-  //   this.props.setBackgroundImageValue()
+  //   this.props.setBackgroundImageValue('NightClub')
   // }
 
   //////////////////////////////////////////////////////// RENDER

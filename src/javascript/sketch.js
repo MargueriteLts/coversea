@@ -18,7 +18,9 @@ let canvasContainerId = ''
 let canvasSize = 600
 
 let imagesObj = {}
-let imagesBg = {}
+let imagesBgNC = {}
+let imagesBgCars = {}
+let imageBg
 
 //////////////////////////////////////////
 
@@ -70,14 +72,13 @@ function drawModules(p) {
     const backgroundImage = getBackgroundImageStore()
 
     let currentImg
-    let imageBg
 
     if (backgroundImage.collections.includes('NightClub') && backgroundImage.currentCollection === 'NightClub') {
       currentImg = backgroundImage.preset.NightClub.current
-      imageBg = imagesBg[currentImg]
+      imageBg = imagesBgNC[currentImg]
     } else if (backgroundImage.collections.includes('Cars') && backgroundImage.currentCollection === 'Cars') {
       currentImg = backgroundImage.preset.Cars.current
-      imageBg = imagesBg[currentImg]
+      imageBg = imagesBgCars[currentImg]
     }
 
 
@@ -182,6 +183,9 @@ function drawModules(p) {
 function sketch(p) {
 
   p.preload = () => {
+
+    //////////////////////////////////////////////////// IMAGE OBJ
+
     if (moduleList.includes('Image')) {
       const imageFiles = getImageStore().images
 
@@ -193,31 +197,29 @@ function sketch(p) {
       console.log(imagesObj);
     }
 
+    //////////////////////////////////////////////////// IMAGE BG
+
     if (moduleList.includes('BackgroundImage')) {
       const backgroundImage = getBackgroundImageStore()
 
-      if (backgroundImage.collections.includes('NightClub') && backgroundImage.currentCollection === 'NightClub') {
-        const imageFiles = backgroundImage.preset.NightClub.images
+      if (backgroundImage.collections.includes('NightClub')) {
+        const imageFiles1 = backgroundImage.preset.NightClub.images
 
-        Object.keys(imageFiles).forEach((key) => {
-          imagesBg = Object.assign({}, imagesBg, {
-            [`${key}`]: p.loadImage(imageFiles[key])
+        Object.keys(imageFiles1).forEach((key) => {
+          imagesBgNC = Object.assign({}, imagesBgNC, {
+            [`${key}`]: p.loadImage(imageFiles1[key])
           })
         })
-        console.log(imagesBg);
       }
+      if (backgroundImage.collections.includes('Cars')) {
+        const imageFiles2 = backgroundImage.preset.Cars.images
 
-      if (backgroundImage.collections.includes('Cars') && backgroundImage.currentCollection === 'Cars') {
-        const imageFiles = backgroundImage.preset.Cars.images
-
-        Object.keys(imageFiles).forEach((key) => {
-          imagesBg = Object.assign({}, imagesBg, {
-            [`${key}`]: p.loadImage(imageFiles[key])
+        Object.keys(imageFiles2).forEach((key) => {
+          imagesBgCars = Object.assign({}, imagesBgCars, {
+            [`${key}`]: p.loadImage(imageFiles2[key])
           })
         })
-        console.log(imagesBg);
       }
-
     }
 
   }
@@ -225,22 +227,10 @@ function sketch(p) {
   p.setup = () => {
     const canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
-    // const blend = getBlendStore()
-    // if (blend) {
-    //   p.blendMode(p.DIFFERENCE)
-    // }
-    // p.frameRate(100)
     p.noStroke()
-    // if (blend) {
-    //   p.blendMode(p.DIFFERENCE)
-    // }
-    // p.noLoop()
   }
   
   p.draw = () => {
-
-    // p.background(0)
-    
     const blend = getBlendStore()
     
     if (blend) {
@@ -250,8 +240,6 @@ function sketch(p) {
     } else {
       drawModules(p)
     }
-
-    // drawModules(p)
 
   }
 }
