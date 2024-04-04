@@ -8,7 +8,8 @@ import {
   getBackgroundStore,
   getColorPickerStore,
   getBackgroundImageStore,
-  getBlendStore
+  getBlendStore,
+  getVinylStore
 } from './store'
 
 let moduleList = {}
@@ -18,9 +19,14 @@ let canvasContainerId = ''
 let canvasSize = 600
 
 let imagesObj = {}
+
 let imagesBgNC = {}
 let imagesBgCars = {}
 let imageBg
+
+let imagesWholeVinyl = {}
+let imagesLabelVinyl = {}
+let imageVinyl
 
 //////////////////////////////////////////
 
@@ -71,14 +77,14 @@ function drawModules(p) {
 
     const backgroundImage = getBackgroundImageStore()
 
-    let currentImg
+    let currentBgImg
 
     if (backgroundImage.collections.includes('NightClub') && backgroundImage.currentCollection === 'NightClub') {
-      currentImg = backgroundImage.preset.NightClub.current
-      imageBg = imagesBgNC[currentImg]
+      currentBgImg = backgroundImage.preset.NightClub.current
+      imageBg = imagesBgNC[currentBgImg]
     } else if (backgroundImage.collections.includes('Cars') && backgroundImage.currentCollection === 'Cars') {
-      currentImg = backgroundImage.preset.Cars.current
-      imageBg = imagesBgCars[currentImg]
+      currentBgImg = backgroundImage.preset.Cars.current
+      imageBg = imagesBgCars[currentBgImg]
     }
 
 
@@ -155,6 +161,37 @@ function drawModules(p) {
     }
   }
 
+  /////////////////////////////////////////////////////////// MODULE BACKGROUNDIMAGE
+
+  if (moduleList.includes('Vinyl')) {
+
+    const vinyl = getVinylStore()
+
+    let currentVinylImg
+
+    if (vinyl.vinylTypes.includes('Whole') && vinyl.currentVinylType === 'Whole') {
+      currentVinylImg = vinyl.preset.Whole.current
+      imageVinyl = imagesWholeVinyl[currentVinylImg]
+    } else if (vinyl.vinylTypes.includes('Label') && vinyl.currentVinylType === 'Label') {
+      currentVinylImg = vinyl.preset.Label.current
+      imageVinyl = imagesLabelVinyl[currentVinylImg]
+    }
+
+
+    p.image(
+      imageVinyl,
+      (canvasSize - imageVinyl.width / 2) / 2,
+      (canvasSize - imageVinyl.height / 2) / 2,
+      imageVinyl.width / 2,
+      imageVinyl.height / 2,
+      0,
+      0,
+      imageVinyl.width,
+      imageVinyl.height,
+      p.CONTAIN
+    )
+  }
+
   /////////////////////////////////////////////////////////// MODULE IMAGE
 
   if (moduleList.includes('Image')) {
@@ -177,7 +214,7 @@ function drawModules(p) {
 
 }
 
-
+////////////////////////////////////////////////////////////////////////////         SKETCH
 
 
 function sketch(p) {
@@ -194,7 +231,6 @@ function sketch(p) {
           [`${key}`]: p.loadImage(imageFiles[key])
         })
       })
-      console.log(imagesObj);
     }
 
     //////////////////////////////////////////////////// IMAGE BG
@@ -217,6 +253,31 @@ function sketch(p) {
         Object.keys(imageFiles2).forEach((key) => {
           imagesBgCars = Object.assign({}, imagesBgCars, {
             [`${key}`]: p.loadImage(imageFiles2[key])
+          })
+        })
+      }
+    }
+
+    //////////////////////////////////////////////////// IMAGE VINYL
+
+    if (moduleList.includes('Vinyl')) {
+      const vinyl = getVinylStore()
+
+      if (vinyl.vinylTypes.includes('Whole')) {
+        const imageFiles = vinyl.preset.Whole.images
+
+        Object.keys(imageFiles).forEach((key) => {
+          imagesWholeVinyl = Object.assign({}, imagesWholeVinyl, {
+            [`${key}`]: p.loadImage(imageFiles[key])
+          })
+        })
+      }
+      if (vinyl.vinylTypes.includes('Label')) {
+        const imageFiles = vinyl.preset.Label.images
+
+        Object.keys(imageFiles).forEach((key) => {
+          imagesLabelVinyl = Object.assign({}, imagesLabelVinyl, {
+            [`${key}`]: p.loadImage(imageFiles[key])
           })
         })
       }

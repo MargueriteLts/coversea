@@ -6,6 +6,7 @@ import Particles from './modules/Particles.jsx'
 import Image from './modules/Image.jsx'
 import Background from './modules/Background.jsx'
 import BackgroundImage from './modules/BackgroundImage.jsx'
+import Vinyl from './modules/Vinyl.jsx'
 
 export default class GeneratorContainer extends Component {
   constructor(props) {
@@ -28,7 +29,9 @@ export default class GeneratorContainer extends Component {
       setBackgroundStore,
       setColorPickerStore,
       backgroundImage,
-      setBackgroundImageStore
+      setBackgroundImageStore,
+      vinyl,
+      setVinylStore
     } = this.props
 
     const modules = []
@@ -81,8 +84,16 @@ export default class GeneratorContainer extends Component {
           <BackgroundImage
             backgroundImage={backgroundImage}
             setBackgroundImageStore={setBackgroundImageStore}
-            // setColorPickerStore={setColorPickerStore}
-            // setImageValue={setBackgroundImageStore}
+            key={index}
+          />
+        )
+      }
+
+      if (moduleName == 'Vinyl') {
+        modules.push(
+          <Vinyl
+            vinyl={vinyl}
+            setVinylStore={setVinylStore}
             key={index}
           />
         )

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import HeaderModule from '../components/HeaderModule.jsx'
 import TabButtonSet from '../components/TabButtonSet.jsx'
 
-export default class Background extends Component {
+export default class BackgroundImage extends Component {
   constructor(props) {
     super(props)
 

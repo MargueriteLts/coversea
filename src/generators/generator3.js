@@ -1,4 +1,4 @@
-const modules = ['Background', 'Shapes', 'Image']
+const modules = ['Background', 'Vinyl', 'Image']
 
 const preset = {
   Background: {
@@ -11,9 +11,14 @@ const preset = {
       Gradient: {}
     }
   },
-  Shapes: { 
-    settings: {
-      sliderValue: 37
+  Vinyl: {
+
+    vinylTypes: ['Whole', 'Label'],
+    currentVinylType: 'Whole',
+
+    preset: {
+      Whole: {},
+      Label: {}
     }
   },
   Image: {}

@@ -22,6 +22,7 @@ moduleParticlesStore,
 moduleImageStore,
 moduleBackgroundStore,
 moduleBackgroundImageStore,
+moduleVinylStore,
 blendStore
 
 function initStore(generatorName) {
@@ -48,6 +49,10 @@ function initStore(generatorName) {
 
     if (moduleName == 'BackgroundImage') {
       moduleBackgroundImageStore = initBackgroundImageStore(generators[generatorName].preset['BackgroundImage'])
+    }
+
+    if (moduleName == 'Vinyl') {
+      moduleVinylStore = initVinylStore(generators[generatorName].preset['Vinyl'])
     }
   })
 }
@@ -274,6 +279,41 @@ function setBackgroundImageStore(type, value) {
   }
 }
 
+////////////////////// VINYL
+
+function initVinylStore(preset) {
+  const collection1 = importAll(
+    require.context('../images/vinylPics/whole', false, /\.(png|jpe?g|svg)$/)
+  )
+  const collection2 = importAll(
+    require.context('../images/vinylPics/label', false, /\.(png|jpe?g|svg)$/)
+  )
+
+  preset = Object.assign({}, preset, { moduleName: 'Vinyl Disc Picture' })
+
+  preset.vinylTypes.forEach((type) => {
+    if (type === 'Whole') {
+      preset.preset.Whole = Object.assign({}, preset.preset.Whole, { text: 'Whole disc', images: collection1, current: sample(Object.keys(collection1)) })
+    }
+
+    if (type === 'Label') {
+      preset.preset.Label = Object.assign({}, preset.preset.Label, { text: 'Disc Label', images: collection2, current: sample(Object.keys(collection2)) })
+    }
+  })
+
+  return preset
+}
+
+function getVinylStore() {
+  return moduleVinylStore
+}
+
+function setVinylStore(type, value) {
+  if (type === 'CurrentTabChange') {
+    moduleVinylStore.currentVinylType = value
+  }
+}
+
 ///////////////////////////////////////////////////////////////////// EXPORT
 
 export {
@@ -291,5 +331,7 @@ export {
   getColorPickerStore,
   getBackgroundImageStore,
   setBackgroundImageStore,
+  getVinylStore,
+  setVinylStore,
   getBlendStore
 }

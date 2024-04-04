@@ -16,7 +16,9 @@ import {
   setBackgroundStore,
   setColorPickerStore,
   getBackgroundImageStore,
-  setBackgroundImageStore
+  setBackgroundImageStore,
+  getVinylStore,
+  setVinylStore
 } from './javascript/store.js'
 
 import { initSketch } from './javascript/sketch.js'
@@ -45,6 +47,7 @@ const actions = {
   setBackgroundStore,
   setColorPickerStore,
   setBackgroundImageStore,
+  setVinylStore,
   initSketch
 }
 
@@ -79,6 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (moduleName == 'BackgroundImage') {
       props.backgroundImage = getBackgroundImageStore()
+    }
+
+    if (moduleName == 'Vinyl') {
+      props.vinyl = getVinylStore()
     }
   });
 
