@@ -14,7 +14,9 @@ import {
   setImageStore,
   getBackgroundStore,
   setBackgroundStore,
-  setColorPickerStore
+  setColorPickerStore,
+  getBackgroundImageStore,
+  setBackgroundImageStore
 } from './javascript/store.js'
 
 import { initSketch } from './javascript/sketch.js'
@@ -42,6 +44,7 @@ const actions = {
   setImageStore,
   setBackgroundStore,
   setColorPickerStore,
+  setBackgroundImageStore,
   initSketch
 }
 
@@ -72,6 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (moduleName == 'Background') {
       props.background = getBackgroundStore()
+    }
+
+    if (moduleName == 'BackgroundImage') {
+      props.backgroundImage = getBackgroundImageStore()
     }
   });
 

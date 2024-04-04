@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 
 import HeaderModule from '../components/HeaderModule.jsx'
 import TabButtonSet from '../components/TabButtonSet.jsx'
-import PlainColor from './background/PlainColor.jsx'
 import ColorPicker from './background/ColorPicker.jsx'
 
 export default class Background extends Component {
@@ -23,6 +22,8 @@ export default class Background extends Component {
     })
   }
 
+  ///////////////////////// GRADIENT
+
   handleChangeColorGradient = () => {
     this.props.setBackgroundStore('Gradient')
   }
@@ -31,28 +32,27 @@ export default class Background extends Component {
     this.props.setBackgroundStore('AngleGradient')
   }
 
-  renderBgContent() {
-    const { setBackgroundStore, background, setColorPickerStore } = this.props
+  ///////////////////////// RENDER CONTENT BACKGROUND TAB
 
-    if (this.state.currentBgType == 'PlainColor') {
-      return <div className="PlainColorComponent">
-        <PlainColor
-          setBackgroundStore={setBackgroundStore}
-          key='PlainColor'
-        />
-      </div>
-    }
-    if (this.state.currentBgType == 'ColorPicker') {
+  renderBgContent() {
+    const {background, setColorPickerStore } = this.props
+
+    ////////////// SOLID COLOR
+
+    if (this.state.currentBgType == 'SolidColor') {
       return <div>
         <ColorPicker
           title=''
           object='background'
           setColorPickerStore={setColorPickerStore}
-          color={background.preset.ColorPicker.color}
-          key='AllColorPicker'
+          color={background.preset.SolidColor.color}
+          key='BackgroundColorPicker'
         />
       </div>
     }
+
+    ////////////// GRADIENT
+
     if (this.state.currentBgType == 'Gradient') {
       return <div>
         <ColorPicker
@@ -69,11 +69,13 @@ export default class Background extends Component {
           color={background.preset.Gradient.color2}
           key='Gradient2ColorPicker'
         />
-      <div className="Button" onClick={this.handleChangeColorGradient}>Randomize Gradient</div>
+      {/* <div className="Button" onClick={this.handleChangeColorGradient}>Randomize Gradient</div> */}
       <div className="Button" onClick={this.handleChangeAngleGradient}>Rotate</div>
       </div>
     }
   }
+
+  //////////////////////////////// NO TAB RENDER
 
   renderBgContentOnly() {
     const { setBackgroundStore, background, setColorPickerStore } = this.props
@@ -100,11 +102,12 @@ export default class Background extends Component {
       </div>)
     }
   }
+
+  //////////////////////////////////////////////////////// RENDER
   
   render() {
     const { background } = this.props
     const nbBgTypes = background.bgTypes.length
-    console.log(nbBgTypes);
 
     return <div className="ModuleContainer">
       <HeaderModule

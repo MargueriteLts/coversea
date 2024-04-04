@@ -3,12 +3,12 @@ const modules = ['Background', 'Shapes', 'Particles', 'Image']
 const preset = {
   Background: {
 
-    bgTypes: ['PlainColor', 'ColorPicker'],
-    currentBgType: 'PlainColor',
+    bgTypes: ['SolidColor', 'Gradient'],
+    currentBgType: 'SolidColor',
 
     preset: {
-      PlainColor: {},
-      ColorPicker: {}
+      SolidColor: {},
+      Gradient: {}
     }
   },
   Shapes: { 

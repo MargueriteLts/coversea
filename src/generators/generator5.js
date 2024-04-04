@@ -3,11 +3,12 @@ const modules = ['Background']
 const preset = {
   Background: {
 
-    bgTypes: ['ColorPicker'],
-    currentBgType: 'ColorPicker',
+    bgTypes: ['SolidColor', 'Gradient'],
+    currentBgType: 'SolidColor',
 
     preset: {
-      ColorPicker: {}
+      SolidColor: {},
+      Gradient: {}
     }
   }
 }

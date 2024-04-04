@@ -21,6 +21,7 @@ moduleShapesStore,
 moduleParticlesStore,
 moduleImageStore,
 moduleBackgroundStore,
+moduleBackgroundImageStore,
 blendStore
 
 function initStore(generatorName) {
@@ -29,6 +30,10 @@ function initStore(generatorName) {
   blendStore = generators[generatorName].blend
 
   moduleList.forEach(moduleName => {
+    if (moduleName == 'Background') {
+      moduleBackgroundStore = initBackgroundStore(generators[generatorName].preset['Background'])
+    }
+
     if (moduleName == 'Shapes') {
       moduleShapesStore = initShapesStore(generators[generatorName].preset['Shapes'])
     }
@@ -41,8 +46,8 @@ function initStore(generatorName) {
       moduleImageStore = initImages()
     }
 
-    if (moduleName == 'Background') {
-      moduleBackgroundStore = initBackgroundStore(generators[generatorName].preset['Background'])
+    if (moduleName == 'BackgroundImage') {
+      moduleBackgroundImageStore = initBackgroundImageStore(generators[generatorName].preset['BackgroundImage'])
     }
   })
 }
@@ -63,12 +68,8 @@ function initBackgroundStore(preset) {
   preset = Object.assign({}, preset, { moduleName: 'Background' })
 
   preset.bgTypes.forEach((bgType) => {
-    if (bgType == 'PlainColor') {
-      preset.preset.PlainColor = Object.assign({}, preset.preset.PlainColor, { text: 'Random plain color', color: generateColor() })
-    }
-
-    if (bgType == 'ColorPicker') {
-      preset.preset.ColorPicker = Object.assign({}, preset.preset.ColorPicker, { text: 'Pick color', color: '#000000' })
+    if (bgType == 'SolidColor') {
+      preset.preset.SolidColor = Object.assign({}, preset.preset.SolidColor, { text: 'Solid color', color: '#000000' })
     }
 
     if (bgType == 'Gradient') {
@@ -88,8 +89,8 @@ function setBackgroundStore(type, value) {
     moduleBackgroundStore.currentBgType = value
   }
 
-  if (type === 'PlainColor') {
-    moduleBackgroundStore.preset.PlainColor.color = generateColor()
+  if (type === 'SolidColor') {
+    moduleBackgroundStore.preset.SolidColor.color = generateColor()
   }
 
   if (type === 'Gradient') {
@@ -100,6 +101,8 @@ function setBackgroundStore(type, value) {
     moduleBackgroundStore.preset.Gradient.angle = changeGradientAngle()
   }
 }
+
+/////////////////// GRADIENT
 
 function changeGradientAngle() {
   let angle = ''
@@ -133,7 +136,7 @@ function setColorPickerStore(object, nextColorValue) {
     moduleShapesStore.settings.color = nextColorValue
   }
   if (object === 'background') {
-    moduleBackgroundStore.preset.ColorPicker.color = nextColorValue
+    moduleBackgroundStore.preset.SolidColor.color = nextColorValue
   }
   if (object === 'gradient1') {
     moduleBackgroundStore.preset.Gradient.color1 = nextColorValue
@@ -148,7 +151,7 @@ function getColorPickerStore(object) {
     return moduleShapesStore.settings.color
   }
   if (object === 'background') {
-    return moduleBackgroundStore.preset.ColorPicker.color
+    return moduleBackgroundStore.preset.SolidColor.color
   }
   if (object === 'gradient1') {
     return moduleBackgroundStore.preset.Gradient.color1
@@ -229,6 +232,48 @@ function setImageStore() {
   moduleImageStore.current = sample(Object.keys(moduleImageStore.images))
 }
 
+////////////////////// BACKGROUND IMAGE
+
+function initBackgroundImageStore(preset) {
+
+  preset = Object.assign({}, preset, { moduleName: 'Background Image' })
+
+  preset.collections.forEach((collection) => {
+    if (collection == 'NightClub') {
+      const collection1 = importAll(
+        require.context('../images/collection1NightClub', false, /\.(png|jpe?g|svg)$/)
+      )
+      preset.preset.NightClub = Object.assign({}, preset.preset.NightClub, { text: 'Night Club', images: collection1, current: sample(Object.keys(collection1)) })
+    }
+
+    if (collection == 'Cars') {
+      const collection2 = importAll(
+        require.context('../images/collection2Cars', false, /\.(png|jpe?g|svg)$/)
+      )
+      preset.preset.Cars = Object.assign({}, preset.preset.Cars, { text: 'Cars', images: collection2, current: sample(Object.keys(collection2)) })
+    }
+  })
+
+  return preset
+}
+
+function getBackgroundImageStore() {
+  return moduleBackgroundImageStore
+}
+
+function setBackgroundImageStore(type, value) {
+  if (type === 'CurrentTabChange') {
+    moduleBackgroundImageStore.currentCollection = value
+  }
+
+  if (type === 'NightClub') {
+    moduleBackgroundImageStore.preset.NightClub.current = sample(Object.keys(moduleBackgroundImageStore.preset.NightClub.images))
+  }
+  if (type === 'Cars') {
+    moduleBackgroundImageStore.preset.Cars.current = sample(Object.keys(moduleBackgroundImageStore.preset.Cars.images))
+  }
+}
+
 ///////////////////////////////////////////////////////////////////// EXPORT
 
 export {
@@ -244,5 +289,7 @@ export {
   setBackgroundStore,
   setColorPickerStore,
   getColorPickerStore,
+  getBackgroundImageStore,
+  setBackgroundImageStore,
   getBlendStore
 }

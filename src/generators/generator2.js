@@ -1,23 +1,27 @@
-const modules = ['Background', 'Shapes', 'Particles']
+const modules = ['Background', 'Image', 'BackgroundImage']
 
 const preset = {
   Background: {
 
-    bgTypes: ['PlainColor', 'ColorPicker', 'Gradient'],
-    currentBgType: 'Gradient',
+    bgTypes: ['SolidColor', 'Gradient'],
+    currentBgType: 'SolidColor',
 
     preset: {
-      PlainColor: {},
-      ColorPicker: {},
+      SolidColor: {},
       Gradient: {}
     }
   },
-  Shapes: { 
-    settings: {
-      sliderValue: 37
+  Image: {},
+  BackgroundImage: {
+
+    collections: ['NightClub', 'Cars'],
+    currentCollection: 'NightClub',
+
+    preset: {
+      NightClub: {},
+      Cars: {}
     }
-  },
-  Particles: { sliderValue: 0 }
+  }
 }
 
 export { modules, preset }

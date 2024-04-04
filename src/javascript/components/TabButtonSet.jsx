@@ -8,11 +8,6 @@ export default class TabButtonSet extends Component {
     super(props)
   }
 
-  // handleClick = (option) => {
-  //   const { option, handleClick } = this.props
-  //   handleClick(option)
-  // }
-
   render() {
     const { options, value, handleClick } = this.props
     const buttonElements = []

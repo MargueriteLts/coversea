@@ -7,6 +7,7 @@ import {
   getImageStore,
   getBackgroundStore,
   getColorPickerStore,
+  getBackgroundImageStore,
   getBlendStore
 } from './store'
 
@@ -16,7 +17,8 @@ let canvasContainerId = ''
 
 let canvasSize = 600
 
-let images = {}
+let imagesObj = {}
+let imagesBg = {}
 
 //////////////////////////////////////////
 
@@ -27,16 +29,8 @@ function drawModules(p) {
   if (moduleList.includes('Background')) {
     const background = getBackgroundStore()
 
-    if (background.bgTypes.includes('PlainColor') && background.currentBgType === 'PlainColor') {
-      const plainColorBackground = background.preset.PlainColor.color
-
-      p.background(
-        plainColorBackground[0],
-        plainColorBackground[1],
-        plainColorBackground[2],
-      )
-    } else if (background.bgTypes.includes('ColorPicker') && background.currentBgType === 'ColorPicker') {
-      const plainColorBackground = background.preset.ColorPicker.color
+    if (background.bgTypes.includes('SolidColor') && background.currentBgType === 'SolidColor') {
+      const plainColorBackground = background.preset.SolidColor.color
 
       p.background(
         plainColorBackground
@@ -67,6 +61,38 @@ function drawModules(p) {
     } else {
       p.background(0)
     }
+  }
+
+  /////////////////////////////////////////////////////////// MODULE BACKGROUNDIMAGE
+
+  if (moduleList.includes('BackgroundImage')) {
+
+    const backgroundImage = getBackgroundImageStore()
+
+    let currentImg
+    let imageBg
+
+    if (backgroundImage.collections.includes('NightClub') && backgroundImage.currentCollection === 'NightClub') {
+      currentImg = backgroundImage.preset.NightClub.current
+      imageBg = imagesBg[currentImg]
+    } else if (backgroundImage.collections.includes('Cars') && backgroundImage.currentCollection === 'Cars') {
+      currentImg = backgroundImage.preset.Cars.current
+      imageBg = imagesBg[currentImg]
+    }
+
+
+    p.image(
+      imageBg,
+      0,
+      0,
+      imageBg.width,
+      imageBg.height,
+      0,
+      0,
+      imageBg.width,
+      imageBg.height,
+      p.CONTAIN
+    )
   }
 
   /////////////////////////////////////////////////////////// MODULE SHAPES
@@ -132,7 +158,7 @@ function drawModules(p) {
 
   if (moduleList.includes('Image')) {
     const { current } = getImageStore()
-    const image = images[current]
+    const image = imagesObj[current]
 
     p.image(
       image,
@@ -147,7 +173,11 @@ function drawModules(p) {
       p.CONTAIN
     )
   }
+
 }
+
+
+
 
 function sketch(p) {
 
@@ -156,11 +186,40 @@ function sketch(p) {
       const imageFiles = getImageStore().images
 
       Object.keys(imageFiles).forEach((key) => {
-        images = Object.assign({}, images, {
+        imagesObj = Object.assign({}, imagesObj, {
           [`${key}`]: p.loadImage(imageFiles[key])
         })
       })
+      console.log(imagesObj);
     }
+
+    if (moduleList.includes('BackgroundImage')) {
+      const backgroundImage = getBackgroundImageStore()
+
+      if (backgroundImage.collections.includes('NightClub') && backgroundImage.currentCollection === 'NightClub') {
+        const imageFiles = backgroundImage.preset.NightClub.images
+
+        Object.keys(imageFiles).forEach((key) => {
+          imagesBg = Object.assign({}, imagesBg, {
+            [`${key}`]: p.loadImage(imageFiles[key])
+          })
+        })
+        console.log(imagesBg);
+      }
+
+      if (backgroundImage.collections.includes('Cars') && backgroundImage.currentCollection === 'Cars') {
+        const imageFiles = backgroundImage.preset.Cars.images
+
+        Object.keys(imageFiles).forEach((key) => {
+          imagesBg = Object.assign({}, imagesBg, {
+            [`${key}`]: p.loadImage(imageFiles[key])
+          })
+        })
+        console.log(imagesBg);
+      }
+
+    }
+
   }
 
   p.setup = () => {
