@@ -21,9 +21,15 @@ export default class Background extends Component {
     })
   }
 
-  // handleClick = () => {
-  //   this.props.setBackgroundImageValue('NightClub')
-  // }
+  handleClick = () => {
+    console.log('click');
+    if (this.state.currentCollection === 'NightClub'){
+      this.props.setBackgroundImageStore('NightClub')
+    }
+    if (this.state.currentCollection === 'Cars'){
+      this.props.setBackgroundImageStore('Cars')
+    }
+  }
 
   //////////////////////////////////////////////////////// RENDER
   
@@ -41,7 +47,7 @@ export default class Background extends Component {
           value={this.state.currentCollection}
           handleClick={this.handleTabClick}
         />
-        {/* <div className="Button" onClick={this.handleClick}>Randomize image</div> */}
+        <div className="Button" onClick={this.handleClick}>Randomize image</div>
       </div>
     </div>
   }

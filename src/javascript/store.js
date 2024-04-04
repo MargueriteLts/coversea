@@ -266,14 +266,12 @@ function setBackgroundImageStore(type, value) {
     moduleBackgroundImageStore.currentCollection = value
   }
 
-  console.log(value);
-
-  // if (type === 'NightClub') {
-  //   moduleBackgroundImageStore.preset.NightClub.current = sample(Object.keys(moduleBackgroundImageStore.preset.NightClub.images))
-  // }
-  // if (type === 'Cars') {
-  //   moduleBackgroundImageStore.preset.Cars.current = sample(Object.keys(moduleBackgroundImageStore.preset.Cars.images))
-  // }
+  if (type === 'NightClub') {
+    moduleBackgroundImageStore.preset.NightClub.current = sample(Object.keys(moduleBackgroundImageStore.preset.NightClub.images))
+  }
+  if (type === 'Cars') {
+    moduleBackgroundImageStore.preset.Cars.current = sample(Object.keys(moduleBackgroundImageStore.preset.Cars.images))
+  }
 }
 
 ///////////////////////////////////////////////////////////////////// EXPORT
