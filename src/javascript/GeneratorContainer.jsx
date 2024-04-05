@@ -27,7 +27,7 @@ export default class GeneratorContainer extends Component {
       setImageStore,
       background,
       setBackgroundStore,
-      setColorPickerStore,
+      // setColorPickerStore,
       backgroundImage,
       setBackgroundImageStore,
       vinyl,
@@ -43,9 +43,10 @@ export default class GeneratorContainer extends Component {
         modules.push(
           <Shapes
             shapes={shapes}
+            setShapesStore={setShapesStore}
             sliderValue={shapes.settings.sliderValue}
-            setColorPickerStore={setColorPickerStore}
-            setSliderValue={setShapesStore}
+            // setColorPickerStore={setColorPickerStore}
+            // setSliderValue={setShapesStore}
             key={index}
           />
         )
@@ -75,7 +76,7 @@ export default class GeneratorContainer extends Component {
           <Background
             background={background}
             setBackgroundStore={setBackgroundStore}
-            setColorPickerStore={setColorPickerStore}
+            // setColorPickerStore={setColorPickerStore}
             key={index}
           />
         )

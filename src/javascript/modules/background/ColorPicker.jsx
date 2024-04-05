@@ -71,7 +71,7 @@ export default class AllColorPicker extends Component {
       { this.state.displayColorPicker
         ? <div style={ styles.popover }>
             <div style={ styles.cover } onClick={ this.handleClose }/>
-            <SketchPicker color={this.props.color} onChange={ (color) => {this.props.handleChange(this.props.type, color.hex)} } />
+            <SketchPicker color={this.props.color} onChange={ (color) => {this.props.handleChange(this.props.object, color.hex)} } />
           </div>
         : null
       }

@@ -25,8 +25,8 @@ export default class Background extends Component {
     })
   }
 
-  handleChangeSolidColor = (type, value) => {
-    this.props.setBackgroundStore(type, value)
+  handleChangeSolidColor = (object, value) => {
+    this.props.setBackgroundStore(object, value)
       .then((color) => {
         this.setState({
           color: color[0]
@@ -48,8 +48,8 @@ export default class Background extends Component {
     )
   }
 
-  handleChange = (type, value) => {
-    this.props.setBackgroundStore(type, value)
+  handleChange = (object, value) => {
+    this.props.setBackgroundStore(object, value)
     .then((colors) => {
         this.setState({
           colorG1: colors[0],
@@ -74,8 +74,8 @@ export default class Background extends Component {
       return <div>
         <ColorPicker
           title=''
-          object='background'
-          type='SolidColor'
+          // object='background'
+          object='SolidColor'
           setColorPickerStore={setColorPickerStore}
           color={this.state.color}
           handleChange={this.handleChangeSolidColor}
@@ -90,8 +90,8 @@ export default class Background extends Component {
       return <div>
         <ColorPicker
           title=''
-          object='gradient1'
-          type='GradientColor1'
+          // object='gradient1'
+          object='GradientColor1'
           setColorPickerStore={setColorPickerStore}
           color={this.state.colorG1}
           handleChange={this.handleChange}
@@ -99,8 +99,8 @@ export default class Background extends Component {
         />
         <ColorPicker
           title=''
-          object='gradient2'
-          type='GradientColor2'
+          // object='gradient2'
+          object='GradientColor2'
           setColorPickerStore={setColorPickerStore}
           color={this.state.colorG2}
           handleChange={this.handleChange}

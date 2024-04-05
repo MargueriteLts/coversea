@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import HeaderModule from '../components/HeaderModule.jsx'
-import AllColorPicker from './background/ColorPicker.jsx'
+import ColorPicker from './background/ColorPicker.jsx'
 
 export default class Shapes extends Component {
   constructor(props) {
@@ -13,12 +13,25 @@ export default class Shapes extends Component {
   }
   
   handleInput = (e) => {
-    this.props.setSliderValue(e.target.value)
+    let type = 'Size'
+    console.log(type, e);
+    this.props.setShapesStore(type, e.target.value)
     this.setState({sliderValue: e.target.value})
+  }
+
+  handleChange = (object, value) => {
+    console.log('COLOR HANDLECHANGE', object, value);
+    this.props.setShapesStore(object, value)
+      .then((color) => {
+        this.setState({
+          color: color[0]
+        })
+      }
+    )
   }
   
   render() {
-    const { shapes, setColorPickerStore } = this.props
+    const { shapes } = this.props
 
     return <div className="ModuleContainer">
       <HeaderModule
@@ -29,13 +42,16 @@ export default class Shapes extends Component {
           type="range"
           min="2"
           max="74"
+          // object='Size'
           value={this.state.sliderValue}
           onInput={this.handleInput}
         />
-        <AllColorPicker
-          object='shapes'
-          setColorPickerStore={setColorPickerStore}
+        <ColorPicker
+          // object='shapes'
+          object='SolidColor'
+          // setColorPickerStore={setColorPickerStore}
           color={shapes.settings.color}
+          handleChange={this.handleChange}
           key='AllColorPicker'
         />
       </div>

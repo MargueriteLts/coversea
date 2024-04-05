@@ -6,7 +6,7 @@ import {
   getParticlesStore,
   getImageStore,
   getBackgroundStore,
-  getColorPickerStore,
+  // getColorPickerStore,
   getBackgroundImageStore,
   getBlendStore,
   getVinylStore
@@ -110,7 +110,7 @@ function drawModules(p) {
 
     p.noStroke()
 
-    const color = getColorPickerStore('shapes')
+    const color = getShapesStore().settings.color
     p.fill(color)
 
     const Value = getShapesStore().settings.sliderValue

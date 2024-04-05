@@ -153,35 +153,35 @@ function generateColor() {
 
 ////////////////////////////////////////////////////// COLORPICKER
 
-function setColorPickerStore(object, nextColorValue) {
-  if (object === 'shapes') {
-    moduleShapesStore.settings.color = nextColorValue
-  }
-  if (object === 'background') {
-    moduleBackgroundStore.preset.SolidColor.color = nextColorValue
-  }
-  if (object === 'gradient1') {
-    moduleBackgroundStore.preset.Gradient.color1 = nextColorValue
-  }
-  if (object === 'gradient2') {
-    moduleBackgroundStore.preset.Gradient.color2 = nextColorValue
-  }
-}
+// function setColorPickerStore(object, nextColorValue) {
+//   if (object === 'shapes') {
+//     moduleShapesStore.settings.color = nextColorValue
+//   }
+//   // if (object === 'background') {
+//   //   moduleBackgroundStore.preset.SolidColor.color = nextColorValue
+//   // }
+//   // if (object === 'gradient1') {
+//   //   moduleBackgroundStore.preset.Gradient.color1 = nextColorValue
+//   // }
+//   // if (object === 'gradient2') {
+//   //   moduleBackgroundStore.preset.Gradient.color2 = nextColorValue
+//   // }
+// }
 
-function getColorPickerStore(object) {
-  if (object === 'shapes') {
-    return moduleShapesStore.settings.color
-  }
-  if (object === 'background') {
-    return moduleBackgroundStore.preset.SolidColor.color
-  }
-  if (object === 'gradient1') {
-    return moduleBackgroundStore.preset.Gradient.color1
-  }
-  if (object === 'gradient2') {
-    return moduleBackgroundStore.preset.Gradient.color2
-  }
-}
+// function getColorPickerStore(object) {
+//   if (object === 'shapes') {
+//     return moduleShapesStore.settings.color
+//   }
+//   // if (object === 'background') {
+//   //   return moduleBackgroundStore.preset.SolidColor.color
+//   // }
+//   // if (object === 'gradient1') {
+//   //   return moduleBackgroundStore.preset.Gradient.color1
+//   // }
+//   // if (object === 'gradient2') {
+//   //   return moduleBackgroundStore.preset.Gradient.color2
+//   // }
+// }
 
 ////////////////////////////////////////////////////// SHAPES
 
@@ -195,8 +195,16 @@ function getShapesStore() {
   return moduleShapesStore
 }
 
-function setShapesStore(nextSliderValue) {
-  moduleShapesStore.settings.sliderValue = nextSliderValue
+function setShapesStore(type, value) {
+  return new Promise((resolve, reject) => {
+    if (type === 'SolidColor') {
+      moduleShapesStore.settings.color = value
+      resolve([value])
+    }
+    if (type === 'Size') {
+      moduleShapesStore.settings.sliderValue = value
+    }
+  })
 }
 
 ////////////////////////////////////////////////////// PARTICLES
@@ -354,8 +362,8 @@ export {
   setImageStore,
   getBackgroundStore,
   setBackgroundStore,
-  setColorPickerStore,
-  getColorPickerStore,
+  // setColorPickerStore,
+  // getColorPickerStore,
   getBackgroundImageStore,
   setBackgroundImageStore,
   getVinylStore,
