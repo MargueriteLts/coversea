@@ -88,18 +88,20 @@ function drawModules(p) {
     }
 
 
-    p.image(
-      imageBg,
-      0,
-      0,
-      imageBg.width,
-      imageBg.height,
-      0,
-      0,
-      imageBg.width,
-      imageBg.height,
-      p.CONTAIN
-    )
+    // p.image(
+    //   imageBg,
+    //   0,
+    //   0,
+    //   imageBg.width,
+    //   imageBg.height,
+    //   0,
+    //   0,
+    //   imageBg.width,
+    //   imageBg.height,
+    //   p.CONTAIN
+    // )
+    const opacity = getBackgroundImageStore().preset.sliderValue
+    p.background(imageBg, opacity)
   }
 
   /////////////////////////////////////////////////////////// MODULE SHAPES

@@ -10,7 +10,10 @@ export default class Background extends Component {
     super(props)
 
     this.state = {
-      currentBgType: this.props.background.currentBgType
+      currentBgType: this.props.background.currentBgType,
+      color: this.props.background.preset.SolidColor.color,
+      colorG1: this.props.background.preset.Gradient.color1,
+      colorG2: this.props.background.preset.Gradient.color2
     }
   }
 
@@ -22,10 +25,38 @@ export default class Background extends Component {
     })
   }
 
+  handleChangeSolidColor = (type, value) => {
+    this.props.setBackgroundStore(type, value)
+      .then((color) => {
+        this.setState({
+          color: color[0]
+        })
+      }
+    )
+  }
+
   ///////////////////////// GRADIENT
 
   handleChangeColorGradient = () => {
     this.props.setBackgroundStore('Gradient')
+      .then((colors) => {
+        this.setState({
+          colorG1: colors[0],
+          colorG2: colors[1]
+        })
+      }
+    )
+  }
+
+  handleChange = (type, value) => {
+    this.props.setBackgroundStore(type, value)
+    .then((colors) => {
+        this.setState({
+          colorG1: colors[0],
+          colorG2: colors[1]
+        })
+      }
+    )
   }
 
   handleChangeAngleGradient = () => {
@@ -44,8 +75,10 @@ export default class Background extends Component {
         <ColorPicker
           title=''
           object='background'
+          type='SolidColor'
           setColorPickerStore={setColorPickerStore}
-          color={background.preset.SolidColor.color}
+          color={this.state.color}
+          handleChange={this.handleChangeSolidColor}
           key='BackgroundColorPicker'
         />
       </div>
@@ -58,18 +91,22 @@ export default class Background extends Component {
         <ColorPicker
           title=''
           object='gradient1'
+          type='GradientColor1'
           setColorPickerStore={setColorPickerStore}
-          color={background.preset.Gradient.color1}
+          color={this.state.colorG1}
+          handleChange={this.handleChange}
           key='Gradient1ColorPicker'
         />
         <ColorPicker
           title=''
           object='gradient2'
+          type='GradientColor2'
           setColorPickerStore={setColorPickerStore}
-          color={background.preset.Gradient.color2}
+          color={this.state.colorG2}
+          handleChange={this.handleChange}
           key='Gradient2ColorPicker'
         />
-      {/* <div className="Button" onClick={this.handleChangeColorGradient}>Randomize Gradient</div> */}
+      <div className="Button" onClick={this.handleChangeColorGradient}>Randomize Gradient</div>
       <div className="Button" onClick={this.handleChangeAngleGradient}>Rotate</div>
       </div>
     }

@@ -18,6 +18,8 @@ const preset = {
     currentCollection: 'NightClub',
 
     preset: {
+      sliderValue: 100,
+
       NightClub: {},
       Cars: {}
     }

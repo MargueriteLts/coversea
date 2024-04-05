@@ -90,21 +90,38 @@ function getBackgroundStore() {
 }
 
 function setBackgroundStore(type, value) {
-  if (type === 'CurrentTabChange') {
-    moduleBackgroundStore.currentBgType = value
-  }
+  let color1, color2
 
-  if (type === 'SolidColor') {
-    moduleBackgroundStore.preset.SolidColor.color = generateColor()
-  }
+  return new Promise((resolve, reject) => {
+    if (type === 'CurrentTabChange') {
+      moduleBackgroundStore.currentBgType = value
+    }
 
-  if (type === 'Gradient') {
-    moduleBackgroundStore.preset.Gradient.color1 = generateColor()
-    moduleBackgroundStore.preset.Gradient.color2 = generateColor()
-  }
-  if (type === 'AngleGradient') {
-    moduleBackgroundStore.preset.Gradient.angle = changeGradientAngle()
-  }
+    if (type === 'SolidColor') {
+      moduleBackgroundStore.preset.SolidColor.color = value
+      resolve([value])
+    }
+
+    if (type === 'Gradient') {
+      color1 = generateColor()
+      color2 = generateColor()
+      moduleBackgroundStore.preset.Gradient.color1 = color1
+      moduleBackgroundStore.preset.Gradient.color2 = color2
+      resolve([color1, color2])
+    }
+    if (type === 'GradientColor1') {
+      moduleBackgroundStore.preset.Gradient.color1 = value
+      resolve([value, moduleBackgroundStore.preset.Gradient.color2])
+    }
+    if (type === 'GradientColor2') {
+      moduleBackgroundStore.preset.Gradient.color2 = value
+      resolve([moduleBackgroundStore.preset.Gradient.color1, value])
+    }
+    if (type === 'AngleGradient') {
+      moduleBackgroundStore.preset.Gradient.angle = changeGradientAngle()
+    }
+
+  })
 }
 
 /////////////////// GRADIENT
@@ -279,6 +296,10 @@ function setBackgroundImageStore(type, value) {
   }
 }
 
+function setBackgroundImageEffectStore(nextSliderValue) {
+  moduleBackgroundImageStore.preset.sliderValue = nextSliderValue
+}
+
 ////////////////////// VINYL
 
 function initVinylStore(preset) {
@@ -340,5 +361,6 @@ export {
   getVinylStore,
   setVinylStore,
   setVinylSizeStore,
+  setBackgroundImageEffectStore,
   getBlendStore
 }

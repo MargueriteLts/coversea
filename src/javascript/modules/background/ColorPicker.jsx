@@ -6,13 +6,12 @@ import { SketchPicker } from 'react-color'
 export default class AllColorPicker extends Component {
   constructor(props) {
     super(props)
-  }
 
-  state = {
-    displayColorPicker: false,
-    color: this.props.color
-    // color: this.props.getColorPickerStore(object)
-  };
+    this.state = {
+      displayColorPicker: false,
+      color: this.props.color
+    };
+  }
 
   handleClick = () => {
     this.setState({ displayColorPicker: !this.state.displayColorPicker })
@@ -22,25 +21,17 @@ export default class AllColorPicker extends Component {
     this.setState({ displayColorPicker: false })
   };
 
-  handleChange = (color) => {
-    const {object} = this.props
-    this.props.setColorPickerStore(object, color.hex)
-    this.setState({ color: color.hex })
-  };
-
-  // updateColor = () => {
-  //   const { object, color } = this.props
-  //   if (object === 'gradient1') {
-  //     this.setState({ color: color})
-  //   }
-  //   if (object === 'gradient2') {
-  //     this.setState({ color: color})
-  //   }
-  // }
-
   render() {
 
     const { title } = this.props
+
+    let color = []
+
+    if (typeof this.props.color == 'object') {
+      color = `rgb(${this.props.color.join(',')})`
+    } else {
+      color = this.props.color
+    }
 
     const styles = reactCSS({
       'default': {
@@ -48,7 +39,7 @@ export default class AllColorPicker extends Component {
           width: '36px',
           height: '14px',
           borderRadius: '2px',
-          background: this.state.color,
+          background: color,
         },
         swatch: {
           padding: '5px',
@@ -80,7 +71,7 @@ export default class AllColorPicker extends Component {
       { this.state.displayColorPicker
         ? <div style={ styles.popover }>
             <div style={ styles.cover } onClick={ this.handleClose }/>
-            <SketchPicker color={this.state.color} onChange={ this.handleChange } />
+            <SketchPicker color={this.props.color} onChange={ (color) => {this.props.handleChange(this.props.type, color.hex)} } />
           </div>
         : null
       }

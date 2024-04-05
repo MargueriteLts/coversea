@@ -32,7 +32,8 @@ export default class GeneratorContainer extends Component {
       setBackgroundImageStore,
       vinyl,
       setVinylStore,
-      setVinylSizeStore
+      setVinylSizeStore,
+      setBackgroundImageEffectStore
     } = this.props
 
     const modules = []
@@ -85,6 +86,8 @@ export default class GeneratorContainer extends Component {
           <BackgroundImage
             backgroundImage={backgroundImage}
             setBackgroundImageStore={setBackgroundImageStore}
+            sliderValue={backgroundImage.preset.sliderValue}
+            setSliderValue={setBackgroundImageEffectStore}
             key={index}
           />
         )

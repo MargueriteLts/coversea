@@ -31,6 +31,11 @@ export default class BackgroundImage extends Component {
     }
   }
 
+  handleInput = (e) => {
+    this.props.setSliderValue(e.target.value)
+    this.setState({sliderValue: e.target.value})
+  }
+
   //////////////////////////////////////////////////////// RENDER
   
   render() {
@@ -48,6 +53,13 @@ export default class BackgroundImage extends Component {
           handleClick={this.handleTabClick}
         />
         <div className="Button" onClick={this.handleClick}>Randomize image</div>
+        <input
+          type="range"
+          min="0"
+          max="255"
+          value={this.state.sliderValue}
+          onInput={this.handleInput}
+        />
       </div>
     </div>
   }

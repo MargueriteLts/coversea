@@ -19,7 +19,8 @@ import {
   setBackgroundImageStore,
   getVinylStore,
   setVinylStore,
-  setVinylSizeStore
+  setVinylSizeStore,
+  setBackgroundImageEffectStore
 } from './javascript/store.js'
 
 import { initSketch } from './javascript/sketch.js'
@@ -50,6 +51,7 @@ const actions = {
   setBackgroundImageStore,
   setVinylStore,
   setVinylSizeStore,
+  setBackgroundImageEffectStore,
   initSketch
 }
 
