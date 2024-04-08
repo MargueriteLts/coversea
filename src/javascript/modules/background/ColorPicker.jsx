@@ -23,7 +23,7 @@ export default class AllColorPicker extends Component {
 
   render() {
 
-    const { title } = this.props
+    const { title, alpha } = this.props
 
     let color = []
 
@@ -35,16 +35,16 @@ export default class AllColorPicker extends Component {
 
     const styles = reactCSS({
       'default': {
-        color: {
-          width: '36px',
-          height: '14px',
+        colorSwatch: {
+          width: '24px',
+          height: '24px',
           borderRadius: '2px',
           background: color,
         },
         swatch: {
-          padding: '5px',
-          background: '#fff',
-          borderRadius: '1px',
+          padding: '2px',
+          background: '#2C2C2C',
+          borderRadius: '2px',
           boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
           display: 'inline-block',
           cursor: 'pointer',
@@ -59,20 +59,28 @@ export default class AllColorPicker extends Component {
           right: '0px',
           bottom: '0px',
           left: '0px',
-        },
+        }
       },
     });
 
     return <div className="PlainColor">
       <div>{title}</div>
       <div style={ styles.swatch } onClick={ this.handleClick }>
-        <div style={ styles.color } />
+        <div style={ styles.colorSwatch } />
       </div>
       { this.state.displayColorPicker
+      
         ? <div style={ styles.popover }>
             <div style={ styles.cover } onClick={ this.handleClose }/>
-            <SketchPicker color={this.props.color} onChange={ (color) => {this.props.handleChange(this.props.object, color.hex)} } />
+
+            <SketchPicker
+              disableAlpha={true}
+              color={this.props.color}
+              onChange={ (color) => {this.props.handleChange(this.props.object, color.hex)} }
+            />
+
           </div>
+
         : null
       }
     </div>

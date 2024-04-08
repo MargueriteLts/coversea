@@ -14,13 +14,11 @@ export default class Shapes extends Component {
   
   handleInput = (e) => {
     let type = 'Size'
-    console.log(type, e);
     this.props.setShapesStore(type, e.target.value)
     this.setState({sliderValue: e.target.value})
   }
 
   handleChange = (object, value) => {
-    console.log('COLOR HANDLECHANGE', object, value);
     this.props.setShapesStore(object, value)
       .then((color) => {
         this.setState({
@@ -42,14 +40,11 @@ export default class Shapes extends Component {
           type="range"
           min="2"
           max="74"
-          // object='Size'
           value={this.state.sliderValue}
           onInput={this.handleInput}
         />
         <ColorPicker
-          // object='shapes'
           object='SolidColor'
-          // setColorPickerStore={setColorPickerStore}
           color={shapes.settings.color}
           handleChange={this.handleChange}
           key='AllColorPicker'

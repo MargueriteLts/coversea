@@ -9,7 +9,8 @@ import {
   // getColorPickerStore,
   getBackgroundImageStore,
   getBlendStore,
-  getVinylStore
+  getVinylStore,
+  getText1Store
 } from './store'
 
 let moduleList = {}
@@ -28,11 +29,13 @@ let imagesWholeVinyl = {}
 let imagesLabelVinyl = {}
 let imageVinyl
 
+let fontEsenin
+
 //////////////////////////////////////////
 
 function drawModules(p) {
 
-  /////////////////////////////////////////////////////////// MODULE BACKGROUND
+  /////////////////////////////////////////// MODULE BACKGROUND
 
   if (moduleList.includes('Background')) {
     const background = getBackgroundStore()
@@ -71,7 +74,7 @@ function drawModules(p) {
     }
   }
 
-  /////////////////////////////////////////////////////////// MODULE BACKGROUNDIMAGE
+  /////////////////////////////////////////// MODULE BACKGROUNDIMAGE
 
   if (moduleList.includes('BackgroundImage')) {
 
@@ -87,24 +90,11 @@ function drawModules(p) {
       imageBg = imagesBgCars[currentBgImg]
     }
 
-
-    // p.image(
-    //   imageBg,
-    //   0,
-    //   0,
-    //   imageBg.width,
-    //   imageBg.height,
-    //   0,
-    //   0,
-    //   imageBg.width,
-    //   imageBg.height,
-    //   p.CONTAIN
-    // )
     const opacity = backgroundImage.preset.sliderValue
     p.background(imageBg, opacity)
   }
 
-  /////////////////////////////////////////////////////////// MODULE SHAPES
+  /////////////////////////////////////////// MODULE SHAPES
 
   if (moduleList.includes('Shapes')) {
 
@@ -148,7 +138,7 @@ function drawModules(p) {
     p.ellipse(yCenter, xCenterEL2, hEV1, wEV2)
   }
 
-  /////////////////////////////////////////////////////////// MODULE PARTICLES
+  /////////////////////////////////////////// MODULE PARTICLES
 
   if (moduleList.includes('Particles')) {
     const particles = getParticlesStore()
@@ -163,7 +153,7 @@ function drawModules(p) {
     }
   }
 
-  /////////////////////////////////////////////////////////// MODULE BACKGROUNDIMAGE
+  /////////////////////////////////////////// MODULE BACKGROUNDIMAGE
 
   if (moduleList.includes('Vinyl')) {
 
@@ -195,7 +185,7 @@ function drawModules(p) {
     );
   }
 
-  /////////////////////////////////////////////////////////// MODULE IMAGE
+  /////////////////////////////////////////// MODULE IMAGE
 
   if (moduleList.includes('Image')) {
     const { current } = getImageStore()
@@ -213,6 +203,15 @@ function drawModules(p) {
       image.height,
       p.CONTAIN
     )
+  }
+
+  /////////////////////////////////////////// MODULE TEXT1
+
+  if (moduleList.includes('Text1')) {
+    const text1 = getText1Store()
+    p.fill(text1.color)
+    p.text(text1.text, 100, 100, canvasSize, canvasSize)
+    p.textFont(fontEsenin, 100)
   }
 
 }
@@ -285,6 +284,10 @@ function sketch(p) {
         })
       }
     }
+
+    //////////////////////////////////////////////////// FONTS
+
+    fontEsenin = p.loadFont('../fonts/esenin-script-one.ttf');
 
   }
 

@@ -37,7 +37,7 @@ export default class Background extends Component {
 
   ///////////////////////// GRADIENT
 
-  handleChangeColorGradient = () => {
+  handleRandomizeGradient = () => {
     this.props.setBackgroundStore('Gradient')
       .then((colors) => {
         this.setState({
@@ -48,7 +48,7 @@ export default class Background extends Component {
     )
   }
 
-  handleChange = (object, value) => {
+  handleChangeGradientColor = (object, value) => {
     this.props.setBackgroundStore(object, value)
     .then((colors) => {
         this.setState({
@@ -94,7 +94,7 @@ export default class Background extends Component {
           object='GradientColor1'
           setColorPickerStore={setColorPickerStore}
           color={this.state.colorG1}
-          handleChange={this.handleChange}
+          handleChange={this.handleChangeGradientColor}
           key='Gradient1ColorPicker'
         />
         <ColorPicker
@@ -103,10 +103,10 @@ export default class Background extends Component {
           object='GradientColor2'
           setColorPickerStore={setColorPickerStore}
           color={this.state.colorG2}
-          handleChange={this.handleChange}
+          handleChange={this.handleChangeGradientColor}
           key='Gradient2ColorPicker'
         />
-      <div className="Button" onClick={this.handleChangeColorGradient}>Randomize Gradient</div>
+      <div className="Button" onClick={this.handleRandomizeGradient}>Randomize Gradient</div>
       <div className="Button" onClick={this.handleChangeAngleGradient}>Rotate</div>
       </div>
     }

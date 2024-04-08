@@ -9,7 +9,7 @@ export default class MyInput extends PureComponent {
     const { value, handleChange } = this.props
 
     return (
-      <input className={'Input'} value={value} onChange={handleChange} maxLength={22} ></input>
+      <input className={'Input'} value={value} onChange={handleChange} ></input>
     )
   }
 }

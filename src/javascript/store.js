@@ -23,6 +23,7 @@ moduleImageStore,
 moduleBackgroundStore,
 moduleBackgroundImageStore,
 moduleVinylStore,
+moduleText1Store,
 blendStore
 
 function initStore(generatorName) {
@@ -53,6 +54,10 @@ function initStore(generatorName) {
 
     if (moduleName == 'Vinyl') {
       moduleVinylStore = initVinylStore(generators[generatorName].preset['Vinyl'])
+    }
+
+    if (moduleName == 'Text1') {
+      moduleText1Store = initText1Store(generators[generatorName].preset['Text1'])
     }
   })
 }
@@ -347,6 +352,30 @@ function setVinylStore(type, value) {
   }
 }
 
+////////////////////// TEXT1
+
+function initText1Store(preset) {
+  preset = Object.assign({}, preset, { moduleName: 'Text 1', color: '#fff' })
+
+  return preset
+}
+
+function getText1Store() {
+  return moduleText1Store
+}
+
+function setText1Store(type, nextValue) {
+  return new Promise((resolve, reject) => {
+    if (type === 'text') {
+      moduleText1Store.text = nextValue
+    }
+    if (type === 'SolidColor') {
+      moduleText1Store.color = nextValue
+      resolve([nextValue])
+    }
+  })
+}
+
 ///////////////////////////////////////////////////////////////////// EXPORT
 
 export {
@@ -364,5 +393,7 @@ export {
   setBackgroundImageStore,
   getVinylStore,
   setVinylStore,
+  getText1Store,
+  setText1Store,
   getBlendStore
 }

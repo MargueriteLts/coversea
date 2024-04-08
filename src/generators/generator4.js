@@ -1,4 +1,4 @@
-const modules = ['Background']
+const modules = ['Background', 'Text1']
 
 const preset = {
   Background: {
@@ -10,6 +10,9 @@ const preset = {
       SolidColor: {},
       Gradient: {}
     }
+  },
+  Text1: {
+    text: 'Some text'
   }
 }
 

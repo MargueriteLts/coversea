@@ -1,4 +1,4 @@
-const modules = ['Background', 'Vinyl', 'Shapes', 'Particles', 'Image']
+const modules = ['Background', 'Vinyl', 'Shapes', 'Particles', 'Image', 'Text1']
 
 const preset = {
   Background: {
@@ -28,7 +28,10 @@ const preset = {
     }
   },
   Particles: { sliderValue: 0 },
-  Image: {}
+  Image: {},
+  Text1: {
+    text: 'Yooooo'
+  }
 }
 
 export { modules, preset }

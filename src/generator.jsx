@@ -14,13 +14,12 @@ import {
   setImageStore,
   getBackgroundStore,
   setBackgroundStore,
-  // setColorPickerStore,
   getBackgroundImageStore,
   setBackgroundImageStore,
   getVinylStore,
   setVinylStore,
-  setVinylSizeStore,
-  setBackgroundImageEffectStore
+  getText1Store,
+  setText1Store
 } from './javascript/store.js'
 
 import { initSketch } from './javascript/sketch.js'
@@ -47,11 +46,9 @@ const actions = {
   setParticlesStore,
   setImageStore,
   setBackgroundStore,
-  // setColorPickerStore,
   setBackgroundImageStore,
   setVinylStore,
-  // setVinylSizeStore,
-  // setBackgroundImageEffectStore,
+  setText1Store,
   initSketch
 }
 
@@ -90,6 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (moduleName == 'Vinyl') {
       props.vinyl = getVinylStore()
+    }
+
+    if (moduleName == 'Text1') {
+      props.text1 = getText1Store()
     }
   });
 

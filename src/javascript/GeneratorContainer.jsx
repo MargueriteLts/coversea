@@ -7,6 +7,7 @@ import Image from './modules/Image.jsx'
 import Background from './modules/Background.jsx'
 import BackgroundImage from './modules/BackgroundImage.jsx'
 import Vinyl from './modules/Vinyl.jsx'
+import Text1 from './modules/Text1.jsx'
 
 export default class GeneratorContainer extends Component {
   constructor(props) {
@@ -30,7 +31,9 @@ export default class GeneratorContainer extends Component {
       backgroundImage,
       setBackgroundImageStore,
       vinyl,
-      setVinylStore
+      setVinylStore,
+      text1,
+      setText1Store
     } = this.props
 
     const modules = []
@@ -91,6 +94,16 @@ export default class GeneratorContainer extends Component {
           <Vinyl
             vinyl={vinyl}
             setVinylStore={setVinylStore}
+            key={index}
+          />
+        )
+      }
+
+      if (moduleName == 'Text1') {
+        modules.push(
+          <Text1
+            text1={text1}
+            setText1Store={setText1Store}
             key={index}
           />
         )

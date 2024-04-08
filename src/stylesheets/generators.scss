@@ -3,6 +3,8 @@ body.page {
   flex-direction: column;
   // justify-content: center;
   align-items: center;
+  height: 100vh;
+  overflow: hidden;
 
   & > div,
   & > a {
@@ -23,6 +25,10 @@ body.page {
     flex-direction: column;
     // column-gap: 20px;
     row-gap: 20px;
+    height: 80vh;
+    // flex-grow: 1;
+    overflow-y: scroll;
+    
   }
 
 
