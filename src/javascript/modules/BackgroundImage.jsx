@@ -9,7 +9,8 @@ export default class BackgroundImage extends Component {
     super(props)
 
     this.state = {
-      currentCollection: this.props.backgroundImage.currentCollection
+      currentCollection: this.props.backgroundImage.currentCollection,
+      sliderValue: this.props.backgroundImage.preset.sliderValue
     }
   }
 
@@ -32,7 +33,7 @@ export default class BackgroundImage extends Component {
   }
 
   handleInput = (e) => {
-    this.props.setSliderValue(e.target.value)
+    this.props.setBackgroundImageStore('opacity', e.target.value)
     this.setState({sliderValue: e.target.value})
   }
 

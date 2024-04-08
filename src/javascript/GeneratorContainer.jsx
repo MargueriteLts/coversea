@@ -27,13 +27,10 @@ export default class GeneratorContainer extends Component {
       setImageStore,
       background,
       setBackgroundStore,
-      // setColorPickerStore,
       backgroundImage,
       setBackgroundImageStore,
       vinyl,
-      setVinylStore,
-      setVinylSizeStore,
-      setBackgroundImageEffectStore
+      setVinylStore
     } = this.props
 
     const modules = []
@@ -45,8 +42,6 @@ export default class GeneratorContainer extends Component {
             shapes={shapes}
             setShapesStore={setShapesStore}
             sliderValue={shapes.settings.sliderValue}
-            // setColorPickerStore={setColorPickerStore}
-            // setSliderValue={setShapesStore}
             key={index}
           />
         )
@@ -76,7 +71,6 @@ export default class GeneratorContainer extends Component {
           <Background
             background={background}
             setBackgroundStore={setBackgroundStore}
-            // setColorPickerStore={setColorPickerStore}
             key={index}
           />
         )
@@ -87,8 +81,6 @@ export default class GeneratorContainer extends Component {
           <BackgroundImage
             backgroundImage={backgroundImage}
             setBackgroundImageStore={setBackgroundImageStore}
-            sliderValue={backgroundImage.preset.sliderValue}
-            setSliderValue={setBackgroundImageEffectStore}
             key={index}
           />
         )
@@ -99,8 +91,6 @@ export default class GeneratorContainer extends Component {
           <Vinyl
             vinyl={vinyl}
             setVinylStore={setVinylStore}
-            sliderValue={vinyl.preset.sliderValue}
-            setSliderValue={setVinylSizeStore}
             key={index}
           />
         )

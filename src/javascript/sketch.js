@@ -100,7 +100,7 @@ function drawModules(p) {
     //   imageBg.height,
     //   p.CONTAIN
     // )
-    const opacity = getBackgroundImageStore().preset.sliderValue
+    const opacity = backgroundImage.preset.sliderValue
     p.background(imageBg, opacity)
   }
 

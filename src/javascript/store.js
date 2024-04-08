@@ -302,10 +302,9 @@ function setBackgroundImageStore(type, value) {
   if (type === 'Cars') {
     moduleBackgroundImageStore.preset.Cars.current = sample(Object.keys(moduleBackgroundImageStore.preset.Cars.images))
   }
-}
-
-function setBackgroundImageEffectStore(nextSliderValue) {
-  moduleBackgroundImageStore.preset.sliderValue = nextSliderValue
+  if (type === 'opacity') {
+    moduleBackgroundImageStore.preset.sliderValue = value
+  }
 }
 
 ////////////////////// VINYL
@@ -343,10 +342,9 @@ function setVinylStore(type, value) {
   if (type === 'CurrentTabChange') {
     moduleVinylStore.currentVinylType = value
   }
-}
-
-function setVinylSizeStore(nextSliderValue) {
-  moduleVinylStore.preset.sliderValue = nextSliderValue
+  if (type === 'size') {
+    moduleVinylStore.preset.sliderValue = value
+  }
 }
 
 ///////////////////////////////////////////////////////////////////// EXPORT
@@ -362,13 +360,9 @@ export {
   setImageStore,
   getBackgroundStore,
   setBackgroundStore,
-  // setColorPickerStore,
-  // getColorPickerStore,
   getBackgroundImageStore,
   setBackgroundImageStore,
   getVinylStore,
   setVinylStore,
-  setVinylSizeStore,
-  setBackgroundImageEffectStore,
   getBlendStore
 }

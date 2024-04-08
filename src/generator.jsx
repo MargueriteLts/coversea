@@ -50,8 +50,8 @@ const actions = {
   // setColorPickerStore,
   setBackgroundImageStore,
   setVinylStore,
-  setVinylSizeStore,
-  setBackgroundImageEffectStore,
+  // setVinylSizeStore,
+  // setBackgroundImageEffectStore,
   initSketch
 }
 

@@ -10,7 +10,7 @@ export default class Vinyl extends Component {
 
     this.state = {
       currentVinylType: this.props.vinyl.currentVinylType,
-      sliderValue: this.props.sliderValue
+      sliderValue: this.props.vinyl.preset.sliderValue
     }
   }
 
@@ -23,19 +23,9 @@ export default class Vinyl extends Component {
   }
 
   handleInput = (e) => {
-    this.props.setSliderValue(e.target.value)
+    this.props.setVinylStore('size', e.target.value)
     this.setState({sliderValue: e.target.value})
   }
-
-  // handleClick = () => {
-  //   console.log('click');
-  //   if (this.state.currentCollection === 'NightClub'){
-  //     this.props.setBackgroundImageStore('NightClub')
-  //   }
-  //   if (this.state.currentCollection === 'Cars'){
-  //     this.props.setBackgroundImageStore('Cars')
-  //   }
-  // }
 
   //////////////////////////////////////////////////////// RENDER
   
