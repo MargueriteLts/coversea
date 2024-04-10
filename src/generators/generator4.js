@@ -15,7 +15,7 @@ const preset = {
     text: 'Music Cover Artwork in Generator4'
   },
   Lines: {},
-  Particles: { sliderValue: 0, min: 10 }
+  Particles: { sliderValue: 10, min: 10 }
 }
 
 export { modules, preset }

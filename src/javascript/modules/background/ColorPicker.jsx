@@ -75,7 +75,7 @@ export default class AllColorPicker extends Component {
 
             <SketchPicker
               disableAlpha={true}
-              color={this.props.color}
+              color={color}
               onChange={ (color) => {this.props.handleChange(this.props.object, color.hex)} }
             />
 
