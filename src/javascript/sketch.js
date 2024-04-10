@@ -6,11 +6,11 @@ import {
   getParticlesStore,
   getImageStore,
   getBackgroundStore,
-  // getColorPickerStore,
   getBackgroundImageStore,
   getBlendStore,
   getVinylStore,
-  getText1Store
+  getText1Store,
+  getLinesStore
 } from './store'
 
 let moduleList = {}
@@ -205,12 +205,54 @@ function drawModules(p) {
     )
   }
 
+  /////////////////////////////////////////// MODULE lINES
+
+  if (moduleList.includes('Lines')) {
+    const lines = getLinesStore()
+    // console.log(lines);
+
+    // for (let index = 0; index < 100; index++) {
+      // p.stroke(255)
+      // p.strokeWeight(5)
+      // p.line (
+      //   lines.lines[0],
+      //   lines.lines[1],
+      //   lines.lines[2],
+      //   lines.lines[3]
+      // )
+    // }
+
+    
+    // for (let i = 0; i < 10; i++) {
+    //   let x1 = random(0, 600)
+    //   let x2 = random(0, 600)
+    //   let y1 = random(0, 600)
+    //   let y2 = random(0, 600)
+    //   r = random(0, 255)
+    //   g = random(0, 255)
+    //   b = random(0, 255)
+    //   stroke(r, g, b)
+    //   line(x1, x2, y1, y2);
+    // }
+
+
+    for (let index = 0; index < lines.lines.length; index++) {
+      // let r = p.random(0, 255)
+      // let g = p.random(0, 255)
+      // let b = p.random(0, 255)
+      // p.stroke(r, g, b)
+      p.stroke(lines.color)
+      p.line(lines.lines[index][0], lines.lines[index][1], lines.lines[index][2], lines.lines[index][3]);
+    }
+  }
+
   /////////////////////////////////////////// MODULE TEXT1
 
   if (moduleList.includes('Text1')) {
     const text1 = getText1Store()
+    p.noStroke()
     p.fill(text1.color)
-    p.text(text1.text, 100, 100, canvasSize, canvasSize)
+    p.text(text1.text, 100, 100, 300, 300)
     p.textFont(fontEsenin, 100)
   }
 

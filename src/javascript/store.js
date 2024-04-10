@@ -24,6 +24,7 @@ moduleBackgroundStore,
 moduleBackgroundImageStore,
 moduleVinylStore,
 moduleText1Store,
+moduleLinesStore,
 blendStore
 
 function initStore(generatorName) {
@@ -58,6 +59,11 @@ function initStore(generatorName) {
 
     if (moduleName == 'Text1') {
       moduleText1Store = initText1Store(generators[generatorName].preset['Text1'])
+    }
+
+    if (moduleName == 'Lines') {
+      moduleLinesStore = initLinesStore(generators[generatorName].preset['Lines'])
+      console.log('STORE, initStore Lines', moduleLinesStore);
     }
   })
 }
@@ -376,6 +382,51 @@ function setText1Store(type, nextValue) {
   })
 }
 
+////////////////////// LINES
+
+function initLinesStore(preset) {
+  preset = Object.assign({}, preset, { moduleName: 'Lines', color: '#fff', lines: generateLines(50) })
+  console.log(preset.lines);
+  return preset
+}
+
+function generateLines(quantity) {
+  const lines = []
+
+  for (let index = 0; index < quantity; index++) {
+    // lines = {
+    //   x1: getRandomArbitrary(0, 600),
+    //   x2: getRandomArbitrary(0, 600),
+    //   x3: getRandomArbitrary(0, 600),
+    //   x4: getRandomArbitrary(0, 600)
+    // }
+    lines.push([
+      getRandomArbitrary(0, 600),
+      getRandomArbitrary(0, 600),
+      getRandomArbitrary(0, 600),
+      getRandomArbitrary(0, 600)
+    ])
+  }
+
+  return lines
+}
+
+function getLinesStore() {
+  return moduleLinesStore
+}
+
+function setLinesStore(type, nextValue) {
+  return new Promise((resolve, reject) => {
+    if (type === 'SolidColor') {
+      moduleLinesStore.color = nextValue
+      resolve([nextValue])
+    }
+    if (type === 'randomize') {
+      moduleLinesStore.lines = generateLines(50)
+    }
+  })
+}
+
 ///////////////////////////////////////////////////////////////////// EXPORT
 
 export {
@@ -395,5 +446,7 @@ export {
   setVinylStore,
   getText1Store,
   setText1Store,
+  getLinesStore,
+  setLinesStore,
   getBlendStore
 }

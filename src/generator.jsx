@@ -19,7 +19,9 @@ import {
   getVinylStore,
   setVinylStore,
   getText1Store,
-  setText1Store
+  setText1Store,
+  getLinesStore,
+  setLinesStore
 } from './javascript/store.js'
 
 import { initSketch } from './javascript/sketch.js'
@@ -49,6 +51,7 @@ const actions = {
   setBackgroundImageStore,
   setVinylStore,
   setText1Store,
+  setLinesStore,
   initSketch
 }
 
@@ -91,6 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (moduleName == 'Text1') {
       props.text1 = getText1Store()
+    }
+
+    if (moduleName == 'Lines') {
+      props.lines = getLinesStore()
     }
   });
 
