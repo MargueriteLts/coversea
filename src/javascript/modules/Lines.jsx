@@ -8,6 +8,7 @@ export default class Lines extends Component {
     super(props)
 
     this.state = {
+      sliderValue: this.props.lines.strokeWeight
     }
   }
 
@@ -23,6 +24,12 @@ export default class Lines extends Component {
 
   handleClick = () => {
     this.props.setLinesStore('randomize')
+  }
+
+  handleInput = (e) => {
+    let type = 'strokeWeight'
+    this.props.setLinesStore(type, e.target.value)
+    this.setState({sliderValue: e.target.value})
   }
   
   render() {
@@ -40,6 +47,13 @@ export default class Lines extends Component {
           handleChange={this.handleChange}
           key='AllColorPicker'
         />
+        <input
+            type="range"
+            min="1"
+            max="50"
+            value={this.state.sliderValue}
+            onInput={this.handleInput}
+          />
       </div>
     </div>
   }

@@ -236,12 +236,15 @@ function drawModules(p) {
     // }
 
 
+    p.stroke(lines.color)
+    p.strokeWeight(lines.strokeWeight);
     for (let index = 0; index < lines.lines.length; index++) {
       // let r = p.random(0, 255)
       // let g = p.random(0, 255)
       // let b = p.random(0, 255)
       // p.stroke(r, g, b)
-      p.stroke(lines.color)
+      // p.stroke(lines.color)
+      // p.strokeWeight(strokeWeight);
       p.line(lines.lines[index][0], lines.lines[index][1], lines.lines[index][2], lines.lines[index][3]);
     }
   }
@@ -252,8 +255,13 @@ function drawModules(p) {
     const text1 = getText1Store()
     p.noStroke()
     p.fill(text1.color)
-    p.text(text1.text, 100, 100, 300, 300)
     p.textFont(fontEsenin, 100)
+    p.textLeading(50)
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text(text1.text, 0, 0, 600, 600)
+    // let bbox = p.fontEsenin.textBounds(text1.text, 100, 100, 300, 300);
+    // p.fill('white')
+    // p.rect(bbox.x, bbox.y, bbox.w, bbox.h);
   }
 
 }

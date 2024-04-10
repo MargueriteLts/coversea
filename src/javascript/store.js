@@ -223,7 +223,8 @@ function setShapesStore(type, value) {
 function initParticles(preset) {
   return {
     sliderValue: preset.sliderValue,
-    particles: generateParticles(preset.sliderValue)
+    particles: generateParticles(preset.sliderValue),
+    min: preset.min
   }
 }
 
@@ -385,7 +386,7 @@ function setText1Store(type, nextValue) {
 ////////////////////// LINES
 
 function initLinesStore(preset) {
-  preset = Object.assign({}, preset, { moduleName: 'Lines', color: '#fff', lines: generateLines(50) })
+  preset = Object.assign({}, preset, { moduleName: 'Lines', color: '#fff', lines: generateLines(50), strokeWeight: 1 })
   console.log(preset.lines);
   return preset
 }
@@ -394,12 +395,6 @@ function generateLines(quantity) {
   const lines = []
 
   for (let index = 0; index < quantity; index++) {
-    // lines = {
-    //   x1: getRandomArbitrary(0, 600),
-    //   x2: getRandomArbitrary(0, 600),
-    //   x3: getRandomArbitrary(0, 600),
-    //   x4: getRandomArbitrary(0, 600)
-    // }
     lines.push([
       getRandomArbitrary(0, 600),
       getRandomArbitrary(0, 600),
@@ -423,6 +418,9 @@ function setLinesStore(type, nextValue) {
     }
     if (type === 'randomize') {
       moduleLinesStore.lines = generateLines(50)
+    }
+    if (type === 'strokeWeight') {
+      moduleLinesStore.strokeWeight = nextValue
     }
   })
 }

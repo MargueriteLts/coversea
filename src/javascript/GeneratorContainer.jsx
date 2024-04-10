@@ -56,8 +56,8 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Particles') {
         modules.push(
           <Particles
-            sliderValue={particles.sliderValue}
-            setSliderValue={setParticlesStore}
+            particles={particles}
+            setParticlesStore={setParticlesStore}
             key={index}
           />
         )

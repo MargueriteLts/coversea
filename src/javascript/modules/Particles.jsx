@@ -7,16 +7,17 @@ export default class Particles extends Component {
     super(props)
 
     this.state = {
-      sliderValue: this.props.sliderValue
+      sliderValue: this.props.particles.sliderValue
     }
   }
 
   handleInput = (e) => {
-    this.props.setSliderValue(e.target.value)
+    this.props.setParticlesStore(e.target.value)
     this.setState({sliderValue: e.target.value})
   }
 
   render() {
+    const { particles } = this.props
     return (
       <div className="ModuleContainer">
         <HeaderModule
@@ -25,7 +26,7 @@ export default class Particles extends Component {
         <div className="ModuleContent">
           <input
             type="range"
-            min="0"
+            min={particles.min}
             max="500"
             value={this.state.sliderValue}
             onInput={this.handleInput}
