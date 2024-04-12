@@ -239,12 +239,9 @@ function drawModules(p) {
 
   /////////////////////////////////////////// MODULE 3D
 
-  p.image(graphics, 0, 0)
-  graphics.clear()
-
-  ///////////////
-
   if (moduleList.includes('Module3D')) {
+    p.image(graphics, 0, 0)
+    graphics.clear()
     const module3D = get3DStore()
 
     if (module3D.x !== prevModule3DX || module3D.y !== prevModule3DY) {

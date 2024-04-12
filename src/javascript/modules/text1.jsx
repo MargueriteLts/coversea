@@ -46,17 +46,20 @@ export default class Text1 extends Component {
         // randomize={}
       />
       <div className="ModuleContent">
-        <Input
-          value={this.state.value}
-          handleChange={this.handleInputChange}
+        <div className="mainText">
+          <div><p>Main text</p></div>
+          <Input
+            value={this.state.value}
+            handleChange={this.handleInputChange}
           />
-        <ColorPicker
+          <ColorPicker
           // alpha={false}
           object='SolidColor'
           color={text1.color}
           handleChange={this.handleChange}
           key='ColorPicker'
         />
+        </div>
       </div>
     </div>
   }

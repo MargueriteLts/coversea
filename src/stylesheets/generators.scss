@@ -24,7 +24,7 @@ body.page {
     display: flex;
     flex-direction: column;
     // column-gap: 20px;
-    row-gap: 20px;
+    row-gap: 8px;
     height: 80vh;
     // flex-grow: 1;
     overflow-y: scroll;
@@ -38,7 +38,7 @@ body.page {
     flex-direction: column;
     width: 816px;
     margin-right: 20px;
-    border-radius: 30px;
+    border-radius: 40px;
 
     .TabButtonSet {
       display: flex;
@@ -71,8 +71,12 @@ body.page {
       flex-direction: row;
 
       .ModuleTitle {
-        color: white;
-        font-size: 30px;
+        color: var(--white);
+        font-size: 26px;
+        font-family: "bc-novatica-cyr", sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        text-transform: uppercase;
       }
     }
 
@@ -96,6 +100,24 @@ body.page {
       input {
         width: 50%;
         // flex-grow: 1;
+      }
+      .mainText {
+        display: flex;
+        flex-direction: row;
+        column-gap: 12px;
+        align-items: center;
+
+        input {
+          background: var(--Btn-greySecondary);
+          border: none;
+          padding: 12px 20px;
+          color: var(--white);
+          border-radius: 20px;
+          font-size: 20px;
+          font-family: neue-haas-unica, sans-serif;
+          font-weight: 300;
+          font-style: normal;
+        }
       }
     }
   }

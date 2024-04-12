@@ -85,6 +85,24 @@ module.exports = {
     }),
 
     // Internal pages
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/socials.html',
+      filename: './socials.html',
+      chunks: ['index']
+    }),
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/about.html',
+      filename: './about.html',
+      chunks: ['index']
+    }),
+
+    // Generators
     new HtmlWebpackPlugin({
       hash: true,
       scriptLoading: 'blocking',

@@ -3,30 +3,104 @@ body.index {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 2500px;
+  background: var(--BgBlack);
+
+  // figure {
+  //   z-index: -10;
+  //   background-image: url('./images/logo-bgGlavnaya.svg');
+  //   background-repeat: no-repeat;
+  //   background-position: center top;
+  //   width: 100vw;
+  //   height: 1512px;
+  // }
+
+  .logoBG {
+    position: absolute;
+    top: 720px;
+    left: 0;
+    width: 100%;
+    height: var(--VPW);
+    z-index: -1;
+    background-image: url('./images/logo-bgGlavnaya.svg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+  }
 
   color: var(--white);
 
-  .header {
-    height: 97px;
+  .quoteDiff {
+    position: relative;
+    mix-blend-mode: difference;
+    top: 360px;
+  }
+
+  h2 {
+    font-size: 42px;
+    align-items: center;
+    text-align: center;
+    font-family: bc-novatica-cyr, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-transform: uppercase;
+  }
+
+  .genMenu {
+    margin-top: 156px;
+
+    .top {
+      margin-top: 44px;
+    }
   }
 
   .generatorsList {
+    margin-top: 24px;
     cursor: hand;
     flex-grow: 1;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    // justify-content: center;
     align-items: left;
+    justify-content: space-between;
+    width: 100%;
+
+    .buttonToGenerator {
+      text-decoration: none;
+      border: solid var(--white) 1px;
+      padding: 16px 20px;
+      font-family: bc-novatica-cyr, sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 32px;
+      color: var(--white);
+      border-radius: 100px;
+    }
+
+    .buttonToGenerator:hover {
+      background: var(--white);
+      color: var(--BgBlack)
+    }
 
     a {
-      margin-bottom: 20px;
+      // margin-bottom: 20px;
       text-decoration: none;
     }
   }
 
-  & > div,
-  & > a {
-    margin: 10px 0;
-  }
+  // & > div,
+  // & > a {
+  //   margin: 10px 0;
+  // }
 }
+
+// .logoBG {
+//   z-index: -10;
+//   background-image: url('./images/logo-bgGlavnaya.svg');
+//   background-repeat: no-repeat;
+//   background-position: center top;
+//   background-size: cover;
+//   width: 100vw;
+//   height: 1512px;
+//   top: 720px;
+// }

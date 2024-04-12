@@ -7,27 +7,47 @@
 html,
 body {
   height: 100%;
-  background: var(--BgBlack);
+  // background: var(--BgBlack);
 }
 
 body {
   font-family: "neue-haas-unica", "bc-novatica-cyr", sans-serif;
-  font-weight: 400;
+  font-weight: 200;
   font-style: normal;
+  color: white;
+  letter-spacing: -5%;
 }
 
-a {
-  text-decoration: none;
+.header {
+  // height: 97px;
+  width: 100%;
 
-  &:visited {
-    color: grey;
+  font-family: bc-novatica-cyr, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 120px;
+  text-align: center;
+  align-items: center;
+
+  .menuButtonActivePage {
+    color: var(--white);
+    text-decoration: none;
+    cursor: default;
   }
 
-  &:hover {
-    text-decoration: underline;
-    color: white;
-    cursor: pointer;
+  .menuButton {
+    color: var(--BgModul);
+    text-decoration: none;
+    cursor: hand;
   }
+}
+
+.Content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 24px;
 }
 
 .Button {
@@ -39,27 +59,3 @@ a {
   width: fit-content;
   border-radius: 36px;
 }
-
-// .images {
-//   display: flex;
-
-//   * {
-//     width: 24px;
-//     height: 24px;
-//     margin: 0 10px;
-//   }
-
-//   .image {
-//     &#bgPNG {
-//       // background-image: url('images/image.png');
-//     }
-
-//     &#bgJPG {
-//       // background-image: url('images/image.jpg');
-//     }
-
-//     &#bgSVG {
-//       // background-image: url('images/image.svg');
-//     }
-//   }
-// }

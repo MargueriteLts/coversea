@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
+import html2canvas from "html2canvas";
+import { generateHash } from './utilities.js'
+
 import Shapes from './modules/Shapes.jsx'
 import Particles from './modules/Particles.jsx'
 import Image from './modules/Image.jsx'
@@ -140,12 +143,26 @@ export default class GeneratorContainer extends Component {
     return modules
   }
 
+  DownloadImage = () => {
+    html2canvas(document.getElementById("sketch")).then(function (canvas) {
+      let a = document.createElement("a");
+      a.href = canvas.toDataURL("image/jpeg");
+      a.download = `cover-${generateHash()}.jpeg`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  };
+
   render() {
     return <div className="GeneratorContainer">
       <div className='wrapModules'>
       {this.renderModules()}
       </div>
-      <div className="sketch" id="sketch"></div>
+      <div className="RightSide">
+        <div className="sketch" id="sketch"></div>
+        <div className="Button" onClick={this.DownloadImage}>Download image</div>
+      </div>
     </div>
   }
 }
