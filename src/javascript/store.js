@@ -165,38 +165,6 @@ function generateColor() {
   return color
 }
 
-////////////////////////////////////////////////////// COLORPICKER
-
-// function setColorPickerStore(object, nextColorValue) {
-//   if (object === 'shapes') {
-//     moduleShapesStore.settings.color = nextColorValue
-//   }
-//   // if (object === 'background') {
-//   //   moduleBackgroundStore.preset.SolidColor.color = nextColorValue
-//   // }
-//   // if (object === 'gradient1') {
-//   //   moduleBackgroundStore.preset.Gradient.color1 = nextColorValue
-//   // }
-//   // if (object === 'gradient2') {
-//   //   moduleBackgroundStore.preset.Gradient.color2 = nextColorValue
-//   // }
-// }
-
-// function getColorPickerStore(object) {
-//   if (object === 'shapes') {
-//     return moduleShapesStore.settings.color
-//   }
-//   // if (object === 'background') {
-//   //   return moduleBackgroundStore.preset.SolidColor.color
-//   // }
-//   // if (object === 'gradient1') {
-//   //   return moduleBackgroundStore.preset.Gradient.color1
-//   // }
-//   // if (object === 'gradient2') {
-//   //   return moduleBackgroundStore.preset.Gradient.color2
-//   // }
-// }
-
 ////////////////////////////////////////////////////// SHAPES
 
 function initShapesStore(shapes) {
@@ -427,10 +395,21 @@ function setLinesStore(type, nextValue) {
   })
 }
 
-////////////////////// LINES
+////////////////////// 3D
 
 function init3DStore(preset) {
   preset = Object.assign({}, preset, { moduleName: '3D Shape', x: generateRandomNb(), y: generateRandomNb() })
+
+  preset.options.forEach((option) => {
+    if (option == 'Torus') {
+      preset.preset.Torus = Object.assign({}, preset.preset.Torus, { text: 'Torus' })
+    }
+
+    if (option == 'Square') {
+      preset.preset.Square = Object.assign({}, preset.preset.Square, { text: 'Square' })
+    }
+  })
+
   return preset
 }
 
@@ -443,9 +422,14 @@ function get3DStore() {
   return module3DStore
 }
 
-function set3DStore() {
-  module3DStore.x = generateRandomNb()
-  module3DStore.y = generateRandomNb()
+function set3DStore(type, value) {
+  if (type === 'CurrentTabChange') {
+    module3DStore.current3DType = value
+  } 
+  if (type === 'randomize') {
+    module3DStore.x = generateRandomNb()
+    module3DStore.y = generateRandomNb()
+  }
 }
 
 ///////////////////////////////////////////////////////////////////// EXPORT

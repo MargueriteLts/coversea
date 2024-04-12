@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import HeaderModule from '../components/HeaderModule.jsx'
-import DropDown from '../components/DropDown.jsx'
+import Dropdown from '../components/DropDown.jsx'
 // import ColorPicker from './background/ColorPicker.jsx'
 
 export default class Module3D extends Component {
@@ -9,20 +9,11 @@ export default class Module3D extends Component {
     super(props)
 
     this.state = {
-      current3DType: this.props.module3D.current3DType
     }
   }
 
-  handleRandomize = () => {
+  handleClick = () => {
     this.props.set3DStore('randomize')
-  }
-
-  handleDropDownClick = (type) => {
-    this.props.set3DStore('CurrentTabChange', type)
-
-    this.setState({
-      current3DType: type
-    })
   }
   
   render() {
@@ -33,12 +24,10 @@ export default class Module3D extends Component {
         title={module3D.moduleName}
       />
       <div className="ModuleContent flexRow">
-        <DropDown
+        <Dropdown
           options={module3D.options}
-          value={this.state.current3DType}
-          handleClick={this.handleDropDownClick}
         />
-        <div className="Button" onClick={this.handleRandomize}>Randomize 3D</div>
+        <div className="Button" onClick={this.handleClick}>Randomize 3D</div>
       </div>
     </div>
   }

@@ -259,7 +259,13 @@ function drawModules(p) {
     graphics.directionalLight(189, 98, 189, 100, 0, 0)
     graphics.directionalLight(54, 98, 189, -100, 0, 0)
     graphics.fill(255)
-    graphics.torus(30, 15, 50, 50);
+
+    if (module3D.options.includes('Torus') && module3D.current3DType === 'Torus') {
+      graphics.torus(30, 15, 50, 50);
+    } else if (module3D.options.includes('Square') && module3D.current3DType === 'Square') {
+      graphics.box(30, 15, 50, 50);
+    }
+
   }
 
 }

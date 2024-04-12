@@ -11,7 +11,15 @@ const preset = {
       Gradient: {}
     }
   },
-  Module3D: {}
+  Module3D: {
+    options: ['Torus', 'Square'],
+    current3DType: 'Torus',
+
+    preset: {
+      Torus: {},
+      Square: {}
+    }
+  }
 }
 
 export { modules, preset }
