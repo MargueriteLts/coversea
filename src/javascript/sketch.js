@@ -10,7 +10,8 @@ import {
   getBlendStore,
   getVinylStore,
   getText1Store,
-  getLinesStore
+  getLinesStore,
+  get3DStore
 } from './store'
 
 let moduleList = {}
@@ -31,7 +32,13 @@ let imageVinyl
 
 let fontEsenin
 
-//////////////////////////////////////////
+let graphics
+
+let prevModule3DX;
+let prevModule3DY;
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function drawModules(p) {
 
@@ -67,8 +74,6 @@ function drawModules(p) {
           p.line(i, 0, i, canvasSize)
         }
       }
-
-
     } else {
       p.background(0)
     }
@@ -209,42 +214,10 @@ function drawModules(p) {
 
   if (moduleList.includes('Lines')) {
     const lines = getLinesStore()
-    // console.log(lines);
-
-    // for (let index = 0; index < 100; index++) {
-      // p.stroke(255)
-      // p.strokeWeight(5)
-      // p.line (
-      //   lines.lines[0],
-      //   lines.lines[1],
-      //   lines.lines[2],
-      //   lines.lines[3]
-      // )
-    // }
-
-    
-    // for (let i = 0; i < 10; i++) {
-    //   let x1 = random(0, 600)
-    //   let x2 = random(0, 600)
-    //   let y1 = random(0, 600)
-    //   let y2 = random(0, 600)
-    //   r = random(0, 255)
-    //   g = random(0, 255)
-    //   b = random(0, 255)
-    //   stroke(r, g, b)
-    //   line(x1, x2, y1, y2);
-    // }
-
 
     p.stroke(lines.color)
     p.strokeWeight(lines.strokeWeight);
     for (let index = 0; index < lines.lines.length; index++) {
-      // let r = p.random(0, 255)
-      // let g = p.random(0, 255)
-      // let b = p.random(0, 255)
-      // p.stroke(r, g, b)
-      // p.stroke(lines.color)
-      // p.strokeWeight(strokeWeight);
       p.line(lines.lines[index][0], lines.lines[index][1], lines.lines[index][2], lines.lines[index][3]);
     }
   }
@@ -262,6 +235,31 @@ function drawModules(p) {
     // let bbox = p.fontEsenin.textBounds(text1.text, 100, 100, 300, 300);
     // p.fill('white')
     // p.rect(bbox.x, bbox.y, bbox.w, bbox.h);
+  }
+
+  /////////////////////////////////////////// MODULE 3D
+
+  p.image(graphics, 0, 0)
+  graphics.clear()
+
+  ///////////////
+
+  if (moduleList.includes('Module3D')) {
+    const module3D = get3DStore()
+
+    if (module3D.x !== prevModule3DX || module3D.y !== prevModule3DY) {
+      graphics.rotateX(module3D.x);
+      graphics.rotateY(module3D.y);
+      
+      prevModule3DX = module3D.x;
+      prevModule3DY = module3D.y;
+    }
+
+    graphics.noStroke()
+    graphics.directionalLight(189, 98, 189, 100, 0, 0)
+    graphics.directionalLight(54, 98, 189, -100, 0, 0)
+    graphics.fill(255)
+    graphics.torus(30, 15, 50, 50);
   }
 
 }
@@ -344,7 +342,11 @@ function sketch(p) {
   p.setup = () => {
     const canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
-    p.noStroke()
+    if (moduleList.includes('Module3D')) {
+      graphics = p.createGraphics(canvasSize, canvasSize, p.WEBGL)
+      graphics.camera(0, 0, 50*p.sqrt(3), 0, 0, 0, 0, 1, 0);
+      graphics.perspective(p.PI/3, 1, 5*p.sqrt(3), 500*p.sqrt(3));
+    }
   }
   
   p.draw = () => {

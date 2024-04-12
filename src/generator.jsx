@@ -21,7 +21,9 @@ import {
   getText1Store,
   setText1Store,
   getLinesStore,
-  setLinesStore
+  setLinesStore,
+  get3DStore,
+  set3DStore
 } from './javascript/store.js'
 
 import { initSketch } from './javascript/sketch.js'
@@ -52,6 +54,7 @@ const actions = {
   setVinylStore,
   setText1Store,
   setLinesStore,
+  set3DStore,
   initSketch
 }
 
@@ -98,6 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (moduleName == 'Lines') {
       props.lines = getLinesStore()
+    }
+    if (moduleName == 'Module3D') {
+      props.module3D = get3DStore()
     }
   });
 

@@ -25,6 +25,7 @@ moduleBackgroundImageStore,
 moduleVinylStore,
 moduleText1Store,
 moduleLinesStore,
+module3DStore,
 blendStore
 
 function initStore(generatorName) {
@@ -63,7 +64,9 @@ function initStore(generatorName) {
 
     if (moduleName == 'Lines') {
       moduleLinesStore = initLinesStore(generators[generatorName].preset['Lines'])
-      console.log('STORE, initStore Lines', moduleLinesStore);
+    }
+    if (moduleName == 'Module3D') {
+      module3DStore = init3DStore(generators[generatorName].preset['Module3D'])
     }
   })
 }
@@ -387,7 +390,6 @@ function setText1Store(type, nextValue) {
 
 function initLinesStore(preset) {
   preset = Object.assign({}, preset, { moduleName: 'Lines', color: '#fff', lines: generateLines(50), strokeWeight: 1 })
-  console.log(preset.lines);
   return preset
 }
 
@@ -425,6 +427,27 @@ function setLinesStore(type, nextValue) {
   })
 }
 
+////////////////////// LINES
+
+function init3DStore(preset) {
+  preset = Object.assign({}, preset, { moduleName: '3D Shape', x: generateRandomNb(), y: generateRandomNb() })
+  return preset
+}
+
+function generateRandomNb() {
+  let randomNb = getRandomArbitrary(0, 100)
+  return randomNb
+}
+
+function get3DStore() {
+  return module3DStore
+}
+
+function set3DStore() {
+  module3DStore.x = generateRandomNb()
+  module3DStore.y = generateRandomNb()
+}
+
 ///////////////////////////////////////////////////////////////////// EXPORT
 
 export {
@@ -446,5 +469,8 @@ export {
   setText1Store,
   getLinesStore,
   setLinesStore,
+  init3DStore,
+  get3DStore,
+  set3DStore,
   getBlendStore
 }
