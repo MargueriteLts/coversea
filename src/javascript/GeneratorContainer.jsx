@@ -20,9 +20,15 @@ export default class GeneratorContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.initSketch('sketch')
     // let sketchdiv = document.getElementById('sketch')
     // console.log(sketchdiv);
+    const info = document.getElementById('sketch')
+    console.log('INFO', info);
+    const info2 = info.getBoundingClientRect();
+    console.log('INFO2', info2);
+    console.log('INFO W', info2.width);
+    console.log('INFO H', info2.height);
+    this.props.initSketch('sketch')
   }
 
   renderModules() {

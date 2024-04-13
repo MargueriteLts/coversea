@@ -18,8 +18,9 @@ let moduleList = {}
 
 let canvasContainerId = ''
 
-// let parentDivSize
 let canvasSize
+let parentDiv
+let parentDivInfo
 let parentDivWidth
 let parentDivHeight
 
@@ -345,41 +346,15 @@ function sketch(p) {
   }
 
   p.setup = () => {
+    
+    parentDivWidth = parentDivInfo.width;
+    parentDivHeight = parentDivInfo.height;
 
-    // parentDivSize = document.getElementById(canvasContainerId).offsetHeight
-    // console.log(document.getElementById(canvasContainerId))
-    // console.log(parentDivSize)
-
-    parentDivWidth = document.getElementById(canvasContainerId).offsetWidth;
-    parentDivHeight = document.getElementById(canvasContainerId).offsetHeight;
-
-    console.log(document.getElementById(canvasContainerId));
-    console.log('WIDTH', parentDivWidth);
-    console.log('HEIGHT', parentDivHeight);
-
-    canvasSize = Math.min(parentDivWidth, parentDivHeight)
-
-    console.log('CANVASSIZE', canvasSize);
+    canvasSize = parseInt(Math.min(parentDivWidth, parentDivHeight))
+    console.log(canvasSize);
 
     let canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
-
-    // window.addEventListener('resize', () => {
-    // // Resize canvas when window is resized
-    // parentDivSize = document.getElementById(canvasContainerId).offsetHeight;
-    // p.resizeCanvas(parentDivSize, parentDivSize);
-    // });
-
-    // window.addEventListener('resize', () => {
-    //   parentDivWidth = document.getElementById(canvasContainerId).offsetWidth
-    //   parentDivHeight = document.getElementById(canvasContainerId).offsetHeight
-
-    //   let minSize = Math.min(parentDivWidth, parentDivHeight)
-
-    //   p.resizeCanvas(minSize, minSize)
-    // })
-
-    // windowResized()
 
     if (moduleList.includes('Module3D')) {
       graphics = p.createGraphics(canvasSize, canvasSize, p.WEBGL)
@@ -401,46 +376,25 @@ function sketch(p) {
   }
 
   p.windowResized = () => {
-    // parentDivWidth = document.getElementById(canvasContainerId).offsetWidth
-    // parentDivHeight = document.getElementById(canvasContainerId).offsetHeight
 
-    let parentDiv = document.getElementById(canvasContainerId);
-    let parentDivInfo = parentDiv.getBoundingClientRect();
-    parentDivWidth = parentDivInfo.height;
-    parentDivHeight = parentDivInfo.width;
-
-    console.log(document.getElementById(canvasContainerId));
-    console.log('WIDTH', parentDivWidth);
-    console.log('HEIGHT', parentDivHeight);
+    parentDiv = document.getElementById(canvasContainerId);
+    parentDivInfo = parentDiv.getBoundingClientRect();
+    parentDivWidth = parentDivInfo.width;
+    parentDivHeight = parentDivInfo.height;
 
     canvasSize = Math.min(parentDivWidth, parentDivHeight)
-
-    console.log('CANVASSIZE', canvasSize);
 
     p.resizeCanvas(canvasSize, canvasSize)
   }
 }
-
-// function windowResized(p) {
-//   parentDivSize = document.getElementById('sketch').offsetHeight;
-//   p.resizeCanvas(parentDivSize, parentDivSize)
-// }
-
-// function windowResized() {
-//   parentDivWidth = document.getElementById(canvasContainerId).offsetWidth
-//   parentDivHeight = document.getElementById(canvasContainerId).offsetHeight
-
-//   let minSize = Math.min(parentDivWidth, parentDivHeight)
-
-//   resizeCanvas(minSize, minSize)
-// }
 
 ///////////////////////////////////////////////////
 
 function initSketch(id) {
   canvasContainerId = id
 
-  // console.log(canvasContainerId);
+  parentDiv = document.getElementById(canvasContainerId);
+  parentDivInfo = parentDiv.getBoundingClientRect();
 
   moduleList = getModuleList()
 
