@@ -21,6 +21,8 @@ export default class GeneratorContainer extends Component {
 
   componentDidMount() {
     this.props.initSketch('sketch')
+    // let sketchdiv = document.getElementById('sketch')
+    // console.log(sketchdiv);
   }
 
   renderModules() {
@@ -155,14 +157,18 @@ export default class GeneratorContainer extends Component {
   };
 
   render() {
-    return <div className="GeneratorContainer">
+    return <div className="GeneratorContent">
       <div className='wrapModules'>
       {this.renderModules()}
       </div>
-      <div className="RightSide">
+      <div className="wrapSketch">
         <div className="sketch" id="sketch"></div>
-        <div className="Button" onClick={this.DownloadImage}>Download image</div>
+        <div className="ButtonPrimary" onClick={this.DownloadImage}>Download image</div>
       </div>
     </div>
   }
 }
+
+{/* <div id="sketchSize">
+  <div className="sketch" id="sketch"></div>
+</div> */}

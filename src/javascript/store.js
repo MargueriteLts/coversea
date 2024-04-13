@@ -312,8 +312,6 @@ function initVinylStore(preset) {
     }
   })
 
-  console.log(preset.preset.sliderValue);
-
   return preset
 }
 

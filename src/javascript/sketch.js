@@ -18,7 +18,10 @@ let moduleList = {}
 
 let canvasContainerId = ''
 
-let canvasSize = 600
+// let parentDivSize
+let canvasSize
+let parentDivWidth
+let parentDivHeight
 
 let imagesObj = {}
 
@@ -102,7 +105,6 @@ function drawModules(p) {
   /////////////////////////////////////////// MODULE SHAPES
 
   if (moduleList.includes('Shapes')) {
-
     p.noStroke()
 
     const color = getShapesStore().settings.color
@@ -343,8 +345,42 @@ function sketch(p) {
   }
 
   p.setup = () => {
-    const canvas = p.createCanvas(canvasSize, canvasSize)
+
+    // parentDivSize = document.getElementById(canvasContainerId).offsetHeight
+    // console.log(document.getElementById(canvasContainerId))
+    // console.log(parentDivSize)
+
+    parentDivWidth = document.getElementById(canvasContainerId).offsetWidth;
+    parentDivHeight = document.getElementById(canvasContainerId).offsetHeight;
+
+    console.log(document.getElementById(canvasContainerId));
+    console.log('WIDTH', parentDivWidth);
+    console.log('HEIGHT', parentDivHeight);
+
+    canvasSize = Math.min(parentDivWidth, parentDivHeight)
+
+    console.log('CANVASSIZE', canvasSize);
+
+    let canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
+
+    // window.addEventListener('resize', () => {
+    // // Resize canvas when window is resized
+    // parentDivSize = document.getElementById(canvasContainerId).offsetHeight;
+    // p.resizeCanvas(parentDivSize, parentDivSize);
+    // });
+
+    // window.addEventListener('resize', () => {
+    //   parentDivWidth = document.getElementById(canvasContainerId).offsetWidth
+    //   parentDivHeight = document.getElementById(canvasContainerId).offsetHeight
+
+    //   let minSize = Math.min(parentDivWidth, parentDivHeight)
+
+    //   p.resizeCanvas(minSize, minSize)
+    // })
+
+    // windowResized()
+
     if (moduleList.includes('Module3D')) {
       graphics = p.createGraphics(canvasSize, canvasSize, p.WEBGL)
       graphics.camera(0, 0, 50*p.sqrt(3), 0, 0, 0, 0, 1, 0);
@@ -362,14 +398,49 @@ function sketch(p) {
     } else {
       drawModules(p)
     }
+  }
 
+  p.windowResized = () => {
+    // parentDivWidth = document.getElementById(canvasContainerId).offsetWidth
+    // parentDivHeight = document.getElementById(canvasContainerId).offsetHeight
+
+    let parentDiv = document.getElementById(canvasContainerId);
+    let parentDivInfo = parentDiv.getBoundingClientRect();
+    parentDivWidth = parentDivInfo.height;
+    parentDivHeight = parentDivInfo.width;
+
+    console.log(document.getElementById(canvasContainerId));
+    console.log('WIDTH', parentDivWidth);
+    console.log('HEIGHT', parentDivHeight);
+
+    canvasSize = Math.min(parentDivWidth, parentDivHeight)
+
+    console.log('CANVASSIZE', canvasSize);
+
+    p.resizeCanvas(canvasSize, canvasSize)
   }
 }
+
+// function windowResized(p) {
+//   parentDivSize = document.getElementById('sketch').offsetHeight;
+//   p.resizeCanvas(parentDivSize, parentDivSize)
+// }
+
+// function windowResized() {
+//   parentDivWidth = document.getElementById(canvasContainerId).offsetWidth
+//   parentDivHeight = document.getElementById(canvasContainerId).offsetHeight
+
+//   let minSize = Math.min(parentDivWidth, parentDivHeight)
+
+//   resizeCanvas(minSize, minSize)
+// }
 
 ///////////////////////////////////////////////////
 
 function initSketch(id) {
   canvasContainerId = id
+
+  // console.log(canvasContainerId);
 
   moduleList = getModuleList()
 

@@ -1,25 +1,33 @@
-@import url("https://use.typekit.net/zdq8cvv.css");
-
 * {
   box-sizing: border-box;
 }
 
-html,
 body {
-  height: 100%;
-  // background: var(--BgBlack);
-}
-
-body {
-  font-family: "neue-haas-unica", "bc-novatica-cyr", sans-serif;
+  font-family: "neue-haas-unica", sans-serif;
   font-weight: 200;
   font-style: normal;
   color: white;
-  letter-spacing: -5%;
+}
+
+h2 {
+  font-size: 42px;
+  align-items: center;
+  text-align: center;
+  font-family: bc-novatica-cyr, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.flexColumn {
+  flex-direction: column;
+}
+
+.flexRow {
+  flex-direction: row;
 }
 
 .header {
-  // height: 97px;
   width: 100%;
 
   font-family: bc-novatica-cyr, sans-serif;
@@ -50,11 +58,15 @@ body {
   padding: 0 24px;
 }
 
-.Button {
+.ButtonPrimary {
   background: var(--white);
-  color: var(--black);
+  color: black;
   cursor: pointer;
   padding: 10px 14px;
+  font-family: "neue-haas-unica", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: -0.05em;
   font-size: 16px;
   width: fit-content;
   border-radius: 36px;
