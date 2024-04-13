@@ -24,6 +24,8 @@ let parentDivInfo
 let parentDivWidth
 let parentDivHeight
 
+// let funckingSIZE
+
 let imagesObj = {}
 
 let imagesBgNC = {}
@@ -347,12 +349,6 @@ function sketch(p) {
 
   p.setup = () => {
     
-    parentDivWidth = parentDivInfo.width;
-    parentDivHeight = parentDivInfo.height;
-
-    canvasSize = parseInt(Math.min(parentDivWidth, parentDivHeight))
-    console.log(canvasSize);
-
     let canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
 
@@ -361,6 +357,18 @@ function sketch(p) {
       graphics.camera(0, 0, 50*p.sqrt(3), 0, 0, 0, 0, 1, 0);
       graphics.perspective(p.PI/3, 1, 5*p.sqrt(3), 500*p.sqrt(3));
     }
+  }
+  
+  p.windowResized = () => {
+    
+    parentDiv = document.getElementById(canvasContainerId);
+    parentDivInfo = parentDiv.getBoundingClientRect();
+    parentDivWidth = parentDivInfo.width;
+    parentDivHeight = parentDivInfo.height;
+    
+    canvasSize = Math.min(parentDivWidth, parentDivHeight)
+    
+    p.resizeCanvas(canvasSize, canvasSize)
   }
   
   p.draw = () => {
@@ -374,24 +382,17 @@ function sketch(p) {
       drawModules(p)
     }
   }
-
-  p.windowResized = () => {
-
-    parentDiv = document.getElementById(canvasContainerId);
-    parentDivInfo = parentDiv.getBoundingClientRect();
-    parentDivWidth = parentDivInfo.width;
-    parentDivHeight = parentDivInfo.height;
-
-    canvasSize = Math.min(parentDivWidth, parentDivHeight)
-
-    p.resizeCanvas(canvasSize, canvasSize)
-  }
 }
 
 ///////////////////////////////////////////////////
 
-function initSketch(id) {
+function initSketch(id, size) {
   canvasContainerId = id
+  console.log(id);
+  console.log(size);
+
+  canvasSize = size
+  console.log(canvasSize);
 
   parentDiv = document.getElementById(canvasContainerId);
   parentDivInfo = parentDiv.getBoundingClientRect();

@@ -17,16 +17,19 @@ import Module3D from './modules/Module3D.jsx'
 export default class GeneratorContainer extends Component {
   constructor(props) {
     super(props)
-    this.sketchContainerRef = React.createRef();
   }
 
   componentDidMount() {
-    const sketchContainer = this.sketchContainerRef.current;
-    const { clientWidth, clientHeight } = sketchContainer;
-    const size = parseInt(Math.min(clientWidth, clientHeight))
+    // let sketchdiv = document.getElementById('sketch')
+    // console.log(sketchdiv);
+    const div = document.getElementById('sketch')
+    console.log('INFO', div);
+    const info = div.getBoundingClientRect();
+    console.log('INFO2', info);
+    console.log('INFO W', info.width);
+    console.log('INFO H', info.height);
 
-    this.props.initSketch('sketch', size);
-
+    // this.props.initSketch('sketch')
   }
 
   renderModules() {
@@ -166,7 +169,7 @@ export default class GeneratorContainer extends Component {
       {this.renderModules()}
       </div>
       <div className="wrapSketch">
-        <div className="sketch" id="sketch" ref={this.sketchContainerRef}>
+        <div className="sketch" id="sketch">
         </div>
         <div className="controls">
           <div className="ButtonPrimary" onClick={this.DownloadImage}>Download image</div>

@@ -108,6 +108,19 @@ section {
 // body {
 //   // line-height: 1;
 // }
+
+* {
+  /* Hide the scrollbar in Firefox */
+    scrollbar-width: none;
+    /* Hide the scrollbar in Internet Explorer/Edge */
+    -ms-overflow-style: none;
+  
+    /* Hide the scrollbar in WebKit browsers (e.g., Chrome, Safari) */
+    body::-webkit-scrollbar {
+      display: none;
+    }
+}
+
 ol,
 ul {
   list-style: none;
