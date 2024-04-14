@@ -23,6 +23,7 @@ import {
   getLinesStore,
   setLinesStore,
   get3DStore,
+  setSliderMaxStore,
   set3DStore
 } from './javascript/store.js'
 
@@ -55,6 +56,7 @@ const actions = {
   setText1Store,
   setLinesStore,
   set3DStore,
+  setSliderMaxStore,
   initSketch
 }
 

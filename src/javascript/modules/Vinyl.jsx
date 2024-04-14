@@ -30,7 +30,8 @@ export default class Vinyl extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { vinyl } = this.props
+    const { vinyl, sliderMax } = this.props
+    // console.log(sliderMax);
 
     return <div className="ModuleContainer">
       <HeaderModule
@@ -46,7 +47,7 @@ export default class Vinyl extends Component {
         <input
           type="range"
           min="1"
-          max="600"
+          max="100"
           value={this.state.sliderValue}
           onInput={this.handleInput}
         />

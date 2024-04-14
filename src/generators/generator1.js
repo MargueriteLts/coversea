@@ -19,7 +19,7 @@ const preset = {
     preset: {
       Whole: {},
       Label: {},
-      sliderValue: 300
+      sliderValue: 50
     }
   },
   Shapes: { 

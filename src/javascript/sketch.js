@@ -11,6 +11,7 @@ import {
   getVinylStore,
   getText1Store,
   getLinesStore,
+  setSliderMaxStore,
   get3DStore
 } from './store'
 
@@ -167,6 +168,8 @@ function drawModules(p) {
 
   if (moduleList.includes('Vinyl')) {
 
+    // console.log('OK');
+
     const vinyl = getVinylStore()
 
     let currentVinylImg
@@ -179,20 +182,43 @@ function drawModules(p) {
       imageVinyl = imagesLabelVinyl[currentVinylImg]
     }
 
-    let imageSize = vinyl.preset.sliderValue
+    let sliderValue = vinyl.preset.sliderValue;
+    // let sliderValue = (equivalentSize * parseInt(vinyl.sliderMax)) / canvasSize;
+
+    // console.log('SLIDER MAX', parseInt(vinyl.sliderMax));
+
+    // console.log(vinyl.sliderMax);
+    // console.log(sliderValue);
+    // console.log('CANVASSIZE', canvasSize);
+
+    let equivalentSize = (sliderValue * canvasSize) / 100
+
+
+    let x = (canvasSize - equivalentSize) / 2;
+    let y = (canvasSize - equivalentSize) / 2;
 
     p.image(
       imageVinyl,
-      (canvasSize - imageSize) / 2,
-      (canvasSize - imageSize) / 2,
-      imageSize,
-      imageSize,
-      0,
-      0,
-      imageVinyl.width,
-      imageVinyl.height,
-      p.CONTAIN
+      x,
+      y,
+      equivalentSize,
+      equivalentSize
     );
+
+    // let imageSize = vinyl.preset.sliderValue
+
+    // p.image(
+    //   imageVinyl,
+    //   (canvasSize - imageSize) / 2,
+    //   (canvasSize - imageSize) / 2,
+    //   imageSize,
+    //   imageSize,
+    //   0,
+    //   0,
+    //   imageVinyl.width,
+    //   imageVinyl.height,
+    //   p.CONTAIN
+    // );
   }
 
   /////////////////////////////////////////// MODULE IMAGE
@@ -201,18 +227,34 @@ function drawModules(p) {
     const { current } = getImageStore()
     const image = imagesObj[current]
 
+    let scaleFactor = canvasSize / Math.max(image.width, image.height); // Calculate scale factor
+
+    let scaledWidth = image.width * scaleFactor; // Calculate scaled width
+    let scaledHeight = image.height * scaleFactor; // Calculate scaled height
+
+    let x = (canvasSize - scaledWidth) / 2; // Calculate x-coordinate to center image
+    let y = (canvasSize - scaledHeight) / 2; // Calculate y-coordinate to center image
+
     p.image(
       image,
-      (canvasSize - image.width / 2) / 2,
-      (canvasSize - image.height / 2) / 2,
-      image.width / 2,
-      image.height / 2,
-      0,
-      0,
-      image.width,
-      image.height,
-      p.CONTAIN
-    )
+      x,
+      y,
+      scaledWidth,
+      scaledHeight
+    );
+
+    // p.image(
+    //   image,
+    //   (canvasSize - image.width / 2) / 2,
+    //   (canvasSize - image.height / 2) / 2,
+    //   image.width / 2,
+    //   image.height / 2,
+    //   0,
+    //   0,
+    //   image.width,
+    //   image.height,
+    //   p.CONTAIN
+    // )
   }
 
   /////////////////////////////////////////// MODULE lINES
@@ -348,6 +390,8 @@ function sketch(p) {
   }
 
   p.setup = () => {
+
+    p.frameRate(5)
     
     let canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
@@ -369,6 +413,10 @@ function sketch(p) {
     canvasSize = Math.min(parentDivWidth, parentDivHeight)
     
     p.resizeCanvas(canvasSize, canvasSize)
+
+    console.log(canvasSize);
+
+    setSliderMaxStore(canvasSize)
   }
   
   p.draw = () => {
@@ -388,11 +436,8 @@ function sketch(p) {
 
 function initSketch(id, size) {
   canvasContainerId = id
-  console.log(id);
-  console.log(size);
 
   canvasSize = size
-  console.log(canvasSize);
 
   parentDiv = document.getElementById(canvasContainerId);
   parentDivInfo = parentDiv.getBoundingClientRect();

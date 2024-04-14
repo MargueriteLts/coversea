@@ -304,7 +304,11 @@ function initVinylStore(preset) {
 
   preset.vinylTypes.forEach((type) => {
     if (type === 'Whole') {
-      preset.preset.Whole = Object.assign({}, preset.preset.Whole, { text: 'Whole disc', images: collection1, current: sample(Object.keys(collection1)) })
+      preset.preset.Whole = Object.assign({}, preset.preset.Whole, {
+        text: 'Whole disc',
+        images: collection1,
+        current: sample(Object.keys(collection1))
+      })
     }
 
     if (type === 'Label') {
@@ -313,6 +317,10 @@ function initVinylStore(preset) {
   })
 
   return preset
+}
+
+function setSliderMaxStore(size) {
+  moduleVinylStore = Object.assign({}, moduleVinylStore, { sliderMin: 0, sliderMax: size  })
 }
 
 function getVinylStore() {
@@ -454,5 +462,6 @@ export {
   init3DStore,
   get3DStore,
   set3DStore,
+  setSliderMaxStore,
   getBlendStore
 }
