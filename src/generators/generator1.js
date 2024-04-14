@@ -1,4 +1,4 @@
-const modules = ['Background', 'Vinyl', 'Shapes', 'Particles', 'Image', 'Text1']
+const modules = ['Background', 'Vinyl', 'Particles', 'Text1']
 
 const preset = {
   Background: {
@@ -27,7 +27,18 @@ const preset = {
       sliderValue: 37
     }
   },
-  Particles: { sliderValue: 0 },
+  Particles: {
+    sliderValue: 10,
+
+    options: ['Ellipses', 'Squares', 'Mix'],
+    currentParticlesType: 'Ellipses',
+
+    preset: {
+      Ellipses: {},
+      Squares: {},
+      Mix: {}
+    }
+  },
   Image: {},
   Text1: {
     text: 'Yooooo'

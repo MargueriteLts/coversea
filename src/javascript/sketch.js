@@ -156,13 +156,38 @@ function drawModules(p) {
   if (moduleList.includes('Particles')) {
     const particles = getParticlesStore()
 
-    for (let index = 0; index < particles.sliderValue; index++) {
-      p.fill(255)
-      p.ellipse (
-        particles.particles[index][0],
-        particles.particles[index][1],
-        particles.particles[index][2],
-      )
+    const color = particles.color
+    p.fill(color)
+      
+    if (particles.options.includes('Ellipses') && particles.currentParticlesType === 'Ellipses') {
+      for (let index = 0; index < particles.sliderValue; index++) {
+        p.ellipse (
+          (particles.particles[index][0] * canvasSize) / 100,
+          (particles.particles[index][1] * canvasSize) / 100,
+          particles.particles[index][2],
+        )
+      }
+    } else if (particles.options.includes('Squares') && particles.currentParticlesType === 'Squares') {
+      for (let index = 0; index < particles.sliderValue; index++) {
+        p.square (
+          (particles.particles[index][0] * canvasSize) / 100,
+          (particles.particles[index][1] * canvasSize) / 100,
+          particles.particles[index][2],
+        )
+      }
+    } else if (particles.options.includes('Mix') && particles.currentParticlesType === 'Mix') {
+      for (let index = 0; index < particles.sliderValue; index++) {
+        p.square (
+          (particles.particles[index][0] * canvasSize) / 100,
+          (particles.particles[index][1] * canvasSize) / 100,
+          particles.particles[index][2],
+        )
+        p.ellipse (
+          (particles.particles[index][3] * canvasSize) / 100,
+          (particles.particles[index][4] * canvasSize) / 100,
+          particles.particles[index][5],
+        )
+      }
     }
   }
 
@@ -429,7 +454,7 @@ function sketch(p) {
 
   p.setup = () => {
 
-    // p.frameRate(5)
+    p.frameRate(5)
     
     let canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)

@@ -178,23 +178,23 @@ function generateColor() {
   return color
 }
 
-function generatePosition() {
-  const canvasSize=100
+// function generatePosition() {
+//   const canvasSize=100
 
-  let positions = [
-    { x: 10, y: 10 }, // top-left
-    { x: canvasSize / 2, y: 10 }, // top-center
-    { x: (canvasSize-10), y: 10 }, // top-right
-    { x: 10, y: (canvasSize-10) }, // bottom-left
-    { x: canvasSize / 2, y: (canvasSize-10) }, // bottom-center
-    { x: (canvasSize-10), y: (canvasSize-10) } // bottom-right
-  ];
+//   let positions = [
+//     { x: 10, y: 10 }, // top-left
+//     { x: canvasSize / 2, y: 10 }, // top-center
+//     { x: (canvasSize-10), y: 10 }, // top-right
+//     { x: 10, y: (canvasSize-10) }, // bottom-left
+//     { x: canvasSize / 2, y: (canvasSize-10) }, // bottom-center
+//     { x: (canvasSize-10), y: (canvasSize-10) } // bottom-right
+//   ];
 
-  let randomIndex = Math.floor(Math.random() * positions.length);
-  const txtPosition = positions[randomIndex];
+//   let randomIndex = Math.floor(Math.random() * positions.length);
+//   const txtPosition = positions[randomIndex];
 
-  return txtPosition;
-}
+//   return txtPosition;
+// }
 
 function generatePositions() {
   const canvasSize = 100;
@@ -248,12 +248,32 @@ function setShapesStore(type, value) {
 
 ////////////////////////////////////////////////////// PARTICLES
 
+// function initParticles(preset) {
+//   return {
+//     sliderValue: preset.sliderValue,
+//     particles: generateParticles(preset.sliderValue),
+//     min: preset.min
+//   }
+// }
+
 function initParticles(preset) {
-  return {
-    sliderValue: preset.sliderValue,
-    particles: generateParticles(preset.sliderValue),
-    min: preset.min
-  }
+  preset = Object.assign({}, preset, { moduleName: 'Particles', particles: generateParticles(preset.sliderValue), color: '#ffffff' })
+
+  preset.options.forEach((option) => {
+    if (option == 'Ellipses') {
+      preset.preset.Ellipses = Object.assign({}, preset.preset.Ellipses, { text: 'Ellipses' })
+    }
+
+    if (option == 'Squares') {
+      preset.preset.Squares = Object.assign({}, preset.preset.Squares, { text: 'Squares' })
+    }
+
+    if (option == 'Mix') {
+      preset.preset.Mix = Object.assign({}, preset.preset.Mix, { text: 'Mix' })
+    }
+  })
+
+  return preset
 }
 
 function generateParticles(quantity) {
@@ -261,9 +281,12 @@ function generateParticles(quantity) {
 
   for (let index = 0; index < quantity; index++) {
     particles.push([
-      getRandomArbitrary(0, 600),
-      getRandomArbitrary(0, 600),
-      getRandomArbitrary(1, 30)
+      getRandomArbitrary(0, 100),
+      getRandomArbitrary(0, 100),
+      getRandomArbitrary(0, 100),
+      getRandomArbitrary(0, 100),
+      getRandomArbitrary(0, 100),
+      getRandomArbitrary(0, 100)
     ])
   }
 
@@ -274,11 +297,21 @@ function getParticlesStore() {
   return moduleParticlesStore
 }
 
-function setParticlesStore(nextSliderValue) {
-  moduleParticlesStore = {
-    sliderValue: nextSliderValue,
-    particles: generateParticles(nextSliderValue)
-  }
+function setParticlesStore(type, value) {
+
+  return new Promise((resolve, reject) => {
+    if (type === 'CurrentTabChange') {
+      moduleParticlesStore.currentParticlesType = value
+    } 
+    if (type === 'quantity') {
+      moduleParticlesStore.sliderValue = value
+      moduleParticlesStore.particles = generateParticles(value)
+    }
+    if (type === 'SolidColor') {
+      moduleParticlesStore.color = value
+      resolve([value])
+    }
+  })
 }
 
 ///////////////////// IMAGES
@@ -522,6 +555,6 @@ export {
   get3DStore,
   set3DStore,
   // setCanvasSizeStore,
-  generatePosition,
+  // generatePosition,
   getBlendStore
 }
