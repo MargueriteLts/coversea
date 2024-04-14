@@ -11,8 +11,9 @@ import {
   getVinylStore,
   getText1Store,
   getLinesStore,
-  setSliderMaxStore,
-  get3DStore
+  get3DStore,
+  setCanvasSizeStore,
+  generatePosition
 } from './store'
 
 let moduleList = {}
@@ -25,7 +26,6 @@ let parentDivInfo
 let parentDivWidth
 let parentDivHeight
 
-// let funckingSIZE
 
 let imagesObj = {}
 
@@ -38,6 +38,8 @@ let imagesLabelVinyl = {}
 let imageVinyl
 
 let fontEsenin
+let mainTextFont;
+let otherTextFont;
 
 let graphics
 
@@ -168,8 +170,6 @@ function drawModules(p) {
 
   if (moduleList.includes('Vinyl')) {
 
-    // console.log('OK');
-
     const vinyl = getVinylStore()
 
     let currentVinylImg
@@ -183,13 +183,6 @@ function drawModules(p) {
     }
 
     let sliderValue = vinyl.preset.sliderValue;
-    // let sliderValue = (equivalentSize * parseInt(vinyl.sliderMax)) / canvasSize;
-
-    // console.log('SLIDER MAX', parseInt(vinyl.sliderMax));
-
-    // console.log(vinyl.sliderMax);
-    // console.log(sliderValue);
-    // console.log('CANVASSIZE', canvasSize);
 
     let equivalentSize = (sliderValue * canvasSize) / 100
 
@@ -204,21 +197,6 @@ function drawModules(p) {
       equivalentSize,
       equivalentSize
     );
-
-    // let imageSize = vinyl.preset.sliderValue
-
-    // p.image(
-    //   imageVinyl,
-    //   (canvasSize - imageSize) / 2,
-    //   (canvasSize - imageSize) / 2,
-    //   imageSize,
-    //   imageSize,
-    //   0,
-    //   0,
-    //   imageVinyl.width,
-    //   imageVinyl.height,
-    //   p.CONTAIN
-    // );
   }
 
   /////////////////////////////////////////// MODULE IMAGE
@@ -272,16 +250,65 @@ function drawModules(p) {
   /////////////////////////////////////////// MODULE TEXT1
 
   if (moduleList.includes('Text1')) {
+
     const text1 = getText1Store()
+
     p.noStroke()
     p.fill(text1.color)
-    p.textFont(fontEsenin, 100)
-    p.textLeading(50)
-    p.textAlign(p.CENTER, p.CENTER);
-    p.text(text1.text, 0, 0, 600, 600)
-    // let bbox = p.fontEsenin.textBounds(text1.text, 100, 100, 300, 300);
-    // p.fill('white')
-    // p.rect(bbox.x, bbox.y, bbox.w, bbox.h);
+
+    p.textAlign(p.CENTER, p.CENTER)
+    const size1 = (30 * canvasSize) / 100
+    p.textSize(size1)
+    // p.textLeading(50)
+    p.textFont(mainTextFont)
+    
+    let mainText = text1.text
+    p.text(mainText, canvasSize/2, canvasSize/2);
+
+    ////////
+
+    p.textAlign(p.CENTER, p.LEFT);
+    const maxSize = (10 * canvasSize) / 100; // Maximum text size
+    p.textFont(otherTextFont);
+
+    let otherText1 = "Other Text1";
+    let otherText2 = "Other Text2";
+
+    const position1 = text1.txtpositions[0];
+    const position2 = text1.txtpositions[1];
+
+    // Text 1
+    let x1 = (position1.x * canvasSize) / 100;
+    let y1 = (position1.y * canvasSize) / 100;
+    let textSize1 = maxSize; // Initial text size
+    p.textSize(textSize1);
+    let textWidth1 = p.textWidth(otherText1);
+
+    while (x1 - textWidth1 / 2 < 0 || x1 + textWidth1 / 2 > p.width - 10) {
+      textSize1 -= 1;
+      p.textSize(textSize1);
+      textWidth1 = p.textWidth(otherText1);
+    }
+    p.text(otherText1, x1, y1);
+
+    // Text 2
+    let x2 = (position2.x * canvasSize) / 100;
+    let y2 = (position2.y * canvasSize) / 100;
+    let textSize2 = maxSize; // Initial text size
+    p.textSize(textSize2);
+    let textWidth2 = p.textWidth(otherText2);
+
+    while (x2 - textWidth2 / 2 < 0 || x2 + textWidth2 / 2 > p.width - 10 || Math.abs(y2 - y1) < textSize2) {
+      textSize2 -= 1;
+      p.textSize(textSize2);
+      textWidth2 = p.textWidth(otherText2);
+    }
+    p.text(otherText2, x2, y2);
+
+
+
+
+
   }
 
   /////////////////////////////////////////// MODULE 3D
@@ -313,6 +340,15 @@ function drawModules(p) {
   }
 
 }
+
+
+
+
+
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////         SKETCH
 
@@ -386,12 +422,14 @@ function sketch(p) {
     //////////////////////////////////////////////////// FONTS
 
     fontEsenin = p.loadFont('../fonts/esenin-script-one.ttf');
+    mainTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
+    otherTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
 
   }
 
   p.setup = () => {
 
-    p.frameRate(5)
+    // p.frameRate(5)
     
     let canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
@@ -413,10 +451,6 @@ function sketch(p) {
     canvasSize = Math.min(parentDivWidth, parentDivHeight)
     
     p.resizeCanvas(canvasSize, canvasSize)
-
-    console.log(canvasSize);
-
-    setSliderMaxStore(canvasSize)
   }
   
   p.draw = () => {
@@ -438,6 +472,8 @@ function initSketch(id, size) {
   canvasContainerId = id
 
   canvasSize = size
+  // console.log('SKETCH SIZE', size);
+  // generatePosition(size)
 
   parentDiv = document.getElementById(canvasContainerId);
   parentDivInfo = parentDiv.getBoundingClientRect();

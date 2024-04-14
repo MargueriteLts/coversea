@@ -27,6 +27,7 @@ moduleText1Store,
 moduleLinesStore,
 module3DStore,
 blendStore
+// canvasSizeStore
 
 function initStore(generatorName) {
   moduleList = generators[generatorName].modules
@@ -74,6 +75,18 @@ function initStore(generatorName) {
 function getModuleList() {
   return moduleList
 }
+
+///////////////////
+
+// function setCanvasSizeStore(size) {
+//   console.log(size);
+//   return canvasSizeStore = size
+// }
+
+// function getCanvasSizeStore() {
+//   console.log(canvasSizeStore);
+//   return canvasSizeStore
+// }
 
 /////// BLEND
 
@@ -164,6 +177,50 @@ function generateColor() {
 
   return color
 }
+
+function generatePosition() {
+  const canvasSize=100
+
+  let positions = [
+    { x: 10, y: 10 }, // top-left
+    { x: canvasSize / 2, y: 10 }, // top-center
+    { x: (canvasSize-10), y: 10 }, // top-right
+    { x: 10, y: (canvasSize-10) }, // bottom-left
+    { x: canvasSize / 2, y: (canvasSize-10) }, // bottom-center
+    { x: (canvasSize-10), y: (canvasSize-10) } // bottom-right
+  ];
+
+  let randomIndex = Math.floor(Math.random() * positions.length);
+  const txtPosition = positions[randomIndex];
+
+  return txtPosition;
+}
+
+function generatePositions() {
+  const canvasSize = 100;
+
+  let positions = [
+    { x: 10, y: 10 }, // top-left
+    { x: canvasSize / 2, y: 10 }, // top-center
+    { x: canvasSize - 10, y: 10 }, // top-right
+    { x: 10, y: canvasSize - 10 }, // bottom-left
+    { x: canvasSize / 2, y: canvasSize - 10 }, // bottom-center
+    { x: canvasSize - 10, y: canvasSize - 10 } // bottom-right
+  ];
+
+  // Generate two distinct random indices
+  let randomIndex1 = Math.floor(Math.random() * positions.length);
+  let randomIndex2;
+  do {
+    randomIndex2 = Math.floor(Math.random() * positions.length);
+  } while (randomIndex2 === randomIndex1);
+
+  const txtPosition1 = positions[randomIndex1];
+  const txtPosition2 = positions[randomIndex2];
+
+  return [txtPosition1, txtPosition2];
+}
+
 
 ////////////////////////////////////////////////////// SHAPES
 
@@ -319,10 +376,6 @@ function initVinylStore(preset) {
   return preset
 }
 
-function setSliderMaxStore(size) {
-  moduleVinylStore = Object.assign({}, moduleVinylStore, { sliderMin: 0, sliderMax: size  })
-}
-
 function getVinylStore() {
   return moduleVinylStore
 }
@@ -339,7 +392,13 @@ function setVinylStore(type, value) {
 ////////////////////// TEXT1
 
 function initText1Store(preset) {
-  preset = Object.assign({}, preset, { moduleName: 'Text 1', color: '#fff' })
+
+  let positions = generatePositions()
+  console.log(positions);
+
+  // preset = Object.assign({}, preset, { moduleName: 'Text 1', color: '#fff', txtposition: position })
+  preset = Object.assign({}, preset, { moduleName: 'Text 1', color: '#fff', txtpositions: positions })
+
 
   return preset
 }
@@ -462,6 +521,7 @@ export {
   init3DStore,
   get3DStore,
   set3DStore,
-  setSliderMaxStore,
+  // setCanvasSizeStore,
+  generatePosition,
   getBlendStore
 }

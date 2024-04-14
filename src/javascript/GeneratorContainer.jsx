@@ -14,30 +14,22 @@ import Text1 from './modules/Text1.jsx'
 import Lines from './modules/Lines.jsx'
 import Module3D from './modules/Module3D.jsx'
 
-let size
 
 export default class GeneratorContainer extends Component {
   constructor(props) {
     super(props)
     this.sketchContainerRef = React.createRef();
-    // this.state = {
-    //   size
-    // }
   }
 
   componentDidMount() {
     const sketchContainer = this.sketchContainerRef.current;
     const { clientWidth, clientHeight } = sketchContainer;
-    size = parseInt(Math.min(clientWidth, clientHeight))
-    // console.log(size);
+    const size = parseInt(Math.min(clientWidth, clientHeight))
+
+    // this.saveCanvasSize(size)
 
     this.props.initSketch('sketch', size);
 
-    this.setCanvasSize(size)
-
-    this.setState({
-      size: parseInt(Math.min(clientWidth, clientHeight))
-    })
 
   }
 
@@ -121,7 +113,7 @@ export default class GeneratorContainer extends Component {
           <Vinyl
             vinyl={vinyl}
             setVinylStore={setVinylStore}
-            sliderMax={size}
+            // sliderMax={size}
             key={index}
           />
         )
@@ -173,12 +165,11 @@ export default class GeneratorContainer extends Component {
     });
   };
 
-  setCanvasSize(size) {
-    this.props.setSliderMaxStore(size)
-  }
+  // saveCanvasSize(size) {
+  //   this.props.setCanvasSizeStore(size)
+  // }
 
   render() {
-    // console.log(size);
     return <div className="GeneratorContent">
       <div className='wrapModules'>
       {this.renderModules()}
@@ -193,7 +184,3 @@ export default class GeneratorContainer extends Component {
     </div>
   }
 }
-
-{/* <div id="sketchSize">
-  <div className="sketch" id="sketch"></div>
-</div> */}

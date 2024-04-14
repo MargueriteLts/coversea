@@ -30,8 +30,7 @@ export default class Vinyl extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { vinyl, sliderMax } = this.props
-    // console.log(sliderMax);
+    const { vinyl } = this.props
 
     return <div className="ModuleContainer">
       <HeaderModule
