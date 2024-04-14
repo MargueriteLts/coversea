@@ -493,7 +493,7 @@ function initText1Store(preset) {
   let positions = generatePositions()
 
   // preset = Object.assign({}, preset, { moduleName: 'Text 1', color: '#fff', txtposition: position })
-  preset = Object.assign({}, preset, { moduleName: 'Text 1', color: '#fff', txtpositions: positions })
+  preset = Object.assign({}, preset, { moduleName: 'Text 1', txtpositions: positions })
 
 
   return preset

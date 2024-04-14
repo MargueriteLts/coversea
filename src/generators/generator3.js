@@ -1,6 +1,9 @@
 const modules = ['Background', 'Vinyl', 'Image', 'Text1']
 
-const blend = true
+const blend = {
+  Vinyl: true,
+  Text1: false
+}
 
 const preset = {
   Background: {
@@ -33,7 +36,8 @@ const preset = {
     text: 'Funky Groov',
     font: 'wonky',
     dopText: false,
-    size: 100
+    size: 100,
+    color: '#fff'
   }
 }
 

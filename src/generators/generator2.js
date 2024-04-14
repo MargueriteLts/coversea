@@ -1,5 +1,10 @@
 const modules = ['Background', 'BackgroundImage', 'Text1']
 
+const blend = {
+  Vinyl: false,
+  Text1: false
+}
+
 const preset = {
   Background: {
 
@@ -28,8 +33,9 @@ const preset = {
     text: 'Dance All Night',
     font: 'Acosta',
     dopText: true,
-    size: 100
+    size: 100,
+    color: '#fff'
   }
 }
 
-export { modules, preset }
+export { modules, blend, preset }

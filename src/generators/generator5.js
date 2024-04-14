@@ -1,5 +1,10 @@
 const modules = ['Background', 'Module3D']
 
+const blend = {
+  Vinyl: false,
+  Text1: false
+}
+
 const preset = {
   Background: {
 
@@ -22,4 +27,4 @@ const preset = {
   }
 }
 
-export { modules, preset }
+export { modules, blend, preset }

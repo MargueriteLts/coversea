@@ -1,4 +1,5 @@
 import p5 from 'p5'
+import { utils } from './p5.utils.min.js'
 
 import {
   getModuleList,
@@ -44,6 +45,7 @@ let otherTextFont;
 
 let graphics
 let blendedLayer
+// let layerTxtBlend
 
 let prevModule3DX;
 let prevModule3DY;
@@ -62,7 +64,7 @@ function drawModules(p) {
     if (background.bgTypes.includes('SolidColor') && background.currentBgType === 'SolidColor') {
       const plainColorBackground = background.preset.SolidColor.color
 
-      if (blend) {
+      if (blend.Vinyl == true) {
         blendedLayer.background(
           plainColorBackground
         )
@@ -85,7 +87,7 @@ function drawModules(p) {
         let amt = p.map(i, 0, canvasSize, 0, 1)
         let c3 = p.lerpColor(c1, c2, amt)
 
-        if (blend) {
+        if (blend.Vinyl == true) {
           blendedLayer.stroke(c3)
           if (angle == 'vertical') {
             blendedLayer.line(0, i, canvasSize, i)
@@ -104,7 +106,7 @@ function drawModules(p) {
         }
       }
     } else {
-      if (blend) {
+      if (blend.Vinyl == true) {
         blendedLayer.background(0)
       } else {
         p.background(0)
@@ -248,7 +250,8 @@ function drawModules(p) {
 
     const blend = getBlendStore()
     
-    if (blend) {
+    if (blend.Vinyl == true) {
+      // console.log('VINYL');
       p.image(blendedLayer, 0, 0)
       blendedLayer.clear()
       blendedLayer.tint(255, opacity)
@@ -346,6 +349,7 @@ function drawModules(p) {
 
   if (moduleList.includes('Lines')) {
     const lines = getLinesStore()
+    // console.log('LINES');
 
     p.stroke(lines.color)
     p.strokeWeight(lines.strokeWeight);
@@ -363,40 +367,54 @@ function drawModules(p) {
     ////// STYLE
     p.noStroke()
     p.fill(text1.color)
+    // console.log(text1.font);
     p.textFont(text1.font)
     p.textAlign(p.CENTER, p.CENTER);
     p.textWrap(p.WORD);
     
 
     //////////////////// MAIN TEXT
-    let textContent = text1.text
+    let textContent
+    if (text1.upperCase == true) {
+      textContent = text1.text.toUpperCase()
+    } else {
+      textContent = text1.text
+    }
+
+    let x
+    let y
+    if (text1.random == true) {
+      const position1 = text1.txtpositions[0]
+      x = (position1.x * canvasSize) / 100
+      y = (position1.y * canvasSize) / 100
+    } else {
+      x = canvasSize / 2;
+      y = canvasSize / 2;
+    }
+
+
     let presetSize = text1.size
 
 
     p.textSize(presetSize)
-    // let textWidth = p.textWidth(textContent)
-
-    // if (textWidth < canvasSize) {
-    //   while (textWidth < canvasSize) {
-    //     presetSize += 1
-    //     p.textSize(presetSize)
-    //     textWidth = p.textWidth(textContent)
-    //   }
-    // }
-    // if (textWidth > canvasSize) {
-    //   while (textWidth > canvasSize) {
-    //     presetSize -= 1
-    //     p.textSize(presetSize)
-    //     textWidth = p.textWidth(textContent)
-    //   }
-    // }
     
-
     p.rectMode(p.CENTER);
 
-    let x = canvasSize / 2;
-    let y = canvasSize / 2;
+    let textWidth = p.textWidth(textContent)
+
+    // const blend = getBlendStore()
+    // if (blend.Text1 == true) {
+    //   p.image(blendedLayer, 0, 0)
+    //   blendedLayer.clear()
+    //   // blendedLayer.blendMode(p.DIFFERENCE)
+
+    //   blendedLayer.text(textContent, x, y, canvasSize, canvasSize);
+    // } else {
+    //   p.text(textContent, x, y, canvasSize, canvasSize);
+    // }
+
     p.text(textContent, x, y, canvasSize, canvasSize);
+
 
     //////// DOP TEXT
 
@@ -567,6 +585,7 @@ function sketch(p) {
     p.loadFont('../fonts/wonky.otf')
     p.loadFont('../fonts/Bolgarus.otf')
     p.loadFont('../fonts/YUNGA-Display.otf')
+    p.loadFont('../fonts/typekini.ttf')
 
   }
 
@@ -603,15 +622,15 @@ function sketch(p) {
   
   p.draw = () => {
     drawModules(p)
-    // const blend = getBlendStore()
     
-    // if (blend) {
-    //   p.clear()
-    //   p.blendMode(p.DIFFERENCE)
-    //   drawModules(p)
-    // } else {
-    //   drawModules(p)
-    // }
+    const blend = getBlendStore()
+    if (blend.Text1 == true) {
+      p.clear()
+      p.blendMode(p.DIFFERENCE)
+      drawModules(p)
+    } else {
+      drawModules(p)
+    }
   }
 }
 
@@ -628,6 +647,8 @@ function initSketch(id, size) {
   parentDivInfo = parentDiv.getBoundingClientRect();
 
   moduleList = getModuleList()
+
+  utils = new p5.Utils();
 
   new p5(sketch)
 }

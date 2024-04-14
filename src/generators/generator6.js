@@ -1,6 +1,9 @@
-const modules = ['Background', 'Shapes', 'Particles']
+const modules = ['Background', 'Shapes', 'Particles', 'Text1']
 
-const blend = true
+const blend = {
+  Vinyl: false,
+  Text1: true
+}
 
 const preset = {
   Background: {
@@ -18,7 +21,25 @@ const preset = {
       sliderValue: 37
     }
   },
-  Particles: { sliderValue: 0 },
+  Particles: {
+    sliderValue: 10,
+
+    options: ['Ellipses', 'Squares', 'Mix'],
+    currentParticlesType: 'Ellipses',
+
+    preset: {
+      Ellipses: {},
+      Squares: {},
+      Mix: {}
+    }
+  },
+  Text1: {
+    text: 'Gradient noise',
+    font: 'bc-novatica-cyr',
+    dopText: true,
+    size: 100,
+    color: '#fff'
+  }
 }
 
 export { modules, blend, preset }

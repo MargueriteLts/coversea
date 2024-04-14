@@ -1,5 +1,10 @@
 const modules = ['Background', 'Vinyl', 'Particles', 'Text1']
 
+const blend = {
+  Vinyl: false,
+  Text1: false
+}
+
 const preset = {
   Background: {
 
@@ -39,8 +44,9 @@ const preset = {
     text: 'Soft Random',
     font: 'esenin-script-one',
     dopText: true,
-    size: 100
+    size: 100,
+    color: '#fff'
   }
 }
 
-export { modules, preset }
+export { modules, blend, preset }
