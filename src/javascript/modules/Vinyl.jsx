@@ -10,7 +10,8 @@ export default class Vinyl extends Component {
 
     this.state = {
       currentVinylType: this.props.vinyl.currentVinylType,
-      sliderValue: this.props.vinyl.preset.sliderValue
+      sliderValue: this.props.vinyl.preset.sliderValue,
+      sliderOpacity: this.props.vinyl.preset.sliderOpacity
     }
   }
 
@@ -25,6 +26,12 @@ export default class Vinyl extends Component {
   handleInput = (e) => {
     this.props.setVinylStore('size', e.target.value)
     this.setState({sliderValue: e.target.value})
+  }
+
+  handleOpacity = (e) => {
+    // console.log('yes');
+    this.props.setVinylStore('opacity', e.target.value)
+    this.setState({sliderOpacity: e.target.value})
   }
 
   //////////////////////////////////////////////////////// RENDER
@@ -45,10 +52,17 @@ export default class Vinyl extends Component {
         />
         <input
           type="range"
-          min="1"
+          min="10"
           max="100"
           value={this.state.sliderValue}
           onInput={this.handleInput}
+        />
+        <input
+          type="range"
+          min="0"
+          max="255"
+          value={this.state.sliderOpacity}
+          onInput={this.handleOpacity}
         />
         {/* <div className="Button" onClick={this.handleClick}>Randomize image</div> */}
       </div>

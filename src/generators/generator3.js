@@ -1,10 +1,12 @@
-const modules = ['Background', 'Vinyl', 'Image']
+const modules = ['Background', 'Vinyl', 'Image', 'Text1']
+
+const blend = true
 
 const preset = {
   Background: {
 
     bgTypes: ['SolidColor', 'Gradient'],
-    currentBgType: 'SolidColor',
+    currentBgType: 'Gradient',
 
     preset: {
       SolidColor: {},
@@ -19,10 +21,20 @@ const preset = {
     preset: {
       Whole: {},
       Label: {},
-      sliderValue: 300
+      sliderValue: 90,
+      bigger: false,
+      sliderOpacity: 200,
     }
   },
-  Image: {}
+  Image: {
+    pixelate: false
+  },
+  Text1: {
+    text: 'Funky Groov',
+    font: 'wonky',
+    dopText: false,
+    size: 100
+  }
 }
 
-export { modules, preset }
+export { modules, blend, preset }

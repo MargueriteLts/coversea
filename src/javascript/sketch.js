@@ -12,8 +12,9 @@ import {
   getText1Store,
   getLinesStore,
   get3DStore,
-  setCanvasSizeStore,
-  generatePosition
+  getFontsStore
+  // setCanvasSizeStore,
+  // generatePosition
 } from './store'
 
 let moduleList = {}
@@ -42,6 +43,7 @@ let mainTextFont;
 let otherTextFont;
 
 let graphics
+let blendedLayer
 
 let prevModule3DX;
 let prevModule3DY;
@@ -55,18 +57,26 @@ function drawModules(p) {
 
   if (moduleList.includes('Background')) {
     const background = getBackgroundStore()
+    const blend = getBlendStore()
 
     if (background.bgTypes.includes('SolidColor') && background.currentBgType === 'SolidColor') {
       const plainColorBackground = background.preset.SolidColor.color
 
-      p.background(
-        plainColorBackground
-      )
+      if (blend) {
+        blendedLayer.background(
+          plainColorBackground
+        )
+      } else {
+        p.background(
+          plainColorBackground
+        )
+      }
+
     } else if (background.bgTypes.includes('Gradient') && background.currentBgType === 'Gradient') {
       const color1 = background.preset.Gradient.color1
       const color2 = background.preset.Gradient.color2
       const angle = background.preset.Gradient.angle
-      p.background(0)
+      // p.background(0)
 
       let c1 = p.color(color1)
       let c2 = p.color(color2)
@@ -74,17 +84,31 @@ function drawModules(p) {
       for (let i = 0; i <= canvasSize; i++) {
         let amt = p.map(i, 0, canvasSize, 0, 1)
         let c3 = p.lerpColor(c1, c2, amt)
-        
-        p.stroke(c3)
-        if (angle == 'vertical') {
-          p.line(0, i, canvasSize, i)
-        }
-        if (angle == 'horizontal') {
-          p.line(i, 0, i, canvasSize)
+
+        if (blend) {
+          blendedLayer.stroke(c3)
+          if (angle == 'vertical') {
+            blendedLayer.line(0, i, canvasSize, i)
+          }
+          if (angle == 'horizontal') {
+            blendedLayer.line(i, 0, i, canvasSize)
+          }
+        } else {
+          p.stroke(c3)
+          if (angle == 'vertical') {
+            p.line(0, i, canvasSize, i)
+          }
+          if (angle == 'horizontal') {
+            p.line(i, 0, i, canvasSize)
+          }
         }
       }
     } else {
-      p.background(0)
+      if (blend) {
+        blendedLayer.background(0)
+      } else {
+        p.background(0)
+      }
     }
   }
 
@@ -191,7 +215,7 @@ function drawModules(p) {
     }
   }
 
-  /////////////////////////////////////////// MODULE BACKGROUNDIMAGE
+  /////////////////////////////////////////// VINYL
 
   if (moduleList.includes('Vinyl')) {
 
@@ -207,57 +231,115 @@ function drawModules(p) {
       imageVinyl = imagesLabelVinyl[currentVinylImg]
     }
 
-    let sliderValue = vinyl.preset.sliderValue;
+    let sliderValue = vinyl.preset.sliderValue
+    let equivalentSize
 
-    let equivalentSize = (sliderValue * canvasSize) / 100
-
+    if (vinyl.preset.bigger == true) {
+      equivalentSize = ((sliderValue * (canvasSize+10)) / 100) + 300
+    } else if (vinyl.preset.bigger == false) {
+      equivalentSize = (sliderValue * canvasSize) / 100
+    }
 
     let x = (canvasSize - equivalentSize) / 2;
     let y = (canvasSize - equivalentSize) / 2;
 
-    p.image(
-      imageVinyl,
-      x,
-      y,
-      equivalentSize,
-      equivalentSize
-    );
+    let opacity = parseFloat(vinyl.preset.sliderOpacity)
+    // p.tint(255, opacity)
+
+    const blend = getBlendStore()
+    
+    if (blend) {
+      p.image(blendedLayer, 0, 0)
+      blendedLayer.clear()
+      blendedLayer.tint(255, opacity)
+
+      // BLEND, 
+      // ADD, 
+      // DARKEST, 
+      // LIGHTEST, 
+      // DIFFERENCE, 
+      // EXCLUSION, 
+      // MULTIPLY, 
+      // OVERLAY, 
+      // HARD_LIGHT, 
+      // SOFT_LIGHT, 
+      // DODGE, 
+      // BURN 
+
+      blendedLayer.blendMode(p.BURN)
+      blendedLayer.image(
+        imageVinyl,
+        x,
+        y,
+        equivalentSize,
+        equivalentSize
+      )
+    } else {
+      p.tint(255, opacity)
+      p.image(
+        imageVinyl,
+        x,
+        y,
+        equivalentSize,
+        equivalentSize
+      )
+    }
+
+    // p.background(imageVinyl, opacity)
   }
 
   /////////////////////////////////////////// MODULE IMAGE
 
   if (moduleList.includes('Image')) {
+    p.noTint()
     const { current } = getImageStore()
     const image = imagesObj[current]
 
-    let scaleFactor = canvasSize / Math.max(image.width, image.height); // Calculate scale factor
+    let scaleFactor = canvasSize / Math.max(image.width, image.height)
 
-    let scaledWidth = image.width * scaleFactor; // Calculate scaled width
-    let scaledHeight = image.height * scaleFactor; // Calculate scaled height
+    let scaledWidth = image.width * scaleFactor
+    let scaledHeight = image.height * scaleFactor
 
-    let x = (canvasSize - scaledWidth) / 2; // Calculate x-coordinate to center image
-    let y = (canvasSize - scaledHeight) / 2; // Calculate y-coordinate to center image
+    let x = (canvasSize - scaledWidth) / 2
+    let y = (canvasSize - scaledHeight) / 2
 
-    p.image(
-      image,
-      x,
-      y,
-      scaledWidth,
-      scaledHeight
-    );
+    if (getImageStore().pixelate == true) {
+      // let pixelSize = 5
+      // for (let y = 0; y < scaledWidth; y += pixelSize) {
+      //   for (let x = 0; x < scaledHeight; x += pixelSize) {
+      //     // Get the color of the pixel at (x, y)
+      //     let col = image.get(x, y);
+      //     // Fill a square with the color of the current pixel
+      //     p.fill(col);
+      //     // Draw a rectangle at (x, y) with size of pixelSize x pixelSize
+      //     p.rect(x, y, pixelSize, pixelSize);
+      //   }
+      // }
 
-    // p.image(
-    //   image,
-    //   (canvasSize - image.width / 2) / 2,
-    //   (canvasSize - image.height / 2) / 2,
-    //   image.width / 2,
-    //   image.height / 2,
-    //   0,
-    //   0,
-    //   image.width,
-    //   image.height,
-    //   p.CONTAIN
-    // )
+      let pixelSize = 5;
+      for (let j = 0; j < scaledHeight; j += pixelSize) {
+        for (let i = 0; i < scaledWidth; i += pixelSize) {
+          // Get the color of the pixel at (i, j) in the scaled image
+          let col = image.get(i / scaleFactor, j / scaleFactor);
+          // Calculate the position to draw the pixelated pixel
+          let drawX = x + i;
+          let drawY = y + j;
+          // Fill a square with the color of the current pixel
+          p.fill(col);
+          // Draw a rectangle at (drawX, drawY) with size of pixelSize x pixelSize
+          p.rect(drawX, drawY, pixelSize, pixelSize);
+        }
+      }
+
+    } else {
+      p.image(
+        image,
+        x,
+        y,
+        scaledWidth,
+        scaledHeight
+      )
+    }
   }
 
   /////////////////////////////////////////// MODULE lINES
@@ -278,57 +360,85 @@ function drawModules(p) {
 
     const text1 = getText1Store()
 
+    ////// STYLE
     p.noStroke()
     p.fill(text1.color)
-
-    p.textAlign(p.CENTER, p.CENTER)
-    const size1 = (30 * canvasSize) / 100
-    p.textSize(size1)
-    // p.textLeading(50)
-    p.textFont(mainTextFont)
+    p.textFont(text1.font)
+    p.textAlign(p.CENTER, p.CENTER);
+    p.textWrap(p.WORD);
     
-    let mainText = text1.text
-    p.text(mainText, canvasSize/2, canvasSize/2);
 
-    ////////
+    //////////////////// MAIN TEXT
+    let textContent = text1.text
+    let presetSize = text1.size
 
-    p.textAlign(p.CENTER, p.LEFT);
-    const maxSize = (10 * canvasSize) / 100; // Maximum text size
-    p.textFont(otherTextFont);
 
-    let otherText1 = "Other Text1";
-    let otherText2 = "Other Text2";
+    p.textSize(presetSize)
+    // let textWidth = p.textWidth(textContent)
 
-    const position1 = text1.txtpositions[0];
-    const position2 = text1.txtpositions[1];
+    // if (textWidth < canvasSize) {
+    //   while (textWidth < canvasSize) {
+    //     presetSize += 1
+    //     p.textSize(presetSize)
+    //     textWidth = p.textWidth(textContent)
+    //   }
+    // }
+    // if (textWidth > canvasSize) {
+    //   while (textWidth > canvasSize) {
+    //     presetSize -= 1
+    //     p.textSize(presetSize)
+    //     textWidth = p.textWidth(textContent)
+    //   }
+    // }
+    
 
-    // Text 1
-    let x1 = (position1.x * canvasSize) / 100;
-    let y1 = (position1.y * canvasSize) / 100;
-    let textSize1 = maxSize; // Initial text size
-    p.textSize(textSize1);
-    let textWidth1 = p.textWidth(otherText1);
+    p.rectMode(p.CENTER);
 
-    while (x1 - textWidth1 / 2 < 0 || x1 + textWidth1 / 2 > p.width - 10) {
-      textSize1 -= 1;
-      p.textSize(textSize1);
-      textWidth1 = p.textWidth(otherText1);
+    let x = canvasSize / 2;
+    let y = canvasSize / 2;
+    p.text(textContent, x, y, canvasSize, canvasSize);
+
+    //////// DOP TEXT
+
+    if (text1.dopText == true) {
+      p.textAlign(p.CENTER, p.LEFT)
+      const maxSize = (2 * canvasSize) / 100
+      // p.textFont(otherTextFont);
+
+      let otherText1 = "Dance"
+      let otherText2 = "Music"
+
+      const position1 = text1.txtpositions[0]
+      const position2 = text1.txtpositions[1]
+
+      // Text 1
+      let x1 = (position1.x * canvasSize) / 100
+      let y1 = (position1.y * canvasSize) / 100
+      let textSize1 = maxSize
+      p.textSize(textSize1)
+      let textWidth1 = p.textWidth(otherText1)
+
+      while (x1 - textWidth1 / 2 < 0 || x1 + textWidth1 / 2 > p.width - 10) {
+        textSize1 -= 1
+        p.textSize(textSize1)
+        textWidth1 = p.textWidth(otherText1)
+      }
+      p.text(otherText1, x1, y1)
+
+      // Text 2
+      let x2 = (position2.x * canvasSize) / 100
+      let y2 = (position2.y * canvasSize) / 100
+      let textSize2 = maxSize
+      p.textSize(textSize2)
+      let textWidth2 = p.textWidth(otherText2)
+
+      while (x2 - textWidth2 / 2 < 0 || x2 + textWidth2 / 2 > p.width - 10 || Math.abs(y2 - y1) < textSize2) {
+        textSize2 -= 1
+        p.textSize(textSize2)
+        textWidth2 = p.textWidth(otherText2);
+      }
+      p.text(otherText2, x2, y2)
     }
-    p.text(otherText1, x1, y1);
-
-    // Text 2
-    let x2 = (position2.x * canvasSize) / 100;
-    let y2 = (position2.y * canvasSize) / 100;
-    let textSize2 = maxSize; // Initial text size
-    p.textSize(textSize2);
-    let textWidth2 = p.textWidth(otherText2);
-
-    while (x2 - textWidth2 / 2 < 0 || x2 + textWidth2 / 2 > p.width - 10 || Math.abs(y2 - y1) < textSize2) {
-      textSize2 -= 1;
-      p.textSize(textSize2);
-      textWidth2 = p.textWidth(otherText2);
-    }
-    p.text(otherText2, x2, y2);
 
 
 
@@ -386,6 +496,7 @@ function sketch(p) {
 
     if (moduleList.includes('Image')) {
       const imageFiles = getImageStore().images
+      // console.log('SKETCH IMGs', imageFiles);
 
       Object.keys(imageFiles).forEach((key) => {
         imagesObj = Object.assign({}, imagesObj, {
@@ -446,15 +557,22 @@ function sketch(p) {
 
     //////////////////////////////////////////////////// FONTS
 
+    // const fontsFiles = getFontsStore()
+    // console.log(fontsFiles);
+
     fontEsenin = p.loadFont('../fonts/esenin-script-one.ttf');
     mainTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
     otherTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
+    p.loadFont('../fonts/Acosta.otf')
+    p.loadFont('../fonts/wonky.otf')
+    p.loadFont('../fonts/Bolgarus.otf')
+    p.loadFont('../fonts/YUNGA-Display.otf')
 
   }
 
   p.setup = () => {
 
-    p.frameRate(5)
+    // p.frameRate(2)
     
     let canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
@@ -463,6 +581,11 @@ function sketch(p) {
       graphics = p.createGraphics(canvasSize, canvasSize, p.WEBGL)
       graphics.camera(0, 0, 50*p.sqrt(3), 0, 0, 0, 0, 1, 0);
       graphics.perspective(p.PI/3, 1, 5*p.sqrt(3), 500*p.sqrt(3));
+    }
+    
+    const blend = getBlendStore()
+    if (blend) {
+      blendedLayer = p.createGraphics(canvasSize, canvasSize)
     }
   }
   
@@ -479,15 +602,16 @@ function sketch(p) {
   }
   
   p.draw = () => {
-    const blend = getBlendStore()
+    drawModules(p)
+    // const blend = getBlendStore()
     
-    if (blend) {
-      p.clear()
-      p.blendMode(p.DIFFERENCE)
-      drawModules(p)
-    } else {
-      drawModules(p)
-    }
+    // if (blend) {
+    //   p.clear()
+    //   p.blendMode(p.DIFFERENCE)
+    //   drawModules(p)
+    // } else {
+    //   drawModules(p)
+    // }
   }
 }
 

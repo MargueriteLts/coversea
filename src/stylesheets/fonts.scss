@@ -4,10 +4,37 @@
 
 @font-face {
   font-family: 'esenin-script-one';
-  src: url('fonts/esenin-script-one.ttf') format('ttf'),
-    url('fonts/esenin-script-one.ttf') format('ttf');
+  src: url('fonts/esenin-script-one.ttf') format('ttf');
   // font-weight: 400;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'Acosta';
+  src: url('fonts/Acosta.otf') format('otf');
+  // font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'wonky';
+  src: url('fonts/wonky.otf') format('otf');
+  // font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bolgarus';
+  src: url('fonts/Bolgarus.otf') format('otf');
+  // font-weight: 400;
+  // font-style: normal;
+}
+
+@font-face {
+  font-family: 'YUNGA-Display';
+  src: url('fonts/YUNGA-Display.otf') format('otf');
+  // font-weight: 400;
+  // font-style: normal;
 }
 
   // font-family: bc-novatica-cyr, sans-serif;

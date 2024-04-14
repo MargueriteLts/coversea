@@ -1,4 +1,4 @@
-const modules = ['Background', 'Image', 'BackgroundImage']
+const modules = ['Background', 'BackgroundImage', 'Text1']
 
 const preset = {
   Background: {
@@ -23,6 +23,12 @@ const preset = {
       NightClub: {},
       Cars: {}
     }
+  },
+  Text1: {
+    text: 'Dance All Night',
+    font: 'Acosta',
+    dopText: true,
+    size: 100
   }
 }
 

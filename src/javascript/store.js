@@ -26,13 +26,16 @@ moduleVinylStore,
 moduleText1Store,
 moduleLinesStore,
 module3DStore,
-blendStore
+blendStore,
+allFonts
 // canvasSizeStore
 
 function initStore(generatorName) {
   moduleList = generators[generatorName].modules
 
   blendStore = generators[generatorName].blend
+
+  allFonts = initFontsStore()
 
   moduleList.forEach(moduleName => {
     if (moduleName == 'Background') {
@@ -48,7 +51,7 @@ function initStore(generatorName) {
     }
 
     if (moduleName == 'Image') {
-      moduleImageStore = initImages()
+      moduleImageStore = initImages(generators[generatorName].preset['Image'])
     }
 
     if (moduleName == 'BackgroundImage') {
@@ -316,14 +319,16 @@ function setParticlesStore(type, value) {
 
 ///////////////////// IMAGES
 
-function initImages() {
+function initImages(preset) {
   const images = importAll(
     require.context('../images', false, /\.(png|jpe?g|svg)$/)
   )
 
+  // console.log('STORE IMG', images);
   return {
     images: images,
-    current: sample(Object.keys(images))
+    current: sample(Object.keys(images)),
+    pixelate: preset.pixelate
   }
 }
 
@@ -333,6 +338,62 @@ function getImageStore() {
 
 function setImageStore() {
   moduleImageStore.current = sample(Object.keys(moduleImageStore.images))
+}
+
+///////////////////// FONTS
+
+// function initFontsStore() {
+//   const allFonts = importAll(
+//     require.context('../fonts', false, /\.(ttf|otf|woff|woff2)$/)
+//   )
+
+//   // allFonts = {}
+//   // let fontName
+  
+  
+//   // Object.keys(fontsFolder).forEach((key) => {
+//   //   fontName = key.replace(/^\.\//, '').replace(/\.(ttf|otf|woff|woff2)$/, '')
+
+//   //   allFonts = Object.assign({}, allFonts, {
+//   //     fontName: fontsFolder[key]
+//   //   })
+//   // })
+  
+
+//   console.log('STORE', allFonts);
+//   return {
+//     allFonts: allFonts
+//   }
+// }
+
+// function initFontsStore() {
+//   const fonts = importAll(
+//     require.context('../fonts', false, /\.(ttf|otf|woff|woff2)$/)
+//   );
+
+//   console.log('STORE FONTS', fonts);
+//   return {
+//     fonts: fonts
+//   };
+// }
+
+function initFontsStore() {
+  const fontContext = require.context('../fonts', false, /\.(ttf|otf|woff|woff2)$/);
+  const fonts = {};
+
+  fontContext.keys().forEach((key) => {
+    const fileName = key.replace(/^.*[\\/]/, ''); // Extracting filename from path
+    fonts[fileName] = fontContext(key);
+  });
+
+  return {
+    fonts: fonts
+  };
+}
+
+
+function getFontsStore() {
+  return allFonts
 }
 
 ////////////////////// BACKGROUND IMAGE
@@ -420,6 +481,9 @@ function setVinylStore(type, value) {
   if (type === 'size') {
     moduleVinylStore.preset.sliderValue = value
   }
+  if (type === 'opacity') {
+    moduleVinylStore.preset.sliderOpacity = value
+  }
 }
 
 ////////////////////// TEXT1
@@ -427,7 +491,6 @@ function setVinylStore(type, value) {
 function initText1Store(preset) {
 
   let positions = generatePositions()
-  console.log(positions);
 
   // preset = Object.assign({}, preset, { moduleName: 'Text 1', color: '#fff', txtposition: position })
   preset = Object.assign({}, preset, { moduleName: 'Text 1', color: '#fff', txtpositions: positions })
@@ -554,6 +617,7 @@ export {
   init3DStore,
   get3DStore,
   set3DStore,
+  getFontsStore,
   // setCanvasSizeStore,
   // generatePosition,
   getBlendStore

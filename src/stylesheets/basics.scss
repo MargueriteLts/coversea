@@ -58,6 +58,10 @@ h2 {
   padding: 0 24px;
 }
 
+.txtInput:focus-visible {
+  outline: none;
+}
+
 .ButtonPrimary {
   background: var(--white);
   color: black;

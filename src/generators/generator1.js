@@ -19,12 +19,8 @@ const preset = {
     preset: {
       Whole: {},
       Label: {},
-      sliderValue: 50
-    }
-  },
-  Shapes: { 
-    settings: {
-      sliderValue: 37
+      sliderValue: 50,
+      bigger: false
     }
   },
   Particles: {
@@ -39,9 +35,11 @@ const preset = {
       Mix: {}
     }
   },
-  Image: {},
   Text1: {
-    text: 'Yooooo'
+    text: 'Soft Random',
+    font: 'esenin-script-one',
+    dopText: true,
+    size: 100
   }
 }
 
