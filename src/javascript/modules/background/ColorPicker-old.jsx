@@ -9,33 +9,12 @@ export default class AllColorPicker extends Component {
 
     this.state = {
       displayColorPicker: false,
-      color: this.props.color,
-      popoverPosition: { top: 0, left: 0 }
+      color: this.props.color
     };
   }
 
   handleClick = () => {
-    const parentRect = ReactDOM.findDOMNode(this).getBoundingClientRect();
-    const popoverWidth = 220;
-    const popoverHeight = 350;
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-
-    let top = parentRect.bottom;
-    let left = parentRect.left;
-
-    if (left + popoverWidth > viewportWidth) {
-      left = viewportWidth - popoverWidth;
-    }
-
-    if (top + popoverHeight > viewportHeight) {
-      top = viewportHeight - popoverHeight;
-    }
-
-    this.setState({
-      displayColorPicker: !this.state.displayColorPicker,
-      popoverPosition: { top, left }
-    });
+    this.setState({ displayColorPicker: !this.state.displayColorPicker })
   };
 
   handleClose = () => {
@@ -71,10 +50,8 @@ export default class AllColorPicker extends Component {
           cursor: 'pointer',
         },
         popover: {
-          position: 'fixed', // Change to fixed to ensure popover position remains fixed relative to the viewport
+          position: 'absolute',
           zIndex: '2',
-          top: this.state.popoverPosition.top,
-          left: this.state.popoverPosition.left
         },
         cover: {
           position: 'fixed',
