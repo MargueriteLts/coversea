@@ -12,8 +12,13 @@ const preset = {
     currentBgType: 'SolidColor',
 
     preset: {
-      SolidColor: {},
-      Gradient: {}
+      SolidColor: {
+        color: '#000000'
+      },
+      Gradient: {
+        color1: '#ff0000',
+        color2:'#00ff00'
+      }
     }
   },
   Vinyl: {

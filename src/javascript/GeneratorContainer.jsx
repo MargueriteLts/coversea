@@ -155,7 +155,7 @@ export default class GeneratorContainer extends Component {
   }
 
   DownloadImage = () => {
-    html2canvas(document.getElementById("sketch")).then(function (canvas) {
+    html2canvas(document.getElementById("defaultCanvas0")).then(function (canvas) {
       let a = document.createElement("a");
       a.href = canvas.toDataURL("image/jpeg");
       a.download = `cover-${generateHash()}.jpeg`;

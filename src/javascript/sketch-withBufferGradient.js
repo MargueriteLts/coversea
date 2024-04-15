@@ -48,16 +48,14 @@ let otherTextFont;
 
 let graphics
 let blendedLayer
-// let gradientBuffer
-// let shapesLayer
+let gradientBuffer
+let shapesLayer
 // let layerTxtBlend
-let vinylLayer
 
 let prevModule3DX;
 let prevModule3DY;
 
 // FOR GRADIENT
-let gradientBg
 let c1
 let c2
 
@@ -89,61 +87,41 @@ function drawModules(p) {
       const color1 = background.preset.Gradient.color1
       const color2 = background.preset.Gradient.color2
       const angle = background.preset.Gradient.angle
+      // p.background(0)
 
-      p.clear()
-      // let gradientBg
+      c1 = p.color(color1)
+      c2 = p.color(color2)
+      // console.log(c1);
 
+      for (let i = 0; i <= canvasSize; i++) {
+        let amt = p.map(i, 0, canvasSize, 0, 1)
+        let c3 = p.lerpColor(c1, c2, amt)
+
+        if (blend.Vinyl == true) {
+          blendedLayer.stroke(c3)
+          if (angle == 'vertical') {
+            blendedLayer.line(0, i, canvasSize, i)
+          }
+          if (angle == 'horizontal') {
+            blendedLayer.line(i, 0, i, canvasSize)
+          }
+        } else {
+          p.stroke(c3)
+          if (angle == 'vertical') {
+            p.line(0, i, canvasSize, i)
+          }
+          if (angle == 'horizontal') {
+            p.line(i, 0, i, canvasSize)
+          }
+        }
+      }
+    } else {
       if (blend.Vinyl == true) {
-        if (angle == 'vertical') {
-          gradientBg = blendedLayer.drawingContext.createLinearGradient (0, 0, 0, canvasSize)
-        }
-        if (angle == 'horizontal') {
-          gradientBg = blendedLayer.drawingContext.createLinearGradient (0, 0, canvasSize, 0)
-        }
+        blendedLayer.background(0)
       } else {
-        if (angle == 'vertical') {
-          gradientBg = p.drawingContext.createLinearGradient (0, 0, 0, canvasSize)
-        }
-        if (angle == 'horizontal') {
-          gradientBg = p.drawingContext.createLinearGradient (0, 0, canvasSize, 0)
-        }
+        p.background(0)
       }
-
-      let colorA
-      let colorB
-      if (typeof color1 == 'object') {
-        colorA = p.color(color1)
-      } else {
-        colorA = color1
-      }
-      if (typeof color2 == 'object') {
-        colorB = p.color(color2)
-      } else {
-        colorB = color2
-      }
-
-      gradientBg.addColorStop(0, colorA)
-      gradientBg.addColorStop(1, colorB)
-
-      if (blend.Vinyl == true) {
-        blendedLayer.drawingContext.fillStyle = gradientBg
-        blendedLayer.rect(0, 0, canvasSize, canvasSize);
-      } else {
-        p.drawingContext.fillStyle = gradientBg
-        p.rect(canvasSize/2, canvasSize/2, canvasSize, canvasSize);
-      }
-      
-      // p.drawingContext.fillStyle = gradientBg
-
     }
-    
-    // else {
-    //   if (blend.Vinyl == true) {
-    //     blendedLayer.background(0)
-    //   } else {
-    //     p.background(0)
-    //   }
-    // }
   }
 
   /////////////////////////////////////////// MODULE BACKGROUNDIMAGE
@@ -168,28 +146,64 @@ function drawModules(p) {
 
   /////////////////////////////////////////// MODULE SHAPES
 
-  if (moduleList.includes('Shapes')) {
+  // const background = getBackgroundStore()
+  // const color1 = background.preset.Gradient.color1
+  // const color2 = background.preset.Gradient.color2
+  
+  // // console.log(color1);
+  // c1 = `"${color1}"`
+  // c2 = `"${color2}"`
+  
+  // // const color = getShapesStore().settings.color
+  // // p.fill(color)
+  
+  // console.log(c1);
+  // console.log(c2);
+  
+  // tools.beginLinearGradient(
+    //   ["#FF0000", "#00FF00"], // Colors
+    //   120,    // gradient begin point x     
+    //   120,   // gradient begin point y
+    //   280,    // gradient end point x
+    //   280,   // gradient end point y
+    //   [0, 1]           // Position of each color.
+    // );
 
+
+  if (moduleList.includes('Shapes')) {
+    // p.image(graphics, 0, 0)
+    gradientBuffer.clear()
+  
     const background = getBackgroundStore()
     const color1 = background.preset.Gradient.color1
     const color2 = background.preset.Gradient.color2
-    // const angle = background.preset.Gradient.angle
+    const angle = background.preset.Gradient.angle
+    // p.background(0)
 
     c1 = p.color(color2)
     c2 = p.color(color1)
 
-    p.noStroke()
+    for (let i = 0; i <= canvasSize; i++) {
+      let amt = p.map(i, 0, canvasSize, 0, 1)
+      let c3 = p.lerpColor(c1, c2, amt)
 
-    let gradientShapes = p.drawingContext.createLinearGradient(
-      0, 0, canvasSize, canvasSize
-    )
-    gradientShapes.addColorStop(0, c1)
-    gradientShapes.addColorStop(1, c2)
+      p.stroke(c3)
+      if (angle == 'vertical') {
+        p.line(i, 0, i, canvasSize)
+      }
+      if (angle == 'horizontal') {
+        p.line(0, i, canvasSize, i)
+      }
+    }
 
-    p.drawingContext.fillStyle = gradientShapes
+    // gradientBuffer.rect(0, 0, canvasSize, canvasSize);
+
+    // p.fill(gradientBuffer);
 
     /////// shapes
-
+    p.image(shapesLayer, 0, 0)
+    // shapesLayer.clear()
+    // p.plane(canvasSize, canvasSize)
     const Value = getShapesStore().settings.sliderValue
     const wValue = parseInt(Value)
 
@@ -212,19 +226,22 @@ function drawModules(p) {
     const wEV2 = ((canvasSize - w) / 2) - (13 * canvasSize / 100) - paddingW
     const hEV2 = canvasSize - paddingH
 
-    p.ellipse(xCenter, yCenter, wCircle)
+    shapesLayer.ellipse(xCenter, yCenter, wCircle)
     
-    p.ellipse(xCenterER1, yCenter, wEV1, hEV1)
-    p.ellipse(xCenterEL1, yCenter, wEV1, hEV1)
-    p.ellipse(xCenterER2, yCenter, wEV2, hEV2)
-    p.ellipse(xCenterEL2, yCenter, wEV2, hEV2)
+    shapesLayer.ellipse(xCenterER1, yCenter, wEV1, hEV1)
+    shapesLayer.ellipse(xCenterEL1, yCenter, wEV1, hEV1)
+    shapesLayer.ellipse(xCenterER2, yCenter, wEV2, hEV2)
+    shapesLayer.ellipse(xCenterEL2, yCenter, wEV2, hEV2)
     
-    p.ellipse(yCenter, xCenterER1, wCircle, wEV1)
-    p.ellipse(yCenter, xCenterEL1, wCircle, wEV1)
-    p.ellipse(yCenter, xCenterER2, hEV1, wEV2)
-    p.ellipse(yCenter, xCenterEL2, hEV1, wEV2)
+    shapesLayer.ellipse(yCenter, xCenterER1, wCircle, wEV1)
+    shapesLayer.ellipse(yCenter, xCenterEL1, wCircle, wEV1)
+    shapesLayer.ellipse(yCenter, xCenterER2, hEV1, wEV2)
+    shapesLayer.ellipse(yCenter, xCenterEL2, hEV1, wEV2)
 
+    shapesLayer.texture(gradientBuffer)
   }
+
+  // utils.endLinearGradient()
 
   /////////////////////////////////////////// MODULE PARTICLES
 
@@ -232,13 +249,7 @@ function drawModules(p) {
     const particles = getParticlesStore()
 
     const color = particles.color
-    if (particles.stroke == true) {
-      p.stroke(color)
-    } else {
-      // p.tint(color, particles.opacity)
-      p.fill(color)
-      // p.noTint()
-    }
+    p.fill(color)
       
     if (particles.options.includes('Ellipses') && particles.currentParticlesType === 'Ellipses') {
       for (let index = 0; index < particles.sliderValue; index++) {
@@ -333,10 +344,8 @@ function drawModules(p) {
         equivalentSize
       )
     } else {
-      p.image(vinylLayer, 0, 0)
-      vinylLayer.clear()
-      vinylLayer.tint(255, opacity)
-      vinylLayer.image(
+      p.tint(255, opacity)
+      p.image(
         imageVinyl,
         x,
         y,
@@ -406,45 +415,13 @@ function drawModules(p) {
 
   if (moduleList.includes('Lines')) {
     const lines = getLinesStore()
+    // console.log('LINES');
 
     p.stroke(lines.color)
     p.strokeWeight(lines.strokeWeight);
     for (let index = 0; index < lines.lines.length; index++) {
-      p.line(
-        (lines.lines[index][0] * canvasSize) / 100,
-        (lines.lines[index][1] * canvasSize) / 100,
-        (lines.lines[index][2] * canvasSize) / 100,
-        (lines.lines[index][3] * canvasSize) / 100
-      );
+      p.line(lines.lines[index][0], lines.lines[index][1], lines.lines[index][2], lines.lines[index][3]);
     }
-  }
-  
-  /////////////////////////////////////////// MODULE 3D
-
-  if (moduleList.includes('Module3D')) {
-    p.image(graphics, 0, 0)
-    graphics.clear()
-    const module3D = get3DStore()
-
-    if (module3D.x !== prevModule3DX || module3D.y !== prevModule3DY) {
-      graphics.rotateX(module3D.x);
-      graphics.rotateY(module3D.y);
-      
-      prevModule3DX = module3D.x;
-      prevModule3DY = module3D.y;
-    }
-
-    graphics.noStroke()
-    graphics.directionalLight(189, 98, 189, 100, 0, 0)
-    graphics.directionalLight(54, 98, 189, -100, 0, 0)
-    graphics.fill(255)
-
-    if (module3D.options.includes('Torus') && module3D.current3DType === 'Torus') {
-      graphics.torus(30, 15, 50, 50);
-    } else if (module3D.options.includes('Square') && module3D.current3DType === 'Square') {
-      graphics.box(30, 15, 50, 50);
-    }
-
   }
 
   /////////////////////////////////////////// MODULE TEXT1
@@ -455,7 +432,8 @@ function drawModules(p) {
 
     ////// STYLE
     p.noStroke()
-    
+    p.fill(text1.color)
+    // console.log(text1.font);
     p.textFont(text1.font)
     p.textAlign(p.CENTER, p.CENTER);
     p.textWrap(p.WORD);
@@ -485,11 +463,10 @@ function drawModules(p) {
 
 
     p.textSize(presetSize)
-    p.textLeading(presetSize-20)
     
     p.rectMode(p.CENTER);
 
-    // let textWidth = p.textWidth(textContent)
+    let textWidth = p.textWidth(textContent)
 
     // const blend = getBlendStore()
     // if (blend.Text1 == true) {
@@ -502,20 +479,7 @@ function drawModules(p) {
     //   p.text(textContent, x, y, canvasSize, canvasSize);
     // }
 
-    // if (moduleList.includes('Module3D')) {
-    //   p.noFill()
-    //   p.stroke(text1.color)
-    //   p.text(textContent, x, y, canvasSize, canvasSize);
-    //   p.noStroke()
-
-    // } else {
-    //   p.fill(text1.color)
-    //   p.text(textContent, x, y, canvasSize, canvasSize);
-    // }
-
-    p.fill(text1.color)
     p.text(textContent, x, y, canvasSize, canvasSize);
-
 
 
     //////// DOP TEXT
@@ -563,6 +527,34 @@ function drawModules(p) {
 
 
 
+
+  }
+
+  /////////////////////////////////////////// MODULE 3D
+
+  if (moduleList.includes('Module3D')) {
+    p.image(graphics, 0, 0)
+    graphics.clear()
+    const module3D = get3DStore()
+
+    if (module3D.x !== prevModule3DX || module3D.y !== prevModule3DY) {
+      graphics.rotateX(module3D.x);
+      graphics.rotateY(module3D.y);
+      
+      prevModule3DX = module3D.x;
+      prevModule3DY = module3D.y;
+    }
+
+    graphics.noStroke()
+    graphics.directionalLight(189, 98, 189, 100, 0, 0)
+    graphics.directionalLight(54, 98, 189, -100, 0, 0)
+    graphics.fill(255)
+
+    if (module3D.options.includes('Torus') && module3D.current3DType === 'Torus') {
+      graphics.torus(30, 15, 50, 50);
+    } else if (module3D.options.includes('Square') && module3D.current3DType === 'Square') {
+      graphics.box(30, 15, 50, 50);
+    }
 
   }
 
@@ -671,18 +663,15 @@ function sketch(p) {
     let canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
 
-    if (moduleList.includes('Vinyl')) {
-      vinylLayer = p.createGraphics(canvasSize, canvasSize)
-    }
-
     if (moduleList.includes('Module3D')) {
       graphics = p.createGraphics(canvasSize, canvasSize, p.WEBGL)
       graphics.camera(0, 0, 50*p.sqrt(3), 0, 0, 0, 0, 1, 0);
       graphics.perspective(p.PI/3, 1, 5*p.sqrt(3), 500*p.sqrt(3));
     }
-    // if (moduleList.includes('Shapes')) {
-    //   gradientBuffer = p.createGraphics(canvasSize, canvasSize)
-    // }
+    if (moduleList.includes('Shapes')) {
+      gradientBuffer = p.createGraphics(canvasSize, canvasSize);
+      shapesLayer = p.createGraphics(canvasSize, canvasSize, p.WEBGL);
+    }
     
     const blend = getBlendStore()
     if (blend) {

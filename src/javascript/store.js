@@ -104,11 +104,11 @@ function initBackgroundStore(preset) {
 
   preset.bgTypes.forEach((bgType) => {
     if (bgType == 'SolidColor') {
-      preset.preset.SolidColor = Object.assign({}, preset.preset.SolidColor, { text: 'Solid color', color: '#000000' })
+      preset.preset.SolidColor = Object.assign({}, preset.preset.SolidColor, { text: 'Solid color' })
     }
 
     if (bgType == 'Gradient') {
-      preset.preset.Gradient = Object.assign({}, preset.preset.Gradient, { text: 'Gradient', color1: '#ff0000', color2:'#00ff00', angle:'vertical' })
+      preset.preset.Gradient = Object.assign({}, preset.preset.Gradient, { text: 'Gradient', angle:'vertical' })
     }
   })
 
@@ -527,10 +527,10 @@ function generateLines(quantity) {
 
   for (let index = 0; index < quantity; index++) {
     lines.push([
-      getRandomArbitrary(0, 600),
-      getRandomArbitrary(0, 600),
-      getRandomArbitrary(0, 600),
-      getRandomArbitrary(0, 600)
+      getRandomArbitrary(0, 100),
+      getRandomArbitrary(0, 100),
+      getRandomArbitrary(0, 100),
+      getRandomArbitrary(0, 100)
     ])
   }
 

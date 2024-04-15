@@ -12,8 +12,13 @@ const preset = {
     currentBgType: 'SolidColor',
 
     preset: {
-      SolidColor: {},
-      Gradient: {}
+      SolidColor: {
+        color: '#000000'
+      },
+      Gradient: {
+        color1: '#0043d4',
+        color2: '#00d443'
+      }
     }
   },
   Image: {},

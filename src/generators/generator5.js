@@ -1,4 +1,4 @@
-const modules = ['Background', 'Module3D']
+const modules = ['Background', 'Module3D', 'Text1']
 
 const blend = {
   Vinyl: false,
@@ -12,8 +12,13 @@ const preset = {
     currentBgType: 'SolidColor',
 
     preset: {
-      SolidColor: {},
-      Gradient: {}
+      SolidColor: {
+        color: '#000000'
+      },
+      Gradient: {
+        color1: '#002fff',
+        color2: '#ff00d4'
+      }
     }
   },
   Module3D: {
@@ -24,6 +29,14 @@ const preset = {
       Torus: {},
       Square: {}
     }
+  },
+  Text1: {
+    text: 'Volume Music',
+    font: 'YUNGA-Display',
+    upperCase: true,
+    dopText: true,
+    size: 100,
+    color: '#fff'
   }
 }
 

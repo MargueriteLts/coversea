@@ -9,11 +9,16 @@ const preset = {
   Background: {
 
     bgTypes: ['SolidColor', 'Gradient'],
-    currentBgType: 'SolidColor',
+    currentBgType: 'Gradient',
 
     preset: {
-      SolidColor: {},
-      Gradient: {}
+      SolidColor: {
+        color: '#000000'
+      },
+      Gradient: {
+        color1: '#d9b34c',
+        color2: '#943a73'
+      }
     }
   },
   Vinyl: {
@@ -30,9 +35,10 @@ const preset = {
   },
   Particles: {
     sliderValue: 10,
+    opacity: 80,
 
     options: ['Ellipses', 'Squares', 'Mix'],
-    currentParticlesType: 'Ellipses',
+    currentParticlesType: 'Mix',
 
     preset: {
       Ellipses: {},
