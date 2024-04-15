@@ -57,8 +57,8 @@ export default class AllColorPicker extends Component {
     const styles = reactCSS({
       'default': {
         colorSwatch: {
-          width: '24px',
-          height: '24px',
+          width: '32px',
+          height: '32px',
           borderRadius: '2px',
           background: color,
         },

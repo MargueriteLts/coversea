@@ -1,4 +1,4 @@
-const modules = ['Background', 'Shapes', 'Particles', 'Text1']
+const modules = ['Background', 'Vinyl', 'Particles', 'Text1']
 
 const blend = {
   Vinyl: false,
@@ -9,26 +9,34 @@ const preset = {
   Background: {
 
     bgTypes: ['SolidColor', 'Gradient'],
-    currentBgType: 'Gradient',
+    currentBgType: 'SolidColor',
 
     preset: {
       SolidColor: {
-        color: '#000000'
+        color: '#0062ff'
       },
       Gradient: {
-        color1: '#ff0000',
-        color2:'#00ff00'
+        color1: '#d9b34c',
+        color2: '#943a73'
       }
     }
   },
-  Shapes: { 
-    settings: {
-      sliderValue: 37
+  Vinyl: {
+    sliderValue: 80,
+    bigger: false,
+    sliderOpacity: 50,
+
+    vinylTypes: ['Whole', 'Label'],
+    currentVinylType: 'Whole',
+
+    preset: {
+      Whole: {},
+      Label: {}
     }
   },
   Particles: {
-    sliderValue: 10,
-    stroke: true,
+    sliderValue: 50,
+    opacity: 80,
 
     options: ['Ellipses', 'Squares', 'Mix'],
     currentParticlesType: 'Ellipses',
@@ -40,9 +48,8 @@ const preset = {
     }
   },
   Text1: {
-    text: 'Gradient noise',
-    font: 'bc-novatica-cyr',
-    upperCase: true,
+    text: 'Soft Random',
+    font: 'esenin-script-one',
     dopText: true,
     size: 100,
     color: '#fff'

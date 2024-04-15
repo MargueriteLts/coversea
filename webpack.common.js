@@ -114,8 +114,24 @@ module.exports = {
     new HtmlWebpackPlugin({
       hash: true,
       scriptLoading: 'blocking',
+      template: './src/generators/generator1p2.html',
+      filename: './generators/generator1p2.html',
+      chunks: ['generator']
+    }),
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
       template: './src/generators/generator2.html',
       filename: './generators/generator2.html',
+      chunks: ['generator']
+    }),
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator2p2.html',
+      filename: './generators/generator2p2.html',
       chunks: ['generator']
     }),
 
@@ -138,6 +154,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       hash: true,
       scriptLoading: 'blocking',
+      template: './src/generators/generator4p2.html',
+      filename: './generators/generator4p2.html',
+      chunks: ['generator']
+    }),
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
       template: './src/generators/generator5.html',
       filename: './generators/generator5.html',
       chunks: ['generator']
@@ -146,8 +170,24 @@ module.exports = {
     new HtmlWebpackPlugin({
       hash: true,
       scriptLoading: 'blocking',
+      template: './src/generators/generator5p2.html',
+      filename: './generators/generator5p2.html',
+      chunks: ['generator']
+    }),
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
       template: './src/generators/generator6.html',
       filename: './generators/generator6.html',
+      chunks: ['generator']
+    }),
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator6p2.html',
+      filename: './generators/generator6p2.html',
       chunks: ['generator']
     }),
 

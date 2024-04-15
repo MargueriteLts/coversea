@@ -87,27 +87,29 @@ export default class Background extends Component {
     ////////////// GRADIENT
 
     if (this.state.currentBgType == 'Gradient') {
-      return <div>
-        <ColorPicker
-          title=''
-          // object='gradient1'
-          object='GradientColor1'
-          setColorPickerStore={setColorPickerStore}
-          color={this.state.colorG1}
-          handleChange={this.handleChangeGradientColor}
-          key='Gradient1ColorPicker'
-        />
-        <ColorPicker
-          title=''
-          // object='gradient2'
-          object='GradientColor2'
-          setColorPickerStore={setColorPickerStore}
-          color={this.state.colorG2}
-          handleChange={this.handleChangeGradientColor}
-          key='Gradient2ColorPicker'
-        />
-      <div className="Button" onClick={this.handleRandomizeGradient}>Randomize Gradient</div>
-      <div className="Button" onClick={this.handleChangeAngleGradient}>Rotate</div>
+      return <div className='gradientControls'>
+        <div className='gradientColors'>
+          <ColorPicker
+            title=''
+            // object='gradient1'
+            object='GradientColor1'
+            setColorPickerStore={setColorPickerStore}
+            color={this.state.colorG1}
+            handleChange={this.handleChangeGradientColor}
+            key='Gradient1ColorPicker'
+          />
+          <ColorPicker
+            title=''
+            // object='gradient2'
+            object='GradientColor2'
+            setColorPickerStore={setColorPickerStore}
+            color={this.state.colorG2}
+            handleChange={this.handleChangeGradientColor}
+            key='Gradient2ColorPicker'
+          />
+        </div>
+        <div className="Button" onClick={this.handleRandomizeGradient}>Randomize Gradient</div>
+        <div className="Button" onClick={this.handleChangeAngleGradient}>Rotate</div>
       </div>
     }
   }
@@ -119,24 +121,44 @@ export default class Background extends Component {
 
     const bgType = background.bgTypes
 
-    if (bgType == 'PlainColor') {
-      return <div className="PlainColorComponent">
-        <PlainColor
-          setBackgroundStore={setBackgroundStore}
-          key='PlainColor'
+    if (bgType == 'SolidColor') {
+      return <div>
+        <ColorPicker
+          title=''
+          // object='background'
+          object='SolidColor'
+          setColorPickerStore={setColorPickerStore}
+          color={this.state.color}
+          handleChange={this.handleChangeSolidColor}
+          key='BackgroundColorPicker'
         />
       </div>
     }
-    if (bgType == 'ColorPicker') {
-      return (<div>
-        <ColorPicker
-          title='Color Picker'
-          object='background'
-          setColorPickerStore={setColorPickerStore}
-          color={background.preset.ColorPicker.color}
-          key='AllColorPicker'
-        />
-      </div>)
+    if (bgType == 'Gradient') {
+      return <div className='gradientControls'>
+        <div className='gradientColors'>
+          <ColorPicker
+            title=''
+            // object='gradient1'
+            object='GradientColor1'
+            setColorPickerStore={setColorPickerStore}
+            color={this.state.colorG1}
+            handleChange={this.handleChangeGradientColor}
+            key='Gradient1ColorPicker'
+          />
+          <ColorPicker
+            title=''
+            // object='gradient2'
+            object='GradientColor2'
+            setColorPickerStore={setColorPickerStore}
+            color={this.state.colorG2}
+            handleChange={this.handleChangeGradientColor}
+            key='Gradient2ColorPicker'
+          />
+        </div>
+        <div className="Button" onClick={this.handleRandomizeGradient}>Randomize Gradient</div>
+        <div className="Button" onClick={this.handleChangeAngleGradient}>Rotate</div>
+      </div>
     }
   }
 
@@ -152,7 +174,7 @@ export default class Background extends Component {
         // randomize={}
       />
       { nbBgTypes > 1
-        ? <div className="ModuleContent flexColumn"> 
+        ? <div className="ModuleContentBg flexColumn"> 
             <TabButtonSet
               options={background.preset}
               value={this.state.currentBgType}
@@ -160,7 +182,7 @@ export default class Background extends Component {
             />
             {this.renderBgContent()}
           </div>
-        : <div>{this.renderBgContentOnly()}</div>
+        : <div className="ModuleContentBgOnly ">{this.renderBgContentOnly()}</div>
       }
     </div>
   }

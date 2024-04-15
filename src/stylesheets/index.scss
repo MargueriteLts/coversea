@@ -24,11 +24,12 @@ body.index {
   .quoteDiff {
     position: relative;
     mix-blend-mode: difference;
-    top: 360px;
+    margin-bottom: 100px;
   }
 
   .genMenu {
     margin-top: 156px;
+    margin-bottom: 150px;
 
     .top {
       margin-top: 44px;
@@ -64,6 +65,47 @@ body.index {
     a {
       text-decoration: none;
     }
+  }
+
+  .container {
+    display: flex;
+    margin: 0 24px;
+  }
+
+  .column {
+    flex: 1;
+    margin-right: 20px;
+  }
+
+  .column:last-child {
+    margin-right: 0;
+  }
+
+  .card {
+    margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+  }
+
+  .card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    /* Ensures square format */
+  }
+
+  .card-content {
+    padding: 10px;
+  }
+
+  .card-title {
+    color: var(--white);
+    mix-blend-mode: difference;
+    font-size: 16px;
+    margin-top: 5px;
   }
 
 }

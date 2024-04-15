@@ -130,7 +130,7 @@ function drawModules(p) {
         blendedLayer.rect(0, 0, canvasSize, canvasSize);
       } else {
         p.drawingContext.fillStyle = gradientBg
-        p.rect(canvasSize/2, canvasSize/2, canvasSize, canvasSize);
+        p.rect(canvasSize/2, canvasSize/2, canvasSize, canvasSize)
       }
       
       // p.drawingContext.fillStyle = gradientBg
@@ -162,7 +162,7 @@ function drawModules(p) {
       imageBg = imagesBgCars[currentBgImg]
     }
 
-    const opacity = backgroundImage.preset.sliderValue
+    const opacity = backgroundImage.sliderValue
     p.background(imageBg, opacity)
   }
 
@@ -288,19 +288,19 @@ function drawModules(p) {
       imageVinyl = imagesLabelVinyl[currentVinylImg]
     }
 
-    let sliderValue = vinyl.preset.sliderValue
+    let sliderValue = vinyl.sliderValue
     let equivalentSize
 
-    if (vinyl.preset.bigger == true) {
+    if (vinyl.bigger == true) {
       equivalentSize = ((sliderValue * (canvasSize+10)) / 100) + 300
-    } else if (vinyl.preset.bigger == false) {
+    } else if (vinyl.bigger == false) {
       equivalentSize = (sliderValue * canvasSize) / 100
     }
 
     let x = (canvasSize - equivalentSize) / 2;
     let y = (canvasSize - equivalentSize) / 2;
 
-    let opacity = parseFloat(vinyl.preset.sliderOpacity)
+    let opacity = parseFloat(vinyl.sliderOpacity)
     // p.tint(255, opacity)
 
     const blend = getBlendStore()
@@ -660,6 +660,7 @@ function sketch(p) {
     p.loadFont('../fonts/Bolgarus.otf')
     p.loadFont('../fonts/YUNGA-Display.otf')
     p.loadFont('../fonts/typekini.ttf')
+    p.loadFont('../fonts/AUSRINE.ttf')
 
   }
 
@@ -700,6 +701,7 @@ function sketch(p) {
     canvasSize = Math.min(parentDivWidth, parentDivHeight)
     
     p.resizeCanvas(canvasSize, canvasSize)
+    p.rect(canvasSize, canvasSize, canvasSize, canvasSize)
   }
   
   p.draw = () => {

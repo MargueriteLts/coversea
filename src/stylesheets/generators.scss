@@ -113,6 +113,9 @@ body.page {
         color: grey;
         margin-right: 12px;
         padding: 8px;
+        border-radius: 40px;
+        // background-color: var(--);
+        padding: 8px 14px;
     
         &:hover:not(.active) {
           color: white;
@@ -121,15 +124,15 @@ body.page {
         }
     
         &.active {
-          background: grey;
+          background: var(--BgModul);
           text-transform: capitalize;
           font-weight: 800;
           color: rgb(255, 255, 255);
           cursor: default;
         }
       }
-  
-      .ModuleContent{
+
+      .ModuleContent {
         display: flex;
         flex-direction: column;
         row-gap: 12px;
@@ -137,21 +140,23 @@ body.page {
         padding: 24px;
         height: 100%;
         // width: 100%;
-  
-        input {
+        border-radius: 0 0 40px 40px;
+
+        .txtInput {
           width: 50%;
           // flex-grow: 1;
         }
+      
         .mainText {
           display: flex;
           flex-direction: row;
           column-gap: 12px;
           align-items: center;
-  
-          input {
-            background: var(--Btn-greySecondary);
+      
+          .txtInput {
+            background: var(--secondary);
             border: none;
-            padding: 12px 20px;
+            padding: 8px 20px;
             color: var(--white);
             border-radius: 20px;
             font-size: 20px;
@@ -159,6 +164,58 @@ body.page {
             font-weight: 300;
             font-style: normal;
           }
+        }
+
+      }
+  
+      .ModuleContentBg {
+        background-color: var(--secondary);
+        display: flex;
+        flex-direction: column;
+        row-gap: 12px;
+        column-gap: 12px;
+        padding: 24px;
+        height: 100%;
+        // width: 100%;
+        border-radius: 0 0 40px 40px;
+
+        .gradientControls {
+          display: flex;
+          flex-direction: row;
+          column-gap: 12px;
+          background-color: var(--BgModul);
+          padding: 24px;
+          border-radius: 30px;
+        }
+
+        .gradientColors {
+          display: flex;
+          flex-direction: row;
+          column-gap: 12px;
+        }
+      }
+
+      .ModuleContentBgOnly {
+        background-color: var(--BgModul);
+        display: flex;
+        flex-direction: column;
+        row-gap: 12px;
+        column-gap: 12px;
+        padding: 24px;
+        height: 100%;
+        // width: 100%;
+        border-radius: 0 0 40px 40px;
+
+        .gradientControls {
+          display: flex;
+          flex-direction: row;
+          column-gap: 12px;
+        }
+
+        .gradientColors {
+          display: flex;
+          flex-direction: row;
+          column-gap: 12px;
         }
       }
     }

@@ -36,6 +36,11 @@ import * as generator3 from './generators/generator3.js'
 import * as generator4 from './generators/generator4.js'
 import * as generator5 from './generators/generator5.js'
 import * as generator6 from './generators/generator6.js'
+import * as generator1p2 from './generators/generator1p2.js'
+import * as generator2p2 from './generators/generator2p2.js'
+import * as generator4p2 from './generators/generator4p2.js'
+import * as generator5p2 from './generators/generator5p2.js'
+import * as generator6p2 from './generators/generator6p2.js'
 
 const generators = {
   generator1,
@@ -43,7 +48,12 @@ const generators = {
   generator3,
   generator4,
   generator5,
-  generator6
+  generator6,
+  generator1p2,
+  generator2p2,
+  generator4p2,
+  generator5p2,
+  generator6p2
 }
 
 const actions = {

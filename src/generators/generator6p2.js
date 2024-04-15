@@ -8,30 +8,30 @@ const blend = {
 const preset = {
   Background: {
 
-    bgTypes: ['SolidColor', 'Gradient'],
-    currentBgType: 'Gradient',
+    bgTypes: ['SolidColor'],
+    currentBgType: 'SolidColor',
 
     preset: {
       SolidColor: {
-        color: '#000000'
+        color: "#000000"
       },
       Gradient: {
         color1: '#ff0000',
-        color2:'#00ff00'
+        color2:'#d4799a'
       }
     }
   },
   Shapes: { 
     settings: {
-      sliderValue: 37
+      sliderValue: 70
     }
   },
   Particles: {
     sliderValue: 10,
-    stroke: true,
+    stroke: false,
 
     options: ['Ellipses', 'Squares', 'Mix'],
-    currentParticlesType: 'Ellipses',
+    currentParticlesType: 'Mix',
 
     preset: {
       Ellipses: {},
@@ -40,7 +40,7 @@ const preset = {
     }
   },
   Text1: {
-    text: 'Gradient noise',
+    text: 'Shape Noise',
     font: 'bc-novatica-cyr',
     upperCase: true,
     dopText: true,

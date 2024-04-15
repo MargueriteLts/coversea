@@ -9,15 +9,15 @@ const preset = {
   Background: {
 
     bgTypes: ['SolidColor', 'Gradient'],
-    currentBgType: 'Gradient',
+    currentBgType: 'SolidColor',
 
     preset: {
       SolidColor: {
         color: '#000000'
       },
       Gradient: {
-        color1: '#0043d4',
-        color2: '#00d443'
+        color1: '#5576ab',
+        color2: '#695a42'
       }
     }
   },
@@ -26,7 +26,7 @@ const preset = {
     sliderValue: 100,
 
     collections: ['NightClub', 'Cars'],
-    currentCollection: 'NightClub',
+    currentCollection: 'Cars',
 
     preset: {
 
@@ -35,8 +35,8 @@ const preset = {
     }
   },
   Text1: {
-    text: 'Dance All Night',
-    font: 'Acosta',
+    text: 'Voyage au bout du monde',
+    font: 'esenin-script-one',
     dopText: true,
     size: 100,
     color: '#fff'

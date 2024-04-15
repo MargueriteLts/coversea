@@ -8,7 +8,7 @@ const blend = {
 const preset = {
   Background: {
 
-    bgTypes: ['SolidColor', 'Gradient'],
+    bgTypes: ['SolidColor'],
     currentBgType: 'SolidColor',
 
     preset: {
@@ -22,19 +22,23 @@ const preset = {
     }
   },
   Vinyl: {
+    sliderValue: 90,
+    bigger: false,
+    sliderOpacity: 200,
 
     vinylTypes: ['Whole', 'Label'],
     currentVinylType: 'Label',
 
     preset: {
       Whole: {},
-      Label: {},
-      sliderValue: 90,
-      bigger: false,
-      sliderOpacity: 200,
+      Label: {}
     }
   },
-  Lines: {},
+  Lines: {
+    strokeWeight: 2,
+    min: 1,
+    max: 10,
+  },
   Text1: {
     text: 'Music Cover Artwork in Generator4',
     font: 'bc-novatica-cyr',

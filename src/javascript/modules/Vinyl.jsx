@@ -10,8 +10,8 @@ export default class Vinyl extends Component {
 
     this.state = {
       currentVinylType: this.props.vinyl.currentVinylType,
-      sliderValue: this.props.vinyl.preset.sliderValue,
-      sliderOpacity: this.props.vinyl.preset.sliderOpacity
+      sliderValue: this.props.vinyl.sliderValue,
+      sliderOpacity: this.props.vinyl.sliderOpacity
     }
   }
 

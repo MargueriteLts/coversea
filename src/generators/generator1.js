@@ -22,15 +22,16 @@ const preset = {
     }
   },
   Vinyl: {
+    sliderValue: 50,
+    bigger: false,
+    sliderOpacity: 255,
 
     vinylTypes: ['Whole', 'Label'],
-    currentVinylType: 'Whole',
+    currentVinylType: 'Label',
 
     preset: {
       Whole: {},
-      Label: {},
-      sliderValue: 50,
-      bigger: false
+      Label: {}
     }
   },
   Particles: {

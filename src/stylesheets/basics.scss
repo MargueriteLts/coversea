@@ -75,3 +75,73 @@ h2 {
   width: fit-content;
   border-radius: 36px;
 }
+
+.Button {
+  background-color: var(--secondary);
+  color: var(--white);
+  padding: 8px 14px;
+  width: fit-content;
+  border-radius: 40px;
+}
+
+.Button:hover {
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background-color: #222222;
+  color: white;
+  font-family: neue-haas-unica;
+  font-size: 16px;
+  width: 295px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+  text-align: left;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--secondary);
+  border-radius: 0 0 20px 20px;
+  width: 295px;
+  padding: 1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.dropdown-item {
+  color: #B3B3B3;
+  font-family: neue-haas-unica;
+  font-size: 16px;
+  padding: 8px 12px;
+  background-color: #222222;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #333333;
+}
+
+.dropdown-item+.dropdown-item {
+  border-top: 1px solid #2C2C2C;
+}
+
+.dropdown-toggle .dropdown-icon {
+  float: right;
+  margin-left: 8px;
+}
+
+.dropdown-toggle.open {
+  border-radius: 20px 20px 0 0;
+  /* Only top corners are rounded when open */
+}

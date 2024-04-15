@@ -1,8 +1,8 @@
-const modules = ['Background', 'Vinyl', 'Image', 'Text1']
+const modules = ['Background', 'Vinyl', 'Lines', 'Text1']
 
 const blend = {
-  Vinyl: true,
-  Text1: false
+  Vinyl: false,
+  Text1: true
 }
 
 const preset = {
@@ -16,8 +16,8 @@ const preset = {
         color: '#000000'
       },
       Gradient: {
-        color1: '#233b70',
-        color2: '#ff9900'
+        color1: '#ff0000',
+        color2:'#00ff00'
       }
     }
   },
@@ -34,15 +34,19 @@ const preset = {
       Label: {}
     }
   },
-  Image: {
-    pixelate: false
+  Lines: {
+    strokeWeight: 50,
+    min: 40,
+    max: 100,
   },
   Text1: {
-    text: 'Funky Groov',
-    font: 'wonky',
+    text: 'Music Cover Artwork in Generator4',
+    font: 'bc-novatica-cyr',
     dopText: false,
-    size: 100,
-    color: '#fff'
+    size: 15,
+    upperCase: true,
+    color: '#ffffff',
+    random: true
   }
 }
 

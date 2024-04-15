@@ -8,8 +8,8 @@ const blend = {
 const preset = {
   Background: {
 
-    bgTypes: ['SolidColor'],
-    currentBgType: 'SolidColor',
+    bgTypes: ['Gradient'],
+    currentBgType: 'Gradient',
 
     preset: {
       SolidColor: {
@@ -23,7 +23,7 @@ const preset = {
   },
   Module3D: {
     options: ['Torus', 'Square'],
-    current3DType: 'Square',
+    current3DType: 'Torus',
 
     preset: {
       Torus: {},
@@ -32,7 +32,7 @@ const preset = {
   },
   Text1: {
     text: 'Volume Music',
-    font: 'AUSRINE',
+    font: 'YUNGA-Display',
     upperCase: true,
     dopText: true,
     size: 100,

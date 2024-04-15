@@ -18,7 +18,7 @@ export default class Image extends Component {
         // randomize={}
       />
       <div className="ModuleContent">
-        <div className="Button" onClick={this.handleClick}>Randomize image</div>
+        <div className="Button" onClick={this.handleClick}>Randomize Shoe</div>
       </div>
     </div>
   }

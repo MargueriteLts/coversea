@@ -49,8 +49,8 @@ export default class Lines extends Component {
         />
         <input
             type="range"
-            min="1"
-            max="50"
+            min={this.props.lines.min}
+            max={this.props.lines.max}
             value={this.state.sliderValue}
             onInput={this.handleInput}
           />

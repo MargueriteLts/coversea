@@ -7,7 +7,6 @@ export default class DropDown extends Component {
     
     this.state = {
       isOpen: false
-      // selectedOption: 'Torus' // Set the default selected option to "Torus"
     };
   }
 
@@ -17,12 +16,10 @@ export default class DropDown extends Component {
     }));
   };
 
-  // handleOptionClick = (option) => {
-  //   this.setState({
-  //     selectedOption: option,
-  //     isOpen: false
-  //   });
-  // };
+  handleClick = (option) => {
+    this.props.handleClick(option); // Call the handleClick function passed from props
+    this.setState({ isOpen: false }); // Close the dropdown after selecting an option
+  };
 
   render() {
     const { isOpen } = this.state;
@@ -33,7 +30,7 @@ export default class DropDown extends Component {
     return (
       <div className="dropdown">
 
-        <button className="dropdown-toggle" onClick={this.toggleDropdown}>
+        <button className={`dropdown-toggle ${isOpen ? 'open' : ''}`} onClick={this.toggleDropdown}>
           {value}
         </button>
 
@@ -43,7 +40,7 @@ export default class DropDown extends Component {
               <div
               className="dropdown-item"
               text={option.text}
-              onClick={() => handleClick(option)}
+              onClick={() => this.handleClick(option)}
               key={option}
               >
               {option}
