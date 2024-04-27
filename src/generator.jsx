@@ -23,7 +23,11 @@ import {
   getLinesStore,
   setLinesStore,
   get3DStore,
-  set3DStore
+  set3DStore,
+  getBasicTypoStore,
+  setBasicTypoStore,
+  generateAllStore
+
   // setCanvasSizeStore
 } from './javascript/store.js'
 
@@ -57,6 +61,7 @@ const generators = {
 }
 
 const actions = {
+  // initStore,
   setShapesStore,
   setParticlesStore,
   setImageStore,
@@ -66,7 +71,9 @@ const actions = {
   setText1Store,
   setLinesStore,
   set3DStore,
+  setBasicTypoStore,
   // setCanvasSizeStore,
+  generateAllStore,
   initSketch
 }
 
@@ -109,6 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (moduleName == 'Text1') {
       props.text1 = getText1Store()
+    }
+
+    if (moduleName == 'BasicTypo') {
+      props.basictypo = getBasicTypoStore()
     }
 
     if (moduleName == 'Lines') {

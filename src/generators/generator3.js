@@ -1,13 +1,19 @@
 const modules = ['Background', 'Vinyl', 'Image', 'Text1']
 
-const blend = {
-  Vinyl: true,
-  Text1: false
-}
+// const blend = {
+//   Vinyl: true,
+//   Text1: false
+// }
 
 const preset = {
-  Background: {
+  
+  blend: {
+    Vinyl: true,
+    Text1: false
+  },
 
+  
+  Background: {
     bgTypes: ['Gradient'],
     currentBgType: 'Gradient',
 
@@ -21,6 +27,7 @@ const preset = {
       }
     }
   },
+  
   Vinyl: {
     sliderValue: 90,
     bigger: false,
@@ -34,16 +41,18 @@ const preset = {
       Label: {}
     }
   },
+
   Image: {
     pixelate: false
   },
+
   Text1: {
     text: 'Funky Groov',
     font: 'wonky',
     dopText: false,
-    size: 100,
+    size: 26,
     color: '#fff'
   }
 }
 
-export { modules, blend, preset }
+export { modules, preset }

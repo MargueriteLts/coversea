@@ -1,13 +1,19 @@
-const modules = ['Background', 'Vinyl', 'Lines', 'Text1']
+const modules = ['Background', 'Vinyl', 'Lines', 'BasicTypo']
 
-const blend = {
-  Vinyl: false,
-  Text1: true
-}
+// const blend = {
+//   Vinyl: false,
+//   Text1: true
+// }
 
 const preset = {
-  Background: {
+  
+  blend: {
+    Vinyl: false,
+    Text1: true
+  },
 
+  
+  Background: {
     bgTypes: ['SolidColor'],
     currentBgType: 'SolidColor',
 
@@ -21,6 +27,7 @@ const preset = {
       }
     }
   },
+
   Vinyl: {
     sliderValue: 90,
     bigger: false,
@@ -34,20 +41,35 @@ const preset = {
       Label: {}
     }
   },
+
   Lines: {
     strokeWeight: 2,
     min: 1,
     max: 10,
   },
-  Text1: {
-    text: 'Music Cover Artwork in Generator4',
+
+  // Text1: {
+  //   text: 'Music Cover Artwork in Generator4',
+  //   font: 'bc-novatica-cyr',
+  //   dopText: false,
+  //   size: 8,
+  //   upperCase: true,
+  //   color: '#ffffff',
+  //   random: true,
+  //   textAlign: 'left'
+  // },
+  BasicTypo: {
+    mainText: 'Music Cover Artwork in Generator4',
+    textarea: 'Music is the answer to everything, music is the key to the world',
     font: 'bc-novatica-cyr',
     dopText: false,
-    size: 15,
+    sizeMainText: 10,
+    sizeTextarea: 2,
     upperCase: true,
     color: '#ffffff',
-    random: true
+    random: true,
+    textAlign: 'left'
   }
 }
 
-export { modules, blend, preset }
+export { modules, preset }

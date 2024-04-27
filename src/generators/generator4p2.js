@@ -1,11 +1,18 @@
 const modules = ['Background', 'Vinyl', 'Lines', 'Text1']
 
-const blend = {
-  Vinyl: false,
-  Text1: true
-}
+// const blend = {
+//   Vinyl: false,
+//   Text1: true
+// }
 
 const preset = {
+  
+  blend: {
+    Vinyl: false,
+    Text1: true
+  },
+
+  
   Background: {
 
     bgTypes: ['Gradient'],
@@ -50,4 +57,4 @@ const preset = {
   }
 }
 
-export { modules, blend, preset }
+export { modules, preset }

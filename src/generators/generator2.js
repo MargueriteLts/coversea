@@ -1,13 +1,18 @@
 const modules = ['Background', 'BackgroundImage', 'Text1']
 
-const blend = {
-  Vinyl: false,
-  Text1: false
-}
+// const blend = {
+//   Vinyl: false,
+//   Text1: false
+// }
 
 const preset = {
-  Background: {
+  
+  blend: {
+    Vinyl: false,
+    Text1: false
+  },
 
+  Background: {
     bgTypes: ['SolidColor', 'Gradient'],
     currentBgType: 'Gradient',
 
@@ -21,6 +26,7 @@ const preset = {
       }
     }
   },
+
   Image: {},
   BackgroundImage: {
     sliderValue: 100,
@@ -34,13 +40,14 @@ const preset = {
       Cars: {}
     }
   },
+
   Text1: {
     text: 'Dance All Night',
     font: 'Acosta',
     dopText: true,
-    size: 100,
+    size: 21,
     color: '#fff'
   }
 }
 
-export { modules, blend, preset }
+export { modules, preset }

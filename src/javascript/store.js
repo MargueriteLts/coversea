@@ -37,13 +37,13 @@ moduleText1Store,
 moduleLinesStore,
 module3DStore,
 blendStore,
+moduleBasicTypoStore,
 allFonts
-// canvasSizeStore
 
 function initStore(generatorName) {
   moduleList = generators[generatorName].modules
 
-  blendStore = generators[generatorName].blend
+  blendStore = generators[generatorName].preset.blend
 
   allFonts = initFontsStore()
 
@@ -74,6 +74,10 @@ function initStore(generatorName) {
 
     if (moduleName == 'Text1') {
       moduleText1Store = initText1Store(generators[generatorName].preset['Text1'])
+    }
+
+    if (moduleName == 'BasicTypo') {
+      moduleBasicTypoStore = initBasicTypoStore(generators[generatorName].preset['BasicTypo'])
     }
 
     if (moduleName == 'Lines') {
@@ -210,15 +214,24 @@ function generateColor() {
 // }
 
 function generatePositions() {
-  const canvasSize = 100;
+  // const canvasSize = 100;
+
+  // let positions = [
+  //   { x: 5, y: 5 }, // top-left
+  //   { x: canvasSize / 2, y: 5 }, // top-center
+  //   { x: canvasSize - 10, y: 5 }, // top-right
+  //   { x: 5, y: canvasSize - 5 }, // bottom-left
+  //   { x: canvasSize / 2, y: canvasSize - 5 }, // bottom-center
+  //   { x: canvasSize - 5, y: canvasSize - 5 } // bottom-right
+  // ];
 
   let positions = [
-    { x: 10, y: 10 }, // top-left
-    { x: canvasSize / 2, y: 10 }, // top-center
-    { x: canvasSize - 10, y: 10 }, // top-right
-    { x: 10, y: canvasSize - 10 }, // bottom-left
-    { x: canvasSize / 2, y: canvasSize - 10 }, // bottom-center
-    { x: canvasSize - 10, y: canvasSize - 10 } // bottom-right
+    { x: 5, y: 5 }, // top-left
+    { x: 30, y: 5 }, // top-center
+    { x: 60, y: 5 }, // top-right
+    { x: 5, y: 95 }, // bottom-left
+    { x: 30, y: 95 }, // bottom-center
+    { x: 60, y: 95 } // bottom-right
   ];
 
   // Generate two distinct random indices
@@ -261,16 +274,8 @@ function setShapesStore(type, value) {
 
 ////////////////////////////////////////////////////// PARTICLES
 
-// function initParticles(preset) {
-//   return {
-//     sliderValue: preset.sliderValue,
-//     particles: generateParticles(preset.sliderValue),
-//     min: preset.min
-//   }
-// }
-
 function initParticles(preset) {
-  preset = Object.assign({}, preset, { moduleName: 'Particles', particles: generateParticles(preset.sliderValue), color: '#ffffff' })
+  preset = Object.assign({}, preset, { moduleName: 'Particles', particles: generateParticles(preset.sliderValue), color: '#000' })
 
   preset.options.forEach((option) => {
     if (option == 'Ellipses') {
@@ -296,10 +301,10 @@ function generateParticles(quantity) {
     particles.push([
       getRandomArbitrary(0, 100),
       getRandomArbitrary(0, 100),
+      getRandomArbitrary(0, 20),
       getRandomArbitrary(0, 100),
       getRandomArbitrary(0, 100),
-      getRandomArbitrary(0, 100),
-      getRandomArbitrary(0, 100)
+      getRandomArbitrary(0, 20)
     ])
   }
 
@@ -503,7 +508,7 @@ function initText1Store(preset) {
   let positions = generatePositions()
 
   // preset = Object.assign({}, preset, { moduleName: 'Text 1', color: '#fff', txtposition: position })
-  preset = Object.assign({}, preset, { moduleName: 'Text 1', txtpositions: positions })
+  preset = Object.assign({}, preset, { moduleName: 'Typography', txtpositions: positions })
 
 
   return preset
@@ -520,6 +525,43 @@ function setText1Store(type, nextValue) {
     }
     if (type === 'SolidColor') {
       moduleText1Store.color = nextValue
+      resolve([nextValue])
+    }
+  })
+}
+
+////////////////////// BASICTYPO
+
+function initBasicTypoStore(preset) {
+
+  let positions = generatePositions()
+
+  // preset = Object.assign({}, preset, { moduleName: 'Text 1', color: '#fff', txtposition: position })
+  preset = Object.assign({}, preset, { moduleName: 'Typography', txtpositions: positions })
+
+
+  return preset
+}
+
+function getBasicTypoStore() {
+  return moduleBasicTypoStore
+}
+
+function setBasicTypoStore(type, nextValue) {
+  return new Promise((resolve, reject) => {
+    if (type === 'mainText') {
+      moduleBasicTypoStore.mainText = nextValue
+    }
+    if (type === 'textarea') {
+      moduleBasicTypoStore.textarea = nextValue
+    }
+    if (type === 'SolidColor') {
+      moduleBasicTypoStore.color = nextValue
+      resolve([nextValue])
+    }
+    if (type === 'Positions') {
+      let positions = generatePositions()
+      moduleBasicTypoStore.txtpositions = positions
       resolve([nextValue])
     }
   })
@@ -603,6 +645,56 @@ function set3DStore(type, value) {
   }
 }
 
+////////////////////// GENERATE ALL
+
+function generateAllStore(generatorName) {
+  moduleList = generators[generatorName].modules
+
+  blendStore = generators[generatorName].preset.blend
+
+  allFonts = initFontsStore()
+
+  moduleList.forEach(moduleName => {
+    if (moduleName == 'Background') {
+    }
+
+    if (moduleName == 'Shapes') {
+    }
+
+    if (moduleName == 'Particles') {
+    }
+
+    if (moduleName == 'Image') {
+    }
+
+    if (moduleName == 'BackgroundImage') {
+    }
+
+    if (moduleName == 'Vinyl') {
+    }
+
+    if (moduleName == 'Text1') {
+    }
+
+    if (moduleName == 'BasicTypo') {
+      generatePositions()
+      setBasicTypoStore('Positions')
+    }
+
+    if (moduleName == 'Lines') {
+      generateLines(50)
+      setLinesStore('randomize')
+    }
+
+    if (moduleName == 'Module3D') {
+    }
+  })
+}
+
+// function generateAllStore(generatorName) {
+//   initStore(generatorName)
+// }
+
 ///////////////////////////////////////////////////////////////////// EXPORT
 
 export {
@@ -630,5 +722,8 @@ export {
   getFontsStore,
   // setCanvasSizeStore,
   // generatePosition,
-  getBlendStore
+  getBlendStore,
+  getBasicTypoStore,
+  setBasicTypoStore,
+  generateAllStore
 }

@@ -19,12 +19,25 @@ h2 {
   text-transform: uppercase;
 }
 
+h3 {
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 16px;
+  font-family: neue-haas-unica;
+}
+
 .flexColumn {
   flex-direction: column;
 }
 
 .flexRow {
   flex-direction: row;
+}
+
+.bottom {
+  margin-bottom: 24px;
 }
 
 .header {

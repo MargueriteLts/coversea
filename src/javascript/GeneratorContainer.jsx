@@ -13,6 +13,10 @@ import Vinyl from './modules/Vinyl.jsx'
 import Text1 from './modules/Text1.jsx'
 import Lines from './modules/Lines.jsx'
 import Module3D from './modules/Module3D.jsx'
+import BasicTypo from './modules/BasicTypo.jsx'
+
+let size
+
 
 
 export default class GeneratorContainer extends Component {
@@ -24,7 +28,8 @@ export default class GeneratorContainer extends Component {
   componentDidMount() {
     const sketchContainer = this.sketchContainerRef.current;
     const { clientWidth, clientHeight } = sketchContainer;
-    const size = parseInt(Math.min(clientWidth, clientHeight))
+    // const size = parseInt(Math.min(clientWidth, clientHeight))
+    size = parseInt(Math.min(clientWidth, clientHeight))
 
     // this.saveCanvasSize(size)
 
@@ -52,7 +57,9 @@ export default class GeneratorContainer extends Component {
       lines,
       setLinesStore,
       module3D,
-      set3DStore
+      set3DStore,
+      basictypo,
+      setBasicTypoStore
     } = this.props
 
     const modules = []
@@ -129,6 +136,16 @@ export default class GeneratorContainer extends Component {
         )
       }
 
+      if (moduleName == 'BasicTypo') {
+        modules.push(
+          <BasicTypo
+            basictypo={basictypo}
+            setBasicTypoStore={setBasicTypoStore}
+            key={index}
+          />
+        )
+      }
+
       if (moduleName == 'Lines') {
         modules.push(
           <Lines
@@ -165,11 +182,21 @@ export default class GeneratorContainer extends Component {
     });
   };
 
+  GenerateCover = () => {
+    // this.props.generateAllStore()
+    const container = document.getElementById('reactComponentRoot')
+    const generatorName = container.dataset.generator
+    // this.props.initStore(generatorName)
+    this.props.generateAllStore(generatorName)
+  }
+
   // saveCanvasSize(size) {
   //   this.props.setCanvasSizeStore(size)
   // }
 
   render() {
+    const { generateAll } = this.props
+
     return <div className="GeneratorContent">
       <div className='wrapModules'>
       {this.renderModules()}
@@ -179,6 +206,7 @@ export default class GeneratorContainer extends Component {
         </div>
         <div className="controls">
           <div className="ButtonPrimary" onClick={this.DownloadImage}>Download image</div>
+          <div className="ButtonBig" onClick={this.GenerateCover}>GENERATE</div>
         </div>
       </div>
     </div>

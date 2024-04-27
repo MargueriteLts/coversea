@@ -1,13 +1,13 @@
 const modules = ['Background', 'Vinyl', 'Particles', 'Text1']
 
-const blend = {
-  Vinyl: false,
-  Text1: false
-}
-
 const preset = {
-  Background: {
+  
+  blend: {
+    Vinyl: false,
+    Text1: false
+  },
 
+  Background: {
     bgTypes: ['SolidColor', 'Gradient'],
     currentBgType: 'Gradient',
 
@@ -21,6 +21,7 @@ const preset = {
       }
     }
   },
+
   Vinyl: {
     sliderValue: 50,
     bigger: false,
@@ -34,6 +35,7 @@ const preset = {
       Label: {}
     }
   },
+
   Particles: {
     sliderValue: 10,
     opacity: 80,
@@ -47,13 +49,14 @@ const preset = {
       Mix: {}
     }
   },
+  
   Text1: {
     text: 'Soft Random',
     font: 'esenin-script-one',
     dopText: true,
-    size: 100,
-    color: '#fff'
+    size: 22,
+    color: '#bababa'
   }
 }
 
-export { modules, blend, preset }
+export { modules, preset }

@@ -1,11 +1,18 @@
 const modules = ['Background', 'Module3D', 'Text1']
 
-const blend = {
-  Vinyl: false,
-  Text1: false
-}
+// const blend = {
+//   Vinyl: false,
+//   Text1: false
+// }
 
 const preset = {
+  
+  blend: {
+    Vinyl: false,
+    Text1: false
+  },
+
+  
   Background: {
 
     bgTypes: ['SolidColor'],
@@ -40,4 +47,4 @@ const preset = {
   }
 }
 
-export { modules, blend, preset }
+export { modules, preset }

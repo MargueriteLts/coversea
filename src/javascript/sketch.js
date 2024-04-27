@@ -1,5 +1,6 @@
 import p5 from 'p5'
 // import utils from './p5.utils.min.js'
+// import {sample} from './utilities.js'
 
 import {
   getModuleList,
@@ -13,6 +14,7 @@ import {
   getText1Store,
   getLinesStore,
   get3DStore,
+  getBasicTypoStore,
   getFontsStore
   // setCanvasSizeStore,
   // generatePosition
@@ -43,8 +45,8 @@ let imagesLabelVinyl = {}
 let imageVinyl
 
 let fontEsenin
-let mainTextFont;
-let otherTextFont;
+let mainTextFont
+let otherTextFont
 
 let graphics
 let blendedLayer
@@ -53,8 +55,8 @@ let blendedLayer
 // let layerTxtBlend
 let vinylLayer
 
-let prevModule3DX;
-let prevModule3DY;
+let prevModule3DX
+let prevModule3DY
 
 // FOR GRADIENT
 let gradientBg
@@ -245,7 +247,8 @@ function drawModules(p) {
         p.ellipse (
           (particles.particles[index][0] * canvasSize) / 100,
           (particles.particles[index][1] * canvasSize) / 100,
-          particles.particles[index][2],
+          (particles.particles[index][2] * canvasSize) / 100
+          // particles.particles[index][2],
         )
       }
     } else if (particles.options.includes('Squares') && particles.currentParticlesType === 'Squares') {
@@ -253,7 +256,8 @@ function drawModules(p) {
         p.square (
           (particles.particles[index][0] * canvasSize) / 100,
           (particles.particles[index][1] * canvasSize) / 100,
-          particles.particles[index][2],
+          (particles.particles[index][2] * canvasSize) / 100
+          // particles.particles[index][2],
         )
       }
     } else if (particles.options.includes('Mix') && particles.currentParticlesType === 'Mix') {
@@ -261,12 +265,14 @@ function drawModules(p) {
         p.square (
           (particles.particles[index][0] * canvasSize) / 100,
           (particles.particles[index][1] * canvasSize) / 100,
-          particles.particles[index][2],
+          (particles.particles[index][2] * canvasSize) / 100
+          // particles.particles[index][2],
         )
         p.ellipse (
           (particles.particles[index][3] * canvasSize) / 100,
           (particles.particles[index][4] * canvasSize) / 100,
-          particles.particles[index][5],
+          (particles.particles[index][5] * canvasSize) / 100
+          // particles.particles[index][5],
         )
       }
     }
@@ -453,11 +459,16 @@ function drawModules(p) {
 
     const text1 = getText1Store()
 
+    if (text1.textAlign === 'left') {
+      p.textAlign(p.LEFT)
+    } else {
+      p.textAlign(p.CENTER, p.CENTER);
+    }
+
     ////// STYLE
     p.noStroke()
     
     p.textFont(text1.font)
-    p.textAlign(p.CENTER, p.CENTER);
     p.textWrap(p.WORD);
     
 
@@ -469,25 +480,48 @@ function drawModules(p) {
       textContent = text1.text
     }
 
+    let presetSize = text1.size
+    let txtSize = (presetSize * canvasSize) / 100
+    p.textSize(txtSize)
+    p.textLeading(txtSize-20)
+    p.fill(text1.color)
+    
     let x
     let y
+    
     if (text1.random == true) {
-      const position1 = text1.txtpositions[0]
-      x = (position1.x * canvasSize) / 100
-      y = (position1.y * canvasSize) / 100
+      
+      // const position1 = text1.txtpositions[0]
+      // x = (position1.x * canvasSize) / 100
+      // y = (position1.y * canvasSize) / 100
+      
+      const positionTxt = text1.txtpositions[0]
+      x = (positionTxt.x * canvasSize) / 100
+      y = (positionTxt.y * canvasSize) / 100
+      
+      let textWidth = p.textWidth(textContent)
+      
+      while (canvasSize - x < textWidth) {
+        txtSize -= 1
+        p.textSize(txtSize)
+        textWidth = p.textWidth(textContent);
+      }
+      p.text(textContent, x, y, canvasSize/3, canvasSize/3);
+      // p.text(textContent, x, y)
+      
+      
+      
     } else {
+      p.rectMode(p.CENTER);
       x = canvasSize / 2;
       y = canvasSize / 2;
+      p.text(textContent, x, y, canvasSize, canvasSize);
     }
 
 
-    let presetSize = text1.size
-
-
-    p.textSize(presetSize)
-    p.textLeading(presetSize-20)
     
-    p.rectMode(p.CENTER);
+
+
 
     // let textWidth = p.textWidth(textContent)
 
@@ -513,43 +547,43 @@ function drawModules(p) {
     //   p.text(textContent, x, y, canvasSize, canvasSize);
     // }
 
-    p.fill(text1.color)
-    p.text(textContent, x, y, canvasSize, canvasSize);
-
 
 
     //////// DOP TEXT
 
     if (text1.dopText == true) {
-      p.textAlign(p.CENTER, p.LEFT)
+
+      p.textAlign(p.CENTER)
       const maxSize = (2 * canvasSize) / 100
       // p.textFont(otherTextFont);
 
-      let otherText1 = "Dance"
-      let otherText2 = "Music"
-
-      const position1 = text1.txtpositions[0]
-      const position2 = text1.txtpositions[1]
-
+      
+      
       // Text 1
-      let x1 = (position1.x * canvasSize) / 100
-      let y1 = (position1.y * canvasSize) / 100
+      let otherText1 = "Dance"
       let textSize1 = maxSize
       p.textSize(textSize1)
+      
+      const position1 = text1.txtpositions[0]
+      let x1 = (position1.x * canvasSize) / 100
+      let y1 = (position1.y * canvasSize) / 100
       let textWidth1 = p.textWidth(otherText1)
-
+      
       while (x1 - textWidth1 / 2 < 0 || x1 + textWidth1 / 2 > p.width - 10) {
         textSize1 -= 1
         p.textSize(textSize1)
         textWidth1 = p.textWidth(otherText1)
       }
       p.text(otherText1, x1, y1)
-
+      
       // Text 2
-      let x2 = (position2.x * canvasSize) / 100
-      let y2 = (position2.y * canvasSize) / 100
+      let otherText2 = "Music"
       let textSize2 = maxSize
       p.textSize(textSize2)
+      
+      const position2 = text1.txtpositions[1]
+      let x2 = (position2.x * canvasSize) / 100
+      let y2 = (position2.y * canvasSize) / 100
       let textWidth2 = p.textWidth(otherText2)
 
       while (x2 - textWidth2 / 2 < 0 || x2 + textWidth2 / 2 > p.width - 10 || Math.abs(y2 - y1) < textSize2) {
@@ -561,10 +595,74 @@ function drawModules(p) {
     }
 
 
-
-
-
   }
+
+  /////////////////////////////////////////// MODULE BASICTYPO
+
+  if (moduleList.includes('BasicTypo')) {
+    const basicTypo = getBasicTypoStore()
+    let mainText = basicTypo.mainText.toUpperCase()
+    let otherText = basicTypo.textarea.toUpperCase()
+
+    p.noStroke()
+    p.textFont(basicTypo.font)
+    p.textWrap(p.WORD)
+
+    //OTHER TEXT
+    p.rectMode(p.CORNER)
+
+    const positionTxt = basicTypo.txtpositions[0]
+    let x = positionTxt.x
+    let y = positionTxt.y
+
+    let presetSizeTextarea = basicTypo.sizeTextarea
+    let presetLeadingSizeTextarea = 2
+    // console.log(presetSizeTextarea);
+    let otherTextSize = (presetSizeTextarea * canvasSize) / 100
+    let otherTextLeadingSize = (presetLeadingSizeTextarea * canvasSize) / 100
+    p.textSize(otherTextSize)
+    // p.textLeading(otherTextSize-2)
+    p.textLeading(otherTextLeadingSize)
+
+    const prct10 = (10 * canvasSize) / 100
+    let width = (canvasSize - prct10) / 3
+
+    if (y == 5) {
+      p.textAlign(p.LEFT, p.TOP)
+    } else {
+      p.textAlign(p.LEFT, p.BOTTOM)
+    }
+
+    x = (positionTxt.x * canvasSize) / 100
+    y = (positionTxt.y * canvasSize) / 100
+    p.text(otherText, x, y, width)
+
+    //MAIN TEXT
+    p.textAlign(p.CENTER, p.CENTER)
+    let presetSizeMainText = basicTypo.sizeMainText
+    let presetLeadingSizeMainText = 8
+    let MainTextSize = (presetSizeMainText * canvasSize) / 100
+    let MainTextLeadingSize = (presetLeadingSizeMainText * canvasSize) / 100
+    p.textSize(MainTextSize)
+    p.textLeading(MainTextLeadingSize)
+    p.fill(basicTypo.color)
+    p.rectMode(p.CENTER)
+    let xmain = canvasSize / 2;
+    let ymain = canvasSize / 2;
+    p.text(mainText, xmain, ymain, canvasSize, canvasSize)
+  }
+
+  /////////////////////////////////////////// MODULE CRAZYTYPO
+
+  // if (moduleList.includes('crazyTypo')) {
+  //   let characters = crazyTypo.text.split('')
+  //   let fontCollection = ['Acosta', 'esenin-script-one', 'wonky', 'Bolgarus', 'typekini', 'AUSRINE', 'YUNGA-Display']
+  //   // let font sample(fontCollection)
+  //   // for (let index = 0; index < fontCollection.length; index++) {
+  //   //   const element = array[index];
+      
+  //   // }
+  // }
 
 }
 
