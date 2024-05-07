@@ -1,4 +1,4 @@
-const modules = ['Background', 'Vinyl', 'Particles', 'Text1']
+const modules = ['Background', 'Vinyl', 'Particles', 'BasicTypo']
 
 const preset = {
   
@@ -37,7 +37,9 @@ const preset = {
   },
 
   Particles: {
-    sliderValue: 10,
+    sliderValue: 15,
+    max: 150,
+    min: 10,
     opacity: 80,
 
     options: ['Ellipses', 'Squares', 'Mix'],
@@ -50,11 +52,20 @@ const preset = {
     }
   },
   
-  Text1: {
-    text: 'Soft Random',
+  // Text1: {
+  //   text: 'Soft Random',
+  //   font: 'esenin-script-one',
+  //   dopText: true,
+  //   size: 22,
+  //   color: '#bababa'
+  // }
+  BasicTypo: {
+    mainText: 'Soft Random',
     font: 'esenin-script-one',
-    dopText: true,
-    size: 22,
+    dopText: false,
+    sizeMainText: 22,
+    leadingMainText: 19,
+    upperCase: false,
     color: '#bababa'
   }
 }

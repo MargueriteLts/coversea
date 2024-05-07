@@ -1,4 +1,4 @@
-const modules = ['Background', 'Vinyl', 'Image', 'Text1']
+const modules = ['Background', 'Vinyl', 'Image', 'BasicTypo']
 
 // const blend = {
 //   Vinyl: true,
@@ -46,12 +46,23 @@ const preset = {
     pixelate: false
   },
 
-  Text1: {
-    text: 'Funky Groov',
+  // Text1: {
+  //   text: 'Funky Groov',
+  //   font: 'wonky',
+  //   dopText: false,
+  //   size: 26,
+  //   color: '#fff'
+  // }
+  BasicTypo: {
+    mainText: 'Funky Groov',
     font: 'wonky',
     dopText: false,
-    size: 26,
-    color: '#fff'
+    sizeMainText: 26,
+    leadingMainText: 24,
+    upperCase: true,
+    color: '#ffffff',
+    random: true,
+    textAlign: 'left'
   }
 }
 

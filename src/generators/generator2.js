@@ -1,4 +1,4 @@
-const modules = ['Background', 'BackgroundImage', 'Text1']
+const modules = ['Background', 'BackgroundImage', 'BasicTypo']
 
 // const blend = {
 //   Vinyl: false,
@@ -41,12 +41,26 @@ const preset = {
     }
   },
 
-  Text1: {
-    text: 'Dance All Night',
+  // Text1: {
+  //   text: 'Dance All Night',
+  //   font: 'Acosta',
+  //   dopText: true,
+  //   size: 21,
+  //   color: '#fff'
+  // }
+  BasicTypo: {
+    mainText: 'Dance All Night',
+    textarea: 'Dance',
     font: 'Acosta',
     dopText: true,
-    size: 21,
-    color: '#fff'
+    sizeMainText: 20,
+    leadingMainText: 20,
+    sizeTextarea: 2,
+    leadingTextarea: 2,
+    upperCase: true,
+    color: '#ffffff',
+    random: true,
+    textAlign: 'left'
   }
 }
 

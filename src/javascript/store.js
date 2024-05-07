@@ -478,7 +478,11 @@ function initVinylStore(preset) {
     }
 
     if (type === 'Label') {
-      preset.preset.Label = Object.assign({}, preset.preset.Label, { text: 'Disc Label', images: collection2, current: sample(Object.keys(collection2)) })
+      preset.preset.Label = Object.assign({}, preset.preset.Label, {
+        text: 'Disc Label',
+        images: collection2,
+        current: sample(Object.keys(collection2))
+      })
     }
   })
 
@@ -490,15 +494,23 @@ function getVinylStore() {
 }
 
 function setVinylStore(type, value) {
-  if (type === 'CurrentTabChange') {
-    moduleVinylStore.currentVinylType = value
-  }
-  if (type === 'size') {
-    moduleVinylStore.sliderValue = value
-  }
-  if (type === 'opacity') {
-    moduleVinylStore.sliderOpacity = value
-  }
+  return new Promise((resolve, reject) => {
+    if (type === 'CurrentTabChange') {
+      moduleVinylStore.currentVinylType = value
+      resolve([value])
+    }
+    if (type === 'size') {
+      // console.log('1///', value);
+      moduleVinylStore.sliderValue = value
+      // console.log('2///', value);
+      resolve([value])
+      // console.log('3///', value);
+    }
+    if (type === 'opacity') {
+      moduleVinylStore.sliderOpacity = value
+      resolve([value])
+    }
+  })
 }
 
 ////////////////////// TEXT1
@@ -645,7 +657,7 @@ function set3DStore(type, value) {
   }
 }
 
-////////////////////// GENERATE ALL
+//////////////////////////////////////////// GENERATE ALL
 
 function generateAllStore(generatorName) {
   moduleList = generators[generatorName].modules
@@ -656,37 +668,77 @@ function generateAllStore(generatorName) {
 
   moduleList.forEach(moduleName => {
     if (moduleName == 'Background') {
+      let BgType = sample(moduleBackgroundStore.bgTypes)
+      setBackgroundStore('CurrentTabChange', BgType)
+      setBackgroundStore('SolidColor', generateColor())
+
+      setBackgroundStore('Gradient')
+      setBackgroundStore('GradientColor1', generateColor())
+      setBackgroundStore('GradientColor2', generateColor())
+      setBackgroundStore('AngleGradient')
+
     }
 
     if (moduleName == 'Shapes') {
+      setShapesStore('SolidColor', generateColor())
+      setShapesStore('Size', getRandomArbitrary(0, 100))
     }
 
     if (moduleName == 'Particles') {
+      let ParticlesTypes = sample(moduleParticlesStore.options)
+      setParticlesStore('CurrentTabChange', ParticlesTypes)
+      setParticlesStore('quantity', getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max))
+      setParticlesStore('CurrentTabChange', ParticlesTypes)
+      //solid color juste black cest cool aussi
+      setParticlesStore('SolidColor', generateColor())
     }
 
     if (moduleName == 'Image') {
+      setImageStore()
     }
 
     if (moduleName == 'BackgroundImage') {
+      let BgImgType = sample(moduleBackgroundImageStore.collections)
+      setBackgroundImageStore('CurrentTabChange', BgImgType)
+      setBackgroundImageStore('NightClub')
+      setBackgroundImageStore('Cars')
+      setBackgroundImageStore('opacity', getRandomArbitrary(10, 255))
+
     }
 
     if (moduleName == 'Vinyl') {
+
+      // return new Promise((resolve, reject) => {
+        let Vinyltype = sample(moduleVinylStore.vinylTypes)
+        setVinylStore('CurrentTabChange', Vinyltype)
+        // resolve([type])
+        let size = getRandomArbitrary(0, 100)
+        setVinylStore('size', size)
+        // resolve([size])
+        let opacity = getRandomArbitrary(0, 255)
+        setVinylStore('opacity', opacity)
+        // resolve([opacity])
+      // })
     }
 
     if (moduleName == 'Text1') {
     }
 
     if (moduleName == 'BasicTypo') {
-      generatePositions()
       setBasicTypoStore('Positions')
+      setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
     }
 
     if (moduleName == 'Lines') {
-      generateLines(50)
+      setLinesStore('SolidColor', generateColor())
       setLinesStore('randomize')
+      setLinesStore('strokeWeight', getRandomArbitrary(0, 100))
     }
 
     if (moduleName == 'Module3D') {
+      let type3D = sample(module3DStore.options)
+      set3DStore('CurrentTabChange', type3D)
+      set3DStore('randomize')
     }
   })
 }

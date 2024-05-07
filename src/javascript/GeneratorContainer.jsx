@@ -188,6 +188,12 @@ export default class GeneratorContainer extends Component {
     const generatorName = container.dataset.generator
     // this.props.initStore(generatorName)
     this.props.generateAllStore(generatorName)
+      // .then(() => {
+      //   this.renderModules()
+      //   // this.setState({
+      //   //   sliderOpacity: newValue[0]
+      //   // })
+      // })
   }
 
   // saveCanvasSize(size) {
@@ -195,7 +201,7 @@ export default class GeneratorContainer extends Component {
   // }
 
   render() {
-    const { generateAll } = this.props
+    // const { generateAll } = this.props
 
     return <div className="GeneratorContent">
       <div className='wrapModules'>

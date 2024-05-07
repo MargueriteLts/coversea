@@ -15,23 +15,41 @@ export default class Vinyl extends Component {
     }
   }
 
+  //////////OK je comprends pas comment marche la promise, pcq on a bosse avec la color, mais la jai une tab et 2 sliders et je comprends pas quelles donnees je dois peredat
+
   handleTabClick = (type) => {
     this.props.setVinylStore('CurrentTabChange', type)
 
-    this.setState({
-      currentVinylType: type
-    })
+    // this.setState({
+    //   currentVinylType: type
+    // })
+      .then(([type]) => {
+        this.setState({
+          currentVinylType: type
+        })
+      })
   }
 
   handleInput = (e) => {
-    this.props.setVinylStore('size', e.target.value)
-    this.setState({sliderValue: e.target.value})
+    const value = e.target.value
+    this.props.setVinylStore('size', value)
+    // this.setState({sliderValue: e.target.value})
+      .then(([newValue]) => {
+        this.setState({
+          sliderValue: newValue
+        })
+      })
   }
 
   handleOpacity = (e) => {
-    // console.log('yes');
-    this.props.setVinylStore('opacity', e.target.value)
-    this.setState({sliderOpacity: e.target.value})
+    const value = e.target.value
+    this.props.setVinylStore('opacity', value)
+    // this.setState({sliderOpacity: e.target.value})
+      .then(([newValue]) => {
+        this.setState({
+          sliderOpacity: newValue
+        })
+      })
   }
 
   //////////////////////////////////////////////////////// RENDER

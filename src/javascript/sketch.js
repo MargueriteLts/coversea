@@ -171,28 +171,34 @@ function drawModules(p) {
   /////////////////////////////////////////// MODULE SHAPES
 
   if (moduleList.includes('Shapes')) {
+    const shapes = getShapesStore()
 
-    const background = getBackgroundStore()
-    const color1 = background.preset.Gradient.color1
-    const color2 = background.preset.Gradient.color2
-    // const angle = background.preset.Gradient.angle
+    if (shapes.settings.gradient == true) {
+      const background = getBackgroundStore()
+      const color1 = background.preset.Gradient.color1
+      const color2 = background.preset.Gradient.color2
+      // const angle = background.preset.Gradient.angle
 
-    c1 = p.color(color2)
-    c2 = p.color(color1)
+      c1 = p.color(color2)
+      c2 = p.color(color1)
 
-    p.noStroke()
+      p.noStroke()
 
-    let gradientShapes = p.drawingContext.createLinearGradient(
-      0, 0, canvasSize, canvasSize
-    )
-    gradientShapes.addColorStop(0, c1)
-    gradientShapes.addColorStop(1, c2)
+      let gradientShapes = p.drawingContext.createLinearGradient(
+        0, 0, canvasSize, canvasSize
+      )
+      gradientShapes.addColorStop(0, c1)
+      gradientShapes.addColorStop(1, c2)
 
-    p.drawingContext.fillStyle = gradientShapes
+      p.drawingContext.fillStyle = gradientShapes
+    }
+    // else {
+    //   p.fill(shapes.color)
+    // }
 
     /////// shapes
 
-    const Value = getShapesStore().settings.sliderValue
+    const Value = shapes.settings.sliderValue
     const wValue = parseInt(Value)
 
     const xCenter = canvasSize / 2
@@ -601,51 +607,64 @@ function drawModules(p) {
 
   if (moduleList.includes('BasicTypo')) {
     const basicTypo = getBasicTypoStore()
-    let mainText = basicTypo.mainText.toUpperCase()
-    let otherText = basicTypo.textarea.toUpperCase()
+    let mainText
+    let otherText
 
     p.noStroke()
     p.textFont(basicTypo.font)
     p.textWrap(p.WORD)
+    p.fill(basicTypo.color)
 
     //OTHER TEXT
-    p.rectMode(p.CORNER)
+    if (basicTypo.dopText == true) {
+      p.rectMode(p.CORNER)
 
-    const positionTxt = basicTypo.txtpositions[0]
-    let x = positionTxt.x
-    let y = positionTxt.y
+      if (basicTypo.upperCase == true) {
+        otherText = basicTypo.textarea.toUpperCase()
+      } else {
+        otherText = basicTypo.textarea
+      }
 
-    let presetSizeTextarea = basicTypo.sizeTextarea
-    let presetLeadingSizeTextarea = 2
-    // console.log(presetSizeTextarea);
-    let otherTextSize = (presetSizeTextarea * canvasSize) / 100
-    let otherTextLeadingSize = (presetLeadingSizeTextarea * canvasSize) / 100
-    p.textSize(otherTextSize)
-    // p.textLeading(otherTextSize-2)
-    p.textLeading(otherTextLeadingSize)
+      const positionTxt = basicTypo.txtpositions[0]
+      let x = positionTxt.x
+      let y = positionTxt.y
 
-    const prct10 = (10 * canvasSize) / 100
-    let width = (canvasSize - prct10) / 3
+      let presetSizeTextarea = basicTypo.sizeTextarea
+      let presetLeadingSizeTextarea = basicTypo.leadingTextarea
+      // console.log(presetSizeTextarea);
+      let otherTextSize = (presetSizeTextarea * canvasSize) / 100
+      let otherTextLeadingSize = (presetLeadingSizeTextarea * canvasSize) / 100
+      p.textSize(otherTextSize)
+      // p.textLeading(otherTextSize-2)
+      p.textLeading(otherTextLeadingSize)
 
-    if (y == 5) {
-      p.textAlign(p.LEFT, p.TOP)
-    } else {
-      p.textAlign(p.LEFT, p.BOTTOM)
+      const prct10 = (10 * canvasSize) / 100
+      let width = (canvasSize - prct10) / 3
+
+      if (y == 5) {
+        p.textAlign(p.LEFT, p.TOP)
+      } else {
+        p.textAlign(p.LEFT, p.BOTTOM)
+      }
+
+      x = (positionTxt.x * canvasSize) / 100
+      y = (positionTxt.y * canvasSize) / 100
+      p.text(otherText, x, y, width)
     }
-
-    x = (positionTxt.x * canvasSize) / 100
-    y = (positionTxt.y * canvasSize) / 100
-    p.text(otherText, x, y, width)
 
     //MAIN TEXT
     p.textAlign(p.CENTER, p.CENTER)
+    if (basicTypo.upperCase == true) {
+      mainText = basicTypo.mainText.toUpperCase()
+    } else {
+      mainText = basicTypo.mainText
+    }
     let presetSizeMainText = basicTypo.sizeMainText
-    let presetLeadingSizeMainText = 8
+    let presetLeadingSizeMainText = basicTypo.leadingMainText
     let MainTextSize = (presetSizeMainText * canvasSize) / 100
     let MainTextLeadingSize = (presetLeadingSizeMainText * canvasSize) / 100
     p.textSize(MainTextSize)
     p.textLeading(MainTextLeadingSize)
-    p.fill(basicTypo.color)
     p.rectMode(p.CENTER)
     let xmain = canvasSize / 2;
     let ymain = canvasSize / 2;

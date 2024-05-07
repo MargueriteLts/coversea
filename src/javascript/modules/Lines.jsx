@@ -26,7 +26,7 @@ export default class Lines extends Component {
     this.props.setLinesStore('randomize')
   }
 
-  handleInput = (e) => {
+  handleSliderSize = (e) => {
     let type = 'strokeWeight'
     this.props.setLinesStore(type, e.target.value)
     this.setState({sliderValue: e.target.value})
@@ -52,7 +52,7 @@ export default class Lines extends Component {
             min={this.props.lines.min}
             max={this.props.lines.max}
             value={this.state.sliderValue}
-            onInput={this.handleInput}
+            onInput={this.handleSliderSize}
           />
       </div>
     </div>

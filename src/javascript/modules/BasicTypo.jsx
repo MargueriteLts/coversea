@@ -70,15 +70,18 @@ export default class BasicTypo extends Component {
             key='ColorPicker'
           />
         </div>
-        <label>
-          Other text
-          <textarea
-            rows={3}
-            cols={40}
-            value={this.state.valueTextarea}
-            onChange={this.handleTextareaChange}
-          />
-        </label>
+        { basictypo.dopText
+          ? <label>
+              Other text
+              <textarea
+                rows={3}
+                cols={40}
+                value={this.state.valueTextarea}
+                onChange={this.handleTextareaChange}
+              />
+            </label>
+            : null
+        }
       </div>
     </div>
   }

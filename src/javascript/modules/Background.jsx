@@ -27,12 +27,11 @@ export default class Background extends Component {
 
   handleChangeSolidColor = (object, value) => {
     this.props.setBackgroundStore(object, value)
-      .then((color) => {
-        this.setState({
-          color: color[0]
-        })
-      }
-    )
+    .then((color) => {
+      this.setState({
+        color: color[0]
+      })
+    })
   }
 
   ///////////////////////// GRADIENT

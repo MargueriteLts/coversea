@@ -44,7 +44,7 @@ export default class AllColorPicker extends Component {
 
   render() {
 
-    const { title, alpha } = this.props
+    const { title } = this.props
 
     let color = []
 

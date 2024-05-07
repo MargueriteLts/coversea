@@ -15,7 +15,7 @@ const preset = {
   
   Background: {
 
-    bgTypes: ['SolidColor', 'Gradient'],
+    bgTypes: ['Gradient'],
     currentBgType: 'Gradient',
 
     preset: {
@@ -30,11 +30,14 @@ const preset = {
   },
   Shapes: { 
     settings: {
-      sliderValue: 37
+      sliderValue: 37,
+      gradient: true
     }
   },
   Particles: {
     sliderValue: 10,
+    max: 20,
+    min: 0,  
     stroke: true,
 
     options: ['Ellipses', 'Squares', 'Mix'],

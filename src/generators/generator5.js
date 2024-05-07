@@ -1,4 +1,4 @@
-const modules = ['Background', 'Module3D', 'Text1']
+const modules = ['Background', 'Module3D', 'BasicTypo']
 
 // const blend = {
 //   Vinyl: false,
@@ -37,13 +37,27 @@ const preset = {
       Square: {}
     }
   },
-  Text1: {
-    text: 'Volume Music',
+  // Text1: {
+  //   text: 'Volume Music',
+  //   font: 'AUSRINE',
+  //   upperCase: true,
+  //   dopText: true,
+  //   size: 100,
+  //   color: '#fff'
+  // }
+  BasicTypo: {
+    mainText: 'Volume Music',
+    textarea: 'Music is the answer to everything, music is the key to the world',
     font: 'AUSRINE',
-    upperCase: true,
     dopText: true,
-    size: 100,
-    color: '#fff'
+    sizeMainText: 10,
+    leadingMainText: 8,
+    sizeTextarea: 2,
+    leadingTextarea: 2,
+    upperCase: true,
+    color: '#ffffff',
+    random: true,
+    textAlign: 'left'
   }
 }
 

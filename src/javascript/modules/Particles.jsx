@@ -61,7 +61,7 @@ export default class Particles extends Component {
           <input
             type="range"
             min={particles.min}
-            max="250"
+            max={particles.max}
             value={this.state.sliderValue}
             onInput={this.handleInput}
           />
