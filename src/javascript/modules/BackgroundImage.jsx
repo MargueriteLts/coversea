@@ -10,7 +10,7 @@ export default class BackgroundImage extends Component {
 
     this.state = {
       currentCollection: this.props.backgroundImage.currentCollection,
-      sliderValue: this.props.backgroundImage.preset.sliderValue
+      sliderValue: this.props.backgroundImage.sliderValue
     }
   }
 

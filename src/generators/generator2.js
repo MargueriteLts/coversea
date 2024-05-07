@@ -1,9 +1,4 @@
-const modules = ['Background', 'BackgroundImage', 'BasicTypo']
-
-// const blend = {
-//   Vinyl: false,
-//   Text1: false
-// }
+const modules = ['Background', 'BackgroundImage', 'BasicTypo', 'Overlay']
 
 const preset = {
   
@@ -28,26 +23,19 @@ const preset = {
   },
 
   Image: {},
+
   BackgroundImage: {
-    sliderValue: 100,
+    sliderValue: 200,
 
     collections: ['NightClub', 'Cars'],
     currentCollection: 'NightClub',
 
     preset: {
-
       NightClub: {},
       Cars: {}
     }
   },
 
-  // Text1: {
-  //   text: 'Dance All Night',
-  //   font: 'Acosta',
-  //   dopText: true,
-  //   size: 21,
-  //   color: '#fff'
-  // }
   BasicTypo: {
     mainText: 'Dance All Night',
     textarea: 'Dance',
@@ -61,6 +49,18 @@ const preset = {
     color: '#ffffff',
     random: true,
     textAlign: 'left'
+  },
+
+  Overlay: {
+    opacityValue: 90,
+
+    collections: ['Plastic', 'Stickers'],
+    currentCollection: 'Plastic',
+
+    preset: {
+      Plastic: {},
+      Stickers: {}
+    }
   }
 }
 

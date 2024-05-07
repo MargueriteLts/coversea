@@ -26,6 +26,8 @@ import {
   set3DStore,
   getBasicTypoStore,
   setBasicTypoStore,
+  getOverlayStore,
+  setOverlayStore,
   generateAllStore
 
   // setCanvasSizeStore
@@ -72,6 +74,7 @@ const actions = {
   setLinesStore,
   set3DStore,
   setBasicTypoStore,
+  setOverlayStore,
   // setCanvasSizeStore,
   generateAllStore,
   initSketch
@@ -127,6 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (moduleName == 'Module3D') {
       props.module3D = get3DStore()
+    }
+    if (moduleName == 'Overlay') {
+      props.overlay = getOverlayStore()
     }
   });
 

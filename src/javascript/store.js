@@ -38,6 +38,7 @@ moduleLinesStore,
 module3DStore,
 blendStore,
 moduleBasicTypoStore,
+moduleOverlayStore,
 allFonts
 
 function initStore(generatorName) {
@@ -86,6 +87,9 @@ function initStore(generatorName) {
     if (moduleName == 'Module3D') {
       module3DStore = init3DStore(generators[generatorName].preset['Module3D'])
     }
+    if (moduleName == 'Overlay') {
+      moduleOverlayStore = initOverlayStore(generators[generatorName].preset['Overlay'])
+    }
   })
 }
 
@@ -93,17 +97,7 @@ function getModuleList() {
   return moduleList
 }
 
-///////////////////
-
-// function setCanvasSizeStore(size) {
-//   console.log(size);
-//   return canvasSizeStore = size
-// }
-
-// function getCanvasSizeStore() {
-//   console.log(canvasSizeStore);
-//   return canvasSizeStore
-// }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////// BLEND
 
@@ -111,7 +105,55 @@ function getBlendStore() {
   return blendStore
 }
 
-////////////////////////////////////////// BACKGROUND
+/////// GENERATE FUNCTIONS
+
+function generateColor() {
+  const color = []
+
+  color.push(parseInt(getRandomArbitrary(0, 255)))
+  color.push(parseInt(getRandomArbitrary(0, 255)))
+  color.push(parseInt(getRandomArbitrary(0, 255)))
+
+  return color
+}
+
+function generatePositions() {
+  // const canvasSize = 100;
+
+  // let positions = [
+  //   { x: 5, y: 5 }, // top-left
+  //   { x: canvasSize / 2, y: 5 }, // top-center
+  //   { x: canvasSize - 10, y: 5 }, // top-right
+  //   { x: 5, y: canvasSize - 5 }, // bottom-left
+  //   { x: canvasSize / 2, y: canvasSize - 5 }, // bottom-center
+  //   { x: canvasSize - 5, y: canvasSize - 5 } // bottom-right
+  // ];
+
+  let positions = [
+    { x: 5, y: 5 }, // top-left
+    { x: 30, y: 5 }, // top-center
+    { x: 60, y: 5 }, // top-right
+    { x: 5, y: 95 }, // bottom-left
+    { x: 30, y: 95 }, // bottom-center
+    { x: 60, y: 95 } // bottom-right
+  ];
+
+  // Generate two distinct random indices
+  let randomIndex1 = Math.floor(Math.random() * positions.length);
+  let randomIndex2;
+  do {
+    randomIndex2 = Math.floor(Math.random() * positions.length);
+  } while (randomIndex2 === randomIndex1);
+
+  const txtPosition1 = positions[randomIndex1];
+  const txtPosition2 = positions[randomIndex2];
+
+  return [txtPosition1, txtPosition2];
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////// BACKGROUND
 
 function initBackgroundStore(preset) {
   preset = Object.assign({}, preset, { moduleName: 'Background' })
@@ -168,7 +210,7 @@ function setBackgroundStore(type, value) {
   })
 }
 
-/////////////////// GRADIENT
+//// GRADIENT
 
 function changeGradientAngle() {
   let angle = ''
@@ -179,76 +221,12 @@ function changeGradientAngle() {
   if (moduleBackgroundStore.preset.Gradient.angle === 'horizontal') {
     angle = 'vertical'
   }
-
+  
   return angle
 }
 
-////////////////////////////////////////////////////// GENERATE FUNCTIONS
 
-function generateColor() {
-  const color = []
-
-  color.push(parseInt(getRandomArbitrary(0, 255)))
-  color.push(parseInt(getRandomArbitrary(0, 255)))
-  color.push(parseInt(getRandomArbitrary(0, 255)))
-
-  return color
-}
-
-// function generatePosition() {
-//   const canvasSize=100
-
-//   let positions = [
-//     { x: 10, y: 10 }, // top-left
-//     { x: canvasSize / 2, y: 10 }, // top-center
-//     { x: (canvasSize-10), y: 10 }, // top-right
-//     { x: 10, y: (canvasSize-10) }, // bottom-left
-//     { x: canvasSize / 2, y: (canvasSize-10) }, // bottom-center
-//     { x: (canvasSize-10), y: (canvasSize-10) } // bottom-right
-//   ];
-
-//   let randomIndex = Math.floor(Math.random() * positions.length);
-//   const txtPosition = positions[randomIndex];
-
-//   return txtPosition;
-// }
-
-function generatePositions() {
-  // const canvasSize = 100;
-
-  // let positions = [
-  //   { x: 5, y: 5 }, // top-left
-  //   { x: canvasSize / 2, y: 5 }, // top-center
-  //   { x: canvasSize - 10, y: 5 }, // top-right
-  //   { x: 5, y: canvasSize - 5 }, // bottom-left
-  //   { x: canvasSize / 2, y: canvasSize - 5 }, // bottom-center
-  //   { x: canvasSize - 5, y: canvasSize - 5 } // bottom-right
-  // ];
-
-  let positions = [
-    { x: 5, y: 5 }, // top-left
-    { x: 30, y: 5 }, // top-center
-    { x: 60, y: 5 }, // top-right
-    { x: 5, y: 95 }, // bottom-left
-    { x: 30, y: 95 }, // bottom-center
-    { x: 60, y: 95 } // bottom-right
-  ];
-
-  // Generate two distinct random indices
-  let randomIndex1 = Math.floor(Math.random() * positions.length);
-  let randomIndex2;
-  do {
-    randomIndex2 = Math.floor(Math.random() * positions.length);
-  } while (randomIndex2 === randomIndex1);
-
-  const txtPosition1 = positions[randomIndex1];
-  const txtPosition2 = positions[randomIndex2];
-
-  return [txtPosition1, txtPosition2];
-}
-
-
-////////////////////////////////////////////////////// SHAPES
+////////////////////// SHAPES
 
 function initShapesStore(shapes) {
   shapes = Object.assign({}, shapes, { moduleName: 'Shapes' })
@@ -272,7 +250,7 @@ function setShapesStore(type, value) {
   })
 }
 
-////////////////////////////////////////////////////// PARTICLES
+////////////////////// PARTICLES
 
 function initParticles(preset) {
   preset = Object.assign({}, preset, { moduleName: 'Particles', particles: generateParticles(preset.sliderValue), color: '#000' })
@@ -332,7 +310,7 @@ function setParticlesStore(type, value) {
   })
 }
 
-///////////////////// IMAGES
+////////////////////// IMAGES
 
 function initImages(preset) {
   const images = importAll(
@@ -353,62 +331,6 @@ function getImageStore() {
 
 function setImageStore() {
   moduleImageStore.current = sample(Object.keys(moduleImageStore.images))
-}
-
-///////////////////// FONTS
-
-// function initFontsStore() {
-//   const allFonts = importAll(
-//     require.context('../fonts', false, /\.(ttf|otf|woff|woff2)$/)
-//   )
-
-//   // allFonts = {}
-//   // let fontName
-  
-  
-//   // Object.keys(fontsFolder).forEach((key) => {
-//   //   fontName = key.replace(/^\.\//, '').replace(/\.(ttf|otf|woff|woff2)$/, '')
-
-//   //   allFonts = Object.assign({}, allFonts, {
-//   //     fontName: fontsFolder[key]
-//   //   })
-//   // })
-  
-
-//   console.log('STORE', allFonts);
-//   return {
-//     allFonts: allFonts
-//   }
-// }
-
-// function initFontsStore() {
-//   const fonts = importAll(
-//     require.context('../fonts', false, /\.(ttf|otf|woff|woff2)$/)
-//   );
-
-//   console.log('STORE FONTS', fonts);
-//   return {
-//     fonts: fonts
-//   };
-// }
-
-function initFontsStore() {
-  const fontContext = require.context('../fonts', false, /\.(ttf|otf|woff|woff2)$/);
-  const fonts = {};
-
-  fontContext.keys().forEach((key) => {
-    const fileName = key.replace(/^.*[\\/]/, ''); // Extracting filename from path
-    fonts[fileName] = fontContext(key);
-  });
-
-  return {
-    fonts: fonts
-  };
-}
-
-
-function getFontsStore() {
-  return allFonts
 }
 
 ////////////////////// BACKGROUND IMAGE
@@ -453,6 +375,51 @@ function setBackgroundImageStore(type, value) {
   }
   if (type === 'opacity') {
     moduleBackgroundImageStore.sliderValue = value
+  }
+}
+
+////////////////////// OVERLAY
+
+function initOverlayStore(preset) {
+  const collection1 = importAll(
+    require.context('../images/overlays/collection1Plastic', false, /\.(png|jpe?g|svg)$/)
+  )
+  const collection2 = importAll(
+    require.context('../images/overlays/collection2Stickers', false, /\.(png|jpe?g|svg)$/)
+  )
+
+  preset = Object.assign({}, preset, { moduleName: 'Overlay' })
+
+  preset.collections.forEach((collection) => {
+    if (collection === 'Plastic') {
+      preset.preset.Plastic = Object.assign({}, preset.preset.Plastic, { text: 'Plastic', images: collection1, current: sample(Object.keys(collection1)) })
+    }
+
+    if (collection === 'Stickers') {
+      preset.preset.Stickers = Object.assign({}, preset.preset.Stickers, { text: 'Stickers', images: collection2, current: sample(Object.keys(collection2)) })
+    }
+  })
+
+  return preset
+}
+
+function getOverlayStore() {
+  return moduleOverlayStore
+}
+
+function setOverlayStore(type, value) {
+  if (type === 'CurrentTabChange') {
+    moduleOverlayStore.currentCollection = value
+  }
+
+  if (type === 'Plastic') {
+    moduleOverlayStore.preset.Plastic.current = sample(Object.keys(moduleOverlayStore.preset.Plastic.images))
+  }
+  if (type === 'Stickers') {
+    moduleOverlayStore.preset.Stickers.current = sample(Object.keys(moduleOverlayStore.preset.Stickers.images))
+  }
+  if (type === 'opacity') {
+    moduleOverlayStore.opacityValue = value
   }
 }
 
@@ -657,7 +624,7 @@ function set3DStore(type, value) {
   }
 }
 
-//////////////////////////////////////////// GENERATE ALL
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GENERATE ALL
 
 function generateAllStore(generatorName) {
   moduleList = generators[generatorName].modules
@@ -747,7 +714,63 @@ function generateAllStore(generatorName) {
 //   initStore(generatorName)
 // }
 
-///////////////////////////////////////////////////////////////////// EXPORT
+////////////////////////////////////////////////////// FONTS
+
+// function initFontsStore() {
+//   const allFonts = importAll(
+//     require.context('../fonts', false, /\.(ttf|otf|woff|woff2)$/)
+//   )
+
+//   // allFonts = {}
+//   // let fontName
+  
+  
+//   // Object.keys(fontsFolder).forEach((key) => {
+//   //   fontName = key.replace(/^\.\//, '').replace(/\.(ttf|otf|woff|woff2)$/, '')
+
+//   //   allFonts = Object.assign({}, allFonts, {
+//   //     fontName: fontsFolder[key]
+//   //   })
+//   // })
+  
+
+//   console.log('STORE', allFonts);
+//   return {
+//     allFonts: allFonts
+//   }
+// }
+
+// function initFontsStore() {
+//   const fonts = importAll(
+//     require.context('../fonts', false, /\.(ttf|otf|woff|woff2)$/)
+//   );
+
+//   console.log('STORE FONTS', fonts);
+//   return {
+//     fonts: fonts
+//   };
+// }
+
+function initFontsStore() {
+  const fontContext = require.context('../fonts', false, /\.(ttf|otf|woff|woff2)$/);
+  const fonts = {};
+
+  fontContext.keys().forEach((key) => {
+    const fileName = key.replace(/^.*[\\/]/, ''); // Extracting filename from path
+    fonts[fileName] = fontContext(key);
+  });
+
+  return {
+    fonts: fonts
+  };
+}
+
+
+function getFontsStore() {
+  return allFonts
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////// EXPORT
 
 export {
   initStore,
@@ -777,5 +800,7 @@ export {
   getBlendStore,
   getBasicTypoStore,
   setBasicTypoStore,
+  getOverlayStore,
+  setOverlayStore,
   generateAllStore
 }

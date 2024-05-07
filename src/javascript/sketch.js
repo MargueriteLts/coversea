@@ -15,6 +15,7 @@ import {
   getLinesStore,
   get3DStore,
   getBasicTypoStore,
+  getOverlayStore,
   getFontsStore
   // setCanvasSizeStore,
   // generatePosition
@@ -43,6 +44,10 @@ let imageBg
 let imagesWholeVinyl = {}
 let imagesLabelVinyl = {}
 let imageVinyl
+
+let imagesPlasticOverlay = {}
+let imagesStickerOverlay = {}
+let imageOverlay
 
 let fontEsenin
 let mainTextFont
@@ -683,6 +688,37 @@ function drawModules(p) {
   //   // }
   // }
 
+    /////////////////////////////////////////// MODULE BACKGROUNDIMAGE
+
+  if (moduleList.includes('Overlay')) {
+    const overlay = getOverlayStore()
+
+    let currentOverlay
+
+    if (overlay.collections.includes('Plastic') && overlay.currentCollection === 'Plastic') {
+      currentOverlay = overlay.preset.Plastic.current
+      imageOverlay = imagesPlasticOverlay[currentOverlay]
+    } else if (overlay.collections.includes('Stickers') && overlay.currentCollection === 'Stickers') {
+      currentOverlay = overlay.preset.Stickers.current
+      imageOverlay = imagesStickerOverlay[currentOverlay]
+    }
+
+    let opacity = parseFloat(overlay.opacityValue)
+    // console.log(opacity);
+    // p.background(imageBg, opacity)
+    p.image(blendedLayer, 0, 0)
+    blendedLayer.clear()
+    blendedLayer.tint(255, opacity)
+    blendedLayer.blendMode(p.ADD)
+    blendedLayer.image(
+      imageOverlay,
+      0,
+      0,
+      canvasSize,
+      canvasSize
+    )
+  }
+
 }
 
 
@@ -763,6 +799,32 @@ function sketch(p) {
         })
       }
     }
+
+    //////////////////////////////////////////////////// IMAGE OVERLAY
+
+    if (moduleList.includes('Overlay')) {
+      const overlay = getOverlayStore()
+
+      if (overlay.collections.includes('Plastic')) {
+        const imageFiles = overlay.preset.Plastic.images
+
+        Object.keys(imageFiles).forEach((key) => {
+          imagesPlasticOverlay = Object.assign({}, imagesPlasticOverlay, {
+            [`${key}`]: p.loadImage(imageFiles[key])
+          })
+        })
+      }
+      if (overlay.collections.includes('Stickers')) {
+        const imageFiles = overlay.preset.Stickers.images
+
+        Object.keys(imageFiles).forEach((key) => {
+          imagesStickerOverlay = Object.assign({}, imagesStickerOverlay, {
+            [`${key}`]: p.loadImage(imageFiles[key])
+          })
+        })
+      }
+    }
+
 
     //////////////////////////////////////////////////// FONTS
 

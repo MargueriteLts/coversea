@@ -10,7 +10,7 @@ export default class Overlay extends Component {
 
     this.state = {
       currentCollection: this.props.overlay.currentCollection,
-      sliderValue: this.props.overlay.preset.sliderValue
+      opacityValue: this.props.overlay.opacityValue
     }
   }
 
@@ -34,7 +34,7 @@ export default class Overlay extends Component {
 
   handleInput = (e) => {
     this.props.setOverlayStore('opacity', e.target.value)
-    this.setState({sliderValue: e.target.value})
+    this.setState({opacityValue: e.target.value})
   }
 
   //////////////////////////////////////////////////////// RENDER
@@ -58,7 +58,7 @@ export default class Overlay extends Component {
           type="range"
           min="0"
           max="255"
-          value={this.state.sliderValue}
+          value={this.state.opacityValue}
           onInput={this.handleInput}
         />
       </div>

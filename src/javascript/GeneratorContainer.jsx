@@ -14,6 +14,7 @@ import Text1 from './modules/Text1.jsx'
 import Lines from './modules/Lines.jsx'
 import Module3D from './modules/Module3D.jsx'
 import BasicTypo from './modules/BasicTypo.jsx'
+import Overlay from './modules/Overlay.jsx'
 
 let size
 
@@ -59,7 +60,9 @@ export default class GeneratorContainer extends Component {
       module3D,
       set3DStore,
       basictypo,
-      setBasicTypoStore
+      setBasicTypoStore,
+      overlay,
+      setOverlayStore
     } = this.props
 
     const modules = []
@@ -161,6 +164,16 @@ export default class GeneratorContainer extends Component {
           <Module3D
             module3D={module3D}
             set3DStore={set3DStore}
+            key={index}
+          />
+        )
+      }
+
+      if (moduleName == 'Overlay') {
+        modules.push(
+          <Overlay
+            overlay={overlay}
+            setOverlayStore={setOverlayStore}
             key={index}
           />
         )
