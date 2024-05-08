@@ -70,160 +70,51 @@ let c2
 
 //FOR NOISE
 let noiseBg
-let r0
-let r1
-let r2
-let r3
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// function generateR() {
-//   const background = getBackgroundStore()
-//   const r = background.preset.Noise.value
-//   r0 = sample(r)
-//   r1 = sample(r)
-//   r2 = sample(r)
-//   r3 = sample(r)
-// }
-
-window.resetSketch = function() {
-  genNoise()
-  console.log('ok');
-}
-
-///WORKING !!!
-// function genNoise() {
-//   const background = getBackgroundStore()
-//   const r = background.preset.Noise.value
-//   noiseBg.pixelDensity(1)
-//   noiseBg.loadPixels()
-//   for (let x = 0; x < canvasSize; x++) {
-//     for (let y = 0; y < canvasSize; y++) {
-//       let index = (x + y * canvasSize) * 4
-//       let r0 = sample(r)
-//       let r1 = sample(r)
-//       let r2 = sample(r)
-//       let r3 = sample(r)
-//       noiseBg.pixels[index+0] = r0
-//       noiseBg.pixels[index+1] = r1
-//       noiseBg.pixels[index+2] = r2
-//       noiseBg.pixels[index+3] = r3
-//     }
-//   }
-//   noiseBg.updatePixels()
-// }
-
-
-
-///update w noise
-// function genNoise() {
-//   let inc = 0.01
-//   let yoff = 0
-//   // console.log(yoff);
-//   let seed = noiseBg.random(1000);
-
-//   noiseBg.pixelDensity(1)
-//   noiseBg.loadPixels()
-//   for (let y = 0; y < canvasSize; y++) {
-//     let xoff = 0
-//     for (let x = 0; x < canvasSize; x++) {
-//       let index = (x + y * canvasSize) * 4
-//       let r = noiseBg.noise(xoff, yoff, seed) * 255
-//       noiseBg.pixels[index+0] = r
-//       noiseBg.pixels[index+1] = r
-//       noiseBg.pixels[index+2] = r
-//       noiseBg.pixels[index+3] = 255
-//       xoff += inc
-//     }
-//     yoff += inc
-//   }
-//   noiseBg.updatePixels()
-// }
-
-
-//update w diff colors
-function genNoise() {
-  let inc = 0.01
-  let yoff = 0
-  // console.log(yoff);
-  let seed = noiseBg.random(1000);
-
-  let redMin = noiseBg.random(0, 100);
-  let redMax = noiseBg.random(150, 255);
-  let greenMin = noiseBg.random(0, 100);
-  let greenMax = noiseBg.random(150, 255);
-  let blueMin = noiseBg.random(0, 100);
-  let blueMax = noiseBg.random(150, 255);
-
-  noiseBg.pixelDensity(1)
-  noiseBg.loadPixels()
-  for (let y = 0; y < canvasSize; y++) {
-    let xoff = 0
+function generateNoiseBackground() {
+  const background = getBackgroundStore()
+  if (background.bgTypes.includes('Noise') && background.currentBgType === 'Noise') {
+    const r = background.preset.Noise.value
+    // console.log(r);
+    p.clear()
+    p.background(0)
+    
+    // let xOff = 0
+    // let yOff = 100
+    // let increment = 0.01
+    // let xN = p.map(p.noise(xOff), 0, 1, 0, canvasSize)
+    // let yN = p.map(p.noise(yOff), 0, 1, 0, canvasSize)
+    // xOff += 0.01
+    // yOff += 0.01
+    // p.ellipse(xN, yN, 24, 24)
+    
+    
+    noiseBg.loadPixels()
+    noiseBg.pixelDensity(1)
     for (let x = 0; x < canvasSize; x++) {
-      let index = (x + y * canvasSize) * 4
-      let noiseVal = noiseBg.noise(xoff, yoff, seed)
-      // blueish-purple noise
-      // let r = noiseBg.map(noiseVal, 0, 1, 0, 255)
-      // let g = noiseBg.map(noiseVal, 0, 1, 100, 200)
-      // let b = noiseBg.map(noiseVal, 0, 1, 200, 255)
-      let r = noiseBg.map(noiseVal, 0, 1, redMin, redMax)
-      let g = noiseBg.map(noiseVal, 0, 1, greenMin, greenMax)
-      let b = noiseBg.map(noiseVal, 0, 1, blueMin, blueMax)
-      noiseBg.pixels[index+0] = r
-      noiseBg.pixels[index+1] = g
-      noiseBg.pixels[index+2] = b
-      noiseBg.pixels[index+3] = 255
-      xoff += inc
+      for (let y = 0; y < canvasSize; y++) {
+        let index = (x + y * canvasSize) * 4
+        let r0 = sample(r)
+        let r1 = sample(r)
+        let r2 = sample(r)
+        let r3 = sample(r)
+        noiseBg.pixels[index+0] = r0
+        noiseBg.pixels[index+1] = r1
+        noiseBg.pixels[index+2] = r2
+        noiseBg.pixels[index+3] = r3
+      }
     }
-    yoff += inc
+    noiseBg.updatePixels()
+  
+    p.image(noiseBg, 0, 0)
+  
+    p.pixelDensity()
+    p.noStroke()
   }
-  noiseBg.updatePixels()
 }
-
-
-
-// function generateNoiseBackground() {
-//   const background = getBackgroundStore()
-//   if (background.bgTypes.includes('Noise') && background.currentBgType === 'Noise') {
-//     const r = background.preset.Noise.value
-//     // console.log(r);
-//     p.clear()
-//     p.background(0)
-    
-//     // let xOff = 0
-//     // let yOff = 100
-//     // let increment = 0.01
-//     // let xN = p.map(p.noise(xOff), 0, 1, 0, canvasSize)
-//     // let yN = p.map(p.noise(yOff), 0, 1, 0, canvasSize)
-//     // xOff += 0.01
-//     // yOff += 0.01
-//     // p.ellipse(xN, yN, 24, 24)
-    
-    
-//     noiseBg.loadPixels()
-//     noiseBg.pixelDensity(1)
-//     for (let x = 0; x < canvasSize; x++) {
-//       for (let y = 0; y < canvasSize; y++) {
-//         let index = (x + y * canvasSize) * 4
-//         let r0 = sample(r)
-//         let r1 = sample(r)
-//         let r2 = sample(r)
-//         let r3 = sample(r)
-//         noiseBg.pixels[index+0] = r0
-//         noiseBg.pixels[index+1] = r1
-//         noiseBg.pixels[index+2] = r2
-//         noiseBg.pixels[index+3] = r3
-//       }
-//     }
-//     noiseBg.updatePixels()
-  
-//     p.image(noiseBg, 0, 0)
-  
-//     p.pixelDensity()
-//     p.noStroke()
-//   }
-// }
 
 function drawModules(p) {
 
@@ -296,46 +187,45 @@ function drawModules(p) {
       
       // p.drawingContext.fillStyle = gradientBg
 
-    } else if (background.bgTypes.includes('Noise') && background.currentBgType === 'Noise') {
-      // const r = background.preset.Noise.value
-      // console.log(r);
-      p.clear()
-      p.background(0)
-      
-      // let xOff = 0
-      // let yOff = 100
-      // let increment = 0.01
-      // let xN = p.map(p.noise(xOff), 0, 1, 0, canvasSize)
-      // let yN = p.map(p.noise(yOff), 0, 1, 0, canvasSize)
-      // xOff += 0.01
-      // yOff += 0.01
-      // p.ellipse(xN, yN, 24, 24)
-      
-      
-      // noiseBg.loadPixels()
-      // noiseBg.pixelDensity(1)
-      // for (let x = 0; x < canvasSize; x++) {
-      //   for (let y = 0; y < canvasSize; y++) {
-      //     let index = (x + y * canvasSize) * 4
-      //     // let r0 = sample(r)
-      //     // let r1 = sample(r)
-      //     // let r2 = sample(r)
-      //     // let r3 = sample(r)
-      //     noiseBg.pixels[index+0] = r0
-      //     noiseBg.pixels[index+1] = r1
-      //     noiseBg.pixels[index+2] = r2
-      //     noiseBg.pixels[index+3] = r3
-      //   }
-      // }
-      // noiseBg.updatePixels()
-
-      // genNoise()
-
-      p.image(noiseBg, 0, 0)
-
-      p.pixelDensity()
-      p.noStroke()
     }
+    // else if (background.bgTypes.includes('Noise') && background.currentBgType === 'Noise') {
+    //   const r = background.preset.Noise.value
+    //   // console.log(r);
+    //   p.clear()
+    //   p.background(0)
+      
+    //   // let xOff = 0
+    //   // let yOff = 100
+    //   // let increment = 0.01
+    //   // let xN = p.map(p.noise(xOff), 0, 1, 0, canvasSize)
+    //   // let yN = p.map(p.noise(yOff), 0, 1, 0, canvasSize)
+    //   // xOff += 0.01
+    //   // yOff += 0.01
+    //   // p.ellipse(xN, yN, 24, 24)
+      
+      
+    //   noiseBg.loadPixels()
+    //   noiseBg.pixelDensity(1)
+    //   for (let x = 0; x < canvasSize; x++) {
+    //     for (let y = 0; y < canvasSize; y++) {
+    //       let index = (x + y * canvasSize) * 4
+    //       let r0 = sample(r)
+    //       let r1 = sample(r)
+    //       let r2 = sample(r)
+    //       let r3 = sample(r)
+    //       noiseBg.pixels[index+0] = r0
+    //       noiseBg.pixels[index+1] = r1
+    //       noiseBg.pixels[index+2] = r2
+    //       noiseBg.pixels[index+3] = r3
+    //     }
+    //   }
+    //   noiseBg.updatePixels()
+
+    //   p.image(noiseBg, 0, 0)
+
+    //   p.pixelDensity()
+    //   p.noStroke()
+    // }
 
     // else {
     //   if (blend.Vinyl == true) {
@@ -1059,13 +949,9 @@ function sketch(p) {
     if (moduleList.includes('Background')) {
       noiseBg = p.createGraphics(canvasSize, canvasSize)
       noiseBg.noLoop()
-      // generateR()
-      genNoise()
-      // generateNoiseBackground()
+      generateNoiseBackground()
       // const background = getBackgroundStore()
       // const r = background.preset.Noise.value
-      // p.clear()
-      // p.background(0)
       // noiseBg.loadPixels()
       // noiseBg.pixelDensity(1)
       // for (let x = 0; x < canvasSize; x++) {

@@ -63,6 +63,7 @@ export default class GeneratorContainer extends Component {
       setBasicTypoStore,
       overlay,
       setOverlayStore
+      // setCanvasSizeStore
     } = this.props
 
     const modules = []
@@ -200,6 +201,7 @@ export default class GeneratorContainer extends Component {
     const container = document.getElementById('reactComponentRoot')
     const generatorName = container.dataset.generator
     // this.props.initStore(generatorName)
+    window.resetSketch()
     this.props.generateAllStore(generatorName)
       // .then(() => {
       //   this.renderModules()

@@ -159,6 +159,11 @@ export default class Background extends Component {
         <div className="Button" onClick={this.handleChangeAngleGradient}>Rotate</div>
       </div>
     }
+    if (bgType == 'Noise') {
+      return <div>
+        <div className="Button" onClick={this.handleRandomizeGradient}>Randomize Gradient</div>
+      </div>
+    }
   }
 
   //////////////////////////////////////////////////////// RENDER

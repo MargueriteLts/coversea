@@ -8,8 +8,8 @@ const preset = {
   },
 
   Background: {
-    bgTypes: ['SolidColor', 'Gradient'],
-    currentBgType: 'Gradient',
+    bgTypes: ['SolidColor', 'Gradient', 'Noise'],
+    currentBgType: 'Noise',
 
     preset: {
       SolidColor: {
@@ -18,7 +18,8 @@ const preset = {
       Gradient: {
         color1: '#d9b34c',
         color2: '#943a73'
-      }
+      },
+      Noise: {}
     }
   },
 

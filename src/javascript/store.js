@@ -40,6 +40,7 @@ blendStore,
 moduleBasicTypoStore,
 moduleOverlayStore,
 allFonts
+// canvasSize
 
 function initStore(generatorName) {
   moduleList = generators[generatorName].modules
@@ -99,6 +100,14 @@ function getModuleList() {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// function setCanvasSizeStore(size) {
+//   canvasSize = size
+// }
+
+// function getCanvasSize() {
+//   return canvasSize
+// }
+
 /////// BLEND
 
 function getBlendStore() {
@@ -151,12 +160,23 @@ function generatePositions() {
   return [txtPosition1, txtPosition2];
 }
 
+// function generateNoise() {
+
+// }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////// BACKGROUND
 
 function initBackgroundStore(preset) {
   preset = Object.assign({}, preset, { moduleName: 'Background' })
+
+  const value = []
+
+  value.push(parseInt(getRandomArbitrary(0, 255)))
+  value.push(parseInt(getRandomArbitrary(0, 255)))
+  value.push(parseInt(getRandomArbitrary(0, 255)))
+  value.push(parseInt(getRandomArbitrary(0, 255)))
 
   preset.bgTypes.forEach((bgType) => {
     if (bgType == 'SolidColor') {
@@ -165,6 +185,11 @@ function initBackgroundStore(preset) {
 
     if (bgType == 'Gradient') {
       preset.preset.Gradient = Object.assign({}, preset.preset.Gradient, { text: 'Gradient', angle:'vertical' })
+    }
+
+    if (bgType == 'Noise') {
+      preset.preset.Noise = Object.assign({}, preset.preset.Noise, { text: 'Noise', value: value })
+      console.log(value);
     }
   })
 
@@ -205,6 +230,19 @@ function setBackgroundStore(type, value) {
     }
     if (type === 'AngleGradient') {
       moduleBackgroundStore.preset.Gradient.angle = changeGradientAngle()
+    }
+
+    if (type === 'Noise') {
+      const value = []
+
+      value.push(parseInt(getRandomArbitrary(0, 255)))
+      value.push(parseInt(getRandomArbitrary(0, 255)))
+      value.push(parseInt(getRandomArbitrary(0, 255)))
+      value.push(parseInt(getRandomArbitrary(0, 255)))
+
+      moduleBackgroundStore.preset.Noise.value = value
+      // console.log(value);
+      // resolve([value])
     }
 
   })
@@ -635,14 +673,17 @@ function generateAllStore(generatorName) {
 
   moduleList.forEach(moduleName => {
     if (moduleName == 'Background') {
-      let BgType = sample(moduleBackgroundStore.bgTypes)
-      setBackgroundStore('CurrentTabChange', BgType)
+      // let BgType = sample(moduleBackgroundStore.bgTypes)
+      // setBackgroundStore('CurrentTabChange', BgType)
+
       setBackgroundStore('SolidColor', generateColor())
 
       setBackgroundStore('Gradient')
       setBackgroundStore('GradientColor1', generateColor())
       setBackgroundStore('GradientColor2', generateColor())
       setBackgroundStore('AngleGradient')
+
+      setBackgroundStore('Noise')
 
     }
 
