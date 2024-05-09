@@ -54,16 +54,23 @@ const preset = {
   //   color: '#fff'
   // }
   BasicTypo: {
-    mainText: 'Funky Groov',
-    font: 'wonky',
-    dopText: false,
-    sizeMainText: 26,
-    leadingMainText: 24,
-    upperCase: true,
     color: '#ffffff',
-    random: true,
-    textAlign: 'left'
-  }
+    upperCase: true,
+    glow: true,
+    stroke: true,
+
+    mainText: 'Funky Groov',
+    optionsMainTextFonts: ['esenin-script-one', 'Acosta', 'wonky', 'PT-Root-UI'],
+    font: 'wonky',
+    sizeMainText:{
+      sliderValue: 26,
+      min: 10,
+      max: 30
+    },
+    styles: ['NORMAL', 'LIGHT', 'BOLD'],
+    styleMainText: 'NORMAL',
+    leadingMainText: 24
+  },
 }
 
 export { modules, preset }

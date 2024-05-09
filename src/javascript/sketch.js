@@ -150,7 +150,10 @@ function genPixels() {
   }
 }
 
-
+function glow(p, glowColor, blur) { 
+  p.drawingContext.shadowColor = p.color(glowColor)
+  p.drawingContext.shadowBlur = blur
+}
 
 
 
@@ -703,10 +706,9 @@ function drawModules(p) {
     let mainText
     let otherTexts = basicTypo.textarea
 
-    p.noStroke()
     
     // p.textFont(basicTypo.font)
-
+    
     if (basicTypo.styles.includes('NORMAL') && basicTypo.styleMainText == 'NORMAL' && basicTypo.font == 'PT-Root-UI') {
       p.textFont(ptrootuiReg)
     } else if (basicTypo.styles.includes('BOLD') && basicTypo.styleMainText == 'BOLD' && basicTypo.font == 'PT-Root-UI') {
@@ -716,13 +718,29 @@ function drawModules(p) {
     } else {
       p.textFont(basicTypo.font)
     }
-
-
+    
+    ////////////////////////////  STYLES
+    
+    p.noStroke()
     p.textStyle(basicTypo.styleMainText)
     p.textWrap(p.WORD)
     p.fill(basicTypo.color)
 
-    //OTHER TEXT
+    if (basicTypo.glow == true) {
+      // p.drawingContext.shadowColor = p.color(255)
+      // p.drawingContext.shadowBlur = 20
+      glow(p, (255), 5)
+      glow(p, (255), 10)
+      glow(p, (255), 30)
+    }
+
+    if (basicTypo.stroke == true) {
+      p.noFill()
+      p.stroke(basicTypo.color)
+      p.strokeWeight((0.4 * canvasSize) / 100)
+    }
+
+    ////////////////////////////  OTHER TEXT
     if (basicTypo.dopText == true) {
       p.rectMode(p.CORNER)
       
@@ -791,7 +809,11 @@ function drawModules(p) {
     let xmain = canvasSize / 2;
     let ymain = canvasSize / 2;
     p.text(mainText, xmain, ymain, canvasSize, canvasSize)
+
+
+    p.drawingContext.shadowBlur = 0
   }
+
 
   /////////////////////////////////////////// MODULE CRAZYTYPO
 
