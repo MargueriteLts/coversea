@@ -8,7 +8,7 @@ const preset = {
   },
 
   Background: {
-    bgTypes: ['SolidColor', 'Gradient', 'Noise'],
+    bgTypes: ['SolidColor', 'Gradient', 'Noise', 'Pixels'],
     currentBgType: 'Noise',
 
     preset: {
@@ -19,7 +19,8 @@ const preset = {
         color1: '#d9b34c',
         color2: '#943a73'
       },
-      Noise: {}
+      Noise: {},
+      Pixels: {}
     }
   },
 
@@ -62,9 +63,16 @@ const preset = {
   // }
   BasicTypo: {
     mainText: 'Soft Random',
+    optionsMainTextFonts: ['esenin-script-one', 'Acosta', 'PT-Root-UI'],
     font: 'esenin-script-one',
+    sizeMainText:{
+      sliderValue: 22,
+      min: 10,
+      max: 30
+    },
+    styles: ['NORMAL', 'LIGHT', 'BOLD'],
+    styleMainText: 'NORMAL',
     dopText: false,
-    sizeMainText: 22,
     leadingMainText: 19,
     upperCase: false,
     color: '#bababa'

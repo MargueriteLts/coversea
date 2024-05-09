@@ -161,7 +161,10 @@ export default class Background extends Component {
     }
     if (bgType == 'Noise') {
       return <div>
-        <div className="Button" onClick={this.handleRandomizeGradient}>Randomize Gradient</div>
+      </div>
+    }
+    if (bgType == 'Pixels') {
+      return <div>
       </div>
     }
   }

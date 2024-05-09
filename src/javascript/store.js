@@ -127,16 +127,6 @@ function generateColor() {
 }
 
 function generatePositions() {
-  // const canvasSize = 100;
-
-  // let positions = [
-  //   { x: 5, y: 5 }, // top-left
-  //   { x: canvasSize / 2, y: 5 }, // top-center
-  //   { x: canvasSize - 10, y: 5 }, // top-right
-  //   { x: 5, y: canvasSize - 5 }, // bottom-left
-  //   { x: canvasSize / 2, y: canvasSize - 5 }, // bottom-center
-  //   { x: canvasSize - 5, y: canvasSize - 5 } // bottom-right
-  // ];
 
   let positions = [
     { x: 5, y: 5 }, // top-left
@@ -148,16 +138,16 @@ function generatePositions() {
   ];
 
   // Generate two distinct random indices
-  let randomIndex1 = Math.floor(Math.random() * positions.length);
-  let randomIndex2;
-  do {
-    randomIndex2 = Math.floor(Math.random() * positions.length);
-  } while (randomIndex2 === randomIndex1);
+  // let randomIndex1 = Math.floor(Math.random() * positions.length);
+  // let randomIndex2;
+  // do {
+  //   randomIndex2 = Math.floor(Math.random() * positions.length);
+  // } while (randomIndex2 === randomIndex1);
+  // const txtPosition1 = positions[randomIndex1];
+  // const txtPosition2 = positions[randomIndex2];
+  // return [txtPosition1, txtPosition2];
 
-  const txtPosition1 = positions[randomIndex1];
-  const txtPosition2 = positions[randomIndex2];
-
-  return [txtPosition1, txtPosition2];
+  return positions
 }
 
 // function generateNoise() {
@@ -189,7 +179,10 @@ function initBackgroundStore(preset) {
 
     if (bgType == 'Noise') {
       preset.preset.Noise = Object.assign({}, preset.preset.Noise, { text: 'Noise', value: value })
-      console.log(value);
+    }
+
+    if (bgType == 'Pixels') {
+      preset.preset.Pixels = Object.assign({}, preset.preset.Pixels, { text: 'Pixels' })
     }
   })
 
@@ -232,18 +225,16 @@ function setBackgroundStore(type, value) {
       moduleBackgroundStore.preset.Gradient.angle = changeGradientAngle()
     }
 
-    if (type === 'Noise') {
-      const value = []
+    // if (type === 'Noise') {
+    //   const value = []
 
-      value.push(parseInt(getRandomArbitrary(0, 255)))
-      value.push(parseInt(getRandomArbitrary(0, 255)))
-      value.push(parseInt(getRandomArbitrary(0, 255)))
-      value.push(parseInt(getRandomArbitrary(0, 255)))
+    //   value.push(parseInt(getRandomArbitrary(0, 255)))
+    //   value.push(parseInt(getRandomArbitrary(0, 255)))
+    //   value.push(parseInt(getRandomArbitrary(0, 255)))
+    //   value.push(parseInt(getRandomArbitrary(0, 255)))
 
-      moduleBackgroundStore.preset.Noise.value = value
-      // console.log(value);
-      // resolve([value])
-    }
+    //   moduleBackgroundStore.preset.Noise.value = value
+    // }
 
   })
 }
@@ -566,12 +557,33 @@ function getBasicTypoStore() {
 
 function setBasicTypoStore(type, nextValue) {
   return new Promise((resolve, reject) => {
+    if (type === 'CurrentTabChange') {
+      moduleBasicTypoStore.font = nextValue
+      resolve([nextValue])
+    } 
     if (type === 'mainText') {
       moduleBasicTypoStore.mainText = nextValue
     }
+    if (type === 'sizeMainText') {
+      moduleBasicTypoStore.sizeMainText.sliderValue = nextValue
+      resolve([nextValue])
+    }
+    if (type === 'StyleTabChange') {
+      moduleBasicTypoStore.styleMainText = nextValue
+      resolve([nextValue])
+    } 
     if (type === 'textarea') {
       moduleBasicTypoStore.textarea = nextValue
+      console.log(moduleBasicTypoStore.textarea);
+      console.log(typeof moduleBasicTypoStore.textarea)
     }
+    // if (type === 'textarea') {
+    //   if (index !== null) {
+    //     moduleBasicTypoStore.textarea[index] = nextValue;
+    //   } else {
+    //     moduleBasicTypoStore.textarea = nextValue;
+    //   }
+    // }
     if (type === 'SolidColor') {
       moduleBasicTypoStore.color = nextValue
       resolve([nextValue])

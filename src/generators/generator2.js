@@ -37,16 +37,26 @@ const preset = {
   },
 
   BasicTypo: {
+    color: '#bababa',
+
     mainText: 'Dance All Night',
-    textarea: 'Dance',
+    optionsMainTextFonts: ['esenin-script-one', 'Acosta', 'PT-Root-UI'],
     font: 'Acosta',
-    dopText: true,
-    sizeMainText: 20,
+    sizeMainText:{
+      sliderValue: 20,
+      min: 10,
+      max: 30
+    },
+    styles: ['NORMAL', 'LIGHT', 'BOLD'],
+    styleMainText: 'NORMAL',
     leadingMainText: 20,
+
+    dopText: true,
+    nbDopText: 1,
+    textarea: 'Dance',
     sizeTextarea: 2,
     leadingTextarea: 2,
     upperCase: true,
-    color: '#ffffff',
     random: true,
     textAlign: 'left'
   },

@@ -149,9 +149,9 @@ body.page {
       
         .mainText {
           display: flex;
-          flex-direction: row;
+          // flex-direction: row;
           column-gap: 12px;
-          align-items: center;
+          // align-items: center;
       
           .txtInput {
             background: var(--secondary);

@@ -53,6 +53,10 @@ let fontEsenin
 let mainTextFont
 let otherTextFont
 
+let ptrootuiReg
+let ptrootuiBold
+let ptrootuiLight
+
 let graphics
 let blendedLayer
 // let gradientBuffer
@@ -70,84 +74,24 @@ let c2
 
 //FOR NOISE
 let noiseBg
-let r0
-let r1
-let r2
-let r3
+let pixelsBg
+// let r0
+// let r1
+// let r2
+// let r3
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// function generateR() {
-//   const background = getBackgroundStore()
-//   const r = background.preset.Noise.value
-//   r0 = sample(r)
-//   r1 = sample(r)
-//   r2 = sample(r)
-//   r3 = sample(r)
-// }
-
 window.resetSketch = function() {
   genNoise()
-  console.log('ok');
 }
 
-///WORKING !!!
-// function genNoise() {
-//   const background = getBackgroundStore()
-//   const r = background.preset.Noise.value
-//   noiseBg.pixelDensity(1)
-//   noiseBg.loadPixels()
-//   for (let x = 0; x < canvasSize; x++) {
-//     for (let y = 0; y < canvasSize; y++) {
-//       let index = (x + y * canvasSize) * 4
-//       let r0 = sample(r)
-//       let r1 = sample(r)
-//       let r2 = sample(r)
-//       let r3 = sample(r)
-//       noiseBg.pixels[index+0] = r0
-//       noiseBg.pixels[index+1] = r1
-//       noiseBg.pixels[index+2] = r2
-//       noiseBg.pixels[index+3] = r3
-//     }
-//   }
-//   noiseBg.updatePixels()
-// }
 
-
-
-///update w noise
-// function genNoise() {
-//   let inc = 0.01
-//   let yoff = 0
-//   // console.log(yoff);
-//   let seed = noiseBg.random(1000);
-
-//   noiseBg.pixelDensity(1)
-//   noiseBg.loadPixels()
-//   for (let y = 0; y < canvasSize; y++) {
-//     let xoff = 0
-//     for (let x = 0; x < canvasSize; x++) {
-//       let index = (x + y * canvasSize) * 4
-//       let r = noiseBg.noise(xoff, yoff, seed) * 255
-//       noiseBg.pixels[index+0] = r
-//       noiseBg.pixels[index+1] = r
-//       noiseBg.pixels[index+2] = r
-//       noiseBg.pixels[index+3] = 255
-//       xoff += inc
-//     }
-//     yoff += inc
-//   }
-//   noiseBg.updatePixels()
-// }
-
-
-//update w diff colors
 function genNoise() {
-  let inc = 0.01
   let yoff = 0
-  // console.log(yoff);
   let seed = noiseBg.random(1000);
+  let inc = noiseBg.random(1)
 
   let redMin = noiseBg.random(0, 100);
   let redMax = noiseBg.random(150, 255);
@@ -182,48 +126,34 @@ function genNoise() {
 }
 
 
+function genPixels() {
+  pixelsBg.noStroke()
+  let inc = 0.01
+  let scl = 10
 
-// function generateNoiseBackground() {
-//   const background = getBackgroundStore()
-//   if (background.bgTypes.includes('Noise') && background.currentBgType === 'Noise') {
-//     const r = background.preset.Noise.value
-//     // console.log(r);
-//     p.clear()
-//     p.background(0)
-    
-//     // let xOff = 0
-//     // let yOff = 100
-//     // let increment = 0.01
-//     // let xN = p.map(p.noise(xOff), 0, 1, 0, canvasSize)
-//     // let yN = p.map(p.noise(yOff), 0, 1, 0, canvasSize)
-//     // xOff += 0.01
-//     // yOff += 0.01
-//     // p.ellipse(xN, yN, 24, 24)
-    
-    
-//     noiseBg.loadPixels()
-//     noiseBg.pixelDensity(1)
-//     for (let x = 0; x < canvasSize; x++) {
-//       for (let y = 0; y < canvasSize; y++) {
-//         let index = (x + y * canvasSize) * 4
-//         let r0 = sample(r)
-//         let r1 = sample(r)
-//         let r2 = sample(r)
-//         let r3 = sample(r)
-//         noiseBg.pixels[index+0] = r0
-//         noiseBg.pixels[index+1] = r1
-//         noiseBg.pixels[index+2] = r2
-//         noiseBg.pixels[index+3] = r3
-//       }
-//     }
-//     noiseBg.updatePixels()
+  let cols = canvasSize/scl
+  let rows = canvasSize/scl
   
-//     p.image(noiseBg, 0, 0)
-  
-//     p.pixelDensity()
-//     p.noStroke()
-//   }
-// }
+  let yoff = 0
+  for (let y = 0; y < rows; y++) {
+    let xoff = 0
+    for (let x = 0; x < cols; x++) {
+      // let noiseVal = noiseBg.noise(xoff, yoff, seed) * 255
+      let r = pixelsBg.random(255)
+      let g = pixelsBg.random(255)
+      let b = pixelsBg.random(255)
+      xoff += inc
+      pixelsBg.fill(r, g, b)
+      pixelsBg.rect(x * scl, y * scl, scl, scl)
+    }
+    yoff += inc
+  }
+}
+
+
+
+
+
 
 function drawModules(p) {
 
@@ -297,53 +227,18 @@ function drawModules(p) {
       // p.drawingContext.fillStyle = gradientBg
 
     } else if (background.bgTypes.includes('Noise') && background.currentBgType === 'Noise') {
-      // const r = background.preset.Noise.value
-      // console.log(r);
       p.clear()
       p.background(0)
-      
-      // let xOff = 0
-      // let yOff = 100
-      // let increment = 0.01
-      // let xN = p.map(p.noise(xOff), 0, 1, 0, canvasSize)
-      // let yN = p.map(p.noise(yOff), 0, 1, 0, canvasSize)
-      // xOff += 0.01
-      // yOff += 0.01
-      // p.ellipse(xN, yN, 24, 24)
-      
-      
-      // noiseBg.loadPixels()
-      // noiseBg.pixelDensity(1)
-      // for (let x = 0; x < canvasSize; x++) {
-      //   for (let y = 0; y < canvasSize; y++) {
-      //     let index = (x + y * canvasSize) * 4
-      //     // let r0 = sample(r)
-      //     // let r1 = sample(r)
-      //     // let r2 = sample(r)
-      //     // let r3 = sample(r)
-      //     noiseBg.pixels[index+0] = r0
-      //     noiseBg.pixels[index+1] = r1
-      //     noiseBg.pixels[index+2] = r2
-      //     noiseBg.pixels[index+3] = r3
-      //   }
-      // }
-      // noiseBg.updatePixels()
-
-      // genNoise()
-
       p.image(noiseBg, 0, 0)
-
+      p.pixelDensity()
+      p.noStroke()
+    } else if (background.bgTypes.includes('Pixels') && background.currentBgType === 'Pixels') {
+      p.clear()
+      p.background(0)
+      p.image(pixelsBg, 0, 0)
       p.pixelDensity()
       p.noStroke()
     }
-
-    // else {
-    //   if (blend.Vinyl == true) {
-    //     blendedLayer.background(0)
-    //   } else {
-    //     p.background(0)
-    //   }
-    // }
   }
 
   /////////////////////////////////////////// MODULE BACKGROUNDIMAGE
@@ -806,27 +701,31 @@ function drawModules(p) {
   if (moduleList.includes('BasicTypo')) {
     const basicTypo = getBasicTypoStore()
     let mainText
-    let otherText
+    let otherTexts = basicTypo.textarea
 
     p.noStroke()
-    p.textFont(basicTypo.font)
+    
+    // p.textFont(basicTypo.font)
+
+    if (basicTypo.styles.includes('NORMAL') && basicTypo.styleMainText == 'NORMAL' && basicTypo.font == 'PT-Root-UI') {
+      p.textFont(ptrootuiReg)
+    } else if (basicTypo.styles.includes('BOLD') && basicTypo.styleMainText == 'BOLD' && basicTypo.font == 'PT-Root-UI') {
+      p.textFont(ptrootuiBold)
+    } else if (basicTypo.styles.includes('LIGHT') && basicTypo.styleMainText == 'LIGHT' && basicTypo.font == 'PT-Root-UI') {
+      p.textFont(ptrootuiLight)
+    } else {
+      p.textFont(basicTypo.font)
+    }
+
+
+    p.textStyle(basicTypo.styleMainText)
     p.textWrap(p.WORD)
     p.fill(basicTypo.color)
 
     //OTHER TEXT
     if (basicTypo.dopText == true) {
       p.rectMode(p.CORNER)
-
-      if (basicTypo.upperCase == true) {
-        otherText = basicTypo.textarea.toUpperCase()
-      } else {
-        otherText = basicTypo.textarea
-      }
-
-      const positionTxt = basicTypo.txtpositions[0]
-      let x = positionTxt.x
-      let y = positionTxt.y
-
+      
       let presetSizeTextarea = basicTypo.sizeTextarea
       let presetLeadingSizeTextarea = basicTypo.leadingTextarea
       // console.log(presetSizeTextarea);
@@ -835,19 +734,44 @@ function drawModules(p) {
       p.textSize(otherTextSize)
       // p.textLeading(otherTextSize-2)
       p.textLeading(otherTextLeadingSize)
-
+      
       const prct10 = (10 * canvasSize) / 100
       let width = (canvasSize - prct10) / 3
 
-      if (y == 5) {
-        p.textAlign(p.LEFT, p.TOP)
+      if (typeof otherTexts === 'string') {
+        if (basicTypo.upperCase == true) {
+          otherTexts = basicTypo.textarea.toUpperCase()
+        } else {
+          otherTexts = basicTypo.textarea
+        }
+        const positionTxt = basicTypo.txtpositions[0]
+        let x = positionTxt.x
+        let y = positionTxt.y
+        if (y == 5) {
+          p.textAlign(p.LEFT, p.TOP)
+        } else {
+          p.textAlign(p.LEFT, p.BOTTOM)
+        }
+        x = (positionTxt.x * canvasSize) / 100
+        y = (positionTxt.y * canvasSize) / 100
+        p.text(otherTexts, x, y, width)
       } else {
-        p.textAlign(p.LEFT, p.BOTTOM)
+        for (let i = 0; i < otherTexts.length; i++) {
+          const currentText = otherTexts[i].value;
+          const positionTxt = basicTypo.txtpositions[i];
+          let x = positionTxt.x
+          let y = positionTxt.y
+          if (y == 5) {
+            p.textAlign(p.LEFT, p.TOP)
+          } else {
+            p.textAlign(p.LEFT, p.BOTTOM)
+          }
+          x = (positionTxt.x * canvasSize) / 100;
+          y = (positionTxt.y * canvasSize) / 100;
+          p.text(currentText, x, y, width);
+        }
       }
 
-      x = (positionTxt.x * canvasSize) / 100
-      y = (positionTxt.y * canvasSize) / 100
-      p.text(otherText, x, y, width)
     }
 
     //MAIN TEXT
@@ -857,7 +781,7 @@ function drawModules(p) {
     } else {
       mainText = basicTypo.mainText
     }
-    let presetSizeMainText = basicTypo.sizeMainText
+    let presetSizeMainText = basicTypo.sizeMainText.sliderValue
     let presetLeadingSizeMainText = basicTypo.leadingMainText
     let MainTextSize = (presetSizeMainText * canvasSize) / 100
     let MainTextLeadingSize = (presetLeadingSizeMainText * canvasSize) / 100
@@ -1027,6 +951,9 @@ function sketch(p) {
     fontEsenin = p.loadFont('../fonts/esenin-script-one.ttf');
     mainTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
     otherTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
+    ptrootuiReg = p.loadFont('../fonts/PT-Root-UI_Regular.woff')
+    ptrootuiBold = p.loadFont('../fonts/PT-Root-UI_Bold.woff')
+    ptrootuiLight = p.loadFont('../fonts/PT-Root-UI_Light.woff')
     p.loadFont('../fonts/Acosta.otf')
     p.loadFont('../fonts/wonky.otf')
     p.loadFont('../fonts/Bolgarus.otf')
@@ -1037,11 +964,6 @@ function sketch(p) {
   }
 
   p.setup = () => {
-
-    // p.pixelDensity(1)
-
-    // p.frameRate(2)
-    // utils = new p5.Utils()
     
     let canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
@@ -1059,29 +981,10 @@ function sketch(p) {
     if (moduleList.includes('Background')) {
       noiseBg = p.createGraphics(canvasSize, canvasSize)
       noiseBg.noLoop()
-      // generateR()
       genNoise()
-      // generateNoiseBackground()
-      // const background = getBackgroundStore()
-      // const r = background.preset.Noise.value
-      // p.clear()
-      // p.background(0)
-      // noiseBg.loadPixels()
-      // noiseBg.pixelDensity(1)
-      // for (let x = 0; x < canvasSize; x++) {
-      //   for (let y = 0; y < canvasSize; y++) {
-      //     let index = (x + y * canvasSize) * 4
-      //     let r0 = sample(r)
-      //     let r1 = sample(r)
-      //     let r2 = sample(r)
-      //     let r3 = sample(r)
-      //     noiseBg.pixels[index+0] = r0
-      //     noiseBg.pixels[index+1] = r1
-      //     noiseBg.pixels[index+2] = r2
-      //     noiseBg.pixels[index+3] = r3
-      //   }
-      // }
-      // noiseBg.updatePixels()
+      pixelsBg = p.createGraphics(canvasSize, canvasSize)
+      pixelsBg.noLoop()
+      genPixels()
     }
 
     // if (moduleList.includes('Shapes')) {
