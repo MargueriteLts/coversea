@@ -81,6 +81,7 @@ body.generator {
       .module__header {
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
         border-radius: 36px 36px 0 0;
         background: var(--BACKGROUND-MODULE);
         padding: 16px 24px 12px;
@@ -152,12 +153,13 @@ body.generator {
           background-color: var(--BACKGROUND-MODULE);
           padding: 18px;
         }
+      }
 
-        .module__content--gradientcolors {
-          display: flex;
-          flex-direction: row;
-          column-gap: 12px;
-        }
+      .module__content--gradientcolors {
+        display: flex;
+        flex-direction: row;
+        column-gap: 12px;
+        align-items: center;
       }
 
       .ModuleContentBgOnly {
@@ -220,6 +222,7 @@ body.generator {
       flex-grow: 0;
       flex-shrink: 1;
       height: fit-content;
+      padding-bottom: 16px;
     }
   }
 

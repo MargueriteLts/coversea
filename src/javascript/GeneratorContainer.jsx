@@ -62,7 +62,8 @@ export default class GeneratorContainer extends Component {
       basictypo,
       setBasicTypoStore,
       overlay,
-      setOverlayStore
+      setOverlayStore,
+      randomizeModuleStore
       // setCanvasSizeStore
     } = this.props
 
@@ -75,6 +76,7 @@ export default class GeneratorContainer extends Component {
             shapes={shapes}
             setShapesStore={setShapesStore}
             key={index}
+            randomizeModuleStore={randomizeModuleStore}
           />
         )
       }
@@ -85,6 +87,7 @@ export default class GeneratorContainer extends Component {
             particles={particles}
             setParticlesStore={setParticlesStore}
             key={index}
+            randomizeModuleStore={randomizeModuleStore}
           />
         )
       }
@@ -94,6 +97,7 @@ export default class GeneratorContainer extends Component {
           <Image
             setImageValue={setImageStore}
             key={index}
+            randomizeModuleStore={randomizeModuleStore}
           />
         )
       }
@@ -104,6 +108,7 @@ export default class GeneratorContainer extends Component {
             background={background}
             setBackgroundStore={setBackgroundStore}
             key={index}
+            randomizeModuleStore={randomizeModuleStore}
           />
         )
       }
@@ -114,6 +119,7 @@ export default class GeneratorContainer extends Component {
             backgroundImage={backgroundImage}
             setBackgroundImageStore={setBackgroundImageStore}
             key={index}
+            randomizeModuleStore={randomizeModuleStore}
           />
         )
       }
@@ -125,6 +131,7 @@ export default class GeneratorContainer extends Component {
             setVinylStore={setVinylStore}
             // sliderMax={size}
             key={index}
+            randomizeModuleStore={randomizeModuleStore}
           />
         )
       }
@@ -145,6 +152,7 @@ export default class GeneratorContainer extends Component {
             basictypo={basictypo}
             setBasicTypoStore={setBasicTypoStore}
             key={index}
+            randomizeModuleStore={randomizeModuleStore}
           />
         )
       }
@@ -155,6 +163,7 @@ export default class GeneratorContainer extends Component {
             lines={lines}
             setLinesStore={setLinesStore}
             key={index}
+            randomizeModuleStore={randomizeModuleStore}
           />
         )
       }
@@ -165,6 +174,7 @@ export default class GeneratorContainer extends Component {
             module3D={module3D}
             set3DStore={set3DStore}
             key={index}
+            randomizeModuleStore={randomizeModuleStore}
           />
         )
       }
@@ -175,6 +185,7 @@ export default class GeneratorContainer extends Component {
             overlay={overlay}
             setOverlayStore={setOverlayStore}
             key={index}
+            randomizeModuleStore={randomizeModuleStore}
           />
         )
       }

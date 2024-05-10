@@ -40,12 +40,14 @@ export default class Particles extends Component {
   }
 
   render() {
-    const { particles } = this.props
+    const { particles, randomizeModuleStore } = this.props
 
     return (
       <div className="module__container">
         <HeaderModule
           title={particles.moduleName}
+          moduleType='Particles'
+          randomizeModuleStore={randomizeModuleStore}
         />
         <div className="module__content">
           <DropDown

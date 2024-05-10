@@ -134,8 +134,8 @@ export default class Background extends Component {
       </div>
     }
     if (bgType == 'Gradient') {
-      return <div className='gradientControls'>
-        <div className='gradientColors'>
+      return <div className='gradientControls flexRow'>
+        <div className='module__content--gradientcolors'>
           <ColorPicker
             title=''
             // object='gradient1'
@@ -155,8 +155,8 @@ export default class Background extends Component {
             key='Gradient2ColorPicker'
           />
         </div>
-        <div className="Button" onClick={this.handleRandomizeGradient}>Randomize Gradient</div>
-        <div className="Button" onClick={this.handleChangeAngleGradient}>Rotate</div>
+        <div className="btn--secondary" onClick={this.handleRandomizeGradient}>Randomize Gradient</div>
+        <div className="btn--secondary" onClick={this.handleChangeAngleGradient}>Rotate</div>
       </div>
     }
     if (bgType == 'Noise') {
@@ -172,13 +172,14 @@ export default class Background extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { background } = this.props
+    const { background, randomizeModuleStore } = this.props
     const nbBgTypes = background.bgTypes.length
 
     return <div className="module__container">
       <HeaderModule
         title={background.moduleName}
-        // randomize={}
+        moduleType='Background'
+        randomizeModuleStore={randomizeModuleStore}
       />
       { nbBgTypes > 1
         ? <div className="module__content--bgmodule flexColumn"> 
@@ -189,7 +190,7 @@ export default class Background extends Component {
             />
             {this.renderBgContent()}
           </div>
-        : <div className="ModuleContentBgOnly ">{this.renderBgContentOnly()}</div>
+        : <div className="module__content">{this.renderBgContentOnly()}</div>
       }
     </div>
   }

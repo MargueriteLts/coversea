@@ -28,7 +28,8 @@ import {
   setBasicTypoStore,
   getOverlayStore,
   setOverlayStore,
-  generateAllStore
+  generateAllStore,
+  randomizeModuleStore
 
   // setCanvasSizeStore
 } from './javascript/store.js'
@@ -77,6 +78,7 @@ const actions = {
   setOverlayStore,
   // setCanvasSizeStore,
   generateAllStore,
+  randomizeModuleStore,
   initSketch
 }
 

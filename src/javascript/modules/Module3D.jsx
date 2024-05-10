@@ -26,11 +26,13 @@ export default class Module3D extends Component {
   }
   
   render() {
-    const { module3D } = this.props
+    const { module3D, randomizeModuleStore } = this.props
 
     return <div className="module__container">
       <HeaderModule
         title={module3D.moduleName}
+        moduleType='Module3D'
+        randomizeModuleStore={randomizeModuleStore}
       />
       <div className="module__content flexRow">
         <DropDown

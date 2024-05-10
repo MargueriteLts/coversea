@@ -7,6 +7,15 @@ export default class Image extends Component {
     super(props)
   }
 
+  RandomizeModule = () => {
+    // const container = document.getElementById('reactComponentRoot')
+    // const generatorName = container.dataset.generator
+    // window.resetSketch()
+    const { moduleType } = this.props
+
+    this.props.randomizeModuleStore(moduleType)
+  }
+
   render() {
     const { title } = this.props
 
@@ -14,6 +23,7 @@ export default class Image extends Component {
       <div className="module__title">
         {title}
       </div>
+      <div className="btn--primary" onClick={this.RandomizeModule}>Randomize</div>
     </div>
   }
 }

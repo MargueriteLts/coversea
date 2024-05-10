@@ -56,12 +56,13 @@ export default class Vinyl extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { vinyl } = this.props
+    const { vinyl, randomizeModuleStore } = this.props
 
     return <div className="module__container">
       <HeaderModule
         title={vinyl.moduleName}
-        // randomize={}
+        moduleType='Vinyl'
+        randomizeModuleStore={randomizeModuleStore}
       />
       <div className="module__content">
         <TabButtonSet

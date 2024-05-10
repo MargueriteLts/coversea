@@ -12,10 +12,13 @@ export default class Image extends Component {
   }
 
   render() {
+    const { randomizeModuleStore } = this.props
+    
     return <div className="module__container">
       <HeaderModule
         title='Random Image'
-        // randomize={}
+        moduleType='Image'
+        randomizeModuleStore={randomizeModuleStore}
       />
       <div className="module__content">
         <div className="btn-secondary" onClick={this.handleClick}>Randomize Shoe</div>

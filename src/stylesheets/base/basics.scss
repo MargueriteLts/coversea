@@ -149,6 +149,10 @@ p {
   font-style: normal;
 }
 
+.textarea__entry:focus-visible {
+  outline: none;
+}
+
 
 
 .btn--big {
@@ -159,7 +163,7 @@ p {
   border: 1px solid var(--WHITE);
   color: var(--TEXT-WHITE);
   text-align: center;
-  font-family: "BC Novatica CYR";
+  font-family: "bc-novatica-cyr";
   font-size: 32px;
   font-style: normal;
   font-weight: 400;

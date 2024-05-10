@@ -1052,9 +1052,11 @@ function sketch(p) {
     fontEsenin = p.loadFont('../fonts/esenin-script-one.ttf');
     mainTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
     otherTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
+
     ptrootuiReg = p.loadFont('../fonts/PT-Root-UI_Regular.woff')
     ptrootuiBold = p.loadFont('../fonts/PT-Root-UI_Bold.woff')
     ptrootuiLight = p.loadFont('../fonts/PT-Root-UI_Light.woff')
+    
     p.loadFont('../fonts/Acosta.otf')
     p.loadFont('../fonts/wonky.otf')
     p.loadFont('../fonts/Bolgarus.otf')

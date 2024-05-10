@@ -117,13 +117,14 @@ export default class BasicTypo extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { basictypo } = this.props
+    const { basictypo, randomizeModuleStore } = this.props
     const { textAreas } = this.state;
 
     return <div className="module__container">
       <HeaderModule
         title={basictypo.moduleName}
-        // randomize={}
+        moduleType='BasicTypo'
+        randomizeModuleStore={randomizeModuleStore}
       />
       <div className="module__content flexColumn">
 

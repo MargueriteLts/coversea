@@ -56,6 +56,10 @@ export default class AllColorPicker extends Component {
 
     const styles = reactCSS({
       'default': {
+        box: {
+          width: '100%',
+          height: '100%',
+        },
         colorSwatch: {
           width: '32px',
           height: '32px',
@@ -86,7 +90,7 @@ export default class AllColorPicker extends Component {
       },
     });
 
-    return <div className="PlainColor">
+    return <div className={styles.box}>
       <div>{title}</div>
       <div style={ styles.swatch } onClick={ this.handleClick }>
         <div style={ styles.colorSwatch } />

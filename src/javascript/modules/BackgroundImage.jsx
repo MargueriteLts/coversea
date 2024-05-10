@@ -40,12 +40,13 @@ export default class BackgroundImage extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { backgroundImage } = this.props
+    const { backgroundImage, randomizeModuleStore } = this.props
 
     return <div className="module__container">
       <HeaderModule
         title={backgroundImage.moduleName}
-        // randomize={}
+        moduleType='BackgroundImage'
+        randomizeModuleStore={randomizeModuleStore}
       />
       <div className="module__content">
         <TabButtonSet

@@ -41,12 +41,13 @@ export default class Overlay extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { overlay } = this.props
+    const { overlay, randomizeModuleStore } = this.props
 
     return <div className="module__container">
       <HeaderModule
         title={overlay.moduleName}
-        // randomize={}
+        moduleType='Overlay'
+        randomizeModuleStore={randomizeModuleStore}
       />
       <div className="module__content">
         <TabButtonSet

@@ -285,7 +285,7 @@ function setShapesStore(type, value) {
 ////////////////////// PARTICLES
 
 function initParticles(preset) {
-  preset = Object.assign({}, preset, { moduleName: 'Particles', particles: generateParticles(preset.sliderValue), color: '#000' })
+  preset = Object.assign({}, preset, { moduleName: 'Particles', particles: generateParticles(preset.sliderValue), color: '#fff' })
 
   preset.options.forEach((option) => {
     if (option == 'Ellipses') {
@@ -744,9 +744,6 @@ function generateAllStore(generatorName) {
       // })
     }
 
-    if (moduleName == 'Text1') {
-    }
-
     if (moduleName == 'BasicTypo') {
       setBasicTypoStore('Positions')
       setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
@@ -764,6 +761,93 @@ function generateAllStore(generatorName) {
       set3DStore('randomize')
     }
   })
+}
+
+
+
+function randomizeModuleStore(moduleType) {
+  if (moduleType == 'Background') {
+    let bgType = sample(moduleBackgroundStore.bgTypes)
+    setBackgroundStore('CurrentTabChange', bgType)
+    setBackgroundStore('SolidColor', generateColor())
+
+    setBackgroundStore('Gradient')
+    setBackgroundStore('GradientColor1', generateColor())
+    setBackgroundStore('GradientColor2', generateColor())
+    setBackgroundStore('AngleGradient')
+
+    setBackgroundStore('Noise')
+
+  }
+
+  if (moduleType == 'Shapes') {
+    setShapesStore('SolidColor', generateColor())
+    setShapesStore('Size', getRandomArbitrary(0, 100))
+  }
+
+  if (moduleType == 'Particles') {
+    console.log('ok');
+    // initParticles(module)
+    let ParticlesTypes = sample(moduleParticlesStore.options)
+    setParticlesStore('CurrentTabChange', ParticlesTypes)
+    setParticlesStore('quantity', getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max))
+    setParticlesStore('CurrentTabChange', ParticlesTypes)
+    //solid color juste black cest cool aussi
+    setParticlesStore('SolidColor', generateColor())
+  }
+
+  if (moduleType == 'Image') {
+    setImageStore()
+  }
+
+  if (moduleType == 'BackgroundImage') {
+    let BgImgType = sample(moduleBackgroundImageStore.collections)
+    setBackgroundImageStore('CurrentTabChange', BgImgType)
+    setBackgroundImageStore('NightClub')
+    setBackgroundImageStore('Cars')
+    setBackgroundImageStore('opacity', getRandomArbitrary(10, 255))
+
+  }
+
+  if (moduleType == 'Vinyl') {
+
+    // return new Promise((resolve, reject) => {
+      let Vinyltype = sample(moduleVinylStore.vinylTypes)
+      setVinylStore('CurrentTabChange', Vinyltype)
+      // resolve([type])
+      let size = getRandomArbitrary(0, 100)
+      setVinylStore('size', size)
+      // resolve([size])
+      let opacity = getRandomArbitrary(0, 255)
+      setVinylStore('opacity', opacity)
+      // resolve([opacity])
+    // })
+  }
+
+  if (moduleType == 'BasicTypo') {
+    setBasicTypoStore('Positions')
+    setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
+  }
+
+  if (moduleType == 'Lines') {
+    setLinesStore('SolidColor', generateColor())
+    setLinesStore('randomize')
+    setLinesStore('strokeWeight', getRandomArbitrary(0, 100))
+  }
+
+  if (moduleType == 'Module3D') {
+    let type3D = sample(module3DStore.options)
+    set3DStore('CurrentTabChange', type3D)
+    set3DStore('randomize')
+  }
+
+  if (moduleType == 'Overlay') {
+    let overlayType = sample(moduleOverlayStore.collections)
+    setOverlayStore('CurrentTabChange', overlayType)
+    setOverlayStore('Plastic')
+    setOverlayStore('Stickers')
+    setOverlayStore('opacity', getRandomArbitrary(10, 255))
+  }
 }
 
 // function generateAllStore(generatorName) {
@@ -858,5 +942,6 @@ export {
   setBasicTypoStore,
   getOverlayStore,
   setOverlayStore,
-  generateAllStore
+  generateAllStore,
+  randomizeModuleStore
 }

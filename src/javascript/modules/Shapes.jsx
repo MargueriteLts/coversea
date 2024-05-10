@@ -40,11 +40,13 @@ export default class Shapes extends Component {
   }
   
   render() {
-    const { shapes } = this.props
+    const { shapes, randomizeModuleStore } = this.props
 
     return <div className="module__container">
       <HeaderModule
         title={shapes.moduleName}
+        moduleType='Shapes'
+        randomizeModuleStore={randomizeModuleStore}
       />
       <div className="module__content flexRow">
         <DropDown

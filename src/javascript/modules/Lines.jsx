@@ -34,11 +34,13 @@ export default class Lines extends Component {
   }
   
   render() {
-    const { lines } = this.props
+    const { lines, randomizeModuleStore } = this.props
 
     return <div className="module__container">
       <HeaderModule
         title={lines.moduleName}
+        moduleType='Lines'
+        randomizeModuleStore={randomizeModuleStore}
       />
       <div className="module__content flexRow">
         <div className="btn--secondary" onClick={this.handleClick}>Randomize lines</div>
