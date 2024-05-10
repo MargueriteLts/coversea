@@ -28,17 +28,17 @@ export default class Module3D extends Component {
   render() {
     const { module3D } = this.props
 
-    return <div className="ModuleContainer">
+    return <div className="module__container">
       <HeaderModule
         title={module3D.moduleName}
       />
-      <div className="ModuleContent flexRow">
+      <div className="module__content flexRow">
         <DropDown
           options={module3D.options}
           value={this.state.current3DType}
           handleClick={this.handleDropDownClick}
         />
-        <div className="Button" onClick={this.handleRandomize}>Randomize 3D</div>
+        <div className="btn--secondary" onClick={this.handleRandomize}>Randomize 3D</div>
       </div>
     </div>
   }

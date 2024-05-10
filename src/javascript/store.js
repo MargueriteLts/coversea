@@ -269,6 +269,9 @@ function getShapesStore() {
 
 function setShapesStore(type, value) {
   return new Promise((resolve, reject) => {
+    if (type === 'CurrentTabChange') {
+      moduleShapesStore.currentShapeType = value
+    } 
     if (type === 'SolidColor') {
       moduleShapesStore.settings.color = value
       resolve([value])

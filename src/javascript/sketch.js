@@ -269,64 +269,98 @@ function drawModules(p) {
   if (moduleList.includes('Shapes')) {
     const shapes = getShapesStore()
 
-    if (shapes.settings.gradient == true) {
-      const background = getBackgroundStore()
-      const color1 = background.preset.Gradient.color1
-      const color2 = background.preset.Gradient.color2
-      // const angle = background.preset.Gradient.angle
-
-      c1 = p.color(color2)
-      c2 = p.color(color1)
-
-      p.noStroke()
-
-      let gradientShapes = p.drawingContext.createLinearGradient(
-        0, 0, canvasSize, canvasSize
-      )
-      gradientShapes.addColorStop(0, c1)
-      gradientShapes.addColorStop(1, c2)
-
-      p.drawingContext.fillStyle = gradientShapes
+    if (shapes.options.includes('Ellipses') && shapes.currentShapeType == 'Ellipses') {
+      if (shapes.settings.gradient == true) {
+        const background = getBackgroundStore()
+        const color1 = background.preset.Gradient.color1
+        const color2 = background.preset.Gradient.color2
+        // const angle = background.preset.Gradient.angle
+  
+        c1 = p.color(color2)
+        c2 = p.color(color1)
+  
+        p.noStroke()
+  
+        let gradientShapes = p.drawingContext.createLinearGradient(
+          0, 0, canvasSize, canvasSize
+        )
+        gradientShapes.addColorStop(0, c1)
+        gradientShapes.addColorStop(1, c2)
+  
+        p.drawingContext.fillStyle = gradientShapes
+      }
+      // else {
+      //   p.fill(shapes.color)
+      // }
+  
+      /////// shapes
+  
+      const Value = shapes.settings.sliderValue
+      const wValue = parseInt(Value)
+  
+      const xCenter = canvasSize / 2
+      const yCenter = canvasSize / 2
+      const w = wValue * canvasSize / 100
+      
+      const paddingW = 3 * canvasSize / 100
+      const paddingH = 5 * canvasSize / 100
+      
+      const wCircle = w - paddingW
+      
+      const xCenterER1 = xCenter + (w / 2) + (6,5 * canvasSize / 100)
+      const xCenterEL1 = xCenter - (w / 2) - (6,5 * canvasSize / 100)
+      const wEV1 = (13 * canvasSize / 100) - paddingW
+      const hEV1 = w + (26 * canvasSize / 100) - paddingH
+      
+      const xCenterER2 = xCenterER1 + ((canvasSize - w) / 4)
+      const xCenterEL2 = canvasSize - xCenterER2
+      const wEV2 = ((canvasSize - w) / 2) - (13 * canvasSize / 100) - paddingW
+      const hEV2 = canvasSize - paddingH
+  
+      p.ellipse(xCenter, yCenter, wCircle)
+      
+      p.ellipse(xCenterER1, yCenter, wEV1, hEV1)
+      p.ellipse(xCenterEL1, yCenter, wEV1, hEV1)
+      p.ellipse(xCenterER2, yCenter, wEV2, hEV2)
+      p.ellipse(xCenterEL2, yCenter, wEV2, hEV2)
+      
+      p.ellipse(yCenter, xCenterER1, wCircle, wEV1)
+      p.ellipse(yCenter, xCenterEL1, wCircle, wEV1)
+      p.ellipse(yCenter, xCenterER2, hEV1, wEV2)
+      p.ellipse(yCenter, xCenterEL2, hEV1, wEV2)
+    } else if (shapes.options.includes('Custom1') && shapes.currentShapeType == 'Custom1') {
+      p.fill(255)
+      p.beginShape()
+      p.curveVertex(100, 50)
+      p.curveVertex(200, 20)
+      p.curveVertex(200, 100)
+      p.curveVertex(50, 75)
+      p.curveVertex(25, 50)
+      // p.bezierVertex(100, 50)
+      // p.bezierVertex(200, 20)
+      // p.bezierVertex(200, 100)
+      // p.bezierVertex(50, 75)
+      // p.bezierVertex(25, 50)
+      // p.vertex(100, 200)
+      // p.vertex(200, 50)
+      // p.vertex(300, 200)
+      p.endShape(p.CLOSE)
+      p.noFill()
+    } else if (shapes.options.includes('Custom2') && shapes.currentShapeType == 'Custom2') {
+      // p.fill(255)
+      p.stroke(255)
+      p.beginShape()
+      p.angleMode(p.DEGREES)
+      let spacing = 50
+      for (let a = 0; a < 360; a += spacing) {
+        let x = 100 * p.sin(a) + 200
+        let y = 100 * p.cos(a) + 200
+        p.vertex(x, y)
+      }
+      p.endShape(p.CLOSE)
+      p.noFill()
     }
-    // else {
-    //   p.fill(shapes.color)
-    // }
 
-    /////// shapes
-
-    const Value = shapes.settings.sliderValue
-    const wValue = parseInt(Value)
-
-    const xCenter = canvasSize / 2
-    const yCenter = canvasSize / 2
-    const w = wValue * canvasSize / 100
-    
-    const paddingW = 3 * canvasSize / 100
-    const paddingH = 5 * canvasSize / 100
-    
-    const wCircle = w - paddingW
-    
-    const xCenterER1 = xCenter + (w / 2) + (6,5 * canvasSize / 100)
-    const xCenterEL1 = xCenter - (w / 2) - (6,5 * canvasSize / 100)
-    const wEV1 = (13 * canvasSize / 100) - paddingW
-    const hEV1 = w + (26 * canvasSize / 100) - paddingH
-    
-    const xCenterER2 = xCenterER1 + ((canvasSize - w) / 4)
-    const xCenterEL2 = canvasSize - xCenterER2
-    const wEV2 = ((canvasSize - w) / 2) - (13 * canvasSize / 100) - paddingW
-    const hEV2 = canvasSize - paddingH
-
-    p.ellipse(xCenter, yCenter, wCircle)
-    
-    p.ellipse(xCenterER1, yCenter, wEV1, hEV1)
-    p.ellipse(xCenterEL1, yCenter, wEV1, hEV1)
-    p.ellipse(xCenterER2, yCenter, wEV2, hEV2)
-    p.ellipse(xCenterEL2, yCenter, wEV2, hEV2)
-    
-    p.ellipse(yCenter, xCenterER1, wCircle, wEV1)
-    p.ellipse(yCenter, xCenterEL1, wCircle, wEV1)
-    p.ellipse(yCenter, xCenterER2, hEV1, wEV2)
-    p.ellipse(yCenter, xCenterEL2, hEV1, wEV2)
 
   }
 
@@ -727,8 +761,6 @@ function drawModules(p) {
     p.fill(basicTypo.color)
 
     if (basicTypo.glow == true) {
-      // p.drawingContext.shadowColor = p.color(255)
-      // p.drawingContext.shadowBlur = 20
       glow(p, (255), 5)
       glow(p, (255), 10)
       glow(p, (255), 30)
@@ -737,7 +769,15 @@ function drawModules(p) {
     if (basicTypo.stroke == true) {
       p.noFill()
       p.stroke(basicTypo.color)
-      p.strokeWeight((0.4 * canvasSize) / 100)
+      p.strokeWeight((0.9 * canvasSize) / 100)
+
+      // let gradient = p.drawingContext.createConicGradient(0, canvasSize/2, canvasSize/2,)
+      // const background = getBackgroundStore()
+      // const color1 = background.preset.Gradient.color1
+      // const color2 = background.preset.Gradient.color2
+      // gradient.addColorStop(0, p.color(color1))
+      // gradient.addColorStop(1, p.color(color2))
+      // p.drawingContext.strokeStyle = gradient
     }
 
     ////////////////////////////  OTHER TEXT
@@ -799,6 +839,7 @@ function drawModules(p) {
     } else {
       mainText = basicTypo.mainText
     }
+
     let presetSizeMainText = basicTypo.sizeMainText.sliderValue
     let presetLeadingSizeMainText = basicTypo.leadingMainText
     let MainTextSize = (presetSizeMainText * canvasSize) / 100
@@ -806,9 +847,47 @@ function drawModules(p) {
     p.textSize(MainTextSize)
     p.textLeading(MainTextLeadingSize)
     p.rectMode(p.CENTER)
+
     let xmain = canvasSize / 2;
     let ymain = canvasSize / 2;
-    p.text(mainText, xmain, ymain, canvasSize, canvasSize)
+    // p.text(mainText, xmain, ymain, canvasSize, canvasSize)
+    let color = 0
+    let txtSize = MainTextSize
+    if (basicTypo.chrome == true) {
+      for (let i = 10; i >= 0; i--) {
+        let offsetX = i * 3;
+        let offsetY = i * 3;
+        // let gradientFill = p.drawingContext.createLinearGradient(0, 0, canvasSize/2, canvasSize/2,)
+        // gradientFill.addColorStop(0, p.color(0))
+        // gradientFill.addColorStop(0.5, p.color(255))
+        // gradientFill.addColorStop(1, p.color(0))
+        // p.drawingContext.fillStyle = gradientFill
+        p.fill(color, color, color);
+        // p.text(mainText, xmain + offsetX, ymain + offsetY);
+        p.textSize(txtSize)
+        p.text(mainText, xmain , ymain);
+        color += 20
+        txtSize -= 1
+      }
+      p.drawingContext.shadowBlur = 10
+      p.drawingContext.shadowColor = p.color(255)
+      p.stroke(255);
+      // let gradient = p.drawingContext.createConicGradient( 0, canvasSize/2, canvasSize/2,)
+      // gradient.addColorStop(0, p.color(0))
+      // gradient.addColorStop(0.5, p.color(255))
+      // gradient.addColorStop(1, p.color(0))
+      // p.drawingContext.strokeStyle = gradient
+      // p.strokeWeight((0.3 * canvasSize) / 100)
+      // let gradientFill = p.drawingContext.createLinearGradient(0, 0, canvasSize/2, canvasSize/2,)
+      // gradientFill.addColorStop(0, p.color(0))
+      // gradientFill.addColorStop(0.5, p.color(255))
+      // gradientFill.addColorStop(1, p.color(0))
+      // p.drawingContext.fillStyle = gradientFill
+      // p.noFill()
+      p.text(mainText, xmain, ymain);
+    } else {
+      p.text(mainText, xmain, ymain, canvasSize, canvasSize)
+    }
 
 
     p.drawingContext.shadowBlur = 0

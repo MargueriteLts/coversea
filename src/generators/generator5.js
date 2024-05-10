@@ -45,17 +45,27 @@ const preset = {
   //   size: 100,
   //   color: '#fff'
   // }
+
   BasicTypo: {
+    color: '#ffffff',
+
     mainText: 'Volume Music',
-    textarea: 'Music is the answer to everything, music is the key to the world',
+    optionsMainTextFonts: ['AUSRINE', 'esenin-script-one', 'Acosta', 'PT-Root-UI', 'bc-novatica-cyr'],
     font: 'AUSRINE',
-    dopText: true,
-    sizeMainText: 10,
+    sizeMainText:{
+      sliderValue: 10,
+      min: 5,
+      max: 20
+    },
+    styles: ['NORMAL', 'LIGHT', 'BOLD'],
+    styleMainText: 'NORMAL',
     leadingMainText: 8,
+
+    dopText: true,
+    textarea: 'Music is the answer to everything, music is the key to the world',
     sizeTextarea: 2,
     leadingTextarea: 2,
     upperCase: true,
-    color: '#ffffff',
     random: true,
     textAlign: 'left'
   }

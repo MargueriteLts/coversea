@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import HeaderModule from '../components/HeaderModule.jsx'
 import TabButtonSet from '../components/TabButtonSet.jsx'
+import Slider from '../components/Slider.jsx'
 
 export default class Vinyl extends Component {
   constructor(props) {
@@ -57,30 +58,32 @@ export default class Vinyl extends Component {
   render() {
     const { vinyl } = this.props
 
-    return <div className="ModuleContainer">
+    return <div className="module__container">
       <HeaderModule
         title={vinyl.moduleName}
         // randomize={}
       />
-      <div className="ModuleContent">
+      <div className="module__content">
         <TabButtonSet
           options={vinyl.preset}
           value={this.state.currentVinylType}
           handleClick={this.handleTabClick}
         />
-        <input
+        <Slider
+          title='Size'
           type="range"
           min="10"
           max="100"
           value={this.state.sliderValue}
-          onInput={this.handleInput}
+          handleChange={this.handleInput}
         />
-        <input
+        <Slider
+          title='Opacity'
           type="range"
           min="0"
           max="255"
           value={this.state.sliderOpacity}
-          onInput={this.handleOpacity}
+          handleChange={this.handleOpacity}
         />
         {/* <div className="Button" onClick={this.handleClick}>Randomize image</div> */}
       </div>

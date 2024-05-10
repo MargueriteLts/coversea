@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import HeaderModule from '../components/HeaderModule.jsx'
 import TabButtonSet from '../components/TabButtonSet.jsx'
+import Slider from '../components/Slider.jsx'
 
 export default class Overlay extends Component {
   constructor(props) {
@@ -42,24 +43,25 @@ export default class Overlay extends Component {
   render() {
     const { overlay } = this.props
 
-    return <div className="ModuleContainer">
+    return <div className="module__container">
       <HeaderModule
         title={overlay.moduleName}
         // randomize={}
       />
-      <div className="ModuleContent">
+      <div className="module__content">
         <TabButtonSet
           options={overlay.preset}
           value={this.state.currentCollection}
           handleClick={this.handleTabClick}
         />
-        <div className="Button" onClick={this.handleClick}>Randomize overlay</div>
-        <input
+        <div className="btn--secondary" onClick={this.handleClick}>Randomize overlay</div>
+        <Slider
+          title='Opacity'
           type="range"
           min="0"
           max="255"
           value={this.state.opacityValue}
-          onInput={this.handleInput}
+          handleChange={this.handleInput}
         />
       </div>
     </div>

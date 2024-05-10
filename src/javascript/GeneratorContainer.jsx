@@ -10,7 +10,7 @@ import Image from './modules/Image.jsx'
 import Background from './modules/Background.jsx'
 import BackgroundImage from './modules/BackgroundImage.jsx'
 import Vinyl from './modules/Vinyl.jsx'
-import Text1 from './modules/Text1.jsx'
+// import Text1 from './modules/Text1.jsx'
 import Lines from './modules/Lines.jsx'
 import Module3D from './modules/Module3D.jsx'
 import BasicTypo from './modules/BasicTypo.jsx'
@@ -53,8 +53,8 @@ export default class GeneratorContainer extends Component {
       setBackgroundImageStore,
       vinyl,
       setVinylStore,
-      text1,
-      setText1Store,
+      // text1,
+      // setText1Store,
       lines,
       setLinesStore,
       module3D,
@@ -74,7 +74,6 @@ export default class GeneratorContainer extends Component {
           <Shapes
             shapes={shapes}
             setShapesStore={setShapesStore}
-            sliderValue={shapes.settings.sliderValue}
             key={index}
           />
         )
@@ -130,15 +129,15 @@ export default class GeneratorContainer extends Component {
         )
       }
 
-      if (moduleName == 'Text1') {
-        modules.push(
-          <Text1
-            text1={text1}
-            setText1Store={setText1Store}
-            key={index}
-          />
-        )
-      }
+      // if (moduleName == 'Text1') {
+      //   modules.push(
+      //     <Text1
+      //       text1={text1}
+      //       setText1Store={setText1Store}
+      //       key={index}
+      //     />
+      //   )
+      // }
 
       if (moduleName == 'BasicTypo') {
         modules.push(
@@ -218,16 +217,16 @@ export default class GeneratorContainer extends Component {
   render() {
     // const { generateAll } = this.props
 
-    return <div className="GeneratorContent">
-      <div className='wrapModules'>
+    return <div className="generator__content">
+      <div className='generator__modules-wrap'>
       {this.renderModules()}
       </div>
-      <div className="wrapSketch">
+      <div className="generator__sketch-wrap">
         <div className="sketch" id="sketch" ref={this.sketchContainerRef}>
         </div>
-        <div className="controls">
-          <div className="ButtonPrimary" onClick={this.DownloadImage}>Download image</div>
-          <div className="ButtonBig" onClick={this.GenerateCover}>GENERATE</div>
+        <div className="generator__sketch-controls">
+          <div className="btn--big" onClick={this.GenerateCover}>GENERATE</div>
+          <div className="btn--primary" onClick={this.DownloadImage}>Download image</div>
         </div>
       </div>
     </div>

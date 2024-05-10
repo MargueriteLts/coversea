@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 import HeaderModule from '../components/HeaderModule.jsx'
 import TabButtonSet from '../components/TabButtonSet.jsx'
-import ColorPicker from './background/ColorPicker.jsx'
+import ColorPicker from '../components/ColorPicker.jsx'
 
 export default class Background extends Component {
   constructor(props) {
@@ -70,7 +70,7 @@ export default class Background extends Component {
     ////////////// SOLID COLOR
 
     if (this.state.currentBgType == 'SolidColor') {
-      return <div>
+      return <div className='module__content--bgmodule-controls'>
         <ColorPicker
           title=''
           // object='background'
@@ -86,8 +86,8 @@ export default class Background extends Component {
     ////////////// GRADIENT
 
     if (this.state.currentBgType == 'Gradient') {
-      return <div className='gradientControls'>
-        <div className='gradientColors'>
+      return <div className='module__content--bgmodule-controls'>
+        <div className='module__content--gradientcolors'>
           <ColorPicker
             title=''
             // object='gradient1'
@@ -107,8 +107,8 @@ export default class Background extends Component {
             key='Gradient2ColorPicker'
           />
         </div>
-        <div className="Button" onClick={this.handleRandomizeGradient}>Randomize Gradient</div>
-        <div className="Button" onClick={this.handleChangeAngleGradient}>Rotate</div>
+        <div className="btn--secondary" onClick={this.handleRandomizeGradient}>Randomize Gradient</div>
+        <div className="btn--secondary" onClick={this.handleChangeAngleGradient}>Rotate</div>
       </div>
     }
   }
@@ -116,7 +116,7 @@ export default class Background extends Component {
   //////////////////////////////// NO TAB RENDER
 
   renderBgContentOnly() {
-    const { setBackgroundStore, background, setColorPickerStore } = this.props
+    const { background, setColorPickerStore } = this.props
 
     const bgType = background.bgTypes
 
@@ -175,13 +175,13 @@ export default class Background extends Component {
     const { background } = this.props
     const nbBgTypes = background.bgTypes.length
 
-    return <div className="ModuleContainer">
+    return <div className="module__container">
       <HeaderModule
         title={background.moduleName}
         // randomize={}
       />
       { nbBgTypes > 1
-        ? <div className="ModuleContentBg flexColumn"> 
+        ? <div className="module__content--bgmodule flexColumn"> 
             <TabButtonSet
               options={background.preset}
               value={this.state.currentBgType}

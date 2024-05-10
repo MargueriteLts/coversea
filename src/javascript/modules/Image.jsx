@@ -12,13 +12,13 @@ export default class Image extends Component {
   }
 
   render() {
-    return <div className="ModuleContainer">
+    return <div className="module__container">
       <HeaderModule
         title='Random Image'
         // randomize={}
       />
-      <div className="ModuleContent">
-        <div className="Button" onClick={this.handleClick}>Randomize Shoe</div>
+      <div className="module__content">
+        <div className="btn-secondary" onClick={this.handleClick}>Randomize Shoe</div>
       </div>
     </div>
   }

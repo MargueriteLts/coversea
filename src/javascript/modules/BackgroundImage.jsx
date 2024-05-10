@@ -42,18 +42,18 @@ export default class BackgroundImage extends Component {
   render() {
     const { backgroundImage } = this.props
 
-    return <div className="ModuleContainer">
+    return <div className="module__container">
       <HeaderModule
         title={backgroundImage.moduleName}
         // randomize={}
       />
-      <div className="ModuleContent">
+      <div className="module__content">
         <TabButtonSet
           options={backgroundImage.preset}
           value={this.state.currentCollection}
           handleClick={this.handleTabClick}
         />
-        <div className="Button" onClick={this.handleClick}>Randomize image</div>
+        <div className="btn--secondary" onClick={this.handleClick}>Randomize image</div>
         <input
           type="range"
           min="0"

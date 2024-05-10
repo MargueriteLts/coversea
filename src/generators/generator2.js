@@ -52,7 +52,6 @@ const preset = {
     leadingMainText: 20,
 
     dopText: true,
-    nbDopText: 1,
     textarea: 'Dance',
     sizeTextarea: 2,
     leadingTextarea: 2,

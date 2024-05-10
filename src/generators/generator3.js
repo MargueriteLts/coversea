@@ -56,8 +56,9 @@ const preset = {
   BasicTypo: {
     color: '#ffffff',
     upperCase: true,
-    glow: true,
-    stroke: true,
+    glow: false,
+    stroke: false,
+    chrome: true,
 
     mainText: 'Funky Groov',
     optionsMainTextFonts: ['esenin-script-one', 'Acosta', 'wonky', 'PT-Root-UI'],
@@ -70,7 +71,7 @@ const preset = {
     styles: ['NORMAL', 'LIGHT', 'BOLD'],
     styleMainText: 'NORMAL',
     leadingMainText: 24
-  },
+  }
 }
 
 export { modules, preset }

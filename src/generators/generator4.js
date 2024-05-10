@@ -58,17 +58,28 @@ const preset = {
   //   random: true,
   //   textAlign: 'left'
   // },
+
+
   BasicTypo: {
+    color: '#ffffff',
+
     mainText: 'Music Cover Artwork in Generator4',
-    textarea: 'Music is the answer to everything, music is the key to the world',
+    optionsMainTextFonts: ['esenin-script-one', 'Acosta', 'PT-Root-UI', 'bc-novatica-cyr'],
     font: 'bc-novatica-cyr',
-    dopText: true,
-    sizeMainText: 10,
+    sizeMainText:{
+      sliderValue: 10,
+      min: 5,
+      max: 20
+    },
+    styles: ['NORMAL', 'LIGHT', 'BOLD'],
+    styleMainText: 'NORMAL',
     leadingMainText: 8,
+
+    dopText: true,
+    textarea: 'Music is the answer to everything, music is the key to the world',
     sizeTextarea: 2,
     leadingTextarea: 2,
     upperCase: true,
-    color: '#ffffff',
     random: true,
     textAlign: 'left'
   }

@@ -14,16 +14,16 @@ export default class DropDown extends Component {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen
     }));
-  };
+  }
 
   handleClick = (option) => {
-    this.props.handleClick(option); // Call the handleClick function passed from props
-    this.setState({ isOpen: false }); // Close the dropdown after selecting an option
-  };
+    this.props.handleClick(option)
+    this.setState({ isOpen: false })
+  }
 
   render() {
     const { isOpen } = this.state;
-    const { options, value, handleClick } = this.props;
+    const { options, value } = this.props;
 
     const availableOptions = options.filter(option => option !== value);
 

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import HeaderModule from '../components/HeaderModule.jsx'
 import DropDown from '../components/DropDown.jsx'
-import ColorPicker from './background/ColorPicker.jsx'
+import ColorPicker from '../components/ColorPicker.jsx'
+import Slider from '../components/Slider.jsx'
 
 export default class Particles extends Component {
   constructor(props) {
@@ -42,11 +43,11 @@ export default class Particles extends Component {
     const { particles } = this.props
 
     return (
-      <div className="ModuleContainer">
+      <div className="module__container">
         <HeaderModule
           title={particles.moduleName}
         />
-        <div className="ModuleContent">
+        <div className="module__content">
           <DropDown
             options={particles.options}
             value={this.state.currentParticlesType}
@@ -58,12 +59,13 @@ export default class Particles extends Component {
             handleChange={this.handleChange}
             key='AllColorPicker'
           />
-          <input
+          <Slider
+            title='Quantity'
             type="range"
             min={particles.min}
             max={particles.max}
             value={this.state.sliderValue}
-            onInput={this.handleInput}
+            handleChange={this.handleInput}
           />
         </div>
       </div>

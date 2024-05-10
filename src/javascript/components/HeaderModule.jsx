@@ -10,13 +10,10 @@ export default class Image extends Component {
   render() {
     const { title } = this.props
 
-    return <div className="ModuleHeader">
-      <div className="ModuleTitle">
+    return <div className="module__header">
+      <div className="module__title">
         {title}
       </div>
-      {/* <ButtonPrimary_Randomize
-        randomize={randomize}
-      /> */}
     </div>
   }
 }

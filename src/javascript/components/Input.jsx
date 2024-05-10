@@ -1,15 +1,18 @@
 import React, { PureComponent } from 'react'
 
-export default class MyInput extends PureComponent {
+export default class Input extends PureComponent {
   constructor(props) {
     super(props)
   }
 
   render() {
-    const { value, handleChange } = this.props
+    const { value, handleChange, title } = this.props
 
     return (
-      <input className="txtInput" value={value} onChange={handleChange} ></input>
+      <div className='input'>
+        {title}
+        <input className="input__entry" value={value} onChange={handleChange} ></input>
+      </div>
     )
   }
 }

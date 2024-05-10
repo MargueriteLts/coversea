@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import HeaderModule from '../components/HeaderModule.jsx'
-import ColorPicker from './background/ColorPicker.jsx'
+import ColorPicker from '../components/ColorPicker.jsx'
+import Slider from '../components/Slider.jsx'
 
 export default class Lines extends Component {
   constructor(props) {
@@ -35,25 +36,26 @@ export default class Lines extends Component {
   render() {
     const { lines } = this.props
 
-    return <div className="ModuleContainer">
+    return <div className="module__container">
       <HeaderModule
         title={lines.moduleName}
       />
-      <div className="ModuleContent flexRow">
-        <div className="Button" onClick={this.handleClick}>Randomize lines</div>
+      <div className="module__content flexRow">
+        <div className="btn--secondary" onClick={this.handleClick}>Randomize lines</div>
         <ColorPicker
           object='SolidColor'
           color={lines.color}
           handleChange={this.handleChange}
           key='AllColorPicker'
         />
-        <input
-            type="range"
-            min={this.props.lines.min}
-            max={this.props.lines.max}
-            value={this.state.sliderValue}
-            onInput={this.handleSliderSize}
-          />
+        <Slider
+          title='Thickness'
+          type="range"
+          min={this.props.lines.min}
+          max={this.props.lines.max}
+          value={this.state.sliderValue}
+          handleChange={this.handleSliderSize}
+        />
       </div>
     </div>
   }

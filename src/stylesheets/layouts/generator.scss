@@ -1,0 +1,227 @@
+body.generator {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0 24px;
+  background: var(--BACKGROUND-WEBSITE-BLACK);
+}
+
+// HEADER
+
+.generator__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+  height: 120px;
+  padding: 16px;
+  color: var(--white);
+
+  .header__homelink {
+    z-index: 1;
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    margin-right: auto;
+  }
+
+  .header__logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// CONTENT
+
+#reactComponentRoot {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+  overflow-y: auto;
+  margin-top: 24px;
+  // margin-bottom: 24px;
+}
+
+.generator__content{
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  column-gap: 20px;
+  width: 100%;
+  height: 100%;
+
+
+  .generator__modules-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    row-gap: 8px;
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 16px;
+
+    /* Hide the scrollbar in Firefox */
+    scrollbar-width: none;
+    /* Hide the scrollbar in Internet Explorer/Edge */
+    -ms-overflow-style: none;
+    /* Hide the scrollbar in WebKit browsers (e.g., Chrome, Safari) */
+    .generator__modules::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .module__container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      
+      .module__header {
+        display: flex;
+        flex-direction: row;
+        border-radius: 36px 36px 0 0;
+        background: var(--BACKGROUND-MODULE);
+        padding: 16px 24px 12px;
+  
+        .module__title {
+          color: var(--white);
+          font-size: 24px;
+          font-family: "bc-novatica-cyr", sans-serif;
+          font-weight: 500;
+          font-style: normal;
+          text-transform: uppercase;
+        }
+      }
+  
+      .TabButtonSet {
+        display: flex;
+        flex-direction: row;
+      }
+  
+      .TabButton {
+        margin-right: 12px;
+        border-radius: 20px 20px 0 0;
+        padding: 8px 18px 10px 18px;
+        justify-content: center;
+        color: var(--TEXT-NOTSELECTED);
+        font-family: neue-haas-unica;
+        font-size: 18px;
+        letter-spacing: -0.6px;
+    
+        &:hover:not(.active) {
+          color: var(--TEXT-WHITE);
+          background-color: var(--BACKGROUND-BTN-HOVER);
+          cursor: pointer;
+        }
+    
+        &.active {
+          background: var(--BACKGROUND-MODULE);
+          // font-weight: 500;
+          color: var(--TEXT-WHITE);
+          cursor: default;
+        }
+      }
+
+      .module__content {
+        display: flex;
+        flex-direction: column;
+        row-gap: 12px;
+        column-gap: 12px;
+        border-radius: 0 0 40px 40px;
+        height: 100%;
+        padding: 8px 24px 24px;
+        background-color: var(--BACKGROUND-MODULE);
+      }
+  
+      .module__content--bgmodule {
+        display: flex;
+        flex-direction: column;
+        border-radius: 0 0 36px 36px;
+        height: 100%;
+        padding: 8px 10px 12px 10px;
+        background-color: var(--BACKGROUND-MODULE-DARKER);
+
+        .module__content--bgmodule-controls {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          border-radius: 0 0 28px 28px;
+          column-gap: 12px;
+          background-color: var(--BACKGROUND-MODULE);
+          padding: 18px;
+        }
+
+        .module__content--gradientcolors {
+          display: flex;
+          flex-direction: row;
+          column-gap: 12px;
+        }
+      }
+
+      .ModuleContentBgOnly {
+        background-color: var(--BgModul);
+        display: flex;
+        flex-direction: column;
+        row-gap: 12px;
+        column-gap: 12px;
+        padding: 24px;
+        height: 100%;
+        // width: 100%;
+        border-radius: 0 0 40px 40px;
+
+        .gradientControls {
+          display: flex;
+          flex-direction: row;
+          column-gap: 12px;
+        }
+
+        .gradientColors {
+          display: flex;
+          flex-direction: row;
+          column-gap: 12px;
+        }
+      }
+
+      .module__content--basictypo-maintext {
+        display: flex;
+        // flex-direction: row;
+        row-gap: 12px;
+        // align-items: center;
+
+        .module__basictypo-maintext-controls {
+          display: flex;
+          flex-direction: row;
+          column-gap: 12px;
+        }
+      }
+    }
+  }
+
+  .generator__sketch-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    row-gap: 16px;
+    overflow: hidden;
+    width: 50%;
+
+    .sketch {
+      flex-grow: 1;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .generator__sketch-controls {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      flex-grow: 0;
+      flex-shrink: 1;
+      height: fit-content;
+    }
+  }
+
+
+}
