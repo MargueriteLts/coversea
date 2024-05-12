@@ -7,23 +7,19 @@ export default class Image extends Component {
     super(props)
   }
 
-  RandomizeModule = () => {
-    // const container = document.getElementById('reactComponentRoot')
-    // const generatorName = container.dataset.generator
-    // window.resetSketch()
-    const { moduleType } = this.props
-
-    this.props.randomizeModuleStore(moduleType)
-  }
+  // randomizeModule = () => {
+  //   const { moduleType } = this.props
+  //   this.props.randomizeModuleStore(moduleType)
+  // }
 
   render() {
-    const { title } = this.props
+    const { title, randomizeModule } = this.props
 
     return <div className="module__header">
       <div className="module__title">
         {title}
       </div>
-      <div className="btn--primary" onClick={this.RandomizeModule}>Randomize</div>
+      <div className="btn--primary" onClick={randomizeModule}>Randomize</div>
     </div>
   }
 }

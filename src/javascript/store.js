@@ -199,6 +199,7 @@ function setBackgroundStore(type, value) {
   return new Promise((resolve, reject) => {
     if (type === 'CurrentTabChange') {
       moduleBackgroundStore.currentBgType = value
+      resolve([value])
     }
 
     if (type === 'SolidColor') {
@@ -223,6 +224,7 @@ function setBackgroundStore(type, value) {
     }
     if (type === 'AngleGradient') {
       moduleBackgroundStore.preset.Gradient.angle = changeGradientAngle()
+      resolve([moduleBackgroundStore.preset.Gradient.angle])
     }
 
     // if (type === 'Noise') {
@@ -677,6 +679,40 @@ function set3DStore(type, value) {
   }
 }
 
+//////////////////////////////////
+// function regenBackground() {
+//   return new Promise((resolve, reject) => {
+//     let bgType = sample(moduleBackgroundStore.bgTypes)
+//     setBackgroundStore('CurrentTabChange', bgType)
+
+//     let newSolidColor=generateColor()
+//     setBackgroundStore('SolidColor', newSolidColor)
+
+//     let Gcolor1, Gcolor2
+//     setBackgroundStore('Gradient')
+//       .then((colors) => {
+//         Gcolor1 = colors[0]
+//         Gcolor2 = colors[1]
+//       })
+
+//     let newGradientColor1=generateColor()
+//     setBackgroundStore('GradientColor1', newGradientColor1)
+
+//     let newGradientColor2=generateColor()
+//     setBackgroundStore('GradientColor2', newGradientColor2)
+
+//     let newAngle
+//     setBackgroundStore('AngleGradient')
+//       .then((randomAngle) => {
+//         newAngle = randomAngle
+//       })
+
+//     resolve([bgType, newSolidColor, Gcolor1, Gcolor2, newGradientColor1, newGradientColor2, newAngle ])
+
+//     setBackgroundStore('Noise')
+//   })
+// }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GENERATE ALL
 
 function generateAllStore(generatorName) {
@@ -686,28 +722,163 @@ function generateAllStore(generatorName) {
 
   allFonts = initFontsStore()
 
-  moduleList.forEach(moduleName => {
-    if (moduleName == 'Background') {
-      // let BgType = sample(moduleBackgroundStore.bgTypes)
-      // setBackgroundStore('CurrentTabChange', BgType)
+  return new Promise((resolve, reject) => {
+    moduleList.forEach(moduleName => {
+      if (moduleName == 'Background') {
 
-      setBackgroundStore('SolidColor', generateColor())
+        let bgType = sample(moduleBackgroundStore.bgTypes)
+        setBackgroundStore('CurrentTabChange', bgType)
 
+        let newSolidColor=generateColor()
+        setBackgroundStore('SolidColor', newSolidColor)
+
+        let Gcolor1, Gcolor2
+        setBackgroundStore('Gradient')
+          .then((colors) => {
+            Gcolor1 = colors[0]
+            Gcolor2 = colors[1]
+          })
+
+        let newGradientColor1=generateColor()
+        setBackgroundStore('GradientColor1', newGradientColor1)
+
+        let newGradientColor2=generateColor()
+        setBackgroundStore('GradientColor2', newGradientColor2)
+
+        let newAngle
+        setBackgroundStore('AngleGradient')
+          .then((randomAngle) => {
+            newAngle = randomAngle
+          })
+
+        resolve([bgType, newSolidColor, Gcolor1, Gcolor2, newGradientColor1, newGradientColor2, newAngle ])
+
+        setBackgroundStore('Noise')
+
+        // regenBackground()
+
+      }
+
+      if (moduleName == 'Shapes') {
+        setShapesStore('SolidColor', generateColor())
+        setShapesStore('Size', getRandomArbitrary(0, 100))
+      }
+
+      if (moduleName == 'Particles') {
+        let ParticlesTypes = sample(moduleParticlesStore.options)
+        setParticlesStore('CurrentTabChange', ParticlesTypes)
+        setParticlesStore('quantity', getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max))
+        setParticlesStore('CurrentTabChange', ParticlesTypes)
+        //solid color juste black cest cool aussi
+        setParticlesStore('SolidColor', generateColor())
+      }
+
+      if (moduleName == 'Image') {
+        setImageStore()
+      }
+
+      if (moduleName == 'BackgroundImage') {
+        let BgImgType = sample(moduleBackgroundImageStore.collections)
+        setBackgroundImageStore('CurrentTabChange', BgImgType)
+        setBackgroundImageStore('NightClub')
+        setBackgroundImageStore('Cars')
+        setBackgroundImageStore('opacity', getRandomArbitrary(10, 255))
+
+      }
+
+      if (moduleName == 'Vinyl') {
+
+        // return new Promise((resolve, reject) => {
+          let Vinyltype = sample(moduleVinylStore.vinylTypes)
+          setVinylStore('CurrentTabChange', Vinyltype)
+          // resolve([type])
+          let size = getRandomArbitrary(0, 100)
+          setVinylStore('size', size)
+          // resolve([size])
+          let opacity = getRandomArbitrary(0, 255)
+          setVinylStore('opacity', opacity)
+          // resolve([opacity])
+        // })
+      }
+
+      if (moduleName == 'BasicTypo') {
+        setBasicTypoStore('Positions')
+        setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
+      }
+
+      if (moduleName == 'Lines') {
+        setLinesStore('SolidColor', generateColor())
+        setLinesStore('randomize')
+        setLinesStore('strokeWeight', getRandomArbitrary(0, 100))
+      }
+
+      if (moduleName == 'Module3D') {
+        let type3D = sample(module3DStore.options)
+        set3DStore('CurrentTabChange', type3D)
+        set3DStore('randomize')
+      }
+    })
+  })
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////// RANDOMIZE MODULE
+
+function randomizeModuleStore(moduleType) {
+  return new Promise((resolve, reject) => {
+    if (moduleType == 'Background') {
+      console.log('ok');
+      // let bgType = sample(moduleBackgroundStore.bgTypes)
+      // setBackgroundStore('CurrentTabChange', bgType)
+      // setBackgroundStore('SolidColor', generateColor())
+
+      // setBackgroundStore('Gradient')
+      // setBackgroundStore('GradientColor1', generateColor())
+      // setBackgroundStore('GradientColor2', generateColor())
+      // setBackgroundStore('AngleGradient')
+
+      // setBackgroundStore('Noise')
+
+      let bgType = sample(moduleBackgroundStore.bgTypes)
+      setBackgroundStore('CurrentTabChange', bgType)
+
+      let newSolidColor=generateColor()
+      setBackgroundStore('SolidColor', newSolidColor)
+
+      let Gcolor1, Gcolor2
       setBackgroundStore('Gradient')
-      setBackgroundStore('GradientColor1', generateColor())
-      setBackgroundStore('GradientColor2', generateColor())
+        .then((colors) => {
+          Gcolor1 = colors[0]
+          Gcolor2 = colors[1]
+        })
+
+      let newGradientColor1=generateColor()
+      setBackgroundStore('GradientColor1', newGradientColor1)
+
+      let newGradientColor2=generateColor()
+      setBackgroundStore('GradientColor2', newGradientColor2)
+
+      let newAngle
       setBackgroundStore('AngleGradient')
+        .then((randomAngle) => {
+          newAngle = randomAngle
+        })
+
+      resolve([bgType, newSolidColor, Gcolor1, Gcolor2, newGradientColor1, newGradientColor2, newAngle ])
 
       setBackgroundStore('Noise')
 
+      // regenBackground()
+
     }
 
-    if (moduleName == 'Shapes') {
+    if (moduleType == 'Shapes') {
       setShapesStore('SolidColor', generateColor())
       setShapesStore('Size', getRandomArbitrary(0, 100))
     }
 
-    if (moduleName == 'Particles') {
+    if (moduleType == 'Particles') {
+      console.log('ok');
+      // initParticles(module)
       let ParticlesTypes = sample(moduleParticlesStore.options)
       setParticlesStore('CurrentTabChange', ParticlesTypes)
       setParticlesStore('quantity', getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max))
@@ -716,11 +887,11 @@ function generateAllStore(generatorName) {
       setParticlesStore('SolidColor', generateColor())
     }
 
-    if (moduleName == 'Image') {
+    if (moduleType == 'Image') {
       setImageStore()
     }
 
-    if (moduleName == 'BackgroundImage') {
+    if (moduleType == 'BackgroundImage') {
       let BgImgType = sample(moduleBackgroundImageStore.collections)
       setBackgroundImageStore('CurrentTabChange', BgImgType)
       setBackgroundImageStore('NightClub')
@@ -729,7 +900,7 @@ function generateAllStore(generatorName) {
 
     }
 
-    if (moduleName == 'Vinyl') {
+    if (moduleType == 'Vinyl') {
 
       // return new Promise((resolve, reject) => {
         let Vinyltype = sample(moduleVinylStore.vinylTypes)
@@ -744,110 +915,31 @@ function generateAllStore(generatorName) {
       // })
     }
 
-    if (moduleName == 'BasicTypo') {
+    if (moduleType == 'BasicTypo') {
       setBasicTypoStore('Positions')
       setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
     }
 
-    if (moduleName == 'Lines') {
+    if (moduleType == 'Lines') {
       setLinesStore('SolidColor', generateColor())
       setLinesStore('randomize')
       setLinesStore('strokeWeight', getRandomArbitrary(0, 100))
     }
 
-    if (moduleName == 'Module3D') {
+    if (moduleType == 'Module3D') {
       let type3D = sample(module3DStore.options)
       set3DStore('CurrentTabChange', type3D)
       set3DStore('randomize')
     }
+
+    if (moduleType == 'Overlay') {
+      let overlayType = sample(moduleOverlayStore.collections)
+      setOverlayStore('CurrentTabChange', overlayType)
+      setOverlayStore('Plastic')
+      setOverlayStore('Stickers')
+      setOverlayStore('opacity', getRandomArbitrary(10, 255))
+    }
   })
-}
-
-
-
-function randomizeModuleStore(moduleType) {
-  if (moduleType == 'Background') {
-    let bgType = sample(moduleBackgroundStore.bgTypes)
-    setBackgroundStore('CurrentTabChange', bgType)
-    setBackgroundStore('SolidColor', generateColor())
-
-    setBackgroundStore('Gradient')
-    setBackgroundStore('GradientColor1', generateColor())
-    setBackgroundStore('GradientColor2', generateColor())
-    setBackgroundStore('AngleGradient')
-
-    setBackgroundStore('Noise')
-
-  }
-
-  if (moduleType == 'Shapes') {
-    setShapesStore('SolidColor', generateColor())
-    setShapesStore('Size', getRandomArbitrary(0, 100))
-  }
-
-  if (moduleType == 'Particles') {
-    console.log('ok');
-    // initParticles(module)
-    let ParticlesTypes = sample(moduleParticlesStore.options)
-    setParticlesStore('CurrentTabChange', ParticlesTypes)
-    setParticlesStore('quantity', getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max))
-    setParticlesStore('CurrentTabChange', ParticlesTypes)
-    //solid color juste black cest cool aussi
-    setParticlesStore('SolidColor', generateColor())
-  }
-
-  if (moduleType == 'Image') {
-    setImageStore()
-  }
-
-  if (moduleType == 'BackgroundImage') {
-    let BgImgType = sample(moduleBackgroundImageStore.collections)
-    setBackgroundImageStore('CurrentTabChange', BgImgType)
-    setBackgroundImageStore('NightClub')
-    setBackgroundImageStore('Cars')
-    setBackgroundImageStore('opacity', getRandomArbitrary(10, 255))
-
-  }
-
-  if (moduleType == 'Vinyl') {
-
-    // return new Promise((resolve, reject) => {
-      let Vinyltype = sample(moduleVinylStore.vinylTypes)
-      setVinylStore('CurrentTabChange', Vinyltype)
-      // resolve([type])
-      let size = getRandomArbitrary(0, 100)
-      setVinylStore('size', size)
-      // resolve([size])
-      let opacity = getRandomArbitrary(0, 255)
-      setVinylStore('opacity', opacity)
-      // resolve([opacity])
-    // })
-  }
-
-  if (moduleType == 'BasicTypo') {
-    setBasicTypoStore('Positions')
-    setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
-  }
-
-  if (moduleType == 'Lines') {
-    setLinesStore('SolidColor', generateColor())
-    setLinesStore('randomize')
-    setLinesStore('strokeWeight', getRandomArbitrary(0, 100))
-  }
-
-  if (moduleType == 'Module3D') {
-    let type3D = sample(module3DStore.options)
-    set3DStore('CurrentTabChange', type3D)
-    set3DStore('randomize')
-  }
-
-  if (moduleType == 'Overlay') {
-    let overlayType = sample(moduleOverlayStore.collections)
-    setOverlayStore('CurrentTabChange', overlayType)
-    setOverlayStore('Plastic')
-    setOverlayStore('Stickers')
-    setOverlayStore('opacity', getRandomArbitrary(10, 255))
-  }
 }
 
 // function generateAllStore(generatorName) {

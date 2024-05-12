@@ -8,7 +8,7 @@ const preset = {
   },
 
   Background: {
-    bgTypes: ['SolidColor', 'Gradient', 'Noise', 'Pixels'],
+    bgTypes: ['SolidColor', 'Gradient'],
     currentBgType: 'SolidColor',
 
     preset: {

@@ -17,7 +17,6 @@ import BasicTypo from './modules/BasicTypo.jsx'
 import Overlay from './modules/Overlay.jsx'
 
 let size
-let moduleType
 
 
 
@@ -25,13 +24,6 @@ export default class GeneratorContainer extends Component {
   constructor(props) {
     super(props)
     this.sketchContainerRef = React.createRef();
-
-    this.state = {
-      currentBgType: this.props.background.currentBgType,
-      solidColor: this.props.background.preset.SolidColor.color,
-      colorG1: this.props.background.preset.Gradient.color1,
-      colorG2: this.props.background.preset.Gradient.color2
-    }
   }
 
   componentDidMount() {
@@ -47,92 +39,22 @@ export default class GeneratorContainer extends Component {
 
   }
 
-
-/////////////////////////////////////////////////// BACKGROUND MODULE
-
-  handleTabClickBackground = (type) => {
-    this.props.setBackgroundStore('CurrentTabChange', type)
-
-    this.setState({
-      currentBgType: type
-    })
-  }
-
-  handleChangeBackgroundSolidColor = (object, value) => {
-    this.props.setBackgroundStore(object, value)
-    .then((color) => {
-      this.setState({
-        solidColor: color[0]
-      })
-    })
-  }
-
-  ///////////////////////// GRADIENT
-
-  handleBackgroundRandomizeGradient = () => {
-    this.props.setBackgroundStore('Gradient')
-      .then((colors) => {
-        this.setState({
-          colorG1: colors[0],
-          colorG2: colors[1]
-        })
-      }
-    )
-  }
-
-  handleChangeBackgroundGradientColor = (object, value) => {
-    this.props.setBackgroundStore(object, value)
-    .then((colors) => {
-        this.setState({
-          colorG1: colors[0],
-          colorG2: colors[1]
-        })
-      }
-    )
-  }
-
-  handleChangeBackgroundGradientAngle = () => {
-    this.props.setBackgroundStore('AngleGradient')
-  }
-
-  ////////////////////////////////////////////////// RANDOMIZE MODULE
-
-  randomizeModule = () => {
-    // const { moduleType } = this.props
-    console.log(moduleType);
-    this.props.randomizeModuleStore(moduleType)
-    .then((newValues) => {
-        this.setState({
-          currentBgType: newValues[0],
-          solidColor: newValues[1],
-          colorG1: newValues[4],
-          colorG2: newValues[5]
-        })
-      })
-  }
-
-// randomizeModule = () => {
-//     const { moduleType } = this.props
-//     this.props.randomizeModuleStore(moduleType)
-//   }
-
-
-/////////////////////////////////////////////////// RENDER MODULES
-
   renderModules() {
     const {
       moduleList,
-      background,
-      setBackgroundStore,
       shapes,
       particles,
       setShapesStore,
       setParticlesStore,
       setImageStore,
+      background,
+      setBackgroundStore,
       backgroundImage,
       setBackgroundImageStore,
       vinyl,
       setVinylStore,
+      // text1,
+      // setText1Store,
       lines,
       setLinesStore,
       module3D,
@@ -150,23 +72,12 @@ export default class GeneratorContainer extends Component {
     moduleList.forEach((moduleName, index) => {
 
       if (moduleName == 'Background') {
-        moduleType = 'Background'
         modules.push(
           <Background
-            // moduleType='Background'
             background={background}
             setBackgroundStore={setBackgroundStore}
-            currentBgType={this.state.currentBgType}
-            solidColor={this.state.solidColor}
-            colorG1={this.state.colorG1}
-            colorG2={this.state.colorG2}
             key={index}
             randomizeModuleStore={randomizeModuleStore}
-            handleChangeBackgroundSolidColor={this.handleChangeBackgroundSolidColor}
-            handleBackgroundRandomizeGradient={this.handleBackgroundRandomizeGradient}
-            handleTabClickBackground={this.handleTabClickBackground}
-            handleChangeBackgroundAngleGradient={this.handleChangeBackgroundGradientAngle}
-            randomizeModule={this.randomizeModule}
           />
         )
       }
@@ -286,21 +197,17 @@ export default class GeneratorContainer extends Component {
     });
   };
 
-  // resolve([bgType, newSolidColor, Gcolor1, Gcolor2, newGradientColor1, newGradientColor2, newAngle ])
-
   generateCover = () => {
     const container = document.getElementById('reactComponentRoot')
     const generatorName = container.dataset.generator
     window.resetSketch()
     this.props.generateAllStore(generatorName)
-      .then((newValues) => {
-        this.setState({
-          currentBgType: newValues[0],
-          solidColor: newValues[1],
-          colorG1: newValues[4],
-          colorG2: newValues[5]
-        })
-      })
+
+      // .then(() => {
+      //   // this.setState({
+      //   //   sliderOpacity: newValue[0]
+      //   // })
+      // })
   }
 
   // saveCanvasSize(size) {
