@@ -31,6 +31,7 @@ const preset = {
   Shapes: {
     options: ['Ellipses', 'Custom1', 'Custom2'],
     currentShapeType: 'Custom1',
+
     settings: {
       sliderValue: 37,
       gradient: true

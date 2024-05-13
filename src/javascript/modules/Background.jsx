@@ -120,14 +120,14 @@ export default class Background extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { background, randomizeModule, handleTabClickBackground, currentBgType, moduleType } = this.props
+    const { background, handleRandomizeModule, handleTabClickBackground, currentBgType } = this.props
     const nbBgTypes = background.bgTypes.length
 
     return <div className="module__container">
       <HeaderModule
         title={background.moduleName}
-        // moduleType='Background'
-        randomizeModule={randomizeModule}
+        handleRandomizeModule={handleRandomizeModule}
+        moduleType='Background'
       />
       { nbBgTypes > 1
         ? <div className="module__content--bgmodule flexColumn"> 

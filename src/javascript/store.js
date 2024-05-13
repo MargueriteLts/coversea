@@ -715,62 +715,103 @@ function set3DStore(type, value) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GENERATE ALL
 
-function generateAllStore(generatorName) {
+function generateAllStore(generatorName, moduleList) {
+  // Generate data for all modules, then filter based on moduleList
+  const newData = generateNewData(generatorName)
+    .then(data => {
+      // Filter data based on moduleList
+      const filteredData = data.filter(item => moduleList.includes(item.module));
+      return filteredData;
+    });
+
+  // console.log('GENERATEALLSTORE', newData);
+  return newData
+}
+
+
+function generateNewData(generatorName) {
   moduleList = generators[generatorName].modules
 
   blendStore = generators[generatorName].preset.blend
 
   allFonts = initFontsStore()
 
+  let data = []
+
   return new Promise((resolve, reject) => {
+
+    let bgType
+    let newSolidColor
+    // let Gcolor1, Gcolor2
+    let newGradientColor1
+    let newGradientColor2
+    // let newAngle
+
+    let currentVinyltype
+    let vinylSize
+    let vinylOpacity
+
+    let particlesTypes
+    let particlesQuantity
+    let particlesColor
+
+    let shapesType
+    let shapesColor
+    let shapesSize
+
     moduleList.forEach(moduleName => {
+
       if (moduleName == 'Background') {
 
-        let bgType = sample(moduleBackgroundStore.bgTypes)
+        bgType = sample(moduleBackgroundStore.bgTypes)
         setBackgroundStore('CurrentTabChange', bgType)
-
-        let newSolidColor=generateColor()
+        newSolidColor=generateColor()
         setBackgroundStore('SolidColor', newSolidColor)
-
-        let Gcolor1, Gcolor2
-        setBackgroundStore('Gradient')
-          .then((colors) => {
-            Gcolor1 = colors[0]
-            Gcolor2 = colors[1]
-          })
-
-        let newGradientColor1=generateColor()
+        newGradientColor1=generateColor()
         setBackgroundStore('GradientColor1', newGradientColor1)
-
-        let newGradientColor2=generateColor()
+        newGradientColor2=generateColor()
         setBackgroundStore('GradientColor2', newGradientColor2)
 
-        let newAngle
-        setBackgroundStore('AngleGradient')
-          .then((randomAngle) => {
-            newAngle = randomAngle
-          })
+        // setBackgroundStore('Gradient')
+        //   .then((colors) => {
+        //     Gcolor1 = colors[0]
+        //     Gcolor2 = colors[1]
+        //   })
 
-        resolve([bgType, newSolidColor, Gcolor1, Gcolor2, newGradientColor1, newGradientColor2, newAngle ])
+        // setBackgroundStore('AngleGradient')
+        //   .then((randomAngle) => {
+        //     newAngle = randomAngle
+        //   })
 
         setBackgroundStore('Noise')
 
-        // regenBackground()
-
+        data.push({module: moduleName, currentBgType: bgType, solidColor: newSolidColor, colorG1: newGradientColor1, colorG2: newGradientColor2 })
+        
+        console.log(data);
       }
 
       if (moduleName == 'Shapes') {
-        setShapesStore('SolidColor', generateColor())
-        setShapesStore('Size', getRandomArbitrary(0, 100))
+
+        shapesType = sample(moduleShapesStore.options)
+        setShapesStore('CurrentTabChange', shapesType)
+        shapesColor = generateColor()
+        setShapesStore('SolidColor', shapesColor)
+        shapesSize = getRandomArbitrary(0, 100)
+        setShapesStore('Size', shapesSize)
+
+        data.push({module: moduleName, currentShapesType: shapesType, shapesSize: shapesSize, shapesColor: shapesColor })
       }
 
       if (moduleName == 'Particles') {
-        let ParticlesTypes = sample(moduleParticlesStore.options)
-        setParticlesStore('CurrentTabChange', ParticlesTypes)
-        setParticlesStore('quantity', getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max))
-        setParticlesStore('CurrentTabChange', ParticlesTypes)
-        //solid color juste black cest cool aussi
-        setParticlesStore('SolidColor', generateColor())
+
+        particlesTypes = sample(moduleParticlesStore.options)
+        setParticlesStore('CurrentTabChange', particlesTypes)
+        particlesQuantity = getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max)
+        setParticlesStore('quantity', particlesQuantity)
+        particlesColor = generateColor()
+        setParticlesStore('SolidColor', particlesColor)
+
+        data.push({module: moduleName, currentParticlesType: particlesTypes, particlesQuantity: particlesQuantity, particlesColor: particlesColor })
       }
 
       if (moduleName == 'Image') {
@@ -782,23 +823,22 @@ function generateAllStore(generatorName) {
         setBackgroundImageStore('CurrentTabChange', BgImgType)
         setBackgroundImageStore('NightClub')
         setBackgroundImageStore('Cars')
-        setBackgroundImageStore('opacity', getRandomArbitrary(10, 255))
+        let bgImgOpacity = getRandomArbitrary(10, 255)
+        setBackgroundImageStore('opacity', bgImgOpacity)
 
+        data.push({module: moduleName, currentBgImgCollection: BgImgType, bgImgOpacity: bgImgOpacity})
       }
 
       if (moduleName == 'Vinyl') {
 
-        // return new Promise((resolve, reject) => {
-          let Vinyltype = sample(moduleVinylStore.vinylTypes)
-          setVinylStore('CurrentTabChange', Vinyltype)
-          // resolve([type])
-          let size = getRandomArbitrary(0, 100)
-          setVinylStore('size', size)
-          // resolve([size])
-          let opacity = getRandomArbitrary(0, 255)
-          setVinylStore('opacity', opacity)
-          // resolve([opacity])
-        // })
+        currentVinyltype = sample(moduleVinylStore.vinylTypes)
+        setVinylStore('CurrentTabChange', currentVinyltype)
+        vinylSize = getRandomArbitrary(0, 100)
+        setVinylStore('size', vinylSize)
+        vinylOpacity = getRandomArbitrary(0, 255)
+        setVinylStore('opacity', vinylOpacity)
+
+        data.push({module: moduleName, currentVinylType: currentVinyltype, vinylSize: vinylSize, vinylOpacity: vinylOpacity })
       }
 
       if (moduleName == 'BasicTypo') {
@@ -817,14 +857,170 @@ function generateAllStore(generatorName) {
         set3DStore('CurrentTabChange', type3D)
         set3DStore('randomize')
       }
+
+      if (moduleName == 'Overlay') {
+        let currentOverlayCollection = sample(moduleOverlayStore.collections)
+        setOverlayStore('CurrentTabChange', currentOverlayCollection)
+        setOverlayStore('NightClub')
+        setOverlayStore('Cars')
+        let overlayOpacity = getRandomArbitrary(10, 255)
+        setOverlayStore('opacity', overlayOpacity)
+
+        data.push({module: moduleName, currentOverlayCollection: currentOverlayCollection, overlayOpacity: overlayOpacity})
+      }
     })
+
+    // resolve([bgType, newSolidColor, Gcolor1, Gcolor2, newGradientColor1, newGradientColor2, newAngle, currentVinyltype, vinylSize, vinylOpacity, particlesTypes, particlesQuantity, particlesColor, shapesColor, shapesSize ])
+    resolve(data)
+
   })
 }
+
+
+
+////// other try
+
+// function generateAllStore(generatorName) {
+//   moduleList = generators[generatorName].modules
+
+//   blendStore = generators[generatorName].preset.blend
+
+//   allFonts = initFontsStore()
+
+//   return new Promise((resolve, reject) => {
+
+//     let bgType
+//     let newSolidColor
+//     let Gcolor1, Gcolor2
+//     let newGradientColor1
+//     let newGradientColor2
+//     let newAngle
+
+//     let currentVinylType
+//     let vinylSize
+//     let vinylOpacity
+
+//     let particlesTypes
+//     let particlesQuantity
+//     let particlesColor
+
+//     let shapesType
+//     let shapesColor
+//     let shapesSize
+
+//     moduleList.forEach(moduleName => {
+
+//       if (moduleName == 'Background') {
+
+//         bgType = sample(moduleBackgroundStore.bgTypes)
+//         setBackgroundStore('CurrentTabChange', bgType)
+//         newSolidColor=generateColor()
+//         setBackgroundStore('SolidColor', newSolidColor)
+//         newGradientColor1=generateColor()
+//         setBackgroundStore('GradientColor1', newGradientColor1)
+//         newGradientColor2=generateColor()
+//         setBackgroundStore('GradientColor2', newGradientColor2)
+
+//         setBackgroundStore('Gradient')
+//           .then((colors) => {
+//             Gcolor1 = colors[0]
+//             Gcolor2 = colors[1]
+//           })
+
+//         setBackgroundStore('AngleGradient')
+//           .then((randomAngle) => {
+//             newAngle = randomAngle
+//           })
+
+//         // resolve([bgType, newSolidColor, Gcolor1, Gcolor2, newGradientColor1, newGradientColor2, newAngle ])
+
+//         setBackgroundStore('Noise')
+
+//         // regenBackground()
+//       }
+
+//       if (moduleName == 'Shapes') {
+
+//         shapesType = sample(moduleShapesStore.options)
+//         setShapesStore('CurrentTabChange', shapesType)
+//         shapesColor = generateColor()
+//         setShapesStore('SolidColor', shapesColor)
+//         shapesSize = getRandomArbitrary(0, 100)
+//         setShapesStore('Size', shapesSize)
+//       }
+
+//       if (moduleName == 'Particles') {
+
+//         particlesTypes = sample(moduleParticlesStore.options)
+//         particlesQuantity = getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max)
+//         particlesColor = generateColor()
+
+//         setParticlesStore('CurrentTabChange', particlesTypes)
+
+//         setParticlesStore('quantity', particlesQuantity)
+
+//         // setParticlesStore('CurrentTabChange', ParticlesTypes)
+        
+//         setParticlesStore('SolidColor', particlesColor)
+//       }
+
+//       if (moduleName == 'Image') {
+//         setImageStore()
+//       }
+
+//       if (moduleName == 'BackgroundImage') {
+//         let BgImgType = sample(moduleBackgroundImageStore.collections)
+//         setBackgroundImageStore('CurrentTabChange', BgImgType)
+//         setBackgroundImageStore('NightClub')
+//         setBackgroundImageStore('Cars')
+//         setBackgroundImageStore('opacity', getRandomArbitrary(10, 255))
+
+//       }
+
+//       if (moduleName == 'Vinyl') {
+
+//         currentVinylType = sample(moduleVinylStore.vinylTypes)
+//         vinylSize = getRandomArbitrary(0, 100)
+//         vinylOpacity = getRandomArbitrary(0, 255)
+
+//         setVinylStore('CurrentTabChange', currentVinylType)
+        
+//         setVinylStore('size', vinylSize)
+        
+//         setVinylStore('opacity', vinylOpacity)
+
+//         // resolve([Vinyltype, size, opacity])
+//       }
+
+//       if (moduleName == 'BasicTypo') {
+//         setBasicTypoStore('Positions')
+//         setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
+//       }
+
+//       if (moduleName == 'Lines') {
+//         setLinesStore('SolidColor', generateColor())
+//         setLinesStore('randomize')
+//         setLinesStore('strokeWeight', getRandomArbitrary(0, 100))
+//       }
+
+//       if (moduleName == 'Module3D') {
+//         let type3D = sample(module3DStore.options)
+//         set3DStore('CurrentTabChange', type3D)
+//         set3DStore('randomize')
+//       }
+//     })
+
+//     resolve([bgType, newSolidColor, Gcolor1, Gcolor2, newGradientColor1, newGradientColor2, newAngle, currentVinylType, vinylSize, vinylOpacity, particlesTypes, particlesQuantity, particlesColor, shapesType, shapesColor, shapesSize ])
+
+//   })
+// }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// RANDOMIZE MODULE
 
 function randomizeModuleStore(moduleType) {
+
   return new Promise((resolve, reject) => {
+
     if (moduleType == 'Background') {
       console.log('ok');
       // let bgType = sample(moduleBackgroundStore.bgTypes)
@@ -851,10 +1047,10 @@ function randomizeModuleStore(moduleType) {
           Gcolor2 = colors[1]
         })
 
-      let newGradientColor1=generateColor()
+      let newGradientColor1 = generateColor()
       setBackgroundStore('GradientColor1', newGradientColor1)
 
-      let newGradientColor2=generateColor()
+      let newGradientColor2 = generateColor()
       setBackgroundStore('GradientColor2', newGradientColor2)
 
       let newAngle
@@ -872,19 +1068,30 @@ function randomizeModuleStore(moduleType) {
     }
 
     if (moduleType == 'Shapes') {
-      setShapesStore('SolidColor', generateColor())
-      setShapesStore('Size', getRandomArbitrary(0, 100))
+      let shapesTypes = sample(moduleShapesStore.options)
+      setShapesStore('CurrentTabChange', shapesTypes)
+      
+      let shapesColor = generateColor()
+      setShapesStore('SolidColor', shapesColor)
+
+      let shapesSize = getRandomArbitrary(0, 100)
+      setShapesStore('Size', shapesSize)
+
+      resolve([shapesTypes, shapesColor, shapesSize])
     }
 
     if (moduleType == 'Particles') {
-      console.log('ok');
-      // initParticles(module)
       let ParticlesTypes = sample(moduleParticlesStore.options)
       setParticlesStore('CurrentTabChange', ParticlesTypes)
-      setParticlesStore('quantity', getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max))
-      setParticlesStore('CurrentTabChange', ParticlesTypes)
-      //solid color juste black cest cool aussi
-      setParticlesStore('SolidColor', generateColor())
+
+      let particlesQuantity = getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max)
+      setParticlesStore('quantity', particlesQuantity)
+
+      // setParticlesStore('CurrentTabChange', ParticlesTypes)
+      let particlesColor = generateColor()
+      setParticlesStore('SolidColor', particlesColor)
+
+      resolve([ParticlesTypes, particlesQuantity, particlesColor])
     }
 
     if (moduleType == 'Image') {
@@ -896,23 +1103,24 @@ function randomizeModuleStore(moduleType) {
       setBackgroundImageStore('CurrentTabChange', BgImgType)
       setBackgroundImageStore('NightClub')
       setBackgroundImageStore('Cars')
-      setBackgroundImageStore('opacity', getRandomArbitrary(10, 255))
+      let bgImgOpacity = getRandomArbitrary(10, 255)
+      setBackgroundImageStore('opacity', bgImgOpacity)
 
+      resolve([BgImgType, bgImgOpacity])
     }
 
     if (moduleType == 'Vinyl') {
 
-      // return new Promise((resolve, reject) => {
-        let Vinyltype = sample(moduleVinylStore.vinylTypes)
-        setVinylStore('CurrentTabChange', Vinyltype)
-        // resolve([type])
-        let size = getRandomArbitrary(0, 100)
-        setVinylStore('size', size)
-        // resolve([size])
-        let opacity = getRandomArbitrary(0, 255)
-        setVinylStore('opacity', opacity)
-        // resolve([opacity])
-      // })
+      let Vinyltype = sample(moduleVinylStore.vinylTypes)
+      setVinylStore('CurrentTabChange', Vinyltype)
+      
+      let size = getRandomArbitrary(0, 100)
+      setVinylStore('size', size)
+      
+      let opacity = getRandomArbitrary(0, 255)
+      setVinylStore('opacity', opacity)
+
+      resolve([Vinyltype, size, opacity])
     }
 
     if (moduleType == 'BasicTypo') {
@@ -937,7 +1145,10 @@ function randomizeModuleStore(moduleType) {
       setOverlayStore('CurrentTabChange', overlayType)
       setOverlayStore('Plastic')
       setOverlayStore('Stickers')
-      setOverlayStore('opacity', getRandomArbitrary(10, 255))
+      let overlayOpacity = getRandomArbitrary(10, 255)
+      setOverlayStore('opacity', overlayOpacity)
+
+      resolve([overlayType, overlayOpacity])
     }
   })
 }

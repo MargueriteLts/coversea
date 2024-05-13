@@ -7,19 +7,14 @@ export default class Image extends Component {
     super(props)
   }
 
-  // randomizeModule = () => {
-  //   const { moduleType } = this.props
-  //   this.props.randomizeModuleStore(moduleType)
-  // }
-
   render() {
-    const { title, randomizeModule } = this.props
+    const { title, handleRandomizeModule, moduleType } = this.props
 
     return <div className="module__header">
       <div className="module__title">
         {title}
       </div>
-      <div className="btn--primary" onClick={randomizeModule}>Randomize</div>
+      <div className="btn--primary" onClick={() => this.props.handleRandomizeModule(moduleType)}>Randomize</div>
     </div>
   }
 }

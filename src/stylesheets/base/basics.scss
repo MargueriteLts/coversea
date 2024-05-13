@@ -119,6 +119,10 @@ p {
   outline: none;
 }
 
+textarea {
+  resize: none;
+}
+
 .textarea {
   display: flex;
   flex-direction: row;

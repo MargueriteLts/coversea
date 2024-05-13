@@ -9,82 +9,77 @@ export default class Vinyl extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      currentVinylType: this.props.vinyl.currentVinylType,
-      sliderValue: this.props.vinyl.sliderValue,
-      sliderOpacity: this.props.vinyl.sliderOpacity
-    }
+    // this.state = {
+    //   currentVinylType: this.props.vinyl.currentVinylType,
+    //   sliderValue: this.props.vinyl.sliderValue,
+    //   sliderOpacity: this.props.vinyl.sliderOpacity
+    // }
   }
 
-  //////////OK je comprends pas comment marche la promise, pcq on a bosse avec la color, mais la jai une tab et 2 sliders et je comprends pas quelles donnees je dois peredat
+  // handleTabClick = (type) => {
+  //   this.props.setVinylStore('CurrentTabChange', type)
 
-  handleTabClick = (type) => {
-    this.props.setVinylStore('CurrentTabChange', type)
+  //     .then(([type]) => {
+  //       this.setState({
+  //         currentVinylType: type
+  //       })
+  //     })
+  // }
 
-    // this.setState({
-    //   currentVinylType: type
-    // })
-      .then(([type]) => {
-        this.setState({
-          currentVinylType: type
-        })
-      })
-  }
+  // handleInput = (e) => {
+  //   const value = e.target.value
+  //   this.props.setVinylStore('size', value)
 
-  handleInput = (e) => {
-    const value = e.target.value
-    this.props.setVinylStore('size', value)
-    // this.setState({sliderValue: e.target.value})
-      .then(([newValue]) => {
-        this.setState({
-          sliderValue: newValue
-        })
-      })
-  }
+  //     .then(([newValue]) => {
+  //       this.setState({
+  //         sliderValue: newValue
+  //       })
+  //     })
+  // }
 
-  handleOpacity = (e) => {
-    const value = e.target.value
-    this.props.setVinylStore('opacity', value)
-    // this.setState({sliderOpacity: e.target.value})
-      .then(([newValue]) => {
-        this.setState({
-          sliderOpacity: newValue
-        })
-      })
-  }
+  // handleOpacity = (e) => {
+  //   const value = e.target.value
+  //   this.props.setVinylStore('opacity', value)
+    
+  //     .then(([newValue]) => {
+  //       this.setState({
+  //         sliderOpacity: newValue
+  //       })
+  //     })
+  // }
 
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { vinyl, randomizeModuleStore } = this.props
+    const { vinyl, handleRandomizeModule, currentVinylType, handleTabClickVinyl, vinylSize, handleChangeVinylSize, vinylOpacity, handleVinylOpacity } = this.props
 
     return <div className="module__container">
       <HeaderModule
         title={vinyl.moduleName}
+        handleRandomizeModule={handleRandomizeModule}
         moduleType='Vinyl'
-        randomizeModuleStore={randomizeModuleStore}
       />
       <div className="module__content">
         <TabButtonSet
           options={vinyl.preset}
-          value={this.state.currentVinylType}
-          handleClick={this.handleTabClick}
+          value={currentVinylType}
+          handleClick={handleTabClickVinyl}
         />
         <Slider
           title='Size'
           type="range"
           min="10"
           max="100"
-          value={this.state.sliderValue}
-          handleChange={this.handleInput}
+          value={vinylSize}
+          handleChange={handleChangeVinylSize}
         />
         <Slider
           title='Opacity'
           type="range"
           min="0"
           max="255"
-          value={this.state.sliderOpacity}
-          handleChange={this.handleOpacity}
+          value={vinylOpacity}
+          handleChange={handleVinylOpacity}
         />
         {/* <div className="Button" onClick={this.handleClick}>Randomize image</div> */}
       </div>
