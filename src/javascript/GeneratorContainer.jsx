@@ -4,17 +4,24 @@ import ReactDOM from 'react-dom'
 import html2canvas from "html2canvas";
 import { generateHash } from './utilities.js'
 
-import Shapes from './modules/Shapes.jsx'
-import Particles from './modules/Particles.jsx'
-import Image from './modules/Image.jsx'
+///////////////MODULES
+//Background
 import Background from './modules/Background.jsx'
 import BackgroundImage from './modules/BackgroundImage.jsx'
-import Vinyl from './modules/Vinyl.jsx'
+//Graphics
+import Image from './modules/Image.jsx'
 import Lines from './modules/Lines.jsx'
 import Module3D from './modules/Module3D.jsx'
+import Particles from './modules/Particles.jsx'
+import Shapes from './modules/Shapes.jsx'
+import Vinyl from './modules/Vinyl.jsx'
+//Text
 import BasicTypo from './modules/BasicTypo.jsx'
+//Overlay
 import Overlay from './modules/Overlay.jsx'
 
+
+///////////////VAR
 let size
 
 
@@ -36,10 +43,8 @@ export default class GeneratorContainer extends Component {
       currentBgImgCollection: this.props.backgroundImage?.currentCollection,
       bgImgOpacity: this.props.backgroundImage?.sliderValue,
 
-      //VINYL MODULE
-      currentVinylType: this.props.vinyl?.currentVinylType,
-      vinylSize: this.props.vinyl?.sliderValue,
-      vinylOpacity: this.props.vinyl?.sliderOpacity,
+      //LINES MODULE
+      linesWeight: this.props.lines?.strokeWeight,
 
       //PARTICLES MODULE
       currentParticlesType: this.props.particles?.currentParticlesType,
@@ -51,11 +56,18 @@ export default class GeneratorContainer extends Component {
       shapesSize: this.props.shapes?.settings.sliderValue,
       shapesColor: this.props.shapes?.settings.color,
 
+      //VINYL MODULE
+      currentVinylType: this.props.vinyl?.currentVinylType,
+      vinylSize: this.props.vinyl?.sliderValue,
+      vinylOpacity: this.props.vinyl?.sliderOpacity,
+
       //OVERLAY MODULE
       currentOverlayCollection: this.props.overlay?.currentCollection,
       overlayOpacity: this.props.overlay?.opacityValue
     }
   }
+
+  ///////
 
   componentDidMount() {
     const sketchContainer = this.sketchContainerRef.current;
@@ -71,8 +83,9 @@ export default class GeneratorContainer extends Component {
   }
 
 
-/////////////////////////////////////////////////// MODULE BACKGROUND
+////////////////////////////////////// MODULE BACKGROUND
 
+  // Tab
   handleTabClickBackground = (type) => {
     this.props.setBackgroundStore('CurrentTabChange', type)
 
@@ -81,6 +94,7 @@ export default class GeneratorContainer extends Component {
     })
   }
 
+  // SolidColor
   handleChangeBackgroundSolidColor = (object, value) => {
     this.props.setBackgroundStore(object, value)
       .then((color) => {
@@ -90,7 +104,7 @@ export default class GeneratorContainer extends Component {
       })
   }
 
-  /////// GRADIENT
+  // Gradient
 
   handleBackgroundRandomizeGradient = () => {
     this.props.setBackgroundStore('Gradient')
@@ -118,8 +132,9 @@ export default class GeneratorContainer extends Component {
     this.props.setBackgroundStore('AngleGradient')
   }
 
-/////////////////////////////////////////////////// MODULE BACKGROUND IMAGE
+////////////////////////////////////// MODULE BACKGROUND IMAGE
 
+  // Tab
   handleTabClickBackgroundImage = (type) => {
     this.props.setBackgroundImageStore('CurrentTabChange', type)
 
@@ -128,8 +143,8 @@ export default class GeneratorContainer extends Component {
     })
   }
 
+  // Randomize
   handleChangeBackgroundImage = () => {
-    // console.log('click');
     if (this.state.currentBgImgCollection === 'NightClub'){
       this.props.setBackgroundImageStore('NightClub')
     }
@@ -138,47 +153,37 @@ export default class GeneratorContainer extends Component {
     }
   }
 
+  // Opacity
   handleBackgroundImageOpacity = (e) => {
     this.props.setBackgroundImageStore('opacity', e.target.value)
     this.setState({bgImgOpacity: e.target.value})
   }
 
-/////////////////////////////////////////////////// MODULE VINYL
+  ////////////////////////////////////// MODULE LINES
 
-  handleTabClickVinyl = (type) => {
-    this.props.setVinylStore('CurrentTabChange', type)
-
-      .then(([type]) => {
-        this.setState({
-          currentVinylType: type
-        })
-      })
+  handleChangeLines = () => {
+    this.props.setLinesStore('randomize')
   }
 
-  handleVinylSize = (e) => {
-    const value = e.target.value
-    this.props.setVinylStore('size', value)
-
-      .then(([newValue]) => {
+  handleLinesColor = (object, value) => {
+    this.props.setLinesStore(object, value)
+      .then((color) => {
         this.setState({
-          vinylSize: newValue
+          linesColor: color[0]
         })
-      })
+      }
+    )
   }
 
-  handleVinylOpacity = (e) => {
-    const value = e.target.value
-    this.props.setVinylStore('opacity', value)
-    
-      .then(([newValue]) => {
-        this.setState({
-          vinylOpacity: newValue
-        })
-      })
+  handleLinesSize = (e) => {
+    let type = 'strokeWeight'
+    this.props.setLinesStore(type, e.target.value)
+    this.setState({linesWeight: e.target.value})
   }
 
-  /////////////////////////////////////////////////// MODULE PARTICLES
-
+  ////////////////////////////////////// MODULE PARTICLES
+  
+  // DropDown
   handleDropDownClickParticles = (type) => {
     this.props.setParticlesStore('CurrentTabChange', type)
 
@@ -189,6 +194,7 @@ export default class GeneratorContainer extends Component {
       })
   }
 
+  // Quantity
   handleParticlesQuantity = (e) => {
     let type = 'quantity'
     this.props.setParticlesStore(type, e.target.value)
@@ -200,6 +206,7 @@ export default class GeneratorContainer extends Component {
       })
   }
 
+  // Color
   handleParticlesColor = (object, value) => {
     this.props.setParticlesStore(object, value)
       .then((color) => {
@@ -210,8 +217,20 @@ export default class GeneratorContainer extends Component {
     )
   }
 
-  /////////////////////////////////////////////////// MODULE SHAPES
+  ////////////////////////////////////// MODULE SHAPES
 
+  // DropDown
+  handleDropDownClickShapes = (type) => {
+    this.props.setShapesStore('CurrentTabChange', type)
+
+      .then((color) => {
+        this.setState({
+          currentShapesType: color[0]
+        })
+      })
+  }
+
+  // Size
   handleShapesSize = (e) => {
     let type = 'Size'
     this.props.setShapesStore(type, e.target.value)
@@ -223,6 +242,7 @@ export default class GeneratorContainer extends Component {
         })
   }
 
+  // Color
   handleShapesColor = (object, value) => {
     this.props.setShapesStore(object, value)
       .then((color) => {
@@ -232,18 +252,46 @@ export default class GeneratorContainer extends Component {
       })
   }
 
-  handleDropDownClickShapes = (type) => {
-    this.props.setShapesStore('CurrentTabChange', type)
+  ////////////////////////////////////// MODULE VINYL
 
-      .then((color) => {
+  // Tab
+  handleTabClickVinyl = (type) => {
+    this.props.setVinylStore('CurrentTabChange', type)
+
+      .then(([type]) => {
         this.setState({
-          currentShapesType: color[0]
+          currentVinylType: type
         })
       })
   }
 
-  /////////////////////////////////////////////////// MODULE OVERLAY
+  // Size
+  handleVinylSize = (e) => {
+    const value = e.target.value
+    this.props.setVinylStore('size', value)
 
+      .then(([newValue]) => {
+        this.setState({
+          vinylSize: newValue
+        })
+      })
+  }
+
+  // Opacity
+  handleVinylOpacity = (e) => {
+    const value = e.target.value
+    this.props.setVinylStore('opacity', value)
+    
+      .then(([newValue]) => {
+        this.setState({
+          vinylOpacity: newValue
+        })
+      })
+  }
+
+  ////////////////////////////////////// MODULE OVERLAY
+
+  // Tab
   handleTabClickOverlay = (type) => {
     this.props.setOverlayStore('CurrentTabChange', type)
 
@@ -252,6 +300,7 @@ export default class GeneratorContainer extends Component {
     })
   }
 
+  // Randomize
   handleChangeOverlay = () => {
     console.log('click');
     if (this.state.currentOverlayCollection === 'Plastic'){
@@ -262,12 +311,17 @@ export default class GeneratorContainer extends Component {
     }
   }
 
+  // Opacity
   handleOverlayOpacity = (e) => {
     this.props.setOverlayStore('opacity', e.target.value)
     this.setState({overlayOpacity: e.target.value})
   }
 
-  ////////////////////////////////////////////////// RANDOMIZE MODULE
+
+  ////////////////////////////////////////////////////////////////////////////
+
+
+  /////////////////////////// RANDOMIZE MODULE ///////////////////////////
 
 
   handleRandomizeModule = (moduleType) => {
@@ -291,17 +345,6 @@ export default class GeneratorContainer extends Component {
           })
         })
     }
-    if (moduleType == 'Vinyl') {
-      this.props.randomizeModuleStore(moduleType)
-        .then((newValues) => {
-          this.setState({
-            currentVinylType: newValues[0],
-            vinylSize: newValues[1],
-            vinylOpacity: newValues[2]
-          })
-        })
-    }
-
     if (moduleType == 'Particles') {
       this.props.randomizeModuleStore(moduleType)
         .then((newValues) => {
@@ -312,7 +355,6 @@ export default class GeneratorContainer extends Component {
           })
         })
     }
-
     if (moduleType == 'Shapes') {
       this.props.randomizeModuleStore(moduleType)
         .then((newValues) => {
@@ -320,6 +362,16 @@ export default class GeneratorContainer extends Component {
             currentShapesType: newValues[0],
             shapesColor: newValues[1],
             shapesSize: newValues[2]
+          })
+        })
+    }
+    if (moduleType == 'Vinyl') {
+      this.props.randomizeModuleStore(moduleType)
+        .then((newValues) => {
+          this.setState({
+            currentVinylType: newValues[0],
+            vinylSize: newValues[1],
+            vinylOpacity: newValues[2]
           })
         })
     }
@@ -335,7 +387,7 @@ export default class GeneratorContainer extends Component {
   }
 
 
-/////////////////////////////////////////////////// RENDER MODULES
+/////////////////////////// RENDER MODULES ///////////////////////////
 
   renderModules() {
     const {
@@ -385,7 +437,6 @@ export default class GeneratorContainer extends Component {
           />
         )
       }
-
       if (moduleName == 'BackgroundImage') {
         modules.push(
           <BackgroundImage
@@ -402,23 +453,38 @@ export default class GeneratorContainer extends Component {
         )
       }
 
-      if (moduleName == 'Shapes') {
+      if (moduleName == 'Image') {
         modules.push(
-          <Shapes
-            shapes={shapes}
-            setShapesStore={setShapesStore}
+          <Image
+            setImageValue={setImageStore}
             key={index}
-            handleRandomizeModule={this.handleRandomizeModule}
-            currentShapesType={this.state.currentShapesType}
-            shapesColor={this.state.shapesColor}
-            shapesSize={this.state.shapesSize}
-            handleDropDownClickShapes={this.handleDropDownClickShapes}
-            handleShapesColor={this.handleShapesColor}
-            handleShapesSize={this.handleShapesSize}
+            randomizeModuleStore={randomizeModuleStore}
           />
         )
       }
-
+      if (moduleName == 'Lines') {
+        modules.push(
+          <Lines
+            lines={lines}
+            setLinesStore={setLinesStore}
+            key={index}
+            handleRandomizeModuleStore={this.handleRandomizeModuleStore}
+            handleChangeLines={this.handleChangeLines}
+            handleLinesColor={this.handleLinesColor}
+            handleLinesSize={this.handleLinesSize}
+          />
+        )
+      }
+      if (moduleName == 'Module3D') {
+        modules.push(
+          <Module3D
+            module3D={module3D}
+            set3DStore={set3DStore}
+            key={index}
+            randomizeModuleStore={randomizeModuleStore}
+          />
+        )
+      }
       if (moduleName == 'Particles') {
         modules.push(
           <Particles
@@ -435,17 +501,22 @@ export default class GeneratorContainer extends Component {
           />
         )
       }
-
-      if (moduleName == 'Image') {
+      if (moduleName == 'Shapes') {
         modules.push(
-          <Image
-            setImageValue={setImageStore}
+          <Shapes
+            shapes={shapes}
+            setShapesStore={setShapesStore}
             key={index}
-            randomizeModuleStore={randomizeModuleStore}
+            handleRandomizeModule={this.handleRandomizeModule}
+            currentShapesType={this.state.currentShapesType}
+            shapesColor={this.state.shapesColor}
+            shapesSize={this.state.shapesSize}
+            handleDropDownClickShapes={this.handleDropDownClickShapes}
+            handleShapesColor={this.handleShapesColor}
+            handleShapesSize={this.handleShapesSize}
           />
         )
       }
-
       if (moduleName == 'Vinyl') {
         modules.push(
           <Vinyl
@@ -453,10 +524,6 @@ export default class GeneratorContainer extends Component {
             setVinylStore={setVinylStore}
             key={index}
             handleRandomizeModule={this.handleRandomizeModule}
-            currentVinylType={this.state.currentVinylType}
-            vinylSize={this.state.vinylSize}
-            vinylOpacity={this.state.vinylOpacity}
-            randomizeModuleStore={randomizeModuleStore}
             handleTabClickVinyl={this.handleTabClickVinyl}
             handleChangeVinylSize={this.handleVinylSize}
             handleVinylOpacity={this.handleVinylOpacity}
@@ -469,28 +536,6 @@ export default class GeneratorContainer extends Component {
           <BasicTypo
             basictypo={basictypo}
             setBasicTypoStore={setBasicTypoStore}
-            key={index}
-            randomizeModuleStore={randomizeModuleStore}
-          />
-        )
-      }
-
-      if (moduleName == 'Lines') {
-        modules.push(
-          <Lines
-            lines={lines}
-            setLinesStore={setLinesStore}
-            key={index}
-            randomizeModuleStore={randomizeModuleStore}
-          />
-        )
-      }
-
-      if (moduleName == 'Module3D') {
-        modules.push(
-          <Module3D
-            module3D={module3D}
-            set3DStore={set3DStore}
             key={index}
             randomizeModuleStore={randomizeModuleStore}
           />
@@ -518,6 +563,8 @@ export default class GeneratorContainer extends Component {
     return modules
   }
 
+  /////////////////////////// DOWNLOAD COVER ///////////////////////////
+
   downloadImage = () => {
     html2canvas(document.getElementById("defaultCanvas0")).then(function (canvas) {
       let a = document.createElement("a");
@@ -529,7 +576,7 @@ export default class GeneratorContainer extends Component {
     });
   };
 
-
+  /////////////////////////// GENERATE COVER ///////////////////////////
 
   generateCover = () => {
     const container = document.getElementById('reactComponentRoot')
@@ -538,7 +585,6 @@ export default class GeneratorContainer extends Component {
 
     this.props.generateAllStore(generatorName, moduleList)
       .then(newValues => {
-        console.log(newValues);
         
         newValues.forEach(({ module, ...values }) => {
           if (moduleList.includes(module)) {
@@ -549,59 +595,13 @@ export default class GeneratorContainer extends Component {
   }
 
 
-  // generateCoverOLD = () => {
-  //   const container = document.getElementById('reactComponentRoot')
-  //   const generatorName = container.dataset.generator
-  //   window.resetSketch()
-  //   this.props.generateAllStore(generatorName)
-  //     .then((newValues) => {
-  //       console.log(newValues);
-  //       this.setState({
-  //         currentBgType: newValues[0],
-  //         solidColor: newValues[1],
-  //         colorG1: newValues[4],
-  //         colorG2: newValues[5],
-  //         currentVinylType: newValues[7],
-  //         vinylSize: newValues[8],
-  //         vinylOpacity: newValues[9],
-  //         currentParticlesType: newValues[10],
-  //         particlesQuantity: newValues[11],
-  //         particlesColor: newValues[12],
-  //         currentShapesType: newValues[13],
-  //         shapesSize: newValues[15],
-  //         shapesColor: newValues[14]
-  //       })
-  //     })
-  // }
 
-  // generateCover = () => {
-  //   const container = document.getElementById('reactComponentRoot')
-  //   const generatorName = container.dataset.generator
-  //   window.resetSketch()
-  //   this.props.generateAllStore(generatorName)
-  //     .then((newValues) => {
-  //       console.log(newValues);
-  //       this.setState({
-  //         currentBgType: newValues.bgType,
-  //         solidColor: newValues.newSolidColor,
-  //         colorG1: newValues.newGradientColor1,
-  //         colorG2: newValues.newGradientColor2,
-  //         currentVinylType: newValues.currentVinylType,
-  //         vinylSize: newValues.vinylSize,
-  //         vinylOpacity: newValues.vinylOpacity,
-  //         currentParticlesType: newValues.particlesTypes,
-  //         particlesQuantity: newValues.particlesQuantity,
-  //         particlesColor: newValues.particlesColor,
-  //         currentShapesType: newValues.shapesType,
-  //         shapesColor: newValues.shapesColor,
-  //         shapesSize: newValues.shapesSize
-  //       })
-  //     })
-  // }
+  ////////////////
+  ////////////////
 
-  // saveCanvasSize(size) {
-  //   this.props.setCanvasSizeStore(size)
-  // }
+
+
+  ////////////////////////////////////////////////////////////////////////////
 
   render() {
 

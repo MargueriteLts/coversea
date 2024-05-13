@@ -7,47 +7,23 @@ import Slider from '../components/Slider.jsx'
 export default class Lines extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      sliderValue: this.props.lines.strokeWeight
-    }
-  }
-
-  handleChange = (object, value) => {
-    this.props.setLinesStore(object, value)
-      .then((color) => {
-        this.setState({
-          color: color[0]
-        })
-      }
-    )
-  }
-
-  handleClick = () => {
-    this.props.setLinesStore('randomize')
-  }
-
-  handleSliderSize = (e) => {
-    let type = 'strokeWeight'
-    this.props.setLinesStore(type, e.target.value)
-    this.setState({sliderValue: e.target.value})
   }
   
   render() {
-    const { lines, randomizeModuleStore } = this.props
+    const { lines, handleRandomizeModuleStore, handleChangeLines, handleLinesColor, handleLinesSize, linesWeight } = this.props
 
     return <div className="module__container">
       <HeaderModule
         title={lines.moduleName}
         moduleType='Lines'
-        randomizeModuleStore={randomizeModuleStore}
+        handleRandomizeModuleStore={handleRandomizeModuleStore}
       />
       <div className="module__content flexRow">
-        <div className="btn--secondary" onClick={this.handleClick}>Randomize lines</div>
+        <div className="btn--secondary" onClick={handleChangeLines}>Randomize lines</div>
         <ColorPicker
           object='SolidColor'
           color={lines.color}
-          handleChange={this.handleChange}
+          handleChange={handleLinesColor}
           key='AllColorPicker'
         />
         <Slider
@@ -55,8 +31,8 @@ export default class Lines extends Component {
           type="range"
           min={this.props.lines.min}
           max={this.props.lines.max}
-          value={this.state.sliderValue}
-          handleChange={this.handleSliderSize}
+          value={lines.strokeWeight}
+          handleChange={handleLinesSize}
         />
       </div>
     </div>
