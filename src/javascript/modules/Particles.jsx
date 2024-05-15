@@ -8,48 +8,19 @@ import Slider from '../components/Slider.jsx'
 export default class Particles extends Component {
   constructor(props) {
     super(props)
-
-    // this.state = {
-    //   sliderValue: this.props.particles.sliderValue,
-    //   currentParticlesType: this.props.particles.currentParticlesType
-    // }
   }
-
-  // handleInput = (e) => {
-  //   let type = 'quantity'
-  //   this.props.setParticlesStore(type, e.target.value)
-  //   this.setState({sliderValue: e.target.value})
-  // }
-
-  // handleDropDownClick = (type) => {
-  //   this.props.setParticlesStore('CurrentTabChange', type)
-
-  //   this.setState({
-  //     currentParticlesType: type
-  //   })
-  // }
-
-  // handleChange = (object, value) => {
-  //   this.props.setParticlesStore(object, value)
-  //     .then((color) => {
-  //       this.setState({
-  //         color: color[0]
-  //       })
-  //     }
-  //   )
-  // }
 
   render() {
     const { particles, handleRandomizeModule, handleDropDownClickParticles, handleParticlesQuantity, handleParticlesColor, currentParticlesType, particlesQuantity, particlesColor } = this.props
 
     return (
-      <div className="module__container">
+      <div className="moduleContainer">
         <HeaderModule
           title={particles.moduleName}
           moduleType='Particles'
           handleRandomizeModule={handleRandomizeModule}
         />
-        <div className="module__content">
+        <div className="moduleContent">
           <DropDown
             options={particles.options}
             value={currentParticlesType}

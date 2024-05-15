@@ -34,10 +34,11 @@ export default class GeneratorContainer extends Component {
     this.state = {
 
       //BACKGROUND MODULE
-      currentBgType: this.props.background?.currentBgType,
-      solidColor: this.props.background?.preset.SolidColor.color,
-      colorG1: this.props.background?.preset.Gradient.color1,
-      colorG2: this.props.background?.preset.Gradient.color2,
+      currentBackgroundType: this.props.background?.currentBackgroundType,
+      backgroundSolidColor: this.props.background?.preset.SolidColor.color,
+      backgroundGradientColor1: this.props.background?.preset.Gradient.color1,
+      backgroundGradientColor2: this.props.background?.preset.Gradient.color2,
+      backgroundGradientAngle: this.props.background?.preset.Gradient.angle,
 
       //BACKGROUND IMAGE MODULE
       currentBgImgCollection: this.props.backgroundImage?.currentCollection,
@@ -90,7 +91,7 @@ export default class GeneratorContainer extends Component {
     this.props.setBackgroundStore('CurrentTabChange', type)
 
     this.setState({
-      currentBgType: type
+      currentBackgroundType: type
     })
   }
 
@@ -99,7 +100,7 @@ export default class GeneratorContainer extends Component {
     this.props.setBackgroundStore(object, value)
       .then((color) => {
         this.setState({
-          solidColor: color[0]
+          backgroundSolidColor: color[0]
         })
       })
   }
@@ -110,19 +111,20 @@ export default class GeneratorContainer extends Component {
     this.props.setBackgroundStore('Gradient')
       .then((colors) => {
         this.setState({
-          colorG1: colors[0],
-          colorG2: colors[1]
+          backgroundGradientColor1: colors[0],
+          backgroundGradientColor2: colors[1]
         })
       }
     )
   }
 
   handleChangeBackgroundGradientColor = (object, value) => {
+    // console.log(value);
     this.props.setBackgroundStore(object, value)
     .then((colors) => {
         this.setState({
-          colorG1: colors[0],
-          colorG2: colors[1]
+          backgroundGradientColor1: colors[0],
+          backgroundGradientColor2: colors[1]
         })
       }
     )
@@ -324,20 +326,19 @@ export default class GeneratorContainer extends Component {
   /////////////////////////// RANDOMIZE MODULE ///////////////////////////
 
 
-  handleRandomizeModule = (moduleType) => {
-    if (moduleType == 'Background') {
-      this.props.randomizeModuleStore(moduleType)
-        .then((newValues) => {
-          this.setState({
-            currentBgType: newValues[0],
-            solidColor: newValues[1],
-            colorG1: newValues[4],
-            colorG2: newValues[5]
+  handleRandomizeModule = (moduleName) => {
+
+    if (moduleName == 'Background') {
+      this.props.randomizeModuleStore(moduleName)
+        .then(newValues => {
+          newValues.forEach(({ ...values }) => {
+            this.setState(values)
           })
         })
     }
-    if (moduleType == 'BackgroundImage') {
-      this.props.randomizeModuleStore(moduleType)
+
+    if (moduleName == 'BackgroundImage') {
+      this.props.randomizeModuleStore(moduleName)
         .then((newValues) => {
           this.setState({
             currentBgImgCollection: newValues[0],
@@ -345,8 +346,8 @@ export default class GeneratorContainer extends Component {
           })
         })
     }
-    if (moduleType == 'Particles') {
-      this.props.randomizeModuleStore(moduleType)
+    if (moduleName == 'Particles') {
+      this.props.randomizeModuleStore(moduleName)
         .then((newValues) => {
           this.setState({
             currentParticlesType: newValues[0],
@@ -355,8 +356,8 @@ export default class GeneratorContainer extends Component {
           })
         })
     }
-    if (moduleType == 'Shapes') {
-      this.props.randomizeModuleStore(moduleType)
+    if (moduleName == 'Shapes') {
+      this.props.randomizeModuleStore(moduleName)
         .then((newValues) => {
           this.setState({
             currentShapesType: newValues[0],
@@ -365,8 +366,8 @@ export default class GeneratorContainer extends Component {
           })
         })
     }
-    if (moduleType == 'Vinyl') {
-      this.props.randomizeModuleStore(moduleType)
+    if (moduleName == 'Vinyl') {
+      this.props.randomizeModuleStore(moduleName)
         .then((newValues) => {
           this.setState({
             currentVinylType: newValues[0],
@@ -375,8 +376,8 @@ export default class GeneratorContainer extends Component {
           })
         })
     }
-    if (moduleType == 'Overlay') {
-      this.props.randomizeModuleStore(moduleType)
+    if (moduleName == 'Overlay') {
+      this.props.randomizeModuleStore(moduleName)
         .then((newValues) => {
           this.setState({
             currentOverlayCollection: newValues[0],
@@ -422,16 +423,17 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Background') {
         modules.push(
           <Background
-            background={background}
-            setBackgroundStore={setBackgroundStore}
             key={index}
             handleRandomizeModule={this.handleRandomizeModule}
-            currentBgType={this.state.currentBgType}
-            solidColor={this.state.solidColor}
-            colorG1={this.state.colorG1}
-            colorG2={this.state.colorG2}
+            background={background}
+            setBackgroundStore={setBackgroundStore}
+            currentBackgroundType={this.state.currentBackgroundType}
+            // solidColor={this.state.backgroundSolidColor}
+            backgroundGradientColor1={this.state.backgroundGradientColor1}
+            backgroundGradientColor2={this.state.backgroundGradientColor2}
             handleTabClickBackground={this.handleTabClickBackground}
             handleChangeBackgroundSolidColor={this.handleChangeBackgroundSolidColor}
+            handleChangeBackgroundGradientColor={this.handleChangeBackgroundGradientColor}
             handleBackgroundRandomizeGradient={this.handleBackgroundRandomizeGradient}
             handleChangeBackgroundAngleGradient={this.handleChangeBackgroundGradientAngle}
           />

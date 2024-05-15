@@ -27,17 +27,16 @@ const generators = {
 }
 
 let moduleList,
-moduleShapesStore,
-moduleParticlesStore,
-moduleImageStore,
+blendStore,
 moduleBackgroundStore,
 moduleBackgroundImageStore,
-moduleVinylStore,
-moduleText1Store,
-moduleLinesStore,
-module3DStore,
-blendStore,
 moduleBasicTypoStore,
+moduleImageStore,
+module3DStore,
+moduleLinesStore,
+moduleParticlesStore,
+moduleShapesStore,
+moduleVinylStore,
 moduleOverlayStore,
 allFonts
 // canvasSize
@@ -72,10 +71,6 @@ function initStore(generatorName) {
 
     if (moduleName == 'Vinyl') {
       moduleVinylStore = initVinylStore(generators[generatorName].preset['Vinyl'])
-    }
-
-    if (moduleName == 'Text1') {
-      moduleText1Store = initText1Store(generators[generatorName].preset['Text1'])
     }
 
     if (moduleName == 'BasicTypo') {
@@ -148,35 +143,39 @@ function generatePositions() {
 
 ////////////////////// BACKGROUND
 
-function initBackgroundStore(preset) {
-  preset = Object.assign({}, preset, { moduleName: 'Background' })
+// function generateNoise() {
+//   const value = []
 
-  const value = []
+//   value.push(parseInt(getRandomArbitrary(0, 255)))
+//   value.push(parseInt(getRandomArbitrary(0, 255)))
+//   value.push(parseInt(getRandomArbitrary(0, 255)))
+//   value.push(parseInt(getRandomArbitrary(0, 255)))
 
-  value.push(parseInt(getRandomArbitrary(0, 255)))
-  value.push(parseInt(getRandomArbitrary(0, 255)))
-  value.push(parseInt(getRandomArbitrary(0, 255)))
-  value.push(parseInt(getRandomArbitrary(0, 255)))
+//   return value
+// }
 
-  preset.bgTypes.forEach((bgType) => {
-    if (bgType == 'SolidColor') {
-      preset.preset.SolidColor = Object.assign({}, preset.preset.SolidColor, { text: 'Solid color' })
+function initBackgroundStore(background) {
+  background = Object.assign({}, background, { moduleName: 'Background' })
+
+  background.backgroundTypes.forEach((backgroundType) => {
+    if (backgroundType == 'SolidColor') {
+      background.preset.SolidColor = Object.assign({}, background.preset.SolidColor, { text: 'Solid color' })
     }
 
-    if (bgType == 'Gradient') {
-      preset.preset.Gradient = Object.assign({}, preset.preset.Gradient, { text: 'Gradient', angle:'vertical' })
+    if (backgroundType == 'Gradient') {
+      background.preset.Gradient = Object.assign({}, background.preset.Gradient, { text: 'Gradient', angle:'vertical' })
     }
 
-    if (bgType == 'Noise') {
-      preset.preset.Noise = Object.assign({}, preset.preset.Noise, { text: 'Noise', value: value })
+    if (backgroundType == 'Noise') {
+      background.preset.Noise = Object.assign({}, background.preset.Noise, { text: 'Noise'})
     }
 
-    if (bgType == 'Pixels') {
-      preset.preset.Pixels = Object.assign({}, preset.preset.Pixels, { text: 'Pixels' })
+    if (backgroundType == 'Pixels') {
+      background.preset.Pixels = Object.assign({}, background.preset.Pixels, { text: 'Pixels' })
     }
   })
 
-  return preset
+  return background
 }
 
 function getBackgroundStore() {
@@ -188,7 +187,7 @@ function setBackgroundStore(type, value) {
 
   return new Promise((resolve, reject) => {
     if (type === 'CurrentTabChange') {
-      moduleBackgroundStore.currentBgType = value
+      moduleBackgroundStore.currentBackgroundType = value
       resolve([value])
     }
 
@@ -216,17 +215,6 @@ function setBackgroundStore(type, value) {
       moduleBackgroundStore.preset.Gradient.angle = changeGradientAngle()
       resolve([moduleBackgroundStore.preset.Gradient.angle])
     }
-
-    // if (type === 'Noise') {
-    //   const value = []
-
-    //   value.push(parseInt(getRandomArbitrary(0, 255)))
-    //   value.push(parseInt(getRandomArbitrary(0, 255)))
-    //   value.push(parseInt(getRandomArbitrary(0, 255)))
-    //   value.push(parseInt(getRandomArbitrary(0, 255)))
-
-    //   moduleBackgroundStore.preset.Noise.value = value
-    // }
 
   })
 }
@@ -444,6 +432,7 @@ function setParticlesStore(type, value) {
     if (type === 'quantity') {
       moduleParticlesStore.sliderValue = value
       moduleParticlesStore.particles = generateParticles(value)
+      resolve([value])
     }
     if (type === 'SolidColor') {
       moduleParticlesStore.color = value
@@ -667,13 +656,6 @@ function generateNewData(generatorName) {
 
   return new Promise((resolve, reject) => {
 
-    let bgType
-    let newSolidColor
-    // let Gcolor1, Gcolor2
-    let newGradientColor1
-    let newGradientColor2
-    // let newAngle
-
     let currentVinyltype
     let vinylSize
     let vinylOpacity
@@ -690,13 +672,13 @@ function generateNewData(generatorName) {
 
       if (moduleName == 'Background') {
 
-        bgType = sample(moduleBackgroundStore.bgTypes)
-        setBackgroundStore('CurrentTabChange', bgType)
-        newSolidColor=generateColor()
+        let newBackgroundType = sample(moduleBackgroundStore.backgroundTypes)
+        setBackgroundStore('CurrentTabChange', newBackgroundType)
+        let newSolidColor=generateColor()
         setBackgroundStore('SolidColor', newSolidColor)
-        newGradientColor1=generateColor()
+        let newGradientColor1=generateColor()
         setBackgroundStore('GradientColor1', newGradientColor1)
-        newGradientColor2=generateColor()
+        let newGradientColor2=generateColor()
         setBackgroundStore('GradientColor2', newGradientColor2)
 
         // setBackgroundStore('Gradient')
@@ -704,15 +686,15 @@ function generateNewData(generatorName) {
         //     Gcolor1 = colors[0]
         //     Gcolor2 = colors[1]
         //   })
-
-        // setBackgroundStore('AngleGradient')
-        //   .then((randomAngle) => {
-        //     newAngle = randomAngle
-        //   })
+        let newGradientAngle
+        setBackgroundStore('AngleGradient')
+          .then((randomAngle) => {
+            newGradientAngle = randomAngle
+          })
 
         setBackgroundStore('Noise')
 
-        data.push({module: moduleName, currentBgType: bgType, solidColor: newSolidColor, colorG1: newGradientColor1, colorG2: newGradientColor2 })
+        data.push({module: moduleName, currentBackgroundType: newBackgroundType, backgroundSolidColor: newSolidColor, backgroundGradientColor1: newGradientColor1, backgroundGradientColor2: newGradientColor2, backgroundGradientAngle: newGradientAngle })
       }
 
       if (moduleName == 'Shapes') {
@@ -806,38 +788,60 @@ function randomizeModuleStore(moduleType) {
 
   return new Promise((resolve, reject) => {
 
+    let newValues = []
     if (moduleType == 'Background') {
 
-      let bgType = sample(moduleBackgroundStore.bgTypes)
-      setBackgroundStore('CurrentTabChange', bgType)
+      let newBackgroundType = sample(moduleBackgroundStore.backgroundTypes)
+      setBackgroundStore('CurrentTabChange', newBackgroundType)
+      
+      if (newBackgroundType == 'SolidColor') {
+        let newSolidColor=generateColor()
+        setBackgroundStore('SolidColor', newSolidColor)
 
-      let newSolidColor=generateColor()
-      setBackgroundStore('SolidColor', newSolidColor)
+        newValues.push({currentBackgroundType: newBackgroundType, backgroundSolidColor: newSolidColor})
+      }
 
-      let Gcolor1, Gcolor2
-      setBackgroundStore('Gradient')
-        .then((colors) => {
-          Gcolor1 = colors[0]
-          Gcolor2 = colors[1]
-        })
+      if (newBackgroundType == 'Gradient') {
+        newValues.push({currentBackgroundType: newBackgroundType})
+        let newGradientColor1, newGradientColor2
+        setBackgroundStore('Gradient')
+          .then((colors) => {
+            newGradientColor1 = colors[0]
+            newGradientColor2 = colors[1]
+            newValues.push({backgroundGradientColor1: newGradientColor1, backgroundGradientColor2: newGradientColor2})
+          })
+          // console.log('GRADIENT COLORS STORE', newGradientColor1, newGradientColor2);
+          
+          // let newGradientColor1 = generateColor()
+          // setBackgroundStore('GradientColor1', newGradientColor1)
+          
+          // let newGradientColor2 = generateColor()
+          // setBackgroundStore('GradientColor2', newGradientColor2)
+          
+          let newAngle
+          setBackgroundStore('AngleGradient')
+            .then((randomAngle) => {
+              newAngle = randomAngle
+              newValues.push({backgroundGradientAngle: newAngle})
+            })
+      }
 
-      let newGradientColor1 = generateColor()
-      setBackgroundStore('GradientColor1', newGradientColor1)
+      if (newBackgroundType == 'Noise') {
+        // setBackgroundStore('Noise')
+        window.resetNoise()
+        newValues.push({currentBackgroundType: newBackgroundType})
+      }
 
-      let newGradientColor2 = generateColor()
-      setBackgroundStore('GradientColor2', newGradientColor2)
+      if (newBackgroundType == 'Pixels') {
+        window.resetPixels()
+        newValues.push({currentBackgroundType: newBackgroundType})
+      }
 
-      let newAngle
-      setBackgroundStore('AngleGradient')
-        .then((randomAngle) => {
-          newAngle = randomAngle
-        })
+      resolve(newValues)
 
-      resolve([bgType, newSolidColor, Gcolor1, Gcolor2, newGradientColor1, newGradientColor2, newAngle ])
 
-      setBackgroundStore('Noise')
 
-      // regenBackground()
+      // resolve([newBackgroundType, newSolidColor, newGradientColor1, newGradientColor2, newAngle ])
 
     }
 

@@ -82,8 +82,12 @@ let pixelsBg
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-window.resetSketch = function() {
+window.resetNoise = function() {
   genNoise()
+}
+
+window.resetPixels = function() {
+  genPixels()
 }
 
 
@@ -165,7 +169,7 @@ function drawModules(p) {
     const background = getBackgroundStore()
     const blend = getBlendStore()
 
-    if (background.bgTypes.includes('SolidColor') && background.currentBgType === 'SolidColor') {
+    if (background.backgroundTypes.includes('SolidColor') && background.currentBackgroundType === 'SolidColor') {
       const plainColorBackground = background.preset.SolidColor.color
 
       if (blend.Vinyl == true) {
@@ -178,7 +182,7 @@ function drawModules(p) {
         )
       }
 
-    } else if (background.bgTypes.includes('Gradient') && background.currentBgType === 'Gradient') {
+    } else if (background.backgroundTypes.includes('Gradient') && background.currentBackgroundType === 'Gradient') {
       const color1 = background.preset.Gradient.color1
       const color2 = background.preset.Gradient.color2
       const angle = background.preset.Gradient.angle
@@ -228,13 +232,13 @@ function drawModules(p) {
       
       // p.drawingContext.fillStyle = gradientBg
 
-    } else if (background.bgTypes.includes('Noise') && background.currentBgType === 'Noise') {
+    } else if (background.backgroundTypes.includes('Noise') && background.currentBackgroundType === 'Noise') {
       p.clear()
       p.background(0)
       p.image(noiseBg, 0, 0)
       p.pixelDensity()
       p.noStroke()
-    } else if (background.bgTypes.includes('Pixels') && background.currentBgType === 'Pixels') {
+    } else if (background.backgroundTypes.includes('Pixels') && background.currentBackgroundType === 'Pixels') {
       p.clear()
       p.background(0)
       p.image(pixelsBg, 0, 0)

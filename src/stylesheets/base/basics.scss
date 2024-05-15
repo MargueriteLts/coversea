@@ -220,7 +220,8 @@ textarea {
 }
 
 .dropdown-toggle {
-  background-color: var(--BACKGROUND-BTN-SECONDARY);
+  // background-color: var(--BACKGROUND-BTN-SECONDARY);
+  background-color: #353537;
   color: var(--TEXT-WHITE);
   font-family: neue-haas-unica;
   font-size: 16px;
@@ -239,10 +240,11 @@ textarea {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: var(--BACKGROUND-BTN-SECONDARY);
+  // background-color: var(--BACKGROUND-BTN-SECONDARY);
+  background-color: #353537;
   border-radius: 0 0 20px 20px;
   width: 160px;
-  padding: 1px;
+  // padding: 1px;
   font-family: neue-haas-unica;
   font-size: 16px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -254,12 +256,12 @@ textarea {
   font-family: neue-haas-unica;
   font-size: 16px;
   padding: 8px 12px;
-  background-color: #222222;
+  // background-color: #222222;
   cursor: pointer;
 }
 
 .dropdown-item:hover {
-  background-color: #333333;
+  background-color: #1a1a1a;
 }
 
 .dropdown-item+.dropdown-item {

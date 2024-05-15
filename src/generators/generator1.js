@@ -8,8 +8,8 @@ const preset = {
   },
 
   Background: {
-    bgTypes: ['SolidColor', 'Gradient'],
-    currentBgType: 'SolidColor',
+    backgroundTypes: ['SolidColor', 'Gradient', 'Noise', 'Pixels'],
+    currentBackgroundType: 'SolidColor',
 
     preset: {
       SolidColor: {
