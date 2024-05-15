@@ -6,6 +6,7 @@ import TabButtonSet from '../components/TabButtonSet.jsx'
 import ColorPicker from '../components/ColorPicker.jsx'
 import M_GradientOrientation from '../components/M_GradientOrientation.jsx'
 import M_GradientColors from '../components/M_GradientColors.jsx'
+import TabImageSet from '../components/TabImageSet.jsx'
 
 export default class Background extends Component {
   constructor(props) {
@@ -21,7 +22,11 @@ export default class Background extends Component {
       handleChangeBackgroundSolidColor,
       handleChangeBackgroundGradientColor,
       handleBackgroundRandomizeGradient,
-      handleChangeBackgroundAngleGradient, backgroundGradientColor1, backgroundGradientColor2
+      handleChangeBackgroundAngleGradient,
+      backgroundGradientColor1,
+      backgroundGradientColor2,
+      currentNoiseType,
+      handleTabClickNoise
     } = this.props
 
     ////////////// SOLID COLOR
@@ -60,6 +65,19 @@ export default class Background extends Component {
 
         {/* je suppr pas pour l'instant mais a terme ca doit etre remplace par la fonction lock */}
         {/* <div className="btn--secondary" onClick={handleBackgroundRandomizeGradient}>Randomize Gradient</div> */}
+      </div>
+    }
+
+    if (currentBackgroundType == 'Noise') {
+      return <div className='TabContent'>
+        <div className='moduleContent-Left'>
+          <TabImageSet
+            options = {background.preset.Noise.preset}
+            value = {currentNoiseType}
+            handleClick = {handleTabClickNoise}
+            collectionName = 'noise'
+          />
+        </div>
       </div>
     }
   }

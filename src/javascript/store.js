@@ -168,6 +168,27 @@ function initBackgroundStore(background) {
 
     if (backgroundType == 'Noise') {
       background.preset.Noise = Object.assign({}, background.preset.Noise, { text: 'Noise'})
+
+       const images = importAll(
+          require.context('../images/noise', false, /\.(png|jpe?g|svg)$/)
+        )
+      // return {
+      //     images: images,
+      //     current: sample(Object.keys(images)),
+      //     pixelate: preset.pixelate
+      //   }
+
+      background.preset.Noise.NoiseOptions.forEach((noiseOption) => {
+        if (noiseOption == 'Small') {
+          background.preset.Noise.preset.Small = Object.assign({}, background.preset.Noise.preset.Small, { text: 'SMALL'})
+        }
+        if (noiseOption == 'Medium') {
+          background.preset.Noise.preset.Medium = Object.assign({}, background.preset.Noise.preset.Medium, { text: 'MEDIUM'})
+        }
+        if (noiseOption == 'Big') {
+          background.preset.Noise.preset.Big = Object.assign({}, background.preset.Noise.preset.Big, { text: 'BIG'})
+        }
+      })
     }
 
     if (backgroundType == 'Pixels') {
@@ -214,6 +235,10 @@ function setBackgroundStore(type, value) {
     if (type === 'AngleGradient') {
       moduleBackgroundStore.preset.Gradient.angle = changeGradientAngle()
       resolve([moduleBackgroundStore.preset.Gradient.angle])
+    }
+
+    if (type === 'currentTabImageChange') {
+      moduleBackgroundStore.preset.Noise.currentNoiseType = value
     }
 
   })

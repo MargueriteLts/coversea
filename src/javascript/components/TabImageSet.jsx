@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import TabButton from './TabButton.jsx'
+import TabImage from './TabImage.jsx'
 
 export default class TabButtonSet extends Component {
   constructor(props) {
@@ -9,23 +9,31 @@ export default class TabButtonSet extends Component {
   }
 
   render() {
-    const { options, value, handleClick } = this.props
+    const { options, value, handleClick, collectionName } = this.props
+
     const buttonElements = []
 
     Object.keys(options).forEach((key, i) => {
 
+      const text = options[key].text;
+      const imageName = text.replace(/\s+/g, '') + '.jpg';
+
+      let imageLink = `../../images/${collectionName}/${imageName}`;
+
+      
       buttonElements.push(
-        <TabButton
-          text={options[key].text}
+        <TabImage
+          text={text}
           isOn={key === value}
           handleClick={() => handleClick(key)}
           key={i}
+          imageLink={imageLink}
         />
       )
     })
 
     return (
-      <div className="TabButtonSet">
+      <div className="TabImageSet">
         {buttonElements}
       </div>
     )

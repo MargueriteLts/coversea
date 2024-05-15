@@ -39,6 +39,7 @@ export default class GeneratorContainer extends Component {
       backgroundGradientColor1: this.props.background?.preset.Gradient.color1,
       backgroundGradientColor2: this.props.background?.preset.Gradient.color2,
       backgroundGradientAngle: this.props.background?.preset.Gradient.angle,
+      currentBackgroundNoiseType: this.props.background?.preset.Noise.currentNoiseType,
 
       //BACKGROUND IMAGE MODULE
       currentBgImgCollection: this.props.backgroundImage?.currentCollection,
@@ -132,6 +133,14 @@ export default class GeneratorContainer extends Component {
 
   handleChangeBackgroundGradientAngle = () => {
     this.props.setBackgroundStore('AngleGradient')
+  }
+
+  // Noise
+   handleTabClickNoise = (type) => {
+    this.props.setBackgroundStore('currentTabImageChange', type)
+    this.setState({
+      currentBackgroundNoiseType: type
+    })
   }
 
 ////////////////////////////////////// MODULE BACKGROUND IMAGE
@@ -431,6 +440,8 @@ export default class GeneratorContainer extends Component {
             // solidColor={this.state.backgroundSolidColor}
             backgroundGradientColor1={this.state.backgroundGradientColor1}
             backgroundGradientColor2={this.state.backgroundGradientColor2}
+            currentNoiseType={this.state.currentBackgroundNoiseType}
+            handleTabClickNoise={this.handleTabClickNoise}
             handleTabClickBackground={this.handleTabClickBackground}
             handleChangeBackgroundSolidColor={this.handleChangeBackgroundSolidColor}
             handleChangeBackgroundGradientColor={this.handleChangeBackgroundGradientColor}

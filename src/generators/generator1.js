@@ -19,7 +19,16 @@ const preset = {
         color1: '#d9b34c',
         color2: '#943a73'
       },
-      Noise: {},
+      Noise: {
+        NoiseOptions: ['Small', 'Medium', 'Big'],
+        currentNoiseType: 'Small',
+
+        preset: {
+          Small: {},
+          Medium: {},
+          Big: {}
+        }
+      },
       Pixels: {}
     }
   },

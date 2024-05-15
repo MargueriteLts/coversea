@@ -136,6 +136,69 @@ body.generator {
         }
       }
 
+      .TabImageSet {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .TabImage {
+        display: flex;
+        width: 150px;
+        height: 150px;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        border-radius: 10px;
+        // background: #000;
+
+        .TabImage--background {
+          width: 150;
+          height: 150;
+          position: absolute;
+          // top: 0;
+          // left: 0;
+        }
+
+        .TabImage--text {
+          position: relative;
+          z-index: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px;
+          border-radius: 10px;
+          background: rgba(26, 26, 26, 0.50);
+          backdrop-filter: blur(2px);
+
+          color: var(--WHITE);
+          text-align: center;
+          font-family: "bc-novatica-cyr";
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 16px;
+          text-transform: uppercase;
+        }
+
+        &:hover:not(.active) {
+          .TabImage--text {
+            background: rgba(26, 26, 26, 0.9);
+          }
+          cursor: pointer;
+        }
+
+        &.active {
+          border: 1px solid white;
+
+          .TabImage--text {
+            color: black;
+            background-color: var(--WHITE);
+          }
+        }
+
+      }
+
       .moduleContent {
         display: flex;
         flex-direction: column;

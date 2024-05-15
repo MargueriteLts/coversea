@@ -60,6 +60,10 @@ module.exports = {
           filename: 'images/[hash][ext][query]'
         }
       },
+      // {
+      //   test: /\.(png|svg|jpg|jpeg|gif)$/i,
+      //   type: 'asset/resource',
+      // },
       {
         test: /\.(ttf|otf|woff|woff2)$/i,
         loader: 'file-loader',
