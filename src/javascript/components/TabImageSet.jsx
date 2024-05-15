@@ -9,17 +9,16 @@ export default class TabButtonSet extends Component {
   }
 
   render() {
-    const { options, value, handleClick, collectionName } = this.props
+    const { options, value, handleClick, collection } = this.props
 
     const buttonElements = []
 
+    
     Object.keys(options).forEach((key, i) => {
-
+      
       const text = options[key].text;
-      const imageName = text.replace(/\s+/g, '') + '.jpg';
-
-      let imageLink = `../../images/${collectionName}/${imageName}`;
-
+      const matchingKey = Object.keys(collection).find(key => key.startsWith(text));
+      const backgroundImage = collection[matchingKey]
       
       buttonElements.push(
         <TabImage
@@ -27,7 +26,7 @@ export default class TabButtonSet extends Component {
           isOn={key === value}
           handleClick={() => handleClick(key)}
           key={i}
-          imageLink={imageLink}
+          imageLink={backgroundImage}
         />
       )
     })

@@ -75,7 +75,7 @@ export default class Background extends Component {
             options = {background.preset.Noise.preset}
             value = {currentNoiseType}
             handleClick = {handleTabClickNoise}
-            collectionName = 'noise'
+            collection={background.preset.Noise.images}
           />
         </div>
       </div>

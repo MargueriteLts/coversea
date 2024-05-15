@@ -167,16 +167,13 @@ function initBackgroundStore(background) {
     }
 
     if (backgroundType == 'Noise') {
-      background.preset.Noise = Object.assign({}, background.preset.Noise, { text: 'Noise'})
+      const images = importAll(
+        require.context('../images/noise', false, /\.(png|jpe?g|svg)$/)
+      )
 
-       const images = importAll(
-          require.context('../images/noise', false, /\.(png|jpe?g|svg)$/)
-        )
-      // return {
-      //     images: images,
-      //     current: sample(Object.keys(images)),
-      //     pixelate: preset.pixelate
-      //   }
+      console.log(images);
+
+      background.preset.Noise = Object.assign({}, background.preset.Noise, { text: 'Noise', images: images})
 
       background.preset.Noise.NoiseOptions.forEach((noiseOption) => {
         if (noiseOption == 'Small') {

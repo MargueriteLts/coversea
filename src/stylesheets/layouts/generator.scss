@@ -144,32 +144,32 @@ body.generator {
 
       .TabImage {
         display: flex;
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
         justify-content: center;
         align-items: center;
         flex-shrink: 0;
         border-radius: 10px;
-        // background: #000;
+        overflow: clip;
 
         .TabImage--background {
-          width: 150;
-          height: 150;
-          position: absolute;
-          // top: 0;
-          // left: 0;
+          position: relative;
+          width: 120px;
+          height: 120px;
         }
 
         .TabImage--text {
-          position: relative;
+          position: absolute;
           z-index: 1;
           display: flex;
           align-items: center;
           justify-content: center;
           padding: 10px;
           border-radius: 10px;
-          background: rgba(26, 26, 26, 0.50);
-          backdrop-filter: blur(2px);
+          background: rgba(204, 204, 204, 0.1);
+          backdrop-filter: blur(6px);
+          width: fit-content;
+          height: fit-content;
 
           color: var(--WHITE);
           text-align: center;
@@ -196,7 +196,6 @@ body.generator {
             background-color: var(--WHITE);
           }
         }
-
       }
 
       .moduleContent {
