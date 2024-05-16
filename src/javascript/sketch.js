@@ -391,6 +391,8 @@ function drawModules(p) {
       p.fill(color)
       // p.noTint()
     }
+
+    // console.log(color);
       
     if (particles.options.includes('Ellipses') && particles.currentParticlesType === 'Ellipses') {
       for (let index = 0; index < particles.sliderValue; index++) {
@@ -426,6 +428,8 @@ function drawModules(p) {
         )
       }
     }
+
+    p.noTint()
   }
 
   /////////////////////////////////////////// VINYL
@@ -508,54 +512,72 @@ function drawModules(p) {
 
   if (moduleList.includes('Image')) {
     p.noTint()
-    const { current } = getImageStore()
-    const image = imagesObj[current]
+    // const { current } = getImageStore()
+    // const image = imagesObj[current]
 
-    let scaleFactor = canvasSize / Math.max(image.width, image.height)
+    const objects = getImageStore()
 
-    let scaledWidth = image.width * scaleFactor
-    let scaledHeight = image.height * scaleFactor
+    let currentObject
+    let imageObject
+
+    if (objects.collections.includes('Shoes') && objects.currentCollection == 'Shoes') {
+      currentObject = objects.preset.Shoes.current
+      imageObject = imagesObj[currentObject]
+    }
+
+    let scaleFactor = canvasSize / Math.max(imageObject.width, imageObject.height)
+
+    let scaledWidth = imageObject.width * scaleFactor
+    let scaledHeight = imageObject.height * scaleFactor
 
     let x = (canvasSize - scaledWidth) / 2
     let y = (canvasSize - scaledHeight) / 2
 
-    if (getImageStore().pixelate == true) {
-      // let pixelSize = 5
-      // for (let y = 0; y < scaledWidth; y += pixelSize) {
-      //   for (let x = 0; x < scaledHeight; x += pixelSize) {
-      //     // Get the color of the pixel at (x, y)
-      //     let col = image.get(x, y);
-      //     // Fill a square with the color of the current pixel
-      //     p.fill(col);
-      //     // Draw a rectangle at (x, y) with size of pixelSize x pixelSize
-      //     p.rect(x, y, pixelSize, pixelSize);
-      //   }
-      // }
+    p.image(
+      imageObject,
+      x,
+      y,
+      scaledWidth,
+      scaledHeight
+    )
 
-      let pixelSize = 5;
-      for (let j = 0; j < scaledHeight; j += pixelSize) {
-        for (let i = 0; i < scaledWidth; i += pixelSize) {
-          // Get the color of the pixel at (i, j) in the scaled image
-          let col = image.get(i / scaleFactor, j / scaleFactor);
-          // Calculate the position to draw the pixelated pixel
-          let drawX = x + i;
-          let drawY = y + j;
-          // Fill a square with the color of the current pixel
-          p.fill(col);
-          // Draw a rectangle at (drawX, drawY) with size of pixelSize x pixelSize
-          p.rect(drawX, drawY, pixelSize, pixelSize);
-        }
-      }
+    // if (getImageStore().pixelate == true) {
+    //   // let pixelSize = 5
+    //   // for (let y = 0; y < scaledWidth; y += pixelSize) {
+    //   //   for (let x = 0; x < scaledHeight; x += pixelSize) {
+    //   //     // Get the color of the pixel at (x, y)
+    //   //     let col = image.get(x, y);
+    //   //     // Fill a square with the color of the current pixel
+    //   //     p.fill(col);
+    //   //     // Draw a rectangle at (x, y) with size of pixelSize x pixelSize
+    //   //     p.rect(x, y, pixelSize, pixelSize);
+    //   //   }
+    //   // }
 
-    } else {
-      p.image(
-        image,
-        x,
-        y,
-        scaledWidth,
-        scaledHeight
-      )
-    }
+    //   let pixelSize = 5;
+    //   for (let j = 0; j < scaledHeight; j += pixelSize) {
+    //     for (let i = 0; i < scaledWidth; i += pixelSize) {
+    //       // Get the color of the pixel at (i, j) in the scaled image
+    //       let col = image.get(i / scaleFactor, j / scaleFactor);
+    //       // Calculate the position to draw the pixelated pixel
+    //       let drawX = x + i;
+    //       let drawY = y + j;
+    //       // Fill a square with the color of the current pixel
+    //       p.fill(col);
+    //       // Draw a rectangle at (drawX, drawY) with size of pixelSize x pixelSize
+    //       p.rect(drawX, drawY, pixelSize, pixelSize);
+    //     }
+    //   }
+
+    // } else {
+    //   p.image(
+    //     image,
+    //     x,
+    //     y,
+    //     scaledWidth,
+    //     scaledHeight
+    //   )
+    // }
   }
 
   /////////////////////////////////////////// MODULE lINES
@@ -828,14 +850,17 @@ function sketch(p) {
     //////////////////////////////////////////////////// IMAGE OBJ
 
     if (moduleList.includes('Image')) {
-      const imageFiles = getImageStore().images
-      // console.log('SKETCH IMGs', imageFiles);
+      const objects = getImageStore()
 
-      Object.keys(imageFiles).forEach((key) => {
-        imagesObj = Object.assign({}, imagesObj, {
-          [`${key}`]: p.loadImage(imageFiles[key])
+      if (objects.collections.includes('Shoes')) {
+        const imageFiles = objects.preset.Shoes.images
+
+        Object.keys(imageFiles).forEach((key) => {
+          imagesObj = Object.assign({}, imagesObj, {
+            [`${key}`]: p.loadImage(imageFiles[key])
+          })
         })
-      })
+      }
     }
 
     //////////////////////////////////////////////////// IMAGE BG

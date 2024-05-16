@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (moduleName == 'Image') {
-      props.image = getImageStore()
+      props.objects = getImageStore()
     }
 
     if (moduleName == 'Background') {

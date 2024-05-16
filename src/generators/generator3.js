@@ -37,16 +37,17 @@ const preset = {
   },
 
   Image: {
-    pixelate: false
+    pixelate: false,
+
+    collections: ['Shoes', 'Electronics'],
+    currentCollection: 'Shoes',
+
+    preset: {
+      Shoes: {},
+      Electronics: {}
+    }
   },
 
-  // Text1: {
-  //   text: 'Funky Groov',
-  //   font: 'wonky',
-  //   dopText: false,
-  //   size: 26,
-  //   color: '#fff'
-  // }
   BasicTypo: {
     color: '#ffffff',
     upperCase: true,

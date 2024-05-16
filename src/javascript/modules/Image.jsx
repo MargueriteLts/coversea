@@ -1,27 +1,29 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import HeaderModule from '../components/HeaderModule.jsx'
+import TabImageSet from '../components/TabImageSet.jsx'
 
 export default class Image extends Component {
   constructor(props) {
     super(props)
   }
 
-  handleClick = () => {
-    this.props.setImageValue()
-  }
-
   render() {
-    const { randomizeModuleStore } = this.props
+    const { handleRandomizeModule, objects, handleTabClickObject } = this.props
     
-    return <div className="module__container">
+    return <div className="moduleContainer">
       <HeaderModule
         title='Random Image'
         moduleType='Image'
-        randomizeModuleStore={randomizeModuleStore}
+        handleRandomizeModule={handleRandomizeModule}
       />
-      <div className="module__content">
-        <div className="btn-secondary" onClick={this.handleClick}>Randomize Shoe</div>
+      <div className="moduleContent">
+        <TabImageSet
+          options = {objects.preset}
+          value = {objects.currentCollection}
+          handleClick = {handleTabClickObject}
+          tabBackgrounds={objects.tabBackgrounds}
+        />
       </div>
     </div>
   }

@@ -311,24 +311,45 @@ function setBackgroundImageStore(type, value) {
 ////////////////////// IMAGES
 
 function initImages(preset) {
-  const images = importAll(
+  const shoesCollection = importAll(
     require.context('../images/sketchGraphics/shoes', false, /\.(png|jpe?g|svg)$/)
   )
 
-  // console.log('STORE IMG', images);
-  return {
-    images: images,
-    current: sample(Object.keys(images)),
-    pixelate: preset.pixelate
-  }
+  const images = importAll(
+    require.context('../images/ui/tabBackgrounds/objects', false, /\.(png|jpe?g|svg)$/)
+  )
+
+  preset = Object.assign({}, preset, { moduleName: 'Objects', tabBackgrounds: images })
+
+  preset.collections.forEach((collection) => {
+    if (collection == 'Shoes') {
+      preset.preset.Shoes = Object.assign({}, preset.preset.Shoes, { text: 'Shoes', images: shoesCollection, current: sample(Object.keys(shoesCollection)) })
+    }
+  })
+
+  return preset
+  // return {
+  //   images: images,
+  //   current: sample(Object.keys(images)),
+  //   pixelate: preset.pixelate
+  // }
 }
 
 function getImageStore() {
   return moduleImageStore
 }
 
-function setImageStore() {
-  moduleImageStore.current = sample(Object.keys(moduleImageStore.images))
+function setImageStore(type, value) {
+  return new Promise((resolve, reject) => { 
+    if (type === 'CurrentTabChange') {
+      moduleImageStore.currentCollection = value
+      resolve([value])
+    }
+
+    if (type === 'Shoes') {
+      moduleImageStore.preset.Shoes.current = sample(Object.keys(moduleImageStore.preset.Shoes.images))
+    }
+  })
 }
 
 ////////////////////// LINES
@@ -761,7 +782,9 @@ function generateAllStore(generatorName, moduleList) {
       }
 
       if (moduleName == 'Image') {
-        setImageStore()
+        if (moduleImageStore.currentCollection == 'Shoes') {
+          setImageStore('Shoes')
+        }
       }
 
       if (moduleName == 'BackgroundImage') {
@@ -919,7 +942,10 @@ function randomizeModuleStore(moduleType) {
     }
 
     if (moduleType == 'Image') {
-      setImageStore()
+      let objectType = sample(moduleImageStore.collections)
+      setImageStore('CurrentTabChange', objectType)
+
+      resolve([Vinyltype])
     }
 
     if (moduleType == 'BackgroundImage') {
@@ -942,7 +968,6 @@ function randomizeModuleStore(moduleType) {
 
       let Vinyltype = sample(moduleVinylStore.vinylTypes)
       setVinylStore('CurrentTabChange', Vinyltype)
-      // console.log(Vinyltype);
       
       let size = getRandomArbitrary(0, 100)
       setVinylStore('size', size)

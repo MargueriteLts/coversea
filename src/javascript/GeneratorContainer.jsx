@@ -98,6 +98,14 @@ export default class GeneratorContainer extends Component {
     this.setState({})
   }
 
+////////////////////////////////////// MODULE IMAGES (OBJECTS)
+
+  // Tab -OK
+  handleTabClickObjects = (type) => {
+    this.props.setImageStore('CurrentTabChange', type)
+    this.setState({})
+  }
+
 ////////////////////////////////////// MODULE LINES
 
   // Colors -OK
@@ -235,17 +243,16 @@ export default class GeneratorContainer extends Component {
     const {
       moduleList,
       background,
+      objects,
       shapes,
       particles,
-      setImageStore,
       backgroundImage,
       vinyl,
       lines,
       module3D,
       basictypo,
       setBasicTypoStore,
-      overlay,
-      randomizeModuleStore
+      overlay
       // setCanvasSizeStore
     } = this.props
 
@@ -285,9 +292,10 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Image') {
         modules.push(
           <Image
-            setImageValue={setImageStore}
             key={index}
-            randomizeModuleStore={randomizeModuleStore}
+            handleRandomizeModule={this.handleRandomizeModule}
+            objects={objects}
+            handleTabClickObject={this.handleTabClickObject}
           />
         )
       }
