@@ -11,18 +11,29 @@ export default class Shapes extends Component {
   }
   
   render() {
-    const { shapes, handleRandomizeModule, currentShapesType, handleDropDownClickShapes, shapesSize, handleShapesSize, shapesColor, handleShapesColor } = this.props
+    const {
+      shapes,
+      handleRandomizeModule,
+      currentShapesType,
+      handleDropDownClickShapes,
+      shapesSize,
+      handleShapesSize,
+      shapesColor,
+      handleShapesColor
+    } = this.props
 
-    return <div className="module__container">
+    console.log(shapes.settings.gradient);
+
+    return <div className="moduleContainer">
       <HeaderModule
         title={shapes.moduleName}
         moduleType='Shapes'
         handleRandomizeModule={handleRandomizeModule}
       />
-      <div className="module__content flexRow">
+      <div className="moduleContent">
         <DropDown
-            options={shapes.options}
-            value={currentShapesType}
+            options={shapes.types}
+            value={shapes.currentType}
             handleClick={handleDropDownClickShapes}
           />
         <Slider
@@ -30,15 +41,19 @@ export default class Shapes extends Component {
           type="range"
           min="2"
           max="74"
-          value={shapesSize}
+          value={shapes.settings.sliderValue}
           handleChange={handleShapesSize}
         />
-        <ColorPicker
-          object='SolidColor'
-          color={shapesColor}
-          handleChange={handleShapesColor}
-          key='AllColorPicker'
-        />
+        { shapes.settings.gradient
+          ?
+          null
+          : <ColorPicker
+            object='SolidColor'
+            color={shapes.settings.color}
+            handleChange={handleShapesColor}
+            key='AllColorPicker'
+          />
+        }
       </div>
     </div>
   }

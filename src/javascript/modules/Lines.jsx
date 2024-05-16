@@ -10,16 +10,23 @@ export default class Lines extends Component {
   }
   
   render() {
-    const { lines, handleRandomizeModuleStore, handleChangeLines, handleLinesColor, handleLinesSize, linesWeight } = this.props
+    const {
+      lines,
+      handleRandomizeModule,
+      handleChangeLines,
+      handleLinesColor,
+      handleLinesSize,
+      linesWeight
+    } = this.props
 
-    return <div className="module__container">
+    return <div className="moduleContainer">
       <HeaderModule
         title={lines.moduleName}
         moduleType='Lines'
-        handleRandomizeModuleStore={handleRandomizeModuleStore}
+        handleRandomizeModule={handleRandomizeModule}
       />
-      <div className="module__content flexRow">
-        <div className="btn--secondary" onClick={handleChangeLines}>Randomize lines</div>
+      <div className="moduleContent">
+        {/* <div className="btn--secondary" onClick={handleChangeLines}>Randomize lines</div> */}
         <ColorPicker
           object='SolidColor'
           color={lines.color}
@@ -29,8 +36,8 @@ export default class Lines extends Component {
         <Slider
           title='Thickness'
           type="range"
-          min={this.props.lines.min}
-          max={this.props.lines.max}
+          min={lines.min}
+          max={lines.max}
           value={lines.strokeWeight}
           handleChange={handleLinesSize}
         />

@@ -1,22 +1,15 @@
 const modules = ['Background', 'Vinyl', 'Lines', 'Text1']
 
-// const blend = {
-//   Vinyl: false,
-//   Text1: true
-// }
-
 const preset = {
   
   blend: {
     Vinyl: false,
     Text1: true
   },
-
   
   Background: {
-
-    bgTypes: ['Gradient'],
-    currentBgType: 'Gradient',
+    backgroundTypes: ['Gradient'],
+    currentBackgroundType: 'Gradient',
 
     preset: {
       SolidColor: {

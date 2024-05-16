@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import HeaderModule from '../components/HeaderModule.jsx'
-import TabButtonSet from '../components/TabButtonSet.jsx'
+import TabImageSet from '../components/TabImageSet.jsx'
 
 export default class BackgroundImage extends Component {
   constructor(props) {
@@ -12,26 +12,33 @@ export default class BackgroundImage extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { backgroundImage, handleRandomizeModule, currentBgImgCollection, handleTabClickBackgroundImage, bgImgOpacity, handleBackgroundImageOpacity, handleChangeBackgroundImage } = this.props
+    const {
+      backgroundImage,
+      handleRandomizeModule,
+      handleTabClickBackgroundImage,
+      handleBackgroundImageOpacity,
+      // handleChangeBackgroundImage
+    } = this.props
 
-    return <div className="module__container">
+    return <div className="moduleContainer">
       <HeaderModule
         title={backgroundImage.moduleName}
         moduleType='BackgroundImage'
         handleRandomizeModule={handleRandomizeModule}
       />
-      <div className="module__content">
-        <TabButtonSet
-          options={backgroundImage.preset}
-          value={currentBgImgCollection}
-          handleClick={handleTabClickBackgroundImage}
+      <div className="moduleContent">
+        <TabImageSet
+          options = {backgroundImage.preset}
+          value = {backgroundImage.currentBackgroundImageCollection}
+          handleClick = {handleTabClickBackgroundImage}
+          tabBackgrounds={backgroundImage.tabBackgrounds}
         />
-        <div className="btn--secondary" onClick={handleChangeBackgroundImage}>Randomize image</div>
+        {/* <div className="btn--secondary" onClick={handleChangeBackgroundImage}>Randomize image</div> */}
         <input
           type="range"
           min="0"
           max="255"
-          value={bgImgOpacity}
+          value={backgroundImage.opacity}
           onInput={handleBackgroundImageOpacity}
         />
       </div>

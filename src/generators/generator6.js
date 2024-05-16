@@ -1,22 +1,15 @@
 const modules = ['Background', 'Shapes', 'Particles', 'BasicTypo']
 
-// const blend = {
-//   Vinyl: false,
-//   Text1: false
-// }
-
 const preset = {
   
   blend: {
     Vinyl: false,
     Text1: false
   },
-
   
   Background: {
-
-    bgTypes: ['Gradient'],
-    currentBgType: 'Gradient',
+    backgroundTypes: ['Gradient'],
+    currentBackgroundType: 'Gradient',
 
     preset: {
       SolidColor: {
@@ -28,15 +21,17 @@ const preset = {
       }
     }
   },
+
   Shapes: {
-    options: ['Ellipses', 'Custom1', 'Custom2'],
-    currentShapeType: 'Custom1',
+    types: ['Ellipses', 'Custom1', 'Custom2'],
+    currentType: 'Custom1',
 
     settings: {
       sliderValue: 37,
       gradient: true
     }
   },
+
   Particles: {
     sliderValue: 10,
     max: 20,

@@ -23,12 +23,12 @@ export default class Particles extends Component {
         <div className="moduleContent">
           <DropDown
             options={particles.options}
-            value={currentParticlesType}
+            value={particles.currentParticlesType}
             handleClick={handleDropDownClickParticles}
           />
           <ColorPicker
             object='SolidColor'
-            color={particlesColor}
+            color={particles.color}
             handleChange={handleParticlesColor}
             key='AllColorPicker'
           />
@@ -37,7 +37,7 @@ export default class Particles extends Component {
             type="range"
             min={particles.min}
             max={particles.max}
-            value={particlesQuantity}
+            value={particles.sliderValue}
             handleChange={handleParticlesQuantity}
           />
         </div>

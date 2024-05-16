@@ -1,10 +1,5 @@
 const modules = ['Background', 'Module3D', 'BasicTypo']
 
-// const blend = {
-//   Vinyl: false,
-//   Text1: false
-// }
-
 const preset = {
   
   blend: {
@@ -14,9 +9,8 @@ const preset = {
 
   
   Background: {
-
-    bgTypes: ['SolidColor'],
-    currentBgType: 'SolidColor',
+    backgroundTypes: ['SolidColor'],
+    currentBackgroundType: 'SolidColor',
 
     preset: {
       SolidColor: {
@@ -28,8 +22,9 @@ const preset = {
       }
     }
   },
+
   Module3D: {
-    options: ['Torus', 'Square'],
+    types: ['Torus', 'Square'],
     current3DType: 'Square',
 
     preset: {
@@ -37,14 +32,6 @@ const preset = {
       Square: {}
     }
   },
-  // Text1: {
-  //   text: 'Volume Music',
-  //   font: 'AUSRINE',
-  //   upperCase: true,
-  //   dopText: true,
-  //   size: 100,
-  //   color: '#fff'
-  // }
 
   BasicTypo: {
     color: '#ffffff',

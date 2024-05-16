@@ -1,10 +1,5 @@
 const modules = ['Background', 'Module3D', 'Text1']
 
-// const blend = {
-//   Vinyl: false,
-//   Text1: false
-// }
-
 const preset = {
   
   blend: {
@@ -12,11 +7,9 @@ const preset = {
     Text1: false
   },
 
-  
   Background: {
-
-    bgTypes: ['Gradient'],
-    currentBgType: 'Gradient',
+    backgroundTypes: ['Gradient'],
+    currentBackgroundType: 'Gradient',
 
     preset: {
       SolidColor: {

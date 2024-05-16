@@ -8,8 +8,8 @@ const preset = {
   },
 
   Background: {
-    bgTypes: ['SolidColor', 'Gradient'],
-    currentBgType: 'Gradient',
+    backgroundTypes: ['SolidColor', 'Gradient'],
+    currentBackgroundType: 'Gradient',
 
     preset: {
       SolidColor: {
@@ -22,13 +22,11 @@ const preset = {
     }
   },
 
-  Image: {},
-
   BackgroundImage: {
-    sliderValue: 200,
+    opacity: 200,
 
-    collections: ['NightClub', 'Cars'],
-    currentCollection: 'NightClub',
+    backgroundImageCollections: ['NightClub', 'Cars'],
+    currentBackgroundImageCollection: 'NightClub',
 
     preset: {
       NightClub: {},
@@ -61,7 +59,7 @@ const preset = {
   },
 
   Overlay: {
-    opacityValue: 90,
+    opacity: 90,
 
     collections: ['Plastic', 'Stickers'],
     currentCollection: 'Plastic',

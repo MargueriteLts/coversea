@@ -168,21 +168,19 @@ function initBackgroundStore(background) {
 
     if (backgroundType == 'Noise') {
       const images = importAll(
-        require.context('../images/noise', false, /\.(png|jpe?g|svg)$/)
+        require.context('../images/ui/tabBackgrounds/noise', false, /\.(png|jpe?g|svg)$/)
       )
 
-      console.log(images);
+      background.preset.Noise = Object.assign({}, background.preset.Noise, { text: 'Noise', tabBackgrounds: images})
 
-      background.preset.Noise = Object.assign({}, background.preset.Noise, { text: 'Noise', images: images})
-
-      background.preset.Noise.NoiseOptions.forEach((noiseOption) => {
-        if (noiseOption == 'Small') {
+      background.preset.Noise.NoiseTypes.forEach((noiseType) => {
+        if (noiseType == 'Small') {
           background.preset.Noise.preset.Small = Object.assign({}, background.preset.Noise.preset.Small, { text: 'SMALL'})
         }
-        if (noiseOption == 'Medium') {
+        if (noiseType == 'Medium') {
           background.preset.Noise.preset.Medium = Object.assign({}, background.preset.Noise.preset.Medium, { text: 'MEDIUM'})
         }
-        if (noiseOption == 'Big') {
+        if (noiseType == 'Big') {
           background.preset.Noise.preset.Big = Object.assign({}, background.preset.Noise.preset.Big, { text: 'BIG'})
         }
       })
@@ -236,6 +234,7 @@ function setBackgroundStore(type, value) {
 
     if (type === 'currentTabImageChange') {
       moduleBackgroundStore.preset.Noise.currentNoiseType = value
+      window.resetNoise()
     }
 
   })
@@ -258,15 +257,19 @@ function changeGradientAngle() {
 
 function initBackgroundImageStore(preset) {
   const collection1 = importAll(
-    require.context('../images/collection1NightClub', false, /\.(png|jpe?g|svg)$/)
+    require.context('../images/sketchGraphics/backgroundImages/collection1NightClub', false, /\.(png|jpe?g|svg)$/)
   )
   const collection2 = importAll(
-    require.context('../images/collection2Cars', false, /\.(png|jpe?g|svg)$/)
+    require.context('../images/sketchGraphics/backgroundImages/collection2Cars', false, /\.(png|jpe?g|svg)$/)
   )
 
-  preset = Object.assign({}, preset, { moduleName: 'Background Image' })
+  const images = importAll(
+    require.context('../images/ui/tabBackgrounds/backgroundImages', false, /\.(png|jpe?g|svg)$/)
+  )
 
-  preset.collections.forEach((collection) => {
+  preset = Object.assign({}, preset, { moduleName: 'Background Image', tabBackgrounds: images })
+
+  preset.backgroundImageCollections.forEach((collection) => {
     if (collection === 'NightClub') {
       preset.preset.NightClub = Object.assign({}, preset.preset.NightClub, { text: 'Night Club', images: collection1, current: sample(Object.keys(collection1)) })
     }
@@ -284,19 +287,23 @@ function getBackgroundImageStore() {
 }
 
 function setBackgroundImageStore(type, value) {
-  if (type === 'CurrentTabChange') {
-    moduleBackgroundImageStore.currentCollection = value
-  }
+  return new Promise((resolve, reject) => {
+    if (type === 'CurrentTabChange') {
+      moduleBackgroundImageStore.currentBackgroundImageCollection = value
+      resolve([value])
+    }
 
-  if (type === 'NightClub') {
-    moduleBackgroundImageStore.preset.NightClub.current = sample(Object.keys(moduleBackgroundImageStore.preset.NightClub.images))
-  }
-  if (type === 'Cars') {
-    moduleBackgroundImageStore.preset.Cars.current = sample(Object.keys(moduleBackgroundImageStore.preset.Cars.images))
-  }
-  if (type === 'opacity') {
-    moduleBackgroundImageStore.sliderValue = value
-  }
+    if (type === 'NightClub') {
+      moduleBackgroundImageStore.preset.NightClub.current = sample(Object.keys(moduleBackgroundImageStore.preset.NightClub.images))
+    }
+    if (type === 'Cars') {
+      moduleBackgroundImageStore.preset.Cars.current = sample(Object.keys(moduleBackgroundImageStore.preset.Cars.images))
+    }
+    if (type === 'opacity') {
+      moduleBackgroundImageStore.opacity = value
+      resolve([value])
+    }
+  })
 }
 
 // Graphics
@@ -305,7 +312,7 @@ function setBackgroundImageStore(type, value) {
 
 function initImages(preset) {
   const images = importAll(
-    require.context('../images', false, /\.(png|jpe?g|svg)$/)
+    require.context('../images/sketchGraphics/shoes', false, /\.(png|jpe?g|svg)$/)
   )
 
   // console.log('STORE IMG', images);
@@ -370,12 +377,12 @@ function setLinesStore(type, nextValue) {
 function init3DStore(preset) {
   preset = Object.assign({}, preset, { moduleName: '3D Shape', x: generateRandomNb(), y: generateRandomNb() })
 
-  preset.options.forEach((option) => {
-    if (option == 'Torus') {
+  preset.types.forEach((type) => {
+    if (type == 'Torus') {
       preset.preset.Torus = Object.assign({}, preset.preset.Torus, { text: 'Torus' })
     }
 
-    if (option == 'Square') {
+    if (type == 'Square') {
       preset.preset.Square = Object.assign({}, preset.preset.Square, { text: 'Square' })
     }
   })
@@ -393,13 +400,16 @@ function get3DStore() {
 }
 
 function set3DStore(type, value) {
-  if (type === 'CurrentTabChange') {
-    module3DStore.current3DType = value
-  } 
-  if (type === 'randomize') {
-    module3DStore.x = generateRandomNb()
-    module3DStore.y = generateRandomNb()
-  }
+  return new Promise((resolve, reject) => { 
+    if (type === 'CurrentTabChange') {
+      module3DStore.current3DType = value
+      resolve([value])
+    } 
+    if (type === 'randomize') {
+      module3DStore.x = generateRandomNb()
+      module3DStore.y = generateRandomNb()
+    }
+  })
 }
 
 ////////////////////// PARTICLES
@@ -478,7 +488,7 @@ function getShapesStore() {
 function setShapesStore(type, value) {
   return new Promise((resolve, reject) => {
     if (type === 'CurrentTabChange') {
-      moduleShapesStore.currentShapeType = value
+      moduleShapesStore.currentType = value
     } 
     if (type === 'SolidColor') {
       moduleShapesStore.settings.color = value
@@ -486,6 +496,7 @@ function setShapesStore(type, value) {
     }
     if (type === 'Size') {
       moduleShapesStore.settings.sliderValue = value
+      resolve([value])
     }
   })
 }
@@ -494,18 +505,22 @@ function setShapesStore(type, value) {
 
 function initVinylStore(preset) {
   const collection1 = importAll(
-    require.context('../images/vinylPics/whole', false, /\.(png|jpe?g|svg)$/)
+    require.context('../images/sketchGraphics/vinylPics/whole', false, /\.(png|jpe?g|svg)$/)
   )
   const collection2 = importAll(
-    require.context('../images/vinylPics/label', false, /\.(png|jpe?g|svg)$/)
+    require.context('../images/sketchGraphics/vinylPics/label', false, /\.(png|jpe?g|svg)$/)
   )
 
-  preset = Object.assign({}, preset, { moduleName: 'Vinyl Disc' })
+  const images = importAll(
+    require.context('../images/ui/tabBackgrounds/vinyl')
+  )
+
+  preset = Object.assign({}, preset, { moduleName: 'Vinyl Disc', tabBackgrounds: images })
 
   preset.vinylTypes.forEach((type) => {
     if (type === 'Whole') {
       preset.preset.Whole = Object.assign({}, preset.preset.Whole, {
-        text: 'Whole disc',
+        text: 'WHOLE DISC',
         images: collection1,
         current: sample(Object.keys(collection1))
       })
@@ -513,7 +528,7 @@ function initVinylStore(preset) {
 
     if (type === 'Label') {
       preset.preset.Label = Object.assign({}, preset.preset.Label, {
-        text: 'Disc Label',
+        text: 'DISC LABEL',
         images: collection2,
         current: sample(Object.keys(collection2))
       })
@@ -613,13 +628,18 @@ function setBasicTypoStore(type, nextValue) {
 
 function initOverlayStore(preset) {
   const collection1 = importAll(
-    require.context('../images/overlays/collection1Plastic', false, /\.(png|jpe?g|svg)$/)
+    require.context('../images/sketchGraphics/overlays/collection1Plastic', false, /\.(png|jpe?g|svg)$/)
   )
   const collection2 = importAll(
-    require.context('../images/overlays/collection2Stickers', false, /\.(png|jpe?g|svg)$/)
+    require.context('../images/sketchGraphics/overlays/collection2Stickers', false, /\.(png|jpe?g|svg)$/)
   )
 
-  preset = Object.assign({}, preset, { moduleName: 'Overlay' })
+  const images = importAll(
+    require.context('../images/ui/tabBackgrounds/overlays', false, /\.(png|jpe?g|svg)$/)
+  )
+
+  
+  preset = Object.assign({}, preset, { moduleName: 'Overlay', tabBackgrounds: images })
 
   preset.collections.forEach((collection) => {
     if (collection === 'Plastic') {
@@ -639,39 +659,30 @@ function getOverlayStore() {
 }
 
 function setOverlayStore(type, value) {
-  if (type === 'CurrentTabChange') {
-    moduleOverlayStore.currentCollection = value
-  }
+  return new Promise((resolve, reject) => { 
+    if (type === 'CurrentTabChange') {
+      moduleOverlayStore.currentCollection = value
+      resolve([value])
+    }
 
-  if (type === 'Plastic') {
-    moduleOverlayStore.preset.Plastic.current = sample(Object.keys(moduleOverlayStore.preset.Plastic.images))
-  }
-  if (type === 'Stickers') {
-    moduleOverlayStore.preset.Stickers.current = sample(Object.keys(moduleOverlayStore.preset.Stickers.images))
-  }
-  if (type === 'opacity') {
-    moduleOverlayStore.opacityValue = value
-  }
+    if (type === 'Plastic') {
+      moduleOverlayStore.preset.Plastic.current = sample(Object.keys(moduleOverlayStore.preset.Plastic.images))
+    }
+    if (type === 'Stickers') {
+      moduleOverlayStore.preset.Stickers.current = sample(Object.keys(moduleOverlayStore.preset.Stickers.images))
+    }
+    if (type === 'opacity') {
+      moduleOverlayStore.opacity = value
+      resolve([value])
+    }
+  })
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GENERATE ALL
 
 function generateAllStore(generatorName, moduleList) {
-  const newData = generateNewData(generatorName)
-    .then(data => {
-      const filteredData = data.filter(item => moduleList.includes(item.module));
-      return filteredData;
-    });
-
-  return newData
-}
-
-
-function generateNewData(generatorName) {
-  moduleList = generators[generatorName].modules
 
   blendStore = generators[generatorName].preset.blend
-
   allFonts = initFontsStore()
 
   let data = []
@@ -693,30 +704,39 @@ function generateNewData(generatorName) {
     moduleList.forEach(moduleName => {
 
       if (moduleName == 'Background') {
+        
+        if (moduleBackgroundStore.currentBackgroundType == 'SolidColor') {
+          let newSolidColor=generateColor()
+          setBackgroundStore('SolidColor', newSolidColor)
 
-        let newBackgroundType = sample(moduleBackgroundStore.backgroundTypes)
-        setBackgroundStore('CurrentTabChange', newBackgroundType)
-        let newSolidColor=generateColor()
-        setBackgroundStore('SolidColor', newSolidColor)
-        let newGradientColor1=generateColor()
-        setBackgroundStore('GradientColor1', newGradientColor1)
-        let newGradientColor2=generateColor()
-        setBackgroundStore('GradientColor2', newGradientColor2)
+          data.push({backgroundSolidColor: newSolidColor})
+        }
 
-        // setBackgroundStore('Gradient')
-        //   .then((colors) => {
-        //     Gcolor1 = colors[0]
-        //     Gcolor2 = colors[1]
-        //   })
-        let newGradientAngle
-        setBackgroundStore('AngleGradient')
-          .then((randomAngle) => {
-            newGradientAngle = randomAngle
-          })
+        if (moduleBackgroundStore.currentBackgroundType == 'Gradient') {
+          let newGradientColor1, newGradientColor2
+          setBackgroundStore('Gradient')
+            .then((colors) => {
+              newGradientColor1 = colors[0]
+              newGradientColor2 = colors[1]
+              data.push({backgroundGradientColor1: newGradientColor1, backgroundGradientColor2: newGradientColor2})
+            })
+            console.log('GRADIENT COLORS STORE', data);
+            
+            let newAngle
+            setBackgroundStore('AngleGradient')
+              .then((randomAngle) => {
+                newAngle = randomAngle
+                data.push({backgroundGradientAngle: newAngle})
+              })
+        }
 
-        setBackgroundStore('Noise')
+        if (moduleBackgroundStore.currentBackgroundType == 'Noise') {
+          window.resetNoise()
+        }
 
-        data.push({module: moduleName, currentBackgroundType: newBackgroundType, backgroundSolidColor: newSolidColor, backgroundGradientColor1: newGradientColor1, backgroundGradientColor2: newGradientColor2, backgroundGradientAngle: newGradientAngle })
+        if (moduleBackgroundStore.currentBackgroundType == 'Pixels') {
+          window.resetPixels()
+        }
       }
 
       if (moduleName == 'Shapes') {
@@ -810,7 +830,7 @@ function randomizeModuleStore(moduleType) {
 
   return new Promise((resolve, reject) => {
 
-    let newValues = []
+    // let newValues = []
     if (moduleType == 'Background') {
 
       let newBackgroundType = sample(moduleBackgroundStore.backgroundTypes)
@@ -820,56 +840,53 @@ function randomizeModuleStore(moduleType) {
         let newSolidColor=generateColor()
         setBackgroundStore('SolidColor', newSolidColor)
 
-        newValues.push({currentBackgroundType: newBackgroundType, backgroundSolidColor: newSolidColor})
+        // newValues.push({currentBackgroundType: newBackgroundType, backgroundSolidColor: newSolidColor})
+
+        resolve([newBackgroundType, newSolidColor])
       }
 
       if (newBackgroundType == 'Gradient') {
-        newValues.push({currentBackgroundType: newBackgroundType})
+        // newValues.push({currentBackgroundType: newBackgroundType})
         let newGradientColor1, newGradientColor2
         setBackgroundStore('Gradient')
           .then((colors) => {
             newGradientColor1 = colors[0]
             newGradientColor2 = colors[1]
-            newValues.push({backgroundGradientColor1: newGradientColor1, backgroundGradientColor2: newGradientColor2})
+            // newValues.push({backgroundGradientColor1: newGradientColor1, backgroundGradientColor2: newGradientColor2})
           })
-          // console.log('GRADIENT COLORS STORE', newGradientColor1, newGradientColor2);
           
-          // let newGradientColor1 = generateColor()
-          // setBackgroundStore('GradientColor1', newGradientColor1)
-          
-          // let newGradientColor2 = generateColor()
-          // setBackgroundStore('GradientColor2', newGradientColor2)
-          
-          let newAngle
-          setBackgroundStore('AngleGradient')
-            .then((randomAngle) => {
-              newAngle = randomAngle
-              newValues.push({backgroundGradientAngle: newAngle})
-            })
+        let newAngle
+        setBackgroundStore('AngleGradient')
+          .then((randomAngle) => {
+            newAngle = randomAngle
+            // newValues.push({backgroundGradientAngle: newAngle})
+          })
+
+        resolve([newBackgroundType, newGradientColor1, newGradientColor2, newAngle])
       }
 
       if (newBackgroundType == 'Noise') {
-        // setBackgroundStore('Noise')
+        let newNoiseType = sample(moduleBackgroundStore.preset.Noise.NoiseTypes)
+        setBackgroundStore('currentTabImageChange', newNoiseType)
         window.resetNoise()
-        newValues.push({currentBackgroundType: newBackgroundType})
+        // newValues.push({currentBackgroundType: newBackgroundType, currentBackgroundNoiseType: newNoiseType})
+
+        resolve([newBackgroundType, newNoiseType])
       }
 
       if (newBackgroundType == 'Pixels') {
         window.resetPixels()
-        newValues.push({currentBackgroundType: newBackgroundType})
+        // newValues.push({currentBackgroundType: newBackgroundType})
+
+        resolve([newBackgroundType])
       }
 
-      resolve(newValues)
-
-
-
-      // resolve([newBackgroundType, newSolidColor, newGradientColor1, newGradientColor2, newAngle ])
-
+      // resolve(newValues)
     }
 
     if (moduleType == 'Shapes') {
-      let shapesTypes = sample(moduleShapesStore.options)
-      setShapesStore('CurrentTabChange', shapesTypes)
+      let shapesType = sample(moduleShapesStore.types)
+      setShapesStore('CurrentTabChange', shapesType)
       
       let shapesColor = generateColor()
       setShapesStore('SolidColor', shapesColor)
@@ -877,7 +894,7 @@ function randomizeModuleStore(moduleType) {
       let shapesSize = getRandomArbitrary(0, 100)
       setShapesStore('Size', shapesSize)
 
-      resolve([shapesTypes, shapesColor, shapesSize])
+      resolve([shapesType, shapesColor, shapesSize])
     }
 
     if (moduleType == 'Particles') {
@@ -899,20 +916,26 @@ function randomizeModuleStore(moduleType) {
     }
 
     if (moduleType == 'BackgroundImage') {
-      let BgImgType = sample(moduleBackgroundImageStore.collections)
-      setBackgroundImageStore('CurrentTabChange', BgImgType)
-      setBackgroundImageStore('NightClub')
-      setBackgroundImageStore('Cars')
-      let bgImgOpacity = getRandomArbitrary(10, 255)
-      setBackgroundImageStore('opacity', bgImgOpacity)
+      let BackgroundImageType = sample(moduleBackgroundImageStore.backgroundImageCollections)
+      setBackgroundImageStore('CurrentTabChange', BackgroundImageType)
 
-      resolve([BgImgType, bgImgOpacity])
+      if (BackgroundImageType == 'NightClub') {
+        setBackgroundImageStore('NightClub')
+      } else if (BackgroundImageType == 'Cars') {
+        setBackgroundImageStore('Cars')
+      }
+
+      let newBackgroundImageOpacity = getRandomArbitrary(10, 255)
+      setBackgroundImageStore('opacity', newBackgroundImageOpacity)
+
+      resolve([BackgroundImageType, newBackgroundImageOpacity])
     }
 
     if (moduleType == 'Vinyl') {
 
       let Vinyltype = sample(moduleVinylStore.vinylTypes)
       setVinylStore('CurrentTabChange', Vinyltype)
+      // console.log(Vinyltype);
       
       let size = getRandomArbitrary(0, 100)
       setVinylStore('size', size)
@@ -929,22 +952,35 @@ function randomizeModuleStore(moduleType) {
     }
 
     if (moduleType == 'Lines') {
-      setLinesStore('SolidColor', generateColor())
+      let newColor = generateColor()
+      setLinesStore('SolidColor', newColor)
+
       setLinesStore('randomize')
-      setLinesStore('strokeWeight', getRandomArbitrary(0, 100))
+
+      let newStrokeWeight = getRandomArbitrary(moduleLinesStore.min, moduleLinesStore.max)
+      setLinesStore('strokeWeight', newStrokeWeight)
+
+      resolve([newColor, newStrokeWeight])
     }
 
     if (moduleType == 'Module3D') {
-      let type3D = sample(module3DStore.options)
+
+      let type3D = sample(module3DStore.types)
       set3DStore('CurrentTabChange', type3D)
+      
       set3DStore('randomize')
+
+      resolve([type3D])
     }
 
     if (moduleType == 'Overlay') {
+
       let overlayType = sample(moduleOverlayStore.collections)
       setOverlayStore('CurrentTabChange', overlayType)
+
       setOverlayStore('Plastic')
       setOverlayStore('Stickers')
+
       let overlayOpacity = getRandomArbitrary(10, 255)
       setOverlayStore('opacity', overlayOpacity)
 

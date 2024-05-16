@@ -78,6 +78,7 @@ let pixelsBg
 // let r1
 // let r2
 // let r3
+// let inc
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,7 +95,16 @@ window.resetPixels = function() {
 function genNoise() {
   let yoff = 0
   let seed = noiseBg.random(1000);
-  let inc = noiseBg.random(1)
+  let inc
+
+  const background = getBackgroundStore()
+  if (background.preset.Noise.currentNoiseType == 'Small') {
+    inc = noiseBg.random(0.95, 1)
+  } else if (background.preset.Noise.currentNoiseType == 'Medium') {
+    inc = noiseBg.random(0.2, 0.25)
+  } else if(background.preset.Noise.currentNoiseType == 'Big') {
+    inc = noiseBg.random(0, 0.01)
+  }
 
   let redMin = noiseBg.random(0, 100);
   let redMax = noiseBg.random(150, 255);
@@ -105,6 +115,7 @@ function genNoise() {
 
   noiseBg.pixelDensity(1)
   noiseBg.loadPixels()
+
   for (let y = 0; y < canvasSize; y++) {
     let xoff = 0
     for (let x = 0; x < canvasSize; x++) {
@@ -117,6 +128,7 @@ function genNoise() {
       let r = noiseBg.map(noiseVal, 0, 1, redMin, redMax)
       let g = noiseBg.map(noiseVal, 0, 1, greenMin, greenMax)
       let b = noiseBg.map(noiseVal, 0, 1, blueMin, blueMax)
+
       noiseBg.pixels[index+0] = r
       noiseBg.pixels[index+1] = g
       noiseBg.pixels[index+2] = b
@@ -255,15 +267,15 @@ function drawModules(p) {
 
     let currentBgImg
 
-    if (backgroundImage.collections.includes('NightClub') && backgroundImage.currentCollection === 'NightClub') {
+    if (backgroundImage.backgroundImageCollections.includes('NightClub') && backgroundImage.currentBackgroundImageCollection === 'NightClub') {
       currentBgImg = backgroundImage.preset.NightClub.current
       imageBg = imagesBgNC[currentBgImg]
-    } else if (backgroundImage.collections.includes('Cars') && backgroundImage.currentCollection === 'Cars') {
+    } else if (backgroundImage.backgroundImageCollections.includes('Cars') && backgroundImage.currentBackgroundImageCollection === 'Cars') {
       currentBgImg = backgroundImage.preset.Cars.current
       imageBg = imagesBgCars[currentBgImg]
     }
 
-    const opacity = backgroundImage.sliderValue
+    const opacity = backgroundImage.opacity
     p.background(imageBg, opacity)
   }
 
@@ -272,7 +284,7 @@ function drawModules(p) {
   if (moduleList.includes('Shapes')) {
     const shapes = getShapesStore()
 
-    if (shapes.options.includes('Ellipses') && shapes.currentShapeType == 'Ellipses') {
+    if (shapes.types.includes('Ellipses') && shapes.currentType == 'Ellipses') {
       if (shapes.settings.gradient == true) {
         const background = getBackgroundStore()
         const color1 = background.preset.Gradient.color1
@@ -331,7 +343,7 @@ function drawModules(p) {
       p.ellipse(yCenter, xCenterEL1, wCircle, wEV1)
       p.ellipse(yCenter, xCenterER2, hEV1, wEV2)
       p.ellipse(yCenter, xCenterEL2, hEV1, wEV2)
-    } else if (shapes.options.includes('Custom1') && shapes.currentShapeType == 'Custom1') {
+    } else if (shapes.types.includes('Custom1') && shapes.currentType == 'Custom1') {
       p.fill(255)
       p.beginShape()
       p.curveVertex(100, 50)
@@ -349,7 +361,7 @@ function drawModules(p) {
       // p.vertex(300, 200)
       p.endShape(p.CLOSE)
       p.noFill()
-    } else if (shapes.options.includes('Custom2') && shapes.currentShapeType == 'Custom2') {
+    } else if (shapes.types.includes('Custom2') && shapes.currentType == 'Custom2') {
       // p.fill(255)
       p.stroke(255)
       p.beginShape()
@@ -584,9 +596,9 @@ function drawModules(p) {
     graphics.directionalLight(54, 98, 189, -100, 0, 0)
     graphics.fill(255)
 
-    if (module3D.options.includes('Torus') && module3D.current3DType === 'Torus') {
+    if (module3D.types.includes('Torus') && module3D.current3DType === 'Torus') {
       graphics.torus(30, 15, 50, 50);
-    } else if (module3D.options.includes('Square') && module3D.current3DType === 'Square') {
+    } else if (module3D.types.includes('Square') && module3D.current3DType === 'Square') {
       graphics.box(30, 15, 50, 50);
     }
 
@@ -832,7 +844,7 @@ function sketch(p) {
     if (moduleList.includes('BackgroundImage')) {
       const backgroundImage = getBackgroundImageStore()
 
-      if (backgroundImage.collections.includes('NightClub')) {
+      if (backgroundImage.backgroundImageCollections.includes('NightClub')) {
         const imageFiles1 = backgroundImage.preset.NightClub.images
 
         Object.keys(imageFiles1).forEach((key) => {
@@ -841,7 +853,7 @@ function sketch(p) {
           })
         })
       }
-      if (backgroundImage.collections.includes('Cars')) {
+      if (backgroundImage.backgroundImageCollections.includes('Cars')) {
         const imageFiles2 = backgroundImage.preset.Cars.images
 
         Object.keys(imageFiles2).forEach((key) => {
@@ -940,7 +952,8 @@ function sketch(p) {
       graphics.perspective(p.PI/3, 1, 5*p.sqrt(3), 500*p.sqrt(3));
     }
 
-    if (moduleList.includes('Background')) {
+    const background = getBackgroundStore()
+    if (moduleList.includes('Background') && background.backgroundTypes.includes('Noise')) {
       noiseBg = p.createGraphics(canvasSize, canvasSize)
       noiseBg.noLoop()
       genNoise()

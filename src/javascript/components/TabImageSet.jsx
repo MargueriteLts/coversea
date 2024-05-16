@@ -9,16 +9,17 @@ export default class TabButtonSet extends Component {
   }
 
   render() {
-    const { options, value, handleClick, collection } = this.props
+    const { options, value, handleClick, tabBackgrounds } = this.props
 
     const buttonElements = []
-
     
     Object.keys(options).forEach((key, i) => {
       
       const text = options[key].text;
-      const matchingKey = Object.keys(collection).find(key => key.startsWith(text));
-      const backgroundImage = collection[matchingKey]
+
+      const matchingKey = Object.keys(tabBackgrounds).find(key => key.startsWith(i));
+
+      const backgroundImage = tabBackgrounds[matchingKey]
       
       buttonElements.push(
         <TabImage

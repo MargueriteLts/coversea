@@ -34,12 +34,12 @@ export default class GeneratorContainer extends Component {
     this.state = {
 
       //BACKGROUND MODULE
-      currentBackgroundType: this.props.background?.currentBackgroundType,
-      backgroundSolidColor: this.props.background?.preset.SolidColor.color,
-      backgroundGradientColor1: this.props.background?.preset.Gradient.color1,
-      backgroundGradientColor2: this.props.background?.preset.Gradient.color2,
-      backgroundGradientAngle: this.props.background?.preset.Gradient.angle,
-      currentBackgroundNoiseType: this.props.background?.preset.Noise.currentNoiseType,
+      // currentBackgroundType: this.props.background?.currentBackgroundType,
+      // backgroundSolidColor: this.props.background?.preset.SolidColor.color,
+      // backgroundGradientColor1: this.props.background?.preset.Gradient.color1,
+      // backgroundGradientColor2: this.props.background?.preset.Gradient.color2,
+      // backgroundGradientAngle: this.props.background?.preset.Gradient.angle,
+      // currentBackgroundNoiseType: this.props.background?.preset.Noise.currentNoiseType,
 
       //BACKGROUND IMAGE MODULE
       currentBgImgCollection: this.props.backgroundImage?.currentCollection,
@@ -59,9 +59,9 @@ export default class GeneratorContainer extends Component {
       shapesColor: this.props.shapes?.settings.color,
 
       //VINYL MODULE
-      currentVinylType: this.props.vinyl?.currentVinylType,
-      vinylSize: this.props.vinyl?.sliderValue,
-      vinylOpacity: this.props.vinyl?.sliderOpacity,
+      // currentVinylType: this.props.vinyl?.currentVinylType,
+      // vinylSize: this.props.vinyl?.sliderValue,
+      // vinylOpacity: this.props.vinyl?.sliderOpacity,
 
       //OVERLAY MODULE
       currentOverlayCollection: this.props.overlay?.currentCollection,
@@ -149,25 +149,32 @@ export default class GeneratorContainer extends Component {
   handleTabClickBackgroundImage = (type) => {
     this.props.setBackgroundImageStore('CurrentTabChange', type)
 
-    this.setState({
-      currentCollection: type
-    })
+      .then(([type]) => {
+        this.setState({
+          currentBackgroundImageCollection: type
+        })
+      })
   }
 
-  // Randomize
-  handleChangeBackgroundImage = () => {
-    if (this.state.currentBgImgCollection === 'NightClub'){
-      this.props.setBackgroundImageStore('NightClub')
-    }
-    if (this.state.currentBgImgCollection === 'Cars'){
-      this.props.setBackgroundImageStore('Cars')
-    }
-  }
+  // OLD Button Randomize
+  // handleChangeBackgroundImage = () => {
+  //   if (this.state.currentBackgroundImageCollection === 'NightClub'){
+  //     this.props.setBackgroundImageStore('NightClub')
+  //   }
+  //   if (this.state.currentBackgroundImageCollection === 'Cars'){
+  //     this.props.setBackgroundImageStore('Cars')
+  //   }
+  // }
 
   // Opacity
   handleBackgroundImageOpacity = (e) => {
     this.props.setBackgroundImageStore('opacity', e.target.value)
-    this.setState({bgImgOpacity: e.target.value})
+    
+      .then(([newValue]) => {
+        this.setState({
+          opacity: newValue
+        })
+      })
   }
 
   ////////////////////////////////////// MODULE LINES
@@ -190,6 +197,17 @@ export default class GeneratorContainer extends Component {
     let type = 'strokeWeight'
     this.props.setLinesStore(type, e.target.value)
     this.setState({linesWeight: e.target.value})
+  }
+
+  ////////////////////////////////////// MODULE 3D
+
+  handleDropDownClickModule3D = (type) => {
+    this.props.set3DStore('CurrentTabChange', type)
+      .then((newValue) => {
+        this.setState({
+          current3DType: newValue
+        })
+      })
   }
 
   ////////////////////////////////////// MODULE PARTICLES
@@ -234,17 +252,16 @@ export default class GeneratorContainer extends Component {
   handleDropDownClickShapes = (type) => {
     this.props.setShapesStore('CurrentTabChange', type)
 
-      .then((color) => {
+      .then((type) => {
         this.setState({
-          currentShapesType: color[0]
+          currentType: type
         })
       })
   }
 
   // Size
   handleShapesSize = (e) => {
-    let type = 'Size'
-    this.props.setShapesStore(type, e.target.value)
+    this.props.setShapesStore('Size', e.target.value)
 
       .then(([newValue]) => {
           this.setState({
@@ -305,27 +322,32 @@ export default class GeneratorContainer extends Component {
   // Tab
   handleTabClickOverlay = (type) => {
     this.props.setOverlayStore('CurrentTabChange', type)
-
-    this.setState({
-      currentCollection: type
-    })
+      .then((newValue) => {
+        this.setState({
+          currentCollection: newValue
+        })
+      })
   }
 
-  // Randomize
-  handleChangeOverlay = () => {
-    console.log('click');
-    if (this.state.currentOverlayCollection === 'Plastic'){
-      this.props.setOverlayStore('Plastic')
-    }
-    if (this.state.currentOverlayCollection === 'Stickers'){
-      this.props.setOverlayStore('Stickers')
-    }
-  }
+  // // Randomize
+  // handleChangeOverlay = () => {
+  //   console.log('click');
+  //   if (this.state.currentOverlayCollection === 'Plastic'){
+  //     this.props.setOverlayStore('Plastic')
+  //   }
+  //   if (this.state.currentOverlayCollection === 'Stickers'){
+  //     this.props.setOverlayStore('Stickers')
+  //   }
+  // }
 
   // Opacity
   handleOverlayOpacity = (e) => {
     this.props.setOverlayStore('opacity', e.target.value)
-    this.setState({overlayOpacity: e.target.value})
+      .then((newValue) => {
+        this.setState({
+          opacity: newValue
+        })
+      })
   }
 
 
@@ -334,66 +356,78 @@ export default class GeneratorContainer extends Component {
 
   /////////////////////////// RANDOMIZE MODULE ///////////////////////////
 
+  // !!! modif pour suppr tous les if statement, PAS BESOIN !!
+
+  // handleRandomizeModule = (moduleName) => {
+
+  //   if (moduleName == 'Background') {
+  //     this.props.randomizeModuleStore(moduleName)
+  //       .then(newValues => {
+  //         this.setState(newValues)
+  //         console.log(newValues);
+  //         // newValues.forEach(({ ...values }) => {
+  //         //   this.setState(values)
+  //         // })
+  //       })
+  //   }
+
+  //   if (moduleName == 'BackgroundImage') {
+  //     this.props.randomizeModuleStore(moduleName)
+  //       .then((newValues) => {
+  //         this.setState({
+  //           currentBgImgCollection: newValues[0],
+  //           bgImgOpacity: newValues[1]
+  //         })
+  //       })
+  //   }
+  //   if (moduleName == 'Particles') {
+  //     this.props.randomizeModuleStore(moduleName)
+  //       .then((newValues) => {
+  //         this.setState({
+  //           currentParticlesType: newValues[0],
+  //           particlesQuantity: newValues[1],
+  //           particlesColor: newValues[2]
+  //         })
+  //       })
+  //   }
+  //   if (moduleName == 'Shapes') {
+  //     this.props.randomizeModuleStore(moduleName)
+  //       .then((newValues) => {
+  //         this.setState({
+  //           currentShapesType: newValues[0],
+  //           shapesColor: newValues[1],
+  //           shapesSize: newValues[2]
+  //         })
+  //       })
+  //   }
+  //   if (moduleName == 'Vinyl') {
+  //     this.props.randomizeModuleStore(moduleName)
+  //     .then(newValues => {
+  //         // console.log('WTF???', newValues);
+  //         this.setState(newValues)
+  //         // console.log('AFTER SETSTATE', this.state.currentVinylType, this.state.vinylSize, this.state.vinylOpacity);
+  //         // newValues.forEach(({ ...values }) => {
+  //           // this.setState(values)
+  //         // })
+  //       })
+  //   }
+  //   if (moduleName == 'Overlay') {
+  //     this.props.randomizeModuleStore(moduleName)
+  //       .then((newValues) => {
+  //         this.setState({
+  //           currentOverlayCollection: newValues[0],
+  //           overlayOpacity: newValues[1]
+  //         })
+  //       })
+  //   }
+  // }
 
   handleRandomizeModule = (moduleName) => {
-
-    if (moduleName == 'Background') {
-      this.props.randomizeModuleStore(moduleName)
-        .then(newValues => {
-          newValues.forEach(({ ...values }) => {
-            this.setState(values)
-          })
-        })
-    }
-
-    if (moduleName == 'BackgroundImage') {
-      this.props.randomizeModuleStore(moduleName)
-        .then((newValues) => {
-          this.setState({
-            currentBgImgCollection: newValues[0],
-            bgImgOpacity: newValues[1]
-          })
-        })
-    }
-    if (moduleName == 'Particles') {
-      this.props.randomizeModuleStore(moduleName)
-        .then((newValues) => {
-          this.setState({
-            currentParticlesType: newValues[0],
-            particlesQuantity: newValues[1],
-            particlesColor: newValues[2]
-          })
-        })
-    }
-    if (moduleName == 'Shapes') {
-      this.props.randomizeModuleStore(moduleName)
-        .then((newValues) => {
-          this.setState({
-            currentShapesType: newValues[0],
-            shapesColor: newValues[1],
-            shapesSize: newValues[2]
-          })
-        })
-    }
-    if (moduleName == 'Vinyl') {
-      this.props.randomizeModuleStore(moduleName)
-        .then((newValues) => {
-          this.setState({
-            currentVinylType: newValues[0],
-            vinylSize: newValues[1],
-            vinylOpacity: newValues[2]
-          })
-        })
-    }
-    if (moduleName == 'Overlay') {
-      this.props.randomizeModuleStore(moduleName)
-        .then((newValues) => {
-          this.setState({
-            currentOverlayCollection: newValues[0],
-            overlayOpacity: newValues[1]
-          })
-        })
-    }
+    this.props.randomizeModuleStore(moduleName)
+      .then(newValues => {
+        this.setState(newValues)
+        //ji kompran pas.... sans this.setState ca effectivement n'update pas le state, le soucis... c'est quon a aucun state ici ni dans les modules... et en plus les newValues c'est juste des values, sans aucune keys.... alors comment il comprend ce quil doit updater...????
+      })
   }
 
 
@@ -435,12 +469,11 @@ export default class GeneratorContainer extends Component {
             key={index}
             handleRandomizeModule={this.handleRandomizeModule}
             background={background}
-            setBackgroundStore={setBackgroundStore}
-            currentBackgroundType={this.state.currentBackgroundType}
-            // solidColor={this.state.backgroundSolidColor}
-            backgroundGradientColor1={this.state.backgroundGradientColor1}
-            backgroundGradientColor2={this.state.backgroundGradientColor2}
-            currentNoiseType={this.state.currentBackgroundNoiseType}
+            // currentBackgroundType={this.state.currentBackgroundType}
+            // // solidColor={this.state.backgroundSolidColor}
+            // backgroundGradientColor1={this.state.backgroundGradientColor1}
+            // backgroundGradientColor2={this.state.backgroundGradientColor2}
+            // currentNoiseType={this.state.currentBackgroundNoiseType}
             handleTabClickNoise={this.handleTabClickNoise}
             handleTabClickBackground={this.handleTabClickBackground}
             handleChangeBackgroundSolidColor={this.handleChangeBackgroundSolidColor}
@@ -453,14 +486,13 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'BackgroundImage') {
         modules.push(
           <BackgroundImage
-            backgroundImage={backgroundImage}
-            setBackgroundImageStore={setBackgroundImageStore}
             key={index}
             handleRandomizeModule={this.handleRandomizeModule}
-            currentBgImgCollection={this.state.currentBgImgCollection}
-            bgImgOpacity={this.state.bgImgOpacity}
+            backgroundImage={backgroundImage}
+            // currentBgImgCollection={this.state.currentBgImgCollection}
+            // bgImgOpacity={this.state.bgImgOpacity}
             handleTabClickBackgroundImage={this.handleTabClickBackgroundImage}
-            handleChangeBackgroundImage={this.handleChangeBackgroundImage}
+            // handleChangeBackgroundImage={this.handleChangeBackgroundImage}
             handleBackgroundImageOpacity={this.handleBackgroundImageOpacity}
           />
         )
@@ -478,11 +510,10 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Lines') {
         modules.push(
           <Lines
-            lines={lines}
-            setLinesStore={setLinesStore}
             key={index}
-            handleRandomizeModuleStore={this.handleRandomizeModuleStore}
-            handleChangeLines={this.handleChangeLines}
+            handleRandomizeModule={this.handleRandomizeModule}
+            lines={lines}
+            // handleChangeLines={this.handleChangeLines}
             handleLinesColor={this.handleLinesColor}
             handleLinesSize={this.handleLinesSize}
           />
@@ -491,10 +522,10 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Module3D') {
         modules.push(
           <Module3D
-            module3D={module3D}
-            set3DStore={set3DStore}
             key={index}
-            randomizeModuleStore={randomizeModuleStore}
+            handleRandomizeModule={this.handleRandomizeModule}
+            module3D={module3D}
+            handleDropDownClickModule3D={this.handleDropDownClickModule3D}
           />
         )
       }
@@ -505,9 +536,9 @@ export default class GeneratorContainer extends Component {
             setParticlesStore={setParticlesStore}
             key={index}
             handleRandomizeModule={this.handleRandomizeModule}
-            currentParticlesType={this.state.currentParticlesType}
-            particlesQuantity={this.state.particlesQuantity}
-            particlesColor={this.state.particlesColor}
+            // currentParticlesType={this.state.currentParticlesType}
+            // particlesQuantity={this.state.particlesQuantity}
+            // particlesColor={this.state.particlesColor}
             handleDropDownClickParticles={this.handleDropDownClickParticles}
             handleParticlesQuantity={this.handleParticlesQuantity}
             handleParticlesColor={this.handleParticlesColor}
@@ -517,13 +548,12 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Shapes') {
         modules.push(
           <Shapes
-            shapes={shapes}
-            setShapesStore={setShapesStore}
-            key={index}
             handleRandomizeModule={this.handleRandomizeModule}
-            currentShapesType={this.state.currentShapesType}
-            shapesColor={this.state.shapesColor}
-            shapesSize={this.state.shapesSize}
+            key={index}
+            shapes={shapes}
+            // currentShapesType={this.state.currentShapesType}
+            // shapesColor={this.state.shapesColor}
+            // shapesSize={this.state.shapesSize}
             handleDropDownClickShapes={this.handleDropDownClickShapes}
             handleShapesColor={this.handleShapesColor}
             handleShapesSize={this.handleShapesSize}
@@ -540,6 +570,7 @@ export default class GeneratorContainer extends Component {
             handleTabClickVinyl={this.handleTabClickVinyl}
             handleChangeVinylSize={this.handleVinylSize}
             handleVinylOpacity={this.handleVinylOpacity}
+            // currentVinylType={this.state.currentVinylType}
           />
         )
       }
@@ -558,14 +589,14 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Overlay') {
         modules.push(
           <Overlay
-            overlay={overlay}
-            setOverlayStore={setOverlayStore}
             key={index}
             handleRandomizeModule={this.handleRandomizeModule}
-            currentOverlayCollection={this.state.currentOverlayCollection}
-            overlayOpacity={this.state.overlayOpacity}
+            overlay={overlay}
+            setOverlayStore={setOverlayStore}
+            // currentOverlayCollection={this.state.currentOverlayCollection}
+            // overlayOpacity={this.state.overlayOpacity}
             handleTabClickOverlay={this.handleTabClickOverlay}
-            handleChangeOverlay={this.handleChangeOverlay}
+            // handleChangeOverlay={this.handleChangeOverlay}
             handleOverlayOpacity={this.handleOverlayOpacity}
           />
         )
@@ -598,11 +629,9 @@ export default class GeneratorContainer extends Component {
 
     this.props.generateAllStore(generatorName, moduleList)
       .then(newValues => {
-        
-        newValues.forEach(({ module, ...values }) => {
-          if (moduleList.includes(module)) {
-            this.setState(values);
-          }
+
+        newValues.forEach(({ ...values }) => {
+          this.setState(values);
         });
       });
   }

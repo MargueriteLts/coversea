@@ -1,22 +1,15 @@
 const modules = ['Background', 'BackgroundImage', 'Text1']
 
-// const blend = {
-//   Vinyl: false,
-//   Text1: false
-// }
-
 const preset = {
   
   blend: {
     Vinyl: false,
     Text1: false
   },
-
   
   Background: {
-
-    bgTypes: ['SolidColor', 'Gradient'],
-    currentBgType: 'SolidColor',
+    backgroundTypes: ['SolidColor', 'Gradient'],
+    currentBackgroundType: 'SolidColor',
 
     preset: {
       SolidColor: {

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import HeaderModule from '../components/HeaderModule.jsx'
 import TabButtonSet from '../components/TabButtonSet.jsx'
 import Slider from '../components/Slider.jsx'
+import TabImageSet from '../components/TabImageSet.jsx'
 
 export default class Vinyl extends Component {
   constructor(props) {
@@ -13,7 +14,9 @@ export default class Vinyl extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { vinyl, handleRandomizeModule, handleTabClickVinyl, handleChangeVinylSize, handleVinylOpacity } = this.props
+    const { vinyl, handleRandomizeModule, handleTabClickVinyl, handleChangeVinylSize, handleVinylOpacity, currentVinylType } = this.props
+
+    // console.log(vinyl.tabBackgroundImages);
 
     return <div className="moduleContainer">
       <HeaderModule
@@ -22,10 +25,11 @@ export default class Vinyl extends Component {
         moduleType='Vinyl'
       />
       <div className="moduleContent">
-        <TabButtonSet
-          options={vinyl.preset}
-          value={vinyl.currentVinylType}
-          handleClick={handleTabClickVinyl}
+        <TabImageSet
+          options = {vinyl.preset}
+          value = {vinyl.currentVinylType}
+          handleClick = {handleTabClickVinyl}
+          tabBackgrounds={vinyl.tabBackgrounds}
         />
         <div className='Sliders'>
           <Slider

@@ -16,6 +16,7 @@ export default class Background extends Component {
   ///////////////////////// RENDER CONTENT BACKGROUND TAB
 
   renderModuleContentWithTabs() {
+    
     const {
       background, 
       currentBackgroundType,
@@ -28,10 +29,10 @@ export default class Background extends Component {
       currentNoiseType,
       handleTabClickNoise
     } = this.props
-
+    
     ////////////// SOLID COLOR
 
-    if (currentBackgroundType == 'SolidColor') {
+    if (background.currentBackgroundType == 'SolidColor') {
       return <div className='TabContent'>
         <ColorPicker
           title=''
@@ -45,7 +46,7 @@ export default class Background extends Component {
 
     ////////////// GRADIENT
 
-    if (currentBackgroundType == 'Gradient') {
+    if (background.currentBackgroundType == 'Gradient') {
       return <div className='TabContent'>
 
         <div className='moduleContent-Left'>
@@ -58,8 +59,8 @@ export default class Background extends Component {
           <M_GradientColors
             background={background}
             handleChangeBackgroundGradientColor={handleChangeBackgroundGradientColor}
-            color1={backgroundGradientColor1}
-            color2={backgroundGradientColor2}
+            color1={background.preset.Gradient.color1}
+            color2={background.preset.Gradient.color2}
           />
         </div>
 
@@ -68,14 +69,14 @@ export default class Background extends Component {
       </div>
     }
 
-    if (currentBackgroundType == 'Noise') {
+    if (background.currentBackgroundType == 'Noise') {
       return <div className='TabContent'>
         <div className='moduleContent-Left'>
           <TabImageSet
             options = {background.preset.Noise.preset}
-            value = {currentNoiseType}
+            value = {background.preset.Noise.currentNoiseType}
             handleClick = {handleTabClickNoise}
-            collection={background.preset.Noise.images}
+            tabBackgrounds={background.preset.Noise.tabBackgrounds}
           />
         </div>
       </div>
@@ -142,6 +143,7 @@ export default class Background extends Component {
   
   render() {
     const { background, handleRandomizeModule, handleTabClickBackground, currentBackgroundType } = this.props
+    
     const nbBgTypes = background.backgroundTypes.length
 
     return <div className="moduleContainer">
@@ -154,7 +156,7 @@ export default class Background extends Component {
         ? <div className="moduleContent_Background"> 
             <TabButtonSet
               options={background.preset}
-              value={currentBackgroundType}
+              value={background.currentBackgroundType}
               handleClick={handleTabClickBackground}
             />
             {this.renderModuleContentWithTabs()}

@@ -20,7 +20,7 @@ const preset = {
         color2: '#943a73'
       },
       Noise: {
-        NoiseOptions: ['Small', 'Medium', 'Big'],
+        NoiseTypes: ['Small', 'Medium', 'Big'],
         currentNoiseType: 'Small',
 
         preset: {
@@ -63,13 +63,6 @@ const preset = {
     }
   },
   
-  // Text1: {
-  //   text: 'Soft Random',
-  //   font: 'esenin-script-one',
-  //   dopText: true,
-  //   size: 22,
-  //   color: '#bababa'
-  // }
   BasicTypo: {
     mainText: 'Soft Random',
     optionsMainTextFonts: ['esenin-script-one', 'Acosta', 'PT-Root-UI'],
