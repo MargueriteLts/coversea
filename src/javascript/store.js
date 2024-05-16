@@ -689,9 +689,9 @@ function generateAllStore(generatorName, moduleList) {
 
   return new Promise((resolve, reject) => {
 
-    let currentVinyltype
-    let vinylSize
-    let vinylOpacity
+    // let currentVinyltype
+    let newVinylSize
+    let newVinylOpacity
 
     let particlesTypes
     let particlesQuantity
@@ -709,7 +709,7 @@ function generateAllStore(generatorName, moduleList) {
           let newSolidColor=generateColor()
           setBackgroundStore('SolidColor', newSolidColor)
 
-          data.push({backgroundSolidColor: newSolidColor})
+          data.push({newSolidColor})
         }
 
         if (moduleBackgroundStore.currentBackgroundType == 'Gradient') {
@@ -718,15 +718,14 @@ function generateAllStore(generatorName, moduleList) {
             .then((colors) => {
               newGradientColor1 = colors[0]
               newGradientColor2 = colors[1]
-              data.push({backgroundGradientColor1: newGradientColor1, backgroundGradientColor2: newGradientColor2})
+              data.push({newGradientColor1, newGradientColor2})
             })
-            console.log('GRADIENT COLORS STORE', data);
             
             let newAngle
             setBackgroundStore('AngleGradient')
               .then((randomAngle) => {
                 newAngle = randomAngle
-                data.push({backgroundGradientAngle: newAngle})
+                data.push({newAngle})
               })
         }
 
@@ -741,26 +740,24 @@ function generateAllStore(generatorName, moduleList) {
 
       if (moduleName == 'Shapes') {
 
-        shapesType = sample(moduleShapesStore.options)
-        setShapesStore('CurrentTabChange', shapesType)
         shapesColor = generateColor()
         setShapesStore('SolidColor', shapesColor)
+
         shapesSize = getRandomArbitrary(0, 100)
         setShapesStore('Size', shapesSize)
 
-        data.push({module: moduleName, currentShapesType: shapesType, shapesSize: shapesSize, shapesColor: shapesColor })
+        data.push({shapesSize, shapesColor })
       }
 
       if (moduleName == 'Particles') {
 
-        particlesTypes = sample(moduleParticlesStore.options)
-        setParticlesStore('CurrentTabChange', particlesTypes)
         particlesQuantity = getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max)
         setParticlesStore('quantity', particlesQuantity)
+
         particlesColor = generateColor()
         setParticlesStore('SolidColor', particlesColor)
 
-        data.push({module: moduleName, currentParticlesType: particlesTypes, particlesQuantity: particlesQuantity, particlesColor: particlesColor })
+        data.push({particlesTypes, particlesQuantity, particlesColor })
       }
 
       if (moduleName == 'Image') {
@@ -768,54 +765,64 @@ function generateAllStore(generatorName, moduleList) {
       }
 
       if (moduleName == 'BackgroundImage') {
-        let BgImgType = sample(moduleBackgroundImageStore.collections)
-        setBackgroundImageStore('CurrentTabChange', BgImgType)
-        setBackgroundImageStore('NightClub')
-        setBackgroundImageStore('Cars')
+        
+        if (moduleBackgroundImageStore.currentBackgroundImageCollection == 'NightClub') {
+          setBackgroundImageStore('NightClub')
+        } else if (moduleBackgroundImageStore.currentBackgroundImageCollection == 'Cars') {
+          setBackgroundImageStore('Cars')
+        }
+
         let bgImgOpacity = getRandomArbitrary(10, 255)
         setBackgroundImageStore('opacity', bgImgOpacity)
 
-        data.push({module: moduleName, currentBgImgCollection: BgImgType, bgImgOpacity: bgImgOpacity})
+        data.push({bgImgOpacity})
       }
 
       if (moduleName == 'Vinyl') {
 
-        currentVinyltype = sample(moduleVinylStore.vinylTypes)
-        setVinylStore('CurrentTabChange', currentVinyltype)
-        vinylSize = getRandomArbitrary(0, 100)
-        setVinylStore('size', vinylSize)
-        vinylOpacity = getRandomArbitrary(0, 255)
-        setVinylStore('opacity', vinylOpacity)
+        newVinylSize = getRandomArbitrary(0, 100)
+        setVinylStore('size', newVinylSize)
 
-        data.push({module: moduleName, currentVinylType: currentVinyltype, vinylSize: vinylSize, vinylOpacity: vinylOpacity })
+        newVinylOpacity = getRandomArbitrary(0, 255)
+        setVinylStore('opacity', newVinylOpacity)
+
+        data.push({newVinylSize, newVinylOpacity})
       }
 
-      if (moduleName == 'BasicTypo') {
-        setBasicTypoStore('Positions')
-        setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
-      }
+      // if (moduleName == 'BasicTypo') {
+      //   setBasicTypoStore('Positions')
+      //   setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
+      // }
 
       if (moduleName == 'Lines') {
-        setLinesStore('SolidColor', generateColor())
+
+        let newColor = generateColor()
+        setLinesStore('SolidColor', newColor)
+
         setLinesStore('randomize')
-        setLinesStore('strokeWeight', getRandomArbitrary(0, 100))
+
+        let newStrokeWeight = getRandomArbitrary(moduleLinesStore.min, moduleLinesStore.max)
+        setLinesStore('strokeWeight', newStrokeWeight)
+
+        data.push({newColor, newStrokeWeight})
       }
 
       if (moduleName == 'Module3D') {
-        let type3D = sample(module3DStore.options)
-        set3DStore('CurrentTabChange', type3D)
         set3DStore('randomize')
       }
 
       if (moduleName == 'Overlay') {
-        let currentOverlayCollection = sample(moduleOverlayStore.collections)
-        setOverlayStore('CurrentTabChange', currentOverlayCollection)
-        setOverlayStore('NightClub')
-        setOverlayStore('Cars')
+
+        if (moduleBackgroundImageStore.currentBackgroundImageCollection == 'Plastic') {
+          setBackgroundImageStore('Plastic')
+        } else if (moduleBackgroundImageStore.currentBackgroundImageCollection == 'Stickers') {
+          setBackgroundImageStore('Stickers')
+        }
+
         let overlayOpacity = getRandomArbitrary(10, 255)
         setOverlayStore('opacity', overlayOpacity)
 
-        data.push({module: moduleName, currentOverlayCollection: currentOverlayCollection, overlayOpacity: overlayOpacity})
+        data.push({overlayOpacity})
       }
     })
 
