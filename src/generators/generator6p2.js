@@ -1,4 +1,4 @@
-const modules = ['Background', 'Shapes', 'Particles', 'Text1']
+const modules = ['Background', 'Shapes', 'BasicTypo']
 
 const preset = {
   
@@ -21,31 +21,39 @@ const preset = {
       }
     }
   },
-  Shapes: { 
+
+  Shapes: {
+    types: ['Ellipses', 'Custom1', 'Custom2'],
+    currentType: 'Ellipses',
+
     settings: {
-      sliderValue: 70
+      sliderValue: 37,
+      gradient: false
     }
   },
-  Particles: {
-    sliderValue: 10,
-    stroke: false,
 
-    options: ['Ellipses', 'Squares', 'Mix'],
-    currentParticlesType: 'Mix',
+  BasicTypo: {
+    color: '#ffffff',
 
-    preset: {
-      Ellipses: {},
-      Squares: {},
-      Mix: {}
-    }
-  },
-  Text1: {
-    text: 'Shape Noise',
+    mainText: 'Gradient noise',
+    optionsMainTextFonts: ['AUSRINE', 'esenin-script-one', 'Acosta', 'PT-Root-UI', 'bc-novatica-cyr'],
     font: 'bc-novatica-cyr',
-    upperCase: true,
+    sizeMainText:{
+      sliderValue: 10,
+      min: 5,
+      max: 20
+    },
+    styles: ['NORMAL', 'LIGHT', 'BOLD'],
+    styleMainText: 'NORMAL',
+    leadingMainText: 8,
+
     dopText: true,
-    size: 100,
-    color: '#fff'
+    textarea: 'Music is the answer to everything, music is the key to the world',
+    sizeTextarea: 2,
+    leadingTextarea: 2,
+    upperCase: true,
+    random: true,
+    textAlign: 'left'
   }
 }
 

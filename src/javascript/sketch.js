@@ -303,10 +303,9 @@ function drawModules(p) {
         gradientShapes.addColorStop(1, c2)
   
         p.drawingContext.fillStyle = gradientShapes
+      } else {
+        p.fill(shapes.settings.color)
       }
-      // else {
-      //   p.fill(shapes.color)
-      // }
   
       /////// shapes
   
@@ -344,7 +343,7 @@ function drawModules(p) {
       p.ellipse(yCenter, xCenterER2, hEV1, wEV2)
       p.ellipse(yCenter, xCenterEL2, hEV1, wEV2)
     } else if (shapes.types.includes('Custom1') && shapes.currentType == 'Custom1') {
-      p.fill(255)
+      p.fill(shapes.settings.color)
       p.beginShape()
       p.curveVertex(100, 50)
       p.curveVertex(200, 20)
@@ -362,8 +361,8 @@ function drawModules(p) {
       p.endShape(p.CLOSE)
       p.noFill()
     } else if (shapes.types.includes('Custom2') && shapes.currentType == 'Custom2') {
-      // p.fill(255)
-      p.stroke(255)
+      p.fill(shapes.settings.color)
+      // p.stroke(255)
       p.beginShape()
       p.angleMode(p.DEGREES)
       let spacing = 50
@@ -792,7 +791,7 @@ function drawModules(p) {
       imageOverlay = imagesStickerOverlay[currentOverlay]
     }
 
-    let opacity = parseFloat(overlay.opacityValue)
+    let opacity = parseFloat(overlay.opacity)
     // console.log(opacity);
     // p.background(imageBg, opacity)
     p.image(blendedLayer, 0, 0)
