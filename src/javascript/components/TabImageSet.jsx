@@ -12,7 +12,7 @@ export default class TabButtonSet extends Component {
     const { options, value, handleClick, tabBackgrounds } = this.props
 
     const buttonElements = []
-    
+
     Object.keys(options).forEach((key, i) => {
       
       const text = options[key].text;

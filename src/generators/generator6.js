@@ -24,7 +24,7 @@ const preset = {
 
   Shapes: {
     types: ['Ellipses', 'Custom1', 'Custom2'],
-    currentType: 'Custom1',
+    currentType: 'Ellipses',
 
     settings: {
       sliderValue: 37,
@@ -37,6 +37,7 @@ const preset = {
     max: 20,
     min: 0,  
     stroke: true,
+    color: '#fff',
 
     options: ['Ellipses', 'Squares', 'Mix'],
     currentParticlesType: 'Ellipses',

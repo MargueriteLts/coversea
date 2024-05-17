@@ -1,4 +1,4 @@
-const modules = ['Background', 'Vinyl', 'Particles', 'BasicTypo']
+const modules = ['Background', 'Particles', 'Image', 'BasicTypo']
 
 const preset = {
   
@@ -9,7 +9,7 @@ const preset = {
 
   Background: {
     backgroundTypes: ['SolidColor', 'Gradient', 'Noise', 'Pixels'],
-    currentBackgroundType: 'SolidColor',
+    currentBackgroundType: 'Gradient',
 
     preset: {
       SolidColor: {
@@ -33,26 +33,12 @@ const preset = {
     }
   },
 
-  Vinyl: {
-    sliderValue: 50,
-    bigger: false,
-    sliderOpacity: 255,
-
-    vinylTypes: ['Whole', 'Label'],
-    currentVinylType: 'Label',
-
-    preset: {
-      Whole: {},
-      Label: {}
-    }
-  },
-
   Particles: {
     sliderValue: 15,
     max: 150,
     min: 10,
-    opacity: 255,
-    color: '#fff',
+    opacity: 72,
+    color: '#2127cf',
 
     options: ['Ellipses', 'Squares', 'Mix'],
     currentParticlesType: 'Mix',
@@ -63,11 +49,22 @@ const preset = {
       Mix: {}
     }
   },
+
+  Image: {
+    pixelate: false,
+
+    collections: ['Shoes'],
+    currentCollection: 'Shoes',
+
+    preset: {
+      Shoes: {}
+    }
+  },
   
   BasicTypo: {
     mainText: 'Soft Random',
-    optionsMainTextFonts: ['esenin-script-one', 'Acosta', 'PT-Root-UI'],
-    font: 'esenin-script-one',
+    optionsMainTextFonts: ['bc-novatica-cyr', 'Acosta', 'PT-Root-UI'],
+    font: 'bc-novatica-cyr',
     sizeMainText:{
       sliderValue: 22,
       min: 10,
@@ -78,7 +75,7 @@ const preset = {
     dopText: false,
     leadingMainText: 19,
     upperCase: false,
-    color: '#bababa'
+    color: '#000'
   }
 }
 

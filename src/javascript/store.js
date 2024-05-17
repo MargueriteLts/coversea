@@ -11,6 +11,7 @@ import * as generator2p2 from '../generators/generator2p2.js'
 import * as generator4p2 from '../generators/generator4p2.js'
 import * as generator5p2 from '../generators/generator5p2.js'
 import * as generator6p2 from '../generators/generator6p2.js'
+import * as generator7 from '../generators/generator7.js'
 
 const generators = {
   generator1,
@@ -23,7 +24,8 @@ const generators = {
   generator2p2,
   generator4p2,
   generator5p2,
-  generator6p2
+  generator6p2,
+  generator7
 }
 
 let moduleList,
@@ -325,6 +327,9 @@ function initImages(preset) {
     if (collection == 'Shoes') {
       preset.preset.Shoes = Object.assign({}, preset.preset.Shoes, { text: 'Shoes', images: shoesCollection, current: sample(Object.keys(shoesCollection)) })
     }
+    if (collection == 'Electronics') {
+      preset.preset.Electronics = Object.assign({}, preset.preset.Electronics, { text: 'Electronics' })
+    }
   })
 
   return preset
@@ -436,7 +441,7 @@ function set3DStore(type, value) {
 ////////////////////// PARTICLES
 
 function initParticles(preset) {
-  preset = Object.assign({}, preset, { moduleName: 'Particles', particles: generateParticles(preset.sliderValue), color: '#fff' })
+  preset = Object.assign({}, preset, { moduleName: 'Particles', particles: generateParticles(preset.sliderValue) })
 
   preset.options.forEach((option) => {
     if (option == 'Ellipses') {
@@ -945,7 +950,13 @@ function randomizeModuleStore(moduleType) {
       let objectType = sample(moduleImageStore.collections)
       setImageStore('CurrentTabChange', objectType)
 
-      resolve([Vinyltype])
+      if (objectType == 'Shoes') {
+        setImageStore('Shoes')
+      } else if (objectType == 'Electronics') {
+        setImageStore('Electronics')
+      }
+
+      resolve([objectType])
     }
 
     if (moduleType == 'BackgroundImage') {

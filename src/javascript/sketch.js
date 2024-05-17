@@ -1,6 +1,6 @@
 import p5 from 'p5'
 // import utils from './p5.utils.min.js'
-import {sample} from './utilities.js'
+import {hexToRgbArray} from './utilities.js'
 
 import {
   getModuleList,
@@ -383,17 +383,22 @@ function drawModules(p) {
   if (moduleList.includes('Particles')) {
     const particles = getParticlesStore()
 
-    const color = particles.color
-    if (particles.stroke == true) {
-      p.stroke(color)
+    const presetColor = particles.color
+    let color
+    if (typeof presetColor == 'string') {
+      color = hexToRgbArray(presetColor)
     } else {
-      // p.tint(color, particles.opacity)
-      p.fill(color)
-      // p.noTint()
+      color = presetColor
     }
 
-    // console.log(color);
-      
+    const alphaValue = particles.opacity
+    if (particles.stroke == true) {
+      p.stroke(...color)
+    } else {
+      p.fill(...color, alphaValue)
+    }
+
+
     if (particles.options.includes('Ellipses') && particles.currentParticlesType === 'Ellipses') {
       for (let index = 0; index < particles.sliderValue; index++) {
         p.ellipse (
@@ -429,7 +434,6 @@ function drawModules(p) {
       }
     }
 
-    p.noTint()
   }
 
   /////////////////////////////////////////// VINYL
