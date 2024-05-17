@@ -9,7 +9,7 @@ const preset = {
 
   Background: {
     backgroundTypes: ['SolidColor', 'Gradient', 'Noise', 'Pixels'],
-    currentBackgroundType: 'SolidColor',
+    currentBackgroundType: 'Noise',
 
     preset: {
       SolidColor: {
@@ -49,7 +49,7 @@ const preset = {
 
   Particles: {
     sliderValue: 15,
-    max: 150,
+    max: 200,
     min: 10,
     opacity: 255,
     color: '#fff',
