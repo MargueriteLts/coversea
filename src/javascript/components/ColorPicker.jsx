@@ -59,6 +59,7 @@ export default class AllColorPicker extends Component {
         box: {
           width: '100%',
           height: '100%',
+          fontSize: '0px',
         },
         colorSwatch: {
           width: '32px',
@@ -90,8 +91,9 @@ export default class AllColorPicker extends Component {
       },
     });
 
-    return <div className={styles.box}>
-      <div>{title}</div>
+    // <div className={styles.box}>
+    return <div className='colorPicker-box'>
+      {/* <div>{title}</div> */}
       <div style={ styles.swatch } onClick={ this.handleClick }>
         <div style={ styles.colorSwatch } />
       </div>

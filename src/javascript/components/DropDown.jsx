@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import icons from '../loadIcons';
+
 
 export default class DropDown extends Component {
   constructor(props) {
@@ -32,6 +34,7 @@ export default class DropDown extends Component {
 
         <button className={`dropdown-toggle ${isOpen ? 'open' : ''}`} onClick={this.toggleDropdown}>
           {value}
+          <img src={icons["AngleDown"]} alt="iconAngleDown" className='icon-button__icon'/>
         </button>
 
         {isOpen && (

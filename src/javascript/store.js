@@ -777,6 +777,8 @@ function generateAllStore(generatorName, moduleList) {
       if (moduleName == 'Image') {
         if (moduleImageStore.currentCollection == 'Shoes') {
           setImageStore('Shoes')
+        } else if (moduleImageStore.collection == 'Electronics') {
+          setImageStore('Electronics')
         }
       }
 

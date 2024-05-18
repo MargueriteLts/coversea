@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom'
 import html2canvas from "html2canvas";
 import { generateHash } from './utilities.js'
 
+//UI
+import IconButton from './components/buttons/IconButton.jsx'
+
 ///////////////MODULES
 //Background
 import Background from './modules/Background.jsx'
@@ -401,7 +404,11 @@ export default class GeneratorContainer extends Component {
         </div>
         <div className="generator__sketch-controls">
           <div className="btn--big" onClick={this.generateCover}>GENERATE</div>
-          <div className="btn--primary" onClick={this.downloadImage}>Download image</div>
+          {/* <div className="btn--primary" onClick={this.downloadImage}>Download image</div> */}
+          <IconButton
+            onClick={this.downloadImage}
+            iconName='Download.svg'
+          />
         </div>
       </div>
     </div>

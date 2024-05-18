@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-// import ButtonPrimary_Randomize from './ButtonPrimary_Randomize'
+import RandomizeButton from './buttons/RandomizeButton.jsx'
 
 export default class Image extends Component {
   constructor(props) {
@@ -14,7 +14,12 @@ export default class Image extends Component {
       <div className="module__title">
         {title}
       </div>
-      <div className="btn--primary" onClick={() => this.props.handleRandomizeModule(moduleType)}>Randomize</div>
+      {/* <div className="btn--primary" onClick={() => this.props.handleRandomizeModule(moduleType)}>Randomize</div> */}
+      <RandomizeButton
+        onClick={() => this.props.handleRandomizeModule(moduleType)}
+        iconName='Dice.svg'
+        text='Randomize'
+      />
     </div>
   }
 }

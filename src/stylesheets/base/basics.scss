@@ -49,6 +49,12 @@ p {
   flex-direction: row;
 }
 
+.colorPicker-box {
+  font-size: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .bottom {
   margin-bottom: 24px;
 }
@@ -85,6 +91,35 @@ p {
 }
 
 ///////////////// BUTTONS
+
+.icon-button {
+  display: inline-flex;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  background-color: #222222;
+  border-radius: 30px;
+}
+
+.icon-button:hover {
+  background-color: black;
+  /* Change as needed */
+}
+
+.icon-button__icon {
+  width: 24px;
+  /* Set the desired size */
+  height: 24px;
+  /* Set the desired size */
+}
+
+.icon-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
 
 .input {
   display: flex;
@@ -190,8 +225,9 @@ textarea {
   padding: 4px 14px 4px 10px;
   justify-content: center;
   align-items: center;
-  // gap: 4px;
+  gap: 4px;
   border-radius: 40px;
+  border: none;
   background: var(--White, #F6F6F6);
   font-family: "neue-haas-unica", sans-serif;
   font-weight: 500;
@@ -200,6 +236,21 @@ textarea {
   font-size: 16px;
   height: fit-content;
   cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+
+  &:hover {
+    // border: 2px solid var(--WHITE);
+    // box-shadow: ;
+    // background-color: grey;
+    transform: scale(1.05);
+    box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.15);
+  }
+
+  &:active {
+    transform: scale(1);
+    // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    background-color: #d0d0d0;
+  }
 }
 
 .btn--secondary {
@@ -220,6 +271,8 @@ textarea {
 }
 
 .dropdown-toggle {
+  display: inline-flex;
+  justify-content: space-between;
   // background-color: var(--BACKGROUND-BTN-SECONDARY);
   background-color: #353537;
   color: var(--TEXT-WHITE);
@@ -227,8 +280,8 @@ textarea {
   font-size: 16px;
   font-weight: 300;
   // width: fit-content;
-  width: 160px;
-  padding: 8px 16px 10px;
+  width: 180px;
+  padding: 8px 12px 10px 16px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
@@ -243,7 +296,7 @@ textarea {
   // background-color: var(--BACKGROUND-BTN-SECONDARY);
   background-color: #353537;
   border-radius: 0 0 20px 20px;
-  width: 160px;
+  width: 180px;
   // padding: 1px;
   font-family: neue-haas-unica;
   font-size: 16px;
@@ -252,11 +305,7 @@ textarea {
 }
 
 .dropdown-item {
-  color: var(--TEXT-NOTSELECTED);
-  font-family: neue-haas-unica;
-  font-size: 16px;
   padding: 8px 12px;
-  // background-color: #222222;
   cursor: pointer;
 }
 
@@ -266,11 +315,6 @@ textarea {
 
 .dropdown-item+.dropdown-item {
   border-top: 1px solid #2C2C2C;
-}
-
-.dropdown-toggle .dropdown-icon {
-  float: right;
-  margin-left: 8px;
 }
 
 .dropdown-toggle.open {
