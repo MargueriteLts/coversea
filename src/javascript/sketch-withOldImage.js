@@ -80,13 +80,6 @@ let pixelsBg
 // let r3
 // let inc
 
-let randomsBuffer
-let amplitude
-let frequency
-// let varRandomScaleFactor
-// let varRandomX
-// let varRandomY
-let imageBuffer
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -96,60 +89,6 @@ window.resetNoise = function() {
 
 window.resetPixels = function() {
   genPixels()
-}
-
-window.resetRandoms = function() {
-  allRandoms()
-}
-
-function randomAmplitude() {
-  amplitude = randomsBuffer.random(25, 30)
-}
-
-function randomFrequency() {
-  frequency = randomsBuffer.random(4.5, 5)
-}
-
-function randomImages() {
-
-  const objects = getImageStore()
-
-  let currentObject
-  let imageObject
-
-  if (objects.collections.includes('Shoes') && objects.currentCollection == 'Shoes') {
-    currentObject = objects.preset.Shoes.current
-    imageObject = imagesObj[currentObject]
-  }
-
-  let scaleFactor = (canvasSize-200) / Math.max(imageObject.width, imageObject.height)
-
-  let scaledWidth = imageObject.width * scaleFactor
-  let scaledHeight = imageObject.height * scaleFactor
-
-  for (let i = 0; i < 10; i++) {
-
-    let varRandomScaleFactor = randomsBuffer.random(0.5, 1.5);
-    // Calculate the new width and height of the image based on the scale factor
-    let newScaledWidth = scaledWidth * varRandomScaleFactor;
-    let newScaledHeight = scaledHeight * varRandomScaleFactor;
-
-    // Calculate the maximum x and y positions to keep the image within the canvas
-    let maxX = canvasSize - newScaledWidth;
-    let maxY = canvasSize - newScaledHeight;
-
-    // Generate random x and y positions within the canvas boundaries
-    let x = randomsBuffer.random(0, maxX);
-    let y = randomsBuffer.random(0, maxY);
-
-    // Draw the image at the calculated position and size
-    imageBuffer.image(imageObject, x, y, scaledWidth, scaledHeight);
-  }
-}
-
-function allRandoms() {
-  randomAmplitude()
-  randomFrequency()
 }
 
 
@@ -576,43 +515,73 @@ function drawModules(p) {
   /////////////////////////////////////////// MODULE IMAGE
 
   if (moduleList.includes('Image')) {
-    // p.noTint()
-    // // const { current } = getImageStore()
-    // // const image = imagesObj[current]
+    p.noTint()
+    // const { current } = getImageStore()
+    // const image = imagesObj[current]
 
-    // const objects = getImageStore()
+    const objects = getImageStore()
 
-    // let currentObject
-    // let imageObject
+    let currentObject
+    let imageObject
 
-    // if (objects.collections.includes('Shoes') && objects.currentCollection == 'Shoes') {
-    //   currentObject = objects.preset.Shoes.current
-    //   imageObject = imagesObj[currentObject]
+    if (objects.collections.includes('Shoes') && objects.currentCollection == 'Shoes') {
+      currentObject = objects.preset.Shoes.current
+      imageObject = imagesObj[currentObject]
+    }
+
+    let scaleFactor = canvasSize / Math.max(imageObject.width, imageObject.height)
+
+    let scaledWidth = imageObject.width * scaleFactor
+    let scaledHeight = imageObject.height * scaleFactor
+
+    let x = (canvasSize - scaledWidth) / 2
+    let y = (canvasSize - scaledHeight) / 2
+
+    p.image(
+      imageObject,
+      x,
+      y,
+      scaledWidth,
+      scaledHeight
+    )
+
+    // if (getImageStore().pixelate == true) {
+    //   // let pixelSize = 5
+    //   // for (let y = 0; y < scaledWidth; y += pixelSize) {
+    //   //   for (let x = 0; x < scaledHeight; x += pixelSize) {
+    //   //     // Get the color of the pixel at (x, y)
+    //   //     let col = image.get(x, y);
+    //   //     // Fill a square with the color of the current pixel
+    //   //     p.fill(col);
+    //   //     // Draw a rectangle at (x, y) with size of pixelSize x pixelSize
+    //   //     p.rect(x, y, pixelSize, pixelSize);
+    //   //   }
+    //   // }
+
+    //   let pixelSize = 5;
+    //   for (let j = 0; j < scaledHeight; j += pixelSize) {
+    //     for (let i = 0; i < scaledWidth; i += pixelSize) {
+    //       // Get the color of the pixel at (i, j) in the scaled image
+    //       let col = image.get(i / scaleFactor, j / scaleFactor);
+    //       // Calculate the position to draw the pixelated pixel
+    //       let drawX = x + i;
+    //       let drawY = y + j;
+    //       // Fill a square with the color of the current pixel
+    //       p.fill(col);
+    //       // Draw a rectangle at (drawX, drawY) with size of pixelSize x pixelSize
+    //       p.rect(drawX, drawY, pixelSize, pixelSize);
+    //     }
+    //   }
+
+    // } else {
+    //   p.image(
+    //     image,
+    //     x,
+    //     y,
+    //     scaledWidth,
+    //     scaledHeight
+    //   )
     // }
-
-    // let scaleFactor = (canvasSize-200) / Math.max(imageObject.width, imageObject.height)
-
-    // let scaledWidth = imageObject.width * scaleFactor
-    // let scaledHeight = imageObject.height * scaleFactor
-
-    // let imgWidth = scaledWidth;
-    // let imgHeight = scaledHeight;
-    // let xMax = canvasSize-scaledWidth
-    // // console.log(xMax);
-    // for (let x = 0; x < xMax; x += 10) {
-    //   // Calculate the y position using a sine wave
-    //   let y = canvasSize / 2 + amplitude * p.sin(x * frequency);
-    //   y = Math.max(imgHeight / 2, Math.min(y, canvasSize - imgHeight / 2));
-    //   // console.log(y);
-    //   // Draw the image at the calculated position
-    //   // p.tint('red')
-    //   // p.imageMode(p.CORNER)
-    //   p.image(imageObject, x, y - imgHeight / 2, scaledWidth, scaledHeight);
-    //   // p.image(imageObject, x, y, scaledWidth, scaledHeight);
-    // }
-
-    p.image(imageBuffer, 0, 0)
-
   }
 
   /////////////////////////////////////////// MODULE lINES
@@ -1000,13 +969,6 @@ function sketch(p) {
     
     let canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
-
-    // random100(p)
-    randomsBuffer = p.createGraphics(canvasSize, canvasSize)
-    allRandoms()
-
-    imageBuffer = p.createGraphics(canvasSize, canvasSize)
-    randomImages()
 
     if (moduleList.includes('Vinyl')) {
       vinylLayer = p.createGraphics(canvasSize, canvasSize)

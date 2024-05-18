@@ -775,6 +775,7 @@ function generateAllStore(generatorName, moduleList) {
       }
 
       if (moduleName == 'Image') {
+        window.resetRandoms()
         if (moduleImageStore.currentCollection == 'Shoes') {
           setImageStore('Shoes')
         } else if (moduleImageStore.collection == 'Electronics') {
