@@ -7,18 +7,58 @@ import ColorPicker from '../components/ColorPicker.jsx'
 import M_GradientOrientation from '../components/M_GradientOrientation.jsx'
 import M_GradientColors from '../components/M_GradientColors.jsx'
 import TabImageSet from '../components/TabImageSet.jsx'
+import IconToggle from '../components/buttons/IconToggle.jsx'
 
 export default class Background extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      solidColorLock : this.props.background.preset.SolidColor.locked,
+      gradientLock: this.props.background.preset.Gradient.locked,
+      noiseLock: this.props.background.preset.Noise.locked,
+      pixelsLock: this.props.background.preset.Pixels.locked
+    }
   }
+
+  /////////////////////////// LOCK/UNLOCK ITEMS ///////////////////////////
+
+  handleToggle = (item, setStore) => {
+    
+    
+    if (item == 'lockSolidColor') {
+      setStore(item, !this.state.solidColorLock)
+      this.setState({
+        solidColorLock: !this.state.solidColorLock
+      })
+    }
+    if (item == 'lockGradient') {
+      setStore(item, !this.state.gradientLock)
+      this.setState({
+        gradientLock: !this.state.gradientLock
+      })
+    }
+    if (item == 'lockNoise') {
+      setStore(item, !this.state.noiseLock)
+      this.setState({
+        noiseLock: !this.state.noiseLock
+      })
+    }
+    if (item == 'lockPixels') {
+      setStore(item, !this.state.pixelsLock)
+      this.setState({
+        pixelsLock: !this.state.pixelsLock
+      })
+    }
+  };
 
   ///////////////////////// RENDER CONTENT BACKGROUND TAB
 
   renderModuleContentWithTabs() {
     
     const {
-      background, 
+      background,
+      setBackgroundStore,
       currentBackgroundType,
       handleChangeBackgroundSolidColor,
       handleChangeBackgroundGradientColor,
@@ -27,13 +67,20 @@ export default class Background extends Component {
       backgroundGradientColor1,
       backgroundGradientColor2,
       currentNoiseType,
-      handleTabClickNoise
+      handleTabClickNoise,
+      onToggle
     } = this.props
     
     ////////////// SOLID COLOR
 
     if (background.currentBackgroundType == 'SolidColor') {
       return <div className='TabContent'>
+        <IconToggle
+          isLocked={this.state.solidColorLock}
+          setStore={setBackgroundStore}
+          item='lockSolidColor'
+          handleToggle={this.handleToggle}
+        />
         <ColorPicker
           title=''
           object='SolidColor'
@@ -48,6 +95,12 @@ export default class Background extends Component {
 
     if (background.currentBackgroundType == 'Gradient') {
       return <div className='TabContent'>
+        <IconToggle
+          isLocked={this.state.gradientLock}
+          setStore={setBackgroundStore}
+          item='lockGradient'
+          handleToggle={this.handleToggle}
+        />
 
         <div className='moduleContent-Left'>
           <M_GradientOrientation
@@ -71,6 +124,12 @@ export default class Background extends Component {
 
     if (background.currentBackgroundType == 'Noise') {
       return <div className='TabContent'>
+        <IconToggle
+          isLocked={this.state.noiseLock}
+          setStore={setBackgroundStore}
+          item='lockNoise'
+          handleToggle={this.handleToggle}
+        />
         <div className='moduleContent-Left'>
           <TabImageSet
             options = {background.preset.Noise.preset}
@@ -79,6 +138,17 @@ export default class Background extends Component {
             tabBackgrounds={background.preset.Noise.tabBackgrounds}
           />
         </div>
+      </div>
+    }
+
+    if (background.currentBackgroundType == 'Pixels') {
+      return <div className='TabContent'>
+        <IconToggle
+          isLocked={this.state.pixelsLock}
+          setStore={setBackgroundStore}
+          item='lockPixels'
+          handleToggle={this.handleToggle}
+        />
       </div>
     }
   }

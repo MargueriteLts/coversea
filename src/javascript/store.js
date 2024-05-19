@@ -239,6 +239,21 @@ function setBackgroundStore(type, value) {
       window.resetNoise()
     }
 
+    //
+
+    if (type == 'lockSolidColor') {
+      moduleBackgroundStore.preset.SolidColor.locked = value
+    }
+    if (type == 'lockGradient') {
+      moduleBackgroundStore.preset.Gradient.locked = value
+    }
+    if (type == 'lockNoise') {
+      moduleBackgroundStore.preset.Noise.locked = value
+    }
+    if (type == 'lockPixels') {
+      moduleBackgroundStore.preset.Pixels.locked = value
+    }
+
   })
 }
 
@@ -719,14 +734,14 @@ function generateAllStore(generatorName, moduleList) {
 
       if (moduleName == 'Background') {
         
-        if (moduleBackgroundStore.currentBackgroundType == 'SolidColor') {
+        if (moduleBackgroundStore.currentBackgroundType == 'SolidColor' && moduleBackgroundStore.preset.SolidColor.locked == false) {
           let newSolidColor=generateColor()
           setBackgroundStore('SolidColor', newSolidColor)
 
           data.push({newSolidColor})
         }
 
-        if (moduleBackgroundStore.currentBackgroundType == 'Gradient') {
+        if (moduleBackgroundStore.currentBackgroundType == 'Gradient' && moduleBackgroundStore.preset.Gradient.locked == false) {
           let newGradientColor1, newGradientColor2
           setBackgroundStore('Gradient')
             .then((colors) => {
@@ -743,11 +758,11 @@ function generateAllStore(generatorName, moduleList) {
               })
         }
 
-        if (moduleBackgroundStore.currentBackgroundType == 'Noise') {
+        if (moduleBackgroundStore.currentBackgroundType == 'Noise' && moduleBackgroundStore.preset.Noise.locked == false) {
           window.resetNoise()
         }
 
-        if (moduleBackgroundStore.currentBackgroundType == 'Pixels') {
+        if (moduleBackgroundStore.currentBackgroundType == 'Pixels' && moduleBackgroundStore.preset.Pixels.locked == false) {
           window.resetPixels()
         }
       }
@@ -861,23 +876,23 @@ function randomizeModuleStore(moduleType) {
       let newBackgroundType = sample(moduleBackgroundStore.backgroundTypes)
       setBackgroundStore('CurrentTabChange', newBackgroundType)
       
-      if (newBackgroundType == 'SolidColor') {
+      if (newBackgroundType == 'SolidColor' && moduleBackgroundStore.preset.SolidColor.locked == false) {
         setBackgroundStore('SolidColor', generateColor())
       }
 
-      if (newBackgroundType == 'Gradient') {
+      if (newBackgroundType == 'Gradient' && moduleBackgroundStore.preset.Gradient.locked == false) {
         
         setBackgroundStore('Gradient')
         setBackgroundStore('AngleGradient')
       }
 
-      if (newBackgroundType == 'Noise') {
+      if (newBackgroundType == 'Noise' && moduleBackgroundStore.preset.Noise.locked == false) {
         let newNoiseType = sample(moduleBackgroundStore.preset.Noise.NoiseTypes)
         setBackgroundStore('currentTabImageChange', newNoiseType)
         window.resetNoise()
       }
 
-      if (newBackgroundType == 'Pixels') {
+      if (newBackgroundType == 'Pixels' && moduleBackgroundStore.preset.Pixels.locked == false) {
         window.resetPixels()
       }
 

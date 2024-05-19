@@ -13,13 +13,16 @@ const preset = {
 
     preset: {
       SolidColor: {
+        locked: false,
         color: '#000000'
       },
       Gradient: {
+        locked: false,
         color1: '#d9b34c',
         color2: '#943a73'
       },
       Noise: {
+        locked: false,
         NoiseTypes: ['Small', 'Medium', 'Big'],
         currentNoiseType: 'Small',
 
@@ -29,7 +32,9 @@ const preset = {
           Big: {}
         }
       },
-      Pixels: {}
+      Pixels: {
+        locked: false
+      }
     }
   },
 

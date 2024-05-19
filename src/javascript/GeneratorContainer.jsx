@@ -239,6 +239,23 @@ export default class GeneratorContainer extends Component {
     });
   };
 
+// /////////////////////////// LOCK/UNLOCK ITEMS ///////////////////////////
+
+//   toggleLock = (module, item) => {
+//     // let 
+//     this.setState({})
+//     // if (module == 'Background') {
+//       // if (item == 'SolidColor') {
+
+//       // }
+//     // }
+//     // this.setState((prevState) => ({
+//     //   items: prevState.items.map(item =>
+//     //     item.id === id ? { ...item, locked: !item.locked } : item
+//     //   ),
+//     // }));
+//   };
+
 
 /////////////////////////// RENDER MODULES ///////////////////////////
 
@@ -255,7 +272,8 @@ export default class GeneratorContainer extends Component {
       module3D,
       basictypo,
       setBasicTypoStore,
-      overlay
+      overlay,
+      setBackgroundStore
       // setCanvasSizeStore
     } = this.props
 
@@ -267,15 +285,16 @@ export default class GeneratorContainer extends Component {
       if (moduleName == 'Background') {
         modules.push(
           <Background
-            key={index}
-            handleRandomizeModule={this.handleRandomizeModule}
             background={background}
+            handleRandomizeModule={this.handleRandomizeModule}
             handleTabClickBackground={this.handleTabClickBackground}
             handleChangeBackgroundSolidColor={this.handleChangeBackgroundSolidColor}
             handleChangeBackgroundGradientColor={this.handleChangeBackgroundGradientColor}
             handleBackgroundRandomizeGradient={this.handleBackgroundRandomizeGradient}
             handleChangeBackgroundAngleGradient={this.handleChangeBackgroundGradientAngle}
             handleTabClickNoise={this.handleTabClickNoise}
+            key={index}
+            setBackgroundStore={setBackgroundStore}
           />
         )
       }
