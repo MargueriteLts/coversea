@@ -85,15 +85,18 @@ body.generator {
         flex-direction: row;
         justify-content: space-between;
         padding: 16px;
-        border-bottom: 1px solid #383838;
+        // border-bottom: 1px solid #383838;
   
         .module__title {
-          color: var(--white);
+          color: var(--TEXT-WHITE);
           font-size: 24px;
           font-family: "bc-novatica-cyr", sans-serif;
           font-weight: 500;
           font-style: normal;
           text-transform: uppercase;
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
         }
       }
   
@@ -209,6 +212,7 @@ body.generator {
         row-gap: 20px;
         height: 100%;
         padding: 16px;
+        border-top: 1px solid #383838;
       }
 
       .Sliders {
@@ -228,6 +232,7 @@ body.generator {
         row-gap: 16px;
         height: 100%;
         padding: 16px;
+        border-top: 1px solid #383838;
 
         .TabContent {
           display: flex;

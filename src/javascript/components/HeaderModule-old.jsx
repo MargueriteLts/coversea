@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import RandomizeButton from './buttons/RandomizeButton.jsx'
-import ModuleTitle from './buttons/ModuleTitle.jsx'
 
 export default class Image extends Component {
   constructor(props) {
@@ -9,14 +8,12 @@ export default class Image extends Component {
   }
 
   render() {
-    const { title, moduleType, handleOpenModule, isOpen } = this.props
+    const { title, handleRandomizeModule, moduleType } = this.props
 
     return <div className="module__header">
-      <ModuleTitle
-        title={title}
-        handleClick={handleOpenModule}
-        isOpen={isOpen}
-      />
+      <div className="module__title">
+        {title}
+      </div>
       <RandomizeButton
         onClick={() => this.props.handleRandomizeModule(moduleType)}
         iconName='Dice.svg'

@@ -14,11 +14,19 @@ export default class Background extends Component {
     super(props)
 
     this.state = {
+      isOpen: false,
+
       solidColorLock : this.props.background.preset.SolidColor.locked,
       gradientLock: this.props.background.preset.Gradient.locked,
       noiseLock: this.props.background.preset.Noise.locked,
       pixelsLock: this.props.background.preset.Pixels.locked
     }
+  }
+
+  handleOpenModule = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    })
   }
 
   /////////////////////////// LOCK/UNLOCK ITEMS ///////////////////////////
@@ -212,7 +220,7 @@ export default class Background extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { background, handleRandomizeModule, handleTabClickBackground, currentBackgroundType } = this.props
+    const { background, handleRandomizeModule, handleTabClickBackground } = this.props
     
     const nbBgTypes = background.backgroundTypes.length
 
@@ -221,18 +229,26 @@ export default class Background extends Component {
         title={background.moduleName}
         handleRandomizeModule={handleRandomizeModule}
         moduleType='Background'
+        handleOpenModule={this.handleOpenModule}
+        isOpen={this.state.isOpen}
       />
-      { nbBgTypes > 1
-        ? <div className="moduleContent_Background"> 
-            <TabButtonSet
-              options={background.preset}
-              value={background.currentBackgroundType}
-              handleClick={handleTabClickBackground}
-            />
-            {this.renderModuleContentWithTabs()}
-          </div>
-        : <div className="module__content">{this.renderModuleContentAlone()}</div>
+      
+      { this.state.isOpen ? (
+          nbBgTypes > 1 ? (
+            <div className="moduleContent_Background"> 
+              <TabButtonSet
+                options={background.preset}
+                value={background.currentBackgroundType}
+                handleClick={handleTabClickBackground}
+              />
+              {this.renderModuleContentWithTabs()}
+            </div>
+          ) : (
+            <div className="module__content">{this.renderModuleContentAlone()}</div>
+          )
+        ) : null
       }
+
     </div>
   }
 }

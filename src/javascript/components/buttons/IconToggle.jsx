@@ -7,33 +7,7 @@ import LockClosed from '../../../images/ui/icons/LockClosed.svg';
 export default class IconToggle extends Component {
   constructor(props) {
     super(props);
-    
-    // this.state = {
-    //   isLocked: this.props.isLocked
-    // };
   }
-
-  // handleToggle = () => {
-  //   const { item } = this.props
-
-  //   this.setState((prevState) => ({
-  //     isLocked: !prevState.isLocked,
-  //   }));
-
-  //   // this.setState({isLocked: !this.state.isLocked})
-  //   console.log(this.props.lockState);
-  //   console.log(this.state.isLocked);
-
-  //   this.props.setStore(item, !this.state.isLocked)
- 
-  // };
-
-  // handleToggleInside = () => {
-  //   this.setState((prevState) => ({
-  //     isLocked: !prevState.isLocked,
-  //   }));
-  //   this.props.handleToggle(this.props.item, this.props.setStore, !this.state.isLocked)
-  // }
 
   render() {
     const { isLocked, handleToggle } = this.props;
