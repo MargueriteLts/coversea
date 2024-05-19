@@ -14,7 +14,6 @@ export default class Image extends Component {
       <div className="module__title">
         {title}
       </div>
-      {/* <div className="btn--primary" onClick={() => this.props.handleRandomizeModule(moduleType)}>Randomize</div> */}
       <RandomizeButton
         onClick={() => this.props.handleRandomizeModule(moduleType)}
         iconName='Dice.svg'

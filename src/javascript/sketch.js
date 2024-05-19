@@ -99,7 +99,9 @@ window.resetPixels = function() {
 }
 
 window.resetRandoms = function() {
-  allRandoms()
+  // allRandoms()
+  console.log('yes');
+  randomImages()
 }
 
 function randomAmplitude() {
@@ -110,7 +112,14 @@ function randomFrequency() {
   frequency = randomsBuffer.random(4.5, 5)
 }
 
+// function newRandoms(a, b) {
+//   let randomNumber
+//   return randomNumber = randomsBuffer.random(a, b) 
+// }
+
+// ici obligé de sortir la génération or de la fonction draw vu qu'on utilise du random MAIS c'est dans un for loop, donc on peut pas juste sortir la fonction random, mais pas grave pcq on peut juste call cette fonction avec window.
 function randomImages() {
+  imageBuffer.clear()
 
   const objects = getImageStore()
 
@@ -1005,8 +1014,10 @@ function sketch(p) {
     randomsBuffer = p.createGraphics(canvasSize, canvasSize)
     allRandoms()
 
-    imageBuffer = p.createGraphics(canvasSize, canvasSize)
-    randomImages()
+    if (moduleList.includes('Image')) {
+      imageBuffer = p.createGraphics(canvasSize, canvasSize)
+      randomImages()
+    }
 
     if (moduleList.includes('Vinyl')) {
       vinylLayer = p.createGraphics(canvasSize, canvasSize)
