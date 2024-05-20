@@ -14,6 +14,7 @@ import {
   getLinesStore,
   get3DStore,
   getBasicTypoStore,
+  getBasicTypoV2Store,
   getOverlayStore,
   getFontsStore
   // setCanvasSizeStore,
@@ -110,6 +111,40 @@ function randomAmplitude() {
 
 function randomFrequency() {
   frequency = randomsBuffer.random(4.5, 5)
+}
+
+function calculateTextBoxPositions(R, n, textWidth) {
+  const positions = [];
+  const centerX = canvasSize / 2;
+  const centerY = canvasSize / 2;
+  const angleStep = 2 * Math.PI / n;
+  let currentAngle = 0;
+
+  for (let i = 0; i < n; i++) {
+    const x = centerX + R * Math.cos(currentAngle);
+    const y = centerY + R * Math.sin(currentAngle);
+
+    if (i > 0) {
+      const previousPos = positions[positions.length - 1];
+      const dist = Math.sqrt(Math.pow(x - previousPos.x, 2) + Math.pow(y - previousPos.y, 2));
+      const requiredDist = textWidth;
+
+      if (dist < requiredDist) {
+        currentAngle += Math.acos((2 * R * R - requiredDist * requiredDist) / (2 * R * R));
+        const adjustedX = centerX + R * Math.cos(currentAngle);
+        const adjustedY = centerY + R * Math.sin(currentAngle);
+        positions.push({ x: adjustedX, y: adjustedY });
+      } else {
+        positions.push({ x, y });
+      }
+    } else {
+      positions.push({ x, y });
+    }
+
+    currentAngle += angleStep;
+  }
+
+  return positions;
 }
 
 // function newRandoms(a, b) {
@@ -827,6 +862,57 @@ function drawModules(p) {
 
 
     p.drawingContext.shadowBlur = 0
+  }
+
+  /////////////////////////////////////////// MODULE BASICTYPO V2
+
+  if (moduleList.includes('BasicTypoV2')) {
+    const basicTypov2 = getBasicTypoV2Store()
+    let textInput
+
+    if (basicTypov2.styles.includes('NORMAL') && basicTypov2.styleText == 'NORMAL' && basicTypov2.font == 'PT-Root-UI') {
+      p.textFont(ptrootuiReg)
+    } else if (basicTypov2.styles.includes('BOLD') && basicTypov2.styleText == 'BOLD' && basicTypov2.font == 'PT-Root-UI') {
+      p.textFont(ptrootuiBold)
+    } else if (basicTypov2.styles.includes('LIGHT') && basicTypov2.styleText == 'LIGHT' && basicTypov2.font == 'PT-Root-UI') {
+      p.textFont(ptrootuiLight)
+    } else {
+      p.textFont(basicTypov2.font)
+    }
+
+    p.noStroke()
+    p.textStyle(basicTypov2.styleText)
+    p.textWrap(p.WORD)
+    p.fill(basicTypov2.color)
+    p.fill('white')
+
+    if (basicTypov2.upperCase == true) {
+      textInput = basicTypov2.textInput.toUpperCase()
+    } else {
+      textInput = basicTypov2.textInput
+    }
+
+    // let presetSizeText = basicTypov2.sizeText.sliderValue
+    let presetLeadingSizeText = basicTypov2.leadingText
+    // let TextSize = (presetSizeText * canvasSize) / 100
+    let TextLeadingSize = (presetLeadingSizeText * canvasSize) / 100
+    p.textSize(10)
+    p.textLeading(TextLeadingSize)
+
+    let txtWidth = p.textWidth(textInput)
+    // let positions = basicTypov2.txtpositions
+
+    // for (let i = 0; i < basicTypov2.nText; i++) {
+    //   p.text(textInput, ((positions[i].x)*canvasSize/100)-(txtWidth/2), (positions[i].y)*canvasSize/100)
+    // }
+
+    const positions = calculateTextBoxPositions(100, 50, txtWidth);
+
+    for (let i = 0; i < positions.length; i++) {
+      const pos = positions[i];
+      p.textAlign(p.CENTER, p.CENTER);
+      p.text('Text', pos.x, pos.y);
+    }
   }
 
 

@@ -24,6 +24,8 @@ import {
   set3DStore,
   getBasicTypoStore,
   setBasicTypoStore,
+  getBasicTypoV2Store,
+  setBasicTypoV2Store,
   getOverlayStore,
   setOverlayStore,
   generateAllStore,
@@ -74,6 +76,7 @@ const actions = {
   setLinesStore,
   set3DStore,
   setBasicTypoStore,
+  setBasicTypoV2Store,
   setOverlayStore,
   // setCanvasSizeStore,
   generateAllStore,
@@ -124,6 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (moduleName == 'BasicTypo') {
       props.basictypo = getBasicTypoStore()
+    }
+
+    if (moduleName == 'BasicTypoV2') {
+      props.basictypoV2 = getBasicTypoV2Store()
     }
 
     if (moduleName == 'Lines') {

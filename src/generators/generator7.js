@@ -1,4 +1,4 @@
-const modules = ['Background', 'Particles', 'Image', 'BasicTypo']
+const modules = ['Background', 'Particles', 'Image', 'BasicTypoV2']
 
 const preset = {
   
@@ -66,21 +66,22 @@ const preset = {
     }
   },
   
-  BasicTypo: {
-    mainText: 'Soft Random',
-    optionsMainTextFonts: ['bc-novatica-cyr', 'Acosta', 'PT-Root-UI'],
+  BasicTypoV2: {
+    textInput: 'Soft Random',
+    optionsTextFonts: ['bc-novatica-cyr', 'Acosta', 'PT-Root-UI'],
     font: 'bc-novatica-cyr',
-    sizeMainText:{
-      sliderValue: 22,
-      min: 10,
-      max: 30
+    sizeText:{
+      sliderValue: 10,
+      min: 3,
+      max: 20
     },
     styles: ['NORMAL', 'LIGHT', 'BOLD'],
-    styleMainText: 'NORMAL',
-    dopText: false,
-    leadingMainText: 19,
+    styleText: 'NORMAL',
+    leadingText: 19,
     upperCase: false,
-    color: '#000'
+    color: '#000',
+    radius: 250,
+    nText: 50
   }
 }
 

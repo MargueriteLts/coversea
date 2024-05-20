@@ -20,6 +20,7 @@ import Shapes from './modules/Shapes.jsx'
 import Vinyl from './modules/Vinyl.jsx'
 //Text
 import BasicTypo from './modules/BasicTypo.jsx'
+import BasicTypoV2 from './modules/BasicTypoV2.jsx'
 //Overlay
 import Overlay from './modules/Overlay.jsx'
 
@@ -271,6 +272,8 @@ export default class GeneratorContainer extends Component {
       lines,
       module3D,
       basictypo,
+      basictypoV2,
+      setBasicTypoV2Store,
       setBasicTypoStore,
       overlay,
       setBackgroundStore
@@ -387,6 +390,16 @@ export default class GeneratorContainer extends Component {
           // randomizeModuleStore={randomizeModuleStore}
             basictypo={basictypo}
             setBasicTypoStore={setBasicTypoStore}
+          />
+        )
+      }
+      if (moduleName == 'BasicTypoV2') {
+        modules.push(
+          <BasicTypoV2
+            key={index}
+          // randomizeModuleStore={randomizeModuleStore}
+            basictypoV2={basictypoV2}
+            setBasicTypoV2Store={setBasicTypoV2Store}
           />
         )
       }

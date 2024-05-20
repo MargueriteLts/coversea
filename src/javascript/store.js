@@ -33,6 +33,7 @@ blendStore,
 moduleBackgroundStore,
 moduleBackgroundImageStore,
 moduleBasicTypoStore,
+moduleBasicTypoV2Store,
 moduleImageStore,
 module3DStore,
 moduleLinesStore,
@@ -77,6 +78,10 @@ function initStore(generatorName) {
 
     if (moduleName == 'BasicTypo') {
       moduleBasicTypoStore = initBasicTypoStore(generators[generatorName].preset['BasicTypo'])
+    }
+
+    if (moduleName == 'BasicTypoV2') {
+      moduleBasicTypoV2Store = initBasicTypoV2Store(generators[generatorName].preset['BasicTypoV2'])
     }
 
     if (moduleName == 'Lines') {
@@ -663,6 +668,63 @@ function setBasicTypoStore(type, nextValue) {
   })
 }
 
+////////////////////// BASICTYPO V2
+
+function calculateCirclePositions(R, n) {
+  const positions = [];
+  // const centerX = 100 / 2;
+  // const centerY = 100 / 2;
+  const angleStep = 2 * Math.PI / n;
+
+  for (let i = 0; i < n; i++) {
+    const angle = angleStep * i;
+    const x = 50 + R * Math.cos(angle);
+    const y = 50 + R * Math.sin(angle);
+    positions.push({ x, y });
+  }
+
+  return positions;
+}
+
+
+function initBasicTypoV2Store(preset) {
+  let positions = calculateCirclePositions(33, 50)
+
+  console.log(positions);
+  
+  preset = Object.assign({}, preset, { moduleName: 'Typography', txtpositions: positions })
+
+  return preset
+}
+
+function getBasicTypoV2Store() {
+  return moduleBasicTypoV2Store
+}
+
+function setBasicTypoV2Store(type, nextValue) {
+  return new Promise((resolve, reject) => {
+    if (type === 'CurrentTabChange') {
+      moduleBasicTypoV2Store.font = nextValue
+      resolve([nextValue])
+    } 
+    if (type === 'mainText') {
+      moduleBasicTypoV2Store.textInput = nextValue
+    }
+    if (type === 'sizeMainText') {
+      moduleBasicTypoV2Store.sizeText.sliderValue = nextValue
+      resolve([nextValue])
+    }
+    if (type === 'StyleTabChange') {
+      moduleBasicTypoV2Store.styleText = nextValue
+      resolve([nextValue])
+    }
+    if (type === 'SolidColor') {
+      moduleBasicTypoV2Store.color = nextValue
+      resolve([nextValue])
+    }
+  })
+}
+
 // Overlay
 
 ////////////////////// OVERLAY
@@ -1073,6 +1135,8 @@ export {
   getBlendStore,
   getBasicTypoStore,
   setBasicTypoStore,
+  getBasicTypoV2Store,
+  setBasicTypoV2Store,
   getOverlayStore,
   setOverlayStore,
   generateAllStore,
