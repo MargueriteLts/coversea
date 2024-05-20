@@ -902,10 +902,12 @@ function drawModules(p) {
     let txtWidth = p.textWidth(textInput)
     // let positions = basicTypov2.txtpositions
 
+    //Ca marche mais pas pour les extremites haut et bas -> les text se superposent
     // for (let i = 0; i < basicTypov2.nText; i++) {
     //   p.text(textInput, ((positions[i].x)*canvasSize/100)-(txtWidth/2), (positions[i].y)*canvasSize/100)
     // }
 
+    //ChatGPT try adapt calculation
     const positions = calculateTextBoxPositions(100, 50, txtWidth);
 
     for (let i = 0; i < positions.length; i++) {
