@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import RandomizeButton from './buttons/RandomizeButton.jsx'
 import ModuleTitle from './buttons/ModuleTitle.jsx'
 
-export default class Image extends Component {
+export default class HeaderModule extends Component {
   constructor(props) {
     super(props)
   }

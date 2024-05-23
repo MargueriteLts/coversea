@@ -13,7 +13,6 @@ const preset = {
 
     preset: {
       SolidColor: {
-        locked: false,
         color: '#000000'
       },
       Gradient: {

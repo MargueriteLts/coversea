@@ -8,9 +8,8 @@ import { generateHash } from './utilities.js'
 import IconButton from './components/buttons/IconButton.jsx'
 
 ///////////////MODULES
-import O_Module from './components/organisms/O_Module.jsx'
 //Background
-// import Background from './modules/Background.jsx'
+import Background from './modules/Background.jsx'
 import BackgroundImage from './modules/BackgroundImage.jsx'
 //Graphics
 import Image from './modules/Image.jsx'
@@ -288,18 +287,17 @@ export default class GeneratorContainer extends Component {
       // Background
       if (moduleName == 'Background') {
         modules.push(
-          <O_Module
-            moduleType='Background'
+          <Background
             background={background}
-            moduleName={background.moduleName}
             handleRandomizeModule={this.handleRandomizeModule}
             handleTabClickBackground={this.handleTabClickBackground}
             handleChangeBackgroundSolidColor={this.handleChangeBackgroundSolidColor}
             handleChangeBackgroundGradientColor={this.handleChangeBackgroundGradientColor}
+            handleBackgroundRandomizeGradient={this.handleBackgroundRandomizeGradient}
             handleChangeBackgroundAngleGradient={this.handleChangeBackgroundGradientAngle}
             handleTabClickNoise={this.handleTabClickNoise}
-            setBackgroundStore={setBackgroundStore}
             key={index}
+            setBackgroundStore={setBackgroundStore}
           />
         )
       }
@@ -328,21 +326,12 @@ export default class GeneratorContainer extends Component {
       }
       if (moduleName == 'Lines') {
         modules.push(
-          // <Lines
-          //   key={index}
-          //   handleRandomizeModule={this.handleRandomizeModule}
-          //   lines={lines}
-          //   handleLinesColor={this.handleLinesColor}
-          //   handleLinesSize={this.handleLinesSize}
-          // />
-          <O_Module
-            moduleType='Lines'
-            lines={lines}
-            moduleName={lines.moduleName}
+          <Lines
+            key={index}
             handleRandomizeModule={this.handleRandomizeModule}
+            lines={lines}
             handleLinesColor={this.handleLinesColor}
             handleLinesSize={this.handleLinesSize}
-            key={index}
           />
         )
       }

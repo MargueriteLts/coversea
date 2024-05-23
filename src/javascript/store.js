@@ -166,11 +166,11 @@ function initBackgroundStore(background) {
 
   background.backgroundTypes.forEach((backgroundType) => {
     if (backgroundType == 'SolidColor') {
-      background.preset.SolidColor = Object.assign({}, background.preset.SolidColor, { text: 'Solid color' })
+      background.preset.SolidColor = Object.assign({}, background.preset.SolidColor, { text: 'Solid color', locked: false, })
     }
 
     if (backgroundType == 'Gradient') {
-      background.preset.Gradient = Object.assign({}, background.preset.Gradient, { text: 'Gradient', angle:'vertical' })
+      background.preset.Gradient = Object.assign({}, background.preset.Gradient, { text: 'Gradient', angle:'vertical', locked: false })
     }
 
     if (backgroundType == 'Noise') {
@@ -178,7 +178,7 @@ function initBackgroundStore(background) {
         require.context('../images/ui/tabBackgrounds/noise', false, /\.(png|jpe?g|svg)$/)
       )
 
-      background.preset.Noise = Object.assign({}, background.preset.Noise, { text: 'Noise', tabBackgrounds: images})
+      background.preset.Noise = Object.assign({}, background.preset.Noise, { text: 'Noise', locked: false, tabBackgrounds: images})
 
       background.preset.Noise.NoiseTypes.forEach((noiseType) => {
         if (noiseType == 'Small') {
@@ -194,7 +194,7 @@ function initBackgroundStore(background) {
     }
 
     if (backgroundType == 'Pixels') {
-      background.preset.Pixels = Object.assign({}, background.preset.Pixels, { text: 'Pixels' })
+      background.preset.Pixels = Object.assign({}, background.preset.Pixels, { text: 'Pixels', locked: false })
     }
   })
 
