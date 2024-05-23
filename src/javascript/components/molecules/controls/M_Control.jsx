@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
+import IconToggle from '../../buttons/IconToggle.jsx'
+import ColorPicker from '../../ColorPicker.jsx'
+
 export default class M_Control extends Component {
   constructor(props) {
     super(props)
@@ -9,16 +12,17 @@ export default class M_Control extends Component {
   renderControlType() {
     const {controlType} = this.props
 
-    const {text, object, color, handleChange, key} = this.props
+    const {object, color, handleChange, type} = this.props
 
     if (controlType == 'SolidColor') {
-    <ColorPicker
-        text={text}
-        object={object}
-        color={color}
-        handleChange={handleChange}
-        key={key}
-      />
+      return (
+        <ColorPicker
+          object={object}
+          color={color}
+          handleChange={handleChange}
+          key={type}
+        />
+      )
     }
   }
 

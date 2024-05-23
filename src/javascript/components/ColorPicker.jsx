@@ -54,6 +54,8 @@ export default class AllColorPicker extends Component {
       color = this.props.color
     }
 
+    let text = `${this.state.color}`
+
     const styles = reactCSS({
       'default': {
         box: {
@@ -92,11 +94,12 @@ export default class AllColorPicker extends Component {
     });
 
     // <div className={styles.box}>
-    return <div className='colorPicker-box'>
+    return <div className='A_ColorPickerButton'>
       {/* <div>{title}</div> */}
       <div style={ styles.swatch } onClick={ this.handleClick }>
         <div style={ styles.colorSwatch } />
       </div>
+      {text}
       { this.state.displayColorPicker
       
         ? <div style={ styles.popover }>

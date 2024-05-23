@@ -7,6 +7,7 @@ import M_GradientOrientation from '../../M_GradientOrientation.jsx'
 import M_GradientColors from '../../M_GradientColors.jsx'
 import TabImageSet from '../../TabImageSet.jsx'
 import IconToggle from '../../buttons/IconToggle.jsx'
+import M_Control from '../controls/M_Control.jsx'
 
 export default class M_BackgroundContent extends Component {
   constructor(props) {
@@ -54,7 +55,7 @@ export default class M_BackgroundContent extends Component {
 
   ///////////////////////// RENDER CONTENT BACKGROUND TAB
 
-  renderModuleContentWithTabs() {
+  renderTabContent() {
     
     const {
       background,
@@ -68,37 +69,38 @@ export default class M_BackgroundContent extends Component {
     ////////////// SOLID COLOR
 
     if (background.currentBackgroundType == 'SolidColor') {
-      return <div className='TabContent'>
-        <IconToggle
-          isLocked={this.state.solidColorLock}
-          setStore={setBackgroundStore}
-          item='lockSolidColor'
-          handleToggle={this.handleToggle}
-        />
-        <ColorPicker
-          title=''
-          object='SolidColor'
-          color={background.preset.SolidColor.color}
-          handleChange={handleChangeBackgroundSolidColor}
-          key='BackgroundColorPicker'
-        />
-      </div>
-      // return (
-      //   <M_Controls
+      // return <div className='TabContent'>
+      //   <IconToggle
       //     isLocked={this.state.solidColorLock}
       //     setStore={setBackgroundStore}
       //     item='lockSolidColor'
       //     handleToggle={this.handleToggle}
+      //   />
+      //   <ColorPicker
       //     title=''
-      //     controlType='solidColor'
-
-      //     text={background.SolidColor.color}
       //     object='SolidColor'
       //     color={background.preset.SolidColor.color}
       //     handleChange={handleChangeBackgroundSolidColor}
       //     key='BackgroundColorPicker'
       //   />
-      // )
+      // </div>
+      // console.log(background.SolidColor);
+      return (
+        <M_Control
+          isLocked={this.state.solidColorLock}
+          setStore={setBackgroundStore}
+          item='lockSolidColor'
+          handleToggle={this.handleToggle}
+          title=''
+          controlType='SolidColor'
+
+          // text={background.SolidColor.color}
+          object='SolidColor'
+          color={background.preset.SolidColor.color}
+          handleChange={handleChangeBackgroundSolidColor}
+          type='BackgroundColorPicker'
+        />
+      )
     }
 
     ////////////// GRADIENT
@@ -168,23 +170,39 @@ export default class M_BackgroundContent extends Component {
     const bgType = background.backgroundTypes
 
     if (bgType == 'SolidColor') {
-      return <div>
-        <IconToggle
+      return (
+      // <div>
+      //   <IconToggle
+      //     isLocked={this.state.solidColorLock}
+      //     setStore={setBackgroundStore}
+      //     item='lockSolidColor'
+      //     handleToggle={this.handleToggle}
+      //   />
+      //   <ColorPicker
+      //     title=''
+      //     // object='background'
+      //     object='SolidColor'
+      //     setColorPickerStore={setColorPickerStore}
+      //     color={background.preset.SolidColor.color}
+      //     handleChange={handleChangeBackgroundSolidColor}
+      //     key='BackgroundColorPicker'
+      //   />
+      // </div>
+        <M_Control
           isLocked={this.state.solidColorLock}
           setStore={setBackgroundStore}
           item='lockSolidColor'
           handleToggle={this.handleToggle}
-        />
-        <ColorPicker
           title=''
-          // object='background'
+          controlType='SolidColor'
+
+          // text={background.SolidColor.color}
           object='SolidColor'
-          setColorPickerStore={setColorPickerStore}
           color={background.preset.SolidColor.color}
           handleChange={handleChangeBackgroundSolidColor}
-          key='BackgroundColorPicker'
+          type='BackgroundColorPicker'
         />
-      </div>
+      )
     }
     if (bgType == 'Gradient') {
       return <div className='gradientControls flexRow'>
@@ -229,20 +247,22 @@ export default class M_BackgroundContent extends Component {
     
     const nbBgTypes = background.backgroundTypes.length
 
-    console.log('in M_BgC');
-    console.log(background);
-
     return (
     <div className="M_BackgroundContent">
       {nbBgTypes > 1 ? (
-        <div className="M_BackgroundContent-WithTabs">
+
+        <div className="BackgroundContent_Tabs">
+          {/* //ADD LOCK FOR TABS */}
           <TabButtonSet
             options={background.preset}
             value={background.currentBackgroundType}
             handleClick={handleTabClickBackground}
           />
-          {this.renderModuleContentWithTabs()}
+          <div className="BackgroundContent_TabContent">
+          {this.renderTabContent()}
+          </div>
         </div>
+
       ) : (
         this.renderModuleContentUnits()
       )}

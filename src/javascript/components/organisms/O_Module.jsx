@@ -36,8 +36,6 @@ export default class Module extends Component {
     } = this.props
 
     if (moduleType == 'Background') {
-      console.log('in O_Module');
-      console.log(background);
       return (
         <M_BackgroundContent
           background={background}
@@ -67,7 +65,7 @@ export default class Module extends Component {
     const { moduleName, moduleType, handleRandomizeModule } = this.props
 
 
-    return <div className="moduleContainer">
+    return <div className="O_Module">
       <M_ModuleHeader
         title={moduleName}
         handleRandomizeModule={handleRandomizeModule}
@@ -78,7 +76,7 @@ export default class Module extends Component {
       
       { this.state.isOpen ?
 
-          <div className="moduleContentContainer">
+          <div className="moduleContent">
             {this.renderModuleContent()}
           </div>
 
