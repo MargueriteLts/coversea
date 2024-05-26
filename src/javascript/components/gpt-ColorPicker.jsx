@@ -1,29 +1,29 @@
-import React, { Component, createRef } from 'react'
-import ReactDOM from 'react-dom'
-import reactCSS from 'reactcss'
-import { SketchPicker } from 'react-color'
-import {rgbToHex} from '../utilities.js'
+import React, { Component, createRef } from 'react';
+import reactCSS from 'reactcss';
+import { SketchPicker } from 'react-color';
 
 export default class AllColorPicker extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       displayColorPicker: false,
       color: this.props.color,
     };
-    
+
     this.colorpickerRef = createRef();
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
   handleClick = () => {
-
-    this.setState({
-      displayColorPicker: !this.state.displayColorPicker,
-    });
+    this.setState({ displayColorPicker: !this.state.displayColorPicker });
   };
+
+  handleClose = () => {
+    this.setState({ displayColorPicker: false });
+  };
+
 
   componentDidMount() {
     document.body.addEventListener('click', this.handleClickOutside);
@@ -39,31 +39,16 @@ export default class AllColorPicker extends Component {
     }
   }
 
-  handleClose = () => {
-    this.setState({ displayColorPicker: false })
-  };
 
   render() {
-
-    let color = []
-    let hexColor
-
-    if (typeof this.props.color == 'object') {
-      color = `rgb(${this.props.color.join(',')})`
-      hexColor = rgbToHex(color)
-    } else {
-      color = this.props.color
-      hexColor = color
-    }
-
-    let text = `${hexColor}`
+    const { color, displayColorPicker } = this.state;
 
     const styles = reactCSS({
-      'default': {
-        box: {
-          width: '100%',
-          height: '100%',
-          fontSize: '0px',
+      default: {
+        swatch: {
+          display: 'inline-block',
+          marginRight: '8px', // Add spacing between swatch and popover
+          cursor: 'pointer',
         },
         colorSwatch: {
           width: '32px',
@@ -71,29 +56,23 @@ export default class AllColorPicker extends Component {
           borderRadius: '2px',
           background: color,
         },
-        swatch: {
-          padding: '2px',
-          background: '#2C2C2C',
-          borderRadius: '2px',
-          boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-          display: 'inline-block',
-          cursor: 'pointer',
-        },
         popover: {
           position: 'absolute',
           zIndex: '2',
+          top: '0',
+          left: '100%',
         }
       },
     });
-    
-    return <div style={{ position: 'relative' }} ref={this.colorpickerRef}>
-      <div style={ styles.swatch } onClick={ this.handleClick }>
-        <div style={ styles.colorSwatch } />
-      </div>
 
-      {text}
+    return (
+      <div style={{ position: 'relative' }} ref={this.colorpickerRef}>
 
-      {this.state.displayColorPicker && (
+        <div style={styles.swatch} onClick={this.handleClick}>
+          <div style={styles.colorSwatch} />
+        </div>
+
+        {displayColorPicker && (
           <div style={styles.popover}>
             <SketchPicker
               disableAlpha={true}
@@ -105,7 +84,9 @@ export default class AllColorPicker extends Component {
             />
           </div>
         )}
-
-    </div>
+        
+      </div>
+    );
   }
 }
+

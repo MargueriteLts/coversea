@@ -46,4 +46,23 @@ function hexToRgbArray(hex) {
   return [r, g, b];
 }
 
-export { getRandomArbitrary, sample, generateHash, importAll, hexToRgbArray }
+function rgbToHex(rgbString) {
+  // Extract the numbers from the string
+  const rgbValues = rgbString.match(/\d+/g).map(Number);
+  
+  // Convert each component to its hexadecimal equivalent
+  const componentToHex = (c) => {
+    const hex = c.toString(16);
+    return hex.length === 1 ? "0" + hex : hex;
+  };
+
+  const [r, g, b] = rgbValues;
+  const hexR = componentToHex(r);
+  const hexG = componentToHex(g);
+  const hexB = componentToHex(b);
+
+  return "#" + hexR + hexG + hexB;
+}
+
+
+export { getRandomArbitrary, sample, generateHash, importAll, hexToRgbArray, rgbToHex }
