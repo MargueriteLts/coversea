@@ -1,36 +1,83 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import ColorPicker from '../../ColorPicker.jsx'
-import Slider from '../../Slider.jsx'
+import M_Control from '../controls/M_Control.jsx'
 
 export default class M_LinesContent extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      // tabsLock: this.props.vinyl.locked,
+      weightLock : this.props.lines.weightLock,
+      solidColorLock: this.props.lines.solidColorLock
+    }
+  }
+
+  handleToggle = (item, setStore) => {
+    
+    
+    // if (item == 'lockTabs') {
+    //   setStore(item, !this.state.tabsLock)
+    //   this.setState({
+    //     tabsLock: !this.state.tabsLock
+    //   })
+    if (item == 'lockWeight') {
+      setStore(item, !this.state.weightLock)
+      this.setState({
+        weightLock: !this.state.weightLock
+      })
+    }
+    if (item == 'lockSolidColor') {
+      setStore(item, !this.state.solidColorLock)
+      this.setState({
+        solidColorLock: !this.state.solidColorLock
+      })
+    }
   }
   
   render() {
     const {
       lines,
       handleLinesColor,
-      handleLinesSize
+      handleLinesSize,
+      setLinesStore
     } = this.props
 
     return <div className="M_LinesContent">
-        <ColorPicker
+      {/* <div className='content_Column'></div> */}
+      <div className='content_Column'>
+        <M_Control
+          orientation="row"
+          controlType='ColorPicker'
+          title='Lines color'
+        //lock
+          isLocked={this.state.solidColorLock}
+          setStore={setLinesStore}
+          item='lockSolidColor'
+          handleToggle={this.handleToggle}
+        //data
+          data={lines.color}
           object='SolidColor'
-          color={lines.color}
           handleChange={handleLinesColor}
-          key='AllColorPicker'
+          type='AllColorPicker'
         />
-        <Slider
-          title='Thickness'
-          type="range"
+        <M_Control
+          orientation="row"
+          controlType='Slider'
+          title='Lines thickness'
+        //lock
+          isLocked={this.state.weightLock}
+          setStore={setLinesStore}
+          item='lockWeight'
+          handleToggle={this.handleToggle}
+        //data
+          data={lines.strokeWeight}
+          handleChange={handleLinesSize}
           min={lines.min}
           max={lines.max}
-          value={lines.strokeWeight}
-          handleChange={handleLinesSize}
         />
+      </div>
     </div>
   }
 }

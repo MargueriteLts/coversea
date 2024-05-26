@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import HeaderModule from '../components/HeaderModule.jsx'
-import DropDown from '../components/DropDown.jsx'
+import DropDown from '../components/molecules/M_Select.jsx'
 import ColorPicker from '../components/ColorPicker.jsx'
 import Slider from '../components/Slider.jsx'
 

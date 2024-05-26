@@ -564,7 +564,7 @@ function initVinylStore(preset) {
     require.context('../images/ui/tabBackgrounds/vinyl')
   )
 
-  preset = Object.assign({}, preset, { moduleName: 'Vinyl Disc', tabBackgrounds: images })
+  preset = Object.assign({}, preset, { moduleName: 'Vinyl Disc', tabBackgrounds: images, locked: false, sizeLock: false, opacityLock: false })
 
   preset.vinylTypes.forEach((type) => {
     if (type === 'Whole') {
@@ -599,14 +599,26 @@ function setVinylStore(type, value) {
     }
     if (type === 'size') {
       // console.log('1///', value);
-      moduleVinylStore.sliderValue = value
+      moduleVinylStore.size = value
       // console.log('2///', value);
       resolve([value])
       // console.log('3///', value);
     }
     if (type === 'opacity') {
-      moduleVinylStore.sliderOpacity = value
+      moduleVinylStore.opacity = value
       resolve([value])
+    }
+
+    //
+
+    if (type == 'lockTabs') {
+      moduleVinylStore.locked = value
+    }
+    if (type == 'lockSize') {
+      moduleVinylStore.sizeLock = value
+    }
+    if (type == 'lockOpacity') {
+      moduleVinylStore.opacityLock = value
     }
   })
 }
@@ -648,9 +660,10 @@ function setBasicTypoStore(type, nextValue) {
       resolve([nextValue])
     } 
     if (type === 'textarea') {
+      console.log(moduleBasicTypoStore.textarea);
+      console.log(nextValue);
       moduleBasicTypoStore.textarea = nextValue
       console.log(moduleBasicTypoStore.textarea);
-      console.log(typeof moduleBasicTypoStore.textarea)
     }
     // if (type === 'textarea') {
     //   if (index !== null) {

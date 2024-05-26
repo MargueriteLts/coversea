@@ -557,19 +557,19 @@ function drawModules(p) {
       imageVinyl = imagesLabelVinyl[currentVinylImg]
     }
 
-    let sliderValue = vinyl.sliderValue
+    let vinylSize = vinyl.size
     let equivalentSize
 
     if (vinyl.bigger == true) {
-      equivalentSize = ((sliderValue * (canvasSize+10)) / 100) + 300
+      equivalentSize = ((vinylSize * (canvasSize+10)) / 100) + 300
     } else if (vinyl.bigger == false) {
-      equivalentSize = (sliderValue * canvasSize) / 100
+      equivalentSize = (vinylSize * canvasSize) / 100
     }
 
     let x = (canvasSize - equivalentSize) / 2;
     let y = (canvasSize - equivalentSize) / 2;
 
-    let opacity = parseFloat(vinyl.sliderOpacity)
+    let opacity = parseFloat(vinyl.opacity)
     // p.tint(255, opacity)
 
     const blend = getBlendStore()

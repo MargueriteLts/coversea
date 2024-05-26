@@ -213,18 +213,79 @@ body.generator {
         height: 100%;
         padding: 16px;
         border-top: 1px solid #383838;
-      }
-
-      .Sliders {
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        column-gap: 20px;
 
-        .input {
+        .content_row {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          column-gap: 20px;
+        }
+
+        .content_Column {
           width: 50%;
         }
+
+        .M_Control {
+          width: 100%;
+          display: flex;
+
+          &.row {
+            flex-direction: row;
+            column-gap: 8px;
+            align-items: center;
+          }
+          &.column {
+            flex-direction: column;
+            row-gap: 8px;
+          }
+
+          .control_Title {
+            display: flex;
+            flex-direction: row;
+            column-gap: 8px;
+            align-items: center;
+          }
+        }
+
+        .M_BackgroundContent {
+
+          .BackgroundContent_WithTabs {
+            display: flex;
+            flex-direction: column;
+            row-gap: 16px;
+
+            .BackgroundContent_Tabs {
+              display: flex;
+              flex-direction: row;
+              column-gap: 8px;
+              align-items: center;
+            }
+
+            // .BackgroundContent_TabContent {}
+          }
+
+
+        }
+
+        .M_LinesContent {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          column-gap: 20px;
+        }
       }
+
+      // .Sliders {
+      //   width: 100%;
+      //   display: flex;
+      //   flex-direction: row;
+      //   column-gap: 20px;
+
+      //   .input {
+      //     width: 50%;
+      //   }
+      // }
   
       .moduleContent_Background {
         display: flex;
@@ -281,16 +342,36 @@ body.generator {
         }
       }
 
-      .module__content--basictypo-maintext {
+      .M_BasicTypoContent {
         display: flex;
-        // flex-direction: row;
-        row-gap: 12px;
-        // align-items: center;
+        flex-direction: column;
+        row-gap: 20px;
+        width: 100%;
 
-        .module__basictypo-maintext-controls {
+        .BasicTypo_row {
           display: flex;
           flex-direction: row;
-          column-gap: 12px;
+          column-gap: 8px;
+
+          .module__basictypo-maintext-controls {
+              display: flex;
+              flex-direction: row;
+              column-gap: 12px;
+            }
+        }
+      }
+
+      .M_AddRemoveText {
+        display: flex;
+        flex-direction: row;
+        column-gap: 4px;
+        align-items: flex-end;
+
+        .inputStack {
+          display: flex;
+          flex-direction: column;
+          row-gap: 8px;
+          flex: 1 0 0;
         }
       }
     }

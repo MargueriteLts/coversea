@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import icons from '../loadIcons';
+import icons from '../../loadIcons';
 
 
-export default class DropDown extends Component {
+export default class M_Select extends Component {
   constructor(props) {
     super(props);
     

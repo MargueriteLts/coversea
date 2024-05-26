@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import HeaderModule from '../components/HeaderModule.jsx'
 import ColorPicker from '../components/ColorPicker.jsx'
-import DropDown from '../components/DropDown.jsx'
+import DropDown from '../components/molecules/M_Select.jsx'
 import Slider from '../components/Slider.jsx'
 
 export default class Shapes extends Component {

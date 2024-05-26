@@ -23,9 +23,9 @@ const preset = {
   },
 
   Vinyl: {
-    sliderValue: 90,
+    size: 90,
     bigger: false,
-    sliderOpacity: 200,
+    opacity: 200,
 
     vinylTypes: ['Whole', 'Label'],
     currentVinylType: 'Label',
@@ -42,22 +42,10 @@ const preset = {
     max: 10,
   },
 
-  // Text1: {
-  //   text: 'Music Cover Artwork in Generator4',
-  //   font: 'bc-novatica-cyr',
-  //   dopText: false,
-  //   size: 8,
-  //   upperCase: true,
-  //   color: '#ffffff',
-  //   random: true,
-  //   textAlign: 'left'
-  // },
-
-
   BasicTypo: {
     color: '#ffffff',
 
-    mainText: 'Music Cover Artwork in Generator4',
+    mainText: 'Name of your track or album',
     optionsMainTextFonts: ['esenin-script-one', 'Acosta', 'PT-Root-UI', 'bc-novatica-cyr'],
     font: 'bc-novatica-cyr',
     sizeMainText:{

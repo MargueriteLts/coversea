@@ -5,7 +5,7 @@ import HeaderModule from '../components/HeaderModule.jsx'
 import TabButtonSet from '../components/TabButtonSet.jsx'
 import Input from '../components/Input.jsx'
 import ColorPicker from '../components/ColorPicker.jsx'
-import DropDown from '../components/DropDown.jsx'
+import DropDown from '../components/molecules/M_Select.jsx'
 import Slider from '../components/Slider.jsx'
 import TextArea from '../components/TextArea.jsx'
 

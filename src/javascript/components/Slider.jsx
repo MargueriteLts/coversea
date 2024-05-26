@@ -6,13 +6,11 @@ export default class Slider extends PureComponent {
   }
 
   render() {
-    const { min, max, value, handleChange, title } = this.props
+    const { min, max, value, handleChange } = this.props
 
     return (
-      <div className='input'>
-        {title}
+      <div className='slider'>
         <input
-          className="slider"
           type="range"
           min={min}
           max={max}

@@ -76,34 +76,18 @@ export default class M_BackgroundContent extends Component {
     ////////////// SOLID COLOR
 
     if (background.currentBackgroundType == 'SolidColor') {
-      // return <div className='TabContent'>
-      //   <IconToggle
-      //     isLocked={this.state.solidColorLock}
-      //     setStore={setBackgroundStore}
-      //     item='lockSolidColor'
-      //     handleToggle={this.handleToggle}
-      //   />
-      //   <ColorPicker
-      //     title=''
-      //     object='SolidColor'
-      //     color={background.preset.SolidColor.color}
-      //     handleChange={handleChangeBackgroundSolidColor}
-      //     key='BackgroundColorPicker'
-      //   />
-      // </div>
-      // console.log(background.SolidColor);
       return (
         <M_Control
+          orientation="row"
+          controlType='ColorPicker'
+
           isLocked={this.state.solidColorLock}
           setStore={setBackgroundStore}
           item='lockSolidColor'
           handleToggle={this.handleToggle}
-          title=''
-          controlType='SolidColor'
 
-          // text={background.SolidColor.color}
+          data={background.preset.SolidColor.color}
           object='SolidColor'
-          color={background.preset.SolidColor.color}
           handleChange={handleChangeBackgroundSolidColor}
           type='BackgroundColorPicker'
         />
@@ -201,7 +185,7 @@ export default class M_BackgroundContent extends Component {
           item='lockSolidColor'
           handleToggle={this.handleToggle}
           title=''
-          controlType='SolidColor'
+          controlType='ColorPicker'
 
           // text={background.SolidColor.color}
           object='SolidColor'
@@ -258,19 +242,21 @@ export default class M_BackgroundContent extends Component {
     <div className="M_BackgroundContent">
       {nbBgTypes > 1 ? (
 
-        <div className="BackgroundContent_Tabs">
-          <IconToggle
-            isLocked={this.state.tabsLock}
-            setStore={setBackgroundStore}
-            item='lockTabs'
-            handleToggle={this.handleToggle}
-          />
-          <TabButtonSet
-            options={background.preset}
-            value={background.currentBackgroundType}
-            handleClick={handleTabClickBackground}
-          />
-          <div className="BackgroundContent_TabContent">
+        <div className="BackgroundContent_WithTabs">
+          <div className="BackgroundContent_Tabs">
+            <IconToggle
+              isLocked={this.state.tabsLock}
+              setStore={setBackgroundStore}
+              item='lockTabs'
+              handleToggle={this.handleToggle}
+            />
+            <TabButtonSet
+              options={background.preset}
+              value={background.currentBackgroundType}
+              handleClick={handleTabClickBackground}
+            />
+          </div>
+        <div className="BackgroundContent_TabContent">
           {this.renderTabContent()}
           </div>
         </div>

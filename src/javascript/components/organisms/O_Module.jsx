@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom'
 import M_ModuleHeader from '../HeaderModule.jsx'
 import M_BackgroundContent from '../molecules/moduleContent/M_BackgroundContent.jsx'
 import M_LinesContent from '../molecules/moduleContent/M_LinesContent.jsx'
+import M_VinylContent from '../molecules/moduleContent/M_VinylContent.jsx'
+import M_BasicTypoContent from '../molecules/moduleContent/M_BasicTypoContent.jsx'
 
 export default class Module extends Component {
   constructor(props) {
@@ -30,9 +32,17 @@ export default class Module extends Component {
       handleChangeBackgroundAngleGradient,
       handleTabClickNoise,
       setBackgroundStore,
+      vinyl,
+      handleTabClickVinyl,
+      handleVinylSize,
+      handleVinylOpacity,
+      setVinylStore,
       lines,
       handleLinesColor,
-      handleLinesSize
+      handleLinesSize,
+      setLinesStore,
+      basictypo,
+      setBasicTypoStore
     } = this.props
 
     if (moduleType == 'Background') {
@@ -48,12 +58,32 @@ export default class Module extends Component {
         />
       )
     }
+    if (moduleType == 'Vinyl') {
+      return (
+        <M_VinylContent
+          vinyl={vinyl}
+          handleTabClickVinyl={handleTabClickVinyl}
+          handleVinylSize={handleVinylSize}
+          handleVinylOpacity={handleVinylOpacity}
+          setVinylStore={setVinylStore}
+        />
+      )
+    }
     if (moduleType == 'Lines') {
       return (
         <M_LinesContent
           lines={lines}
           handleLinesColor={handleLinesColor}
           handleLinesSize={handleLinesSize}
+          setLinesStore={setLinesStore}
+        />
+      )
+    }
+    if (moduleType == 'BasicTypo') {
+      return (
+        <M_BasicTypoContent
+          basictypo={basictypo}
+          setBasicTypoStore={setBasicTypoStore}
         />
       )
     }

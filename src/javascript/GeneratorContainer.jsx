@@ -9,6 +9,7 @@ import IconButton from './components/buttons/IconButton.jsx'
 
 ///////////////MODULES
 import O_Module from './components/organisms/O_Module.jsx'
+
 //Background
 // import Background from './modules/Background.jsx'
 import BackgroundImage from './modules/BackgroundImage.jsx'
@@ -265,19 +266,21 @@ export default class GeneratorContainer extends Component {
     const {
       moduleList,
       background,
+      setBackgroundStore,
       objects,
       shapes,
       particles,
       backgroundImage,
       vinyl,
+      setVinylStore,
       lines,
+      setLinesStore,
       module3D,
       basictypo,
       basictypoV2,
       setBasicTypoV2Store,
       setBasicTypoStore,
-      overlay,
-      setBackgroundStore
+      overlay
       // setCanvasSizeStore
     } = this.props
 
@@ -328,13 +331,6 @@ export default class GeneratorContainer extends Component {
       }
       if (moduleName == 'Lines') {
         modules.push(
-          // <Lines
-          //   key={index}
-          //   handleRandomizeModule={this.handleRandomizeModule}
-          //   lines={lines}
-          //   handleLinesColor={this.handleLinesColor}
-          //   handleLinesSize={this.handleLinesSize}
-          // />
           <O_Module
             moduleType='Lines'
             lines={lines}
@@ -342,6 +338,7 @@ export default class GeneratorContainer extends Component {
             handleRandomizeModule={this.handleRandomizeModule}
             handleLinesColor={this.handleLinesColor}
             handleLinesSize={this.handleLinesSize}
+            setLinesStore={setLinesStore}
             key={index}
           />
         )
@@ -382,13 +379,16 @@ export default class GeneratorContainer extends Component {
       }
       if (moduleName == 'Vinyl') {
         modules.push(
-          <Vinyl
-            key={index}
-            handleRandomizeModule={this.handleRandomizeModule}
+          <O_Module
+            moduleType='Vinyl'
             vinyl={vinyl}
+            moduleName={vinyl.moduleName}
+            handleRandomizeModule={this.handleRandomizeModule}
             handleTabClickVinyl={this.handleTabClickVinyl}
-            handleChangeVinylSize={this.handleVinylSize}
+            handleVinylSize={this.handleVinylSize}
             handleVinylOpacity={this.handleVinylOpacity}
+            setVinylStore={setVinylStore}
+            key={index}
           />
         )
       }
@@ -396,12 +396,19 @@ export default class GeneratorContainer extends Component {
       // Typography
       if (moduleName == 'BasicTypo') {
         modules.push(
-          <BasicTypo
-            key={index}
-          // randomizeModuleStore={randomizeModuleStore}
+          <O_Module
+            moduleType='BasicTypo'
             basictypo={basictypo}
+            moduleName={basictypo.moduleName}
             setBasicTypoStore={setBasicTypoStore}
+            key={index}
           />
+          // <BasicTypo
+          //   key={index}
+          // // randomizeModuleStore={randomizeModuleStore}
+          //   basictypo={basictypo}
+          //   setBasicTypoStore={setBasicTypoStore}
+          // />
         )
       }
       if (moduleName == 'BasicTypoV2') {
@@ -447,7 +454,6 @@ export default class GeneratorContainer extends Component {
         </div>
         <div className="generator__sketch-controls">
           <div className="btn--big" onClick={this.generateCover}>GENERATE</div>
-          {/* <div className="btn--primary" onClick={this.downloadImage}>Download image</div> */}
           <IconButton
             onClick={this.downloadImage}
             iconName='Download.svg'

@@ -1,67 +1,54 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import reactCSS from 'reactcss'
-import { SketchPicker } from 'react-color'
+import React, { Component, createRef } from 'react';
+import reactCSS from 'reactcss';
+import { SketchPicker } from 'react-color';
 
 export default class AllColorPicker extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       displayColorPicker: false,
       color: this.props.color,
-      popoverPosition: { top: 0, left: 0 }
     };
+
+    this.colorpickerRef = createRef();
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleClick = () => {
-    const parentRect = ReactDOM.findDOMNode(this).getBoundingClientRect();
-    const popoverWidth = 220;
-    const popoverHeight = 350;
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-
-    let top = parentRect.bottom;
-    let left = parentRect.left;
-
-    if (left + popoverWidth > viewportWidth) {
-      left = viewportWidth - popoverWidth;
-    }
-
-    if (top + popoverHeight > viewportHeight) {
-      top = viewportHeight - popoverHeight;
-    }
-
-    this.setState({
-      displayColorPicker: !this.state.displayColorPicker,
-      popoverPosition: { top, left }
-    });
+    this.setState({ displayColorPicker: !this.state.displayColorPicker });
   };
 
   handleClose = () => {
-    this.setState({ displayColorPicker: false })
+    this.setState({ displayColorPicker: false });
   };
 
-  render() {
 
-    const { title } = this.props
+  componentDidMount() {
+    document.body.addEventListener('click', this.handleClickOutside);
+  }
 
-    let color = []
+  componentWillUnmount() {
+    document.body.removeEventListener('click', this.handleClickOutside);
+  }
 
-    if (typeof this.props.color == 'object') {
-      color = `rgb(${this.props.color.join(',')})`
-    } else {
-      color = this.props.color
+  handleClickOutside(event) {
+    if (this.colorpickerRef && !this.colorpickerRef.current.contains(event.target)) {
+      this.handleClose()
     }
+  }
 
-    let text = `${this.state.color}`
+
+  render() {
+    const { color, displayColorPicker, title } = this.state;
 
     const styles = reactCSS({
-      'default': {
-        box: {
-          width: '100%',
-          height: '100%',
-          fontSize: '0px',
+      default: {
+        swatch: {
+          display: 'inline-block',
+          marginRight: '8px', // Add spacing between swatch and popover
+          cursor: 'pointer',
         },
         colorSwatch: {
           width: '32px',
@@ -69,52 +56,34 @@ export default class AllColorPicker extends Component {
           borderRadius: '2px',
           background: color,
         },
-        swatch: {
-          padding: '2px',
-          background: '#2C2C2C',
-          borderRadius: '2px',
-          boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-          display: 'inline-block',
-          cursor: 'pointer',
-        },
         popover: {
-          position: 'fixed', // Change to fixed to ensure popover position remains fixed relative to the viewport
+          position: 'absolute',
           zIndex: '2',
-          top: this.state.popoverPosition.top,
-          left: this.state.popoverPosition.left
-        },
-        cover: {
-          position: 'fixed',
-          top: '0px',
-          right: '0px',
-          bottom: '0px',
-          left: '0px',
+          top: '0',
+          left: '100%',
         }
       },
     });
 
-    // <div className={styles.box}>
-    return <div className='A_ColorPickerButton'>
-      {/* <div>{title}</div> */}
-      <div style={ styles.swatch } onClick={ this.handleClick }>
-        <div style={ styles.colorSwatch } />
-      </div>
-      {text}
-      { this.state.displayColorPicker
-      
-        ? <div style={ styles.popover }>
-            <div style={ styles.cover } onClick={ this.handleClose }/>
-
+    return (
+      <div style={{ position: 'relative' }} ref={this.colorpickerRef}>
+        <div>{title}</div>
+        <div style={styles.swatch} onClick={this.handleClick}>
+          <div style={styles.colorSwatch} />
+        </div>
+        {displayColorPicker && (
+          <div style={styles.popover}>
             <SketchPicker
               disableAlpha={true}
               color={color}
-              onChange={ (color) => {this.props.handleChange(this.props.object, color.hex)} }
+              onChange={(color) => {
+                this.setState({ color: color.hex });
+                this.props.handleChange(this.props.object, color.hex);
+              }}
             />
-
           </div>
-
-        : null
-      }
-    </div>
+        )}
+      </div>
+    );
   }
 }
