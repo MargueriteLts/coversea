@@ -14,6 +14,7 @@ export default class M_BackgroundContent extends Component {
     super(props)
 
     this.state = {
+      tabsLock: this.props.background.locked,
       solidColorLock : this.props.background.preset.SolidColor?.locked,
       gradientLock: this.props.background.preset.Gradient?.locked,
       noiseLock: this.props.background.preset.Noise?.locked,
@@ -27,6 +28,12 @@ export default class M_BackgroundContent extends Component {
   handleToggle = (item, setStore) => {
     
     
+    if (item == 'lockTabs') {
+      setStore(item, !this.state.tabsLock)
+      this.setState({
+        tabsLock: !this.state.tabsLock
+      })
+    }
     if (item == 'lockSolidColor') {
       setStore(item, !this.state.solidColorLock)
       this.setState({
@@ -243,7 +250,7 @@ export default class M_BackgroundContent extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { background, handleTabClickBackground } = this.props
+    const { background, handleTabClickBackground, setBackgroundStore } = this.props
     
     const nbBgTypes = background.backgroundTypes.length
 
@@ -252,7 +259,12 @@ export default class M_BackgroundContent extends Component {
       {nbBgTypes > 1 ? (
 
         <div className="BackgroundContent_Tabs">
-          {/* //ADD LOCK FOR TABS */}
+          <IconToggle
+            isLocked={this.state.tabsLock}
+            setStore={setBackgroundStore}
+            item='lockTabs'
+            handleToggle={this.handleToggle}
+          />
           <TabButtonSet
             options={background.preset}
             value={background.currentBackgroundType}

@@ -162,7 +162,7 @@ function generatePositions() {
 // }
 
 function initBackgroundStore(background) {
-  background = Object.assign({}, background, { moduleName: 'Background' })
+  background = Object.assign({}, background, { moduleName: 'Background', locked: false })
 
   background.backgroundTypes.forEach((backgroundType) => {
     if (backgroundType == 'SolidColor') {
@@ -246,6 +246,9 @@ function setBackgroundStore(type, value) {
 
     //
 
+    if (type == 'lockTabs') {
+      moduleBackgroundStore.locked = value
+    }
     if (type == 'lockSolidColor') {
       moduleBackgroundStore.preset.SolidColor.locked = value
     }
@@ -842,8 +845,8 @@ function generateAllStore(generatorName, moduleList) {
 
       if (moduleName == 'Particles') {
 
-        let particlesQuantity = getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max)
-        setParticlesStore('quantity', particlesQuantity)
+        // let particlesQuantity = getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max)
+        setParticlesStore('quantity', moduleParticlesStore.sliderValue)
 
         let particlesColor = generateColor()
         setParticlesStore('SolidColor', particlesColor)
@@ -935,10 +938,15 @@ function randomizeModuleStore(moduleType) {
 
     if (moduleType == 'Background') {
 
-      let newBackgroundType = sample(moduleBackgroundStore.backgroundTypes)
-      setBackgroundStore('CurrentTabChange', newBackgroundType)
+      let newBackgroundType = moduleBackgroundStore.currentBackgroundType
+
+      if (moduleBackgroundStore.locked == false) {
+        newBackgroundType = sample(moduleBackgroundStore.backgroundTypes)
+        setBackgroundStore('CurrentTabChange', newBackgroundType)
+      }
       
       if (newBackgroundType == 'SolidColor' && moduleBackgroundStore.preset.SolidColor.locked == false) {
+        console.log('yo');
         setBackgroundStore('SolidColor', generateColor())
       }
 

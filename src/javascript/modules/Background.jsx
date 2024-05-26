@@ -231,6 +231,7 @@ export default class Background extends Component {
         moduleType='Background'
         handleOpenModule={this.handleOpenModule}
         isOpen={this.state.isOpen}
+        // type: fixed/movable
       />
       
       { this.state.isOpen ? (
