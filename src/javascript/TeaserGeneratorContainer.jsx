@@ -6,6 +6,7 @@ import { generateHash } from './utilities.js'
 
 //UI
 import IconButton from './components/buttons/IconButton.jsx'
+import A_Text from './components/ATOMS/A_Text.jsx'
 
 ///////////////MODULES
 import O_Module from './components/organisms/O_Module.jsx'
@@ -424,6 +425,10 @@ export default class TeaserGeneratorContainer extends Component {
         </div>
         <div className="generator__sketch-controls">
           <div className="btn--big" onClick={this.generateCover}>GENERATE</div>
+          <A_Text
+            style='description'
+            text='In the final version the download feature will be available for you to save as many artwork as you like.'
+          />
         </div>
       </div>
     </div>

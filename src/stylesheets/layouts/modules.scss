@@ -1,0 +1,326 @@
+.generator__modules-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    row-gap: 8px;
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 16px;
+
+    /* Hide the scrollbar in Firefox */
+    scrollbar-width: none;
+    /* Hide the scrollbar in Internet Explorer/Edge */
+    -ms-overflow-style: none;
+
+    /* Hide the scrollbar in WebKit browsers (e.g., Chrome, Safari) */
+    .generator__modules::-webkit-scrollbar {
+      display: none;
+    }
+
+    .O_Module {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      border-radius: 30px;
+      background-color: var(--BACKGROUND-MODULE-DARKER);
+
+      .module__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 16px;
+        // border-bottom: 1px solid #383838;
+
+        .module__title {
+          color: var(--TEXT-WHITE);
+          font-size: 24px;
+          font-family: "bc-novatica-cyr", sans-serif;
+          font-weight: 500;
+          font-style: normal;
+          text-transform: uppercase;
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
+        }
+      }
+
+      .TabButtonSet {
+        display: inline-flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .TabButton {
+        display: inline-flex;
+        //WTF
+        padding: 11px 16px 13px 16px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        color: #838383;
+        text-align: center;
+        font-family: "neue-haas-unica";
+        font-size: 16px;
+        line-height: 16px;
+        font-style: normal;
+        font-weight: 400;
+        // line-height: normal;
+        letter-spacing: -0.8px;
+        // height: fit-content;
+
+        &:hover:not(.active) {
+          color: var(--TEXT-WHITE);
+          // background-color: var(--BACKGROUND-BTN-HOVER);
+          background-color: #1D1D1D;
+          cursor: pointer;
+        }
+
+        &.active {
+          // background: #1D1D1D;
+          background: #353537;
+          ;
+          color: var(--WHITE);
+          cursor: default;
+        }
+      }
+
+      .TabImageSet {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .TabImage {
+        position: relative;
+        display: flex;
+        width: 140px;
+        height: 140px;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        border-radius: 10px;
+        overflow: clip;
+
+        .TabImage--background {
+          // width: 100%;
+          // height: 100%;
+          width: 140px;
+          height: 140px;
+        }
+
+        .TabImage--text {
+          position: absolute;
+          z-index: 1;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px;
+          border-radius: 10px;
+          background: rgba(204, 204, 204, 0.1);
+          backdrop-filter: blur(6px);
+          width: fit-content;
+          height: fit-content;
+
+          color: var(--WHITE);
+          text-align: center;
+          font-family: "bc-novatica-cyr";
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 16px;
+          text-transform: uppercase;
+        }
+
+        &:hover:not(.active) {
+          .TabImage--text {
+            background: rgba(26, 26, 26, 0.9);
+          }
+
+          cursor: pointer;
+        }
+
+        &.active {
+          border: 1px solid white;
+
+          .TabImage--text {
+            color: black;
+            background-color: var(--WHITE);
+          }
+        }
+      }
+
+      .moduleContent {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        height: 100%;
+        padding: 16px;
+        border-top: 1px solid #383838;
+        width: 100%;
+
+        .content_row {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          column-gap: 20px;
+        }
+
+        .content_Column {
+          width: 50%;
+        }
+
+        .M_Control {
+          width: 100%;
+          display: flex;
+
+          &.row {
+            flex-direction: row;
+            column-gap: 8px;
+            align-items: center;
+          }
+
+          &.column {
+            flex-direction: column;
+            row-gap: 8px;
+          }
+
+          .control_Title {
+            display: flex;
+            flex-direction: row;
+            column-gap: 8px;
+            align-items: center;
+          }
+        }
+
+        .M_BackgroundContent {
+
+          .BackgroundContent_WithTabs {
+            display: flex;
+            flex-direction: column;
+            row-gap: 16px;
+
+            .BackgroundContent_Tabs {
+              display: flex;
+              flex-direction: row;
+              column-gap: 8px;
+              align-items: center;
+            }
+
+            // .BackgroundContent_TabContent {}
+          }
+
+
+        }
+
+        .M_LinesContent {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          column-gap: 20px;
+        }
+      }
+
+      // .Sliders {
+      //   width: 100%;
+      //   display: flex;
+      //   flex-direction: row;
+      //   column-gap: 20px;
+
+      //   .input {
+      //     width: 50%;
+      //   }
+      // }
+
+      .moduleContent_Background {
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+        height: 100%;
+        padding: 16px;
+        border-top: 1px solid #383838;
+
+        .TabContent {
+          display: flex;
+          flex-direction: row;
+          // align-items: center;
+          column-gap: 12px;
+
+        }
+
+        .moduleContent-Left,
+        .moduleContent-Right {
+          display: flex;
+          flex-direction: column;
+          row-gap: 20px;
+          width: 50%;
+        }
+      }
+
+      .gradientColors {
+        display: flex;
+        flex-direction: row;
+        column-gap: 12px;
+        align-items: center;
+      }
+
+      .ModuleContentBgOnly {
+        background-color: var(--BgModul);
+        display: flex;
+        flex-direction: column;
+        row-gap: 12px;
+        column-gap: 12px;
+        padding: 24px;
+        height: 100%;
+        // width: 100%;
+        border-radius: 0 0 40px 40px;
+
+        .gradientControls {
+          display: flex;
+          flex-direction: row;
+          column-gap: 12px;
+        }
+
+        .gradientColors {
+          display: flex;
+          flex-direction: row;
+          column-gap: 12px;
+        }
+      }
+
+      .M_BasicTypoContent {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        width: 100%;
+
+        .BasicTypo_row {
+          display: flex;
+          flex-direction: row;
+          column-gap: 8px;
+
+          .module__basictypo-maintext-controls {
+            display: flex;
+            flex-direction: row;
+            column-gap: 12px;
+          }
+        }
+      }
+
+      .M_AddRemoveText {
+        display: flex;
+        flex-direction: row;
+        column-gap: 4px;
+        align-items: flex-end;
+
+        .inputStack {
+          display: flex;
+          flex-direction: column;
+          row-gap: 8px;
+          flex: 1 0 0;
+        }
+      }
+    }
+  }

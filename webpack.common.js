@@ -9,7 +9,8 @@ const path = require('path')
 module.exports = {
   entry: {
     index: './src/index.js',
-    generator: './src/generator.jsx'
+    generator: './src/generator.jsx',
+    teasergenerator: './src/teaserGenerator.jsx',
   },
   output: {
     filename: '[name].js',
@@ -89,13 +90,12 @@ module.exports = {
     }),
 
     // Teaser Page
-
     new HtmlWebpackPlugin({
       hash: true,
       scriptLoading: 'blocking',
-      template: './src/generators/teaserpage.html',
-      filename: './generators/teaserpage.html',
-      chunks: ['generator']
+      template: './src/teaserpage.html',
+      filename: './teaserpage.html',
+      chunks: ['teasergenerator']
     }),
 
     // Internal pages
