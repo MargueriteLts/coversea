@@ -12,7 +12,7 @@ export default class AllColorPicker extends Component {
       displayColorPicker: false,
       color: this.props.color,
     };
-    
+
     this.colorpickerRef = createRef();
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -81,7 +81,7 @@ export default class AllColorPicker extends Component {
         },
         popover: {
           position: 'absolute',
-          zIndex: '2',
+          zIndex: '2'
         }
       },
     });

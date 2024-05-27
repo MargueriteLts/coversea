@@ -602,17 +602,27 @@ function drawModules(p) {
         equivalentSize
       )
     } else {
-      p.image(vinylLayer, 0, 0)
-      vinylLayer.clear()
-      vinylLayer.tint(255, opacity)
-      vinylLayer.image(
-        imageVinyl,
+      // p.image(vinylLayer, 0, 0)
+      // vinylLayer.clear()
+      // vinylLayer.tint(255, opacity)
+      // vinylLayer.image(
+      //   imageVinyl,
+      //   x,
+      //   y,
+      //   equivalentSize,
+      //   equivalentSize
+      // )
+      p.tint(255, opacity)
+      p.image(imageVinyl,
         x,
         y,
         equivalentSize,
-        equivalentSize
-      )
+        equivalentSize)
+      p.noTint()
     }
+
+    // console.log(canvasSize);
+    // console.log(equivalentSize);
 
     // p.background(imageVinyl, opacity)
   }
@@ -967,7 +977,17 @@ function drawModules(p) {
 
 
 
-
+function getDivSize() {
+  return new Promise((resolve, reject) => {
+    parentDiv = document.getElementById(canvasContainerId);
+    parentDivInfo = parentDiv.getBoundingClientRect();
+    parentDivWidth = parentDivInfo.width;
+    parentDivHeight = parentDivInfo.height;
+    
+    let newCanvasSize = Math.min(parentDivWidth, parentDivHeight)
+    resolve([newCanvasSize])
+  })
+}
 
 
 
@@ -1107,9 +1127,11 @@ function sketch(p) {
       randomImages()
     }
 
-    if (moduleList.includes('Vinyl')) {
-      vinylLayer = p.createGraphics(canvasSize, canvasSize)
-    }
+    // if (moduleList.includes('Vinyl')) {
+    //   getDivSize().then((canvasSize) => {
+    //     vinylLayer = p.createGraphics(canvasSize, canvasSize)
+    //   })
+    // }
 
     if (moduleList.includes('Module3D')) {
       graphics = p.createGraphics(canvasSize, canvasSize, p.WEBGL)
@@ -1138,17 +1160,20 @@ function sketch(p) {
   }
   
   p.windowResized = () => {
-    
-    parentDiv = document.getElementById(canvasContainerId);
-    parentDivInfo = parentDiv.getBoundingClientRect();
-    parentDivWidth = parentDivInfo.width;
-    parentDivHeight = parentDivInfo.height;
-    
-    canvasSize = Math.min(parentDivWidth, parentDivHeight)
-    
-    p.resizeCanvas(canvasSize, canvasSize)
-    p.rect(canvasSize, canvasSize, canvasSize, canvasSize)
+      // parentDiv = document.getElementById(canvasContainerId);
+      // parentDivInfo = parentDiv.getBoundingClientRect();
+      // parentDivWidth = parentDivInfo.width;
+      // parentDivHeight = parentDivInfo.height;
+      
+      // canvasSize = Math.min(parentDivWidth, parentDivHeight)
+      getDivSize().then((newCanvasSize) => {
+        canvasSize = newCanvasSize
+        p.resizeCanvas(canvasSize, canvasSize)
+        p.rect(canvasSize, canvasSize, canvasSize, canvasSize)
+      })
   }
+
+
   
   p.draw = () => {
     drawModules(p)

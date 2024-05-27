@@ -66,10 +66,10 @@ export default class M_DropDown extends Component {
     const styles = reactCSS({
       'default': {
         popover: {
-          position: 'fixed', // Change to fixed to ensure popover position remains fixed relative to the viewport
+          position: 'absolute', // Change to fixed to ensure popover position remains fixed relative to the viewport
           zIndex: '2',
-          top: this.state.popoverPosition.top,
-          left: this.state.popoverPosition.left
+          top: '21px',
+          right: '50%'
         },
         // cover: {
         //   position: 'fixed',

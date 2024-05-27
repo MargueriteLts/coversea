@@ -88,6 +88,16 @@ module.exports = {
       chunks: ['index']
     }),
 
+    // Teaser Page
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/teaserpage.html',
+      filename: './generators/teaserpage.html',
+      chunks: ['generator']
+    }),
+
     // Internal pages
 
     new HtmlWebpackPlugin({

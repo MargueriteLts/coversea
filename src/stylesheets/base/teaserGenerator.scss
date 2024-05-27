@@ -1,0 +1,167 @@
+body.teaserGenerator {
+  display: flex;
+  flex-direction: column;
+  // height: 100vh;
+  // height: 840px;
+  height: 2500px;
+  // overflow: hidden;
+  margin: 12px 24px;
+  background: var(--BACKGROUND-WEBSITE-BLACK);
+  overflow: auto;
+
+  .teaserGeneratorContainer {
+      display: inline-flex;
+      height: 840px;
+      padding: 36px;
+      align-items: center;
+      gap: 21px;
+      flex-shrink: 0;
+      border-radius: 20px;
+      // background: #0A0A0A;
+      border: 10px solid var(--BACKGROUND-BTN-SECONDARY);
+  
+      #reactComponentRoot {
+        display: flex;
+        flex-direction: column;
+        // flex-grow: 1;
+        // height: 100%;
+        // height: fit-content;
+        overflow-y: hidden;
+        // margin-top: 24px;
+        // margin-bottom: 24px;
+      }
+    }
+  
+    .generator__content {
+      height: fit-content;
+    }
+  
+    .teaserHeader {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      top: 12px;
+  
+      .logoHeader {
+        width: 100%;
+        background-image: url('./images/ui/logo-symbolWithName.svg');
+        background-size: cover;
+        background-position: top;
+        background-repeat: no-repeat;
+        width: 541px;
+        height: 73px;
+      }
+  
+      .subtitle {
+        color: var(--White, #F6F6F6);
+        text-align: center;
+        font-family: "BC Novatica CYR";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+        /* 100% */
+        letter-spacing: -0.54px;
+        text-transform: uppercase;
+      }
+    }
+  
+    p {
+      color: var(--White, #F6F6F6);
+      font-family: "Neue Haas Unica";
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 20px;
+      letter-spacing: -0.48px;
+    }
+  
+    .section1 {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 201px;
+      margin-top: 88px;
+  
+      .citation {
+        color: var(--White, #F6F6F6);
+        font-family: "BC Novatica CYR";
+        font-size: 46.943px;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 44.708px;
+        /* 95.238% */
+        text-transform: uppercase;
+        width: 1225px;
+        mix-blend-mode: difference;
+      }
+    }
+  
+    .section2 {
+      display: inline-flex;
+      height: 43px;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      margin-top: 288px;
+  
+      .button {
+        display: flex;
+        padding: 12.632px 15.789px;
+        align-items: center;
+        gap: 7.105px;
+  
+        border-radius: 30px;
+        border: 1px solid var(--White, #F6F6F6);
+  
+        color: var(--White, #F6F6F6);
+        text-align: center;
+        leading-trim: both;
+        text-edge: cap;
+        font-family: "BC Novatica CYR";
+        font-size: 25.263px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 25.263px;
+        /* 100% */
+        text-transform: uppercase;
+      }
+  
+      .logoBG {
+        position: absolute;
+        // top: 427px;
+        // left: 0;
+        width: 100%;
+        height: var(--VPW);
+  
+        z-index: -1;
+        background-image: url('./images/ui/logo-bgGlavnaya.svg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+
+    h1 {
+      color: var(--White, #F6F6F6);
+      font-family: "BC Novatica CYR";
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 36px;
+      /* 100% */
+      letter-spacing: -1.08px;
+      text-transform: uppercase;
+    }
+
+    .section3 {
+      display: flex;
+      flex-direction: column;
+      row-gap: 24px;
+      height: fit-content;
+      margin-top: 660px;
+
+  
+    }
+}

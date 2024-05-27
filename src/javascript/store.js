@@ -12,6 +12,7 @@ import * as generator4p2 from '../generators/generator4p2.js'
 import * as generator5p2 from '../generators/generator5p2.js'
 import * as generator6p2 from '../generators/generator6p2.js'
 import * as generator7 from '../generators/generator7.js'
+import * as teaserGenerator from '../generators/teaserGenerator.js'
 
 const generators = {
   generator1,
@@ -25,7 +26,8 @@ const generators = {
   generator4p2,
   generator5p2,
   generator6p2,
-  generator7
+  generator7,
+  teaserGenerator
 }
 
 let moduleList,

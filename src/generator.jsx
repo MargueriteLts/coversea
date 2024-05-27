@@ -36,6 +36,7 @@ import {
 
 import { initSketch } from './javascript/sketch.js'
 import GeneratorContainer from './javascript/GeneratorContainer.jsx'
+import TeaserGeneratorContainer from './javascript/TeaserGeneratorContainer.jsx'
 
 import * as generator1 from './generators/generator1.js'
 import * as generator2 from './generators/generator2.js'
@@ -49,6 +50,7 @@ import * as generator4p2 from './generators/generator4p2.js'
 import * as generator5p2 from './generators/generator5p2.js'
 import * as generator6p2 from './generators/generator6p2.js'
 import * as generator7 from './generators/generator7.js'
+import * as teaserGenerator from './generators/teaserGenerator.js'
 
 const generators = {
   generator1,
@@ -62,7 +64,8 @@ const generators = {
   generator4p2,
   generator5p2,
   generator6p2,
-  generator7
+  generator7,
+  teaserGenerator
 }
 
 const actions = {
@@ -145,5 +148,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const root = createRoot(container)
-  root.render(<GeneratorContainer {...props} {...actions} />)
+  if (generatorName == 'teaserGenerator') {
+    root.render(<TeaserGeneratorContainer {...props} {...actions} />)
+  } else {
+    root.render(<GeneratorContainer {...props} {...actions} />)
+  }
+  // root.render(<GeneratorContainer {...props} {...actions} />)
 })

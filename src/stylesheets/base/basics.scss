@@ -268,42 +268,50 @@ textarea {
   cursor: pointer;
 }
 
-
-.dropDownButton {
-  display: inline-flex;
-  padding: 8px 12px 10px 12px;
-  align-items: center;
-  gap: 8px;
-  color: var(--TEXT-WHITE);
-  font-family: "Neue Haas Unica";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.8px;
-  cursor: pointer;
-  border-radius: 10px;
-
-  &:hover {
-    // background-color: var(--BACKGROUND-BTN-SECONDARY);
-    background-color: #1D1D1D;
-    background-color:#353537;
-  }
-
-  &.active {
-    background-color: #353537;
-  }
-}
-
-.dropDownPopover {
-  display: flex;
-  flex-direction: column;
-  row-gap: 12px;
-  background-color: #353537;
-  padding: 12px;
-  width: fit-content;
+.M_DropDown {
+  position: relative;
   height: fit-content;
-  border-radius: 10px;
+
+  .dropDownButton {
+    display: inline-flex;
+    padding: 8px 12px 10px 12px;
+    align-items: center;
+    gap: 8px;
+    color: var(--TEXT-WHITE);
+    font-family: "Neue Haas Unica";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.8px;
+    cursor: pointer;
+    border-radius: 10px;
+
+    &:hover {
+      // background-color: var(--BACKGROUND-BTN-SECONDARY);
+      background-color: #1D1D1D;
+      background-color: #353537;
+    }
+
+    &.active {
+      background-color: #353537;
+    }
+  }
+
+  .dropDownPopover {
+    // position: absolute;
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+    background-color: #353537;
+    padding: 12px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    -webkit-box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.18);
+    -moz-box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.18);
+    box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.18);
+  }
 }
 
 
