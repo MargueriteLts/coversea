@@ -427,7 +427,7 @@ export default class TeaserGeneratorContainer extends Component {
           <div className="btn--big" onClick={this.generateCover}>GENERATE</div>
           <A_Text
             style='description'
-            text='In the final version the download feature will be available for you to save as many artwork as you like.'
+            text={`The download feature will be available in the full version. Stay tuned so you don't miss the realease!`}
           />
         </div>
       </div>

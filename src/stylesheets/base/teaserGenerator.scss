@@ -2,415 +2,71 @@ body.teaserGenerator {
   display: flex;
   flex-direction: column;
   background: var(--BACKGROUND-WEBSITE-BLACK);
-  margin: 2vw;
+
+  margin: 36px;
   justify-content: center;
   align-items: center;
-}
+  overflow-x: hidden;
 
-.teaserGeneratorContainer {
-  display: inline-flex;
-  padding: 2vw;
-  margin: 2vw;
-  align-items: center;
-  justify-content: center;
-  border-radius: 40px;
-  border: 5px solid var(--BACKGROUND-BTN-SECONDARY);
-  width: 95vw;
-  // height: fit-content;
-  overflow-y: hidden;
-  aspect-ratio: auto;
-  // width: 100%;
-  height: 100%;
-
-  #reactComponentRoot {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    // height: fit-content;
-    overflow-y: hidden;
+  h1 {
+    color: var(--TEXT-WHITE);
+    
+    /* TeaserPage/h1 */
+    font-family: "bc-novatica-cyr";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36px;
+    /* 100% */
+    letter-spacing: -1.08px;
+    text-transform: uppercase;
   }
-}
 
-.generator__content {
-  display: flex;
-  flex-direction: row;
-  flex-grow: 1;
-  column-gap: 20px;
-  width: 100%;
-  // height: fit-content;
-  overflow: hidden;
+  p {
+    color: var(---TEXT-WHITE);
+    font-family: "neue-haas-unica";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 20px;
+    letter-spacing: -0.48px;
+  }
 
-  .generator__sketch-wrap {
-    display: flex;
-    flex-direction: column;
-    row-gap: 16px;
-    overflow: hidden;
-    width: 50%;
+  .statement {
+    color: var(---TEXT-WHITE);
+    font-family: "bc-novatica-cyr";
+    font-size: 46px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 46px;
+    /* 100% */
+    text-transform: uppercase;
+    mix-blend-mode: difference;
+  }
 
-    .sketch {
-      flex-grow: 1;
-      overflow: hidden;
-      width: 100%;
-      aspect-ratio: 1 / 1;
-    }
+  .subtitle {
+    color: var(---TEXT-WHITE);
+    font-family: "bc-novatica-cyr";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    /* 100% */
+    letter-spacing: -0.54px;
+    text-transform: uppercase;
 
-    .generator__sketch-controls {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      height: fit-content;
-    }
-
-    .description {
-      color: var(--White, #F6F6F6);
-      font-family: "Neue Haas Unica";
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 300;
+    span {
+      // color: var(--White, #F6F6F6);
+      font-family: "bc-novatica-cyr";
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 400;
       line-height: 20px;
-      letter-spacing: -0.48px;
-      width: 250px;
+      letter-spacing: -0.54px;
+      text-transform: uppercase;
     }
   }
-
-  .generator__modules-wrap {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    row-gap: 8px;
-    // height: 100%;
-    aspect-ratio: 1 / 1;
-
-    overflow-y: auto;
-    padding-bottom: 16px;
-
-    /* Hide the scrollbar in Firefox */
-    scrollbar-width: none;
-    /* Hide the scrollbar in Internet Explorer/Edge */
-    -ms-overflow-style: none;
-
-    /* Hide the scrollbar in WebKit browsers (e.g., Chrome, Safari) */
-    .generator__modules::-webkit-scrollbar {
-      display: none;
-    }
-
-    .O_Module {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      border-radius: 30px;
-      background-color: var(--BACKGROUND-MODULE-DARKER);
-
-      .module__header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 16px;
-        // border-bottom: 1px solid #383838;
-
-        .module__title {
-          color: var(--TEXT-WHITE);
-          font-size: 24px;
-          font-family: "bc-novatica-cyr", sans-serif;
-          font-weight: 500;
-          font-style: normal;
-          text-transform: uppercase;
-          border: none;
-          background-color: transparent;
-          cursor: pointer;
-        }
-      }
-
-      .TabButtonSet {
-        display: inline-flex;
-        align-items: flex-start;
-        gap: 12px;
-      }
-
-      .TabButton {
-        display: inline-flex;
-        //WTF
-        padding: 11px 16px 13px 16px;
-        justify-content: center;
-        align-items: center;
-        border-radius: 20px;
-        color: #838383;
-        text-align: center;
-        font-family: "neue-haas-unica";
-        font-size: 16px;
-        line-height: 16px;
-        font-style: normal;
-        font-weight: 400;
-        // line-height: normal;
-        letter-spacing: -0.8px;
-        // height: fit-content;
-
-        &:hover:not(.active) {
-          color: var(--TEXT-WHITE);
-          // background-color: var(--BACKGROUND-BTN-HOVER);
-          background-color: #1D1D1D;
-          cursor: pointer;
-        }
-
-        &.active {
-          // background: #1D1D1D;
-          background: #353537;
-          ;
-          color: var(--WHITE);
-          cursor: default;
-        }
-      }
-
-      .TabImageSet {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .TabImage {
-        position: relative;
-        display: flex;
-        width: 140px;
-        height: 140px;
-        justify-content: center;
-        align-items: center;
-        flex-shrink: 0;
-        border-radius: 10px;
-        overflow: clip;
-
-        .TabImage--background {
-          // width: 100%;
-          // height: 100%;
-          width: 140px;
-          height: 140px;
-        }
-
-        .TabImage--text {
-          position: absolute;
-          z-index: 1;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 10px;
-          border-radius: 10px;
-          background: rgba(204, 204, 204, 0.1);
-          backdrop-filter: blur(6px);
-          width: fit-content;
-          height: fit-content;
-
-          color: var(--WHITE);
-          text-align: center;
-          font-family: "bc-novatica-cyr";
-          font-size: 16px;
-          font-style: normal;
-          font-weight: 400;
-          line-height: 16px;
-          text-transform: uppercase;
-        }
-
-        &:hover:not(.active) {
-          .TabImage--text {
-            background: rgba(26, 26, 26, 0.9);
-          }
-
-          cursor: pointer;
-        }
-
-        &.active {
-          border: 1px solid white;
-
-          .TabImage--text {
-            color: black;
-            background-color: var(--WHITE);
-          }
-        }
-      }
-
-      .moduleContent {
-        display: flex;
-        flex-direction: column;
-        row-gap: 20px;
-        height: 100%;
-        padding: 16px;
-        border-top: 1px solid #383838;
-        width: 100%;
-
-        .content_row {
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          column-gap: 20px;
-        }
-
-        .content_Column {
-          width: 50%;
-        }
-
-        .M_Control {
-          width: 100%;
-          display: flex;
-
-          &.row {
-            flex-direction: row;
-            column-gap: 8px;
-            align-items: center;
-          }
-
-          &.column {
-            flex-direction: column;
-            row-gap: 8px;
-          }
-
-          .control_Title {
-            display: flex;
-            flex-direction: row;
-            column-gap: 8px;
-            align-items: center;
-          }
-        }
-
-        .M_BackgroundContent {
-
-          .BackgroundContent_WithTabs {
-            display: flex;
-            flex-direction: column;
-            row-gap: 16px;
-
-            .BackgroundContent_Tabs {
-              display: flex;
-              flex-direction: row;
-              column-gap: 8px;
-              align-items: center;
-            }
-
-            // .BackgroundContent_TabContent {}
-          }
-
-
-        }
-
-        .M_LinesContent {
-          display: flex;
-          flex-direction: row;
-          width: 100%;
-          column-gap: 20px;
-        }
-      }
-
-      // .Sliders {
-      //   width: 100%;
-      //   display: flex;
-      //   flex-direction: row;
-      //   column-gap: 20px;
-
-      //   .input {
-      //     width: 50%;
-      //   }
-      // }
-
-      .moduleContent_Background {
-        display: flex;
-        flex-direction: column;
-        row-gap: 16px;
-        height: 100%;
-        padding: 16px;
-        border-top: 1px solid #383838;
-
-        .TabContent {
-          display: flex;
-          flex-direction: row;
-          // align-items: center;
-          column-gap: 12px;
-
-        }
-
-        .moduleContent-Left,
-        .moduleContent-Right {
-          display: flex;
-          flex-direction: column;
-          row-gap: 20px;
-          width: 50%;
-        }
-      }
-
-      .gradientColors {
-        display: flex;
-        flex-direction: row;
-        column-gap: 12px;
-        align-items: center;
-      }
-
-      .ModuleContentBgOnly {
-        background-color: var(--BgModul);
-        display: flex;
-        flex-direction: column;
-        row-gap: 12px;
-        column-gap: 12px;
-        padding: 24px;
-        height: 100%;
-        // width: 100%;
-        border-radius: 0 0 40px 40px;
-
-        .gradientControls {
-          display: flex;
-          flex-direction: row;
-          column-gap: 12px;
-        }
-
-        .gradientColors {
-          display: flex;
-          flex-direction: row;
-          column-gap: 12px;
-        }
-      }
-
-      .M_BasicTypoContent {
-        display: flex;
-        flex-direction: column;
-        row-gap: 20px;
-        width: 100%;
-
-        .BasicTypo_row {
-          display: flex;
-          flex-direction: row;
-          column-gap: 8px;
-
-          .module__basictypo-maintext-controls {
-            display: flex;
-            flex-direction: row;
-            column-gap: 12px;
-          }
-        }
-      }
-
-      .M_AddRemoveText {
-        display: flex;
-        flex-direction: row;
-        column-gap: 4px;
-        align-items: flex-end;
-
-        .inputStack {
-          display: flex;
-          flex-direction: column;
-          row-gap: 8px;
-          flex: 1 0 0;
-        }
-      }
-    }
-  }
-
 }
-
-
-
-
-
-
-
-
 
 
 .teaserHeader {
@@ -429,106 +85,507 @@ body.teaserGenerator {
     // width: 33vw;
     height: 73px;
   }
-
-  .subtitle {
-    color: var(--White, #F6F6F6);
-    text-align: center;
-    font-family: "BC Novatica CYR";
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18px;
-    /* 100% */
-    letter-spacing: -0.54px;
-    text-transform: uppercase;
-  }
 }
 
-p {
-  color: var(--White, #F6F6F6);
-  font-family: "Neue Haas Unica";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: 20px;
-  letter-spacing: -0.48px;
-}
+.teaserContent {
+  position: relative;
+  display: flex;
+  justify-content: left;
+  width: 100%;
 
-.section1 {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 35vh;
-  margin-top: 10vh;
+  .section-subtitle {
+      display: flex;
+      width: 461px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      margin-top: 88px;
+    }
+  
+    .section-statement {
+      margin-top: 332px;
+      width: 1069px;
+    }
+  
+    .section2 {
+      display: inline-flex;
+      // height: 43px;
+      height: fit-content;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      // margin-top: 35vh;
+      margin-top: 260px;
+  
+      .button {
+        display: flex;
+        padding: 12px 16px;
+        align-items: center;
+  
+        border-radius: 30px;
+        border: 1px solid var(--White, #F6F6F6);
+  
+        color: var(--White, #F6F6F6);
+        text-align: center;
+        // leading-trim: both;
+        // text-edge: cap;
+        font-family: "BC Novatica CYR";
+        font-size: 26px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 26px;
+        /* 100% */
+        text-transform: uppercase;
+  
+        &:hover {
+          color: black;
+          background-color: white;
+          cursor: pointer;
+        }
+      }
+  
+      .logoBG {
+        position: absolute;
+        // top: 427px;
+        // left: 0;
+        width: 100%;
+        height: var(--VPW);
+  
+        z-index: -1;
+        background-image: url('./images/ui/logo-bgGlavnaya.svg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+  
+    .section3 {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      row-gap: 350px;
+      margin-top: 1000px;
+      width: 100%;
+  
+      .subsection {
+        display: flex;
+        flex-direction: column;
+        row-gap: 24px;
+      }
+    }
+  
+    .promoImages {
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+  
+      .right {
+        position: relative;
+        top: -200px;
+        right: -50vw;
+        height: auto;
+        width: 60vw;
+        aspect-ratio: auto;
+      }
+    }
+  
+    .teaserGeneratorContainer {
+      display: inline-flex;
+      padding: 2vw;
+      margin: 10vw;
+      align-items: center;
+      justify-content: center;
+      border-radius: 40px;
+      border: 5px solid var(--BACKGROUND-BTN-SECONDARY);
+      width: 95vw;
+      // height: fit-content;
+      overflow-y: hidden;
+      aspect-ratio: auto;
+      // width: 100%;
+      height: 100%;
+  
+      #reactComponentRoot {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        // height: fit-content;
+        overflow-y: hidden;
+      }
+    }
+  
+    .generator__content {
+      display: flex;
+      flex-direction: row;
+      flex-grow: 1;
+      column-gap: 20px;
+      width: 100%;
+      // height: fit-content;
+      overflow: hidden;
+  
+      .generator__sketch-wrap {
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+        overflow: hidden;
+        width: 50%;
+  
+        .sketch {
+          flex-grow: 1;
+          overflow: hidden;
+          width: 100%;
+          aspect-ratio: 1 / 1;
+        }
+  
+        .generator__sketch-controls {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          height: fit-content;
+        }
+  
+        .description {
+          color: var(--White, #F6F6F6);
+          font-family: "Neue Haas Unica";
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 300;
+          line-height: 20px;
+          letter-spacing: -0.48px;
+          width: 250px;
+        }
+      }
+  
+      .generator__modules-wrap {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        row-gap: 8px;
+        // height: 100%;
+        aspect-ratio: 1 / 1;
+  
+        overflow-y: auto;
+        padding-bottom: 16px;
+  
+        /* Hide the scrollbar in Firefox */
+        scrollbar-width: none;
+        /* Hide the scrollbar in Internet Explorer/Edge */
+        -ms-overflow-style: none;
+  
+        /* Hide the scrollbar in WebKit browsers (e.g., Chrome, Safari) */
+        .generator__modules::-webkit-scrollbar {
+          display: none;
+        }
+  
+        .O_Module {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          border-radius: 30px;
+          background-color: var(--BACKGROUND-MODULE-DARKER);
+  
+          .module__header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 16px;
+            // border-bottom: 1px solid #383838;
+  
+            .module__title {
+              color: var(--TEXT-WHITE);
+              font-size: 24px;
+              font-family: "bc-novatica-cyr", sans-serif;
+              font-weight: 500;
+              font-style: normal;
+              text-transform: uppercase;
+              border: none;
+              background-color: transparent;
+              cursor: pointer;
+            }
+          }
+  
+          .TabButtonSet {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 12px;
+          }
+  
+          .TabButton {
+            display: inline-flex;
+            //WTF
+            padding: 11px 16px 13px 16px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            color: #838383;
+            text-align: center;
+            font-family: "neue-haas-unica";
+            font-size: 16px;
+            line-height: 16px;
+            font-style: normal;
+            font-weight: 400;
+            // line-height: normal;
+            letter-spacing: -0.8px;
+            // height: fit-content;
+  
+            &:hover:not(.active) {
+              color: var(--TEXT-WHITE);
+              // background-color: var(--BACKGROUND-BTN-HOVER);
+              background-color: #1D1D1D;
+              cursor: pointer;
+            }
+  
+            &.active {
+              // background: #1D1D1D;
+              background: #353537;
+              ;
+              color: var(--WHITE);
+              cursor: default;
+            }
+          }
+  
+          .TabImageSet {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+          }
+  
+          .TabImage {
+            position: relative;
+            display: flex;
+            width: 140px;
+            height: 140px;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            border-radius: 10px;
+            overflow: clip;
+  
+            .TabImage--background {
+              // width: 100%;
+              // height: 100%;
+              width: 140px;
+              height: 140px;
+            }
+  
+            .TabImage--text {
+              position: absolute;
+              z-index: 1;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 10px;
+              border-radius: 10px;
+              background: rgba(204, 204, 204, 0.1);
+              backdrop-filter: blur(6px);
+              width: fit-content;
+              height: fit-content;
+  
+              color: var(--WHITE);
+              text-align: center;
+              font-family: "bc-novatica-cyr";
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 16px;
+              text-transform: uppercase;
+            }
+  
+            &:hover:not(.active) {
+              .TabImage--text {
+                background: rgba(26, 26, 26, 0.9);
+              }
+  
+              cursor: pointer;
+            }
+  
+            &.active {
+              border: 1px solid white;
+  
+              .TabImage--text {
+                color: black;
+                background-color: var(--WHITE);
+              }
+            }
+          }
+  
+          .moduleContent {
+            display: flex;
+            flex-direction: column;
+            row-gap: 20px;
+            height: 100%;
+            padding: 16px;
+            border-top: 1px solid #383838;
+            width: 100%;
+  
+            .content_row {
+              width: 100%;
+              display: flex;
+              flex-direction: row;
+              column-gap: 20px;
+            }
+  
+            .content_Column {
+              width: 50%;
+            }
+  
+            .M_Control {
+              width: 100%;
+              display: flex;
+  
+              &.row {
+                flex-direction: row;
+                column-gap: 8px;
+                align-items: center;
+              }
+  
+              &.column {
+                flex-direction: column;
+                row-gap: 8px;
+              }
+  
+              .control_Title {
+                display: flex;
+                flex-direction: row;
+                column-gap: 8px;
+                align-items: center;
+              }
+            }
+  
+            .M_BackgroundContent {
+  
+              .BackgroundContent_WithTabs {
+                display: flex;
+                flex-direction: column;
+                row-gap: 16px;
+  
+                .BackgroundContent_Tabs {
+                  display: flex;
+                  flex-direction: row;
+                  column-gap: 8px;
+                  align-items: center;
+                }
+  
+                // .BackgroundContent_TabContent {}
+              }
+  
+  
+            }
+  
+            .M_LinesContent {
+              display: flex;
+              flex-direction: row;
+              width: 100%;
+              column-gap: 20px;
+            }
+          }
+  
+          // .Sliders {
+          //   width: 100%;
+          //   display: flex;
+          //   flex-direction: row;
+          //   column-gap: 20px;
+  
+          //   .input {
+          //     width: 50%;
+          //   }
+          // }
+  
+          .moduleContent_Background {
+            display: flex;
+            flex-direction: column;
+            row-gap: 16px;
+            height: 100%;
+            padding: 16px;
+            border-top: 1px solid #383838;
+  
+            .TabContent {
+              display: flex;
+              flex-direction: row;
+              // align-items: center;
+              column-gap: 12px;
+  
+            }
+  
+            .moduleContent-Left,
+            .moduleContent-Right {
+              display: flex;
+              flex-direction: column;
+              row-gap: 20px;
+              width: 50%;
+            }
+          }
+  
+          .gradientColors {
+            display: flex;
+            flex-direction: row;
+            column-gap: 12px;
+            align-items: center;
+          }
+  
+          .ModuleContentBgOnly {
+            background-color: var(--BgModul);
+            display: flex;
+            flex-direction: column;
+            row-gap: 12px;
+            column-gap: 12px;
+            padding: 24px;
+            height: 100%;
+            // width: 100%;
+            border-radius: 0 0 40px 40px;
+  
+            .gradientControls {
+              display: flex;
+              flex-direction: row;
+              column-gap: 12px;
+            }
+  
+            .gradientColors {
+              display: flex;
+              flex-direction: row;
+              column-gap: 12px;
+            }
+          }
+  
+          .M_BasicTypoContent {
+            display: flex;
+            flex-direction: column;
+            row-gap: 20px;
+            width: 100%;
+  
+            .BasicTypo_row {
+              display: flex;
+              flex-direction: row;
+              column-gap: 8px;
+  
+              .module__basictypo-maintext-controls {
+                display: flex;
+                flex-direction: row;
+                column-gap: 12px;
+              }
+            }
+          }
+  
+          .M_AddRemoveText {
+            display: flex;
+            flex-direction: row;
+            column-gap: 4px;
+            align-items: flex-end;
+  
+            .inputStack {
+              display: flex;
+              flex-direction: column;
+              row-gap: 8px;
+              flex: 1 0 0;
+            }
+          }
+        }
+      }
+  
+    }
 
-  .citation {
-    color: var(--White, #F6F6F6);
-    font-family: "BC Novatica CYR";
-    font-size: 46px;
-    font-style: italic;
-    font-weight: 400;
-    line-height: 44px;
-    /* 95.238% */
-    text-transform: uppercase;
-    // width: 1225px;
-    mix-blend-mode: difference;
-  }
-}
-
-.section2 {
-  display: inline-flex;
-  height: 43px;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  margin-top: 400px;
-
-  .button {
-    display: flex;
-    padding: 12.632px 15.789px;
-    align-items: center;
-    gap: 7.105px;
-
-    border-radius: 30px;
-    border: 1px solid var(--White, #F6F6F6);
-
-    color: var(--White, #F6F6F6);
-    text-align: center;
-    leading-trim: both;
-    text-edge: cap;
-    font-family: "BC Novatica CYR";
-    font-size: 25.263px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 25.263px;
-    /* 100% */
-    text-transform: uppercase;
-  }
-
-  .logoBG {
-    position: absolute;
-    // top: 427px;
-    // left: 0;
-    width: 100%;
-    height: var(--VPW);
-
-    z-index: -1;
-    background-image: url('./images/ui/logo-bgGlavnaya.svg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-}
-
-.title {
-  color: var(--White, #F6F6F6);
-  font-family: "BC Novatica CYR";
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 36px;
-  /* 100% */
-  letter-spacing: -1.08px;
-  text-transform: uppercase;
-  // justify-content: left;
 }
