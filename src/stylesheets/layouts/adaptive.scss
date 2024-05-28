@@ -1,0 +1,21 @@
+@media screen and (max-width: 1706px) {
+  .backgroundLogo {
+      height: var(--VPW);
+    }
+}
+
+@media screen and (min-width: 1707px) {
+  .teaserContent {
+    width: 1707px;
+    overflow-x: visible;
+
+    .backgroundLogo {
+      height: 1707px;
+    }
+  }
+
+}
+
+@media screen and (max-width: 1279px) {
+  
+}

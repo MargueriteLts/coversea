@@ -5,3 +5,4 @@
 @import 'stylesheets/base/teaserGenerator.scss';
 /* @import 'stylesheets/layouts/modules.scss'; */
 /* @import 'stylesheets/layouts/generatorContent.scss'; */
+@import 'stylesheets/layouts/adaptive.scss';

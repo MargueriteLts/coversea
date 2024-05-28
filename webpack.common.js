@@ -10,7 +10,7 @@ module.exports = {
   entry: {
     index: './src/index.js',
     generator: './src/generator.jsx',
-    teasergenerator: './src/teaserGenerator.jsx',
+    // teasergenerator: './src/teaserGenerator.jsx',
   },
   output: {
     filename: '[name].js',
@@ -95,7 +95,7 @@ module.exports = {
       scriptLoading: 'blocking',
       template: './src/teaserpage.html',
       filename: './teaserpage.html',
-      chunks: ['teasergenerator']
+      chunks: ['generator']
     }),
 
     // Internal pages
