@@ -2,7 +2,7 @@
 @import 'stylesheets/abstracts/vars.scss';
 @import 'stylesheets/abstracts/fonts.scss';
 @import 'stylesheets/base/basics.scss';
-@import 'stylesheets/components/buttons.scss';
+@import 'stylesheets/buttons.scss';
 /* @import 'stylesheets/layouts/generator.scss'; */
 @import 'stylesheets/base/teaserGenerator.scss';
 /* @import 'stylesheets/layouts/modules.scss'; */

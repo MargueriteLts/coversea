@@ -1,4 +1,4 @@
-// import './generators.css'
+import './generators.css'
 // import './teaserGenerator.css'
 
 import React from 'react'
