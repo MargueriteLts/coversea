@@ -1,10 +1,7 @@
-@import 'stylesheets/base/reset.scss';
-@import 'stylesheets/abstracts/vars.scss';
-@import 'stylesheets/abstracts/fonts.scss';
-@import 'stylesheets/base/basics.scss';
+@import 'stylesheets/reset.scss';
+@import 'stylesheets/vars.scss';
+@import 'stylesheets/fonts.scss';
+@import 'stylesheets/basics.scss';
 @import 'stylesheets/buttons.scss';
-@import 'stylesheets/base/teaserGenerator.scss';
-/* @import 'stylesheets/layouts/generator.scss'; */
-/* @import 'stylesheets/layouts/modules.scss'; */
-/* @import 'stylesheets/layouts/generatorContent.scss'; */
-@import 'stylesheets/layouts/adaptive.scss';
+@import 'stylesheets/teaserGenerator.scss';
+@import 'stylesheets/adaptive.scss';
