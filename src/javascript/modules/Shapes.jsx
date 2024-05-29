@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import HeaderModule from '../components/HeaderModule.jsx'
+import M_ModuleHeader from '../components/M_ModuleHeader.jsx'
 import ColorPicker from '../components/ColorPicker.jsx'
 import DropDown from '../components/molecules/M_Select.jsx'
 import Slider from '../components/Slider.jsx'
@@ -25,7 +25,7 @@ export default class Shapes extends Component {
     console.log(shapes.settings.gradient);
 
     return <div className="moduleContainer">
-      <HeaderModule
+      <M_ModuleHeader
         title={shapes.moduleName}
         moduleType='Shapes'
         handleRandomizeModule={handleRandomizeModule}

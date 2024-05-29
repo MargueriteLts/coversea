@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import HeaderModule from '../components/HeaderModule.jsx'
+import M_ModuleHeader from '../components/M_ModuleHeader.jsx'
 import DropDown from '../components/molecules/M_Select.jsx'
 import ColorPicker from '../components/ColorPicker.jsx'
 import Slider from '../components/Slider.jsx'
@@ -15,7 +15,7 @@ export default class Particles extends Component {
 
     return (
       <div className="moduleContainer">
-        <HeaderModule
+        <M_ModuleHeader
           title={particles.moduleName}
           moduleType='Particles'
           handleRandomizeModule={handleRandomizeModule}

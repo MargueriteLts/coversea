@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import IconToggle from '../../buttons/IconToggle.jsx'
+import A_Text from '../../ATOMS/A_Text.jsx'
 import ColorPicker from '../../ColorPicker.jsx'
 import Slider from '../../Slider.jsx'
 import TabImageSet from '../../TabImageSet.jsx'
+import M_GradientColors from './M_GradientColors.jsx'
+import M_GradientAngle from './M_GradientAngle.jsx'
 
 export default class M_Control extends Component {
   constructor(props) {
@@ -14,7 +17,7 @@ export default class M_Control extends Component {
   renderControlType() {
     const {controlType} = this.props
 
-    const {object, data, handleChange, type, min, max, options, images} = this.props
+    const {object, data, data2, handleChange, type, min, max, options, images} = this.props
 
     if (controlType == 'ColorPicker') {
       return (
@@ -23,6 +26,22 @@ export default class M_Control extends Component {
           color={data}
           handleChange={handleChange}
           key={type}
+        />
+      )
+    }
+    if (controlType == 'GradientColors') {
+      return (
+        <M_GradientColors
+          handleChangeBackgroundGradientColor={handleChange}
+          color1={data}
+          color2={data2}
+        />
+      )
+    }
+    if (controlType == 'GradientAngle') {
+      return (
+        <M_GradientAngle
+          handleChangeGradientAngle={handleChange}
         />
       )
     }
@@ -64,7 +83,7 @@ export default class M_Control extends Component {
   }
 
   render() {
-    const { isLocked, setStore, item, handleToggle, title, orientation } = this.props
+    const { isLocked, setStore, item, handleToggle, title, orientation, hasTitle } = this.props
 
     if (orientation == 'row') {
       return <div className="M_Control row">
@@ -74,7 +93,12 @@ export default class M_Control extends Component {
           item={item}
           handleToggle={handleToggle}
         />
-        {title}
+        {hasTitle ? 
+          <A_Text
+            text={title}
+            style='titleText'
+          />
+        : null }
         {this.renderControlType()}
       </div>
     }
@@ -87,7 +111,12 @@ export default class M_Control extends Component {
             item={item}
             handleToggle={handleToggle}
           />
-          {title}
+          {hasTitle ? 
+            <A_Text
+              text={title}
+              style='titleText'
+            />
+          : null }
         </div>
         {this.renderControlType()}
       </div>

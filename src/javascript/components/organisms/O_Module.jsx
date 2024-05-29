@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import M_ModuleHeader from '../HeaderModule.jsx'
+import M_ModuleHeader from '../molecules/M_ModuleHeader.jsx'
 import M_BackgroundContent from '../molecules/moduleContent/M_BackgroundContent.jsx'
 import M_LinesContent from '../molecules/moduleContent/M_LinesContent.jsx'
 import M_VinylContent from '../molecules/moduleContent/M_VinylContent.jsx'

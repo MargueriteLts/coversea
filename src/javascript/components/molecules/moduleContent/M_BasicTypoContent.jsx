@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom'
 // import Slider from '../../Slider.jsx'
 import A_Text from '../../ATOMS/A_Text.jsx'
 import TextArea from '../../TextArea.jsx'
-import M_DropDown from '../M_DropDown.jsx'
+import M_TextSettingsDropDown from '../M_TextSettingsDropDown.jsx'
 
 import M_AddRemoveText from '../controls/M_AddRemoveText.jsx'
 
@@ -16,48 +16,83 @@ export default class BasicTypo extends Component {
     super(props)
 
     this.state = {
-      valueMainText: this.props.basictypo.mainText,
-      currentMainTextFont: this.props.basictypo.font,
-      sliderValue: this.props.basictypo.sizeMainText.sliderValue,
-      styleMainText: this.props.basictypo.styleMainText,
-      color: this.props.basictypo.color
+      valueMainText: this.props.basictypo.mainText.value,
+      currentFontMainText: this.props.basictypo.mainText.currentFont,
+      sizeMainText: this.props.basictypo.mainText.size.sliderValue,
+      // styleMainText: this.props.basictypo.styleMainText,
+      colorMainText: this.props.basictypo.mainText.color,
+
+      valueOtherText: this.props.basictypo.otherText.value,
+      currentFontOtherText: this.props.basictypo.otherText.currentFont,
+      sizeOtherText: this.props.basictypo.otherText.size.sliderValue,
+      // styleMainText: this.props.basictypo.styleMainText,
+      colorOtherText: this.props.basictypo.otherText.color
     }
   }
 
   handleMainTextChange = (event) => {
-
     const inputValue = event.target.value
-
     this.props.setBasicTypoStore('mainText', inputValue)
-
     this.setState({
       valueMainText: inputValue
     });
   }
 
-  handleDropDownClick = (type) => {
-    this.props.setBasicTypoStore('CurrentTabChange', type)
-
+  handleMainTextDropDownClick = (type) => {
+    this.props.setBasicTypoStore('CurrentMainFontChange', type)
     this.setState({
-      currentMainTextFont: type
+      currentFontMainText: type
     })
   }
 
 
-  handleChange = (object, value) => {
+  handleChangeMainTextColor = (object, value) => {
+    // console.log(object);
     this.props.setBasicTypoStore(object, value)
       .then((color) => {
         this.setState({
-          color: color[0]
+          colorMainText: color[0]
         })
       }
     )
   }
 
   handleSizeMainText = (e) => {
-    let type = 'sizeMainText'
-    this.props.setBasicTypoStore(type, e.target.value)
-    this.setState({sliderValue: e.target.value})
+    this.props.setBasicTypoStore('sizeMainText', e.target.value)
+    this.setState({sizeMainText: e.target.value})
+  }
+
+  /// other text
+
+    handleOtherTextChange = (event) => {
+    const inputValue = event.target.value
+    this.props.setBasicTypoStore('otherText', inputValue)
+    this.setState({
+      valueOtherText: inputValue
+    });
+  }
+
+  handleOtherTextDropDownClick = (type) => {
+    this.props.setBasicTypoStore('CurrentOtherFontChange', type)
+    this.setState({
+      currentFontOtherText: type
+    })
+  }
+
+
+  handleChangeOtherTextColor = (object, value) => {
+    this.props.setBasicTypoStore(object, value)
+      .then((color) => {
+        this.setState({
+          colorOtherText: color[0]
+        })
+      }
+    )
+  }
+
+  handleSizeOtherText = (e) => {
+    this.props.setBasicTypoStore('sizeOtherText', e.target.value)
+    this.setState({sizeOtherText: e.target.value})
   }
 
   //////////////////////////////////////////////////////// RENDER
@@ -70,6 +105,7 @@ export default class BasicTypo extends Component {
       <div className="BasicTypo_row">
         <A_Text
           text='Main text'
+          style='basicTypo-title'
         />
         <TextArea
           className='textarea'
@@ -79,43 +115,20 @@ export default class BasicTypo extends Component {
           onChange={this.handleMainTextChange}
         />
 
-        <M_DropDown
+        <M_TextSettingsDropDown
           title='Text settings'
-          typo={basictypo}
-          handleChange={this.handleChange}
-          handleDropDownClick={this.handleDropDownClick}
+          object='colorMainText'
+          color={basictypo.mainText.color}
+          handleChange={this.handleChangeMainTextColor}
+          fontOptions={basictypo.mainText.fontOptions}
+          currentFont={this.state.currentFontMainText}
+          handleDropDownClick={this.handleMainTextDropDownClick}
           // handleDropDownStyles={this.handleDropDownStyles}
-          handleSizeMainText={this.handleSizeMainText}
-          currentMainTextFont={this.state.currentMainTextFont}
-          size={this.state.sliderValue}
+          minSize={basictypo.mainText.size.min}
+          maxSize={basictypo.mainText.size.max}
+          size={this.state.sizeMainText}
+          handleTextSize={this.handleSizeMainText}
         />
-
-        {/* <div className='module__basictypo-maintext-controls'>
-          <ColorPicker
-            // alpha={false}
-            object='SolidColor'
-            color={basictypo.color}
-            handleChange={this.handleChange}
-            key='ColorPicker'
-          />
-          <DropDown
-            options={basictypo.optionsMainTextFonts}
-            value={this.state.currentMainTextFont}
-            handleClick={this.handleDropDownClick}
-          />
-          <DropDown
-            options={basictypo.styles}
-            value={this.state.styleMainText}
-            handleClick={this.handleDropDownStyles}
-          />
-          <Slider
-            title='Size'
-            min={basictypo.sizeMainText.min}
-            max={basictypo.sizeMainText.max}
-            value={this.state.sliderValue}
-            handleChange={this.handleSizeMainText}
-          />
-        </div> */}
       </div>
 
       { basictypo.dopText
@@ -123,10 +136,25 @@ export default class BasicTypo extends Component {
         <div className="BasicTypo_row">
           <A_Text
             text='Small text'
+            style='basicTypo-title'
           />
           <M_AddRemoveText
-            text={basictypo.textarea}
+            text={basictypo.otherText.value}
             setStore={setBasicTypoStore}
+          />
+          <M_TextSettingsDropDown
+            title='Text settings'
+            object='colorOtherText'
+            color={basictypo.otherText.color}
+            handleChange={this.handleChangeOtherTextColor}
+            fontOptions={basictypo.otherText.fontOptions}
+            currentFont={this.state.currentFontOtherText}
+            handleDropDownClick={this.handleOtherTextDropDownClick}
+            // handleDropDownStyles={this.handleDropDownStyles}
+            minSize={basictypo.otherText.size.min}
+            maxSize={basictypo.otherText.size.max}
+            size={this.state.sizeOtherText}
+            handleTextSize={this.handleSizeOtherText}
           />
         </div>
         : null

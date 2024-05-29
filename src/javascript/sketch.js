@@ -302,7 +302,8 @@ function drawModules(p) {
     } else if (background.backgroundTypes.includes('Gradient') && background.currentBackgroundType === 'Gradient') {
       const color1 = background.preset.Gradient.color1
       const color2 = background.preset.Gradient.color2
-      const angle = background.preset.Gradient.angle
+      // console.log('sketch', background.preset.Gradient.angle.value);
+      const angle = background.preset.Gradient.angle.value
 
       p.clear()
       // let gradientBg
@@ -315,11 +316,17 @@ function drawModules(p) {
           gradientBg = blendedLayer.drawingContext.createLinearGradient (0, 0, canvasSize, 0)
         }
       } else {
-        if (angle == 'vertical') {
+        if (angle == 'angle1') {
+          gradientBg = p.drawingContext.createLinearGradient (0, 0, canvasSize, 0)
+        }
+        if (angle == 'angle2') {
           gradientBg = p.drawingContext.createLinearGradient (0, 0, 0, canvasSize)
         }
-        if (angle == 'horizontal') {
-          gradientBg = p.drawingContext.createLinearGradient (0, 0, canvasSize, 0)
+        if (angle == 'angle3') {
+          gradientBg = p.drawingContext.createLinearGradient (canvasSize, 0, 0, 0)
+        }
+        if (angle == 'angle4') {
+          gradientBg = p.drawingContext.createLinearGradient (0, canvasSize, 0, 0)
         }
       }
 
@@ -719,71 +726,78 @@ function drawModules(p) {
   if (moduleList.includes('BasicTypo')) {
     const basicTypo = getBasicTypoStore()
     let mainText
-    let otherTexts = basicTypo.textarea
+    let otherTexts = basicTypo.otherText.value
 
     
     // p.textFont(basicTypo.font)
     
-    if (basicTypo.styles.includes('NORMAL') && basicTypo.styleMainText == 'NORMAL' && basicTypo.font == 'PT-Root-UI') {
-      p.textFont(ptrootuiReg)
-    } else if (basicTypo.styles.includes('BOLD') && basicTypo.styleMainText == 'BOLD' && basicTypo.font == 'PT-Root-UI') {
-      p.textFont(ptrootuiBold)
-    } else if (basicTypo.styles.includes('LIGHT') && basicTypo.styleMainText == 'LIGHT' && basicTypo.font == 'PT-Root-UI') {
-      p.textFont(ptrootuiLight)
-    } else {
-      p.textFont(basicTypo.font)
-    }
+    // if (basicTypo.styles.includes('NORMAL') && basicTypo.styleMainText == 'NORMAL' && basicTypo.font == 'PT-Root-UI') {
+    //   p.textFont(ptrootuiReg)
+    // } else if (basicTypo.styles.includes('BOLD') && basicTypo.styleMainText == 'BOLD' && basicTypo.font == 'PT-Root-UI') {
+    //   p.textFont(ptrootuiBold)
+    // } else if (basicTypo.styles.includes('LIGHT') && basicTypo.styleMainText == 'LIGHT' && basicTypo.font == 'PT-Root-UI') {
+    //   p.textFont(ptrootuiLight)
+    // } else {
+    //   p.textFont(basicTypo.font)
+    // }
     
     ////////////////////////////  STYLES
     
     p.noStroke()
-    p.textStyle(basicTypo.styleMainText)
+    // p.textStyle(basicTypo.styleMainText)
     p.textWrap(p.WORD)
-    p.fill(basicTypo.color)
 
-    if (basicTypo.glow == true) {
-      glow(p, (255), 5)
-      glow(p, (255), 10)
-      glow(p, (255), 30)
-    }
+    // if (basicTypo.glow == true) {
+    //   glow(p, (255), 5)
+    //   glow(p, (255), 10)
+    //   glow(p, (255), 30)
+    // }
 
-    if (basicTypo.stroke == true) {
-      p.noFill()
-      p.stroke(basicTypo.color)
-      p.strokeWeight((0.9 * canvasSize) / 100)
+    // if (basicTypo.stroke == true) {
+    //   p.noFill()
+    //   p.stroke(basicTypo.color)
+    //   p.strokeWeight((0.9 * canvasSize) / 100)
 
-      // let gradient = p.drawingContext.createConicGradient(0, canvasSize/2, canvasSize/2,)
-      // const background = getBackgroundStore()
-      // const color1 = background.preset.Gradient.color1
-      // const color2 = background.preset.Gradient.color2
-      // gradient.addColorStop(0, p.color(color1))
-      // gradient.addColorStop(1, p.color(color2))
-      // p.drawingContext.strokeStyle = gradient
-    }
+    //   // let gradient = p.drawingContext.createConicGradient(0, canvasSize/2, canvasSize/2,)
+    //   // const background = getBackgroundStore()
+    //   // const color1 = background.preset.Gradient.color1
+    //   // const color2 = background.preset.Gradient.color2
+    //   // gradient.addColorStop(0, p.color(color1))
+    //   // gradient.addColorStop(1, p.color(color2))
+    //   // p.drawingContext.strokeStyle = gradient
+    // }
 
     ////////////////////////////  OTHER TEXT
     if (basicTypo.dopText == true) {
       p.rectMode(p.CORNER)
       
-      let presetSizeTextarea = basicTypo.sizeTextarea
-      let presetLeadingSizeTextarea = basicTypo.leadingTextarea
+      let presetSizeOtherText = basicTypo.otherText.size.sliderValue
+      let presetLeadingOtherText = basicTypo.otherText.leading
       // console.log(presetSizeTextarea);
-      let otherTextSize = (presetSizeTextarea * canvasSize) / 100
-      let otherTextLeadingSize = (presetLeadingSizeTextarea * canvasSize) / 100
+      let otherTextSize = (presetSizeOtherText * canvasSize) / 100
+      let otherTextLeading = (presetLeadingOtherText * canvasSize) / 100
       p.textSize(otherTextSize)
       // p.textLeading(otherTextSize-2)
-      p.textLeading(otherTextLeadingSize)
+      p.textLeading(otherTextLeading)
       
       const prct10 = (10 * canvasSize) / 100
       let width = (canvasSize - prct10) / 3
 
+
+      // console.log(otherTexts);
+
       if (typeof otherTexts === 'string') {
+        // console.log('yo');
         if (basicTypo.upperCase == true) {
-          otherTexts = basicTypo.textarea.toUpperCase()
+          otherTexts = basicTypo.otherText.value.toUpperCase()
         } else {
-          otherTexts = basicTypo.textarea
+          otherTexts = basicTypo.otherText.value
         }
-        const positionTxt = basicTypo.txtpositions[0]
+        
+        // const positionTxt = basicTypo.textPositions[0]
+        // const positionTxt = randomTextPosition
+        const positionTxt = basicTypo.textPositions.randomPosition
+        
         let x = positionTxt.x
         let y = positionTxt.y
         if (y == 5) {
@@ -795,9 +809,18 @@ function drawModules(p) {
         y = (positionTxt.y * canvasSize) / 100
         p.text(otherTexts, x, y, width)
       } else {
+        // console.log('yo');
         for (let i = 0; i < otherTexts.length; i++) {
           const currentText = otherTexts[i].value;
-          const positionTxt = basicTypo.txtpositions[i];
+
+          if (basicTypo.upperCase == true) {
+            currentText = otherTexts[i].value.toUpperCase()
+          }
+
+          // const positionTxt = basicTypo.txtpositions[i];
+          // const positionTxt = randomOrderTextPositions[i];
+          const positionTxt = basicTypo.textPositions.randomPositions[i]
+
           let x = positionTxt.x
           let y = positionTxt.y
           if (y == 5) {
@@ -814,61 +837,67 @@ function drawModules(p) {
     }
 
     //MAIN TEXT
+    p.fill(basicTypo.mainText.color)
+    p.textFont(basicTypo.mainText.currentFont)
     p.textAlign(p.CENTER, p.CENTER)
+
     if (basicTypo.upperCase == true) {
-      mainText = basicTypo.mainText.toUpperCase()
+      mainText = basicTypo.mainText.value.toUpperCase()
     } else {
-      mainText = basicTypo.mainText
+      mainText = basicTypo.mainText.value
     }
 
-    let presetSizeMainText = basicTypo.sizeMainText.sliderValue
-    let presetLeadingSizeMainText = basicTypo.leadingMainText
+    let presetSizeMainText = basicTypo.mainText.size.sliderValue
+    let presetLeadingMainText = basicTypo.mainText.leading
     let MainTextSize = (presetSizeMainText * canvasSize) / 100
-    let MainTextLeadingSize = (presetLeadingSizeMainText * canvasSize) / 100
+    let MainTextLeading = (presetLeadingMainText * canvasSize) / 100
     p.textSize(MainTextSize)
-    p.textLeading(MainTextLeadingSize)
+    p.textLeading(MainTextLeading)
     p.rectMode(p.CENTER)
 
     let xmain = canvasSize / 2;
     let ymain = canvasSize / 2;
     // p.text(mainText, xmain, ymain, canvasSize, canvasSize)
-    let color = 0
-    let txtSize = MainTextSize
-    if (basicTypo.chrome == true) {
-      for (let i = 10; i >= 0; i--) {
-        let offsetX = i * 3;
-        let offsetY = i * 3;
-        // let gradientFill = p.drawingContext.createLinearGradient(0, 0, canvasSize/2, canvasSize/2,)
-        // gradientFill.addColorStop(0, p.color(0))
-        // gradientFill.addColorStop(0.5, p.color(255))
-        // gradientFill.addColorStop(1, p.color(0))
-        // p.drawingContext.fillStyle = gradientFill
-        p.fill(color, color, color);
-        // p.text(mainText, xmain + offsetX, ymain + offsetY);
-        p.textSize(txtSize)
-        p.text(mainText, xmain , ymain);
-        color += 20
-        txtSize -= 1
-      }
-      p.drawingContext.shadowBlur = 10
-      p.drawingContext.shadowColor = p.color(255)
-      p.stroke(255);
-      // let gradient = p.drawingContext.createConicGradient( 0, canvasSize/2, canvasSize/2,)
-      // gradient.addColorStop(0, p.color(0))
-      // gradient.addColorStop(0.5, p.color(255))
-      // gradient.addColorStop(1, p.color(0))
-      // p.drawingContext.strokeStyle = gradient
-      // p.strokeWeight((0.3 * canvasSize) / 100)
-      // let gradientFill = p.drawingContext.createLinearGradient(0, 0, canvasSize/2, canvasSize/2,)
-      // gradientFill.addColorStop(0, p.color(0))
-      // gradientFill.addColorStop(0.5, p.color(255))
-      // gradientFill.addColorStop(1, p.color(0))
-      // p.drawingContext.fillStyle = gradientFill
-      // p.noFill()
-      p.text(mainText, xmain, ymain);
-    } else {
-      p.text(mainText, xmain, ymain, canvasSize, canvasSize)
-    }
+    // let color = 0
+    // let txtSize = MainTextSize
+
+    // if (basicTypo.chrome == true) {
+    //   for (let i = 10; i >= 0; i--) {
+    //     let offsetX = i * 3;
+    //     let offsetY = i * 3;
+    //     // let gradientFill = p.drawingContext.createLinearGradient(0, 0, canvasSize/2, canvasSize/2,)
+    //     // gradientFill.addColorStop(0, p.color(0))
+    //     // gradientFill.addColorStop(0.5, p.color(255))
+    //     // gradientFill.addColorStop(1, p.color(0))
+    //     // p.drawingContext.fillStyle = gradientFill
+    //     p.fill(color, color, color);
+    //     // p.text(mainText, xmain + offsetX, ymain + offsetY);
+    //     p.textSize(txtSize)
+    //     p.text(mainText, xmain , ymain);
+    //     color += 20
+    //     txtSize -= 1
+    //   }
+    //   p.drawingContext.shadowBlur = 10
+    //   p.drawingContext.shadowColor = p.color(255)
+    //   p.stroke(255);
+    //   // let gradient = p.drawingContext.createConicGradient( 0, canvasSize/2, canvasSize/2,)
+    //   // gradient.addColorStop(0, p.color(0))
+    //   // gradient.addColorStop(0.5, p.color(255))
+    //   // gradient.addColorStop(1, p.color(0))
+    //   // p.drawingContext.strokeStyle = gradient
+    //   // p.strokeWeight((0.3 * canvasSize) / 100)
+    //   // let gradientFill = p.drawingContext.createLinearGradient(0, 0, canvasSize/2, canvasSize/2,)
+    //   // gradientFill.addColorStop(0, p.color(0))
+    //   // gradientFill.addColorStop(0.5, p.color(255))
+    //   // gradientFill.addColorStop(1, p.color(0))
+    //   // p.drawingContext.fillStyle = gradientFill
+    //   // p.noFill()
+    //   p.text(mainText, xmain, ymain);
+    // } else {
+    //   p.text(mainText, xmain, ymain, canvasSize, canvasSize)
+    // }
+
+    p.text(mainText, xmain, ymain, canvasSize, canvasSize)
 
 
     p.drawingContext.shadowBlur = 0

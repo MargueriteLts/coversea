@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-import ColorPicker from './ColorPicker.jsx'
+import ColorPicker from '../../ColorPicker.jsx'
 
 export default class M_GradientColors extends PureComponent {
   constructor(props) {
@@ -8,7 +8,7 @@ export default class M_GradientColors extends PureComponent {
   }
 
   render() {
-    const { background, handleChangeBackgroundGradientColor, color1, color2 } = this.props
+    const { handleChangeBackgroundGradientColor, color1, color2 } = this.props
 
     return (
       <div className='gradientColors'>

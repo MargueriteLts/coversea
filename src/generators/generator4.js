@@ -39,31 +39,45 @@ const preset = {
   Lines: {
     strokeWeight: 2,
     min: 1,
-    max: 10,
+    max: 100,
   },
 
   BasicTypo: {
-    color: '#ffffff',
-
-    mainText: 'Name of your track or album',
-    optionsMainTextFonts: ['esenin-script-one', 'Acosta', 'PT-Root-UI', 'bc-novatica-cyr'],
-    font: 'bc-novatica-cyr',
-    sizeMainText:{
-      sliderValue: 10,
-      min: 5,
-      max: 20
-    },
-    styles: ['NORMAL', 'LIGHT', 'BOLD'],
-    styleMainText: 'NORMAL',
-    leadingMainText: 8,
-
     dopText: true,
-    textarea: 'Music is the answer to everything, music is the key to the world',
-    sizeTextarea: 2,
-    leadingTextarea: 2,
+    // random: true,
+
     upperCase: true,
-    random: true,
-    textAlign: 'left'
+    textAlign: 'left',
+
+    mainText: {
+      value: 'Name of your track or album',
+      color: '#ffffff',
+      fontOptions: ['esenin-script-one', 'Acosta', 'PT-Root-UI', 'bc-novatica-cyr'],
+      currentFont: 'bc-novatica-cyr',
+      size:{
+        sliderValue: 10,
+        min: 5,
+        max: 20
+      },
+      leading: 8,
+    },
+
+    otherText: {
+      value: 'Music is the answer to everything, music is the key to the world',
+      color: '#ffffff',
+      fontOptions: ['esenin-script-one', 'Acosta', 'PT-Root-UI', 'bc-novatica-cyr'],
+      currentFont: 'bc-novatica-cyr',
+      size:{
+        sliderValue: 2,
+        min: 1,
+        max: 10
+      },
+      leading: 2,
+    }
+   
+    // styles: ['NORMAL', 'LIGHT', 'BOLD'],
+    // styleMainText: 'NORMAL',
+
   }
 }
 

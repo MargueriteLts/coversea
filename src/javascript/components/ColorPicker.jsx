@@ -68,13 +68,13 @@ export default class AllColorPicker extends Component {
         colorSwatch: {
           width: '32px',
           height: '32px',
-          borderRadius: '2px',
+          borderRadius: '4px',
           background: color,
         },
         swatch: {
           padding: '2px',
           background: '#2C2C2C',
-          borderRadius: '2px',
+          borderRadius: '4px',
           boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
           display: 'inline-block',
           cursor: 'pointer',
@@ -87,11 +87,14 @@ export default class AllColorPicker extends Component {
     });
     
     return <div style={{ position: 'relative' }} ref={this.colorpickerRef}>
-      <div style={ styles.swatch } onClick={ this.handleClick }>
-        <div style={ styles.colorSwatch } />
-      </div>
+      <div className='A_ColorPickerButton' onClick={ this.handleClick }>
 
-      {text}
+        <div style={ styles.swatch }>
+          <div style={ styles.colorSwatch } />
+        </div>
+
+        {text}
+      </div>
 
       {this.state.displayColorPicker && (
           <div style={styles.popover}>

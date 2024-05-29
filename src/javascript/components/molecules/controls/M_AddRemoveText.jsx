@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 
 import TextArea from '../../TextArea.jsx'
+import A_IconButton from '../../buttons/A_IconButton.jsx'
 
 export default class M_AddRemoveText extends PureComponent {
   constructor(props) {
@@ -56,7 +57,7 @@ export default class M_AddRemoveText extends PureComponent {
 
       <div className='inputStack'>
         {textAreas.map((textArea, index) => (
-          <div key={index} className='flexRow'>
+          <div key={index} className='flexRow align-bottom'>
             <TextArea
               className='textarea'
               rows={3}
@@ -64,11 +65,23 @@ export default class M_AddRemoveText extends PureComponent {
               value={textArea.value}
               onChange={(event) => this.handleTextAreaChange(event, index)}
             />
-            <div className="btn--secondary" onClick={() => this.handleRemoveText(index)}>Remove</div>
+            {/* <div className="btn--secondary" onClick={() => this.handleRemoveText(index)}>Remove</div> */}
+            <A_IconButton
+              onClick={() => this.handleRemoveText(index)}
+              size='normal'
+              style='filled'
+              iconName='Minus.svg'
+            />
           </div>
         ))}
       </div>
-      <div className="btn--secondary" onClick={this.handleAddText}>Add text</div>
+      {/* <div className="btn--secondary" onClick={this.handleAddText}>Add text</div> */}
+      <A_IconButton
+        onClick={this.handleAddText}
+        size='normal'
+        style='filled'
+        iconName='Plus.svg'
+      />
     </div>
   }
 }

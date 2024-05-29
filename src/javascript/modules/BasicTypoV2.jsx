@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import HeaderModule from '../components/HeaderModule.jsx'
+import M_ModuleHeader from '../components/M_ModuleHeader.jsx'
 import TabButtonSet from '../components/TabButtonSet.jsx'
 import Input from '../components/Input.jsx'
 import ColorPicker from '../components/ColorPicker.jsx'
@@ -70,7 +70,7 @@ export default class BasicTypo extends Component {
     const { basictypoV2, randomizeModuleStore } = this.props
 
     return <div className="moduleContainer">
-      <HeaderModule
+      <M_ModuleHeader
         title={basictypoV2.moduleName}
         moduleType='BasicTypo'
         randomizeModuleStore={randomizeModuleStore}

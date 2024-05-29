@@ -65,6 +65,7 @@ export default class M_LinesContent extends Component {
         <M_Control
           orientation="row"
           controlType='Slider'
+          hasTitle={true}
           title='Lines thickness'
         //lock
           isLocked={this.state.weightLock}

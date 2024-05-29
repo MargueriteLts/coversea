@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classnames from 'classnames'
 // import PropTypes from 'prop-types';
 // import './IconButton.css'; // Make sure to create and import the CSS file
 
@@ -31,17 +32,22 @@ class IconButton extends Component {
   }
 
   render() {
-    const { onClick } = this.props;
+    const { onClick, size, style } = this.props;
     const { iconSrc } = this.state;
 
+    const buttonClass = classnames('A_Button__Icon', {
+      [`${size}`]: true,
+      [`${style}`]: true
+    });
+
     return (
-      <button
-        className='icon-button'
+      <div
+        className={buttonClass}
         onClick={onClick}
         disabled={!iconSrc} // Disable the button if the icon is not found
       >
-        {iconSrc && <img src={iconSrc} alt={this.props.iconName} className="icon-button__icon" />}
-      </button>
+        {iconSrc && <img src={iconSrc} alt={this.props.iconName} className="A_Icon" />}
+      </div>
     );
   }
 }

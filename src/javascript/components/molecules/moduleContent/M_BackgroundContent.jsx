@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 
 import TabButtonSet from '../../TabButtonSet.jsx'
 import ColorPicker from '../../ColorPicker.jsx'
-import M_GradientOrientation from '../../M_GradientOrientation.jsx'
-import M_GradientColors from '../../M_GradientColors.jsx'
+import M_GradientOrientation from '../controls/M_GradientAngle.jsx'
+import M_GradientColors from '../controls/M_GradientColors.jsx'
 import TabImageSet from '../../TabImageSet.jsx'
 import IconToggle from '../../buttons/IconToggle.jsx'
 import M_Control from '../controls/M_Control.jsx'
@@ -17,6 +17,7 @@ export default class M_BackgroundContent extends Component {
       tabsLock: this.props.background.locked,
       solidColorLock : this.props.background.preset.SolidColor?.locked,
       gradientLock: this.props.background.preset.Gradient?.locked,
+      gradientAngleLock: this.props.background.preset.Gradient?.angle.locked,
       noiseLock: this.props.background.preset.Noise?.locked,
       pixelsLock: this.props.background.preset.Pixels?.locked
     }
@@ -44,6 +45,12 @@ export default class M_BackgroundContent extends Component {
       setStore(item, !this.state.gradientLock)
       this.setState({
         gradientLock: !this.state.gradientLock
+      })
+    }
+    if (item == 'lockGradientAngle') {
+      setStore(item, !this.state.gradientAngleLock)
+      this.setState({
+        gradientAngleLock: !this.state.gradientAngleLock
       })
     }
     if (item == 'lockNoise') {
@@ -80,6 +87,7 @@ export default class M_BackgroundContent extends Component {
         <M_Control
           orientation="row"
           controlType='ColorPicker'
+          hasTitle={false}
 
           isLocked={this.state.solidColorLock}
           setStore={setBackgroundStore}
@@ -97,28 +105,47 @@ export default class M_BackgroundContent extends Component {
     ////////////// GRADIENT
 
     if (background.currentBackgroundType == 'Gradient') {
-      return <div className='TabContent'>
-        <IconToggle
+      // return <div className='TabContent'>
+      //   <IconToggle
+      //     isLocked={this.state.gradientLock}
+      //     setStore={setBackgroundStore}
+      //     item='lockGradient'
+      //     handleToggle={this.handleToggle}
+      //   />
+
+      //   <div className='moduleContent-Left'>
+      //     <M_GradientOrientation
+      //       handleChangeBackgroundAngleGradient={handleChangeBackgroundAngleGradient}
+      //     />
+      //   </div>
+
+      // </div>
+      return <div className='TabContent-Left'>
+        <M_Control
+          orientation="row"
+          controlType='GradientColors'
+          hasTitle={false}
+
           isLocked={this.state.gradientLock}
           setStore={setBackgroundStore}
           item='lockGradient'
           handleToggle={this.handleToggle}
+
+          data={background.preset.Gradient.color1}
+          data2={background.preset.Gradient.color2}
+          handleChange={handleChangeBackgroundGradientColor}
         />
+        <M_Control
+          orientation="row"
+          controlType='GradientAngle'
 
-        <div className='moduleContent-Left'>
-          <M_GradientOrientation
-            handleChangeBackgroundAngleGradient={handleChangeBackgroundAngleGradient}
-          />
-        </div>
+          isLocked={this.state.gradientAngleLock}
+          setStore={setBackgroundStore}
+          item='lockGradientAngle'
+          handleToggle={this.handleToggle}
 
-        <div className='moduleContent-Right'>
-          <M_GradientColors
-            background={background}
-            handleChangeBackgroundGradientColor={handleChangeBackgroundGradientColor}
-            color1={background.preset.Gradient.color1}
-            color2={background.preset.Gradient.color2}
-          />
-        </div>
+          handleChange={handleChangeBackgroundAngleGradient}
+        />
       </div>
     }
 
@@ -162,23 +189,6 @@ export default class M_BackgroundContent extends Component {
 
     if (bgType == 'SolidColor') {
       return (
-      // <div>
-      //   <IconToggle
-      //     isLocked={this.state.solidColorLock}
-      //     setStore={setBackgroundStore}
-      //     item='lockSolidColor'
-      //     handleToggle={this.handleToggle}
-      //   />
-      //   <ColorPicker
-      //     title=''
-      //     // object='background'
-      //     object='SolidColor'
-      //     setColorPickerStore={setColorPickerStore}
-      //     color={background.preset.SolidColor.color}
-      //     handleChange={handleChangeBackgroundSolidColor}
-      //     key='BackgroundColorPicker'
-      //   />
-      // </div>
         <M_Control
           isLocked={this.state.solidColorLock}
           setStore={setBackgroundStore}

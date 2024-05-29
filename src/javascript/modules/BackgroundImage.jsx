@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import HeaderModule from '../components/HeaderModule.jsx'
+import M_ModuleHeader from '../components/M_ModuleHeader.jsx'
 import TabImageSet from '../components/TabImageSet.jsx'
 
 export default class BackgroundImage extends Component {
@@ -21,7 +21,7 @@ export default class BackgroundImage extends Component {
     } = this.props
 
     return <div className="moduleContainer">
-      <HeaderModule
+      <M_ModuleHeader
         title={backgroundImage.moduleName}
         moduleType='BackgroundImage'
         handleRandomizeModule={handleRandomizeModule}

@@ -52,7 +52,8 @@ export default class M_VinylContent extends Component {
       <M_Control
         orientation="column"
         controlType='TabImageSet'
-        title='Vinyl size'
+        hasTitle={true}
+        title='Vinyl Disc'
       //lock
         isLocked={this.state.tabsLock}
         setStore={setVinylStore}
@@ -68,6 +69,7 @@ export default class M_VinylContent extends Component {
         <M_Control
           orientation="row"
           controlType='Slider'
+          hasTitle={true}
           title='Vinyl size'
 
           isLocked={this.state.sizeLock}
@@ -88,6 +90,7 @@ export default class M_VinylContent extends Component {
           handleChange={handleVinylOpacity}
           item='lockOpacity'
           handleToggle={this.handleToggle}
+          hasTitle={true}
           title='Vinyl opacity'
           controlType='SliderOpacity'
         />

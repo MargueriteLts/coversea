@@ -7,7 +7,7 @@ import ColorPicker from '../ColorPicker.jsx'
 import M_Select from './M_Select.jsx'
 import Slider from '../Slider.jsx'
 
-export default class M_DropDown extends Component {
+export default class M_TextSettingsDropDown extends Component {
   constructor(props) {
     super(props)
 
@@ -53,31 +53,28 @@ export default class M_DropDown extends Component {
   render() {
     const {
       title,
-      typo,
+      object,
+      color,
       handleChange,
+      fontOptions,
+      currentFont,
       handleDropDownClick,
       // handleDropDownStyles,
-      handleSizeMainText,
-      currentMainTextFont,
-      size
+      minSize,
+      maxSize,
+      size,
+      handleTextSize
     } = this.props
 
 
     const styles = reactCSS({
       'default': {
         popover: {
-          position: 'absolute', // Change to fixed to ensure popover position remains fixed relative to the viewport
+          position: 'absolute',
           zIndex: '2',
-          top: '21px',
-          right: '50%'
+          top: '44px',
+          right: '0'
         },
-        // cover: {
-        //   position: 'fixed',
-        //   top: '0px',
-        //   right: '0px',
-        //   bottom: '0px',
-        //   left: '0px',
-        // }
       },
     });
 
@@ -95,14 +92,14 @@ export default class M_DropDown extends Component {
         ? <div style={ styles.popover } className='dropDownPopover'>
           <ColorPicker
             // alpha={false}
-            object='SolidColor'
-            color={typo.color}
+            object={object}
+            color={color}
             handleChange={handleChange}
             key='ColorPicker'
           />
           <M_Select
-            options={typo.optionsMainTextFonts}
-            value={currentMainTextFont}
+            options={fontOptions}
+            value={currentFont}
             handleClick={handleDropDownClick}
           />
           {/* <M_Select
@@ -112,10 +109,10 @@ export default class M_DropDown extends Component {
           /> */}
           <Slider
             title='Size'
-            min={typo.sizeMainText.min}
-            max={typo.sizeMainText.max}
+            min={minSize}
+            max={maxSize}
             value={size}
-            handleChange={handleSizeMainText}
+            handleChange={handleTextSize}
           />
         </div>
 

@@ -5,27 +5,27 @@ import html2canvas from "html2canvas";
 import { generateHash } from './utilities.js'
 
 //UI
-import IconButton from './components/buttons/IconButton.jsx'
+import A_IconButton from './components/buttons/A_IconButton.jsx'
 import A_Text from './components/ATOMS/A_Text.jsx'
 
 ///////////////MODULES
 import O_Module from './components/organisms/O_Module.jsx'
 
-//Background
-// import Background from './modules/Background.jsx'
-import BackgroundImage from './modules/BackgroundImage.jsx'
-//Graphics
-import Image from './modules/Image.jsx'
-import Lines from './modules/Lines.jsx'
-import Module3D from './modules/Module3D.jsx'
-import Particles from './modules/Particles.jsx'
-import Shapes from './modules/Shapes.jsx'
-import Vinyl from './modules/Vinyl.jsx'
-//Text
-import BasicTypo from './modules/BasicTypo.jsx'
-import BasicTypoV2 from './modules/BasicTypoV2.jsx'
-//Overlay
-import Overlay from './modules/Overlay.jsx'
+// //Background
+// // import Background from './modules/Background.jsx'
+// import BackgroundImage from './modules/BackgroundImage.jsx'
+// //Graphics
+// import Image from './modules/Image.jsx'
+// import Lines from './modules/Lines.jsx'
+// import Module3D from './modules/Module3D.jsx'
+// import Particles from './modules/Particles.jsx'
+// import Shapes from './modules/Shapes.jsx'
+// import Vinyl from './modules/Vinyl.jsx'
+// //Text
+// import BasicTypo from './modules/BasicTypo.jsx'
+// import BasicTypoV2 from './modules/BasicTypoV2.jsx'
+// //Overlay
+// import Overlay from './modules/Overlay.jsx'
 
 
 ///////////////VAR
@@ -455,7 +455,7 @@ export default class GeneratorContainer extends Component {
         </div>
         <div className="generator__sketch-controls">
           <div className="btn--big" onClick={this.generateCover}>GENERATE</div>
-          {/* <IconButton
+          {/* <A_IconButton
             onClick={this.downloadImage}
             iconName='Download.svg'
           /> */}

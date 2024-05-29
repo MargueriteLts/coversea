@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import HeaderModule from '../components/HeaderModule.jsx'
+import M_ModuleHeader from '../components/M_ModuleHeader.jsx'
 import TabImageSet from '../components/TabImageSet.jsx'
 import Slider from '../components/Slider.jsx'
 
@@ -24,7 +24,7 @@ export default class Overlay extends Component {
     } = this.props
 
     return <div className="moduleContainer">
-      <HeaderModule
+      <M_ModuleHeader
         title={overlay.moduleName}
         moduleType='Overlay'
         handleRandomizeModule={handleRandomizeModule}

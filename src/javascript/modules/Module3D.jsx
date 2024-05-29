@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import HeaderModule from '../components/HeaderModule.jsx'
+import M_ModuleHeader from '../components/M_ModuleHeader.jsx'
 import DropDown from '../components/molecules/M_Select.jsx'
 // import ColorPicker from './background/ColorPicker.jsx'
 
@@ -13,7 +13,7 @@ export default class Module3D extends Component {
     const { module3D, handleRandomizeModule, handleDropDownClickModule3D } = this.props
 
     return <div className="moduleContainer">
-      <HeaderModule
+      <M_ModuleHeader
         title={module3D.moduleName}
         moduleType='Module3D'
         handleRandomizeModule={handleRandomizeModule}
