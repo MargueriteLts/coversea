@@ -3,6 +3,7 @@
 @import 'stylesheets/abstracts/fonts.scss';
 @import 'stylesheets/base/basics.scss';
 @import 'stylesheets/base/teaserGenerator.scss';
+@import 'stylesheets/layouts/generator.scss';
 /* @import 'stylesheets/layouts/modules.scss'; */
 /* @import 'stylesheets/layouts/generatorContent.scss'; */
 @import 'stylesheets/layouts/adaptive.scss';

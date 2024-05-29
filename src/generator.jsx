@@ -1,5 +1,5 @@
-import './generators.css'
-// import './teaserGenerator.css'
+// import './generators.css'
+import './teaserGenerator.css'
 
 import React from 'react'
 import { createRoot } from 'react-dom/client'
@@ -149,10 +149,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const root = createRoot(container)
-  // if (generatorName == 'teaserGenerator') {
-  //   root.render(<TeaserGeneratorContainer {...props} {...actions} />)
-  // } else {
-  //   root.render(<GeneratorContainer {...props} {...actions} />)
-  // }
-  root.render(<GeneratorContainer {...props} {...actions} />)
+  if (generatorName == 'teaserGenerator') {
+    root.render(<TeaserGeneratorContainer {...props} {...actions} />)
+  } else {
+    root.render(<GeneratorContainer {...props} {...actions} />)
+  }
+  // root.render(<GeneratorContainer {...props} {...actions} />)
 })

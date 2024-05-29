@@ -1,3 +1,149 @@
+@media screen and (max-width: 744px) {
+  .teaserHeader {
+    padding-top: 16px;
+
+    .logo-header {
+      width: 362px;
+      height: 49px;
+    }
+  }
+
+  h1 {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  p {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 20px;
+    letter-spacing: -0.18px;
+  }
+
+  .teaserContent {
+    padding: 14px;
+  }
+
+  .section-subtitle {
+    position: relative;
+    width: 100%;
+
+    .subtitle {
+      width: 100%;
+      margin-top: 44px;
+    }
+  }
+
+  #scrollButton {
+    display: none;
+  }
+
+  #scrollButton-mobile {
+    display: block;
+    margin-top: 64px;
+  }
+
+  .statement {
+    font-size: 35px;
+    line-height: 35px;
+    // width: 362px;
+    width: 100%;
+    font-weight: 500;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // mix-blend-mode: difference;
+  }
+
+  .statement-position {
+    margin-top: 131px;
+  }
+
+  #bg-statement {
+    display: block;
+    position: absolute;
+
+    position: absolute;
+    aspect-ratio: 1 / 1;
+
+    z-index: -1;
+    background-image: url('./images/ui/logo-bgGlavnaya.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    // height: 140vw;
+    width: 600px;
+    height: auto;
+    mix-blend-mode: difference;
+  }
+
+  .teaserGeneratorContainer {
+    border: none;
+    left: -22px;
+    width: 100vw;
+    background-color: black;
+  }
+
+  .generator__modules-wrap {
+    display: none;
+  }
+
+  .description {
+    font-size: 14px;
+    line-height: 14px;
+    width: 230px;
+  }
+}
+
+
+@media screen and (min-width: 744px) {
+  p {
+    letter-spacing: -0.48px;
+  }
+  .teaserHeader {
+    padding-top: 36px;
+
+    .logo-header {
+      width: 541px;
+      height: 73px;
+    }
+  }
+
+  .section-subtitle {
+    width: 461px;
+    margin-top: 88px;
+  }
+
+  #bg-statement {
+    display: none;
+  }
+
+  #scrollButton-mobile {
+    display: none;
+  }
+
+  .generator__modules-wrap {
+    display: flex;
+  }
+
+  .teaserGeneratorContainer {
+    border: 5px solid var(--BACKGROUND-BTN-SECONDARY);
+    background-color: var(--BACKGROUND-WEBSITE-BLACK);
+    width: 100%;
+    left: 0;
+  }
+
+  .generator__sketch-wrap {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+
+
 // @media screen and (max-width: 1706px) {
 //   .backgroundLogo {
 //       height: var(--VPW);
@@ -93,119 +239,6 @@
     .generator_modules-wrap {
       aspect-ratio: 1 / 1;
     }
-  }
-}
-
-@media screen and (max-width: 744px) {
-  .teaserHeader {
-    padding-top: 16px;
-
-    .logo-header {
-      width: 362px;
-      height: 49px;
-    }
-  }
-
-  h1 {
-    font-size: 18px;
-    line-height: 20px;
-  }
-
-  p {
-    font-size: 16px;
-    line-height: 20px;
-  }
-
-  #scrollButton {
-    display: none;
-  }
-
-  #scrollButton-mobile {
-    display: block;
-    margin-top: 64px;
-  }
-
-  .statement {
-    font-size: 35px;
-    line-height: 35px;
-    // width: 362px;
-    width: 100%;
-    font-weight: 500;
-    font-style: italic;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    // mix-blend-mode: difference;
-  }
-
-  .statement-position {
-    margin-top: 131px;
-  }
-
-  #bg-statement {
-    display: block;
-    position: absolute;
-
-    position: absolute;
-    aspect-ratio: 1 / 1;
-  
-    z-index: -1;
-    background-image: url('./images/ui/logo-bgGlavnaya.svg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    height: 140vw;
-    mix-blend-mode: difference;
-  }
-
-  .teaserGeneratorContainer {
-    border: none;
-    left: -22px;
-    width: 100vw;
-    background-color: black;
-  }
-
-  .generator__modules-wrap {
-    display: none;
-  }
-  .description {
-    font-size: 14px;
-    line-height: 14px;
-    width: 230px;
-  }
-}
-
-@media screen and (min-width: 744px) {
-  .teaserHeader {
-    padding-top: 36px;
-
-    .logo-header {
-      width: 541px;
-      height: 73px;
-    }
-  }
-
-  #bg-statement {
-    display: none;
-  }
-
-  #scrollButton-mobile {
-    display: none;
-  }
-  
-  .generator__modules-wrap {
-    display: flex;
-  }
-  .teaserGeneratorContainer {
-    border: 5px solid var(--BACKGROUND-BTN-SECONDARY);
-    background-color: var(--BACKGROUND-WEBSITE-BLACK);
-    width: 100%;
-    left: 0;
-  }
-  .generator__sketch-wrap {
-    align-items: center;
-    justify-content: center;
   }
 }
 

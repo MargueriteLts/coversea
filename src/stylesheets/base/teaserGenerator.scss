@@ -1,3 +1,5 @@
+@import '../components/buttons.scss';
+
 body.teaserGenerator {
   display: flex;
   flex-direction: column;
@@ -30,14 +32,14 @@ body.teaserGenerator {
 
   p {
     color: var(--TEXT-WHITE);
-    // font-family: "Neue Haas Unica";
-    font-family: "neue-haas-unica", sans-serif;
+    font-family: "Neue Haas Unica";
+    // font-family: "neue-haas-unica", sans-serif;
     // font-size: 16px;
     font-style: normal;
     font-weight: 300;
     // line-height: 20px;
     // line-height: 123%;
-    letter-spacing: -0.48px;
+    // letter-spacing: -0.48px;
   }
 }
 
@@ -127,11 +129,11 @@ body.teaserGenerator {
 
   .section-subtitle {
     display: flex;
-    width: 461px;
+    // width: 461px;
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
-    margin-top: 88px;
+    // margin-top: 88px;
   }
   
   // .statement-position {
@@ -326,7 +328,7 @@ body.teaserGenerator {
           .description {
             // color: var(--White, #F6F6F6);
             color: grey;
-            font-family: "neue-haas-unica", sans-serif;
+            font-family: "Neue Haas Unica", sans-serif;
             // font-size: 16px;
             font-style: normal;
             font-weight: 400;
@@ -400,7 +402,7 @@ body.teaserGenerator {
               border-radius: 20px;
               color: #838383;
               text-align: center;
-              font-family: "neue-haas-unica", sans-serif;
+              font-family: "Neue Haas Unica", sans-serif;
               font-size: 16px;
               line-height: 16px;
               font-style: normal;
