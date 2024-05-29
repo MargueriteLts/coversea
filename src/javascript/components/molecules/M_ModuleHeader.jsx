@@ -24,9 +24,10 @@ export default class M_ModuleHeader extends Component {
 
       <A_Button
         onClick={() => this.props.handleRandomizeModule(moduleType)}
-        iconName='Dice.svg'
+        icon='Dice'
         text='Randomize'
         type='primary'
+        hasIcon={true}
       />
     </div>
   }

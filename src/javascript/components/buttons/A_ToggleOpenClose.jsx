@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import icons from '../../loadIcons';
+// import icons from '../../loadIcons';
 
 export default class A_ToggleOpenClose extends Component {
   constructor(props) {
@@ -14,9 +14,11 @@ export default class A_ToggleOpenClose extends Component {
     return <div className={style} onClick={handleClick}>
       {hasIconLeft ? (
       isOpen ? (
-        <img src={icons["AngleUp"]} alt="" />
+        // <img src={icons["AngleUp"]} alt="" />
+        <div className='A_Icon AngleUp'></div>
       ) : (
-        <img src={icons["AngleDown"]} alt="" />
+        <div className='A_Icon AngleDown'></div>
+        // <img src={icons["AngleDown"]} alt="" />
       )
     ) : null}
       
@@ -24,9 +26,11 @@ export default class A_ToggleOpenClose extends Component {
 
       {hasIconRight ? (
       isOpen ? (
-        <img src={icons["AngleUp"]} alt="" />
+        <div className='A_Icon AngleUp'></div>
+        // <img src={icons["AngleUp"]} alt="" />
       ) : (
-        <img src={icons["AngleDown"]} alt="" />
+        // <img src={icons["AngleDown"]} alt="" />
+        <div className='A_Icon AngleDown'></div>
       )
     ) : null}
 

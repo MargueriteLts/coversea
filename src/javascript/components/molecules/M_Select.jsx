@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import icons from '../../loadIcons';
+import classnames from 'classnames'
+
+// import icons from '../../loadIcons';
 
 
 export default class M_Select extends Component {
@@ -29,13 +31,19 @@ export default class M_Select extends Component {
 
     const availableOptions = options.filter(option => option !== value);
 
+     const classes = classnames({
+      'icon-button__icon': true,
+      'AngleDown': true
+    })
+
     return (
       <div className="dropdown">
 
-        <button className={`dropdown-toggle ${isOpen ? 'open' : ''}`} onClick={this.toggleDropdown}>
+        <div className={`dropdown-toggle ${isOpen ? 'open' : ''}`} onClick={this.toggleDropdown}>
           {value}
-          <img src={icons["AngleDown"]} alt="iconAngleDown" className='icon-button__icon'/>
-        </button>
+          <div className={classes}></div>
+          {/* <img src={icons["AngleDown"]} alt="iconAngleDown" className='icon-button__icon'/> */}
+        </div>
 
         {isOpen && (
           <div className="dropdown-menu">

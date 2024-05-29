@@ -5,6 +5,30 @@
 .A_Icon {
   width: 24px;
   height: 24px;
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.AngleDown {
+  background-image: url('./images/ui/icons/AngleDown.svg');
+}
+
+.AngleUp {
+  background-image: url('./images/ui/icons/AngleUp.svg');
+}
+
+.Dice {
+  background-image: url('./images/ui/icons/Dice.svg');
+}
+
+.locked {
+  background-image: url('./images/ui/icons/LockClosed.svg');
+}
+
+.unLocked {
+  background-image: url('./images/ui/icons/LockOpen.svg');
 }
 
 // .btn {

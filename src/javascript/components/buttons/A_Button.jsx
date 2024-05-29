@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames'
 
-import icons from '../../loadIcons';
+// import icons from '../../loadIcons';
 
 export default class A_Button extends Component {
   constructor(props) {
@@ -12,18 +12,22 @@ export default class A_Button extends Component {
   }
 
   render() {
-    const { onClick, text, type} = this.props;
+    const { onClick, text, type, icon, hasIcon} = this.props;
 
     const buttonClass = classnames('A_Button', {
       [`A_Button--${type}`]: true
     });
 
+    const iconClass = classnames('A_Icon', {
+      [`${icon}`]: true
+    })
+
     return (
-      <div
-        className={buttonClass}
-        onClick={onClick}
-      >
-        <img src={icons["Dice"]} alt={this.props.iconName} className="A_Icon" />{text}
+      <div className={buttonClass} onClick={onClick}>
+        {hasIcon ? (
+          <div className={iconClass}></div>
+        ) : null }
+        {text}
       </div>
     );
   }
