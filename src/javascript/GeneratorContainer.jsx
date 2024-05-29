@@ -6,6 +6,7 @@ import { generateHash } from './utilities.js'
 
 //UI
 import IconButton from './components/buttons/IconButton.jsx'
+import A_Text from './components/ATOMS/A_Text.jsx'
 
 ///////////////MODULES
 import O_Module from './components/organisms/O_Module.jsx'
@@ -454,9 +455,13 @@ export default class GeneratorContainer extends Component {
         </div>
         <div className="generator__sketch-controls">
           <div className="btn--big" onClick={this.generateCover}>GENERATE</div>
-          <IconButton
+          {/* <IconButton
             onClick={this.downloadImage}
             iconName='Download.svg'
+          /> */}
+          <A_Text
+            style='description'
+            text={`The download feature will be available in the full version. Stay tuned so you don't miss the realease!`}
           />
         </div>
       </div>
