@@ -455,13 +455,11 @@ export default class GeneratorContainer extends Component {
         </div>
         <div className="generator__sketch-controls">
           <div className="btn--big" onClick={this.generateCover}>GENERATE</div>
-          {/* <A_IconButton
+          <A_IconButton
             onClick={this.downloadImage}
-            iconName='Download.svg'
-          /> */}
-          <A_Text
-            style='description'
-            text={`The download feature will be available in the full version. Stay tuned so you don't miss the realease!`}
+            icon='download'
+            size='large'
+            style='filled'
           />
         </div>
       </div>

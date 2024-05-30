@@ -417,12 +417,13 @@ export default class TeaserGeneratorContainer extends Component {
   render() {
 
     return <div className="generator__content">
-      <div className='generator__modules-wrap'>
-      {this.renderModules()}
+      <div className='generator__modules-container'>
+        <div className='generator__modules-wrap'>
+        {this.renderModules()}
+        </div>
       </div>
       <div className="generator__sketch-wrap">
-        <div className="sketch" id="sketch" ref={this.sketchContainerRef}>
-        </div>
+        <div className="sketch" id="sketch" ref={this.sketchContainerRef}></div>
         <div className="generator__sketch-controls">
           <div className="btn--big" onClick={this.generateCover}>GENERATE</div>
           <A_Text

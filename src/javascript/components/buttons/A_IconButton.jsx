@@ -11,7 +11,7 @@ import classnames from 'classnames'
   render() {
     const { onClick, size, style, icon } = this.props;
 
-    const buttonClass = classnames('A_Button__Icon', {
+    const buttonClass = classnames('A_Button_Icon', {
       [`${size}`]: true,
       [`${style}`]: true
     });

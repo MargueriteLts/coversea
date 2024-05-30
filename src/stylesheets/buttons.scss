@@ -12,28 +12,29 @@
 }
 
 .AngleUp {
-  // background-image: url('images/AngleUp.svg');
    background-image: url('images/ui/icons/AngleUp.svg');
 }
 
 .AngleDown {
-  // background-image: url('images/AngleDown.svg');
    background-image: url('images/ui/icons/AngleDown.svg');
 }
 
 .Dice {
-  // background-image: url('images/Dice.svg');
    background-image: url('images/ui/icons/Dice.svg');
 }
 
 .locked {
-  // background-image: url('images/LockClosed.svg');
    background-image: url('images/ui/icons/LockClosed.svg');
 }
 
 .unLocked {
-  // background-image: url('images/LockOpen.svg');
    background-image: url('images/ui/icons/LockOpen.svg');
+}
+
+.download {
+  background-image: url('images/ui/icons/Download.svg');
+  // mask-image: url('images/ui/icons/Download.svg');
+  // -webkit-mask-image: url('images/ui/icons/Download.svg');
 }
 
 // .btn {
@@ -128,13 +129,12 @@
 
 ///////
 
-.A_Button__Icon {
+.A_Button_Icon {
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   border: none;
-  border-radius: 16px;
   height: fit-content;
 }
 
@@ -144,23 +144,20 @@
 
 .normal {
   padding: 4px;
+  border-radius: 16px;
 }
 
-.icon-button:hover {
-  background-color: black;
-  /* Change as needed */
+.large {
+  padding: 16px;
+  border-radius: 50px;
 }
 
-.icon-button__icon {
-  width: 24px;
-  /* Set the desired size */
-  height: 24px;
-  /* Set the desired size */
+.A_Button_Icon:hover {
+  background-color: var(--WHITE);
 }
 
-.icon-button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
+.A_Button_Icon:hover .A_Icon {
+  filter: invert(1);
 }
 
 //////
