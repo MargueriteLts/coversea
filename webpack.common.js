@@ -89,17 +89,8 @@ module.exports = {
       chunks: ['index']
     }),
 
-    // Teaser Page
-    new HtmlWebpackPlugin({
-      hash: true,
-      scriptLoading: 'blocking',
-      template: './src/teaserpage.html',
-      filename: './teaserpage.html',
-      chunks: ['generator']
-    }),
-
     // Internal pages
-
+    
     new HtmlWebpackPlugin({
       hash: true,
       scriptLoading: 'blocking',
@@ -107,13 +98,22 @@ module.exports = {
       filename: './socials.html',
       chunks: ['index']
     }),
-
+    
     new HtmlWebpackPlugin({
       hash: true,
       scriptLoading: 'blocking',
       template: './src/about.html',
       filename: './about.html',
       chunks: ['index']
+    }),
+    
+    // Teaser Page
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/teaserpage.html',
+      filename: './generators/teaserpage.html',
+      chunks: ['generator']
     }),
 
     // Generators
