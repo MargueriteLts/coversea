@@ -53,6 +53,10 @@
   background-image: url('images/ui/icons/DoubleArrow.svg');
 }
 
+.Rotate {
+  background-image: url('images/ui/icons/Rotate.svg');
+}
+
 // .btn {
 //   cursor: pointer;
 // }
@@ -156,6 +160,10 @@
 
 .filled {
   background-color: var(--BACKGROUND-BTN-SECONDARY);
+}
+
+.transparent {
+  background-color: transparent;
 }
 
 .normal {

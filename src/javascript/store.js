@@ -202,7 +202,8 @@ function setBackgroundStore(type, value) {
 
     if (type === 'CurrentGradientType') {
       moduleBackgroundStore.preset.Gradient.currentGradientType = value
-      resolve([value])
+      // resolve([value])
+      resolve([moduleBackgroundStore.preset.Gradient.currentGradientType])
     }
 
     if (type === 'SolidColor') {

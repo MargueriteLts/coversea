@@ -96,6 +96,8 @@ export default class M_BackgroundContent extends Component {
       handleChangeBackgroundGradientType,
       handleTabClickNoise
     } = this.props
+
+    // console.log(gradientTypes);
     
     ////////////// SOLID COLOR
 
@@ -152,17 +154,20 @@ export default class M_BackgroundContent extends Component {
               data={background.preset.Gradient.gradientTypes}
               data2={background.preset.Gradient.currentGradientType}
             />
-            <M_Control
-              orientation="row"
-              controlType='GradientAngle'
+            { background.preset.Gradient.currentGradientType == 'Linear' ?
+              <M_Control
+                orientation="row"
+                controlType='GradientAngle'
 
-              isLocked={this.state.gradientAngleLock}
-              setStore={setBackgroundStore}
-              item='lockGradientAngle'
-              handleToggle={this.handleToggle}
+                isLocked={this.state.gradientAngleLock}
+                setStore={setBackgroundStore}
+                item='lockGradientAngle'
+                handleToggle={this.handleToggle}
 
-              handleChange={handleChangeBackgroundAngleGradient}
-            />
+                handleChange={handleChangeBackgroundAngleGradient}
+              />
+              : null
+            }
           </div>
           {/* <M_GradientDirection
              gradientAngleLock={this.state.gradientAngleLock}
