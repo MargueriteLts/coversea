@@ -356,36 +356,141 @@ function drawModules(p) {
       }
 
       let stopColor = colorA
-      // let newStopColor
+      let lastColor
 
       let stop = 0
       let newStop
-      // gradientBg.addColorStop(stop, colorA)
+
       gradientBg.addColorStop(stop, stopColor)
-      // console.log('Quantity from store', gradient.stops.quantity);
+
       let Q = gradient.stops.quantity
-      // console.log(Q);
-      // let Q = 5
 
 
+      ///
+      function hexToHsl(hex) {
+        // Convert hex to RGB
+        let r = parseInt(hex.slice(1, 3), 16);
+        let g = parseInt(hex.slice(3, 5), 16);
+        let b = parseInt(hex.slice(5, 7), 16);
 
-      for (let i = 0; i < Q; i++) {
+        // Convert RGB to HSL
+        r /= 255;
+        g /= 255;
+        b /= 255;
 
-        newStop = stop + 1/(Q+1)
-        // console.log('Stop value in for', newStop);
+        let max = Math.max(r, g, b);
+        let min = Math.min(r, g, b);
+        let h, s, l = (max + min) / 2;
 
-        if (stopColor == colorA) {
-          stopColor = colorB
-        } else if (stopColor == colorB) {
-          stopColor = colorA
-        }
+        if (max === min) {
+            h = s = 0; // achromatic
+        } else {
+            let d = max - min;
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+            switch (max) {
+                case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                case g: h = (b - r) / d + 2; break;
+                case b: h = (r - g) / d + 4; break;
+            }
+            h /= 6;
+          }
 
-        gradientBg.addColorStop(newStop, stopColor)
-        stop = newStop
-        
+          // Convert HSL values to percentage and round
+          h = Math.round(h * 360);
+          s = Math.round(s * 100);
+          l = Math.round(l * 100);
+
+          return { h, s, l };
+      }// Output: {h: 207, s: 70, l: 53}
+
+      function hsbToRgb(h, s, b) {
+          s /= 100;
+          b /= 100;
+          const k = (n) => (n + h / 60) % 6;
+          const f = (n) => b * (1 - s * Math.max(0, Math.min(k(n), 4 - k(n), 1)));
+
+          const r = Math.round(255 * f(5));
+          const g = Math.round(255 * f(3));
+          const bVal = Math.round(255 * f(1));
+
+          return { r, g, b: bVal };
       }
 
-      gradientBg.addColorStop(1, colorB)
+      ///
+
+      let hsbColorValues= hexToHsl(colorA)
+      let h = hsbColorValues.h
+      let s = hsbColorValues.s
+      let b = hsbColorValues.b
+      // let hsbColor = `${hsbColorValues.h},${hsbColorValues.s},${hsbColorValues.l}`
+
+      if (Q == 0) {
+        gradientBg.addColorStop(0, colorA)
+        gradientBg.addColorStop(1, colorB)
+      } else {
+        for (let i = 0; i < Q; i++) {
+  
+          newStop = stop + 1/(Q+1)
+  
+          // if (stopColor == colorA) {
+          //   stopColor = colorB
+          // } else if (stopColor == colorB) {
+          //   stopColor = colorA
+          // }
+
+          // let colorValues= hexToHsl(gColor)
+          // {h: 207, s: 70, l: 53}
+          let newH = h + 10
+          // let hsbColor = `${newH},${values.s},${values.l}`
+          p.colorMode(p.HSB)
+          let newColor = p.color(newH, s, b)
+          let rgbColor = hsbToRgb(newColor)
+          let finalColor = `${rgbColor.r},${rgbColor.g},${rgbColor.b}`
+
+
+          gradientBg.addColorStop(newStop, finalColor)
+
+          // gColor = newColor
+          h = newH
+
+
+          stop = newStop
+        }
+        p.colorMode(p.RGB)
+        gradientBg.addColorStop(1, colorB);
+
+      }
+
+
+
+      /// WORKING BASIC ALTERNATION
+
+      // if (Q == 0) {
+      //   gradientBg.addColorStop(0, colorA)
+      //   gradientBg.addColorStop(1, colorB)
+      // } else {
+      //   for (let i = 0; i < Q; i++) {
+  
+      //     newStop = stop + 1/(Q+1)
+  
+      //     if (stopColor == colorA) {
+      //       stopColor = colorB
+      //     } else if (stopColor == colorB) {
+      //       stopColor = colorA
+      //     }
+      //     gradientBg.addColorStop(newStop, stopColor)
+
+
+      //     stop = newStop
+      //   }
+
+      //   if (stopColor == colorA) {
+      //     lastColor = colorB;
+      //   } else if (stopColor == colorB) {
+      //     lastColor = colorA;
+      //   }
+      //   gradientBg.addColorStop(1, lastColor);
+      // }
 
       // gradientBg.addColorStop(0, colorA)
       // gradientBg.addColorStop(0.3, colorB)

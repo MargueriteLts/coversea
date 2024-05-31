@@ -124,7 +124,7 @@ export default class M_BackgroundContent extends Component {
     ////////////// GRADIENT
 
     if (background.currentBackgroundType == 'Gradient') {
-      return <div className="BackgroundContent_TabContent">
+      return <div className="BackgroundContent_TabContent row">
         <div className='TabContent-column'>
           <M_Control
             orientation="row"
@@ -191,6 +191,7 @@ export default class M_BackgroundContent extends Component {
             handleToggle={this.handleToggle}
 
             data={background.preset.Gradient.stops.quantity}
+            data2={background.preset.Gradient.stops}
             handleChange={handleChangeBackgroundGradientStopQuantity}
             
           />

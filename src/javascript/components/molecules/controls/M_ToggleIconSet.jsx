@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import A_ToggleIcon from './buttons/A_ToggleIcon.jsx'
+import A_ToggleIcon from '../../buttons/A_ToggleIcon.jsx'
 
 export default class TabButtonSet extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export default class TabButtonSet extends Component {
       buttonElements.push(
         <A_ToggleIcon
           icon={options[key]}
-          isOn={key === value}
+          isOn={options[key] === value}
           handleClick={() => handleClick(options[key])}
           key={i}
         />
@@ -25,7 +25,7 @@ export default class TabButtonSet extends Component {
     })
 
     return (
-      <div className="TabButtonSet">
+      <div className="M_ToggleIconSet">
         {buttonElements}
       </div>
     )

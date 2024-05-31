@@ -94,7 +94,7 @@ export default class BasicTypo extends Component {
   
   render() {
     const { basictypo, setBasicTypoStore } = this.props
-    console.log('OTHERTEXT in basictypo module', basictypo.otherText);
+    // console.log('OTHERTEXT in basictypo module', basictypo.otherText);
 
     return <div className="M_BasicTypoContent">
 

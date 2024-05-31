@@ -6,14 +6,14 @@ export default class M_NumberInput extends PureComponent {
   }
 
   render() {
-    const { value, handleChange } = this.props
+    const { value, handleChange, object } = this.props
 
     return (
       // <div className='input'>
         <input
           type="number"
-          min="0"
-          max="100"
+          min={object.min}
+          max={object.max}
           className="A_NumberInput"
           value={value}
           placeholder="Type a number…"

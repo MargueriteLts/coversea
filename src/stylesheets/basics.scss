@@ -71,12 +71,14 @@ p {
     color: var(--white);
     text-decoration: none;
     cursor: default;
+    user-select: none;
   }
 
   .menuButton {
     color: var(--BgModul);
     text-decoration: none;
     cursor: hand;
+    user-select: none;
   }
 }
 

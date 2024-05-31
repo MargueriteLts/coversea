@@ -9,7 +9,7 @@ const preset = {
   
   Background: {
     backgroundTypes: ['SolidColor', 'Gradient'],
-    currentBackgroundType: 'SolidColor',
+    currentBackgroundType: 'Gradient',
 
     preset: {
       SolidColor: {
@@ -17,11 +17,14 @@ const preset = {
       },
       Gradient: {
         gradientTypes: ['Linear', 'Radial'],
-        currentGradientType: 'Radial',
+        currentGradientType: 'Linear',
         typeLocked: false,
+
         stops: {
           quantity: 2,
-          locked: false
+          locked: false,
+          max: 12,
+          min: 0
         },
         color1: '#ff0000',
         color2:'#00ff00'

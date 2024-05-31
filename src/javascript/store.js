@@ -233,6 +233,9 @@ function setBackgroundStore(type, value) {
     if (type == 'RandomizeAngleGradient') {
       moduleBackgroundStore.preset.Gradient.angle.value = value
     }
+    if (type == 'RandomizeGradientType') {
+      moduleBackgroundStore.preset.Gradient.currentGradientType = value
+    }
     if (type === 'stopQuantity') {
       moduleBackgroundStore.preset.Gradient.stops.quantity = parseInt(value)
       // resolve([moduleBackgroundStore.preset.Gradient.stops.quantity])
@@ -398,7 +401,7 @@ function setImageStore(type, value) {
 ////////////////////// LINES
 
 function initLinesStore(preset) {
-  preset = Object.assign({}, preset, { moduleName: 'Lines', color: '#fff', lines: generateLines(50) })
+  preset = Object.assign({}, preset, { moduleName: 'Lines', color: '#fff', lines: generateLines(50), lineTypeLocked: false, strokeWeightLocked: false, colorLocked: false })
   return preset
 }
 
@@ -421,17 +424,25 @@ function getLinesStore() {
   return moduleLinesStore
 }
 
-function setLinesStore(type, nextValue) {
+function setLinesStore(type, value) {
   return new Promise((resolve, reject) => {
     if (type === 'SolidColor') {
-      moduleLinesStore.color = nextValue
-      resolve([nextValue])
+      moduleLinesStore.color = value
+      resolve([value])
     }
     if (type === 'randomize') {
       moduleLinesStore.lines = generateLines(50)
     }
     if (type === 'strokeWeight') {
-      moduleLinesStore.strokeWeight = nextValue
+      moduleLinesStore.strokeWeight = value
+    }
+    //
+
+    if (type === 'lockWeight') {
+      moduleLinesStore.strokeWeightLocked = value
+    }
+    if (type === 'lockColor') {
+      moduleLinesStore.colorLocked = value
     }
   })
 }
@@ -1029,6 +1040,11 @@ function randomizeModuleStore(moduleType) {
         
         setBackgroundStore('Gradient')
 
+        if (moduleBackgroundStore.preset.Gradient.typeLocked == false) {
+          let gradientType = sample(moduleBackgroundStore.preset.Gradient.gradientTypes)
+          setBackgroundStore('RandomizeGradientType', gradientType)
+        }
+
         if (moduleBackgroundStore.preset.Gradient.angle.locked == false) {
           let newAngle = sample(['angle1', 'angle2', 'angle3', 'angle4'])
           setBackgroundStore('RandomizeAngleGradient', newAngle)
@@ -1098,12 +1114,16 @@ function randomizeModuleStore(moduleType) {
 
     if (moduleType == 'Vinyl') {
 
-      let Vinyltype = sample(moduleVinylStore.vinylTypes)
-      setVinylStore('CurrentTabChange', Vinyltype)
-      
-      setVinylStore('size', getRandomArbitrary(0, 100))
-      
-      setVinylStore('opacity', getRandomArbitrary(0, 255))
+      if (moduleVinylStore.locked == false ){
+        let Vinyltype = sample(moduleVinylStore.vinylTypes)
+        setVinylStore('CurrentTabChange', Vinyltype)
+      }
+      if (moduleVinylStore.sizeLock == false) {
+        setVinylStore('size', getRandomArbitrary(0, 100))
+      }
+      if (moduleVinylStore.opacityLock == false ){
+        setVinylStore('opacity', getRandomArbitrary(0, 255))
+      }
     }
 
     if (moduleType == 'BasicTypo') {
@@ -1111,14 +1131,19 @@ function randomizeModuleStore(moduleType) {
       setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
     }
 
+    ////////
     if (moduleType == 'Lines') {
-      setLinesStore('SolidColor', generateColor())
-
+      
       setLinesStore('randomize')
-
-      setLinesStore('strokeWeight', getRandomArbitrary(moduleLinesStore.min, moduleLinesStore.max))
-
+      console.log(moduleLinesStore.colorLocked);
+      if ( moduleLinesStore.colorLocked == false ) {
+        setLinesStore('SolidColor', generateColor())
+      }
+      if ( moduleLinesStore.strokeWeightLocked == false ) {
+        setLinesStore('strokeWeight', getRandomArbitrary(moduleLinesStore.min, moduleLinesStore.max))
+      }
     }
+    ////////
 
     if (moduleType == 'Module3D') {
 

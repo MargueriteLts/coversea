@@ -9,8 +9,8 @@ export default class M_LinesContent extends Component {
 
     this.state = {
       // tabsLock: this.props.vinyl.locked,
-      weightLock : this.props.lines.weightLock,
-      solidColorLock: this.props.lines.solidColorLock
+      weightLock : this.props.lines.strokeWeightLocked,
+      solidColorLock: this.props.lines.colorLocked
     }
   }
 
@@ -28,7 +28,7 @@ export default class M_LinesContent extends Component {
         weightLock: !this.state.weightLock
       })
     }
-    if (item == 'lockSolidColor') {
+    if (item == 'lockColor') {
       setStore(item, !this.state.solidColorLock)
       this.setState({
         solidColorLock: !this.state.solidColorLock
@@ -54,7 +54,7 @@ export default class M_LinesContent extends Component {
         //lock
           isLocked={this.state.solidColorLock}
           setStore={setLinesStore}
-          item='lockSolidColor'
+          item='lockColor'
           handleToggle={this.handleToggle}
         //data
           data={lines.color}
@@ -66,7 +66,7 @@ export default class M_LinesContent extends Component {
           orientation="row"
           controlType='Slider'
           hasTitle={true}
-          title='Lines thickness'
+          title='Thickness'
         //lock
           isLocked={this.state.weightLock}
           setStore={setLinesStore}

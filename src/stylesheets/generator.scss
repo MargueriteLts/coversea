@@ -174,8 +174,35 @@ body.generator {
                 column-gap: 8px;
                 align-items: center;
               }
-  
-              // .BackgroundContent_TabContent {}
+
+              .row {
+                flex-direction: row;
+              }
+              .column {
+                flex-direction: column;
+              }
+              
+              .BackgroundContent_TabContent {
+                display: flex;
+                gap: 20px;
+                width: 100%;
+
+                .TabContent-column {
+                  width: 50%;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 20px;
+
+                  .gradientDirection { 
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    height: fit-content;
+                  }
+                }
+
+
+              }
             }
   
   

@@ -9,7 +9,7 @@ import TabImageSet from '../../TabImageSet.jsx'
 import M_GradientColors from './M_GradientColors.jsx'
 import M_GradientAngle from './M_GradientAngle.jsx'
 import M_NumberInput from './M_NumberInput.jsx'
-import M_ToggleIconSet from '../../M_ToggleIconSet.jsx'
+import M_ToggleIconSet from './M_ToggleIconSet.jsx'
 
 export default class M_Control extends Component {
   constructor(props) {
@@ -63,6 +63,7 @@ export default class M_Control extends Component {
         <M_NumberInput
           handleChange={handleChange}
           value={data}
+          object={data2}
         />
       )
     }

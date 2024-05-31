@@ -162,3 +162,88 @@ function drawTextBottomToTop(txt, x, y, maxWidth) {
   }
 }
 
+
+
+let stopColor = colorA
+      // let newStopColor
+      let lastColor = colorB
+
+      let stop = 0
+      let newStop
+      // gradientBg.addColorStop(stop, colorA)
+      gradientBg.addColorStop(stop, stopColor)
+      // console.log('Quantity from store', gradient.stops.quantity);
+      let Q = gradient.stops.quantity
+      // console.log(Q);
+      // let Q = 5
+
+      if (Q == 0) {
+        gradientBg.addColorStop(0, colorA)
+        gradientBg.addColorStop(1, colorB)
+      } else {
+        for (let i = 0; i < Q; i++) {
+
+          // if (i == Q-1 && Q == !1) {
+          //   newStop = 1
+          // } else {
+          //   newStop = stop + 1/(Q+1)
+          // }
+  
+          newStop = stop + 1/(Q+1)
+          // console.log('Stop value in for', newStop);
+  
+          if (stopColor == colorA) {
+            stopColor = colorB
+            // lastColor = colorA
+          } else if (stopColor == colorB) {
+            stopColor = colorA
+            // lastColor = colorB
+          }
+
+          if (lastColor == colorA) {
+            lastColor = colorA
+          } else if (lastColor == colorB) {
+            lastColor = colorB
+          }
+  
+          gradientBg.addColorStop(newStop, stopColor)
+          stop = newStop
+
+          // let lastColor
+          // if (stopColor == colorA) {
+          //   lastColor = colorB
+          // } else if (stopColor == colorB) {
+          //   lastColor = colorA
+          // }
+  
+            gradientBg.addColorStop(1, lastColor)
+          // if (i = Q-1) {
+          //   let lastColor
+          //   if (stopColor == colorA) {
+          //     lastColor = colorB
+          //   } else if (stopColor == colorB) {
+          //     lastColor = colorA
+          //   }
+          //   console.log(lastColor);
+          //   gradientBg.addColorStop(1, lastColor)
+          // } 
+        }
+
+
+
+
+
+        ///
+
+
+
+        //
+      // function randomColorCloseTo(baseColor) {
+      //   // console.log('yo');
+      //   let variation = 30; // Variation amount
+      //   let r = p.red(baseColor) + p.random(-variation, variation);
+      //   let g = p.green(baseColor) + p.random(-variation, variation);
+      //   let b = p.blue(baseColor) + p.random(-variation, variation);
+      //   return p.color(p.constrain(r, 0, 255), p.constrain(g, 0, 255), p.constrain(b, 0, 255));
+      // }
+      //

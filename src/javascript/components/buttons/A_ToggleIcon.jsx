@@ -14,17 +14,20 @@ export default class A_ToggleIcon extends Component {
   render() {
     const { isOn, handleClick, icon } = this.props;
 
-    const classes = classnames({
+    const iconClasses = classnames({
       'A_Icon': true,
-      toggleIcon: true,
       [`${icon}`]:true,
+    })
+
+    const buttonClasses = classnames({
+      toggleIcon: true,
       active: isOn
     })
 
     return (
       // <div onClick={() => handleToggle(this.props.item, this.props.setStore)}>
-      <div onClick={handleClick}>
-        <div className={classes}></div>
+      <div onClick={handleClick} className={buttonClasses}>
+        <div className={iconClasses}></div>
       </div>
     );
   }
