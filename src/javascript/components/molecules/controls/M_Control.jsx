@@ -8,6 +8,8 @@ import Slider from '../../Slider.jsx'
 import TabImageSet from '../../TabImageSet.jsx'
 import M_GradientColors from './M_GradientColors.jsx'
 import M_GradientAngle from './M_GradientAngle.jsx'
+import M_NumberInput from './M_NumberInput.jsx'
+import M_ToggleIconSet from '../../M_ToggleIconSet.jsx'
 
 export default class M_Control extends Component {
   constructor(props) {
@@ -42,6 +44,25 @@ export default class M_Control extends Component {
       return (
         <M_GradientAngle
           handleChangeGradientAngle={handleChange}
+        />
+      )
+    }
+    //Gradient type
+    if (controlType == 'ToggleIconSet') {
+      return (
+        <M_ToggleIconSet
+          handleClick={handleChange}
+          options={data}
+          value={data2}
+        />
+      )
+    }
+    if (controlType == 'NumberInput') {
+      // console.log('in M_Control', handleChange);
+      return (
+        <M_NumberInput
+          handleChange={handleChange}
+          value={data}
         />
       )
     }

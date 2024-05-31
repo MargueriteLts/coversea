@@ -16,6 +16,13 @@ const preset = {
         color: '#000000'
       },
       Gradient: {
+        gradientTypes: ['Linear', 'Radial'],
+        currentGradientType: 'Radial',
+        typeLocked: false,
+        stops: {
+          quantity: 2,
+          locked: false
+        },
         color1: '#ff0000',
         color2:'#00ff00'
       }

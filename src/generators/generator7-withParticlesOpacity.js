@@ -38,33 +38,33 @@ const preset = {
     }
   },
 
-  // Particles: {
-  //   sliderValue: 15,
-  //   max: 150,
-  //   min: 10,
-  //   opacity: 72,
-  //   color: '#2127cf',
+  Particles: {
+    sliderValue: 15,
+    max: 150,
+    min: 10,
+    opacity: 72,
+    color: '#2127cf',
 
-  //   options: ['Ellipses', 'Squares', 'Mix'],
-  //   currentParticlesType: 'Mix',
+    options: ['Ellipses', 'Squares', 'Mix'],
+    currentParticlesType: 'Mix',
 
-  //   preset: {
-  //     Ellipses: {},
-  //     Squares: {},
-  //     Mix: {}
-  //   }
-  // },
+    preset: {
+      Ellipses: {},
+      Squares: {},
+      Mix: {}
+    }
+  },
 
-  // Image: {
-  //   pixelate: false,
+  Image: {
+    pixelate: false,
 
-  //   collections: ['Shoes'],
-  //   currentCollection: 'Shoes',
+    collections: ['Shoes'],
+    currentCollection: 'Shoes',
 
-  //   preset: {
-  //     Shoes: {}
-  //   }
-  // },
+    preset: {
+      Shoes: {}
+    }
+  },
   
   BasicTypoV2: {
     textInput: 'Soft Random',

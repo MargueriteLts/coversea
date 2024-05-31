@@ -200,6 +200,11 @@ function setBackgroundStore(type, value) {
       resolve([value])
     }
 
+    if (type === 'CurrentGradientType') {
+      moduleBackgroundStore.preset.Gradient.currentGradientType = value
+      resolve([value])
+    }
+
     if (type === 'SolidColor') {
       moduleBackgroundStore.preset.SolidColor.color = value
       resolve([value])
@@ -224,6 +229,16 @@ function setBackgroundStore(type, value) {
       moduleBackgroundStore.preset.Gradient.angle.value = changeGradientAngle()
       resolve([moduleBackgroundStore.preset.Gradient.angle.value])
     }
+    if (type == 'RandomizeAngleGradient') {
+      moduleBackgroundStore.preset.Gradient.angle.value = value
+    }
+    if (type === 'stopQuantity') {
+      moduleBackgroundStore.preset.Gradient.stops.quantity = parseInt(value)
+      // resolve([moduleBackgroundStore.preset.Gradient.stops.quantity])
+      //??
+      // console.log('store value', moduleBackgroundStore.preset.Gradient.stops.quantity);
+      resolve([value])
+    }
 
     if (type === 'currentTabImageChange') {
       moduleBackgroundStore.preset.Noise.currentNoiseType = value
@@ -243,6 +258,9 @@ function setBackgroundStore(type, value) {
     }
     if (type == 'lockGradientAngle') {
       moduleBackgroundStore.preset.Gradient.angle.locked = value
+    }
+    if (type == 'lockGradientStopQuantity') {
+      moduleBackgroundStore.preset.Gradient.stops.locked = value
     }
     if (type == 'lockNoise') {
       moduleBackgroundStore.preset.Noise.locked = value
@@ -749,7 +767,7 @@ function calculateCirclePositions(R, n) {
 function initBasicTypoV2Store(preset) {
   let positions = calculateCirclePositions(33, 50)
 
-  console.log(positions);
+  // console.log(positions);
   
   preset = Object.assign({}, preset, { moduleName: 'Typography', txtpositions: positions })
 
@@ -1009,7 +1027,16 @@ function randomizeModuleStore(moduleType) {
       if (newBackgroundType == 'Gradient' && moduleBackgroundStore.preset.Gradient.locked == false) {
         
         setBackgroundStore('Gradient')
-        setBackgroundStore('AngleGradient')
+
+        if (moduleBackgroundStore.preset.Gradient.angle.locked == false) {
+          let newAngle = sample(['angle1', 'angle2', 'angle3', 'angle4'])
+          setBackgroundStore('RandomizeAngleGradient', newAngle)
+        }
+
+        if (moduleBackgroundStore.preset.Gradient.stops.locked == false) {
+          let newQuantity = getRandomArbitrary(0, 100)
+          setBackgroundStore('stopQuantity', newQuantity)
+        }
       }
 
       if (newBackgroundType == 'Noise' && moduleBackgroundStore.preset.Noise.locked == false) {

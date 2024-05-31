@@ -45,6 +45,7 @@ const preset = {
   BasicTypo: {
     dopText: true,
     // random: true,
+    //textPositions : [[], []]
 
     upperCase: true,
     textAlign: 'left',
@@ -63,7 +64,8 @@ const preset = {
     },
 
     otherText: {
-      value: 'Music is the answer to everything, music is the key to the world',
+      // values: [{value: 'Music is the answer to everything, music is the key to the world'}],
+      values: ['Music is the answer to everything, music is the key to the world'],
       color: '#ffffff',
       fontOptions: ['esenin-script-one', 'Acosta', 'PT-Root-UI', 'bc-novatica-cyr'],
       currentFont: 'bc-novatica-cyr',

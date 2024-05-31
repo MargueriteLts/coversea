@@ -30,6 +30,8 @@ export default class Module extends Component {
       handleChangeBackgroundSolidColor,
       handleChangeBackgroundGradientColor,
       handleChangeBackgroundAngleGradient,
+      handleChangeBackgroundGradientStopQuantity,
+      handleChangeBackgroundGradientType,
       handleTabClickNoise,
       setBackgroundStore,
       vinyl,
@@ -50,9 +52,11 @@ export default class Module extends Component {
         <M_BackgroundContent
           background={background}
           handleTabClickBackground={handleTabClickBackground}
+          handleChangeBackgroundGradientType={handleChangeBackgroundGradientType}
           handleChangeBackgroundSolidColor={handleChangeBackgroundSolidColor}
           handleChangeBackgroundGradientColor={handleChangeBackgroundGradientColor}
           handleChangeBackgroundAngleGradient={handleChangeBackgroundAngleGradient}
+          handleChangeBackgroundGradientStopQuantity={handleChangeBackgroundGradientStopQuantity}
           handleTabClickNoise={handleTabClickNoise}
           setBackgroundStore={setBackgroundStore}
         />

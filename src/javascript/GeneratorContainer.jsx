@@ -16,15 +16,15 @@ import O_Module from './components/organisms/O_Module.jsx'
 // import BackgroundImage from './modules/BackgroundImage.jsx'
 // //Graphics
 // import Image from './modules/Image.jsx'
-// import Lines from './modules/Lines.jsx'
+// // import Lines from './modules/Lines.jsx'
 // import Module3D from './modules/Module3D.jsx'
 // import Particles from './modules/Particles.jsx'
 // import Shapes from './modules/Shapes.jsx'
 // import Vinyl from './modules/Vinyl.jsx'
-// //Text
-// import BasicTypo from './modules/BasicTypo.jsx'
+// // //Text
+// // import BasicTypo from './modules/BasicTypo.jsx'
 // import BasicTypoV2 from './modules/BasicTypoV2.jsx'
-// //Overlay
+// // //Overlay
 // import Overlay from './modules/Overlay.jsx'
 
 
@@ -63,6 +63,12 @@ export default class GeneratorContainer extends Component {
     this.setState({})
   }
 
+   handleChangeBackgroundGradientType = (type) => {
+    console.log(type);
+     this.props.setBackgroundStore('CurrentGradientType', type)
+     this.setState({})
+  }
+
   // SolidColor -OK
   handleChangeBackgroundSolidColor = (object, value) => {
     this.props.setBackgroundStore(object, value)
@@ -83,6 +89,11 @@ export default class GeneratorContainer extends Component {
   // -OK (no state update here)
   handleChangeBackgroundGradientAngle = () => {
     this.props.setBackgroundStore('AngleGradient')
+  }
+
+  handleChangeBackgroundGradientStopQuantity = (e) => {
+    this.props.setBackgroundStore('stopQuantity', e.target.value)
+    this.setState({})
   }
 
   // Noise -OK
@@ -298,9 +309,11 @@ export default class GeneratorContainer extends Component {
             moduleName={background.moduleName}
             handleRandomizeModule={this.handleRandomizeModule}
             handleTabClickBackground={this.handleTabClickBackground}
+            handleChangeBackgroundGradientType={this.handleChangeBackgroundGradientType}
             handleChangeBackgroundSolidColor={this.handleChangeBackgroundSolidColor}
             handleChangeBackgroundGradientColor={this.handleChangeBackgroundGradientColor}
             handleChangeBackgroundAngleGradient={this.handleChangeBackgroundGradientAngle}
+            handleChangeBackgroundGradientStopQuantity={this.handleChangeBackgroundGradientStopQuantity}
             handleTabClickNoise={this.handleTabClickNoise}
             setBackgroundStore={setBackgroundStore}
             key={index}

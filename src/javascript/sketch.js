@@ -300,35 +300,15 @@ function drawModules(p) {
       }
 
     } else if (background.backgroundTypes.includes('Gradient') && background.currentBackgroundType === 'Gradient') {
-      const color1 = background.preset.Gradient.color1
-      const color2 = background.preset.Gradient.color2
-      // console.log('sketch', background.preset.Gradient.angle.value);
-      const angle = background.preset.Gradient.angle.value
+      const gradient = background.preset.Gradient
+      const color1 = gradient.color1
+      const color2 = gradient.color2
+      
+
+      const angle = gradient.angle.value
 
       p.clear()
       // let gradientBg
-
-      if (blend.Vinyl == true) {
-        if (angle == 'vertical') {
-          gradientBg = blendedLayer.drawingContext.createLinearGradient (0, 0, 0, canvasSize)
-        }
-        if (angle == 'horizontal') {
-          gradientBg = blendedLayer.drawingContext.createLinearGradient (0, 0, canvasSize, 0)
-        }
-      } else {
-        if (angle == 'angle1') {
-          gradientBg = p.drawingContext.createLinearGradient (0, 0, canvasSize, 0)
-        }
-        if (angle == 'angle2') {
-          gradientBg = p.drawingContext.createLinearGradient (0, 0, 0, canvasSize)
-        }
-        if (angle == 'angle3') {
-          gradientBg = p.drawingContext.createLinearGradient (canvasSize, 0, 0, 0)
-        }
-        if (angle == 'angle4') {
-          gradientBg = p.drawingContext.createLinearGradient (0, canvasSize, 0, 0)
-        }
-      }
 
       let colorA
       let colorB
@@ -343,8 +323,74 @@ function drawModules(p) {
         colorB = color2
       }
 
-      gradientBg.addColorStop(0, colorA)
+      // console.log(gradient.currentGradientType);
+
+      if (blend.Vinyl == true) {
+        if (angle == 'vertical') {
+          gradientBg = blendedLayer.drawingContext.createLinearGradient (0, 0, 0, canvasSize)
+        }
+        if (angle == 'horizontal') {
+          gradientBg = blendedLayer.drawingContext.createLinearGradient (0, 0, canvasSize, 0)
+        }
+      } else {
+        if (gradient.currentGradientType == 'Radial') {
+
+          gradientBg = p.drawingContext.createRadialGradient (canvasSize/2, canvasSize/2, 0, canvasSize/2, canvasSize/2, 350) 
+          //Comment mettre plusieurs radial gradient??? -> soft noise gradient
+          // gradientBg = p.drawingContext.createRadialGradient (canvasSize, canvasSize, 0, canvasSize, canvasSize, 350) 
+
+        } else if (gradient.currentGradientType == 'Linear') {
+          if (angle == 'angle1') {
+            gradientBg = p.drawingContext.createLinearGradient (0, 0, canvasSize, 0)
+          }
+          if (angle == 'angle2') {
+            gradientBg = p.drawingContext.createLinearGradient (0, 0, 0, canvasSize)
+          }
+          if (angle == 'angle3') {
+            gradientBg = p.drawingContext.createLinearGradient (canvasSize, 0, 0, 0)
+          }
+          if (angle == 'angle4') {
+            gradientBg = p.drawingContext.createLinearGradient (0, canvasSize, 0, 0)
+          }
+        }
+      }
+
+      let stopColor = colorA
+      // let newStopColor
+
+      let stop = 0
+      let newStop
+      // gradientBg.addColorStop(stop, colorA)
+      gradientBg.addColorStop(stop, stopColor)
+      // console.log('Quantity from store', gradient.stops.quantity);
+      let Q = gradient.stops.quantity
+      // console.log(Q);
+      // let Q = 5
+
+
+
+      for (let i = 0; i < Q; i++) {
+
+        newStop = stop + 1/(Q+1)
+        // console.log('Stop value in for', newStop);
+
+        if (stopColor == colorA) {
+          stopColor = colorB
+        } else if (stopColor == colorB) {
+          stopColor = colorA
+        }
+
+        gradientBg.addColorStop(newStop, stopColor)
+        stop = newStop
+        
+      }
+
       gradientBg.addColorStop(1, colorB)
+
+      // gradientBg.addColorStop(0, colorA)
+      // gradientBg.addColorStop(0.3, colorB)
+      // gradientBg.addColorStop(0.6, colorA)
+      // gradientBg.addColorStop(1, colorB)
 
       if (blend.Vinyl == true) {
         blendedLayer.drawingContext.fillStyle = gradientBg
@@ -745,19 +791,10 @@ function drawModules(p) {
       
       p.textSize(otherTextSize)
       p.textLeading(otherTextLeading)
-      
-      // const prct10 = canvasSize * 0.1 / 2
-
-      // const textZone = canvasSize - prct10 * 2
-      // let widthOfText = textZone / 3
 
 
       let positions = basicTypo.textPositions
-
-
-      // 
-      // 
-      // 
+      
       // 
       const offset = canvasSize * 0.1 / 2
       const textZone = canvasSize - offset * 2
@@ -765,12 +802,14 @@ function drawModules(p) {
       const center = (canvasSize - maxWidth) / 2
       const right = canvasSize - maxWidth - offset
       const bottom = canvasSize - offset
+      //
 
       p.rectMode(p.CORNER)
 
       let currentText
       
       for (let i = 0; i < otherTexts.length; i++) {
+
         if (basicTypo.upperCase == true) {
           currentText = otherTexts[i].toUpperCase()
         } else {
@@ -809,141 +848,6 @@ function drawModules(p) {
           p.textAlign(p.RIGHT, p.BOTTOM);
           p.text(currentText, right, bottom, maxWidth);
         }
-
-
-        // let textHeight = p.textAscent(currentText) + p.textDescent(currentText)
-        // console.log('textHeight', textHeight);
-
-
-        // // let y
-        // // console.log('Y', positionTxt.y);
-        // if (positionTxt.y == 95) {
-        //   // y = positionTxt.y - textHeight
-        //   p.textAlign(p.CENTER, p.BOTTOM)
-        //   // console.log('new Y', y);
-        // }
-        // // else {
-        // //   y = positionTxt.y
-        // // }
-
-          // { x: 5, y: 5 }, // top-left
-          // { x: 30, y: 5 }, // top-center
-          // { x: 60, y: 5 }, // top-right
-          // { x: 5, y: 95 }, // bottom-left
-          // { x: 30, y: 95 }, // bottom-center
-          // { x: 60, y: 95 } // bottom-right
-
-        // let x
-        // let y
-
-        // console.log(positionTxt);
-
-        // // x = positionTxt.x
-        // // y = positionTxt.y
-
-        // // p.rectMode(p.CORNER)
-
-        // let tx
-        // let ty
-
-        // if (y == 0 && x == 0) {
-        //   p.textAlign(p.LEFT, p.TOP)
-        //   // tx = (x * textZone) / 100;
-        //   // ty = (y * textZone) / 100;
-        // } else if (y == 100 && x == 0) {
-        //   p.textAlign(p.LEFT, p.BOTTOM)
-        //   // tx = (x * textZone) / 100;
-        //   // ty = (y * textZone) / 100;
-        // } else if (y == 0 & x == 50) {
-        //   p.textAlign(p.CENTER, p.TOP)
-        //   // tx = (x * textZone) / 100;
-        //   // ty = (y * textZone) / 100;
-        // } else if (y == 100 && x == 50) {
-        //   p.textAlign(p.CENTER, p.BOTTOM)
-        //   // tx = (x * textZone) / 100;
-        //   // ty = (y * textZone) / 100;
-        // } else if (y == 0 && x == 100) {
-        //   console.log('yo');
-        //   console.log(canvasSize);
-        //   console.log(textZone);
-        //   p.textAlign(p.RIGHT, p.TOP)
-        //   // tx = (x * textZone) / 100;
-        //   // ty = (y * textZone) / 100;
-        //   console.log(tx, ty);
-        // } else if (y == 100 && x == 100) {
-        //   p.textAlign(p.RIGHT, p.BOTTOM)
-        //   // tx = (x * textZone) / 100;
-        //   // ty = ((y * textZone) / 100) - prct10;
-        // }
-
-        // let maxWidth = textZone / 3;
-        // // let maxWidth = canvasSize / 3;
-
-        // p.rectMode(p.CORNER)
-
-        // if (positionTxt[0] == 'left' && positionTxt[1] == 'top') {
-        //   p.textAlign(p.LEFT, p.TOP);
-        //   // console.log('left top', canvasSize / 3);
-        //   p.text(currentText, prct10, prct10, maxWidth);
-        // }
-        // if (positionTxt[0] == 'center' && positionTxt[1] == 'top') {
-        //   p.textAlign(p.CENTER, p.TOP);
-        //   // p.text(currentText, (textZone - maxWidth) / 2, prct10, maxWidth);
-        //   p.text(currentText, (textZone / 3) + prct10, prct10, maxWidth);
-        // }
-        // if (positionTxt[0] == 'right' && positionTxt[1] == 'top') {
-        //   p.textAlign(p.RIGHT, p.TOP);
-        //   p.text(currentText, textZone - maxWidth + prct10, prct10, maxWidth);
-        // }
-        // if (positionTxt[0] == 'left' && positionTxt[1] == 'bottom') {
-        //   p.textAlign(p.LEFT, p.BOTTOM);
-        //   p.text(currentText, prct10, textZone + prct10, maxWidth);
-        // }
-        // if (positionTxt[0] == 'center' && positionTxt[1] == 'bottom') {
-        //   p.textAlign(p.CENTER, p.BOTTOM);
-        //   // p.text(currentText, (textZone - maxWidth) / 2, textZone, maxWidth);
-        //   p.text(currentText, textZone / 3 + prct10, textZone + prct10, maxWidth);
-        // }
-        // if (positionTxt[0] == 'right' && positionTxt[1] == 'bottom') {
-        //   p.textAlign(p.RIGHT, p.BOTTOM);
-        //   p.text(currentText, textZone - maxWidth + prct10, textZone + prct10, maxWidth);
-        // }
-
-
-
-
-        
-        
-
-
-        
-
-
-
-
-
-
-
-        // if (y == 95 && x == 50) {
-        //   p.textAlign(p.CENTER, p.BOTTOM)
-        // } else if (y == 95 && x == 5) {
-        //   p.textAlign(p.LEFT, p.BOTTOM)
-        // } else if (y == 95 && x == 60) {
-        //   p.textAlign(p.RIGHT, p.BOTTOM)
-        // } else if (x == 5) {
-        //   p.textAlign(p.LEFT, )
-        // }
-
-
-        // x = (positionTxt.x * canvasSize) / 100;
-        // x = (positionTxt.x * textZone) / 100;
-        // x = (positionTxt.x * canvasSize) / 100;
-        // y = (positionTxt.y * textZone) / 100;
-        // tx = (x * textZone) / 100;
-        // ty = ((y * textZone) / 100) - prct10;
-
-        // // p.text(currentText, x, y, widthOfText);
-        // p.text(currentText, tx, ty, widthOfText);
       }
   
 
