@@ -4,8 +4,8 @@
 @import 'stylesheets/basics.scss';
 @import 'stylesheets/index.scss';
 @import 'stylesheets/buttons.scss';
-/* @import 'stylesheets/generator.scss'; */
-@import 'stylesheets/teaserGenerator.scss';
-/* @import 'stylesheets/adaptive.scss'; */
+@import 'stylesheets/generator.scss';
+/* @import 'stylesheets/teaserGenerator.scss'; */
+@import 'stylesheets/adaptive.scss';
 
 /*  */

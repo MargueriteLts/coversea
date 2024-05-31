@@ -8,17 +8,20 @@ export default class M_AddRemoveText extends PureComponent {
     super(props)
 
     this.state= {
-      textAreas: [{ value: this.props.text }]
+      textAreas: this.props.text
     }
+
+    console.log('this props', this.props.text);
   }
 
   handleTextAreaChange = (event, index) => {
 
     const { textAreas } = this.state;
-    const { value } = event.target;
-    const updatedTextAreas = [...textAreas]
 
-    updatedTextAreas[index] = { ...updatedTextAreas[index], value: value }
+    const { value } = event.target;
+
+    const updatedTextAreas = [...textAreas]
+    updatedTextAreas[index] = value;
     
     this.setState({
       textAreas: updatedTextAreas
@@ -42,46 +45,48 @@ export default class M_AddRemoveText extends PureComponent {
 
   handleAddText = () => {
     const { textAreas } = this.state;
+     const updatedTextAreas = [...textAreas, 'Your text' ]
+    
+    this.setState({
+      textAreas: updatedTextAreas
+    });
 
-    if (textAreas.length < 6) {
-      this.setState({
-        textAreas: [...textAreas, { value: 'New text' }]
-      });
-    }
+    this.props.setStore('textarea', updatedTextAreas)
   }
 
   render() {
-    const { textAreas } = this.state
-
     return <div className='M_AddRemoveText'>
 
       <div className='inputStack'>
-        {textAreas.map((textArea, index) => (
+
+        {this.state.textAreas.map((textArea, index) => (
           <div key={index} className='flexRow align-bottom'>
             <TextArea
               className='textarea'
               rows={3}
               cols={40}
-              value={textArea.value}
+              value={textArea}
               onChange={(event) => this.handleTextAreaChange(event, index)}
             />
-            {/* <div className="btn--secondary" onClick={() => this.handleRemoveText(index)}>Remove</div> */}
+
             <A_IconButton
               onClick={() => this.handleRemoveText(index)}
               size='normal'
               style='filled'
-              iconName='Minus.svg'
+              icon='minus'
             />
           </div>
         ))}
       </div>
-      {/* <div className="btn--secondary" onClick={this.handleAddText}>Add text</div> */}
-      <A_IconButton
-        onClick={this.handleAddText}
-        size='normal'
-        style='filled'
-        iconName='Plus.svg'
-      />
+      
+      {this.state.textAreas.length < 6 ?
+        <A_IconButton
+          onClick={this.handleAddText}
+          size='normal'
+          style='filled'
+          icon='plus'
+        />
+      : null}
     </div>
   }
 }

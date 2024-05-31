@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import classnames from 'classnames'
-// import PropTypes from 'prop-types';
-// import './IconButton.css'; // Make sure to create and import the CSS file
 
  export default class IconButton extends Component {
   constructor(props) {
@@ -11,18 +9,18 @@ import classnames from 'classnames'
   render() {
     const { onClick, size, style, icon } = this.props;
 
-    const buttonClass = classnames('A_Button_Icon', {
+    const buttonClasses = classnames('A_Button_Icon', {
       [`${size}`]: true,
       [`${style}`]: true
     });
 
-    const iconClass = classnames('A_Icon', {
+    const iconClasses = classnames('A_Icon', {
       [`${icon}`]: true
     });
 
 
-    return <div className={buttonClass} onClick={onClick}>
-      <div className={iconClass}></div>
+    return <div className={buttonClasses} onClick={onClick}>
+      <div className={iconClasses}></div>
     </div>
 
   }

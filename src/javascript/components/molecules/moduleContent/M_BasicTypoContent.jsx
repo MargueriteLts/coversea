@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-// import Input from '../../Input.jsx'
-// import ColorPicker from '../../ColorPicker.jsx'
-// import DropDown from '../M_Select.jsx'
-// import Slider from '../../Slider.jsx'
 import A_Text from '../../ATOMS/A_Text.jsx'
 import TextArea from '../../TextArea.jsx'
 import M_TextSettingsDropDown from '../M_TextSettingsDropDown.jsx'
-
 import M_AddRemoveText from '../controls/M_AddRemoveText.jsx'
 
 export default class BasicTypo extends Component {
@@ -99,6 +94,7 @@ export default class BasicTypo extends Component {
   
   render() {
     const { basictypo, setBasicTypoStore } = this.props
+    console.log('OTHERTEXT in basictypo module', basictypo.otherText);
 
     return <div className="M_BasicTypoContent">
 
@@ -139,7 +135,8 @@ export default class BasicTypo extends Component {
             style='basicTypo-title'
           />
           <M_AddRemoveText
-            text={basictypo.otherText.value}
+            // text={basictypo.otherText.value}
+            text={basictypo.otherText.values}
             setStore={setBasicTypoStore}
           />
           <M_TextSettingsDropDown

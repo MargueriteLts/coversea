@@ -130,36 +130,6 @@ function shuffleArray(array) {
   return array;
 }
 
-function generatePositions() {
-
-  let positions = [
-    { x: 5, y: 5 }, // top-left
-    { x: 30, y: 5 }, // top-center
-    { x: 60, y: 5 }, // top-right
-    { x: 5, y: 95 }, // bottom-left
-    { x: 30, y: 95 }, // bottom-center
-    { x: 60, y: 95 } // bottom-right
-  ];
-  let randomPosition = sample(positions)
-
-  let randomPositions = shuffleArray(positions)
-
-
-  let textPositions = Object.assign({}, textPositions, { randomPosition: randomPosition, randomPositions: randomPositions })
-
-  // Generate two distinct random indices
-  // let randomIndex1 = Math.floor(Math.random() * positions.length);
-  // let randomIndex2;
-  // do {
-  //   randomIndex2 = Math.floor(Math.random() * positions.length);
-  // } while (randomIndex2 === randomIndex1);
-  // const txtPosition1 = positions[randomIndex1];
-  // const txtPosition2 = positions[randomIndex2];
-  // return [txtPosition1, txtPosition2];
-
-  return textPositions
-}
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Background
@@ -653,18 +623,60 @@ function setVinylStore(type, value) {
 
 ////////////////////// BASICTYPO
 
+function generatePositions() {
+
+  let positions = [
+    // // { x: 5, y: 5 }, // top-left
+    // { x: 0, y: 0 }, // top-left
+    // // { x: 50, y: 5 }, // top-center
+    // { x: 50, y: 0 }, // top-center
+    // // { x: 30, y: 5 }, // top-center
+    // // { x: 95, y: 5 }, // top-right
+    // { x: 100, y: 0 }, // top-right
+    // // { x: 5, y: 95 }, // bottom-left
+    // { x: 0, y: 100 }, // bottom-left
+    // // { x: 30, y: 95 }, // bottom-center
+    // // { x: 50, y: 95 }, // bottom-center
+    // { x: 50, y: 100 }, // bottom-center
+    // // { x: 60, y: 95 } // bottom-right
+    // { x: 100, y: 100 } // bottom-right
+    // // { x: 95, y: 95 } // bottom-right
+    ['left', 'top' ], ['center', 'top'], ['right', 'top'],
+    ['left', 'bottom'], ['center', 'bottom'], ['right', 'bottom']
+  ];
+  // let randomPosition = sample(positions)
+
+  // let randomPositions = shuffleArray(positions)
+
+
+  // let textPositions = Object.assign({}, textPositions, { randomPosition: randomPosition, randomPositions: randomPositions })
+  // let textPositions = Object.assign({}, textPositions, { randomPositions })
+
+  // Generate two distinct random indices
+  // let randomIndex1 = Math.floor(Math.random() * positions.length);
+  // let randomIndex2;
+  // do {
+  //   randomIndex2 = Math.floor(Math.random() * positions.length);
+  // } while (randomIndex2 === randomIndex1);
+  // const txtPosition1 = positions[randomIndex1];
+  // const txtPosition2 = positions[randomIndex2];
+  // return [txtPosition1, txtPosition2];
+
+  return shuffleArray(positions)
+}
+
 function initBasicTypoStore(preset) {
 
   let positions = generatePositions()
+  // console.log(positions);
 
   // preset = Object.assign({}, preset, { moduleName: 'Text 1', color: '#fff', txtposition: position })
   preset = Object.assign({}, preset, {
     moduleName: 'Typography',
+    // textPositions : [[], []]
     textPositions: positions
     //textPositions: {randomPosition: { x: 60, y: 95 }, randomPositions: [{ x: 5, y: 5 },{ x: 30, y: 5 },{ x: 60, y: 5 },{ x: 5, y: 95 },{ x: 30, y: 95 },{ x: 60, y: 95 }] }
   })
-
-  console.log(preset);
 
   return preset
 }
@@ -695,7 +707,8 @@ function setBasicTypoStore(type, nextValue) {
     }
 
      if (type === 'textarea') {
-      moduleBasicTypoStore.otherText.value = nextValue
+      console.log('OTHERTEXT in STORE', moduleBasicTypoStore.otherText);
+      moduleBasicTypoStore.otherText.values = nextValue
     }
 
     //COLOR??
@@ -931,10 +944,10 @@ function generateAllStore(generatorName, moduleList) {
       //   data.push({newVinylSize, newVinylOpacity})
       // }
 
-      // if (moduleName == 'BasicTypo') {
-      //   setBasicTypoStore('Positions')
-      //   setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
-      // }
+      if (moduleName == 'BasicTypo') {
+        setBasicTypoStore('Positions')
+        // setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
+      }
 
       if (moduleName == 'Lines') {
 

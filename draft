@@ -1,0 +1,164 @@
+// if (typeof otherTexts === 'string') {
+      //   // console.log('yo');
+      //   if (basicTypo.upperCase == true) {
+      //     otherTexts = basicTypo.otherText.value.toUpperCase()
+      //   } else {
+      //     otherTexts = basicTypo.otherText.value
+      //   }
+
+      //   const positionTxt = positions.randomPosition
+        
+      //   let x = positionTxt.x
+      //   let y = positionTxt.y
+      //   if (y == 5) {
+      //     p.textAlign(p.LEFT, p.TOP)
+      //   } else {
+      //     p.textAlign(p.LEFT, p.BOTTOM)
+      //   }
+      //   x = (positionTxt.x * canvasSize) / 100
+      //   y = (positionTxt.y * canvasSize) / 100
+      //   p.text(otherTexts, x, y, width)
+      // }    
+    
+    
+    
+    // if (basicTypo.chrome == true) {
+    //   for (let i = 10; i >= 0; i--) {
+    //     let offsetX = i * 3;
+    //     let offsetY = i * 3;
+    //     // let gradientFill = p.drawingContext.createLinearGradient(0, 0, canvasSize/2, canvasSize/2,)
+    //     // gradientFill.addColorStop(0, p.color(0))
+    //     // gradientFill.addColorStop(0.5, p.color(255))
+    //     // gradientFill.addColorStop(1, p.color(0))
+    //     // p.drawingContext.fillStyle = gradientFill
+    //     p.fill(color, color, color);
+    //     // p.text(mainText, xmain + offsetX, ymain + offsetY);
+    //     p.textSize(txtSize)
+    //     p.text(mainText, xmain , ymain);
+    //     color += 20
+    //     txtSize -= 1
+    //   }
+    //   p.drawingContext.shadowBlur = 10
+    //   p.drawingContext.shadowColor = p.color(255)
+    //   p.stroke(255);
+    //   // let gradient = p.drawingContext.createConicGradient( 0, canvasSize/2, canvasSize/2,)
+    //   // gradient.addColorStop(0, p.color(0))
+    //   // gradient.addColorStop(0.5, p.color(255))
+    //   // gradient.addColorStop(1, p.color(0))
+    //   // p.drawingContext.strokeStyle = gradient
+    //   // p.strokeWeight((0.3 * canvasSize) / 100)
+    //   // let gradientFill = p.drawingContext.createLinearGradient(0, 0, canvasSize/2, canvasSize/2,)
+    //   // gradientFill.addColorStop(0, p.color(0))
+    //   // gradientFill.addColorStop(0.5, p.color(255))
+    //   // gradientFill.addColorStop(1, p.color(0))
+    //   // p.drawingContext.fillStyle = gradientFill
+    //   // p.noFill()
+    //   p.text(mainText, xmain, ymain);
+    // } else {
+    //   p.text(mainText, xmain, ymain, canvasSize, canvasSize)
+    // }
+
+    
+
+    // if (basicTypo.glow == true) {
+    //   glow(p, (255), 5)
+    //   glow(p, (255), 10)
+    //   glow(p, (255), 30)
+    // }
+
+    // if (basicTypo.stroke == true) {
+    //   p.noFill()
+    //   p.stroke(basicTypo.color)
+    //   p.strokeWeight((0.9 * canvasSize) / 100)
+
+    //   // let gradient = p.drawingContext.createConicGradient(0, canvasSize/2, canvasSize/2,)
+    //   // const background = getBackgroundStore()
+    //   // const color1 = background.preset.Gradient.color1
+    //   // const color2 = background.preset.Gradient.color2
+    //   // gradient.addColorStop(0, p.color(color1))
+    //   // gradient.addColorStop(1, p.color(color2))
+    //   // p.drawingContext.strokeStyle = gradient
+    // }
+
+    
+    // p.textFont(basicTypo.font)
+    
+    // if (basicTypo.styles.includes('NORMAL') && basicTypo.styleMainText == 'NORMAL' && basicTypo.font == 'PT-Root-UI') {
+    //   p.textFont(ptrootuiReg)
+    // } else if (basicTypo.styles.includes('BOLD') && basicTypo.styleMainText == 'BOLD' && basicTypo.font == 'PT-Root-UI') {
+    //   p.textFont(ptrootuiBold)
+    // } else if (basicTypo.styles.includes('LIGHT') && basicTypo.styleMainText == 'LIGHT' && basicTypo.font == 'PT-Root-UI') {
+    //   p.textFont(ptrootuiLight)
+    // } else {
+    //   p.textFont(basicTypo.font)
+    // }
+
+
+
+function setup() {
+  // Create a 100x100 canvas
+  createCanvas(500, 500);
+  background(255,0,0)
+  
+  // Define the text strings
+  let texts = [
+    "Hello, World! World!World! World! World!World! ",
+    "p5.js is fun p5.js is fun p5.js is fun p5.js is fun p5.js is fun p5.js is fun p5.js is fun p5.js is fun",
+    "Creative Coding Creative Coding Creative Coding Creative Coding",
+    "Short Text Wrapping Text Wrapping Text Wrapping Text Wrapping Text Wrapping Text",
+    "Wrapping Text Wrapping Text Wrapping Text Wrapping Text Wrapping Text",
+    "Example Example Example Example Example Example Example Example Example Example"
+  ];
+
+  // Set text properties
+  textSize(12); // Set text size
+  let maxWidth = width / 3; // Maximum width for text box
+  
+  // Top-left
+  textAlign(LEFT, TOP);
+  text(texts[0], 0, 0, maxWidth);
+  
+  textAlign(CENTER)
+  text(texts[1], width/2, 0, maxWidth);
+
+  // Top-right
+  textAlign(RIGHT, TOP);
+  text(texts[2], width-maxWidth, 0, maxWidth);
+
+  // Bottom-left
+  textAlign(LEFT, BOTTOM);
+  drawTextBottomToTop(texts[3], 0, height, maxWidth);
+
+  // Bottom-center
+  textAlign(CENTER, BOTTOM);
+  drawTextBottomToTop(texts[4], width / 2, height, maxWidth);
+
+  // Bottom-right
+  textAlign(RIGHT, BOTTOM);
+  drawTextBottomToTop(texts[5], width, height, maxWidth);
+}
+
+// Function to draw text from bottom to top
+function drawTextBottomToTop(txt, x, y, maxWidth) {
+  let words = txt.split(' ');
+  let lines = [];
+  let currentLine = words[0];
+
+  for (let i = 1; i < words.length; i++) {
+    let word = words[i];
+    let testLine = currentLine + ' ' + word;
+    if (textWidth(testLine) <= maxWidth) {
+      currentLine = testLine;
+    } else {
+      lines.push(currentLine);
+      currentLine = word;
+    }
+  }
+  lines.push(currentLine);
+
+  for (let i = lines.length - 1; i >= 0; i--) {
+    text(lines[i], x, y);
+    y -= textAscent() + textDescent();
+  }
+}
+

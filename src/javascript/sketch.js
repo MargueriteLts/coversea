@@ -726,113 +726,226 @@ function drawModules(p) {
   if (moduleList.includes('BasicTypo')) {
     const basicTypo = getBasicTypoStore()
     let mainText
-    let otherTexts = basicTypo.otherText.value
-
-    
-    // p.textFont(basicTypo.font)
-    
-    // if (basicTypo.styles.includes('NORMAL') && basicTypo.styleMainText == 'NORMAL' && basicTypo.font == 'PT-Root-UI') {
-    //   p.textFont(ptrootuiReg)
-    // } else if (basicTypo.styles.includes('BOLD') && basicTypo.styleMainText == 'BOLD' && basicTypo.font == 'PT-Root-UI') {
-    //   p.textFont(ptrootuiBold)
-    // } else if (basicTypo.styles.includes('LIGHT') && basicTypo.styleMainText == 'LIGHT' && basicTypo.font == 'PT-Root-UI') {
-    //   p.textFont(ptrootuiLight)
-    // } else {
-    //   p.textFont(basicTypo.font)
-    // }
     
     ////////////////////////////  STYLES
     
     p.noStroke()
     // p.textStyle(basicTypo.styleMainText)
-    p.textWrap(p.WORD)
-
-    // if (basicTypo.glow == true) {
-    //   glow(p, (255), 5)
-    //   glow(p, (255), 10)
-    //   glow(p, (255), 30)
-    // }
-
-    // if (basicTypo.stroke == true) {
-    //   p.noFill()
-    //   p.stroke(basicTypo.color)
-    //   p.strokeWeight((0.9 * canvasSize) / 100)
-
-    //   // let gradient = p.drawingContext.createConicGradient(0, canvasSize/2, canvasSize/2,)
-    //   // const background = getBackgroundStore()
-    //   // const color1 = background.preset.Gradient.color1
-    //   // const color2 = background.preset.Gradient.color2
-    //   // gradient.addColorStop(0, p.color(color1))
-    //   // gradient.addColorStop(1, p.color(color2))
-    //   // p.drawingContext.strokeStyle = gradient
-    // }
-
+    // p.textWrap(p.WORD)
+    
     ////////////////////////////  OTHER TEXT
     if (basicTypo.dopText == true) {
-      p.rectMode(p.CORNER)
+      let otherTexts = basicTypo.otherText.values
       
       let presetSizeOtherText = basicTypo.otherText.size.sliderValue
       let presetLeadingOtherText = basicTypo.otherText.leading
-      // console.log(presetSizeTextarea);
+
       let otherTextSize = (presetSizeOtherText * canvasSize) / 100
       let otherTextLeading = (presetLeadingOtherText * canvasSize) / 100
+      
       p.textSize(otherTextSize)
-      // p.textLeading(otherTextSize-2)
       p.textLeading(otherTextLeading)
       
-      const prct10 = (10 * canvasSize) / 100
-      let width = (canvasSize - prct10) / 3
+      // const prct10 = canvasSize * 0.1 / 2
+
+      // const textZone = canvasSize - prct10 * 2
+      // let widthOfText = textZone / 3
 
 
-      // console.log(otherTexts);
+      let positions = basicTypo.textPositions
 
-      if (typeof otherTexts === 'string') {
-        // console.log('yo');
+
+      // 
+      // 
+      // 
+      // 
+      const offset = canvasSize * 0.1 / 2
+      const textZone = canvasSize - offset * 2
+      const maxWidth = textZone / 3;
+      const center = (canvasSize - maxWidth) / 2
+      const right = canvasSize - maxWidth - offset
+      const bottom = canvasSize - offset
+
+      p.rectMode(p.CORNER)
+
+      let currentText
+      
+      for (let i = 0; i < otherTexts.length; i++) {
         if (basicTypo.upperCase == true) {
-          otherTexts = basicTypo.otherText.value.toUpperCase()
+          currentText = otherTexts[i].toUpperCase()
         } else {
-          otherTexts = basicTypo.otherText.value
+          currentText = otherTexts[i];
         }
+
+        const positionTxt = positions[i]
+
+
+        if (positionTxt[0] == 'left' && positionTxt[1] == 'top') {
+          p.textAlign(p.LEFT, p.TOP);
+          p.text(currentText, offset, offset, maxWidth);
+        }
+
+        if (positionTxt[0] == 'center' && positionTxt[1] == 'top') {
+          p.textAlign(p.CENTER, p.TOP);
+          p.text(currentText, center, offset, maxWidth);
+        }
+
+        if (positionTxt[0] == 'right' && positionTxt[1] == 'top') {
+          p.textAlign(p.RIGHT, p.TOP);
+          p.text(currentText, right, offset, maxWidth);
+        }
+
+        if (positionTxt[0] == 'left' && positionTxt[1] == 'bottom') {
+          p.textAlign(p.LEFT, p.BOTTOM);
+          p.text(currentText, offset, bottom, maxWidth);
+        }
+
+        if (positionTxt[0] == 'center' && positionTxt[1] == 'bottom') {
+          p.textAlign(p.CENTER, p.BOTTOM);
+          p.text(currentText, center, bottom, maxWidth);
+        }
+
+        if (positionTxt[0] == 'right' && positionTxt[1] == 'bottom') {
+          p.textAlign(p.RIGHT, p.BOTTOM);
+          p.text(currentText, right, bottom, maxWidth);
+        }
+
+
+        // let textHeight = p.textAscent(currentText) + p.textDescent(currentText)
+        // console.log('textHeight', textHeight);
+
+
+        // // let y
+        // // console.log('Y', positionTxt.y);
+        // if (positionTxt.y == 95) {
+        //   // y = positionTxt.y - textHeight
+        //   p.textAlign(p.CENTER, p.BOTTOM)
+        //   // console.log('new Y', y);
+        // }
+        // // else {
+        // //   y = positionTxt.y
+        // // }
+
+          // { x: 5, y: 5 }, // top-left
+          // { x: 30, y: 5 }, // top-center
+          // { x: 60, y: 5 }, // top-right
+          // { x: 5, y: 95 }, // bottom-left
+          // { x: 30, y: 95 }, // bottom-center
+          // { x: 60, y: 95 } // bottom-right
+
+        // let x
+        // let y
+
+        // console.log(positionTxt);
+
+        // // x = positionTxt.x
+        // // y = positionTxt.y
+
+        // // p.rectMode(p.CORNER)
+
+        // let tx
+        // let ty
+
+        // if (y == 0 && x == 0) {
+        //   p.textAlign(p.LEFT, p.TOP)
+        //   // tx = (x * textZone) / 100;
+        //   // ty = (y * textZone) / 100;
+        // } else if (y == 100 && x == 0) {
+        //   p.textAlign(p.LEFT, p.BOTTOM)
+        //   // tx = (x * textZone) / 100;
+        //   // ty = (y * textZone) / 100;
+        // } else if (y == 0 & x == 50) {
+        //   p.textAlign(p.CENTER, p.TOP)
+        //   // tx = (x * textZone) / 100;
+        //   // ty = (y * textZone) / 100;
+        // } else if (y == 100 && x == 50) {
+        //   p.textAlign(p.CENTER, p.BOTTOM)
+        //   // tx = (x * textZone) / 100;
+        //   // ty = (y * textZone) / 100;
+        // } else if (y == 0 && x == 100) {
+        //   console.log('yo');
+        //   console.log(canvasSize);
+        //   console.log(textZone);
+        //   p.textAlign(p.RIGHT, p.TOP)
+        //   // tx = (x * textZone) / 100;
+        //   // ty = (y * textZone) / 100;
+        //   console.log(tx, ty);
+        // } else if (y == 100 && x == 100) {
+        //   p.textAlign(p.RIGHT, p.BOTTOM)
+        //   // tx = (x * textZone) / 100;
+        //   // ty = ((y * textZone) / 100) - prct10;
+        // }
+
+        // let maxWidth = textZone / 3;
+        // // let maxWidth = canvasSize / 3;
+
+        // p.rectMode(p.CORNER)
+
+        // if (positionTxt[0] == 'left' && positionTxt[1] == 'top') {
+        //   p.textAlign(p.LEFT, p.TOP);
+        //   // console.log('left top', canvasSize / 3);
+        //   p.text(currentText, prct10, prct10, maxWidth);
+        // }
+        // if (positionTxt[0] == 'center' && positionTxt[1] == 'top') {
+        //   p.textAlign(p.CENTER, p.TOP);
+        //   // p.text(currentText, (textZone - maxWidth) / 2, prct10, maxWidth);
+        //   p.text(currentText, (textZone / 3) + prct10, prct10, maxWidth);
+        // }
+        // if (positionTxt[0] == 'right' && positionTxt[1] == 'top') {
+        //   p.textAlign(p.RIGHT, p.TOP);
+        //   p.text(currentText, textZone - maxWidth + prct10, prct10, maxWidth);
+        // }
+        // if (positionTxt[0] == 'left' && positionTxt[1] == 'bottom') {
+        //   p.textAlign(p.LEFT, p.BOTTOM);
+        //   p.text(currentText, prct10, textZone + prct10, maxWidth);
+        // }
+        // if (positionTxt[0] == 'center' && positionTxt[1] == 'bottom') {
+        //   p.textAlign(p.CENTER, p.BOTTOM);
+        //   // p.text(currentText, (textZone - maxWidth) / 2, textZone, maxWidth);
+        //   p.text(currentText, textZone / 3 + prct10, textZone + prct10, maxWidth);
+        // }
+        // if (positionTxt[0] == 'right' && positionTxt[1] == 'bottom') {
+        //   p.textAlign(p.RIGHT, p.BOTTOM);
+        //   p.text(currentText, textZone - maxWidth + prct10, textZone + prct10, maxWidth);
+        // }
+
+
+
+
         
-        // const positionTxt = basicTypo.textPositions[0]
-        // const positionTxt = randomTextPosition
-        const positionTxt = basicTypo.textPositions.randomPosition
         
-        let x = positionTxt.x
-        let y = positionTxt.y
-        if (y == 5) {
-          p.textAlign(p.LEFT, p.TOP)
-        } else {
-          p.textAlign(p.LEFT, p.BOTTOM)
-        }
-        x = (positionTxt.x * canvasSize) / 100
-        y = (positionTxt.y * canvasSize) / 100
-        p.text(otherTexts, x, y, width)
-      } else {
-        // console.log('yo');
-        for (let i = 0; i < otherTexts.length; i++) {
-          const currentText = otherTexts[i].value;
 
-          if (basicTypo.upperCase == true) {
-            currentText = otherTexts[i].value.toUpperCase()
-          }
 
-          // const positionTxt = basicTypo.txtpositions[i];
-          // const positionTxt = randomOrderTextPositions[i];
-          const positionTxt = basicTypo.textPositions.randomPositions[i]
+        
 
-          let x = positionTxt.x
-          let y = positionTxt.y
-          if (y == 5) {
-            p.textAlign(p.LEFT, p.TOP)
-          } else {
-            p.textAlign(p.LEFT, p.BOTTOM)
-          }
-          x = (positionTxt.x * canvasSize) / 100;
-          y = (positionTxt.y * canvasSize) / 100;
-          p.text(currentText, x, y, width);
-        }
+
+
+
+
+
+
+        // if (y == 95 && x == 50) {
+        //   p.textAlign(p.CENTER, p.BOTTOM)
+        // } else if (y == 95 && x == 5) {
+        //   p.textAlign(p.LEFT, p.BOTTOM)
+        // } else if (y == 95 && x == 60) {
+        //   p.textAlign(p.RIGHT, p.BOTTOM)
+        // } else if (x == 5) {
+        //   p.textAlign(p.LEFT, )
+        // }
+
+
+        // x = (positionTxt.x * canvasSize) / 100;
+        // x = (positionTxt.x * textZone) / 100;
+        // x = (positionTxt.x * canvasSize) / 100;
+        // y = (positionTxt.y * textZone) / 100;
+        // tx = (x * textZone) / 100;
+        // ty = ((y * textZone) / 100) - prct10;
+
+        // // p.text(currentText, x, y, widthOfText);
+        // p.text(currentText, tx, ty, widthOfText);
       }
+  
 
     }
 
@@ -857,45 +970,6 @@ function drawModules(p) {
 
     let xmain = canvasSize / 2;
     let ymain = canvasSize / 2;
-    // p.text(mainText, xmain, ymain, canvasSize, canvasSize)
-    // let color = 0
-    // let txtSize = MainTextSize
-
-    // if (basicTypo.chrome == true) {
-    //   for (let i = 10; i >= 0; i--) {
-    //     let offsetX = i * 3;
-    //     let offsetY = i * 3;
-    //     // let gradientFill = p.drawingContext.createLinearGradient(0, 0, canvasSize/2, canvasSize/2,)
-    //     // gradientFill.addColorStop(0, p.color(0))
-    //     // gradientFill.addColorStop(0.5, p.color(255))
-    //     // gradientFill.addColorStop(1, p.color(0))
-    //     // p.drawingContext.fillStyle = gradientFill
-    //     p.fill(color, color, color);
-    //     // p.text(mainText, xmain + offsetX, ymain + offsetY);
-    //     p.textSize(txtSize)
-    //     p.text(mainText, xmain , ymain);
-    //     color += 20
-    //     txtSize -= 1
-    //   }
-    //   p.drawingContext.shadowBlur = 10
-    //   p.drawingContext.shadowColor = p.color(255)
-    //   p.stroke(255);
-    //   // let gradient = p.drawingContext.createConicGradient( 0, canvasSize/2, canvasSize/2,)
-    //   // gradient.addColorStop(0, p.color(0))
-    //   // gradient.addColorStop(0.5, p.color(255))
-    //   // gradient.addColorStop(1, p.color(0))
-    //   // p.drawingContext.strokeStyle = gradient
-    //   // p.strokeWeight((0.3 * canvasSize) / 100)
-    //   // let gradientFill = p.drawingContext.createLinearGradient(0, 0, canvasSize/2, canvasSize/2,)
-    //   // gradientFill.addColorStop(0, p.color(0))
-    //   // gradientFill.addColorStop(0.5, p.color(255))
-    //   // gradientFill.addColorStop(1, p.color(0))
-    //   // p.drawingContext.fillStyle = gradientFill
-    //   // p.noFill()
-    //   p.text(mainText, xmain, ymain);
-    // } else {
-    //   p.text(mainText, xmain, ymain, canvasSize, canvasSize)
-    // }
 
     p.text(mainText, xmain, ymain, canvasSize, canvasSize)
 
