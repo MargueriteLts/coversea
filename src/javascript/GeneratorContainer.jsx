@@ -145,26 +145,14 @@ export default class GeneratorContainer extends Component {
     // )
   }
 
-  // handleMaxQuantity = () => {
-  //   let max
-  //   if (this.props.lines.currentLineType == 'Straight') {
-  //     // max = this.props.lines.quantity.straightLines
-  //     max = `"${this.props.lines.quantity.straightLines}"`
-  //   }
-  //   if (this.props.lines.currentLineType == 'Curves') {
-  //     // max = this.props.lines.quantity.curvedLines
-  //     max = `"${this.props.lines.quantity.curvedLines}"`
-  //   }
-  //   if (this.props.lines.currentLineType == 'Arcs') {
-  //     // max = this.props.lines.quantity.arcs
-  //     max = `"${this.props.lines.quantity.arcs}"`
-  //   }
-  //   if (this.props.lines.currentLineType == 'Bouncing') {
-  //     // max = this.props.lines.quantity.bouncingLines
-  //     max = `"${this.props.lines.quantity.bouncingLines}"`
-  //   }
-  //   // console.log(max);
-  //   return max
+  // handleMaxQuantityValue = (type) => {
+  //   this.props.setLinesStore('maxQuantity', type)
+  //   this.setState({})
+  // }
+
+  // handleQuantityValue = (type) => {
+  //   this.props.setLinesStore('sliderValueQuantity', type)
+  //   this.setState({})
   // }
 
   handleDropDownLinesTypeClick = (type) => {
@@ -393,7 +381,8 @@ export default class GeneratorContainer extends Component {
             handleLinesColor={this.handleLinesColor}
             handleLinesSize={this.handleLinesSize}
             handleLinesQuantity={this.handleLinesQuantity}
-            handleMaxQuantity={this.handleMaxQuantity}
+            handleMaxQuantityValue={this.handleMaxQuantityValue}
+            handleQuantityValue={this.handleQuantityValue}
             handleDropDownLinesTypeClick={this.handleDropDownLinesTypeClick}
             setLinesStore={setLinesStore}
             key={index}

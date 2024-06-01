@@ -854,7 +854,7 @@ function drawModules(p) {
     p.stroke(lines.color)
     p.strokeWeight(lines.strokeWeight);
 
-    let allPointSets = lines.pointsSets
+    let allPointSets = lines.preset.Curves.pointsSets
 
     if (lines.currentLineType == 'Curves') {
       for (let points of allPointSets) {
@@ -868,41 +868,41 @@ function drawModules(p) {
 
     if (lines.currentLineType == 'Arcs') {
       p.angleMode(p.DEGREES)
-      for (let index = 0; index < lines.arcs.length; index++) {
+      for (let index = 0; index < lines.preset.Arcs.arcs.length; index++) {
         p.arc(
-          (lines.arcs[index][0] * canvasSize) / 100,
-          (lines.arcs[index][1] * canvasSize) / 100,
-          (lines.arcs[index][2] * canvasSize) / 100,
-          (lines.arcs[index][3] * canvasSize) / 100,
-          lines.arcs[index][4],
-          lines.arcs[index][5]
+          (lines.preset.Arcs.arcs[index][0] * canvasSize) / 100,
+          (lines.preset.Arcs.arcs[index][1] * canvasSize) / 100,
+          (lines.preset.Arcs.arcs[index][2] * canvasSize) / 100,
+          (lines.preset.Arcs.arcs[index][3] * canvasSize) / 100,
+          lines.preset.Arcs.arcs[index][4],
+          lines.preset.Arcs.arcs[index][5]
           )
       }
     }
 
     if (lines.currentLineType == 'Straight') {
-      for (let index = 0; index < lines.straightLines.length; index++) {
+      for (let index = 0; index < lines.preset.Straight.straightLines.length; index++) {
         p.line(
-          (lines.straightLines[index][0] * canvasSize) / 100,
-          (lines.straightLines[index][1] * canvasSize) / 100,
-          (lines.straightLines[index][2] * canvasSize) / 100,
-          (lines.straightLines[index][3] * canvasSize) / 100
+          (lines.preset.Straight.straightLines[index][0] * canvasSize) / 100,
+          (lines.preset.Straight.straightLines[index][1] * canvasSize) / 100,
+          (lines.preset.Straight.straightLines[index][2] * canvasSize) / 100,
+          (lines.preset.Straight.straightLines[index][3] * canvasSize) / 100
         );
       }
     }
 
     if (lines.currentLineType == 'Bouncing') {
-      let startX = (lines.bouncingRandom[0] * canvasSize) / 100
-      let startY = (lines.bouncingRandom[1] * canvasSize) / 100
-      let endX = (lines.bouncingRandom[2] * canvasSize) / 100
-      let endY = (lines.bouncingRandom[3] * canvasSize) / 100
+      let startX = (lines.preset.Bouncing.bouncingRandom[0] * canvasSize) / 100
+      let startY = (lines.preset.Bouncing.bouncingRandom[1] * canvasSize) / 100
+      let endX = (lines.preset.Bouncing.bouncingRandom[2] * canvasSize) / 100
+      let endY = (lines.preset.Bouncing.bouncingRandom[3] * canvasSize) / 100
 
-      let deltaStartX = (lines.bouncingRange[0] * canvasSize) / 100
-      let deltaStartY = (lines.bouncingRange[1] * canvasSize) / 100
-      let deltaEndX = (lines.bouncingRange[2] * canvasSize) / 100
-      let deltaEndY = (lines.bouncingRange[3] * canvasSize) / 100
+      let deltaStartX = (lines.preset.Bouncing.bouncingRange[0] * canvasSize) / 100
+      let deltaStartY = (lines.preset.Bouncing.bouncingRange[1] * canvasSize) / 100
+      let deltaEndX = (lines.preset.Bouncing.bouncingRange[2] * canvasSize) / 100
+      let deltaEndY = (lines.preset.Bouncing.bouncingRange[3] * canvasSize) / 100
 
-       for (let i = 0; i < lines.quantity.bouncingLines; i++) {
+       for (let i = 0; i < lines.preset.Bouncing.quantity; i++) {
         
         // p.stroke(255, 50);
         p.line(startX, startY, endX, endY);

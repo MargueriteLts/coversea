@@ -546,42 +546,45 @@ function bouncingRange(range) {
 
 //////
 
-function initLinesStore(preset) {
-  let max
-    if (preset.currentLineType == 'Straight') {
-      // max = this.props.lines.quantity.straightLines
-      max = `"${preset.quantity.straightLines}"`
-    }
-    if (preset.currentLineType == 'Curves') {
-      // max = this.props.lines.quantity.curvedLines
-      max = `"${preset.quantity.curvedLines}"`
-    }
-    if (preset.currentLineType == 'Arcs') {
-      // max = this.props.lines.quantity.arcs
-      max = `"${preset.quantity.arcs}"`
-    }
-    if (preset.currentLineType == 'Bouncing') {
-      // max = this.props.lines.quantity.bouncingLines
-      max = `"${preset.quantity.bouncingLines}"`
-    }
-
-  preset = Object.assign({}, preset, {
+function initLinesStore(lines) {
+  lines = Object.assign({}, lines, {
     moduleName: 'Lines',
     color: '#fff',
-
-    straightLines: generateLines(preset.quantity.straightLines, preset.layout),
-    arcs: generateArcs(preset.quantity.arcs, preset.layout),
-    bouncingRandom: bouncingRandom(),
-    bouncingRange: bouncingRange(2),
-    pointsSets: generateMultiplePointSets(preset.quantity.curvedLines, preset.quantity.points),
-    maxQuantity: max,
-
+    quantityLocked: false,
     lineTypeLocked: false,
     strokeWeightLocked: false,
     colorLocked: false
   })
+
+  lines.linesTypes.forEach((lineType) => {
+    if (lineType == 'Straight') {
+      lines.preset.Straight = Object.assign({}, lines.preset.Straight, { text: 'Straight Lines', straightLines: generateLines(lines.preset.Straight.quantity, lines.layout) })
+    }
+    if (lineType == 'Curves') {
+      lines.preset.Curves = Object.assign({}, lines.preset.Curves, { text: 'Curvy Lines', pointsSets: generateMultiplePointSets(lines.preset.Curves.quantity, lines.preset.Curves.points) })
+    }
+    if (lineType == 'Arcs') {
+      lines.preset.Arcs = Object.assign({}, lines.preset.Arcs, { text: 'Arcs', arcs: generateArcs(lines.preset.Arcs.quantity, lines.layout) })
+    }
+    if (lineType == 'Bouncing') {
+      lines.preset.Bouncing = Object.assign({}, lines.preset.Bouncing, { text: 'Bouncing Lines', bouncingRandom: bouncingRandom(), bouncingRange: bouncingRange(2) })
+    }
+  })
+
+  if (lines.currentLineType == 'Straight') {
+    lines = Object.assign({}, lines, { sliderValueQuantity: lines.preset.Straight.quantity, maxQuantity: lines.preset.Straight.max })
+  }
+  if (lines.currentLineType == 'Curves') {
+    lines = Object.assign({}, lines, { sliderValueQuantity: lines.preset.Curves.quantity, maxQuantity: lines.preset.Curves.max })
+  }
+  if (lines.currentLineType == 'Arcs') {
+    lines = Object.assign({}, lines, { sliderValueQuantity: lines.preset.Arcs.quantity, maxQuantity: lines.preset.Arcs.max })
+  }
+  if (lines.currentLineType == 'Bouncing') {
+    lines = Object.assign({}, lines, { sliderValueQuantity: lines.preset.Bouncing.quantity, maxQuantity: lines.preset.Bouncing.max })
+  }
   
-  return preset
+  return lines
 }
 
 function getLinesStore() {
@@ -590,10 +593,24 @@ function getLinesStore() {
 
 function setLinesStore(type, value) {
   return new Promise((resolve, reject) => {
+
     if (type === 'CurrentTypeChange') {
       moduleLinesStore.currentLineType = value
+      if (value == 'Straight') {
+        moduleLinesStore.maxQuantity = moduleLinesStore.preset.Straight.max
+      }
+      if (value == 'Curves') {
+        moduleLinesStore.maxQuantity = moduleLinesStore.preset.Curves.max
+      }
+      if (value == 'Arcs') {
+        moduleLinesStore.maxQuantity = moduleLinesStore.preset.Arcs.max
+      }
+      if (value == 'Bouncing') {
+        moduleLinesStore.maxQuantity = moduleLinesStore.preset.Bouncing.max
+      }
       resolve([value])
     }
+
     if (type === 'SolidColor') {
       moduleLinesStore.color = value
       resolve([value])
@@ -606,27 +623,28 @@ function setLinesStore(type, value) {
     }
 
     if (type === 'linesQuantity') {
+      moduleLinesStore.sliderValueQuantity = value
+
       if (moduleLinesStore.currentLineType == 'Straight') {
-        moduleLinesStore.quantity.straightLines = value
-        moduleLinesStore.maxQuantity = value
+        moduleLinesStore.preset.Straight.quantity = value
+        moduleLinesStore.preset.Straight.straightLines= generateLines(moduleLinesStore.preset.Straight.quantity, moduleLinesStore.layout)
         resolve([value])
       }
       if (moduleLinesStore.currentLineType == 'Curves') {
-        moduleLinesStore.quantity.curvedLines = value
-        moduleLinesStore.maxQuantity = value
+        moduleLinesStore.preset.Curves.quantity = value
+        moduleLinesStore.preset.Curves.pointsSets= generateMultiplePointSets(moduleLinesStore.preset.Curves.quantity, moduleLinesStore.preset.Curves.points)
         resolve([value])
       }
       if (moduleLinesStore.currentLineType == 'Arcs') {
-        moduleLinesStore.quantity.arcs = value
-        moduleLinesStore.maxQuantity = value
+        moduleLinesStore.preset.Arcs.quantity = value
+        moduleLinesStore.preset.Arcs.arcs = generateArcs(moduleLinesStore.preset.Arcs.quantity, moduleLinesStore.layout)
         resolve([value])
       }
       if (moduleLinesStore.currentLineType == 'Bouncing') {
         // console.log('yo');
-        moduleLinesStore.quantity.bouncingLines = value
-        moduleLinesStore.maxQuantity = value
-        moduleLinesStore.bouncingRandom = bouncingRandom()
-        moduleLinesStore.bouncingRange = bouncingRange(2)
+        moduleLinesStore.preset.Bouncing.quantity = value
+        moduleLinesStore.preset.Bouncing.bouncingRandom = bouncingRandom()
+        moduleLinesStore.preset.Bouncing.bouncingRange = bouncingRange(2)
         resolve([value])
       }
     }
