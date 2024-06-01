@@ -929,8 +929,6 @@ function drawModules(p) {
         }
       }
     }
-
-    // p.fill()
   }
   
   /////////////////////////////////////////// MODULE 3D
@@ -975,6 +973,7 @@ function drawModules(p) {
     
     ////////////////////////////  OTHER TEXT
     if (basicTypo.dopText == true) {
+      p.fill(basicTypo.otherText.color)
       let otherTexts = basicTypo.otherText.values
       
       let presetSizeOtherText = basicTypo.otherText.size.sliderValue
