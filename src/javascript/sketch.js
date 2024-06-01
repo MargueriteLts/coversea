@@ -774,10 +774,21 @@ function drawModules(p) {
       //   equivalentSize,
       //   equivalentSize
       // )
+
       // p.tint(255, opacity)
-      let tintColor = hexToRgbArray(vinyl.tintColor)
-      // console.log(tintColor, opacity);
-      p.tint(tintColor[0], tintColor[1], tintColor[2], opacity);
+
+      let tintColor
+      if (Array.isArray(vinyl.tintColor)) {
+        tintColor = vinyl.tintColor
+        p.tint(tintColor[0], tintColor[1], tintColor[2], opacity)
+      } else {
+        tintColor = hexToRgbArray(vinyl.tintColor)
+        p.tint(tintColor[0], tintColor[1], tintColor[2], opacity)
+      }
+
+      // let tintColor = hexToRgbArray(vinyl.tintColor)
+      // p.tint(tintColor[0], tintColor[1], tintColor[2], opacity);
+
       p.image(imageVinyl,
         x,
         y,
@@ -837,18 +848,89 @@ function drawModules(p) {
   /////////////////////////////////////////// MODULE lINES
 
   if (moduleList.includes('Lines')) {
+    p.noFill()
     const lines = getLinesStore()
 
     p.stroke(lines.color)
     p.strokeWeight(lines.strokeWeight);
-    for (let index = 0; index < lines.lines.length; index++) {
-      p.line(
-        (lines.lines[index][0] * canvasSize) / 100,
-        (lines.lines[index][1] * canvasSize) / 100,
-        (lines.lines[index][2] * canvasSize) / 100,
-        (lines.lines[index][3] * canvasSize) / 100
-      );
+
+    let allPointSets = lines.pointsSets
+
+    if (lines.currentLineType == 'Curves') {
+      for (let points of allPointSets) {
+        p.beginShape();
+        for (let point of points) {
+          p.curveVertex(point.x * canvasSize / 100, point.y * canvasSize / 100);
+        }
+        p.endShape();
+      }
     }
+
+    if (lines.currentLineType == 'Arcs') {
+      p.angleMode(p.DEGREES)
+      for (let index = 0; index < lines.arcs.length; index++) {
+        p.arc(
+          (lines.arcs[index][0] * canvasSize) / 100,
+          (lines.arcs[index][1] * canvasSize) / 100,
+          (lines.arcs[index][2] * canvasSize) / 100,
+          (lines.arcs[index][3] * canvasSize) / 100,
+          lines.arcs[index][4],
+          lines.arcs[index][5]
+          )
+      }
+    }
+
+    if (lines.currentLineType == 'Straight') {
+      for (let index = 0; index < lines.lines.length; index++) {
+        p.line(
+          (lines.lines[index][0] * canvasSize) / 100,
+          (lines.lines[index][1] * canvasSize) / 100,
+          (lines.lines[index][2] * canvasSize) / 100,
+          (lines.lines[index][3] * canvasSize) / 100
+        );
+      }
+    }
+
+    if (lines.currentLineType == 'Bouncing') {
+      let startX = (lines.bouncingRandom[0] * canvasSize) / 100
+      let startY = (lines.bouncingRandom[1] * canvasSize) / 100
+      let endX = (lines.bouncingRandom[2] * canvasSize) / 100
+      let endY = (lines.bouncingRandom[3] * canvasSize) / 100
+
+      let deltaStartX = (lines.bouncingRange[0] * canvasSize) / 100
+      let deltaStartY = (lines.bouncingRange[1] * canvasSize) / 100
+      let deltaEndX = (lines.bouncingRange[2] * canvasSize) / 100
+      let deltaEndY = (lines.bouncingRange[3] * canvasSize) / 100
+
+       for (let i = 0; i < lines.bouncingLinesQuantity; i++) {
+        
+        // p.stroke(255, 50);
+        p.line(startX, startY, endX, endY);
+
+        startX += deltaStartX;
+        startY += deltaStartY;
+        endX += deltaEndX;
+        endY += deltaEndY;
+
+        if (startX < 0 || startX > canvasSize) {
+          deltaStartX *= -1;
+        }
+
+        if (startY < 0 || startY > canvasSize) {
+          deltaStartY *= -1;
+        }
+
+        if (endX < 0 || endX > canvasSize) {
+          deltaEndX *= -1;
+        }
+
+        if (endY < 0 || endY > canvasSize) {
+          deltaEndY *= -1;
+        }
+      }
+    }
+
+    // p.fill()
   }
   
   /////////////////////////////////////////// MODULE 3D

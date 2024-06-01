@@ -400,24 +400,186 @@ function setImageStore(type, value) {
 
 ////////////////////// LINES
 
-function initLinesStore(preset) {
-  preset = Object.assign({}, preset, { moduleName: 'Lines', color: '#fff', lines: generateLines(50), lineTypeLocked: false, strokeWeightLocked: false, colorLocked: false })
-  return preset
+// function generateRandomLines(numLines) {
+//   let lines = [];
+//   let x = 0;
+
+//   for (let i = 0; i < numLines; i++) {
+//     // Generate a random distance for the next line
+//     let distance = getRandomArbitrary(10, 50);
+//     x += distance;
+//     if (x >= 100) break;
+
+//     lines.push(x);
+//   }
+
+//   return lines;
+// }
+
+function generateRandomPoints(numPoints) {
+  let points = [];
+  for (let i = 0; i < numPoints; i++) {
+    let x =  getRandomArbitrary(0, 100);
+    let y =  getRandomArbitrary(0, 100);
+    points.push({ x: x, y: y });
+  }
+
+  return points;
 }
 
-function generateLines(quantity) {
+function generateMultiplePointSets(numSets, numPoints) {
+  let allPoints = [];
+  for (let i = 0; i < numSets; i++) {
+    let points = generateRandomPoints(numPoints);
+    allPoints.push(points);
+  }
+  return allPoints;
+}
+
+function generateLines(quantity, layout) {
   const lines = []
 
-  for (let index = 0; index < quantity; index++) {
-    lines.push([
-      getRandomArbitrary(0, 100),
-      getRandomArbitrary(0, 100),
-      getRandomArbitrary(0, 100),
-      getRandomArbitrary(0, 100)
-    ])
+  if (layout == 'Horizontal') {
+    for (let index = 0; index < quantity; index++) {
+      let y = getRandomArbitrary(0, 100)
+      lines.push([
+        getRandomArbitrary(0, 100),
+        y,
+        getRandomArbitrary(0, 100),
+        y
+      ])
+    }
+  }
+
+  if (layout == 'Vertical') {
+    for (let index = 0; index < quantity; index++) {
+      let x = getRandomArbitrary(0, 100)
+      lines.push([
+        x,
+        getRandomArbitrary(0, 100),
+        x,
+        getRandomArbitrary(0, 100)
+      ])
+    }
+  }
+
+  if (layout == 'Bazar') {
+    for (let index = 0; index < quantity; index++) {
+      lines.push([
+        getRandomArbitrary(0, 100),
+        getRandomArbitrary(0, 100),
+        getRandomArbitrary(0, 100),
+        getRandomArbitrary(0, 100)
+      ])
+    }
   }
 
   return lines
+}
+
+function generateArcs(quantity, layout) {
+  const lines = []
+
+  if (layout == 'Bazar') {
+    for (let index = 0; index < quantity; index++) {
+      lines.push([
+        getRandomArbitrary(0, 100),
+        getRandomArbitrary(0, 100),
+        getRandomArbitrary(0, 100),
+        getRandomArbitrary(0, 100),
+        getRandomArbitrary(0, 360),
+        getRandomArbitrary(0, 360)
+        // (getRandomArbitrary(0, 360)* Math.PI ) /180,
+        // (getRandomArbitrary(0, 360)* Math.PI ) /180
+      ])
+    }
+  }
+
+  if (layout == 'Vertical') {
+    let y = getRandomArbitrary(0, 100)
+    let w = getRandomArbitrary(0, 100)
+    let h = getRandomArbitrary(0, 100)
+    // let angle = (getRandomArbitrary(0, 360)* Math.PI ) /180
+    let angle1 = getRandomArbitrary(0, 360)
+    let angle2 = getRandomArbitrary(0, 360)
+
+    let rows = 5
+
+    for (let row = 0; row < rows; row++) {
+      let y = getRandomArbitrary(0, 100)
+      let newY = y
+
+      for (let index = 0; index < quantity; index++) {
+        lines.push([
+          getRandomArbitrary(0, 100),
+          y,
+          w,
+          h,
+          angle1,
+          angle2
+        ]);
+
+        if (index === Math.floor(quantity / 2)) {
+          newY = getRandomArbitrary(0, 100);
+          for (let innerIndex = index; innerIndex < quantity; innerIndex++) {
+            lines.push([
+              getRandomArbitrary(0, 100),
+              newY,
+              w,
+              h,
+              angle1,
+              angle2
+            ]);
+          }
+          break;
+        }
+      }
+    }
+  }
+  console.log(lines);
+  return lines
+}
+
+function bouncingRandom() {
+  let points = [
+    getRandomArbitrary(0, 100),
+    getRandomArbitrary(0, 100),
+    getRandomArbitrary(0, 100),
+    getRandomArbitrary(0, 100)
+  ]
+  console.log(points);
+  return points
+}
+
+function bouncingRange(range) {
+  let points = [
+    getRandomArbitrary(-range, range),
+    getRandomArbitrary(-range, range),
+    getRandomArbitrary(-range, range),
+    getRandomArbitrary(-range, range)
+  ]
+  return points
+}
+
+//////
+
+function initLinesStore(preset) {
+  preset = Object.assign({}, preset, {
+    moduleName: 'Lines',
+    color: '#fff',
+    lines: generateLines(preset.straightLinesQuantity, preset.layout),
+    // arcs: generateArcs(50, preset.layout),
+    arcs: generateArcs(preset.arcsQuantity, preset.layout),
+    // lines: generateRandomLines(50),
+    bouncingRandom: bouncingRandom(),
+    bouncingRange: bouncingRange(2),
+    lineTypeLocked: false,
+    strokeWeightLocked: false,
+    colorLocked: false,
+    pointsSets: generateMultiplePointSets(preset.curvedLinesQuantity, preset.pointsQuantity)
+  })
+  
+  return preset
 }
 
 function getLinesStore() {
@@ -426,6 +588,10 @@ function getLinesStore() {
 
 function setLinesStore(type, value) {
   return new Promise((resolve, reject) => {
+    if (type === 'CurrentTypeChange') {
+      moduleLinesStore.currentLineType = value
+      resolve([value])
+    }
     if (type === 'SolidColor') {
       moduleLinesStore.color = value
       resolve([value])
@@ -1142,6 +1308,10 @@ function randomizeModuleStore(moduleType) {
       if (moduleVinylStore.opacityLock == false ){
         setVinylStore('opacity', getRandomArbitrary(0, 255))
       }
+      if (moduleVinylStore.tintColorLock == false ){
+        let newColor = generateColor()
+        moduleVinylStore.tintColor = newColor
+      }
 
       if (moduleVinylStore.currentVinylType == 'Whole') {
         let newImage = sample(Object.keys(moduleVinylStore.preset.Whole.images))
@@ -1173,6 +1343,7 @@ function randomizeModuleStore(moduleType) {
       if ( moduleLinesStore.strokeWeightLocked == false ) {
         setLinesStore('strokeWeight', getRandomArbitrary(moduleLinesStore.min, moduleLinesStore.max))
       }
+      moduleLinesStore.pointsSets = generateMultiplePointSets(moduleLinesStore.Lquantity, moduleLinesStore.Pquantity)
     }
     ////////
 

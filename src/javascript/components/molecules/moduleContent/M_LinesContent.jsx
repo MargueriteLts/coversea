@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import M_Control from '../controls/M_Control.jsx'
+import M_Select from '../M_Select.jsx'
 
 export default class M_LinesContent extends Component {
   constructor(props) {
@@ -35,17 +36,29 @@ export default class M_LinesContent extends Component {
       })
     }
   }
+
+  // handleDropDownLinesTypeClick = (type) => {
+  //   this.props.setLinesStore('CurrentTypeChange', type)
+  //   this.setState({})
+  // }
   
   render() {
     const {
       lines,
       handleLinesColor,
       handleLinesSize,
-      setLinesStore
+      setLinesStore,
+      handleDropDownLinesTypeClick
     } = this.props
 
     return <div className="M_LinesContent">
-      {/* <div className='content_Column'></div> */}
+      <div className='content_Column'>
+        <M_Select
+          options={lines.linesTypes}
+          value={lines.currentLineType}
+          handleClick={handleDropDownLinesTypeClick}
+        />
+      </div>
       <div className='content_Column'>
         <M_Control
           orientation="row"

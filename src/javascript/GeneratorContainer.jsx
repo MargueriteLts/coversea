@@ -137,6 +137,11 @@ export default class GeneratorContainer extends Component {
     this.setState({})
   }
 
+  handleDropDownLinesTypeClick = (type) => {
+    this.props.setLinesStore('CurrentTypeChange', type)
+    this.setState({})
+  }
+
 ////////////////////////////////////// MODULE 3D
 
   // DropDown -OK
@@ -290,6 +295,7 @@ export default class GeneratorContainer extends Component {
       backgroundImage,
       vinyl,
       setVinylStore,
+      handleDropDownLinesTypeClick,
       lines,
       setLinesStore,
       module3D,
@@ -357,6 +363,7 @@ export default class GeneratorContainer extends Component {
             handleRandomizeModule={this.handleRandomizeModule}
             handleLinesColor={this.handleLinesColor}
             handleLinesSize={this.handleLinesSize}
+            handleDropDownLinesTypeClick={this.handleDropDownLinesTypeClick}
             setLinesStore={setLinesStore}
             key={index}
           />

@@ -9,7 +9,7 @@ const preset = {
   
   Background: {
     backgroundTypes: ['SolidColor', 'Gradient'],
-    currentBackgroundType: 'Gradient',
+    currentBackgroundType: 'SolidColor',
 
     preset: {
       SolidColor: {
@@ -50,6 +50,25 @@ const preset = {
   },
 
   Lines: {
+    linesTypes: ['Straight', 'Curves', 'Arcs', 'Bouncing'],
+    currentLineType: 'Bouncing',
+
+    layout: 'Vertical',
+
+    straightLinesQuantity: 50,
+    curvedLinesQuantity: 10,
+    bouncingLinesQuantity: 100,
+    arcsQuantity: 10,
+    pointsQuantity: 10,
+
+    // quantity : {
+    //   straightLines: 50,
+    //   curvedLines: 10,
+    //   bouncingLines: 100,
+    //   arcs: 10,
+    //   points: 10,
+    // },
+    
     strokeWeight: 2,
     min: 1,
     max: 100,
