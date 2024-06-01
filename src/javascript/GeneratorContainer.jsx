@@ -205,6 +205,11 @@ export default class GeneratorContainer extends Component {
     this.setState({})
   }
 
+  handleChangeVinylTintColor = (object, value) => {
+    this.props.setVinylStore(object, value)
+    this.setState({})
+  }
+
   ////////////////////////////////////// MODULE OVERLAY
 
   // Tab -OK
@@ -401,6 +406,7 @@ export default class GeneratorContainer extends Component {
             handleTabClickVinyl={this.handleTabClickVinyl}
             handleVinylSize={this.handleVinylSize}
             handleVinylOpacity={this.handleVinylOpacity}
+            handleChangeVinylTintColor={this.handleChangeVinylTintColor}
             setVinylStore={setVinylStore}
             key={index}
           />

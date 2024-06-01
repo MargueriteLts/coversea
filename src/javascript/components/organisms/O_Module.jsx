@@ -38,6 +38,7 @@ export default class Module extends Component {
       handleTabClickVinyl,
       handleVinylSize,
       handleVinylOpacity,
+      handleChangeVinylTintColor,
       setVinylStore,
       lines,
       handleLinesColor,
@@ -70,6 +71,7 @@ export default class Module extends Component {
           handleVinylSize={handleVinylSize}
           handleVinylOpacity={handleVinylOpacity}
           setVinylStore={setVinylStore}
+          handleChangeVinylTintColor={handleChangeVinylTintColor}
         />
       )
     }

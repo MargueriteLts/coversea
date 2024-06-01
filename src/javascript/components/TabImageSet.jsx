@@ -13,6 +13,7 @@ export default class TabButtonSet extends Component {
 
     const buttonElements = []
 
+
     Object.keys(options).forEach((key, i) => {
       
       const text = options[key].text;
@@ -20,6 +21,7 @@ export default class TabButtonSet extends Component {
       const matchingKey = Object.keys(tabBackgrounds).find(key => key.startsWith(i));
 
       const backgroundImage = tabBackgrounds[matchingKey]
+      // console.log(backgroundImage);
       
       buttonElements.push(
         <TabImage

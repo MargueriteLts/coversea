@@ -79,7 +79,8 @@ body.generator {
         flex-direction: column;
         width: 100%;
         border-radius: 30px;
-        background-color: var(--BACKGROUND-MODULE-DARKER);
+        // background-color: var(--BACKGROUND-MODULE-DARKER);
+        background-color: var(--BACKGROUND-MODULE);
   
         .M_ModuleHeader {
           display: flex;

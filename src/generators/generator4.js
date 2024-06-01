@@ -36,13 +36,16 @@ const preset = {
     size: 90,
     bigger: false,
     opacity: 200,
+    tintColor: '#ffffff',
+    tintColorLock: false,
 
-    vinylTypes: ['Whole', 'Label'],
+    vinylTypes: ['Whole', 'Label', 'Vinyl'],
     currentVinylType: 'Label',
 
     preset: {
       Whole: {},
-      Label: {}
+      Label: {},
+      Vinyl: {}
     }
   },
 

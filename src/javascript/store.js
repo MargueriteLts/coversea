@@ -585,6 +585,9 @@ function initVinylStore(preset) {
   const collection2 = importAll(
     require.context('../images/sketchGraphics/vinylPics/label', false, /\.(png|jpe?g|svg)$/)
   )
+  const collection3 = importAll(
+    require.context('../images/sketchGraphics/vinylPics/Vinyl', false, /\.(png|jpe?g|svg)$/)
+  )
 
   const images = importAll(
     require.context('../images/ui/tabBackgrounds/vinyl')
@@ -608,6 +611,13 @@ function initVinylStore(preset) {
         current: sample(Object.keys(collection2))
       })
     }
+    if (type === 'Vinyl') {
+      preset.preset.Vinyl = Object.assign({}, preset.preset.Vinyl, {
+        text: 'VINYL',
+        images: collection3,
+        current: sample(Object.keys(collection3))
+      })
+    }
   })
 
   return preset
@@ -621,6 +631,7 @@ function setVinylStore(type, value) {
   return new Promise((resolve, reject) => {
     if (type === 'CurrentTabChange') {
       moduleVinylStore.currentVinylType = value
+      console.log(value);
       resolve([value])
     }
     if (type === 'size') {
@@ -634,6 +645,10 @@ function setVinylStore(type, value) {
       moduleVinylStore.opacity = value
       resolve([value])
     }
+    if (type === 'TintColor') {
+      moduleVinylStore.tintColor = value
+      resolve([value])
+    }
 
     //
 
@@ -645,6 +660,9 @@ function setVinylStore(type, value) {
     }
     if (type == 'lockOpacity') {
       moduleVinylStore.opacityLock = value
+    }
+    if (type == 'lockTintColor') {
+      moduleVinylStore.tintColorLock = value
     }
   })
 }
@@ -1123,6 +1141,19 @@ function randomizeModuleStore(moduleType) {
       }
       if (moduleVinylStore.opacityLock == false ){
         setVinylStore('opacity', getRandomArbitrary(0, 255))
+      }
+
+      if (moduleVinylStore.currentVinylType == 'Whole') {
+        let newImage = sample(Object.keys(moduleVinylStore.preset.Whole.images))
+        moduleVinylStore.preset.Whole.current = newImage
+      }
+      if (moduleVinylStore.currentVinylType == 'Label') {
+        let newImage = sample(Object.keys(moduleVinylStore.preset.Label.images))
+        moduleVinylStore.preset.Label.current = newImage
+      }
+      if (moduleVinylStore.currentVinylType == 'Vinyl') {
+        let newImage = sample(Object.keys(moduleVinylStore.preset.Vinyl.images))
+        moduleVinylStore.preset.Vinyl.current = newImage
       }
     }
 

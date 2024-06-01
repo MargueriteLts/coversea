@@ -10,7 +10,8 @@ export default class M_VinylContent extends Component {
     this.state = {
       tabsLock: this.props.vinyl.locked,
       sizeLock : this.props.vinyl.sizeLock,
-      opacityLock: this.props.vinyl.opacityLock
+      opacityLock: this.props.vinyl.opacityLock,
+      tintColorLock: this.props.vinyl.tintColorLock
     }
   }
 
@@ -34,6 +35,12 @@ export default class M_VinylContent extends Component {
         opacityLock: !this.state.opacityLock
       })
     }
+    if (item == 'lockTintColor') {
+      setStore(item, !this.state.tintColorLock)
+      this.setState({
+        tintColorLock: !this.state.tintColorLock
+      })
+    }
   };
 
   //////////////////////////////////////////////////////// RENDER
@@ -44,27 +51,47 @@ export default class M_VinylContent extends Component {
       handleTabClickVinyl,
       handleVinylSize,
       handleVinylOpacity,
+      handleChangeVinylTintColor,
       setVinylStore
     } = this.props
 
 
     return <div className="M_VinylContent">
-      <M_Control
-        orientation="column"
-        controlType='TabImageSet'
-        hasTitle={true}
-        title='Vinyl Disc'
-      //lock
-        isLocked={this.state.tabsLock}
-        setStore={setVinylStore}
-        item='lockTabs'
-        handleToggle={this.handleToggle}
-      //data
-        data={vinyl.currentVinylType}
-        options = {vinyl.preset}
-        handleChange = {handleTabClickVinyl}
-        images={vinyl.tabBackgrounds}
-      />
+      <div className='content_row'>
+        <M_Control
+          orientation="column"
+          controlType='TabImageSet'
+          hasTitle={true}
+          title='Vinyl Disc'
+        //lock
+          isLocked={this.state.tabsLock}
+          setStore={setVinylStore}
+          item='lockTabs'
+          handleToggle={this.handleToggle}
+        //data
+          data={vinyl.currentVinylType}
+          options = {vinyl.preset}
+          handleChange = {handleTabClickVinyl}
+          images={vinyl.tabBackgrounds}
+        />
+        <M_Control
+          orientation="row"
+          controlType='ColorPicker'
+          hasTitle={true}
+          title='Tint color'
+
+          isLocked={this.state.tintColorLock}
+          setStore={setVinylStore}
+          item='lockTintColor'
+          handleToggle={this.handleToggle}
+
+          data={vinyl.tintColor}
+          object='TintColor'
+          handleChange={handleChangeVinylTintColor}
+          type='AllColorPicker'
+        />
+
+      </div>
       <div className='content_row'>
         <M_Control
           orientation="row"
