@@ -400,21 +400,6 @@ function setImageStore(type, value) {
 
 ////////////////////// LINES
 
-// function generateRandomLines(numLines) {
-//   let lines = [];
-//   let x = 0;
-
-//   for (let i = 0; i < numLines; i++) {
-//     // Generate a random distance for the next line
-//     let distance = getRandomArbitrary(10, 50);
-//     x += distance;
-//     if (x >= 100) break;
-
-//     lines.push(x);
-//   }
-
-//   return lines;
-// }
 
 function generateRandomPoints(numPoints) {
   let points = [];
@@ -536,7 +521,6 @@ function generateArcs(quantity, layout) {
       }
     }
   }
-  console.log(lines);
   return lines
 }
 
@@ -547,7 +531,6 @@ function bouncingRandom() {
     getRandomArbitrary(0, 100),
     getRandomArbitrary(0, 100)
   ]
-  console.log(points);
   return points
 }
 
@@ -564,19 +547,38 @@ function bouncingRange(range) {
 //////
 
 function initLinesStore(preset) {
+  let max
+    if (preset.currentLineType == 'Straight') {
+      // max = this.props.lines.quantity.straightLines
+      max = `"${preset.quantity.straightLines}"`
+    }
+    if (preset.currentLineType == 'Curves') {
+      // max = this.props.lines.quantity.curvedLines
+      max = `"${preset.quantity.curvedLines}"`
+    }
+    if (preset.currentLineType == 'Arcs') {
+      // max = this.props.lines.quantity.arcs
+      max = `"${preset.quantity.arcs}"`
+    }
+    if (preset.currentLineType == 'Bouncing') {
+      // max = this.props.lines.quantity.bouncingLines
+      max = `"${preset.quantity.bouncingLines}"`
+    }
+
   preset = Object.assign({}, preset, {
     moduleName: 'Lines',
     color: '#fff',
-    lines: generateLines(preset.straightLinesQuantity, preset.layout),
-    // arcs: generateArcs(50, preset.layout),
-    arcs: generateArcs(preset.arcsQuantity, preset.layout),
-    // lines: generateRandomLines(50),
+
+    straightLines: generateLines(preset.quantity.straightLines, preset.layout),
+    arcs: generateArcs(preset.quantity.arcs, preset.layout),
     bouncingRandom: bouncingRandom(),
     bouncingRange: bouncingRange(2),
+    pointsSets: generateMultiplePointSets(preset.quantity.curvedLines, preset.quantity.points),
+    maxQuantity: max,
+
     lineTypeLocked: false,
     strokeWeightLocked: false,
-    colorLocked: false,
-    pointsSets: generateMultiplePointSets(preset.curvedLinesQuantity, preset.pointsQuantity)
+    colorLocked: false
   })
   
   return preset
@@ -602,6 +604,32 @@ function setLinesStore(type, value) {
     if (type === 'strokeWeight') {
       moduleLinesStore.strokeWeight = value
     }
+
+    if (type === 'linesQuantity') {
+      if (moduleLinesStore.currentLineType == 'Straight') {
+        moduleLinesStore.quantity.straightLines = value
+        moduleLinesStore.maxQuantity = value
+        resolve([value])
+      }
+      if (moduleLinesStore.currentLineType == 'Curves') {
+        moduleLinesStore.quantity.curvedLines = value
+        moduleLinesStore.maxQuantity = value
+        resolve([value])
+      }
+      if (moduleLinesStore.currentLineType == 'Arcs') {
+        moduleLinesStore.quantity.arcs = value
+        moduleLinesStore.maxQuantity = value
+        resolve([value])
+      }
+      if (moduleLinesStore.currentLineType == 'Bouncing') {
+        // console.log('yo');
+        moduleLinesStore.quantity.bouncingLines = value
+        moduleLinesStore.maxQuantity = value
+        moduleLinesStore.bouncingRandom = bouncingRandom()
+        moduleLinesStore.bouncingRange = bouncingRange(2)
+        resolve([value])
+      }
+    }
     //
 
     if (type === 'lockWeight') {
@@ -609,6 +637,9 @@ function setLinesStore(type, value) {
     }
     if (type === 'lockColor') {
       moduleLinesStore.colorLocked = value
+    }
+    if (type === 'lockQuantity') {
+      moduleLinesStore.quantityLocked = value
     }
   })
 }

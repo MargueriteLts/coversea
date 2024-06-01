@@ -848,9 +848,9 @@ function drawModules(p) {
   /////////////////////////////////////////// MODULE lINES
 
   if (moduleList.includes('Lines')) {
-    p.noFill()
     const lines = getLinesStore()
-
+    
+    p.noFill()
     p.stroke(lines.color)
     p.strokeWeight(lines.strokeWeight);
 
@@ -881,12 +881,12 @@ function drawModules(p) {
     }
 
     if (lines.currentLineType == 'Straight') {
-      for (let index = 0; index < lines.lines.length; index++) {
+      for (let index = 0; index < lines.straightLines.length; index++) {
         p.line(
-          (lines.lines[index][0] * canvasSize) / 100,
-          (lines.lines[index][1] * canvasSize) / 100,
-          (lines.lines[index][2] * canvasSize) / 100,
-          (lines.lines[index][3] * canvasSize) / 100
+          (lines.straightLines[index][0] * canvasSize) / 100,
+          (lines.straightLines[index][1] * canvasSize) / 100,
+          (lines.straightLines[index][2] * canvasSize) / 100,
+          (lines.straightLines[index][3] * canvasSize) / 100
         );
       }
     }
@@ -902,7 +902,7 @@ function drawModules(p) {
       let deltaEndX = (lines.bouncingRange[2] * canvasSize) / 100
       let deltaEndY = (lines.bouncingRange[3] * canvasSize) / 100
 
-       for (let i = 0; i < lines.bouncingLinesQuantity; i++) {
+       for (let i = 0; i < lines.quantity.bouncingLines; i++) {
         
         // p.stroke(255, 50);
         p.line(startX, startY, endX, endY);

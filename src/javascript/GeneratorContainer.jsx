@@ -137,6 +137,36 @@ export default class GeneratorContainer extends Component {
     this.setState({})
   }
 
+  handleLinesQuantity = (e) => {
+    this.props.setLinesStore('linesQuantity', e.target.value)
+    this.setState({})
+    //   .then(() => {
+    //   }
+    // )
+  }
+
+  // handleMaxQuantity = () => {
+  //   let max
+  //   if (this.props.lines.currentLineType == 'Straight') {
+  //     // max = this.props.lines.quantity.straightLines
+  //     max = `"${this.props.lines.quantity.straightLines}"`
+  //   }
+  //   if (this.props.lines.currentLineType == 'Curves') {
+  //     // max = this.props.lines.quantity.curvedLines
+  //     max = `"${this.props.lines.quantity.curvedLines}"`
+  //   }
+  //   if (this.props.lines.currentLineType == 'Arcs') {
+  //     // max = this.props.lines.quantity.arcs
+  //     max = `"${this.props.lines.quantity.arcs}"`
+  //   }
+  //   if (this.props.lines.currentLineType == 'Bouncing') {
+  //     // max = this.props.lines.quantity.bouncingLines
+  //     max = `"${this.props.lines.quantity.bouncingLines}"`
+  //   }
+  //   // console.log(max);
+  //   return max
+  // }
+
   handleDropDownLinesTypeClick = (type) => {
     this.props.setLinesStore('CurrentTypeChange', type)
     this.setState({})
@@ -295,7 +325,6 @@ export default class GeneratorContainer extends Component {
       backgroundImage,
       vinyl,
       setVinylStore,
-      handleDropDownLinesTypeClick,
       lines,
       setLinesStore,
       module3D,
@@ -363,6 +392,8 @@ export default class GeneratorContainer extends Component {
             handleRandomizeModule={this.handleRandomizeModule}
             handleLinesColor={this.handleLinesColor}
             handleLinesSize={this.handleLinesSize}
+            handleLinesQuantity={this.handleLinesQuantity}
+            handleMaxQuantity={this.handleMaxQuantity}
             handleDropDownLinesTypeClick={this.handleDropDownLinesTypeClick}
             setLinesStore={setLinesStore}
             key={index}

@@ -43,6 +43,8 @@ export default class Module extends Component {
       lines,
       handleLinesColor,
       handleLinesSize,
+      handleLinesQuantity,
+      handleMaxQuantity,
       handleDropDownLinesTypeClick,
       setLinesStore,
       basictypo,
@@ -84,6 +86,8 @@ export default class Module extends Component {
           handleLinesSize={handleLinesSize}
           setLinesStore={setLinesStore}
           handleDropDownLinesTypeClick={handleDropDownLinesTypeClick}
+          handleLinesQuantity={handleLinesQuantity}
+          handleMaxQuantity={handleMaxQuantity}
         />
       )
     }

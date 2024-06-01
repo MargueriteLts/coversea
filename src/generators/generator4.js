@@ -55,19 +55,14 @@ const preset = {
 
     layout: 'Vertical',
 
-    straightLinesQuantity: 50,
-    curvedLinesQuantity: 10,
-    bouncingLinesQuantity: 100,
-    arcsQuantity: 10,
-    pointsQuantity: 10,
-
-    // quantity : {
-    //   straightLines: 50,
-    //   curvedLines: 10,
-    //   bouncingLines: 100,
-    //   arcs: 10,
-    //   points: 10,
-    // },
+    quantity: {
+      straightLines: 50,
+      curvedLines: 10,
+      bouncingLines: 100,
+      arcs: 10,
+      points: 10,
+    },
+    quantityLocked: false,
     
     strokeWeight: 2,
     min: 1,
