@@ -194,6 +194,14 @@ body.generator {
               }
             }
           }
+
+          .content_Column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            align-self: stretch;
+          }
   
           .M_BackgroundContent {
   
@@ -256,15 +264,16 @@ body.generator {
             flex-direction: row;
             width: 100%;
             column-gap: 20px;
-
-            .content_Column {
-              display: flex;
-              flex-direction: column;
-              align-items: flex-start;
-              gap: 20px;
-              align-self: stretch;
-            }
           }
+
+          .M_ParticlesContent {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            column-gap: 20px;
+          }
+
+
         }
   
         // .Sliders {

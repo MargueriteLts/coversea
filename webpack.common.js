@@ -9,7 +9,7 @@ const path = require('path')
 module.exports = {
   entry: {
     index: './src/index.js',
-    //generator: './src/generator.jsx',
+    generator: './src/generator.jsx',
     teasergenerator: './src/teaserGenerator.jsx',
   },
   output: {
@@ -116,14 +116,14 @@ module.exports = {
       chunks: ['teasergenerator']
     }),
 
-    //// Generators
-    //new HtmlWebpackPlugin({
-    //  hash: true,
-    //  scriptLoading: 'blocking',
-    //  template: './src/generators/generator1.html',
-    //  filename: './generators/generator1.html',
-    //  chunks: ['generator']
-    //}),
+    // Generators
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator1.html',
+      filename: './generators/generator1.html',
+      chunks: ['generator']
+    }),
 
     //new HtmlWebpackPlugin({
     //  hash: true,

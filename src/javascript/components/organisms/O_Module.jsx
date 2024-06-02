@@ -6,6 +6,7 @@ import M_BackgroundContent from '../molecules/moduleContent/M_BackgroundContent.
 import M_LinesContent from '../molecules/moduleContent/M_LinesContent.jsx'
 import M_VinylContent from '../molecules/moduleContent/M_VinylContent.jsx'
 import M_BasicTypoContent from '../molecules/moduleContent/M_BasicTypoContent.jsx'
+import M_ParticlesContent from '../molecules/moduleContent/M_ParticlesContent.jsx'
 
 export default class Module extends Component {
   constructor(props) {
@@ -49,7 +50,12 @@ export default class Module extends Component {
       handleDropDownLinesTypeClick,
       setLinesStore,
       basictypo,
-      setBasicTypoStore
+      setBasicTypoStore,
+      particles,
+      setParticlesStore,
+      handleDropDownClickParticles,
+      handleParticlesQuantity,
+      handleParticlesColor
     } = this.props
 
     if (moduleType == 'Background') {
@@ -98,6 +104,17 @@ export default class Module extends Component {
         <M_BasicTypoContent
           basictypo={basictypo}
           setBasicTypoStore={setBasicTypoStore}
+        />
+      )
+    }
+    if (moduleType == 'Particles') {
+      return (
+        <M_ParticlesContent
+          particles={particles}
+          setParticlesStore={setParticlesStore}
+          handleDropDownClickParticles={handleDropDownClickParticles}
+          handleParticlesQuantity={handleParticlesQuantity}
+          handleParticlesColor={handleParticlesColor}
         />
       )
     }

@@ -1,6 +1,6 @@
 import { sample, getRandomArbitrary, importAll } from './utilities'
 
-//import * as generator1 from '../generators/generator1.js'
+import * as generator1 from '../generators/generator1.js'
 //import * as generator2 from '../generators/generator2.js'
 //import * as generator3 from '../generators/generator3.js'
 //import * as generator4 from '../generators/generator4.js'
@@ -15,7 +15,7 @@ import { sample, getRandomArbitrary, importAll } from './utilities'
 import * as teaserGenerator from '../generators/teaserGenerator.js'
 
 const generators = {
-  //generator1,
+  generator1,
   //generator2,
   //generator3,
   //generator4,

@@ -310,6 +310,7 @@ export default class GeneratorContainer extends Component {
       objects,
       shapes,
       particles,
+      setParticlesStore,
       backgroundImage,
       vinyl,
       setVinylStore,
@@ -381,8 +382,6 @@ export default class GeneratorContainer extends Component {
             handleLinesColor={this.handleLinesColor}
             handleLinesSize={this.handleLinesSize}
             handleLinesQuantity={this.handleLinesQuantity}
-            handleMaxQuantityValue={this.handleMaxQuantityValue}
-            handleQuantityValue={this.handleQuantityValue}
             handleDropDownLinesTypeClick={this.handleDropDownLinesTypeClick}
             setLinesStore={setLinesStore}
             key={index}
@@ -401,13 +400,16 @@ export default class GeneratorContainer extends Component {
       }
       if (moduleName == 'Particles') {
         modules.push(
-          <Particles
-            key={index}
-            handleRandomizeModule={this.handleRandomizeModule}
+          <O_Module
+            moduleType='Particles'
             particles={particles}
+            moduleName={particles.moduleName}
+            handleRandomizeModule={this.handleRandomizeModule}
+            setParticlesStore={setParticlesStore}
             handleDropDownClickParticles={this.handleDropDownClickParticles}
             handleParticlesQuantity={this.handleParticlesQuantity}
             handleParticlesColor={this.handleParticlesColor}
+            key={index}
           />
         )
       }

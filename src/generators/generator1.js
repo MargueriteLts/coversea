@@ -1,33 +1,29 @@
-const modules = ['Background', 'Vinyl', 'Lines', 'BasicTypo']
+const modules = ['Background', 'Vinyl', 'Particles', 'BasicTypo']
 
 const preset = {
   
   blend: {
     Vinyl: false,
-    Text1: true
+    Text1: false
   },
-  
+
   Background: {
-    backgroundTypes: ['SolidColor', 'Gradient'],
-    currentBackgroundType: 'SolidColor',
+    backgroundTypes: ['SolidColor', 'Noise'],
+    currentBackgroundType: 'Noise',
 
     preset: {
       SolidColor: {
         color: '#000000'
       },
-      Gradient: {
-        gradientTypes: ['Linear', 'Radial'],
-        currentGradientType: 'Linear',
-        typeLocked: false,
+      Noise: {
+        NoiseTypes: ['Small', 'Medium', 'Big'],
+        currentNoiseType: 'Small',
 
-        stops: {
-          quantity: 2,
-          locked: false,
-          max: 12,
-          min: 0
-        },
-        color1: '#ff0000',
-        color2:'#00ff00'
+        preset: {
+          Small: {},
+          Medium: {},
+          Big: {}
+        }
       }
     }
   },
@@ -49,37 +45,25 @@ const preset = {
     }
   },
 
-  Lines: {
-    linesTypes: ['Straight', 'Curves', 'Arcs', 'Bouncing'],
-    currentLineType: 'Bouncing',
+  Particles: {
+    sliderValue: 15,
+    quantityLocked: false,
+    max: 200,
+    min: 10,
+    opacity: 255,
+    color: '#fff',
+    colorLocked: false,
 
-    layout: 'Vertical',
+    options: ['Ellipses', 'Squares', 'Mix'],
+    currentParticlesType: 'Mix',
 
     preset: {
-      Straight: {
-        quantity: 50,
-        max: 100
-      },
-      Curves: {
-        quantity: 10,
-        max: 10,
-        points: 10
-      },
-      Arcs: {
-        quantity: 10,
-        max: 10
-      },
-      Bouncing: {
-        quantity: 100,
-        max: 150
-      },
-    },
-    
-    strokeWeight: 2,
-    min: 1,
-    max: 100,
+      Ellipses: {},
+      Squares: {},
+      Mix: {}
+    }
   },
-
+  
   BasicTypo: {
     dopText: true,
 

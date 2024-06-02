@@ -36,29 +36,13 @@ export default class M_LinesContent extends Component {
         solidColorLock: !this.state.solidColorLock
       })
     }
+    if (item == 'lockQuantity') {
+      setStore(item, !this.state.quantityLock)
+      this.setState({
+        quantityLock: !this.state.quantityLock
+      })
+    }
   }
-
-  // handleQuantity = () => {
-  //   let value
-  //   if (this.props.lines.currentLineType == 'Straight') {
-  //     // max = this.props.lines.quantity.straightLines
-  //     value = `"${this.props.lines.quantity.straightLines}"`
-  //   }
-  //   if (this.props.lines.currentLineType == 'Curves') {
-  //     // max = this.props.lines.quantity.curvedLines
-  //     value = `"${this.props.lines.quantity.curvedLines}"`
-  //   }
-  //   if (this.props.lines.currentLineType == 'Arcs') {
-  //     // max = this.props.lines.quantity.arcs
-  //     value = `"${this.props.lines.quantity.arcs}"`
-  //   }
-  //   if (this.props.lines.currentLineType == 'Bouncing') {
-  //     // max = this.props.lines.quantity.bouncingLines
-  //     value = `"${this.props.lines.quantity.bouncingLines}"`
-  //   }
-  //   // console.log(max);
-  //   return value
-  // }
   
   render() {
     const {
@@ -67,13 +51,9 @@ export default class M_LinesContent extends Component {
       handleLinesSize,
       setLinesStore,
       handleLinesQuantity,
-      handleMaxQuantityValue,
-      handleQuantityValue,
       handleDropDownLinesTypeClick
     } = this.props
-
-    // console.log(lines.quantity.bouncingLines);
-    // console.log(this.handleMaxQuantity());
+    
 
     return <div className="M_LinesContent">
       <div className='content_Column'>
