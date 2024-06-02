@@ -76,8 +76,8 @@ const preset = {
     mainText: {
       value: 'Name of your track or album',
       color: '#ffffff',
-      fontOptions: ['esenin-script-one', 'Acosta', 'PT-Root-UI', 'bc-novatica-cyr'],
-      currentFont: 'bc-novatica-cyr',
+      fontOptions: ['Sans Serif', 'Script', 'Special'],
+      currentFont: 'Script',
       size:{
         sliderValue: 10,
         min: 5,
@@ -90,8 +90,8 @@ const preset = {
       // values: [{value: 'Music is the answer to everything, music is the key to the world'}],
       values: ['Music is the answer to everything, music is the key to the world'],
       color: '#ffffff',
-      fontOptions: ['esenin-script-one', 'Acosta', 'PT-Root-UI', 'bc-novatica-cyr'],
-      currentFont: 'bc-novatica-cyr',
+      fontOptions: ['Sans Serif', 'Script', 'Special'],
+      currentFont: 'Sans Serif',
       size:{
         sliderValue: 2,
         min: 1,

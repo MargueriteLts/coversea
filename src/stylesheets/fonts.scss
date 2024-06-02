@@ -1,7 +1,8 @@
 @import url("https://use.typekit.net/zdq8cvv.css");
 
-// font-family: "neue-haas-unica", "bc-novatica-cyr", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Italianno&family=Luxurious+Script&family=Mea+Culpa&family=Pinyon+Script&display=swap');
 
+// font-family: "neue-haas-unica", "bc-novatica-cyr", sans-serif;
 
 // Neue Haas Unica W1G Light
 // font-family: "neue-haas-unica",
@@ -52,53 +53,103 @@
 // font-style: italic;
 
 @font-face {
-  font-family: 'esenin-script-one';
-  src: url('fonts/esenin-script-one.ttf') format('ttf');
-  // font-weight: 400;
+  font-family: "", cursive;
+   src: url('fonts/ADC-Semi-Bold.otf') format('otf');
+  font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Acosta';
-  src: url('fonts/Acosta.otf') format('otf');
-  // font-weight: 400;
+  font-family: "mint", cursive;
+   src: url('fonts/MintSansRegular.otf') format('otf');
+  font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'wonky';
-  src: url('fonts/wonky.otf') format('otf');
-  // font-weight: 400;
+  font-family: "liberation", cursive;
+   src: url('fonts/LiberationSans-Regular.ttf') format('ttf');
+  font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Bolgarus';
-  src: url('fonts/Bolgarus.otf') format('otf');
-  // font-weight: 400;
-  // font-style: normal;
+  font-family: "Mea Culpa", cursive;
+   src: url('fonts/MeaCulpa-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: 'YUNGA-Display';
-  src: url('fonts/YUNGA-Display.otf') format('otf');
-  // font-weight: 400;
-  // font-style: normal;
+  font-family: "Luxurious Script", cursive;
+   src: url('fonts/LuxuriousScript-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: 'typekini';
-  src: url('fonts/typekini.ttf') format('ttf');
-  // font-weight: 400;
-  // font-style: normal;
+  font-family: "Pinyon Script", cursive;
+   src: url('fonts/PinyonScript-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: 'AUSRINE';
-  src: url('fonts/AUSRINE.ttf') format('ttf');
-  // font-weight: 400;
-  // font-style: normal;
+  font-family: "Italianno", cursive;
+   src: url('fonts/Italianno-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
 }
+
+
+//@font-face {
+//  font-family: 'esenin-script-one';
+//  src: url('fonts/esenin-script-one.ttf') format('ttf');
+//  // font-weight: 400;
+//  font-style: normal;
+//}
+
+//@font-face {
+//  font-family: 'Acosta';
+//  src: url('fonts/Acosta.otf') format('otf');
+//  // font-weight: 400;
+//  font-style: normal;
+//}
+
+//@font-face {
+//  font-family: 'wonky';
+//  src: url('fonts/wonky.otf') format('otf');
+//  // font-weight: 400;
+//  font-style: normal;
+//}
+
+//@font-face {
+//  font-family: 'Bolgarus';
+//  src: url('fonts/Bolgarus.otf') format('otf');
+//  // font-weight: 400;
+//  // font-style: normal;
+//}
+
+//@font-face {
+//  font-family: 'YUNGA-Display';
+//  src: url('fonts/YUNGA-Display.otf') format('otf');
+//  // font-weight: 400;
+//  // font-style: normal;
+//}
+
+//@font-face {
+//  font-family: 'typekini';
+//  src: url('fonts/typekini.ttf') format('ttf');
+//  // font-weight: 400;
+//  // font-style: normal;
+//}
+
+//@font-face {
+//  font-family: 'AUSRINE';
+//  src: url('fonts/AUSRINE.ttf') format('ttf');
+//  // font-weight: 400;
+//  // font-style: normal;
+//}
 
   // font-family: bc-novatica-cyr, sans-serif;
   // font-weight: 300;

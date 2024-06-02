@@ -1055,6 +1055,7 @@ function drawModules(p) {
     
     ////////////////////////////  OTHER TEXT
     if (basicTypo.dopText == true) {
+      p.textFont(basicTypo.fontOtherText)
       p.fill(basicTypo.otherText.color)
       let otherTexts = basicTypo.otherText.values
       
@@ -1130,7 +1131,7 @@ function drawModules(p) {
 
     //MAIN TEXT
     p.fill(basicTypo.mainText.color)
-    p.textFont(basicTypo.mainText.currentFont)
+    p.textFont(basicTypo.fontMainText)
     p.textAlign(p.CENTER, p.CENTER)
 
     if (basicTypo.upperCase == true) {
@@ -1387,20 +1388,30 @@ function sketch(p) {
     // const fontsFiles = getFontsStore()
     // console.log(fontsFiles);
 
-    fontEsenin = p.loadFont('../fonts/esenin-script-one.ttf');
-    mainTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
-    otherTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
+    //fontEsenin = p.loadFont('../fonts/esenin-script-one.ttf');
+    //mainTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
+    //otherTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
 
-    ptrootuiReg = p.loadFont('../fonts/PT-Root-UI_Regular.woff')
-    ptrootuiBold = p.loadFont('../fonts/PT-Root-UI_Bold.woff')
-    ptrootuiLight = p.loadFont('../fonts/PT-Root-UI_Light.woff')
+    //ptrootuiReg = p.loadFont('../fonts/PT-Root-UI_Regular.woff')
+    //ptrootuiBold = p.loadFont('../fonts/PT-Root-UI_Bold.woff')
+    //ptrootuiLight = p.loadFont('../fonts/PT-Root-UI_Light.woff')
     
-    p.loadFont('../fonts/Acosta.otf')
-    p.loadFont('../fonts/wonky.otf')
-    p.loadFont('../fonts/Bolgarus.otf')
-    p.loadFont('../fonts/YUNGA-Display.otf')
-    p.loadFont('../fonts/typekini.ttf')
-    p.loadFont('../fonts/AUSRINE.ttf')
+    //p.loadFont('../fonts/Acosta.otf')
+    //p.loadFont('../fonts/wonky.otf')
+    //p.loadFont('../fonts/Bolgarus.otf')
+    //p.loadFont('../fonts/YUNGA-Display.otf')
+    //p.loadFont('../fonts/typekini.ttf')
+    //p.loadFont('../fonts/AUSRINE.ttf')
+
+    p.loadFont('../fonts/ADC-Semi-Bold.otf')
+    p.loadFont('../fonts/MintSansRegular.otf')
+    p.loadFont('../fonts/LiberationSans-Regular.ttf')
+
+
+    p.loadFont('../fonts/MeaCulpa-Regular.ttf')
+    p.loadFont('../fonts/LuxuriousScript-Regular.ttf')
+    p.loadFont('../fonts/PinyonScript-Regular.ttf')
+    p.loadFont('../fonts/Italianno-Regular.ttf')
 
   }
 

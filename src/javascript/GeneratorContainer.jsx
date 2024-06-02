@@ -446,6 +446,7 @@ export default class GeneratorContainer extends Component {
             basictypo={basictypo}
             moduleName={basictypo.moduleName}
             setBasicTypoStore={setBasicTypoStore}
+            handleRandomizeModule={this.handleRandomizeModule}
             key={index}
           />
           // <BasicTypo

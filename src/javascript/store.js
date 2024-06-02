@@ -932,17 +932,53 @@ function generatePositions() {
   return shuffleArray(positions)
 }
 
+function setfont(fontType) {
+
+  let font
+
+  let sansSerifFonts = ['ADC-Semi-Bold', 'MintSansRegular', 'LiberationSans-Regular']
+  let scriptFonts = ['MeaCulpa-Regular', 'LuxuriousScript-Regular', 'PinyonScript-Regular', 'Italianno-Regular']
+
+  if (fontType == 'Script') {
+    font = sample(scriptFonts)
+  }
+  if (fontType == 'Sans Serif') {
+    font = sample(sansSerifFonts)
+  }
+
+  return font
+}
+
 function initBasicTypoStore(preset) {
 
   let positions = generatePositions()
-  // console.log(positions);
 
-  // preset = Object.assign({}, preset, { moduleName: 'Text 1', color: '#fff', txtposition: position })
+  //let fontMainText
+  //let fontOtherText
+  
+  //if (preset.mainText.currentFont == 'Script') {
+  //  fontMainText = sample(scriptFonts)
+  //}
+  //if (preset.mainText.currentFont == 'Sans Serif') {
+  //  fontMainText = sample(sansSerifFonts)
+  //}
+
+  //if (preset.otherText.currentFont == 'Script') {
+  //  fontOtherText = sample(scriptFonts)
+  //}
+  //if (preset.otherText.currentFont == 'Sans Serif') {
+  //  fontOtherText = sample(sansSerifFonts)
+  //}
+
+
   preset = Object.assign({}, preset, {
     moduleName: 'Typography',
+    locked: false,
     // textPositions : [[], []]
-    textPositions: positions
+    textPositions: positions,
     //textPositions: {randomPosition: { x: 60, y: 95 }, randomPositions: [{ x: 5, y: 5 },{ x: 30, y: 5 },{ x: 60, y: 5 },{ x: 5, y: 95 },{ x: 30, y: 95 },{ x: 60, y: 95 }] }
+    fontMainText: setfont(preset.mainText.currentFont),
+    fontOtherText: setfont(preset.otherText.currentFont)
   })
 
   return preset
@@ -956,13 +992,37 @@ function setBasicTypoStore(type, nextValue) {
   return new Promise((resolve, reject) => {
     if (type === 'CurrentMainFontChange') {
       moduleBasicTypoStore.mainText.currentFont = nextValue
+
+      if (nextValue == 'Script') {
+        moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.mainText.currentFont)
+      }
+      if (nextValue == 'Sans Serif') {
+        moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.mainText.currentFont)
+      }
       resolve([nextValue])
-    } 
+    }
+    if (type === 'CurrentOtherFontChange') {
+      moduleBasicTypoStore.otherText.currentFont = nextValue
+
+      if (nextValue == 'Script') {
+        moduleBasicTypoStore.fontOtherText = setfont(moduleBasicTypoStore.otherText.currentFont)
+      }
+      if (nextValue == 'Sans Serif') {
+        moduleBasicTypoStore.fontOtherText = setfont(moduleBasicTypoStore.otherText.currentFont)
+      }
+      resolve([nextValue])
+    }
+
+
     if (type === 'mainText') {
       moduleBasicTypoStore.mainText.value = nextValue
     }
     if (type === 'sizeMainText') {
       moduleBasicTypoStore.mainText.size.sliderValue = nextValue
+      resolve([nextValue])
+    }
+    if (type === 'sizeOtherText') {
+      moduleBasicTypoStore.otherText.size.sliderValue = nextValue
       resolve([nextValue])
     }
     // if (type === 'StyleTabChange') {
@@ -974,7 +1034,6 @@ function setBasicTypoStore(type, nextValue) {
     }
 
      if (type === 'textarea') {
-      console.log('OTHERTEXT in STORE', moduleBasicTypoStore.otherText);
       moduleBasicTypoStore.otherText.values = nextValue
     }
 
@@ -1171,10 +1230,8 @@ function generateAllStore(generatorName, moduleList) {
         // let particlesQuantity = getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max)
         setParticlesStore('quantity', moduleParticlesStore.sliderValue)
 
-        let particlesColor = generateColor()
-        setParticlesStore('SolidColor', particlesColor)
-
-        data.push({particlesQuantity, particlesColor })
+        //let particlesColor = generateColor()
+        //setParticlesStore('SolidColor', particlesColor)
       }
 
       if (moduleName == 'Image') {
@@ -1233,7 +1290,9 @@ function generateAllStore(generatorName, moduleList) {
 
       if (moduleName == 'BasicTypo') {
         setBasicTypoStore('Positions')
-        // setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
+        
+        moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.mainText.currentFont)
+        moduleBasicTypoStore.fontOtherText = setfont(moduleBasicTypoStore.otherText.currentFont)
       }
 
       if (moduleName == 'Lines') {
@@ -1408,6 +1467,23 @@ function randomizeModuleStore(moduleType) {
 
     if (moduleType == 'BasicTypo') {
       setBasicTypoStore('Positions')
+
+      if (moduleBasicTypoStore.locked == false) {
+        //let newTypeFontMainText = sample(['Sans Serif', 'Script', 'Special'])
+        let newTypeFontMainText = sample(['Sans Serif', 'Script'])
+        //let newTypeFontOtherText = sample(['Sans Serif', 'Script', 'Special'])
+        let newTypeFontOtherText = sample(['Sans Serif', 'Script'])
+        moduleBasicTypoStore.fontMainText = setfont(newTypeFontMainText)
+        moduleBasicTypoStore.fontOtherText = setfont(newTypeFontOtherText)
+
+        moduleBasicTypoStore.mainText.color = generateColor()
+        moduleBasicTypoStore.otherText.color = generateColor()
+
+        moduleBasicTypoStore.mainText.size.sliderValue = getRandomArbitrary(moduleBasicTypoStore.mainText.size.min, moduleBasicTypoStore.mainText.size.max)
+        moduleBasicTypoStore.otherText.size.sliderValue = getRandomArbitrary(moduleBasicTypoStore.otherText.size.min, moduleBasicTypoStore.otherText.size.max)
+        
+      }
+
       setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
     }
 
