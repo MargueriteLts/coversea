@@ -60,6 +60,7 @@ let ptrootuiLight
 
 let graphics
 let blendedLayer
+let shapesLayer
 // let gradientBuffer
 // let shapesLayer
 // let layerTxtBlend
@@ -676,50 +677,125 @@ function drawModules(p) {
       const xCenterEL2 = canvasSize - xCenterER2
       const wEV2 = ((canvasSize - w) / 2) - (13 * canvasSize / 100) - paddingW
       const hEV2 = canvasSize - paddingH
-  
-      p.ellipse(xCenter, yCenter, wCircle)
+
+      if (shapes.blend == true) {
+        p.blendMode(p.DIFFERENCE)
+        p.image(shapesLayer, 0, 0)
+        shapesLayer.clear()
+        shapesLayer.noStroke()
+
+        shapesLayer.ellipse(xCenter, yCenter, wCircle)
       
-      p.ellipse(xCenterER1, yCenter, wEV1, hEV1)
-      p.ellipse(xCenterEL1, yCenter, wEV1, hEV1)
-      p.ellipse(xCenterER2, yCenter, wEV2, hEV2)
-      p.ellipse(xCenterEL2, yCenter, wEV2, hEV2)
+        shapesLayer.ellipse(xCenterER1, yCenter, wEV1, hEV1)
+        shapesLayer.ellipse(xCenterEL1, yCenter, wEV1, hEV1)
+        shapesLayer.ellipse(xCenterER2, yCenter, wEV2, hEV2)
+        shapesLayer.ellipse(xCenterEL2, yCenter, wEV2, hEV2)
+        
+        shapesLayer.ellipse(yCenter, xCenterER1, wCircle, wEV1)
+        shapesLayer.ellipse(yCenter, xCenterEL1, wCircle, wEV1)
+        shapesLayer.ellipse(yCenter, xCenterER2, hEV1, wEV2)
+        shapesLayer.ellipse(yCenter, xCenterEL2, hEV1, wEV2)
+
+        p.blendMode(p.BLEND)
+      } else {
+        p.ellipse(xCenter, yCenter, wCircle)
       
-      p.ellipse(yCenter, xCenterER1, wCircle, wEV1)
-      p.ellipse(yCenter, xCenterEL1, wCircle, wEV1)
-      p.ellipse(yCenter, xCenterER2, hEV1, wEV2)
-      p.ellipse(yCenter, xCenterEL2, hEV1, wEV2)
-    } else if (shapes.types.includes('Custom1') && shapes.currentType == 'Custom1') {
-      p.fill(shapes.settings.color)
-      p.beginShape()
-      p.curveVertex(100, 50)
-      p.curveVertex(200, 20)
-      p.curveVertex(200, 100)
-      p.curveVertex(50, 75)
-      p.curveVertex(25, 50)
-      // p.bezierVertex(100, 50)
-      // p.bezierVertex(200, 20)
-      // p.bezierVertex(200, 100)
-      // p.bezierVertex(50, 75)
-      // p.bezierVertex(25, 50)
-      // p.vertex(100, 200)
-      // p.vertex(200, 50)
-      // p.vertex(300, 200)
-      p.endShape(p.CLOSE)
-      p.noFill()
-    } else if (shapes.types.includes('Custom2') && shapes.currentType == 'Custom2') {
-      p.fill(shapes.settings.color)
-      // p.stroke(255)
-      p.beginShape()
-      p.angleMode(p.DEGREES)
-      let spacing = 50
-      for (let a = 0; a < 360; a += spacing) {
-        let x = 100 * p.sin(a) + 200
-        let y = 100 * p.cos(a) + 200
-        p.vertex(x, y)
+        p.ellipse(xCenterER1, yCenter, wEV1, hEV1)
+        p.ellipse(xCenterEL1, yCenter, wEV1, hEV1)
+        p.ellipse(xCenterER2, yCenter, wEV2, hEV2)
+        p.ellipse(xCenterEL2, yCenter, wEV2, hEV2)
+        
+        p.ellipse(yCenter, xCenterER1, wCircle, wEV1)
+        p.ellipse(yCenter, xCenterEL1, wCircle, wEV1)
+        p.ellipse(yCenter, xCenterER2, hEV1, wEV2)
+        p.ellipse(yCenter, xCenterEL2, hEV1, wEV2)
       }
-      p.endShape(p.CLOSE)
-      p.noFill()
+
     }
+
+    if (shapes.types.includes('Coversea') && shapes.currentType == 'Coversea') {
+      
+      let scalingFactors=[1, 0.7766003799274739, 0.7975911550512838, 0.8194409105542975, 0.8441930895718139, 0.8694941663460238, 0.8938675340986638, 0.916042384939555, 0.9351918645714109, 0.950997999690028, 0.9635649636253911, 0.973262351511485]
+      let initialW = canvasSize
+      //let initialW = shapes.settings.sliderValue
+      let newW
+
+      if (shapes.blend == true) {
+        p.blendMode(p.DIFFERENCE)
+        p.image(shapesLayer, 0, 0)
+        shapesLayer.clear()
+        shapesLayer.noStroke()
+        shapesLayer.rectMode(p.CENTER)
+        
+        for (let i = 0; i < 13; i += 1) {
+          shapesLayer.fill(shapes.settings.color)
+          let sf = scalingFactors[i]
+          newW = initialW*sf
+          shapesLayer.rect(canvasSize / 2,canvasSize / 2,newW,newW,55)
+          shapesLayer.erase()
+          shapesLayer.ellipse(canvasSize / 2,canvasSize / 2,newW)
+          initialW = newW
+          //c -= 20
+          shapesLayer.noErase()
+        }
+        p.blendMode(p.BLEND)
+      } else {
+        //p.clear()
+        p.noStroke()
+        p.rectMode(p.CENTER)
+        
+        for (let i = 0; i < 13; i += 1) {
+          p.fill(shapes.settings.color)
+          let sf = scalingFactors[i]
+          newW = initialW*sf
+          p.rect(canvasSize / 2,canvasSize / 2,newW,newW,55)
+          p.erase()
+          p.ellipse(canvasSize / 2,canvasSize / 2,newW)
+          initialW = newW
+          //c -= 20
+          p.noErase()
+        }
+      }
+
+      
+      
+    }
+
+
+
+
+    //if (shapes.types.includes('Custom1') && shapes.currentType == 'Custom1') {
+    //  p.fill(shapes.settings.color)
+    //  p.beginShape()
+    //  p.curveVertex(100, 50)
+    //  p.curveVertex(200, 20)
+    //  p.curveVertex(200, 100)
+    //  p.curveVertex(50, 75)
+    //  p.curveVertex(25, 50)
+    //  // p.bezierVertex(100, 50)
+    //  // p.bezierVertex(200, 20)
+    //  // p.bezierVertex(200, 100)
+    //  // p.bezierVertex(50, 75)
+    //  // p.bezierVertex(25, 50)
+    //  // p.vertex(100, 200)
+    //  // p.vertex(200, 50)
+    //  // p.vertex(300, 200)
+    //  p.endShape(p.CLOSE)
+    //  p.noFill()
+    //} else if (shapes.types.includes('Custom2') && shapes.currentType == 'Custom2') {
+    //  p.fill(shapes.settings.color)
+    //  // p.stroke(255)
+    //  p.beginShape()
+    //  p.angleMode(p.DEGREES)
+    //  let spacing = 50
+    //  for (let a = 0; a < 360; a += spacing) {
+    //    let x = 100 * p.sin(a) + 200
+    //    let y = 100 * p.cos(a) + 200
+    //    p.vertex(x, y)
+    //  }
+    //  p.endShape(p.CLOSE)
+    //  p.noFill()
+    //}
 
 
   }
@@ -1424,6 +1500,8 @@ function sketch(p) {
     randomsBuffer = p.createGraphics(canvasSize, canvasSize)
     allRandoms()
 
+    shapesLayer = p.createGraphics(canvasSize, canvasSize)
+
     if (moduleList.includes('Image')) {
       imageBuffer = p.createGraphics(canvasSize, canvasSize)
       randomImages()
@@ -1481,7 +1559,7 @@ function sketch(p) {
     drawModules(p)
     
     const blend = getBlendStore()
-    if (blend.Text1 == true) {
+    if (blend.difference == true) {
       p.clear()
       p.blendMode(p.DIFFERENCE)
       drawModules(p)

@@ -1,10 +1,11 @@
-const modules = ['Background', 'Vinyl', 'Particles', 'BasicTypo']
+const modules = ['Background', 'BackgroundImage', 'BasicTypo', 'Shapes']
 
 const preset = {
   
   blend: {
     Vinyl: false,
-    Text1: false
+    difference: false,
+    //Shapes: true
   },
 
   Background: {
@@ -31,42 +32,33 @@ const preset = {
     }
   },
 
-  Vinyl: {
-    size: 90,
-    bigger: false,
+  BackgroundImage: {
     opacity: 200,
-    tintColor: '#ffffff',
-    tintColorLock: false,
+    locked: false,
+    opacityLock: false,
 
-    vinylTypes: ['Whole', 'Label', 'Vinyl'],
-    currentVinylType: 'Label',
+    backgroundImageCollections: ['NightClub', 'Cars'],
+    currentBackgroundImageCollection: 'NightClub',
 
     preset: {
-      Whole: {},
-      Label: {},
-      Vinyl: {}
+      NightClub: {},
+      Cars: {}
     }
   },
 
-  Particles: {
-    sliderValue: 15,
-    quantityLocked: false,
-    max: 200,
-    min: 10,
-    opacity: 255,
-    color: '#fff',
-    colorLocked: false,
+  Shapes: {
+    types: ['Ellipses', 'Coversea'],
+    currentType: 'Coversea',
+    blend: true,
 
-    options: ['Ellipses', 'Squares', 'Mix'],
-    currentParticlesType: 'Mix',
-
-    preset: {
-      Ellipses: {},
-      Squares: {},
-      Mix: {}
+    settings: {
+      sliderValue: 37,
+      gradient: false,
+      colorLocked: false,
+      sizeLocked: false
     }
   },
-  
+
   BasicTypo: {
     dopText: true,
 
@@ -102,7 +94,19 @@ const preset = {
     // styles: ['NORMAL', 'LIGHT', 'BOLD'],
     // styleMainText: 'NORMAL',
 
-  }
+  },
+
+  //Overlay: {
+  //  opacity: 90,
+
+  //  collections: ['Plastic', 'Stickers'],
+  //  currentCollection: 'Plastic',
+
+  //  preset: {
+  //    Plastic: {},
+  //    Stickers: {}
+  //  }
+  //}
 }
 
 export { modules, preset }

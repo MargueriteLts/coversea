@@ -1,7 +1,7 @@
 import { sample, getRandomArbitrary, importAll } from './utilities'
 
 import * as generator1 from '../generators/generator1.js'
-//import * as generator2 from '../generators/generator2.js'
+import * as generator2 from '../generators/generator2.js'
 //import * as generator3 from '../generators/generator3.js'
 //import * as generator4 from '../generators/generator4.js'
 //import * as generator5 from '../generators/generator5.js'
@@ -16,7 +16,7 @@ import * as teaserGenerator from '../generators/teaserGenerator.js'
 
 const generators = {
   generator1,
-  //generator2,
+  generator2,
   //generator3,
   //generator4,
   //generator5,
@@ -353,6 +353,15 @@ function setBackgroundImageStore(type, value) {
       moduleBackgroundImageStore.opacity = value
       resolve([value])
     }
+
+    //
+    if (type == 'lockTabs') {
+      moduleBackgroundImageStore.locked = value
+    }
+    if (type == 'lockOpacity') {
+      moduleBackgroundImageStore.opacityLock = value
+    }
+
   })
 }
 
@@ -764,6 +773,13 @@ function setParticlesStore(type, value) {
       moduleParticlesStore.color = value
       resolve([value])
     }
+
+    if (type === 'lockColor') {
+      moduleParticlesStore.colorLocked = value
+    }
+    if (type === 'lockQuantity') {
+      moduleParticlesStore.quantityLocked = value
+    }
   })
 }
 
@@ -792,6 +808,14 @@ function setShapesStore(type, value) {
       moduleShapesStore.settings.sliderValue = value
       resolve([value])
     }
+    if (type == 'lockColor') {
+     moduleShapesStore.settings.colorLocked = value
+    }
+    resolve([value])
+    if (type == 'lockSize') {
+     moduleShapesStore.settings.sizeLocked = value
+    }
+    resolve([value])
   })
 }
 
@@ -1184,8 +1208,7 @@ function generateAllStore(generatorName, moduleList) {
          if (moduleBackgroundStore.currentBackgroundType == 'SolidColor' && moduleBackgroundStore.preset.SolidColor.locked == false) {
            let newSolidColor=generateColor()
            setBackgroundStore('SolidColor', newSolidColor)
-
-           data.push({newSolidColor})
+           
          }
 
          if (moduleBackgroundStore.currentBackgroundType == 'Gradient' && moduleBackgroundStore.preset.Gradient.locked == false) {
@@ -1194,14 +1217,12 @@ function generateAllStore(generatorName, moduleList) {
              .then((colors) => {
                newGradientColor1 = colors[0]
                newGradientColor2 = colors[1]
-               data.push({newGradientColor1, newGradientColor2})
              })
             
              let newAngle
              setBackgroundStore('AngleGradient')
                .then((randomAngle) => {
                  newAngle = randomAngle
-                 data.push({newAngle})
                })
          }
 
@@ -1216,13 +1237,15 @@ function generateAllStore(generatorName, moduleList) {
 
       if (moduleName == 'Shapes') {
 
-        let shapesColor = generateColor()
-        setShapesStore('SolidColor', shapesColor)
+        //let shapesColor = generateColor()
+        //setShapesStore('SolidColor', shapesColor)
 
-        let shapesSize = getRandomArbitrary(0, 100)
-        setShapesStore('Size', shapesSize)
+        if (moduleShapesStore.currentType == 'Ellipses' && moduleShapesStore.settings.sizeLocked == false) {
+          let shapesSize = getRandomArbitrary(0, 100)
+          setShapesStore('Size', shapesSize)
+        }
 
-        data.push({shapesSize, shapesColor })
+        
       }
 
       if (moduleName == 'Particles') {
@@ -1251,10 +1274,8 @@ function generateAllStore(generatorName, moduleList) {
           setBackgroundImageStore('Cars')
         }
 
-        let bgImgOpacity = getRandomArbitrary(10, 255)
-        setBackgroundImageStore('opacity', bgImgOpacity)
-
-        data.push({bgImgOpacity})
+        //let bgImgOpacity = getRandomArbitrary(10, 255)
+        //setBackgroundImageStore('opacity', bgImgOpacity)
       }
 
        if (moduleName == 'Vinyl') {
@@ -1404,22 +1425,31 @@ function randomizeModuleStore(moduleType) {
     }
 
     if (moduleType == 'Shapes') {
+      //update control with select
       let shapesType = sample(moduleShapesStore.types)
       setShapesStore('CurrentTabChange', shapesType)
       
-      setShapesStore('SolidColor', generateColor())
-
-      setShapesStore('Size', getRandomArbitrary(0, 100))
+      if (moduleShapesStore.settings.colorLocked == false) {
+        setShapesStore('SolidColor', generateColor())
+      }
+      if (moduleShapesStore.settings.sizeLocked == false) {
+        setShapesStore('Size', getRandomArbitrary(2, 74))
+      }
 
     }
 
     if (moduleType == 'Particles') {
       let ParticlesTypes = sample(moduleParticlesStore.options)
       setParticlesStore('CurrentTabChange', ParticlesTypes)
+      moduleParticlesStore.particles = generateParticles(moduleParticlesStore.sliderValue)
+      
+      if (moduleParticlesStore.quantityLocked == false) {
+        setParticlesStore('quantity', getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max))
+      }
+      if (moduleParticlesStore.colorLocked == false) {
+        setParticlesStore('SolidColor', generateColor())
+      }
 
-      setParticlesStore('quantity', getRandomArbitrary(moduleParticlesStore.min, moduleParticlesStore.max))
-
-      setParticlesStore('SolidColor', generateColor())
     }
 
     if (moduleType == 'Image') {

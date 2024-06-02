@@ -107,12 +107,13 @@ export default class M_Control extends Component {
   }
 
   render() {
-    const { isLocked, setStore, item, handleToggle, title, orientation, hasTitle, isFullWidth } = this.props
+    const { isLocked, setStore, item, handleToggle, title, orientation, hasTitle, isFullWidth, isHalfWidth } = this.props
 
     const classNames = classnames({
       'M_Control': true,
       [`${orientation}`]: true,
-      fullWidth: isFullWidth
+      fullWidth: isFullWidth,
+      halfWidth: isHalfWidth,
     })
 
     if (orientation == 'row') {

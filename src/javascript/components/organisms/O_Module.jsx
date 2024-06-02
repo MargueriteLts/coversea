@@ -7,6 +7,8 @@ import M_LinesContent from '../molecules/moduleContent/M_LinesContent.jsx'
 import M_VinylContent from '../molecules/moduleContent/M_VinylContent.jsx'
 import M_BasicTypoContent from '../molecules/moduleContent/M_BasicTypoContent.jsx'
 import M_ParticlesContent from '../molecules/moduleContent/M_ParticlesContent.jsx'
+import M_BackgroundImageContent from '../molecules/moduleContent/M_BackgroundImageContent.jsx'
+import M_ShapesContent from '../molecules/moduleContent/M_ShapesContent.jsx'
 
 export default class Module extends Component {
   constructor(props) {
@@ -56,7 +58,16 @@ export default class Module extends Component {
       setParticlesStore,
       handleDropDownClickParticles,
       handleParticlesQuantity,
-      handleParticlesColor
+      handleParticlesColor,
+      backgroundImage,
+      setBackgroundImageStore,
+      handleTabClickBackgroundImage,
+      handleBackgroundImageOpacity,
+      shapes,
+      setShapesStore,
+      handleDropDownClickShapes,
+      handleShapesColor,
+      handleShapesSize
     } = this.props
 
     if (moduleType == 'Background') {
@@ -117,6 +128,27 @@ export default class Module extends Component {
           handleDropDownClickParticles={handleDropDownClickParticles}
           handleParticlesQuantity={handleParticlesQuantity}
           handleParticlesColor={handleParticlesColor}
+        />
+      )
+    }
+    if (moduleType == 'BackgroundImage') {
+      return (
+        <M_BackgroundImageContent
+          backgroundImage={backgroundImage}
+          setBackgroundImageStore={setBackgroundImageStore}
+          handleTabClickBackgroundImage={handleTabClickBackgroundImage}
+          handleBackgroundImageOpacity={handleBackgroundImageOpacity}
+        />
+      )
+    }
+    if (moduleType == 'Shapes') {
+      return (
+        <M_ShapesContent
+          shapes={shapes}
+          setShapesStore={setShapesStore}
+          handleDropDownClickShapes={handleDropDownClickShapes}
+          handleShapesColor={handleShapesColor}
+          handleShapesSize={handleShapesSize}
         />
       )
     }

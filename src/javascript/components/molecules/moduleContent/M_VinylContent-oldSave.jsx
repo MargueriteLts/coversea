@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import M_Control from '../controls/M_Control.jsx'
-import M_ControlWithSubControl from '../controls/M_TabSetWithSubControl.jsx'
+//import M_ControlWithSubControl from '../controls/M_TabSetWithSubControl.jsx'
 
 export default class M_VinylContent extends Component {
   constructor(props) {

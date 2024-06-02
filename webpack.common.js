@@ -133,13 +133,13 @@ module.exports = {
     //  chunks: ['generator']
     //}),
 
-    //new HtmlWebpackPlugin({
-    //  hash: true,
-    //  scriptLoading: 'blocking',
-    //  template: './src/generators/generator2.html',
-    //  filename: './generators/generator2.html',
-    //  chunks: ['generator']
-    //}),
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator2.html',
+      filename: './generators/generator2.html',
+      chunks: ['generator']
+    }),
 
     //new HtmlWebpackPlugin({
     //  hash: true,

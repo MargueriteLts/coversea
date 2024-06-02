@@ -273,6 +273,25 @@ body.generator {
             column-gap: 20px;
           }
 
+          .M_BackgroundImageContent {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            align-self: stretch;
+
+            .halfWidth {
+              width: 50%;
+            }
+          }
+
+          .M_ShapesContent {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            column-gap: 20px;
+          }
+
 
         }
   

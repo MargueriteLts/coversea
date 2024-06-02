@@ -304,6 +304,7 @@ export default class GeneratorContainer extends Component {
       setBackgroundStore,
       objects,
       shapes,
+      setShapesStore,
       particles,
       setParticlesStore,
       backgroundImage,
@@ -347,12 +348,18 @@ export default class GeneratorContainer extends Component {
       }
       if (moduleName == 'BackgroundImage') {
         modules.push(
-          <BackgroundImage
-            key={index}
-            handleRandomizeModule={this.handleRandomizeModule}
+          //<BackgroundImage
+          //  handleTabClickBackgroundImage={this.handleTabClickBackgroundImage}
+          //  handleBackgroundImageOpacity={this.handleBackgroundImageOpacity}
+          ///>
+          <O_Module
+            moduleType='BackgroundImage'
             backgroundImage={backgroundImage}
+            moduleName={backgroundImage.moduleName}
+            handleRandomizeModule={this.handleRandomizeModule}
             handleTabClickBackgroundImage={this.handleTabClickBackgroundImage}
             handleBackgroundImageOpacity={this.handleBackgroundImageOpacity}
+            key={index}
           />
         )
       }
@@ -411,13 +418,16 @@ export default class GeneratorContainer extends Component {
       }
       if (moduleName == 'Shapes') {
         modules.push(
-          <Shapes
-            key={index}
-            handleRandomizeModule={this.handleRandomizeModule}
+          <O_Module
+            moduleType='Shapes'
             shapes={shapes}
+            moduleName={shapes.moduleName}
+            setShapesStore={setShapesStore}
+            handleRandomizeModule={this.handleRandomizeModule}
             handleDropDownClickShapes={this.handleDropDownClickShapes}
             handleShapesColor={this.handleShapesColor}
             handleShapesSize={this.handleShapesSize}
+            key={index}
           />
         )
       }
@@ -449,12 +459,6 @@ export default class GeneratorContainer extends Component {
             handleRandomizeModule={this.handleRandomizeModule}
             key={index}
           />
-          // <BasicTypo
-          //   key={index}
-          // // randomizeModuleStore={randomizeModuleStore}
-          //   basictypo={basictypo}
-          //   setBasicTypoStore={setBasicTypoStore}
-          // />
         )
       }
       if (moduleName == 'BasicTypoV2') {

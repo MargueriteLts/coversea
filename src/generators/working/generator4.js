@@ -4,7 +4,7 @@ const preset = {
   
   blend: {
     Vinyl: false,
-    Text1: true
+    difference: true
   },
   
   Background: {
