@@ -9,6 +9,8 @@ import TabImageSet from '../../TabImageSet.jsx'
 import IconToggle from '../../buttons/IconToggle.jsx'
 import M_Control from '../controls/M_Control.jsx'
 import M_GradientDirection from '../controls/M_GradientDirection.jsx'
+import M_TabSetWithSubControl from '../controls/M_TabSetWithSubControl.jsx'
+
 
 export default class M_BackgroundContent extends Component {
   constructor(props) {
@@ -22,6 +24,8 @@ export default class M_BackgroundContent extends Component {
       gradientAngleLock: this.props.background.preset.Gradient?.angle.locked,
       gradientStopQuantityLock: this.props.background.preset.Gradient?.stops.locked,
       noiseLock: this.props.background.preset.Noise?.locked,
+      noiseTypeLock: this.props.background.preset.Noise?.typeLocked,
+      tintColorLock: this.props.background.preset.Noise?.tintColorLock,
       pixelsLock: this.props.background.preset.Pixels?.locked,
     }
 
@@ -74,6 +78,18 @@ export default class M_BackgroundContent extends Component {
         noiseLock: !this.state.noiseLock
       })
     }
+    if (item == 'lockTintColor') {
+      setStore(item, !this.state.tintColorLock)
+      this.setState({
+        tintColorLock: !this.state.tintColorLock
+      })
+    }
+    if (item == 'lockNoiseTabs') {
+      setStore(item, !this.state.noiseTypeLock)
+      this.setState({
+        noiseTypeLock: !this.state.noiseTypeLock
+      })
+    }
     if (item == 'lockPixels') {
       setStore(item, !this.state.pixelsLock)
       this.setState({
@@ -94,7 +110,8 @@ export default class M_BackgroundContent extends Component {
       handleChangeBackgroundAngleGradient,
       handleChangeBackgroundGradientStopQuantity,
       handleChangeBackgroundGradientType,
-      handleTabClickNoise
+      handleTabClickNoise,
+      handleChangeNoiseTintColor
     } = this.props
 
     // console.log(gradientTypes);
@@ -201,12 +218,14 @@ export default class M_BackgroundContent extends Component {
 
     if (background.currentBackgroundType == 'Noise') {
       return <div className='TabContent'>
-        <IconToggle
+
+        {/*<IconToggle
           isLocked={this.state.noiseLock}
           setStore={setBackgroundStore}
           item='lockNoise'
           handleToggle={this.handleToggle}
         />
+
         <div className='moduleContent-Left'>
           <TabImageSet
             options = {background.preset.Noise.preset}
@@ -214,7 +233,32 @@ export default class M_BackgroundContent extends Component {
             handleClick = {handleTabClickNoise}
             tabBackgrounds={background.preset.Noise.tabBackgrounds}
           />
-        </div>
+        </div>*/}
+
+        <M_TabSetWithSubControl
+          //subControl
+          subControlType='ColorPicker'
+          hasTitle={true}
+          subControlTitle='Tint color'
+          isSubControlLocked={this.state.tintColorLock}
+          setStore={setBackgroundStore}
+          itemSubControl='lockTintColor'
+          handleToggle={this.handleToggle}
+          data={background.preset.Noise.tintColor}
+          object='TintColor'
+          handleChangeControl={handleChangeNoiseTintColor}
+          type='AllColorPicker'
+
+          //mainControl
+          mainTitle='Choose a noise style'
+          isLocked={this.state.noiseTypeLock}
+          item='lockNoiseTabs'
+          options = {background.preset.Noise.preset}
+          value={background.preset.Noise.currentNoiseType}
+          handleTabChange={handleTabClickNoise}
+          images={background.preset.Noise.tabBackgrounds}
+        />
+
       </div>
     }
 

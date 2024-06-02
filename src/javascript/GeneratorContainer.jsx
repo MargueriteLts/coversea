@@ -102,6 +102,11 @@ export default class GeneratorContainer extends Component {
     this.setState({})
   }
 
+  handleChangeNoiseTintColor = (object, value) => {
+    this.props.setBackgroundStore(object, value)
+    this.setState({})
+  }
+
 ////////////////////////////////////// MODULE BACKGROUND IMAGE
 
   // Tab -OK
@@ -144,16 +149,6 @@ export default class GeneratorContainer extends Component {
     //   }
     // )
   }
-
-  // handleMaxQuantityValue = (type) => {
-  //   this.props.setLinesStore('maxQuantity', type)
-  //   this.setState({})
-  // }
-
-  // handleQuantityValue = (type) => {
-  //   this.props.setLinesStore('sliderValueQuantity', type)
-  //   this.setState({})
-  // }
 
   handleDropDownLinesTypeClick = (type) => {
     this.props.setLinesStore('CurrentTypeChange', type)
@@ -344,6 +339,7 @@ export default class GeneratorContainer extends Component {
             handleChangeBackgroundAngleGradient={this.handleChangeBackgroundGradientAngle}
             handleChangeBackgroundGradientStopQuantity={this.handleChangeBackgroundGradientStopQuantity}
             handleTabClickNoise={this.handleTabClickNoise}
+            handleChangeNoiseTintColor={this.handleChangeNoiseTintColor}
             setBackgroundStore={setBackgroundStore}
             key={index}
           />

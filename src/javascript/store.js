@@ -243,6 +243,10 @@ function setBackgroundStore(type, value) {
       // console.log('store value', moduleBackgroundStore.preset.Gradient.stops.quantity);
       resolve([value])
     }
+    if (type === 'TintColor') {
+      moduleBackgroundStore.preset.Noise.tintColor = value
+      resolve([value])
+    }
 
     if (type === 'currentTabImageChange') {
       moduleBackgroundStore.preset.Noise.currentNoiseType = value
@@ -268,6 +272,9 @@ function setBackgroundStore(type, value) {
     }
     if (type == 'lockNoise') {
       moduleBackgroundStore.preset.Noise.locked = value
+    }
+    if (type == 'lockTintColor') {
+      moduleBackgroundStore.preset.Noise.tintColorLock = value
     }
     if (type == 'lockPixels') {
       moduleBackgroundStore.preset.Pixels.locked = value

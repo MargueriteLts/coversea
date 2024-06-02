@@ -197,7 +197,56 @@ function allRandoms() {
   randomFrequency()
 }
 
+// with random colors inside
+//function genNoise() {
+//  let yoff = 0
+//  let seed = noiseBg.random(1000);
+//  let inc
 
+//  const background = getBackgroundStore()
+//  if (background.preset.Noise.currentNoiseType == 'Small') {
+//    inc = noiseBg.random(0.95, 1)
+//  } else if (background.preset.Noise.currentNoiseType == 'Medium') {
+//    inc = noiseBg.random(0.2, 0.25)
+//  } else if(background.preset.Noise.currentNoiseType == 'Big') {
+//    inc = noiseBg.random(0, 0.01)
+//  }
+
+//  let redMin = noiseBg.random(0, 100);
+//  let redMax = noiseBg.random(150, 255);
+//  let greenMin = noiseBg.random(0, 100);
+//  let greenMax = noiseBg.random(150, 255);
+//  let blueMin = noiseBg.random(0, 100);
+//  let blueMax = noiseBg.random(150, 255);
+
+//  noiseBg.pixelDensity(1)
+//  noiseBg.loadPixels()
+
+//  for (let y = 0; y < canvasSize; y++) {
+//    let xoff = 0
+//    for (let x = 0; x < canvasSize; x++) {
+//      let index = (x + y * canvasSize) * 4
+//      let noiseVal = noiseBg.noise(xoff, yoff, seed)
+//      // blueish-purple noise
+//      // let r = noiseBg.map(noiseVal, 0, 1, 0, 255)
+//      // let g = noiseBg.map(noiseVal, 0, 1, 100, 200)
+//      // let b = noiseBg.map(noiseVal, 0, 1, 200, 255)
+//      let r = noiseBg.map(noiseVal, 0, 1, redMin, redMax)
+//      let g = noiseBg.map(noiseVal, 0, 1, greenMin, greenMax)
+//      let b = noiseBg.map(noiseVal, 0, 1, blueMin, blueMax)
+
+//      noiseBg.pixels[index+0] = r
+//      noiseBg.pixels[index+1] = g
+//      noiseBg.pixels[index+2] = b
+//      noiseBg.pixels[index+3] = 255
+//      xoff += inc
+//    }
+//    yoff += inc
+//  }
+//  noiseBg.updatePixels()
+//}
+
+//try with tint color from store
 function genNoise() {
   let yoff = 0
   let seed = noiseBg.random(1000);
@@ -212,12 +261,25 @@ function genNoise() {
     inc = noiseBg.random(0, 0.01)
   }
 
-  let redMin = noiseBg.random(0, 100);
-  let redMax = noiseBg.random(150, 255);
-  let greenMin = noiseBg.random(0, 100);
-  let greenMax = noiseBg.random(150, 255);
-  let blueMin = noiseBg.random(0, 100);
-  let blueMax = noiseBg.random(150, 255);
+  //let redMin = noiseBg.random(0, 100);
+  //let redMax = noiseBg.random(150, 255);
+  //let greenMin = noiseBg.random(0, 100);
+  //let greenMax = noiseBg.random(150, 255);
+  //let blueMin = noiseBg.random(0, 100);
+  //let blueMax = noiseBg.random(150, 255);
+
+  let colorArray
+  if (Array.isArray(background.preset.Noise.tintColor)) {
+    colorArray = background.preset.Noise.tintColor
+    //p.tint(tintColor[0], tintColor[1], tintColor[2], 128)
+  } else {
+    colorArray = hexToRgbArray(background.preset.Noise.tintColor)
+    //p.tint(tintColor[0], tintColor[1], tintColor[2], 128)
+  }
+
+  let rC = colorArray[0];
+  let gC = colorArray[1];
+  let bC = colorArray[2];
 
   noiseBg.pixelDensity(1)
   noiseBg.loadPixels()
@@ -231,9 +293,18 @@ function genNoise() {
       // let r = noiseBg.map(noiseVal, 0, 1, 0, 255)
       // let g = noiseBg.map(noiseVal, 0, 1, 100, 200)
       // let b = noiseBg.map(noiseVal, 0, 1, 200, 255)
-      let r = noiseBg.map(noiseVal, 0, 1, redMin, redMax)
-      let g = noiseBg.map(noiseVal, 0, 1, greenMin, greenMax)
-      let b = noiseBg.map(noiseVal, 0, 1, blueMin, blueMax)
+      //Random colors
+      //let r = noiseBg.map(noiseVal, 0, 1, redMin, redMax)
+      //let g = noiseBg.map(noiseVal, 0, 1, greenMin, greenMax)
+      //let b = noiseBg.map(noiseVal, 0, 1, blueMin, blueMax)
+      //black&white
+      //let r = noiseBg.map(noiseVal, 0, 1, 0, 255)
+      //let g = noiseBg.map(noiseVal, 0, 1, 0, 255)
+      //let b = noiseBg.map(noiseVal, 0, 1, 0, 255)
+      //from store
+      let r = noiseBg.map(noiseVal, 0, 1, 0, rC)
+      let g = noiseBg.map(noiseVal, 0, 1, 0, gC)
+      let b = noiseBg.map(noiseVal, 0, 1, 0, bC)
 
       noiseBg.pixels[index+0] = r
       noiseBg.pixels[index+1] = g
@@ -510,8 +581,19 @@ function drawModules(p) {
 
     } else if (background.backgroundTypes.includes('Noise') && background.currentBackgroundType === 'Noise') {
       p.clear()
-      p.background(0)
+      p.background(255)
+      
+      //let tintColor
+      //if (Array.isArray(background.preset.Noise.tintColor)) {
+      //  tintColor = background.preset.Noise.tintColor
+      //  p.tint(tintColor[0], tintColor[1], tintColor[2], 128)
+      //} else {
+      //  tintColor = hexToRgbArray(background.preset.Noise.tintColor)
+      //  p.tint(tintColor[0], tintColor[1], tintColor[2], 128)
+      //}
+
       p.image(noiseBg, 0, 0)
+
       p.pixelDensity()
       p.noStroke()
     } else if (background.backgroundTypes.includes('Pixels') && background.currentBackgroundType === 'Pixels') {

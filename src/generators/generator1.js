@@ -18,6 +18,9 @@ const preset = {
       Noise: {
         NoiseTypes: ['Small', 'Medium', 'Big'],
         currentNoiseType: 'Small',
+        tintColor: '#ffffff',
+        tintColorLock: false,
+        typeLocked: false,
 
         preset: {
           Small: {},

@@ -34,6 +34,7 @@ export default class Module extends Component {
       handleChangeBackgroundGradientStopQuantity,
       handleChangeBackgroundGradientType,
       handleTabClickNoise,
+      handleChangeNoiseTintColor,
       setBackgroundStore,
       vinyl,
       handleTabClickVinyl,
@@ -70,6 +71,7 @@ export default class Module extends Component {
           handleChangeBackgroundGradientStopQuantity={handleChangeBackgroundGradientStopQuantity}
           handleTabClickNoise={handleTabClickNoise}
           setBackgroundStore={setBackgroundStore}
+          handleChangeNoiseTintColor={handleChangeNoiseTintColor}
         />
       )
     }
