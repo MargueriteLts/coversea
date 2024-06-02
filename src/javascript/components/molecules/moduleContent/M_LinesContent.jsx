@@ -85,6 +85,7 @@ export default class M_LinesContent extends Component {
         <M_Control
           orientation="row"
           controlType='Slider'
+          isFullWidth={true}
           hasTitle={true}
           title='Quantity'
         //lock
@@ -118,6 +119,7 @@ export default class M_LinesContent extends Component {
         <M_Control
           orientation="row"
           controlType='Slider'
+          isFullWidth={true}
           hasTitle={true}
           title='Thickness'
         //lock

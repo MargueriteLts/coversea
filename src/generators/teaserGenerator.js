@@ -16,6 +16,16 @@ const preset = {
         color: '#000000'
       },
       Gradient: {
+        gradientTypes: ['Linear', 'Radial'],
+        currentGradientType: 'Linear',
+        typeLocked: false,
+
+        stops: {
+          quantity: 2,
+          locked: false,
+          max: 12,
+          min: 0
+        },
         color1: '#ff0000',
         color2:'#00ff00'
       }
@@ -26,17 +36,53 @@ const preset = {
     size: 90,
     bigger: false,
     opacity: 200,
+    tintColor: '#ffffff',
+    tintColorLock: false,
 
-    vinylTypes: ['Whole', 'Label'],
+    vinylTypes: ['Whole', 'Label', 'Vinyl'],
     currentVinylType: 'Label',
 
     preset: {
       Whole: {},
-      Label: {}
+      Label: {},
+      Vinyl: {}
     }
   },
 
   Lines: {
+    linesTypes: ['Straight', 'Curves', 'Arcs', 'Bouncing'],
+    currentLineType: 'Bouncing',
+
+    layout: 'Vertical',
+
+    // quantity: {
+    //   straightLines: 50,
+    //   curvedLines: 10,
+    //   bouncingLines: 100,
+    //   arcs: 10,
+    //   points: 10,
+    // },
+
+    preset: {
+      Straight: {
+        quantity: 50,
+        max: 100
+      },
+      Curves: {
+        quantity: 10,
+        max: 10,
+        points: 10
+      },
+      Arcs: {
+        quantity: 10,
+        max: 10
+      },
+      Bouncing: {
+        quantity: 100,
+        max: 150
+      },
+    },
+    
     strokeWeight: 2,
     min: 1,
     max: 100,

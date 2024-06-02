@@ -127,25 +127,28 @@ body.generator {
           }
   
           .M_Control {
-            width: 100%;
             display: flex;
-  
+            
             &.row {
               flex-direction: row;
               column-gap: 16px;
               align-items: center;
             }
-  
+            
             &.column {
               flex-direction: column;
               row-gap: 8px;
+            }
+            
+            &.fullWidth {
+              width: 100%;
             }
 
             .titleText {
               display: flex;
               align-items: center;
               color: var(--TEXT-WHITE);
-              font-family: "Neue Haas Unica";
+              font-family: "neue-haas-unica";
               font-size: 16px;
               font-style: normal;
               font-weight: 400;
@@ -199,6 +202,7 @@ body.generator {
                     flex-direction: row;
                     width: 100%;
                     height: fit-content;
+                    gap: 12px;
                   }
                 }
 

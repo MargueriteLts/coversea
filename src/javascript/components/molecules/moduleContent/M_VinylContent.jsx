@@ -96,6 +96,7 @@ export default class M_VinylContent extends Component {
         <M_Control
           orientation="row"
           controlType='Slider'
+          isFullWidth={true}
           hasTitle={true}
           title='Vinyl size'
 
@@ -111,15 +112,18 @@ export default class M_VinylContent extends Component {
         />
         <M_Control
           orientation="row"
-          isLocked={this.state.opacityLock}
-          setStore={setVinylStore}
-          data={vinyl.opacity}
-          handleChange={handleVinylOpacity}
-          item='lockOpacity'
-          handleToggle={this.handleToggle}
+          controlType='SliderOpacity'
+          isFullWidth={true}
           hasTitle={true}
           title='Vinyl opacity'
-          controlType='SliderOpacity'
+
+          isLocked={this.state.opacityLock}
+          setStore={setVinylStore}
+          item='lockOpacity'
+          handleToggle={this.handleToggle}
+
+          data={vinyl.opacity}
+          handleChange={handleVinylOpacity}
         />
       </div>
     </div>

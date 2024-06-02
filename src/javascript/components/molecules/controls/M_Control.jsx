@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
+import classnames from 'classnames'
+
 import IconToggle from '../../buttons/IconToggle.jsx'
 import A_Text from '../../ATOMS/A_Text.jsx'
 import ColorPicker from '../../ColorPicker.jsx'
@@ -105,10 +107,17 @@ export default class M_Control extends Component {
   }
 
   render() {
-    const { isLocked, setStore, item, handleToggle, title, orientation, hasTitle } = this.props
+    const { isLocked, setStore, item, handleToggle, title, orientation, hasTitle, isFullWidth } = this.props
+
+    const classNames = classnames({
+      'M_Control': true,
+      [`${orientation}`]: true,
+      fullWidth: isFullWidth
+    })
 
     if (orientation == 'row') {
-      return <div className="M_Control row">
+      // return <div className="M_Control row">
+      return <div className={classNames}>
         <IconToggle
           isLocked={isLocked}
           setStore={setStore}
@@ -125,7 +134,8 @@ export default class M_Control extends Component {
       </div>
     }
     if (orientation == 'column') {
-      return <div className="M_Control column">
+      // return <div className="M_Control column">
+      return <div className={classNames}>
         <div className="control_Title">
           <IconToggle
             isLocked={isLocked}

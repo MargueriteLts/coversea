@@ -16,15 +16,15 @@ import O_Module from './components/organisms/O_Module.jsx'
 // import BackgroundImage from './modules/BackgroundImage.jsx'
 // //Graphics
 // import Image from './modules/Image.jsx'
-// import Lines from './modules/Lines.jsx'
+// // import Lines from './modules/Lines.jsx'
 // import Module3D from './modules/Module3D.jsx'
 // import Particles from './modules/Particles.jsx'
 // import Shapes from './modules/Shapes.jsx'
 // import Vinyl from './modules/Vinyl.jsx'
-// //Text
-// import BasicTypo from './modules/BasicTypo.jsx'
+// // //Text
+// // import BasicTypo from './modules/BasicTypo.jsx'
 // import BasicTypoV2 from './modules/BasicTypoV2.jsx'
-// //Overlay
+// // //Overlay
 // import Overlay from './modules/Overlay.jsx'
 
 
@@ -33,7 +33,7 @@ let size
 
 
 
-export default class TeaserGeneratorContainer extends Component {
+export default class GeneratorContainer extends Component {
   constructor(props) {
     super(props)
     this.sketchContainerRef = React.createRef();
@@ -63,6 +63,12 @@ export default class TeaserGeneratorContainer extends Component {
     this.setState({})
   }
 
+   handleChangeBackgroundGradientType = (type) => {
+    console.log(type);
+     this.props.setBackgroundStore('CurrentGradientType', type)
+     this.setState({})
+  }
+
   // SolidColor -OK
   handleChangeBackgroundSolidColor = (object, value) => {
     this.props.setBackgroundStore(object, value)
@@ -83,6 +89,11 @@ export default class TeaserGeneratorContainer extends Component {
   // -OK (no state update here)
   handleChangeBackgroundGradientAngle = () => {
     this.props.setBackgroundStore('AngleGradient')
+  }
+
+  handleChangeBackgroundGradientStopQuantity = (e) => {
+    this.props.setBackgroundStore('stopQuantity', e.target.value)
+    this.setState({})
   }
 
   // Noise -OK
@@ -123,6 +134,29 @@ export default class TeaserGeneratorContainer extends Component {
   // Stroke -OK
   handleLinesSize = (e) => {
     this.props.setLinesStore('strokeWeight', e.target.value)
+    this.setState({})
+  }
+
+  handleLinesQuantity = (e) => {
+    this.props.setLinesStore('linesQuantity', e.target.value)
+    this.setState({})
+    //   .then(() => {
+    //   }
+    // )
+  }
+
+  // handleMaxQuantityValue = (type) => {
+  //   this.props.setLinesStore('maxQuantity', type)
+  //   this.setState({})
+  // }
+
+  // handleQuantityValue = (type) => {
+  //   this.props.setLinesStore('sliderValueQuantity', type)
+  //   this.setState({})
+  // }
+
+  handleDropDownLinesTypeClick = (type) => {
+    this.props.setLinesStore('CurrentTypeChange', type)
     this.setState({})
   }
 
@@ -194,6 +228,11 @@ export default class TeaserGeneratorContainer extends Component {
     this.setState({})
   }
 
+  handleChangeVinylTintColor = (object, value) => {
+    this.props.setVinylStore(object, value)
+    this.setState({})
+  }
+
   ////////////////////////////////////// MODULE OVERLAY
 
   // Tab -OK
@@ -229,6 +268,36 @@ export default class TeaserGeneratorContainer extends Component {
     this.props.generateAllStore(generatorName, this.props.moduleList)
     this.setState({})
   }
+
+/////////////////////////// DOWNLOAD COVER ///////////////////////////
+
+  downloadImage = () => {
+    html2canvas(document.getElementById("defaultCanvas0")).then(function (canvas) {
+      let a = document.createElement("a");
+      a.href = canvas.toDataURL("image/jpeg");
+      a.download = `cover-${generateHash()}.jpeg`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  };
+
+// /////////////////////////// LOCK/UNLOCK ITEMS ///////////////////////////
+
+//   toggleLock = (module, item) => {
+//     // let 
+//     this.setState({})
+//     // if (module == 'Background') {
+//       // if (item == 'SolidColor') {
+
+//       // }
+//     // }
+//     // this.setState((prevState) => ({
+//     //   items: prevState.items.map(item =>
+//     //     item.id === id ? { ...item, locked: !item.locked } : item
+//     //   ),
+//     // }));
+//   };
 
 
 /////////////////////////// RENDER MODULES ///////////////////////////
@@ -268,9 +337,11 @@ export default class TeaserGeneratorContainer extends Component {
             moduleName={background.moduleName}
             handleRandomizeModule={this.handleRandomizeModule}
             handleTabClickBackground={this.handleTabClickBackground}
+            handleChangeBackgroundGradientType={this.handleChangeBackgroundGradientType}
             handleChangeBackgroundSolidColor={this.handleChangeBackgroundSolidColor}
             handleChangeBackgroundGradientColor={this.handleChangeBackgroundGradientColor}
             handleChangeBackgroundAngleGradient={this.handleChangeBackgroundGradientAngle}
+            handleChangeBackgroundGradientStopQuantity={this.handleChangeBackgroundGradientStopQuantity}
             handleTabClickNoise={this.handleTabClickNoise}
             setBackgroundStore={setBackgroundStore}
             key={index}
@@ -309,6 +380,10 @@ export default class TeaserGeneratorContainer extends Component {
             handleRandomizeModule={this.handleRandomizeModule}
             handleLinesColor={this.handleLinesColor}
             handleLinesSize={this.handleLinesSize}
+            handleLinesQuantity={this.handleLinesQuantity}
+            handleMaxQuantityValue={this.handleMaxQuantityValue}
+            handleQuantityValue={this.handleQuantityValue}
+            handleDropDownLinesTypeClick={this.handleDropDownLinesTypeClick}
             setLinesStore={setLinesStore}
             key={index}
           />
@@ -358,6 +433,7 @@ export default class TeaserGeneratorContainer extends Component {
             handleTabClickVinyl={this.handleTabClickVinyl}
             handleVinylSize={this.handleVinylSize}
             handleVinylOpacity={this.handleVinylOpacity}
+            handleChangeVinylTintColor={this.handleChangeVinylTintColor}
             setVinylStore={setVinylStore}
             key={index}
           />
@@ -426,10 +502,16 @@ export default class TeaserGeneratorContainer extends Component {
         <div className="sketch" id="sketch" ref={this.sketchContainerRef}></div>
         <div className="generator__sketch-controls">
           <div className="btn--big" onClick={this.generateCover}>GENERATE</div>
-          <A_Text
-            style='description'
-            text={`The download feature will be available in the full version. Stay tuned so you don't miss the realease!`}
-          />
+          <div className='description-desktop'>
+            <p>
+              The download feature will be available in the full version. Stay tuned so you don't miss the realease!
+            </p>
+          </div>
+          <div className='description-mobile'>
+            <p>
+              Please use a computer to have access to all the features inside the generator!
+            </p>
+          </div>
         </div>
       </div>
     </div>
