@@ -2,7 +2,7 @@ import { sample, getRandomArbitrary, importAll } from './utilities'
 
 import * as generator1 from '../generators/generator1.js'
 import * as generator2 from '../generators/generator2.js'
-//import * as generator3 from '../generators/generator3.js'
+import * as generator3 from '../generators/generator3.js'
 //import * as generator4 from '../generators/generator4.js'
 //import * as generator5 from '../generators/generator5.js'
 //import * as generator6 from '../generators/generator6.js'
@@ -17,7 +17,7 @@ import * as teaserGenerator from '../generators/teaserGenerator.js'
 const generators = {
   generator1,
   generator2,
-  //generator3,
+  generator3,
   //generator4,
   //generator5,
   //generator6,
@@ -373,6 +373,9 @@ function initImages(preset) {
   const shoesCollection = importAll(
     require.context('../images/sketchGraphics/shoes', false, /\.(png|jpe?g|svg)$/)
   )
+  const toolsCollection = importAll(
+    require.context('../images/sketchGraphics/tools', false, /\.(png|jpe?g|svg)$/)
+  )
 
   const images = importAll(
     require.context('../images/ui/tabBackgrounds/objects', false, /\.(png|jpe?g|svg)$/)
@@ -384,8 +387,8 @@ function initImages(preset) {
     if (collection == 'Shoes') {
       preset.preset.Shoes = Object.assign({}, preset.preset.Shoes, { text: 'Shoes', images: shoesCollection, current: sample(Object.keys(shoesCollection)) })
     }
-    if (collection == 'Electronics') {
-      preset.preset.Electronics = Object.assign({}, preset.preset.Electronics, { text: 'Electronics' })
+    if (collection == 'Tools') {
+      preset.preset.Tools = Object.assign({}, preset.preset.Tools, { text: 'Tools', images: toolsCollection, current: sample(Object.keys(toolsCollection)) })
     }
   })
 
@@ -410,6 +413,13 @@ function setImageStore(type, value) {
 
     if (type === 'Shoes') {
       moduleImageStore.preset.Shoes.current = sample(Object.keys(moduleImageStore.preset.Shoes.images))
+    }
+    if (type === 'Tools') {
+      moduleImageStore.preset.Tools.current = sample(Object.keys(moduleImageStore.preset.Tools.images))
+    }
+
+    if (type == 'lockTabs') {
+      moduleImageStore.locked = value
     }
   })
 }
@@ -1452,14 +1462,17 @@ function randomizeModuleStore(moduleType) {
 
     }
 
-    if (moduleType == 'Image') {
-      let objectType = sample(moduleImageStore.collections)
-      setImageStore('CurrentTabChange', objectType)
+    if (moduleType == 'Objects') {
 
-      if (objectType == 'Shoes') {
-        setImageStore('Shoes')
-      } else if (objectType == 'Electronics') {
-        setImageStore('Electronics')
+      if (moduleImageStore.locked == false) {
+        let objectType = sample(moduleImageStore.collections)
+        setImageStore('CurrentTabChange', objectType)
+
+        if (objectType == 'Shoes') {
+          setImageStore('Shoes')
+        } else if (objectType == 'Tools') {
+          setImageStore('Tools')
+        }
       }
 
     }

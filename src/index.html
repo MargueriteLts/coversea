@@ -1,216 +1,159 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <title>Coversea main page</title>
-    <analytics></analytics>
-  </head>
 
-  <body class="index">
-    <div class="header">
-      <a href="socials.html" class="menuButton">SOCIALS</a>
-      <a href="index.html" class="menuButtonActivePage">COVERSEA</a>
-      <a href="about.html" class="menuButton">ABOUT</a>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coversea Teaser page</title>
+  <analytics></analytics>
+</head>
+
+<body class="teaserGenerator">
+
+  <div class="teaserHeader">
+    <div class="logo logo-header"></div>
+  </div>
+  
+  <div class="teaserContent">
+    <div class="section-subtitle">
+      <div class="subtitle">
+        <h2>
+          your new cover artwork generator<br> <span>(powered by p5.js)</span>
+        </h2>
+      </div>
+      <p>
+        Coversea is initially a diploma project, aiming to explore the possibilities of generative art through algorithms
+        and
+        code. Technologies of creative coding were incorporated in a useful tool which anybody can use to create unique
+        cover
+        artworks.
+      </p>
     </div>
 
-    <div class="logoBG"></div>
+    <div  class="section-CTA-mobile">
+      <div id="scrollButton-mobile" class="button">Try our teaser generator</div>
+      <div class="subSection-CTA">
+        <p>Learn more</p>
+        <img src="./images/ui/icons/AngleDown.svg" alt="Angle Down icon" class="icon">
+      </div>
+    </div>
+    
+    <div class="statement-position">
+        <div id="bg-statement"></div>
+      <div class="statement">
+          We seek to make visual expression accessible to all music lovers, and foster a vibrant music landscape,
+          by establishing Coversea as a leading canvas
+          for cover artwork creation
+      </div>
+    </div>
+    
 
-    <div class="Content">
+
+    <div class="section-CTA-desktop">
+      <div class="CTA">
+        <div class="backgroundLogo"></div>
+        <div id="scrollButton" class="button">Try our teaser generator</div>
+      </div>
+      <div class="subSection-CTA">
+        <p>Learn more</p>
+        <img src="./images/ui/icons/AngleDown.svg" alt="Angle Down icon" class="icon">
+      </div>
+    </div>
+
+    <div class="section-presentation">
+
+      <div class="subsection" id="s1">
+        <div class="subsection-text" id="st1">
+          <h1>
+            transform your ideas<br> into art in a few clicks
+          </h1>
+          <p>Discover the power of generative coding and create unique cover artworks for your music. Our platform offers a
+            myriad of
+            possibilities to express your style.<br>
+            You can let the computer surprise you by clicking “Randomize” or generate a cover to your taste by tweaking the
+            presets.</p>
+        </div>
+        <img src="./images/ui/generatorExample-TOCHANGE.png" alt="Image of the generator's interface" class="generatorImage-img">
+        <div class="generatorImage"></div>
+        <div class="modulesImage-mobile"></div>
+      </div>
+
+        
+
       
-      <div class="genMenu">
-        <h3>[No design skills?]</h3>
-        <h3>[No time?]</h3>
-        <h3>[No money?]</h3>
-        <div class="top">
-          <p>Just choose a style and generate unique music cover artworks</p>
+      <div class="subsection" id="s2">
+          <img src="./images/ui/modulesExamples-3.png" alt="Image of modules" class="modulesImage-img">
+          <div class="modulesImage"></div>
+          
+          <div class="subsection-text" id="st2">
+            <h1>once you are satisfied<br> with the design,<br> download it freely!</h1>
+            <p>Each generator is carefully being crafted, to offer you original designs with new esthetics and high quality
+              cover artworks. If you like what
+              you see, you can freely download the artwork.
+            </p>
+          </div>
+          <div class="generatorImage-mobile"></div>
         </div>
-        <div class="generatorsList">
-          <a href="./generators/generator1.html" class="buttonToGenerator">GENERATOR 1</a>
-          <a href="./generators/generator2.html" class="buttonToGenerator">GENERATOR 2</a>
-          <a href="./generators/generator3.html" class="buttonToGenerator">GENERATOR 3</a>
-          <a href="./generators/generator4.html" class="buttonToGenerator">GENERATOR 4</a>
-          <a href="./generators/generator5.html" class="buttonToGenerator">GENERATOR 5</a>
-          <a href="./generators/generator6.html" class="buttonToGenerator">GENERATOR 6</a>
-          <a href="./generators/generator7.html" class="buttonToGenerator">GENERATOR 7</a>
-        </div>
-      </div>
-
-      <div class="quoteDiff">
-        <h2>
-          Unleash Your Creativity </br>
-          with Infinite Possibilities
-        </h2>
-      </div>
-
-      <div class="bottom">
-        <p>Explore covers</p>
-      </div>
-
-      <div class="container">
-        <!-- 1 -->
-        <div class="column">
-          <a href="./generators/generator1.html" class="card">
-            <img src="./images/ui/cards/placeholder1.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[1]</h3>
-            </div>
-          </a>
-          <a href="./generators/generator2.html" class="card">
-            <img src="./images/ui/cards/placeholder2.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[2]</h3>
-            </div>
-          </a>
-          <a href="./generators/generator3.html" class="card">
-            <img src="./images/ui/cards/placeholder3.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[3]</h3>
-            </div>
-          </a>
-        </div>
-
-        <!-- 2 -->
-        <div class="column"  style="margin-top: 100px;">
-          <a href="./generators/generator4.html" class="card">
-            <img src="./images/ui/cards/placeholder4.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[4]</h3>
-            </div>
-          </a>
-          <a href="./generators/generator5.html" class="card">
-            <img src="./images/ui/cards/placeholder5.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[5]</h3>
-            </div>
-          </a>
-          <a href="./generators/generator6.html" class="card">
-            <img src="./images/ui/cards/placeholder6.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[6]</h3>
-            </div>
-          </a>
-        </div>
-
-        <!-- 3 -->
-        <div class="column"  style="margin-top: 50px;">
-          <a href="./generators/generator1p2.html" class="card">
-            <img src="./images/ui/cards/placeholder1p2.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[1]</h3>
-            </div>
-          </a>
-          <a href="./generators/generator2p2.html" class="card">
-            <img src="./images/ui/cards/placeholder2p2.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[2]</h3>
-            </div>
-          </a>
-          <a href="./generators/generator4p2.html" class="card">
-            <img src="./images/ui/cards/placeholder4p2.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[4]</h3>
-            </div>
-          </a>
-        </div>
-
-        <!-- 4 -->
-        <div class="column"  style="margin-top: 200px;">
-          <a href="./generators/generator5p2.html" class="card">
-            <img src="./images/ui/cards/placeholder5p2.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[5]</h3>
-            </div>
-          </a>
-          <a href="./generators/generator6p2.html" class="card">
-            <img src="./images/ui/cards/placeholder6p2.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[6]</h3>
-            </div>
-          </a>
-          <a href="./generators/generator3.html" class="card">
-            <img src="./images/ui/cards/placeholder3.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[3]</h3>
-            </div>
-          </a>
-        </div>
-
-        <!-- 5 -->
-        <div class="column">
-          <a href="./generators/generator1.html" class="card">
-            <img src="./images/ui/cards/placeholder1.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[1]</h3>
-            </div>
-          </a>
-          <a href="./generators/generator2.html" class="card">
-            <img src="./images/ui/cards/placeholder2.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[2]</h3>
-            </div>
-          </a>
-          <a href="./generators/generator3.html" class="card">
-            <img src="./images/ui/cards/placeholder3.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[3]</h3>
-            </div>
-          </a>
-        </div>
-
-        <!-- 6 -->
-        <div class="column" style="margin-top: 50px;">
-          <a href="./generators/generator1p2.html" class="card">
-            <img src="./images/ui/cards/placeholder1p2.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[1]</h3>
-            </div>
-          </a>
-          <a href="./generators/generator2p2.html" class="card">
-            <img src="./images/ui/cards/placeholder2p2.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[2]</h3>
-            </div>
-          </a>
-          <a href="./generators/generator4p2.html" class="card">
-            <img src="./images/ui/cards/placeholder4p2.jpeg" alt="Card Image">
-            <div class="card-content">
-              <h3 class="card-title">GENERATOR_[4]</h3>
-            </div>
-          </a>
-        </div>
-
-      </div>
-
-      <div class="section">
-        <h2>
-          In a dialog with the computer</br>
-          generate endless artworks
-        </h2>
+    </div>
+    
+    <div class="section-generator" id="targetSection">
+      <div class="subsection-text" id="s3">
+        <h1>Try a generator right now</h1>
         <p>
-          Discover the power of generative coding and create stunning, one-of-a-kind cover art for your music.
-          Our platform offers
-          a myriad of possibilities to express your unique style.
-          Once you chose a generator, just click on randomize and let
-          the magic happen before your eyes. But you are also free
-          to tweak the parameters to your liking
+          We invite you to experience a teaser version of COVERSEA.
+          Dive in and test out our unique tool, though please note that not all features are available just yet. This is just a
+          glimpse of what's to come.
+          The full suite of capabilities will be unveiled at our grand launch, coming very soon. Stay tuned and follow us for
+          updates!
         </p>
       </div>
 
-      <div class="section">
-        <h2>
-          once you are satisfied </br>
-          with the design, </br>
-          download it freely!
-        </h2>
-        <p>
-          Each generator has been carefully crafted,
-          we garantie you that each time you'll press that generate button, the result will be of high quality, and if you like it
-          you can download the artwork freely
-        </p>
-      
+      <div class="teaserGenerator-margin">
+        <div class="teaserGeneratorContainer">
+          <div data-generator="teaserGenerator" id="reactComponentRoot"></div>
+        </div>
       </div>
 
     </div>
 
-  </body>
+    <div class="section-socials">
+      <div class="subsection-text" id="s4">
+        <p>
+          Many other features and generators will be accessible, follow us on social media to be the first to know about the
+          full
+          release!
+        </p>
+        <h1>
+          you have an idea for a cover design and want to take part in the project?
+          Don’t hesitate to contact us!
+        </h1>
+        <div class="socials-buttons">
+          <div class="button" id="socials">INST<img src="./images/ui/icons/ArrowBasicTopRight.svg" alt="Angle Down icon" class="icon">
+          </div>
+          <div class="button" id="socials">TELEGRAM<img src="./images/ui/icons/ArrowBasicTopRight.svg" alt="Angle Down icon"
+              class="icon"></div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="teaserFooter">
+    <div class="footer-column">
+      <div class="logo logo-footer"></div>
+      <p>By Marguerite Lorthiois</p>
+    </div>
+    <div class="footer-infos">
+      <p>math × code × art × design</p>
+      <p>HSE Art&Design School 2024</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('scrollButton').addEventListener('click', function () {
+      document.getElementById('targetSection').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+
 </html>

@@ -102,6 +102,11 @@ export default class GeneratorContainer extends Component {
     this.setState({})
   }
 
+  handleChangeNoiseTintColor = (object, value) => {
+    this.props.setBackgroundStore(object, value)
+    this.setState({})
+  }
+
 ////////////////////////////////////// MODULE BACKGROUND IMAGE
 
   // Tab -OK
@@ -144,16 +149,6 @@ export default class GeneratorContainer extends Component {
     //   }
     // )
   }
-
-  // handleMaxQuantityValue = (type) => {
-  //   this.props.setLinesStore('maxQuantity', type)
-  //   this.setState({})
-  // }
-
-  // handleQuantityValue = (type) => {
-  //   this.props.setLinesStore('sliderValueQuantity', type)
-  //   this.setState({})
-  // }
 
   handleDropDownLinesTypeClick = (type) => {
     this.props.setLinesStore('CurrentTypeChange', type)
@@ -309,7 +304,9 @@ export default class GeneratorContainer extends Component {
       setBackgroundStore,
       objects,
       shapes,
+      setShapesStore,
       particles,
+      setParticlesStore,
       backgroundImage,
       vinyl,
       setVinylStore,
@@ -343,6 +340,7 @@ export default class GeneratorContainer extends Component {
             handleChangeBackgroundAngleGradient={this.handleChangeBackgroundGradientAngle}
             handleChangeBackgroundGradientStopQuantity={this.handleChangeBackgroundGradientStopQuantity}
             handleTabClickNoise={this.handleTabClickNoise}
+            handleChangeNoiseTintColor={this.handleChangeNoiseTintColor}
             setBackgroundStore={setBackgroundStore}
             key={index}
           />
@@ -350,12 +348,14 @@ export default class GeneratorContainer extends Component {
       }
       if (moduleName == 'BackgroundImage') {
         modules.push(
-          <BackgroundImage
-            key={index}
-            handleRandomizeModule={this.handleRandomizeModule}
+          <O_Module
+            moduleType='BackgroundImage'
             backgroundImage={backgroundImage}
+            moduleName={backgroundImage.moduleName}
+            handleRandomizeModule={this.handleRandomizeModule}
             handleTabClickBackgroundImage={this.handleTabClickBackgroundImage}
             handleBackgroundImageOpacity={this.handleBackgroundImageOpacity}
+            key={index}
           />
         )
       }
@@ -363,11 +363,19 @@ export default class GeneratorContainer extends Component {
       // Graphics
       if (moduleName == 'Image') {
         modules.push(
-          <Image
-            key={index}
-            handleRandomizeModule={this.handleRandomizeModule}
+          //<Image
+          //  key={index}
+          //  handleRandomizeModule={this.handleRandomizeModule}
+          //  objects={objects}
+          //  handleTabClickObject={this.handleTabClickObject}
+          ///>
+          <O_Module
+            moduleType='Objects'
             objects={objects}
-            handleTabClickObject={this.handleTabClickObject}
+            moduleName={objects.moduleName}
+            handleRandomizeModule={this.handleRandomizeModule}
+            handleTabClickObjects={this.handleTabClickObjects}
+            key={index}
           />
         )
       }
@@ -381,8 +389,6 @@ export default class GeneratorContainer extends Component {
             handleLinesColor={this.handleLinesColor}
             handleLinesSize={this.handleLinesSize}
             handleLinesQuantity={this.handleLinesQuantity}
-            handleMaxQuantityValue={this.handleMaxQuantityValue}
-            handleQuantityValue={this.handleQuantityValue}
             handleDropDownLinesTypeClick={this.handleDropDownLinesTypeClick}
             setLinesStore={setLinesStore}
             key={index}
@@ -401,25 +407,31 @@ export default class GeneratorContainer extends Component {
       }
       if (moduleName == 'Particles') {
         modules.push(
-          <Particles
-            key={index}
-            handleRandomizeModule={this.handleRandomizeModule}
+          <O_Module
+            moduleType='Particles'
             particles={particles}
+            moduleName={particles.moduleName}
+            handleRandomizeModule={this.handleRandomizeModule}
+            setParticlesStore={setParticlesStore}
             handleDropDownClickParticles={this.handleDropDownClickParticles}
             handleParticlesQuantity={this.handleParticlesQuantity}
             handleParticlesColor={this.handleParticlesColor}
+            key={index}
           />
         )
       }
       if (moduleName == 'Shapes') {
         modules.push(
-          <Shapes
-            key={index}
-            handleRandomizeModule={this.handleRandomizeModule}
+          <O_Module
+            moduleType='Shapes'
             shapes={shapes}
+            moduleName={shapes.moduleName}
+            setShapesStore={setShapesStore}
+            handleRandomizeModule={this.handleRandomizeModule}
             handleDropDownClickShapes={this.handleDropDownClickShapes}
             handleShapesColor={this.handleShapesColor}
             handleShapesSize={this.handleShapesSize}
+            key={index}
           />
         )
       }
@@ -448,14 +460,9 @@ export default class GeneratorContainer extends Component {
             basictypo={basictypo}
             moduleName={basictypo.moduleName}
             setBasicTypoStore={setBasicTypoStore}
+            handleRandomizeModule={this.handleRandomizeModule}
             key={index}
           />
-          // <BasicTypo
-          //   key={index}
-          // // randomizeModuleStore={randomizeModuleStore}
-          //   basictypo={basictypo}
-          //   setBasicTypoStore={setBasicTypoStore}
-          // />
         )
       }
       if (moduleName == 'BasicTypoV2') {

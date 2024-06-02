@@ -9,6 +9,7 @@ import M_BasicTypoContent from '../molecules/moduleContent/M_BasicTypoContent.js
 import M_ParticlesContent from '../molecules/moduleContent/M_ParticlesContent.jsx'
 import M_BackgroundImageContent from '../molecules/moduleContent/M_BackgroundImageContent.jsx'
 import M_ShapesContent from '../molecules/moduleContent/M_ShapesContent.jsx'
+import M_ObjectsContent from '../molecules/moduleContent/M_ObjectsContent.jsx'
 
 export default class Module extends Component {
   constructor(props) {
@@ -67,7 +68,10 @@ export default class Module extends Component {
       setShapesStore,
       handleDropDownClickShapes,
       handleShapesColor,
-      handleShapesSize
+      handleShapesSize,
+      objects,
+      setImageStore,
+      handleTabClickObject
     } = this.props
 
     if (moduleType == 'Background') {
@@ -149,6 +153,15 @@ export default class Module extends Component {
           handleDropDownClickShapes={handleDropDownClickShapes}
           handleShapesColor={handleShapesColor}
           handleShapesSize={handleShapesSize}
+        />
+      )
+    }
+    if (moduleType == 'Objects') {
+      return (
+        <M_ObjectsContent
+          objects={objects}
+          setImageStore={setImageStore}
+          handleTabClickObject={handleTabClickObject}
         />
       )
     }

@@ -86,7 +86,7 @@ module.exports = {
       scriptLoading: 'blocking',
       template: './src/index.html',
       filename: './index.html',
-      chunks: ['index']
+      chunks: ['teasergenerator']
     }),
 
     // Internal pages
@@ -96,6 +96,14 @@ module.exports = {
       scriptLoading: 'blocking',
       template: './src/socials.html',
       filename: './socials.html',
+      chunks: ['index']
+    }),
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/landing.html',
+      filename: './landing.html',
       chunks: ['index']
     }),
     
@@ -108,13 +116,6 @@ module.exports = {
     }),
     
     // Teaser Page
-    new HtmlWebpackPlugin({
-      hash: true,
-      scriptLoading: 'blocking',
-      template: './src/generators/teaserpage.html',
-      filename: './generators/teaserpage.html',
-      chunks: ['teasergenerator']
-    }),
 
     // Generators
     new HtmlWebpackPlugin({
@@ -149,21 +150,21 @@ module.exports = {
     //  chunks: ['generator']
     //}),
 
-    //new HtmlWebpackPlugin({
-    //  hash: true,
-    //  scriptLoading: 'blocking',
-    //  template: './src/generators/generator3.html',
-    //  filename: './generators/generator3.html',
-    //  chunks: ['generator']
-    //}),
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator3.html',
+      filename: './generators/generator3.html',
+      chunks: ['generator']
+    }),
 
-    //new HtmlWebpackPlugin({
-    //  hash: true,
-    //  scriptLoading: 'blocking',
-    //  template: './src/generators/generator4.html',
-    //  filename: './generators/generator4.html',
-    //  chunks: ['generator']
-    //}),
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator4.html',
+      filename: './generators/generator4.html',
+      chunks: ['generator']
+    }),
 
     //new HtmlWebpackPlugin({
     //  hash: true,

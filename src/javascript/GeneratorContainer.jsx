@@ -124,7 +124,7 @@ export default class GeneratorContainer extends Component {
 ////////////////////////////////////// MODULE IMAGES (OBJECTS)
 
   // Tab -OK
-  handleTabClickObjects = (type) => {
+  handleTabClickObject = (type) => {
     this.props.setImageStore('CurrentTabChange', type)
     this.setState({})
   }
@@ -303,6 +303,7 @@ export default class GeneratorContainer extends Component {
       background,
       setBackgroundStore,
       objects,
+      setImageStore,
       shapes,
       setShapesStore,
       particles,
@@ -348,10 +349,6 @@ export default class GeneratorContainer extends Component {
       }
       if (moduleName == 'BackgroundImage') {
         modules.push(
-          //<BackgroundImage
-          //  handleTabClickBackgroundImage={this.handleTabClickBackgroundImage}
-          //  handleBackgroundImageOpacity={this.handleBackgroundImageOpacity}
-          ///>
           <O_Module
             moduleType='BackgroundImage'
             backgroundImage={backgroundImage}
@@ -367,11 +364,20 @@ export default class GeneratorContainer extends Component {
       // Graphics
       if (moduleName == 'Image') {
         modules.push(
-          <Image
-            key={index}
-            handleRandomizeModule={this.handleRandomizeModule}
+          //<Image
+          //  key={index}
+          //  handleRandomizeModule={this.handleRandomizeModule}
+          //  objects={objects}
+          //  handleTabClickObject={this.handleTabClickObject}
+          ///>
+          <O_Module
+            moduleType='Objects'
             objects={objects}
+            moduleName={objects.moduleName}
+            handleRandomizeModule={this.handleRandomizeModule}
             handleTabClickObject={this.handleTabClickObject}
+            setImageStore={setImageStore}
+            key={index}
           />
         )
       }

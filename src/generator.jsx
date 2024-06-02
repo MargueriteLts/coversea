@@ -40,7 +40,7 @@ import GeneratorContainer from './javascript/GeneratorContainer.jsx'
 
 import * as generator1 from './generators/generator1.js'
 import * as generator2 from './generators/generator2.js'
-//import * as generator3 from './generators/generator3.js'
+import * as generator3 from './generators/generator3.js'
 //import * as generator4 from './generators/generator4.js'
 //import * as generator5 from './generators/generator5.js'
 //import * as generator6 from './generators/generator6.js'
@@ -54,7 +54,7 @@ import * as generator2 from './generators/generator2.js'
 const generators = {
   generator1,
   generator2,
-  //generator3,
+  generator3,
   //generator4,
   //generator5,
   //generator6,

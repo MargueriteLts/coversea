@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-//import M_ModuleHeader from '../components/M_ModuleHeader.jsx'
-//import TabImageSet from '../components/TabImageSet.jsx'
+
 import M_Control from '../controls/M_Control.jsx'
 
 export default class BackgroundImage extends Component {

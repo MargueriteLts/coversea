@@ -1,37 +1,36 @@
-const modules = ['Background', 'Vinyl', 'Lines', 'BasicTypo']
+const modules = ['Background', 'Vinyl', 'Image', 'BasicTypo']
 
 const preset = {
   
   blend: {
-    Vinyl: false,
-    Text1: true
+    Vinyl: true,
+    Text1: false
   },
   
   Background: {
-    backgroundTypes: ['SolidColor', 'Gradient'],
-    currentBackgroundType: 'SolidColor',
+    backgroundTypes: ['SolidColor', 'Noise'],
+    currentBackgroundType: 'Noise',
 
     preset: {
       SolidColor: {
         color: '#000000'
       },
-      Gradient: {
-        gradientTypes: ['Linear', 'Radial'],
-        currentGradientType: 'Linear',
+      Noise: {
+        NoiseTypes: ['Small', 'Medium', 'Big'],
+        currentNoiseType: 'Small',
+        tintColor: '#ffffff',
+        tintColorLock: false,
         typeLocked: false,
 
-        stops: {
-          quantity: 2,
-          locked: false,
-          max: 12,
-          min: 0
-        },
-        color1: '#ff0000',
-        color2:'#00ff00'
+        preset: {
+          Small: {},
+          Medium: {},
+          Big: {}
+        }
       }
     }
   },
-
+  
   Vinyl: {
     size: 90,
     bigger: false,
@@ -49,35 +48,18 @@ const preset = {
     }
   },
 
-  Lines: {
-    linesTypes: ['Straight', 'Curves', 'Arcs', 'Bouncing'],
-    currentLineType: 'Bouncing',
+  Image: {
+    pixelate: false,
+    locked: false,
+    multiplication: false,
 
-    layout: 'Vertical',
+    collections: ['Shoes', 'Tools'],
+    currentCollection: 'Shoes',
 
     preset: {
-      Straight: {
-        quantity: 50,
-        max: 100
-      },
-      Curves: {
-        quantity: 10,
-        max: 10,
-        points: 10
-      },
-      Arcs: {
-        quantity: 10,
-        max: 10
-      },
-      Bouncing: {
-        quantity: 100,
-        max: 150
-      },
-    },
-    
-    strokeWeight: 2,
-    min: 1,
-    max: 100,
+      Shoes: {},
+      Tools: {}
+    }
   },
 
   BasicTypo: {

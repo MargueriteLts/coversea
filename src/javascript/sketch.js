@@ -167,6 +167,10 @@ function randomImages() {
     currentObject = objects.preset.Shoes.current
     imageObject = imagesObj[currentObject]
   }
+  if (objects.collections.includes('Tools') && objects.currentCollection == 'Tools') {
+    currentObject = objects.preset.Tools.current
+    imageObject = imagesObj[currentObject]
+  }
 
   let scaleFactor = (canvasSize-200) / Math.max(imageObject.width, imageObject.height)
 
@@ -964,42 +968,52 @@ function drawModules(p) {
   /////////////////////////////////////////// MODULE IMAGE
 
   if (moduleList.includes('Image')) {
-    // p.noTint()
-    // // const { current } = getImageStore()
-    // // const image = imagesObj[current]
+    p.noTint()
+    // const { current } = getImageStore()
+    // const image = imagesObj[current]
 
-    // const objects = getImageStore()
+    const objects = getImageStore()
 
-    // let currentObject
-    // let imageObject
+    if  (objects.multiplication) {
+      p.image(imageBuffer, 0, 0)
+    } else {
+      let currentObject
+      let imageObject
+  
+      if (objects.collections.includes('Shoes') && objects.currentCollection == 'Shoes') {
+        currentObject = objects.preset.Shoes.current
+        imageObject = imagesObj[currentObject]
+      }
+      if (objects.collections.includes('Tools') && objects.currentCollection == 'Tools') {
+        currentObject = objects.preset.Tools.current
+        imageObject = imagesObj[currentObject]
+      }
+  
+      //let scaleFactor = (canvasSize-200) / Math.max(imageObject.width, imageObject.height)
+  
+      //let scaledWidth = imageObject.width * scaleFactor
+      //let scaledHeight = imageObject.height * scaleFactor
+  
+      //let imgWidth = scaledWidth;
+      //let imgHeight = scaledHeight;
+      //let xMax = canvasSize-scaledWidth
+      p.image(imageObject, 0, 0, canvasSize, canvasSize);
 
-    // if (objects.collections.includes('Shoes') && objects.currentCollection == 'Shoes') {
-    //   currentObject = objects.preset.Shoes.current
-    //   imageObject = imagesObj[currentObject]
-    // }
+      //// console.log(xMax);
+      //for (let x = 0; x < xMax; x += 10) {
+      //  // Calculate the y position using a sine wave
+      //  let y = canvasSize / 2 + amplitude * p.sin(x * frequency);
+      //  y = Math.max(imgHeight / 2, Math.min(y, canvasSize - imgHeight / 2));
+      //  // console.log(y);
+      //  // Draw the image at the calculated position
+      //  // p.tint('red')
+      //  // p.imageMode(p.CORNER)
+      //  p.image(imageObject, x, y - imgHeight / 2, scaledWidth, scaledHeight);
+      //  // p.image(imageObject, x, y, scaledWidth, scaledHeight);
+      //}
+    }
 
-    // let scaleFactor = (canvasSize-200) / Math.max(imageObject.width, imageObject.height)
 
-    // let scaledWidth = imageObject.width * scaleFactor
-    // let scaledHeight = imageObject.height * scaleFactor
-
-    // let imgWidth = scaledWidth;
-    // let imgHeight = scaledHeight;
-    // let xMax = canvasSize-scaledWidth
-    // // console.log(xMax);
-    // for (let x = 0; x < xMax; x += 10) {
-    //   // Calculate the y position using a sine wave
-    //   let y = canvasSize / 2 + amplitude * p.sin(x * frequency);
-    //   y = Math.max(imgHeight / 2, Math.min(y, canvasSize - imgHeight / 2));
-    //   // console.log(y);
-    //   // Draw the image at the calculated position
-    //   // p.tint('red')
-    //   // p.imageMode(p.CORNER)
-    //   p.image(imageObject, x, y - imgHeight / 2, scaledWidth, scaledHeight);
-    //   // p.image(imageObject, x, y, scaledWidth, scaledHeight);
-    // }
-
-    p.image(imageBuffer, 0, 0)
 
   }
 
@@ -1365,6 +1379,15 @@ function sketch(p) {
 
       if (objects.collections.includes('Shoes')) {
         const imageFiles = objects.preset.Shoes.images
+
+        Object.keys(imageFiles).forEach((key) => {
+          imagesObj = Object.assign({}, imagesObj, {
+            [`${key}`]: p.loadImage(imageFiles[key])
+          })
+        })
+      }
+      if (objects.collections.includes('Tools')) {
+        const imageFiles = objects.preset.Tools.images
 
         Object.keys(imageFiles).forEach((key) => {
           imagesObj = Object.assign({}, imagesObj, {
