@@ -90,30 +90,39 @@ export default class M_TextSettingsDropDown extends Component {
       { this.state.displayContent
       
         ? <div style={ styles.popover } className='dropDownPopover'>
-          <ColorPicker
-            // alpha={false}
-            object={object}
-            color={color}
-            handleChange={handleChange}
-            key='ColorPicker'
-          />
-          <M_Select
-            options={fontOptions}
-            value={currentFont}
-            handleClick={handleDropDownClick}
-          />
-          {/* <M_Select
-            options={typo.styles}
-            value={this.state.styleMainText}
-            handleClick={handleDropDownStyles}
-          /> */}
-          <Slider
-            title='Size'
-            min={minSize}
-            max={maxSize}
-            value={size}
-            handleChange={handleTextSize}
-          />
+          {/* SHOULD BE COMPONENTS ATOMS */}
+          <div className='dropDown-item'>
+            <ColorPicker
+              // alpha={false}
+              object={object}
+              color={color}
+              handleChange={handleChange}
+              key='ColorPicker'
+            />
+          </div>
+          <div className='dropDown-item'>
+            <M_Select
+              options={fontOptions}
+              value={currentFont}
+              handleClick={handleDropDownClick}
+            />
+          </div>
+          <div className='dropDown-item'>
+            <Slider
+              title='Size'
+              min={minSize}
+              max={maxSize}
+              value={size}
+              handleChange={handleTextSize}
+            />
+          </div>
+          {/*<div className='dropDown-item'>
+            <M_Select
+              options={typo.styles}
+              value={this.state.styleMainText}
+              handleClick={handleDropDownStyles}
+            />  
+          </div>*/}
         </div>
 
         : null

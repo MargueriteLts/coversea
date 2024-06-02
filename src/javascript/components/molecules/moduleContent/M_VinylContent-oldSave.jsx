@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import M_Control from '../controls/M_Control.jsx'
-import M_TabSetWithSubControl from '../controls/M_TabSetWithSubControl.jsx'
+import M_ControlWithSubControl from '../controls/M_TabSetWithSubControl.jsx'
 
 export default class M_VinylContent extends Component {
   constructor(props) {
@@ -59,28 +59,35 @@ export default class M_VinylContent extends Component {
 
     return <div className="M_VinylContent">
       <div className='content_row'>
-        <M_TabSetWithSubControl
-          //subControl
-          subControlType='ColorPicker'
+        <M_Control
           hasTitle={true}
-          subControlTitle='Tint color'
-          isSubControlLocked={this.state.tintColorLock}
+          title='Vinyl Disc'
+        //lock
+          isLocked={this.state.tabsLock}
           setStore={setVinylStore}
-          itemSubControl='lockTintColor'
+          item='lockTabs'
           handleToggle={this.handleToggle}
+        //data
+          data={vinyl.currentVinylType}
+          options = {vinyl.preset}
+          handleChange = {handleTabClickVinyl}
+          images={vinyl.tabBackgrounds}
+        />
+        <M_Control
+          orientation="row"
+          controlType='ColorPicker'
+          hasTitle={true}
+          title='Tint color'
+
+          isLocked={this.state.tintColorLock}
+          setStore={setVinylStore}
+          item='lockTintColor'
+          handleToggle={this.handleToggle}
+
           data={vinyl.tintColor}
           object='TintColor'
-          handleChangeControl={handleChangeVinylTintColor}
+          handleChange={handleChangeVinylTintColor}
           type='AllColorPicker'
-
-          //mainControl
-          mainTitle='Vinyl Disc'
-          isLocked={this.state.tabsLock}
-          item='lockTabs'
-          options = {vinyl.preset}
-          value={vinyl.currentVinylType}
-          handleTabChange={handleTabClickVinyl}
-          images={vinyl.tabBackgrounds}
         />
 
       </div>

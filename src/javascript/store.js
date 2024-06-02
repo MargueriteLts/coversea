@@ -615,9 +615,6 @@ function setLinesStore(type, value) {
       moduleLinesStore.color = value
       resolve([value])
     }
-    if (type === 'randomize') {
-      moduleLinesStore.lines = generateLines(50)
-    }
     if (type === 'strokeWeight') {
       moduleLinesStore.strokeWeight = value
     }
@@ -1116,40 +1113,40 @@ function generateAllStore(generatorName, moduleList) {
 
     moduleList.forEach(moduleName => {
 
-      // if (moduleName == 'Background') {
+       if (moduleName == 'Background') {
         
-      //   if (moduleBackgroundStore.currentBackgroundType == 'SolidColor' && moduleBackgroundStore.preset.SolidColor.locked == false) {
-      //     let newSolidColor=generateColor()
-      //     setBackgroundStore('SolidColor', newSolidColor)
+         if (moduleBackgroundStore.currentBackgroundType == 'SolidColor' && moduleBackgroundStore.preset.SolidColor.locked == false) {
+           let newSolidColor=generateColor()
+           setBackgroundStore('SolidColor', newSolidColor)
 
-      //     data.push({newSolidColor})
-      //   }
+           data.push({newSolidColor})
+         }
 
-      //   if (moduleBackgroundStore.currentBackgroundType == 'Gradient' && moduleBackgroundStore.preset.Gradient.locked == false) {
-      //     let newGradientColor1, newGradientColor2
-      //     setBackgroundStore('Gradient')
-      //       .then((colors) => {
-      //         newGradientColor1 = colors[0]
-      //         newGradientColor2 = colors[1]
-      //         data.push({newGradientColor1, newGradientColor2})
-      //       })
+         if (moduleBackgroundStore.currentBackgroundType == 'Gradient' && moduleBackgroundStore.preset.Gradient.locked == false) {
+           let newGradientColor1, newGradientColor2
+           setBackgroundStore('Gradient')
+             .then((colors) => {
+               newGradientColor1 = colors[0]
+               newGradientColor2 = colors[1]
+               data.push({newGradientColor1, newGradientColor2})
+             })
             
-      //       let newAngle
-      //       setBackgroundStore('AngleGradient')
-      //         .then((randomAngle) => {
-      //           newAngle = randomAngle
-      //           data.push({newAngle})
-      //         })
-      //   }
+             let newAngle
+             setBackgroundStore('AngleGradient')
+               .then((randomAngle) => {
+                 newAngle = randomAngle
+                 data.push({newAngle})
+               })
+         }
 
-      //   if (moduleBackgroundStore.currentBackgroundType == 'Noise' && moduleBackgroundStore.preset.Noise.locked == false) {
-      //     window.resetNoise()
-      //   }
+         if (moduleBackgroundStore.currentBackgroundType == 'Noise' && moduleBackgroundStore.preset.Noise.locked == false) {
+           window.resetNoise()
+         }
 
-      //   if (moduleBackgroundStore.currentBackgroundType == 'Pixels' && moduleBackgroundStore.preset.Pixels.locked == false) {
-      //     window.resetPixels()
-      //   }
-      // }
+         if (moduleBackgroundStore.currentBackgroundType == 'Pixels' && moduleBackgroundStore.preset.Pixels.locked == false) {
+           window.resetPixels()
+         }
+       }
 
       if (moduleName == 'Shapes') {
 
@@ -1196,16 +1193,36 @@ function generateAllStore(generatorName, moduleList) {
         data.push({bgImgOpacity})
       }
 
-      // if (moduleName == 'Vinyl') {
+       if (moduleName == 'Vinyl') {
 
-      //   let newVinylSize = getRandomArbitrary(0, 100)
-      //   setVinylStore('size', newVinylSize)
-
-      //   let newVinylOpacity = getRandomArbitrary(0, 255)
-      //   setVinylStore('opacity', newVinylOpacity)
-
-      //   data.push({newVinylSize, newVinylOpacity})
-      // }
+        //if (moduleVinylStore.locked == false ){
+        //  let Vinyltype = sample(moduleVinylStore.vinylTypes)
+        //  setVinylStore('CurrentTabChange', Vinyltype)
+        //}
+        //if (moduleVinylStore.sizeLock == false) {
+        //  setVinylStore('size', getRandomArbitrary(0, 100))
+        //}
+        //if (moduleVinylStore.opacityLock == false ){
+        //  setVinylStore('opacity', getRandomArbitrary(0, 255))
+        //}
+        //if (moduleVinylStore.tintColorLock == false ){
+        //  let newColor = generateColor()
+        //  moduleVinylStore.tintColor = newColor
+        //}
+  
+        if (moduleVinylStore.currentVinylType == 'Whole') {
+          let newImage = sample(Object.keys(moduleVinylStore.preset.Whole.images))
+          moduleVinylStore.preset.Whole.current = newImage
+        }
+        if (moduleVinylStore.currentVinylType == 'Label') {
+          let newImage = sample(Object.keys(moduleVinylStore.preset.Label.images))
+          moduleVinylStore.preset.Label.current = newImage
+        }
+        if (moduleVinylStore.currentVinylType == 'Vinyl') {
+          let newImage = sample(Object.keys(moduleVinylStore.preset.Vinyl.images))
+          moduleVinylStore.preset.Vinyl.current = newImage
+        }
+       }
 
       if (moduleName == 'BasicTypo') {
         setBasicTypoStore('Positions')
@@ -1213,16 +1230,22 @@ function generateAllStore(generatorName, moduleList) {
       }
 
       if (moduleName == 'Lines') {
+        
+        if (moduleLinesStore.currentLineType == 'Straight') {
+          moduleLinesStore.preset.Straight.straightLines = generateLines(moduleLinesStore.preset.Straight.quantity, moduleLinesStore.layout)
+        }
+        if (moduleLinesStore.currentLineType == 'Curves') {
+          moduleLinesStore.preset.Curves.pointsSets= generateMultiplePointSets(moduleLinesStore.preset.Curves.quantity, moduleLinesStore.preset.Curves.points)
+        }
+        if (moduleLinesStore.currentLineType == 'Arcs') {
+          moduleLinesStore.preset.Arcs.arcs = generateArcs(moduleLinesStore.preset.Arcs.quantity, moduleLinesStore.layout)
+        }
+        if (moduleLinesStore.currentLineType == 'Bouncing') {
+          moduleLinesStore.preset.Bouncing.bouncingRandom = bouncingRandom()
+          moduleLinesStore.preset.Bouncing.bouncingRange = bouncingRange(2)
+        }
 
-        // let newColor = generateColor()
-        // setLinesStore('SolidColor', newColor)
 
-        setLinesStore('randomize')
-
-        // let newStrokeWeight = getRandomArbitrary(moduleLinesStore.min, moduleLinesStore.max)
-        // setLinesStore('strokeWeight', newStrokeWeight)
-
-        // data.push({newColor, newStrokeWeight})
       }
 
       if (moduleName == 'Module3D') {

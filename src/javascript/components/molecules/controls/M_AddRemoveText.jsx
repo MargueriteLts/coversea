@@ -60,7 +60,7 @@ export default class M_AddRemoveText extends PureComponent {
       <div className='inputStack'>
 
         {this.state.textAreas.map((textArea, index) => (
-          <div key={index} className='flexRow align-bottom'>
+          <div key={index} className='removableInput'>
             <TextArea
               className='textarea'
               rows={3}

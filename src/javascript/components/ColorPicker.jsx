@@ -81,7 +81,7 @@ export default class AllColorPicker extends Component {
         },
         popover: {
           position: 'absolute',
-          zIndex: '2'
+          zIndex: '10'
         }
       },
     });

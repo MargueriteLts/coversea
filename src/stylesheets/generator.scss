@@ -114,6 +114,10 @@ body.generator {
           width: 100%;
           padding: 16px;
           border-top: 1px solid #383838;
+
+          .sketch-picker {
+            background-color: var( --BACKGROUND-BTN-SECONDARY);
+          }
   
           .content_row {
             width: 100%;
@@ -128,6 +132,7 @@ body.generator {
   
           .M_Control {
             display: flex;
+            min-height: 40px;
             
             &.row {
               flex-direction: row;
@@ -162,6 +167,31 @@ body.generator {
               flex-direction: row;
               column-gap: 8px;
               align-items: center;
+            }
+          }
+
+          .M_TabsWithSubControl {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+
+            .topControls {
+              display: flex;
+              flex-direction: row;
+              width: 100%;
+              //justify-content: space-between;
+              gap: 20px;
+
+              .control_Title {
+                display: flex;
+                flex-direction: row;
+              }
+
+              .M_Control {
+                width: 50%;
+
+              }
             }
           }
   
@@ -326,6 +356,7 @@ body.generator {
               line-height: 16px;
               letter-spacing: -0.8px;
               height: 40px;
+              min-width: 60px;
             }
   
             .module__basictypo-maintext-controls {
@@ -348,6 +379,13 @@ body.generator {
             flex-direction: column;
             row-gap: 8px;
             flex: 1 0 0;
+
+            .removableInput {
+              display: flex;
+              flex-direction: row;
+              align-items: flex-end;
+              gap: 12px;
+            }
           }
         }
       }
