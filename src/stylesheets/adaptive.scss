@@ -41,6 +41,7 @@
     
     padding: 14px;
     width: 100%;
+    min-width: 390px;
   }
 
   .section-subtitle {
@@ -341,8 +342,8 @@
   
   .section-presentation {
     margin-top: 440px;
-    flex-direction: row;
-    gap: 44px;
+    flex-direction: column;
+    gap: 330px;
   }
 
   .generatorImage-mobile, .modulesImage-mobile {
@@ -353,36 +354,46 @@
     display: block;
   }
 
+  .modulesImage {
+    position: absolute;
+    height: 430px;
+    top: -250%;
+    width: 600px;
+    right: -5%;
+  }
+
+  .generatorImage {
+    position: absolute;
+    height: 304px;
+    left: -35%;
+    top: 280%;
+  }
+
 
   .subsection {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
 
-    #st1 {
-      // margin-bottom: 50px;
-  
+    #st1 {  
       p {
         width: 360px;
       }
     }
     #st2 {
-      // position: absolute;
       position: relative;
       left: calc(50% + 44px);
-      top: 24px;
-      // bottom: 86px;
-      bottom: 40%;
+      bottom: 0;
 
       p {
         width: 287px;
       }
     }
+  }
 
-    #s2 {
-      top: -30px;
-    }
+  #s3 {
+    margin-top: 200px;
   }
   
   .generator__modules-container {
@@ -798,6 +809,14 @@
   //     width: 360px;
   //   }
   // }
+
+  .generatorImage-img {
+    display: none;
+  }
+
+  .modulesImage-img {
+    display: none;
+  }
 }
 
 
@@ -829,9 +848,146 @@
     height: 100vw;
   }
 
+  //.section-presentation {
+  //  margin-top: 50%;
+  //}
+
+  //.section-presentation {
+  //  position: relative;
+  //   margin-top: 50%;
+
+  //  display: flex;
+  //  width: 100%;
+  //  flex-direction: row;
+  //  gap: 44px;
+
+  //  .subsection {
+  //     position: relative;
+  //     display: flex;
+  //     flex-direction: column;
+  //     width: 50%;
+
+  //    #st1 {
+  //      position: relative;
+  //      width: fit-content;
+  //      left: 0;
+  //      top: 0;
+  //       margin-bottom: 150px;
+    
+  //       p {
+  //         width: 408px;
+  //       }
+  //    }
+
+  //    #st2 {
+  //      position: absolute;
+  //      left: calc(50% + 44px);
+  //      left: 0;
+  //      top: 380px;
+  //      bottom: 86px;
+  //      bottom: 40%;
+
+  //      p {
+  //        width: 394px;
+  //      }
+  //    }
+  //  }
+
+  //  #s1 {
+  //    gap:64px;
+  //  }
+  //  #s2 {
+  //    top: -30px;
+  //  }
+  //}
+
+  //.section-presentation {
+  //  .subsection {
+  //    #st1 { 
+  //      p {
+  //        width: 410px;
+  //      }
+  //    }
+  //    #st2 { 
+  //      p {
+  //        width: 356px;
+  //      }
+  //    }
+  //  }
+  //}
+
   .section-presentation {
+    position: relative;
     margin-top: 50%;
+
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    gap: 44px;
+
+    .subsection {
+       position: relative;
+       display: flex;
+       flex-direction: column;
+       width: 50%;
+
+      #st1 {
+        position: relative;
+        width: fit-content;
+        left: 0;
+        top: 0;
+         margin-bottom: 150px;
+    
+         p {
+           width: 410px;
+         }
+      }
+
+      .generatorImage, .modulesImage {
+        display: none;
+      }
+
+      .generatorImage-img {
+        display: block;
+        position: relative;
+        height: auto;
+        object-fit: cover;
+        width: 110%;
+        left: -20%;
+      }
+
+      .modulesImage-img {
+        display: block;
+        position: relative;
+        height: auto;
+        object-fit: cover;
+        width: 150%;
+      }
+
+      #st2 {
+        position: absolute;
+        left: calc(50% + 44px);
+        left: 0;
+        //top: 380px;
+        top: 70%;
+        bottom: 86px;
+        bottom: 40%;
+
+        p {
+          width: 394px;
+        }
+      }
+    }
+
+    #s1 {
+      gap:64px;
+    }
+    #s2 {
+      top: -30px;
+    }
   }
+
+
 
   .teaserFooter {
     padding: 36px;
@@ -1223,5 +1379,38 @@
       }
     }
 
+  }
+}
+
+@media screen and (min-width: 1708px)  {
+  //.teaserContent {
+  //  //overflow-x: visible;
+  //}
+  .teaserContent {
+    padding: 10%;
+  }
+
+  .section-presentation {
+    margin-top: 800px;
+
+    .subsection {
+      .generatorImage-img {
+        object-fit: contain;
+        object-position: center;
+        height: 565px;
+        //width: 950px;
+        width: 130%;
+        left: -30%;
+        //right: 0;
+      }
+      
+      .modulesImage-img {
+        object-fit: contain;
+        object-position: top;
+        width: 968px;
+        height: 648px;
+        right: 20%;
+      }
+    }
   }
 }

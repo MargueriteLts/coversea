@@ -209,52 +209,27 @@ body.teaserGenerator {
         width: fit-content;
         left: 0;
         top: 0;
-        // margin-bottom: 150px;
-    
-        // p {
-        //   width: 408px;
-        // }
-      }
-
-      .generatorImage {
-        position: relative;
-        height: auto;
-        object-fit: cover;
       }
 
       .modulesImage {
-        position: relative;
-        height: auto;
-        object-fit: cover;
+        z-index: -1;
+        background-image: url('./images/ui/modulesExamples-3.png');
+        background-size: cover;
+        background-position: top left;
+        background-repeat: no-repeat;
       }
-
-      #st2 {
-        // position: absolute;
-        // left: calc(50% + 44px);
-        left: 0;
-        // top: 380px;
-        // bottom: 86px;
-        // bottom: 40%;
-
-        // p {
-        //   width: 394px;
-        // }
+      
+      .generatorImage {
+        z-index: -1;
+        background-image: url('./images/ui/generatorExample-TOCHANGE.png');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        //height: auer;
+        width: 100vw;
       }
     }
-
-    #s1 {
-      gap:64px;
-    }
-    // #s2 {
-    //   // top: -30px; commented for adaptive mobile
-    // }
   }
-
-
-
-  // .description-mobile {
-  //   display: none;
-  // }
 
   .section-generator {
     display: flex;
