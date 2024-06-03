@@ -10,6 +10,8 @@ import M_ParticlesContent from '../molecules/moduleContent/M_ParticlesContent.js
 import M_BackgroundImageContent from '../molecules/moduleContent/M_BackgroundImageContent.jsx'
 import M_ShapesContent from '../molecules/moduleContent/M_ShapesContent.jsx'
 import M_ObjectsContent from '../molecules/moduleContent/M_ObjectsContent.jsx'
+import M_3DContent from '../molecules/moduleContent/M_3DContent.jsx'
+import M_OverlayContent from '../molecules/moduleContent/M_OverlayContent.jsx'
 
 export default class Module extends Component {
   constructor(props) {
@@ -71,7 +73,16 @@ export default class Module extends Component {
       handleShapesSize,
       objects,
       setImageStore,
-      handleTabClickObject
+      handleTabClickObject,
+      module3D,
+      handleDropDownClickModule3D,
+      set3DStore,
+      handle3DColor,
+      handle3DSize,
+      overlay,
+      handleTabClickOverlay,
+      handleOverlayOpacity,
+      setOverlayStore
     } = this.props
 
     if (moduleType == 'Background') {
@@ -162,6 +173,28 @@ export default class Module extends Component {
           objects={objects}
           setImageStore={setImageStore}
           handleTabClickObject={handleTabClickObject}
+        />
+      )
+    }
+    if (moduleType == 'Module3D') {
+      return (
+        <M_3DContent
+          module3D={module3D}
+          //setImageStore={setImageStore}
+          handleDropDownClickModule3D={handleDropDownClickModule3D}
+          handle3DSize={handle3DSize}
+          set3DStore={set3DStore}
+          handle3DColor={handle3DColor}
+        />
+      )
+    }
+    if (moduleType == 'Overlay') {
+      return (
+        <M_OverlayContent
+          overlay={overlay}
+          setOverlayStore={setOverlayStore}
+          handleTabClickOverlay={handleTabClickOverlay}
+          handleOverlayOpacity={handleOverlayOpacity}
         />
       )
     }

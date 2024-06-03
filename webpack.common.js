@@ -126,13 +126,21 @@ module.exports = {
       chunks: ['generator']
     }),
 
-    //new HtmlWebpackPlugin({
-    //  hash: true,
-    //  scriptLoading: 'blocking',
-    //  template: './src/generators/generator1p2.html',
-    //  filename: './generators/generator1p2.html',
-    //  chunks: ['generator']
-    //}),
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator1_2.html',
+      filename: './generators/generator1_2.html',
+      chunks: ['generator']
+    }),
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator1_3.html',
+      filename: './generators/generator1_3.html',
+      chunks: ['generator']
+    }),
 
     new HtmlWebpackPlugin({
       hash: true,
@@ -174,13 +182,13 @@ module.exports = {
     //  chunks: ['generator']
     //}),
 
-    //new HtmlWebpackPlugin({
-    //  hash: true,
-    //  scriptLoading: 'blocking',
-    //  template: './src/generators/generator5.html',
-    //  filename: './generators/generator5.html',
-    //  chunks: ['generator']
-    //}),
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator5.html',
+      filename: './generators/generator5.html',
+      chunks: ['generator']
+    }),
 
     //new HtmlWebpackPlugin({
     //  hash: true,
@@ -190,13 +198,13 @@ module.exports = {
     //  chunks: ['generator']
     //}),
 
-    //new HtmlWebpackPlugin({
-    //  hash: true,
-    //  scriptLoading: 'blocking',
-    //  template: './src/generators/generator6.html',
-    //  filename: './generators/generator6.html',
-    //  chunks: ['generator']
-    //}),
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator6.html',
+      filename: './generators/generator6.html',
+      chunks: ['generator']
+    }),
 
     //new HtmlWebpackPlugin({
     //  hash: true,
@@ -206,13 +214,45 @@ module.exports = {
     //  chunks: ['generator']
     //}),
 
-    //new HtmlWebpackPlugin({
-    //  hash: true,
-    //  scriptLoading: 'blocking',
-    //  template: './src/generators/generator7.html',
-    //  filename: './generators/generator7.html',
-    //  chunks: ['generator']
-    //}),
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator7.html',
+      filename: './generators/generator7.html',
+      chunks: ['generator']
+    }),
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator8.html',
+      filename: './generators/generator8.html',
+      chunks: ['generator']
+    }),
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator9.html',
+      filename: './generators/generator9.html',
+      chunks: ['generator']
+    }),
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator9_2.html',
+      filename: './generators/generator9_2.html',
+      chunks: ['generator']
+    }),
+
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/generators/generator10.html',
+      filename: './generators/generator10.html',
+      chunks: ['generator']
+    }),
 
     // Partials
     new HtmlWebpackPartialsPlugin([

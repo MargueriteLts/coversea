@@ -10,6 +10,7 @@ import A_Text from './components/ATOMS/A_Text.jsx'
 
 ///////////////MODULES
 import O_Module from './components/organisms/O_Module.jsx'
+import { set3DStore } from './store.js';
 
 // //Background
 // // import Background from './modules/Background.jsx'
@@ -160,6 +161,16 @@ export default class GeneratorContainer extends Component {
   // DropDown -OK
   handleDropDownClickModule3D = (type) => {
     this.props.set3DStore('CurrentTabChange', type)
+    this.setState({})
+  }
+
+  handle3DColor = (object, value) => {
+    this.props.set3DStore(object, value)
+    this.setState({})
+  }
+
+  handle3DSize = (e) => {
+    this.props.set3DStore('Size', e.target.value)
     this.setState({})
   }
 
@@ -314,11 +325,13 @@ export default class GeneratorContainer extends Component {
       lines,
       setLinesStore,
       module3D,
+      set3DStore,
       basictypo,
       basictypoV2,
       setBasicTypoV2Store,
       setBasicTypoStore,
-      overlay
+      overlay,
+      setOverlayStore
       // setCanvasSizeStore
     } = this.props
 
@@ -399,11 +412,16 @@ export default class GeneratorContainer extends Component {
       }
       if (moduleName == 'Module3D') {
         modules.push(
-          <Module3D
-            key={index}
-            handleRandomizeModule={this.handleRandomizeModule}
+          <O_Module
+            moduleType='Module3D'
             module3D={module3D}
+            moduleName={module3D.moduleName}
+            set3DStore={set3DStore}
+            handleRandomizeModule={this.handleRandomizeModule}
             handleDropDownClickModule3D={this.handleDropDownClickModule3D}
+            handle3DSize={this.handle3DSize}
+            handle3DColor={this.handle3DColor}
+            key={index}
           />
         )
       }
@@ -481,12 +499,15 @@ export default class GeneratorContainer extends Component {
       // Overlay
       if (moduleName == 'Overlay') {
         modules.push(
-          <Overlay
-            key={index}
-            handleRandomizeModule={this.handleRandomizeModule}
+          <O_Module
+            moduleType='Overlay'
             overlay={overlay}
+            moduleName={overlay.moduleName}
+            handleRandomizeModule={this.handleRandomizeModule}
             handleTabClickOverlay={this.handleTabClickOverlay}
             handleOverlayOpacity={this.handleOverlayOpacity}
+            setOverlayStore={setOverlayStore}
+            key={index}
           />
         )
       }

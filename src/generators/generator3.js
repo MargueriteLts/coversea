@@ -1,4 +1,4 @@
-const modules = ['Background', 'Vinyl', 'Image', 'BasicTypo']
+const modules = ['Background', 'Vinyl', 'Lines', 'BasicTypo']
 
 const preset = {
   
@@ -8,8 +8,8 @@ const preset = {
   },
   
   Background: {
-    backgroundTypes: ['SolidColor', 'Noise'],
-    currentBackgroundType: 'Noise',
+    backgroundTypes: ['SolidColor', 'Pixels'],
+    currentBackgroundType: 'Pixels',
 
     preset: {
       SolidColor: {
@@ -32,7 +32,7 @@ const preset = {
   },
   
   Vinyl: {
-    size: 90,
+    size: 30,
     bigger: false,
     opacity: 200,
     tintColor: '#ffffff',
@@ -48,18 +48,36 @@ const preset = {
     }
   },
 
-  Image: {
-    pixelate: false,
-    locked: false,
-    multiplication: false,
+  Lines: {
+    linesTypes: ['Straight', 'Curves', 'Bouncing'],
+    currentLineType: 'Straight',
 
-    collections: ['Shoes', 'Tools'],
-    currentCollection: 'Shoes',
+    layout: 'Bazar',
+    color: '#FFFFFF',
 
     preset: {
-      Shoes: {},
-      Tools: {}
-    }
+      Straight: {
+        quantity: 50,
+        max: 100
+      },
+      Curves: {
+        quantity: 10,
+        max: 10,
+        points: 10
+      },
+      Arcs: {
+        quantity: 10,
+        max: 10
+      },
+      Bouncing: {
+        quantity: 100,
+        max: 150
+      },
+    },
+    
+    strokeWeight: 10,
+    min: 1,
+    max: 100,
   },
 
   BasicTypo: {
@@ -70,7 +88,7 @@ const preset = {
 
     mainText: {
       value: 'Name of your track or album',
-      color: '#ffffff',
+      color: '#000000',
       fontOptions: ['Sans Serif', 'Script', 'Special'],
       currentFont: 'Script',
       size:{
@@ -82,8 +100,8 @@ const preset = {
     },
 
     otherText: {
-      values: ['Music is the answer to everything, music is the key to the world'],
-      color: '#ffffff',
+      values: ['Music is the answer', 'to everything', 'music is the key', 'to the world', 'just dance', 'and listen'],
+      color: '#000000',
       fontOptions: ['Sans Serif', 'Script', 'Special'],
       currentFont: 'Sans Serif',
       size:{

@@ -33,12 +33,12 @@ const preset = {
   },
 
   BackgroundImage: {
-    opacity: 200,
+    opacity: 100,
     locked: false,
     opacityLock: false,
 
     backgroundImageCollections: ['NightClub', 'Cars'],
-    currentBackgroundImageCollection: 'NightClub',
+    currentBackgroundImageCollection: 'Cars',
 
     preset: {
       NightClub: {},
@@ -48,11 +48,12 @@ const preset = {
 
   Shapes: {
     types: ['Ellipses', 'Coversea'],
-    currentType: 'Coversea',
+    currentType: 'Ellipses',
     blend: true,
-
+    
     settings: {
-      sliderValue: 37,
+      color: '#ffffff',
+      sliderValue: 7,
       gradient: false,
       colorLocked: false,
       sizeLocked: false
@@ -67,11 +68,11 @@ const preset = {
 
     mainText: {
       value: 'Name of your track or album',
-      color: '#ffffff',
+      color: '#000000',
       fontOptions: ['Sans Serif', 'Script', 'Special'],
       currentFont: 'Script',
       size:{
-        sliderValue: 10,
+        sliderValue: 19,
         min: 5,
         max: 20
       },
@@ -79,12 +80,12 @@ const preset = {
     },
 
     otherText: {
-      values: ['Music is the answer to everything, music is the key to the world'],
+      values: ['Music is the answer', 'to everything', 'music is the key', 'to the world', 'just dance', 'and listen'],
       color: '#ffffff',
       fontOptions: ['Sans Serif', 'Script', 'Special'],
       currentFont: 'Sans Serif',
       size:{
-        sliderValue: 2,
+        sliderValue: 6,
         min: 1,
         max: 10
       },
@@ -94,19 +95,7 @@ const preset = {
     // styles: ['NORMAL', 'LIGHT', 'BOLD'],
     // styleMainText: 'NORMAL',
 
-  },
-
-  //Overlay: {
-  //  opacity: 90,
-
-  //  collections: ['Plastic', 'Stickers'],
-  //  currentCollection: 'Plastic',
-
-  //  preset: {
-  //    Plastic: {},
-  //    Stickers: {}
-  //  }
-  //}
+  }
 }
 
 export { modules, preset }

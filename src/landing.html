@@ -2,14 +2,14 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <title>Coversea main page</title>
+    <title>Coversea</title>
     <analytics></analytics>
   </head>
 
   <body class="index">
     <div class="header">
       <a href="socials.html" class="menuButton">SOCIALS</a>
-      <a href="index.html" class="menuButtonActivePage">COVERSEA</a>
+      <a href="landing.html" class="menuButtonActivePage menu-button-logo logo"></a>
       <a href="about.html" class="menuButton">ABOUT</a>
     </div>
 
@@ -22,47 +22,52 @@
         <h3>[No time?]</h3>
         <h3>[No money?]</h3>
         <div class="top">
-          <p>Just choose a style and generate unique music cover artworks</p>
+          <p>Just choose a generator and create unique music cover artworks</p>
+          <button id="randomizeBtn">Randomize generators</button>
         </div>
-        <div class="generatorsList">
-          <a href="./generators/generator1.html" class="buttonToGenerator">GENERATOR 1</a>
-          <a href="./generators/generator2.html" class="buttonToGenerator">GENERATOR 2</a>
-          <a href="./generators/generator3.html" class="buttonToGenerator">GENERATOR 3</a>
-          <a href="./generators/generator4.html" class="buttonToGenerator">GENERATOR 4</a>
-          <a href="./generators/generator5.html" class="buttonToGenerator">GENERATOR 5</a>
-          <a href="./generators/generator6.html" class="buttonToGenerator">GENERATOR 6</a>
-          <a href="./generators/generator7.html" class="buttonToGenerator">GENERATOR 7</a>
+        <div class="generatorsList" id="buttonContainer">
+          <div class="buttonToGenerator"><a href="./generators/generator1.html">ASC_[420]E</a><div class="arrowRight"></div></div>
+          <div class="buttonToGenerator"><a href="./generators/generator2.html">KSF_[521]P</a><div class="arrowRight"></div></div>
+          <div class="buttonToGenerator"><a href="./generators/generator3.html">TLR_[874]S</a><div class="arrowRight"></div></div>
+          <div class="buttonToGenerator"><a href="./generators/generator4.html">REU_[624]T</a><div class="arrowRight"></div></div>
+          <div class="buttonToGenerator"><a href="./generators/generator5.html">GNV_[354]E</a><div class="arrowRight"></div></div>
+          <div class="buttonToGenerator"><a href="./generators/generator6.html">TGS_[352]E</a><div class="arrowRight"></div></div>
+          <div class="buttonToGenerator"><a href="./generators/generator7.html">IEN_[357]R</a><div class="arrowRight"></div></div>
+          <div class="buttonToGenerator"><a href="./generators/generator8.html">RYF_[634]T</a><div class="arrowRight"></div></div>
+          <div class="buttonToGenerator"><a href="./generators/generator9.html">LFY_[636]D</a><div class="arrowRight"></div></div>
+          <div class="buttonToGenerator"><a href="./generators/generator10.html">AZA_[638]S</a><div class="arrowRight"></div></div>
         </div>
       </div>
 
       <div class="quoteDiff">
         <h2>
-          Unleash Your Creativity </br>
+          Unleash Your Creativity <br>
           with Infinite Possibilities
         </h2>
       </div>
 
       <div class="bottom">
-        <p>Explore covers</p>
+        <p>Explore cover previews <br>
+          and choose a generator</p>
       </div>
 
       <div class="container">
         <!-- 1 -->
         <div class="column">
           <a href="./generators/generator1.html" class="card">
-            <img src="./images/ui/cards/placeholder1.jpeg" alt="Card Image">
+            <img src="./images/ui/cards/gen1.jpeg" alt="Card Image">
             <div class="card-content">
               <h3 class="card-title">GENERATOR_[1]</h3>
             </div>
           </a>
           <a href="./generators/generator2.html" class="card">
-            <img src="./images/ui/cards/placeholder2.jpeg" alt="Card Image">
+            <img src="./images/ui/cards/gen2.jpeg" alt="Card Image">
             <div class="card-content">
               <h3 class="card-title">GENERATOR_[2]</h3>
             </div>
           </a>
           <a href="./generators/generator3.html" class="card">
-            <img src="./images/ui/cards/placeholder3.jpeg" alt="Card Image">
+            <img src="./images/ui/cards/gen3.jpeg" alt="Card Image">
             <div class="card-content">
               <h3 class="card-title">GENERATOR_[3]</h3>
             </div>
@@ -72,19 +77,19 @@
         <!-- 2 -->
         <div class="column"  style="margin-top: 100px;">
           <a href="./generators/generator4.html" class="card">
-            <img src="./images/ui/cards/placeholder4.jpeg" alt="Card Image">
+            <img src="./images/ui/cards/gen4.jpeg" alt="Card Image">
             <div class="card-content">
               <h3 class="card-title">GENERATOR_[4]</h3>
             </div>
           </a>
           <a href="./generators/generator5.html" class="card">
-            <img src="./images/ui/cards/placeholder5.jpeg" alt="Card Image">
+            <img src="./images/ui/cards/gen5.jpeg" alt="Card Image">
             <div class="card-content">
               <h3 class="card-title">GENERATOR_[5]</h3>
             </div>
           </a>
           <a href="./generators/generator6.html" class="card">
-            <img src="./images/ui/cards/placeholder6.jpeg" alt="Card Image">
+            <img src="./images/ui/cards/gen6.jpeg" alt="Card Image">
             <div class="card-content">
               <h3 class="card-title">GENERATOR_[6]</h3>
             </div>
@@ -93,20 +98,20 @@
 
         <!-- 3 -->
         <div class="column"  style="margin-top: 50px;">
-          <a href="./generators/generator1p2.html" class="card">
-            <img src="./images/ui/cards/placeholder1p2.jpeg" alt="Card Image">
+          <a href="./generators/generator1_2.html" class="card">
+            <img src="./images/ui/cards/gen1_2.jpeg" alt="Card Image">
             <div class="card-content">
               <h3 class="card-title">GENERATOR_[1]</h3>
             </div>
           </a>
-          <a href="./generators/generator2p2.html" class="card">
-            <img src="./images/ui/cards/placeholder2p2.jpeg" alt="Card Image">
+          <a href="./generators/generator2_2.html" class="card">
+            <img src="./images/ui/cards/gen2_2.jpeg" alt="Card Image">
             <div class="card-content">
               <h3 class="card-title">GENERATOR_[2]</h3>
             </div>
           </a>
-          <a href="./generators/generator4p2.html" class="card">
-            <img src="./images/ui/cards/placeholder4p2.jpeg" alt="Card Image">
+          <a href="./generators/generator4_2.html" class="card">
+            <img src="./images/ui/cards/gen4_2.jpeg" alt="Card Image">
             <div class="card-content">
               <h3 class="card-title">GENERATOR_[4]</h3>
             </div>
@@ -115,102 +120,157 @@
 
         <!-- 4 -->
         <div class="column"  style="margin-top: 200px;">
-          <a href="./generators/generator5p2.html" class="card">
-            <img src="./images/ui/cards/placeholder5p2.jpeg" alt="Card Image">
+          <a href="./generators/generator5_2.html" class="card">
+            <img src="./images/ui/cards/gen5_2.jpeg" alt="Card Image">
             <div class="card-content">
               <h3 class="card-title">GENERATOR_[5]</h3>
             </div>
           </a>
-          <a href="./generators/generator6p2.html" class="card">
-            <img src="./images/ui/cards/placeholder6p2.jpeg" alt="Card Image">
+          <a href="./generators/generator6_2.html" class="card">
+            <img src="./images/ui/cards/gen6_2.jpeg" alt="Card Image">
             <div class="card-content">
               <h3 class="card-title">GENERATOR_[6]</h3>
             </div>
           </a>
-          <a href="./generators/generator3.html" class="card">
-            <img src="./images/ui/cards/placeholder3.jpeg" alt="Card Image">
+          <a href="./generators/generator7.html" class="card">
+            <img src="./images/ui/cards/gen7.jpeg" alt="Card Image">
             <div class="card-content">
-              <h3 class="card-title">GENERATOR_[3]</h3>
+              <h3 class="card-title">GENERATOR_[7]</h3>
             </div>
           </a>
         </div>
 
         <!-- 5 -->
         <div class="column">
-          <a href="./generators/generator1.html" class="card">
-            <img src="./images/ui/cards/placeholder1.jpeg" alt="Card Image">
+          <a href="./generators/generator8.html" class="card">
+            <img src="./images/ui/cards/gen8.jpeg" alt="Card Image">
             <div class="card-content">
-              <h3 class="card-title">GENERATOR_[1]</h3>
+              <h3 class="card-title">GENERATOR_[8]</h3>
             </div>
           </a>
-          <a href="./generators/generator2.html" class="card">
-            <img src="./images/ui/cards/placeholder2.jpeg" alt="Card Image">
+          <a href="./generators/generator9.html" class="card">
+            <img src="./images/ui/cards/gen9.jpeg" alt="Card Image">
             <div class="card-content">
-              <h3 class="card-title">GENERATOR_[2]</h3>
+              <h3 class="card-title">GENERATOR_[9]</h3>
             </div>
           </a>
-          <a href="./generators/generator3.html" class="card">
-            <img src="./images/ui/cards/placeholder3.jpeg" alt="Card Image">
+          <a href="./generators/generator10.html" class="card">
+            <img src="./images/ui/cards/gen10.jpeg" alt="Card Image">
             <div class="card-content">
-              <h3 class="card-title">GENERATOR_[3]</h3>
+              <h3 class="card-title">GENERATOR_[10]</h3>
             </div>
           </a>
         </div>
 
         <!-- 6 -->
         <div class="column" style="margin-top: 50px;">
-          <a href="./generators/generator1p2.html" class="card">
-            <img src="./images/ui/cards/placeholder1p2.jpeg" alt="Card Image">
+          <a href="./generators/generator10_2.html" class="card">
+            <img src="./images/ui/cards/gen10_2.jpeg" alt="Card Image">
             <div class="card-content">
-              <h3 class="card-title">GENERATOR_[1]</h3>
+              <h3 class="card-title">GENERATOR_[10]</h3>
             </div>
           </a>
-          <a href="./generators/generator2p2.html" class="card">
-            <img src="./images/ui/cards/placeholder2p2.jpeg" alt="Card Image">
+          <a href="./generators/generator7_2.html" class="card">
+            <img src="./images/ui/cards/gen7_2.jpeg" alt="Card Image">
             <div class="card-content">
-              <h3 class="card-title">GENERATOR_[2]</h3>
+              <h3 class="card-title">GENERATOR_[7]</h3>
             </div>
           </a>
-          <a href="./generators/generator4p2.html" class="card">
-            <img src="./images/ui/cards/placeholder4p2.jpeg" alt="Card Image">
+          <a href="./generators/generator8_2.html" class="card">
+            <img src="./images/ui/cards/gen8_2.jpeg" alt="Card Image">
             <div class="card-content">
-              <h3 class="card-title">GENERATOR_[4]</h3>
+              <h3 class="card-title">GENERATOR_[8]</h3>
             </div>
           </a>
         </div>
 
       </div>
 
-      <div class="section">
-        <h2>
-          In a dialog with the computer</br>
-          generate endless artworks
-        </h2>
-        <p>
-          Discover the power of generative coding and create stunning, one-of-a-kind cover art for your music.
-          Our platform offers
-          a myriad of possibilities to express your unique style.
-          Once you chose a generator, just click on randomize and let
-          the magic happen before your eyes. But you are also free
-          to tweak the parameters to your liking
-        </p>
+      <div class="section-presentation">
+
+        <div class="subsection" id="s1">
+          <div class="subsection-text" id="st1">
+            <h1>
+              transform your ideas<br> into art in a few clicks
+            </h1>
+            <p>Discover the power of generative coding and create unique cover artworks for your music. Our platform offers a
+              myriad of
+              possibilities to express your style.<br>
+              You can let the computer surprise you by clicking “Randomize” or generate a cover to your taste by tweaking the
+              presets.</p>
+          </div>
+          <div class="image_modules"></div>
+        </div>
+        
+        <div class="subsection" id="s2">
+            <div class="image_generator"></div>
+            
+            <div class="subsection-text" id="st2">
+              <h1>once you are satisfied<br> with the design,<br> download it freely!</h1>
+              <p>Each generator is carefully being crafted, to offer you original designs with new esthetics and high quality
+                cover artworks. If you like what
+                you see, you can freely download the artwork.
+              </p>
+            </div>
+          </div>
       </div>
 
-      <div class="section">
-        <h2>
-          once you are satisfied </br>
-          with the design, </br>
-          download it freely!
-        </h2>
-        <p>
-          Each generator has been carefully crafted,
-          we garantie you that each time you'll press that generate button, the result will be of high quality, and if you like it
-          you can download the artwork freely
-        </p>
-      
+      <div class="section-socials">
+        <div class="subsection-text" id="s4">
+          <p>
+            Many other features and generators will be accessible, follow us on social media to be the first to know about the
+            full
+            release!
+          </p>
+          <h1>
+            you have an idea for a cover design and want to take part in the project?
+            Don’t hesitate to contact us!
+          </h1>
+        </div>
+        <div class="socials-buttons">
+          <div class="button" id="socials">INST<img src="./images/ui/icons/ArrowBasicTopRight.svg" alt="Angle Down icon" class="icon">
+          </div>
+          <div class="button" id="socials">TELEGRAM<img src="./images/ui/icons/ArrowBasicTopRight.svg" alt="Angle Down icon"
+              class="icon"></div>
+        </div>
       </div>
 
     </div>
 
+    <div class="teaserFooter">
+      <div class="footer-column">
+        <div class="logo logo-footer"></div>
+        <p>By Marguerite Lorthiois</p>
+      </div>
+      <div class="footer-column">
+        <p>math × code × art × design</p>
+        <p>HSE Art&Design School 2024</p>
+      </div>
+    </div>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const buttonContainer = document.getElementById('buttonContainer');
+        const buttons = Array.from(buttonContainer.children);
+        const randomizeBtn = document.getElementById('randomizeBtn');
+  
+        function randomizeButtons() {
+          // Hide all buttons
+          buttons.forEach(button => button.style.display = 'none');
+  
+          // Shuffle the buttons array
+          const shuffledButtons = buttons.sort(() => Math.random() - 0.5);
+  
+          // Display the first 5 buttons
+          shuffledButtons.slice(0, 5).forEach(button => button.style.display = 'flex');
+        }
+  
+        randomizeBtn.addEventListener('click', randomizeButtons);
+  
+        // Initial randomization on page load
+        randomizeButtons();
+      });
+    </script>
   </body>
 </html>

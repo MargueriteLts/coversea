@@ -13,7 +13,7 @@ const preset = {
 
     preset: {
       SolidColor: {
-        color: '#000000'
+        color: '#56c2c4'
       },
       Noise: {
         NoiseTypes: ['Small', 'Medium', 'Big'],
@@ -49,16 +49,16 @@ const preset = {
   },
 
   Particles: {
-    sliderValue: 15,
+    sliderValue: 20,
     quantityLocked: false,
     max: 200,
     min: 10,
     opacity: 255,
-    color: '#fff',
+    color: '#c7c7c7',
     colorLocked: false,
 
     options: ['Ellipses', 'Squares', 'Mix'],
-    currentParticlesType: 'Mix',
+    currentParticlesType: 'Squares',
 
     preset: {
       Ellipses: {},
@@ -87,7 +87,7 @@ const preset = {
     },
 
     otherText: {
-      values: ['Music is the answer to everything, music is the key to the world'],
+      values: ['Music is the answer to everything', 'music is the key to the world'],
       color: '#ffffff',
       fontOptions: ['Sans Serif', 'Script', 'Special'],
       currentFont: 'Sans Serif',

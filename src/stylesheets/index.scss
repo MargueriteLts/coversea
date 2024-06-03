@@ -1,9 +1,33 @@
 body.index {
+  a {
+    text-decoration: none;  /* Remove underline */
+    color: inherit;         /* Inherit color from parent element */
+    background: none;       /* Remove background */
+    border: none;           /* Remove border */
+    outline: none;          /* Remove outline */
+    cursor: pointer;        /* Set cursor to pointer for usability */
+  }
+  
+  //a:visited {
+  //  color: inherit;         /* Ensure visited links don't change color */
+  //}
+  
+  //a:hover,
+  //a:focus,
+  //a:active {
+  //  text-decoration: none;  /* Ensure no underline on hover, focus, active */
+  //  color: inherit;         /* Maintain color on hover, focus, active */
+  //  background: none;       /* Remove any background on hover, focus, active */
+  //  border: none;           /* Remove any border on hover, focus, active */
+  //  outline: none;          /* Remove any outline on hover, focus, active */
+  //}
+
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 2500px;
+  //height: 2500px;
   background: var(--BACKGROUND-WEBSITE-BLACK);
 
   .logoBG {
@@ -19,21 +43,63 @@ body.index {
     background-repeat: no-repeat;
   }
 
+  .logo {
+    background-image: url('./images/ui/logo-symbolWithName.svg');
+    // background-size: cover;
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+
+  }
+
+  .menu-button-logo {
+    display: block;
+    width: 594px;
+    height: 80px;
+  }
+
+  .menuButton:hover {
+    color: grey;
+  }
+
   color: var(--TEXT-WHITE);
 
   .quoteDiff {
+    width: 100%;
     position: relative;
     mix-blend-mode: difference;
     margin-bottom: 100px;
+    text-align: center;
   }
 
   .genMenu {
+    display: block;
+    position: relative;
     margin-top: 156px;
     margin-bottom: 124px;
 
     .top {
       margin-top: 24px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
     }
+
+      #randomizeBtn {
+        border: none;
+        box-shadow: none;
+        color: var(--TEXT-WHITE);
+        background-color: var(--BACKGROUND-BTN-SECONDARY);
+        padding: 12px;
+        border-radius: 20px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--BACKGROUND-BTN-HOVER);
+        }
+      }
   }
 
   .generatorsList {
@@ -56,6 +122,20 @@ body.index {
       font-size: 32px;
       color: var(--WHITE);
       border-radius: 100px;
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+
+      .arrowRight {
+        width: 24px;
+        height: 24px;
+        background-position: top center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('images/ui/icons/ArrowBasicRight.svg');
+      }
     }
 
     .buttonToGenerator:hover {
@@ -63,9 +143,6 @@ body.index {
       color: var(--TEXT-BLACK)
     }
 
-    a {
-      text-decoration: none;
-    }
   }
 
   .container {
@@ -88,6 +165,11 @@ body.index {
     overflow: hidden;
     text-decoration: none;
     display: block;
+
+    a {
+      text-decoration: none;
+      color: var(--TEXT-WHITE);
+    }
   }
 
   .card img {
@@ -109,8 +191,123 @@ body.index {
     margin-top: 5px;
   }
 
-  // .section {
-  //   margin-top: 104px;
-  // }
+  .section-presentation {
+    margin-top: 350px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+
+    .subsection {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+
+      .subsection-text {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: left;
+        width: 560px;
+
+        h1 {
+          color: var(--White, #F6F6F6);
+          font-family: "BC Novatica CYR";
+          font-size: 42px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 40px; /* 95.238% */
+          text-transform: uppercase;
+        }
+      }
+
+      .image_modules {
+        width: 1028px;
+        height: 400px;
+        background-image: url('./images/ui/modulesExamples-3.png');
+    // background-size: cover;
+        //background-size: 100% auto;
+        background-size: contain;
+        background-position: top;
+        background-repeat: no-repeat;
+      }
+
+      .image_generator {
+        width: 768px;
+        height: 630px;
+        background-image: url('./images/ui/generatorExample-TOCHANGE.png');
+    // background-size: cover;
+        //background-size: 100% auto;
+        background-size: contain;
+        background-position: top;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  .section-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 1050px;
+    margin-bottom: 300px;
+
+    p {
+      width: 380px;
+    }
+
+    .socials-buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+
+      .button {
+        display: flex;
+        padding: 13px 12px 16px 20px;
+        align-items: center;
+        gap: 9px;
+        border-radius: 38.285px;
+        border: 1px solid var(--White, #F6F6F6);
+        width: fit-content;
+  
+        color: var(--White, #F6F6F6);
+        font-family: "BC Novatica CYR";
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 36px; /* 100% */
+        letter-spacing: -1.08px;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .teaserFooter {
+    padding: 36px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: var(--BACKGROUND-MODULE) 1px solid;
+    
+    p {
+      color: var(--Text-DIM);
+      font-size: 16px;
+      line-height: 16px;
+    }
+
+    .logo-footer {
+      width: 370px;
+      height: 48px;
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
 
 }

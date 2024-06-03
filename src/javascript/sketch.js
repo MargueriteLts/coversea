@@ -101,10 +101,42 @@ window.resetPixels = function() {
   genPixels()
 }
 
+window.resetImages = function() {
+  randomImages()
+}
+
 window.resetRandoms = function() {
   // allRandoms()
   console.log('yes');
   randomImages()
+}
+
+window.resetLight = function() {
+  const module3D = get3DStore()
+  let colorArray1
+  if (Array.isArray(module3D.color1)) {
+    colorArray1 = module3D.color1
+  } else {
+    colorArray1 = hexToRgbArray(module3D.color1)
+  }
+  let r1 = colorArray1[0]
+  let g1 = colorArray1[1]
+  let b1 = colorArray1[2]
+  let colorArray2
+  if (Array.isArray(module3D.color2)) {
+    colorArray2 = module3D.color2
+  } else {
+    colorArray2 = hexToRgbArray(module3D.color2)
+  }
+  let r2 = colorArray2[0]
+  let g2 = colorArray2[1]
+  let b2 = colorArray2[2]
+  setLight(r1, r2, g1, g2, b1, b2)
+}
+
+function setLight(r1, r2, g1, g2, b1, b2) {
+  graphics.directionalLight(r1, g1, b1, 100, 0, 0)
+  graphics.directionalLight(r2, g2, b2, -100, 0, 0)
 }
 
 function randomAmplitude() {
@@ -324,6 +356,7 @@ function genNoise() {
 
 
 function genPixels() {
+  //console.log('yes');
   pixelsBg.noStroke()
   let inc = 0.01
   let scl = 10
@@ -1119,16 +1152,149 @@ function drawModules(p) {
     }
 
     graphics.noStroke()
-    graphics.directionalLight(189, 98, 189, 100, 0, 0)
-    graphics.directionalLight(54, 98, 189, -100, 0, 0)
-    graphics.fill(255)
+
+    //let colorArray1
+    //if (Array.isArray(module3D.color1)) {
+    //  colorArray1 = module3D.color1
+    //} else {
+    //  colorArray1 = hexToRgbArray(module3D.color1)
+    //}
+    //let colorArray2
+    //if (Array.isArray(module3D.color2)) {
+    //  colorArray2 = module3D.color2
+    //} else {
+    //  colorArray2 = hexToRgbArray(module3D.color2)
+    //}
+
+    //let r1 = colorArray1[0]
+    //let g1 = colorArray1[1]
+    //let b1 = colorArray1[2]
+    //let r2 = colorArray2[0]
+    //let g2 = colorArray2[1]
+    //let b2 = colorArray2[2]
+    
+    //graphics.directionalLight(189, 98, 189, 100, 0, 0)
+    graphics.directionalLight(250, 250, 250, 100, 0, 0)
+    //graphics.directionalLight(54, 98, 189, -100, 0, 0)
+    graphics.directionalLight(100, 100, 100, -100, 0, 0)
+    //graphics.directionalLight(colorArray1[0], colorArray1[1], colorArray1[2], 100, 0, 0)
+    //graphics.directionalLight(colorArray2[0], colorArray2[1], colorArray2[2], -100, 0, 0)
+
+    //setLight(r1, r2, g1, g2, b1, b2)
+    //graphics.fill(255)
+
+    //if (module3D.types.includes('Torus') && module3D.current3DType === 'Torus') {
+    //  graphics.torus(30, 15, 50, 50);
+    //} else if (module3D.types.includes('Square') && module3D.current3DType === 'Square') {
+    //  graphics.box(30, 15, 50, 50);
+    //}
+
+    let fct = module3D.sliderValue
+    //console.log(module3D.size);
 
     if (module3D.types.includes('Torus') && module3D.current3DType === 'Torus') {
-      graphics.torus(30, 15, 50, 50);
+      graphics.torus(30*fct, 15*fct, 50, 50)
     } else if (module3D.types.includes('Square') && module3D.current3DType === 'Square') {
-      graphics.box(30, 15, 50, 50);
+      graphics.box(30*fct, 15*fct, 50, 50)
     }
 
+  }
+
+  /////////////////////////////////////////// MODULE BASICTYPO V2
+
+  if (moduleList.includes('BasicTypoV2')) {
+    const basicTypov2 = getBasicTypoV2Store()
+    let textInput
+
+    if (basicTypov2.styles.includes('NORMAL') && basicTypov2.styleText == 'NORMAL' && basicTypov2.font == 'PT-Root-UI') {
+      p.textFont(ptrootuiReg)
+    } else if (basicTypov2.styles.includes('BOLD') && basicTypov2.styleText == 'BOLD' && basicTypov2.font == 'PT-Root-UI') {
+      p.textFont(ptrootuiBold)
+    } else if (basicTypov2.styles.includes('LIGHT') && basicTypov2.styleText == 'LIGHT' && basicTypov2.font == 'PT-Root-UI') {
+      p.textFont(ptrootuiLight)
+    } else {
+      p.textFont(basicTypov2.font)
+    }
+
+    p.noStroke()
+    p.textStyle(basicTypov2.styleText)
+    p.textWrap(p.WORD)
+    p.fill(basicTypov2.color)
+    p.fill('white')
+
+    if (basicTypov2.upperCase == true) {
+      textInput = basicTypov2.textInput.toUpperCase()
+    } else {
+      textInput = basicTypov2.textInput
+    }
+
+    // let presetSizeText = basicTypov2.sizeText.sliderValue
+    let presetLeadingSizeText = basicTypov2.leadingText
+    // let TextSize = (presetSizeText * canvasSize) / 100
+    let TextLeadingSize = (presetLeadingSizeText * canvasSize) / 100
+    p.textSize(10)
+    p.textLeading(TextLeadingSize)
+
+    let txtWidth = p.textWidth(textInput)
+    // let positions = basicTypov2.txtpositions
+
+    //Ca marche mais pas pour les extremites haut et bas -> les text se superposent
+    // for (let i = 0; i < basicTypov2.nText; i++) {
+    //   p.text(textInput, ((positions[i].x)*canvasSize/100)-(txtWidth/2), (positions[i].y)*canvasSize/100)
+    // }
+
+    //ChatGPT try adapt calculation
+    const positions = calculateTextBoxPositions(100, 50, txtWidth);
+
+    for (let i = 0; i < positions.length; i++) {
+      const pos = positions[i];
+      p.textAlign(p.CENTER, p.CENTER);
+      p.text('Text', pos.x, pos.y);
+    }
+  }
+
+
+  /////////////////////////////////////////// MODULE CRAZYTYPO
+
+  // if (moduleList.includes('crazyTypo')) {
+  //   let characters = crazyTypo.text.split('')
+  //   let fontCollection = ['Acosta', 'esenin-script-one', 'wonky', 'Bolgarus', 'typekini', 'AUSRINE', 'YUNGA-Display']
+  //   // let font sample(fontCollection)
+  //   // for (let index = 0; index < fontCollection.length; index++) {
+  //   //   const element = array[index];
+      
+  //   // }
+  // }
+
+    /////////////////////////////////////////// MODULE BACKGROUNDIMAGE
+
+  if (moduleList.includes('Overlay')) {
+    const overlay = getOverlayStore()
+
+    let currentOverlay
+
+    if (overlay.collections.includes('Plastic') && overlay.currentCollection === 'Plastic') {
+      currentOverlay = overlay.preset.Plastic.current
+      imageOverlay = imagesPlasticOverlay[currentOverlay]
+    } else if (overlay.collections.includes('Stickers') && overlay.currentCollection === 'Stickers') {
+      currentOverlay = overlay.preset.Stickers.current
+      imageOverlay = imagesStickerOverlay[currentOverlay]
+    }
+
+    let opacity = parseFloat(overlay.opacity)
+    // console.log(opacity);
+    // p.background(imageBg, opacity)
+    p.image(blendedLayer, 0, 0)
+    blendedLayer.clear()
+    blendedLayer.tint(255, opacity)
+    blendedLayer.blendMode(p.ADD)
+    blendedLayer.image(
+      imageOverlay,
+      0,
+      0,
+      canvasSize,
+      canvasSize
+    )
   }
 
   /////////////////////////////////////////// MODULE BASICTYPO
@@ -1245,103 +1411,6 @@ function drawModules(p) {
 
 
     p.drawingContext.shadowBlur = 0
-  }
-
-  /////////////////////////////////////////// MODULE BASICTYPO V2
-
-  if (moduleList.includes('BasicTypoV2')) {
-    const basicTypov2 = getBasicTypoV2Store()
-    let textInput
-
-    if (basicTypov2.styles.includes('NORMAL') && basicTypov2.styleText == 'NORMAL' && basicTypov2.font == 'PT-Root-UI') {
-      p.textFont(ptrootuiReg)
-    } else if (basicTypov2.styles.includes('BOLD') && basicTypov2.styleText == 'BOLD' && basicTypov2.font == 'PT-Root-UI') {
-      p.textFont(ptrootuiBold)
-    } else if (basicTypov2.styles.includes('LIGHT') && basicTypov2.styleText == 'LIGHT' && basicTypov2.font == 'PT-Root-UI') {
-      p.textFont(ptrootuiLight)
-    } else {
-      p.textFont(basicTypov2.font)
-    }
-
-    p.noStroke()
-    p.textStyle(basicTypov2.styleText)
-    p.textWrap(p.WORD)
-    p.fill(basicTypov2.color)
-    p.fill('white')
-
-    if (basicTypov2.upperCase == true) {
-      textInput = basicTypov2.textInput.toUpperCase()
-    } else {
-      textInput = basicTypov2.textInput
-    }
-
-    // let presetSizeText = basicTypov2.sizeText.sliderValue
-    let presetLeadingSizeText = basicTypov2.leadingText
-    // let TextSize = (presetSizeText * canvasSize) / 100
-    let TextLeadingSize = (presetLeadingSizeText * canvasSize) / 100
-    p.textSize(10)
-    p.textLeading(TextLeadingSize)
-
-    let txtWidth = p.textWidth(textInput)
-    // let positions = basicTypov2.txtpositions
-
-    //Ca marche mais pas pour les extremites haut et bas -> les text se superposent
-    // for (let i = 0; i < basicTypov2.nText; i++) {
-    //   p.text(textInput, ((positions[i].x)*canvasSize/100)-(txtWidth/2), (positions[i].y)*canvasSize/100)
-    // }
-
-    //ChatGPT try adapt calculation
-    const positions = calculateTextBoxPositions(100, 50, txtWidth);
-
-    for (let i = 0; i < positions.length; i++) {
-      const pos = positions[i];
-      p.textAlign(p.CENTER, p.CENTER);
-      p.text('Text', pos.x, pos.y);
-    }
-  }
-
-
-  /////////////////////////////////////////// MODULE CRAZYTYPO
-
-  // if (moduleList.includes('crazyTypo')) {
-  //   let characters = crazyTypo.text.split('')
-  //   let fontCollection = ['Acosta', 'esenin-script-one', 'wonky', 'Bolgarus', 'typekini', 'AUSRINE', 'YUNGA-Display']
-  //   // let font sample(fontCollection)
-  //   // for (let index = 0; index < fontCollection.length; index++) {
-  //   //   const element = array[index];
-      
-  //   // }
-  // }
-
-    /////////////////////////////////////////// MODULE BACKGROUNDIMAGE
-
-  if (moduleList.includes('Overlay')) {
-    const overlay = getOverlayStore()
-
-    let currentOverlay
-
-    if (overlay.collections.includes('Plastic') && overlay.currentCollection === 'Plastic') {
-      currentOverlay = overlay.preset.Plastic.current
-      imageOverlay = imagesPlasticOverlay[currentOverlay]
-    } else if (overlay.collections.includes('Stickers') && overlay.currentCollection === 'Stickers') {
-      currentOverlay = overlay.preset.Stickers.current
-      imageOverlay = imagesStickerOverlay[currentOverlay]
-    }
-
-    let opacity = parseFloat(overlay.opacity)
-    // console.log(opacity);
-    // p.background(imageBg, opacity)
-    p.image(blendedLayer, 0, 0)
-    blendedLayer.clear()
-    blendedLayer.tint(255, opacity)
-    blendedLayer.blendMode(p.ADD)
-    blendedLayer.image(
-      imageOverlay,
-      0,
-      0,
-      canvasSize,
-      canvasSize
-    )
   }
 
 }
@@ -1547,6 +1616,8 @@ function sketch(p) {
       noiseBg = p.createGraphics(canvasSize, canvasSize)
       noiseBg.noLoop()
       genNoise()
+    }
+    if (moduleList.includes('Background') && background.backgroundTypes.includes('Pixels')) {
       pixelsBg = p.createGraphics(canvasSize, canvasSize)
       pixelsBg.noLoop()
       genPixels()

@@ -41,8 +41,6 @@ export default class BackgroundImage extends Component {
     } = this.props
 
     return <div className="M_BackgroundImageContent">
-      
-
         <M_Control
           orientation='column'
           hasTitle={true}
@@ -75,7 +73,6 @@ export default class BackgroundImage extends Component {
           data={backgroundImage.opacity}
           handleChange={handleBackgroundImageOpacity}
         />
-      {/*</div>*/}
     </div>
   }
 }

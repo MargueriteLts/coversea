@@ -19,6 +19,12 @@ body.generator {
   padding: 16px;
   color: var(--white);
 
+  h1 {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+  }
+
   .header__homelink {
     z-index: 1;
     display: inline-block;

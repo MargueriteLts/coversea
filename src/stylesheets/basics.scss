@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   font-family: "neue-haas-unica", sans-serif;
   font-weight: 200;
@@ -10,21 +14,21 @@ body {
 }
 
 h1 {
-  font-family: bc-novatica-cyr, sans-serif;
+  font-family: "bc-novatica-cyr", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 70px;
+  font-size: 50px;
   text-transform: uppercase;
-  position: absolute;
-  text-align: center;
-  width: 100%;
+  //position: absolute;
+  //text-align: center;
+  //width: 100%;
 }
 
 h2 {
   font-size: 42px;
-  align-items: center;
-  text-align: center;
-  font-family: bc-novatica-cyr, sans-serif;
+  //align-items: center;
+  //text-align: center;
+  font-family: "bc-novatica-cyr", sans-serif;
   font-weight: 400;
   font-style: normal;
   text-transform: uppercase;
@@ -59,13 +63,17 @@ p {
 
 .header {
   width: 100%;
+  display: flex;flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
 
   font-family: bc-novatica-cyr, sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 120px;
+  font-size: 106px;
+  line-height: 106px;
   text-align: center;
-  align-items: center;
 
   .menuButtonActivePage {
     color: var(--white);
@@ -77,8 +85,9 @@ p {
   .menuButton {
     color: var(--BgModul);
     text-decoration: none;
-    cursor: hand;
+    cursor: pointer;
     user-select: none;
+    color: var(--DARK-GREY);
   }
 }
 
@@ -88,6 +97,7 @@ p {
   flex-direction: column;
   width: 100%;
   padding: 0 24px;
+  overflow-x: hidden;
 }
 
 //for working on basictypo layout

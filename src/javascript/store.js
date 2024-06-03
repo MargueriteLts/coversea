@@ -3,30 +3,38 @@ import { sample, getRandomArbitrary, importAll } from './utilities'
 import * as generator1 from '../generators/generator1.js'
 import * as generator2 from '../generators/generator2.js'
 import * as generator3 from '../generators/generator3.js'
-//import * as generator4 from '../generators/generator4.js'
-//import * as generator5 from '../generators/generator5.js'
-//import * as generator6 from '../generators/generator6.js'
+import * as generator4 from '../generators/generator4.js'
+import * as generator5 from '../generators/generator5.js'
+import * as generator6 from '../generators/generator6.js'
 //import * as generator1p2 from '../generators/generator1p2.js'
 //import * as generator2p2 from '../generators/generator2p2.js'
 //import * as generator4p2 from '../generators/generator4p2.js'
 //import * as generator5p2 from '../generators/generator5p2.js'
 //import * as generator6p2 from '../generators/generator6p2.js'
-//import * as generator7 from '../generators/generator7.js'
+import * as generator7 from '../generators/generator7.js'
+import * as generator8 from '../generators/generator8.js'
+import * as generator9 from '../generators/generator9.js'
+import * as generator9_2 from '../generators/generator9_2.js'
+import * as generator10 from '../generators/generator10.js'
 import * as teaserGenerator from '../generators/teaserGenerator.js'
 
 const generators = {
   generator1,
   generator2,
   generator3,
-  //generator4,
-  //generator5,
-  //generator6,
+  generator4,
+  generator5,
+  generator6,
   //generator1p2,
   //generator2p2,
   //generator4p2,
   //generator5p2,
   //generator6p2,
-  //generator7,
+  generator7,
+  generator8,
+  generator9,
+  generator9_2,
+  generator10,
   teaserGenerator
 }
 
@@ -575,7 +583,7 @@ function bouncingRange(range) {
 function initLinesStore(lines) {
   lines = Object.assign({}, lines, {
     moduleName: 'Lines',
-    color: '#fff',
+    //color: '#fff',
     quantityLocked: false,
     lineTypeLocked: false,
     strokeWeightLocked: false,
@@ -688,7 +696,7 @@ function setLinesStore(type, value) {
 ////////////////////// MODULE 3D
 
 function init3DStore(preset) {
-  preset = Object.assign({}, preset, { moduleName: '3D Shape', x: generateRandomNb(), y: generateRandomNb() })
+  preset = Object.assign({}, preset, { moduleName: '3D Shape', x: generateRandomNb(), y: generateRandomNb(), color1Locked: false, color2Locked: false, sizeLocked: false, sliderValue: 1 })
 
   preset.types.forEach((type) => {
     if (type == 'Torus') {
@@ -721,6 +729,33 @@ function set3DStore(type, value) {
     if (type === 'randomize') {
       module3DStore.x = generateRandomNb()
       module3DStore.y = generateRandomNb()
+    }
+    if (type === 'SolidColor1') {
+      module3DStore.color1 = value
+      //console.log(module3DStore.color1);
+      window.resetLight()
+      resolve([value])
+    }
+    if (type === 'SolidColor2') {
+      module3DStore.color2 = value
+      //window.resetLight()
+      resolve([value])
+    }
+
+    if (type === 'Size') {
+      module3DStore.sliderValue = value
+      resolve([value])
+    }
+
+
+    if (type === 'lockColor1') {
+      module3DStore.color1Locked = value
+    }
+    if (type === 'lockColo2') {
+      module3DStore.color2Locked = value
+    }
+    if (type === 'lockSize') {
+      module3DStore.sizeLocked = value
     }
   })
 }
@@ -797,7 +832,7 @@ function setParticlesStore(type, value) {
 
 function initShapesStore(shapes) {
   shapes = Object.assign({}, shapes, { moduleName: 'Shapes' })
-  shapes.settings = Object.assign({}, shapes.settings, { color: '#999999' })
+  //shapes.settings = Object.assign({}, shapes.settings, { color: '#999999' })
   return shapes
 }
 
@@ -1161,7 +1196,7 @@ function initOverlayStore(preset) {
   )
 
   
-  preset = Object.assign({}, preset, { moduleName: 'Overlay', tabBackgrounds: images })
+  preset = Object.assign({}, preset, { moduleName: 'Overlay', tabBackgrounds: images, locked: false, opacityLock: false })
 
   preset.collections.forEach((collection) => {
     if (collection === 'Plastic') {
@@ -1196,6 +1231,13 @@ function setOverlayStore(type, value) {
     if (type === 'opacity') {
       moduleOverlayStore.opacity = value
       resolve([value])
+    }
+
+    if (type == 'lockTabs') {
+      moduleOverlayStore.locked = value
+    }
+    if (type == 'lockOpacity') {
+      moduleOverlayStore.opacityLock = value
     }
   })
 }
@@ -1351,16 +1393,15 @@ function generateAllStore(generatorName, moduleList) {
 
       if (moduleName == 'Overlay') {
 
-        if (moduleBackgroundImageStore.currentBackgroundImageCollection == 'Plastic') {
-          setBackgroundImageStore('Plastic')
-        } else if (moduleBackgroundImageStore.currentBackgroundImageCollection == 'Stickers') {
-          setBackgroundImageStore('Stickers')
+        if (moduleOverlayStore.currentCollection == 'Plastic') {
+          setOverlayStore('Plastic')
+        } else if (moduleOverlayStore.currentCollection == 'Stickers') {
+          setOverlayStore('Stickers')
         }
 
         let overlayOpacity = getRandomArbitrary(10, 255)
         setOverlayStore('opacity', overlayOpacity)
-
-        data.push({overlayOpacity})
+        
       }
     })
 
@@ -1385,7 +1426,6 @@ function randomizeModuleStore(moduleType) {
       }
       
       if (newBackgroundType == 'SolidColor' && moduleBackgroundStore.preset.SolidColor.locked == false) {
-        console.log('yo');
         setBackgroundStore('SolidColor', generateColor())
       }
 
@@ -1474,7 +1514,10 @@ function randomizeModuleStore(moduleType) {
           setImageStore('Tools')
         }
       }
-
+      
+      if (moduleImageStore.multiplication) {
+        window.resetImages()
+      }
     }
 
     if (moduleType == 'Vinyl') {

@@ -17,7 +17,7 @@ const preset = {
       },
       Gradient: {
         gradientTypes: ['Linear', 'Radial'],
-        currentGradientType: 'Linear',
+        currentGradientType: 'Radial',
         typeLocked: false,
 
         stops: {
@@ -26,8 +26,8 @@ const preset = {
           max: 12,
           min: 0
         },
-        color1: '#ff0000',
-        color2:'#00ff00'
+        color1: '#E75030',
+        color2:'#928EEB'
       }
     }
   },
@@ -36,11 +36,11 @@ const preset = {
     size: 90,
     bigger: false,
     opacity: 200,
-    tintColor: '#ffffff',
+    tintColor: '#ff0000',
     tintColorLock: false,
 
     vinylTypes: ['Whole', 'Label', 'Vinyl'],
-    currentVinylType: 'Label',
+    currentVinylType: 'Vinyl',
 
     preset: {
       Whole: {},
@@ -50,18 +50,11 @@ const preset = {
   },
 
   Lines: {
-    linesTypes: ['Straight', 'Curves', 'Arcs', 'Bouncing'],
-    currentLineType: 'Bouncing',
+    linesTypes: ['Curves', 'Arcs', 'Bouncing'],
+    currentLineType: 'Curves',
 
     layout: 'Vertical',
-
-    // quantity: {
-    //   straightLines: 50,
-    //   curvedLines: 10,
-    //   bouncingLines: 100,
-    //   arcs: 10,
-    //   points: 10,
-    // },
+    color: '#FFFFFF',
 
     preset: {
       Straight: {
@@ -69,7 +62,7 @@ const preset = {
         max: 100
       },
       Curves: {
-        quantity: 10,
+        quantity: 5,
         max: 10,
         points: 10
       },
@@ -83,15 +76,13 @@ const preset = {
       },
     },
     
-    strokeWeight: 2,
+    strokeWeight: 1,
     min: 1,
     max: 100,
   },
 
   BasicTypo: {
     dopText: true,
-    // random: true,
-    //textPositions : [[], []]
 
     upperCase: true,
     textAlign: 'left',
@@ -99,8 +90,8 @@ const preset = {
     mainText: {
       value: 'Name of your track or album',
       color: '#ffffff',
-      fontOptions: ['esenin-script-one', 'Acosta', 'PT-Root-UI', 'bc-novatica-cyr'],
-      currentFont: 'bc-novatica-cyr',
+      fontOptions: ['Sans Serif', 'Script', 'Special'],
+      currentFont: 'Sans Serif',
       size:{
         sliderValue: 10,
         min: 5,
@@ -110,11 +101,10 @@ const preset = {
     },
 
     otherText: {
-      // values: [{value: 'Music is the answer to everything, music is the key to the world'}],
-      values: ['Music is the answer to everything, music is the key to the world'],
+      values: ['Music is the answer to everything', 'music is the key to the world'],
       color: '#ffffff',
-      fontOptions: ['esenin-script-one', 'Acosta', 'PT-Root-UI', 'bc-novatica-cyr'],
-      currentFont: 'bc-novatica-cyr',
+      fontOptions: ['Sans Serif', 'Script', 'Special'],
+      currentFont: 'Sans Serif',
       size:{
         sliderValue: 2,
         min: 1,
