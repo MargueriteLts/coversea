@@ -2,46 +2,38 @@
   box-sizing: border-box;
 }
 
-a {
-  text-decoration: none;
-}
-
 body {
-  font-family: "neue-haas-unica", sans-serif;
-  font-weight: 200;
-  font-style: normal;
-  color: white;
+  background: var(--BACKGROUND-WEBSITE-BLACK);
 }
 
-h1 {
+a {
+  text-decoration: none;  /* Remove underline */
+  color: inherit;         /* Inherit color from parent element */
+  background: none;       /* Remove background */
+  border: none;           /* Remove border */
+  outline: none;          /* Remove outline */
+  cursor: pointer;        /* Set cursor to pointer for usability */
+}
+
+h1, h2, h3 {
   font-family: "bc-novatica-cyr", sans-serif;
-  font-weight: 400;
+  text-transform: uppercase;
   font-style: normal;
-  font-size: 50px;
-  text-transform: uppercase;
-  //position: absolute;
-  //text-align: center;
-  //width: 100%;
-}
-
-h2 {
-  font-size: 42px;
-  //align-items: center;
-  //text-align: center;
-  font-family: "bc-novatica-cyr", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  text-transform: uppercase;
-}
-
-h3 {
-  text-transform: uppercase;
+  color: var(--TEXT-WHITE);
 }
 
 p {
+  font-family: "neue-haas-unica";
   font-size: 16px;
-  font-family: neue-haas-unica;
+  font-style: normal;
+  font-weight: 200;
+  color: var(--TEXT-WHITE);
 }
+
+
+
+
+//LAYOUT
 
 .flexColumn {
   display: flex;
@@ -61,247 +53,9 @@ p {
   align-items: flex-end;
 }
 
-.header {
-  width: 100%;
-  display: flex;flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 24px;
 
-  font-family: bc-novatica-cyr, sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 106px;
-  line-height: 106px;
-  text-align: center;
-
-  .menuButtonActivePage {
-    color: var(--white);
-    text-decoration: none;
-    cursor: default;
-    user-select: none;
-  }
-
-  .menuButton {
-    color: var(--BgModul);
-    text-decoration: none;
-    cursor: pointer;
-    user-select: none;
-    color: var(--DARK-GREY);
-  }
-}
-
-.Content {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 0 24px;
-  overflow-x: hidden;
-}
 
 //for working on basictypo layout
 .generator__modules-wrap {
   min-width: 700px;
 }
-
-///////////////// BUTTONS
-
-
-.input {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  column-gap: 12px;
-  // font-family: "bc-novatica-cyr", sans-serif;
-  font-family: neue-haas-unica, sans-serif;
-  // text-transform: uppercase;
-  font-size: 18px;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: -0.6px;
-  color: var(--TEXT-NOTSELECTED);
-}
-
-.input__entry {
-  flex-grow: 1;
-  // width: 100%;
-  background-color: var(--BACKGROUND-WEBSITE-BLACK);
-  color: var(--TEXT-WHITE);
-  border: none;
-  border-radius: 20px;
-  padding: 8px 20px 9px;
-  font-size: 20px;
-  font-family: neue-haas-unica, sans-serif;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.input__entry:focus-visible {
-  outline: none;
-}
-
-textarea {
-  resize: none;
-}
-
-.textarea {
-  display: flex;
-  flex-direction: row;
-  flex-grow: 1;
-  align-items: center;
-  column-gap: 12px;
-  // font-family: "bc-novatica-cyr", sans-serif;
-  font-family: neue-haas-unica, sans-serif;
-  // text-transform: uppercase;
-  font-size: 18px;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: -0.6px;
-  color: var(--TEXT-NOTSELECTED);
-}
-
-.textarea__entry {
-  flex-grow: 1;
-  width: 100%;
-  background-color: var(--BACKGROUND-WEBSITE-BLACK);
-  color: var(--TEXT-WHITE);
-  border: none;
-  border-radius: 20px;
-  padding: 8px 20px 9px;
-  font-size: 20px;
-  font-family: neue-haas-unica, sans-serif;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.textarea__entry:focus-visible {
-  outline: none;
-}
-
-// codepen
-
-input[type="range"] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  outline: none;
-  vertical-align: middle;
-  width: 100%;
-  height: .15rem;
-  background: var(--GREY);
-  border-radius: 20px;
-}
-
-::-moz-range-track {
-  background: transparent;
-  border: 0
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  outline: none;
-  cursor: pointer;
-  border: 0;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  background-color: var(--GREY);
-}
-
-input[type="range"]::-moz-range-thumb {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  outline: none;
-  cursor: pointer;
-  border: 0;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  background-color: var(--GREY);
-}
-
-input[type="range"]::-ms-thumb {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  outline: none;
-  cursor: pointer;
-  border: 0;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  background-color: var(--GREY);
-}
-
-input[type="range"]::-webkit-slider-thumb:hover {
-  background-color: var(--WHITE);
-}
-input[type="range"]::-moz-range-thumb:hover {
-  background-color: var(--WHITE);
-}
-input[type="range"]::-ms-thumb:hover {
-  background-color: var(--WHITE);
-}
-
-.slider {
-  width: 100%;
-}
-
-.A_NumberInput {
-  background-color: var(--BACKGROUND-BTN-SECONDARY);
-  color: var(--TEXT-WHITE);
-  padding-left: 12px;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-radius: 10px;
-  outline: none;
-  box-shadow: none;
-  border: none;
-  font-family: "bc-novatica-cyr";
-  font-size: 16px;
-  line-height: 16px;
-}
-
-// input[type="number"] {
-//   -webkit-appearance: textfield;
-//   -moz-appearance: textfield;
-//   appearance: textfield;
-// }
-
-// input[type=number]::-webkit-inner-spin-button,
-// input[type=number]::-webkit-outer-spin-button {
-//   -webkit-appearance: none;
-//   margin: 0;
-//   // width: 10px;
-//   // height: 10px;
-//   height: 100%;
-//   width: 10px;
-// }
-
-// input[type="number"]::-webkit-inner-spin-button {
-//   background: url('images/ui/icons/AngleDownS.svg') no-repeat center;
-//   background-size: 100%;
-//   // border: none;
-//   // cursor: pointer;
-//   // // margin-bottom: 5px;
-//   // // bottom: 0;
-//   // position: absolute;
-//   // height: 50%;
-//   // bottom: 0;
-// }
-
-// input[type="number"]::-webkit-outer-spin-button {
-//   background: url('images/ui/icons/AngleUpS.svg') no-repeat center;
-//   background-size: 100%;
-// //   border: none;
-// //   cursor: pointer;
-// //   // margin-top: 5px;
-// //   position: absolute;
-// //   height: 50%;
-// //   top: 0;
-// }

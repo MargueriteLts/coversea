@@ -1,34 +1,57 @@
 body.index {
-  a {
-    text-decoration: none;  /* Remove underline */
-    color: inherit;         /* Inherit color from parent element */
-    background: none;       /* Remove background */
-    border: none;           /* Remove border */
-    outline: none;          /* Remove outline */
-    cursor: pointer;        /* Set cursor to pointer for usability */
-  }
-  
-  //a:visited {
-  //  color: inherit;         /* Ensure visited links don't change color */
-  //}
-  
-  //a:hover,
-  //a:focus,
-  //a:active {
-  //  text-decoration: none;  /* Ensure no underline on hover, focus, active */
-  //  color: inherit;         /* Maintain color on hover, focus, active */
-  //  background: none;       /* Remove any background on hover, focus, active */
-  //  border: none;           /* Remove any border on hover, focus, active */
-  //  outline: none;          /* Remove any outline on hover, focus, active */
-  //}
-
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //height: 2500px;
-  background: var(--BACKGROUND-WEBSITE-BLACK);
+
+  h1 {
+    font-size: 50px;
+    font-weight: 400;
+  }
+  
+  h2 {
+    font-size: 42px;
+    font-weight: 400;
+  }
+
+  .headerLandingPage {
+    width: 100%;
+    display: flex;flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+  
+    font-family: bc-novatica-cyr, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 106px;
+    line-height: 106px;
+    text-align: center;
+  
+    .menuButtonActivePage {
+      color: var(--white);
+      text-decoration: none;
+      cursor: default;
+      user-select: none;
+    }
+  
+    .menuButton {
+      color: var(--BgModul);
+      text-decoration: none;
+      cursor: pointer;
+      user-select: none;
+      color: var(--DARK-GREY);
+    }
+  }
+  
+  .contentLandingPage {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 24px;
+    overflow-x: hidden;
+  }
 
   .logoBG {
     position: absolute;
