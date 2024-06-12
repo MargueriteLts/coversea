@@ -29,6 +29,7 @@ import * as generator9_3 from '../generators/generator9_3.js'
 import * as generator10 from '../generators/generator10.js'
 import * as generator10_2 from '../generators/generator10_2.js'
 import * as generator10_3 from '../generators/generator10_3.js'
+import * as teaserGenerator from '../generators/teaserGenerator.js'
 
 const generators = {
   generator1,
@@ -608,7 +609,6 @@ function bouncingRange(range) {
 function initLinesStore(lines) {
   lines = Object.assign({}, lines, {
     moduleName: 'Lines',
-    //color: '#fff',
     quantityLocked: false,
     lineTypeLocked: false,
     strokeWeightLocked: false,
@@ -657,6 +657,7 @@ function setLinesStore(type, value) {
       moduleLinesStore.currentLineType = value
       if (value == 'Straight') {
         moduleLinesStore.maxQuantity = moduleLinesStore.preset.Straight.max
+        moduleLinesStore.sliderValueQuantity = moduleLinesStore.preset.Straight.quantity
       }
       if (value == 'Curves') {
         moduleLinesStore.maxQuantity = moduleLinesStore.preset.Curves.max
@@ -687,8 +688,10 @@ function setLinesStore(type, value) {
         resolve([value])
       }
       if (moduleLinesStore.currentLineType == 'Curves') {
+        console.log('yo');
         moduleLinesStore.preset.Curves.quantity = value
-        moduleLinesStore.preset.Curves.pointsSets= generateMultiplePointSets(moduleLinesStore.preset.Curves.quantity, moduleLinesStore.preset.Curves.points)
+        //moduleLinesStore.preset.Curves.pointsSets= generateMultiplePointSets(moduleLinesStore.preset.Curves.quantity, moduleLinesStore.preset.Curves.points)
+        moduleLinesStore.preset.Curves.pointsSets= generateMultiplePointSets(value, moduleLinesStore.preset.Curves.points)
         resolve([value])
       }
       if (moduleLinesStore.currentLineType == 'Arcs') {
@@ -1458,20 +1461,19 @@ function randomizeModuleStore(moduleType) {
         
         setBackgroundStore('Gradient')
 
-        if (moduleBackgroundStore.preset.Gradient.typeLocked == false) {
-          let gradientType = sample(moduleBackgroundStore.preset.Gradient.gradientTypes)
-          setBackgroundStore('RandomizeGradientType', gradientType)
-        }
+      }
+      if (moduleBackgroundStore.preset.Gradient.typeLocked == false) {
+        moduleBackgroundStore.currentGradientType = sample(moduleBackgroundStore.preset.Gradient.gradientTypes)
+      }
 
-        if (moduleBackgroundStore.preset.Gradient.angle.locked == false) {
-          let newAngle = sample(['angle1', 'angle2', 'angle3', 'angle4'])
-          setBackgroundStore('RandomizeAngleGradient', newAngle)
-        }
+      if (moduleBackgroundStore.preset.Gradient.angle.locked == false) {
+        let newAngle = sample(['angle1', 'angle2', 'angle3', 'angle4'])
+        setBackgroundStore('RandomizeAngleGradient', newAngle)
+      }
 
-        if (moduleBackgroundStore.preset.Gradient.stops.locked == false) {
-          let newQuantity = getRandomArbitrary(0, 100)
-          setBackgroundStore('stopQuantity', newQuantity)
-        }
+      if (moduleBackgroundStore.preset.Gradient.stops.locked == false) {
+        let newQuantity = getRandomArbitrary(0, 100)
+        setBackgroundStore('stopQuantity', newQuantity)
       }
 
       if (newBackgroundType == 'Noise' && moduleBackgroundStore.preset.Noise.locked == false) {
@@ -1601,15 +1603,21 @@ function randomizeModuleStore(moduleType) {
     ////////
     if (moduleType == 'Lines') {
       
-      setLinesStore('randomize')
-      console.log(moduleLinesStore.colorLocked);
+
       if ( moduleLinesStore.colorLocked == false ) {
         setLinesStore('SolidColor', generateColor())
       }
       if ( moduleLinesStore.strokeWeightLocked == false ) {
         setLinesStore('strokeWeight', getRandomArbitrary(moduleLinesStore.min, moduleLinesStore.max))
       }
-      moduleLinesStore.pointsSets = generateMultiplePointSets(moduleLinesStore.Lquantity, moduleLinesStore.Pquantity)
+
+      if (moduleLinesStore.quantityLocked == false) {
+        let newSliderValue = getRandomArbitrary(1, moduleLinesStore.maxQuantity)
+        moduleLinesStore.sliderValueQuantity = newSliderValue
+        setLinesStore('linesQuantity', newSliderValue)
+      } else {
+        setLinesStore('linesQuantity', moduleLinesStore.sliderValueQuantity)
+      }
     }
     ////////
 

@@ -4,7 +4,7 @@ const preset = {
   
   blend: {
     Vinyl: false,
-    Text1: true
+    difference: true
   },
   
   Background: {
@@ -54,6 +54,7 @@ const preset = {
     currentLineType: 'Bouncing',
 
     layout: 'Vertical',
+    color: '#FFFFFF',
 
     preset: {
       Straight: {
