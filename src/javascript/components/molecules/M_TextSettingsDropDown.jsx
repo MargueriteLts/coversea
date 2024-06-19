@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import reactCSS from 'reactcss'
 
 import A_DropDownButton from '../ATOMS/A_DropDownButton.jsx'
-import ColorPicker from '../ColorPicker.jsx'
+import M_ColorPicker from './controls/M_ColorPicker.jsx'
 import M_Select from './M_Select.jsx'
 import Slider from '../Slider.jsx'
 
@@ -92,7 +92,7 @@ export default class M_TextSettingsDropDown extends Component {
         ? <div style={ styles.popover } className='dropDownPopover'>
           {/* SHOULD BE COMPONENTS ATOMS */}
           <div className='dropDown-item'>
-            <ColorPicker
+            <M_ColorPicker
               // alpha={false}
               object={object}
               color={color}

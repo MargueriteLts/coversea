@@ -10,12 +10,17 @@
 
 <body class="teaserGenerator">
 
-  <div class="teaserHeader">
-    <div class="logo logo-header"></div>
-  </div>
+  <!-- header -->
   
-  <div class="teaserContent">
-    <div class="section-subtitle">
+  <header class="teaserHeader">
+    <div class="logo logo-header"></div>
+  </header>
+
+  <!-- content -->
+
+  <main class="teaserContent">
+
+    <section class="section-subtitle">
       <h2>
         your new cover artwork generator<br> <span>(powered by p5.js)</span>
       </h2>
@@ -26,15 +31,15 @@
         cover
         artworks.
       </p>
-    </div>
+    </section>
 
-    <div  class="section-CTA-mobile">
+    <section  class="section-CTA-mobile">
       <div id="scrollButton-mobile" class="button">Try our teaser generator</div>
       <div class="subSection-CTA">
         <p>Learn more</p>
         <img src="./images/ui/icons/AngleDown.svg" alt="Angle Down icon" class="icon">
       </div>
-    </div>
+    </section>
     
     <div class="statement-position">
         <div id="bg-statement"></div>
@@ -44,10 +49,8 @@
           for cover artwork creation
       </div>
     </div>
-    
 
-
-    <div class="section-CTA-desktop">
+    <section class="section-CTA-desktop">
       <div class="CTA">
         <div class="backgroundLogo"></div>
         <div id="scrollButton" class="button">Try our teaser generator</div>
@@ -56,10 +59,9 @@
         <p>Learn more</p>
         <img src="./images/ui/icons/AngleDown.svg" alt="Angle Down icon" class="icon">
       </div>
-    </div>
+    </section>
 
-    <div class="section-presentation">
-
+    <section class="section-presentation">
       <div class="subsection" id="s1">
         <div class="subsection-text" id="st1">
           <h1>
@@ -75,26 +77,23 @@
         <div class="generatorImage"></div>
         <div class="modulesImage-mobile"></div>
       </div>
-
-        
-
       
       <div class="subsection" id="s2">
-          <img src="./images/ui/modulesExamples-3.png" alt="Image of modules" class="modulesImage-img">
-          <div class="modulesImage"></div>
-          
-          <div class="subsection-text" id="st2">
-            <h1>once you are satisfied<br> with the design,<br> download it freely!</h1>
-            <p>Each generator is carefully being crafted, to offer you original designs with new esthetics and high quality
-              cover artworks. If you like what
-              you see, you can freely download the artwork.
-            </p>
-          </div>
-          <div class="generatorImage-mobile"></div>
+        <img src="./images/ui/modulesExamples-3.png" alt="Image of modules" class="modulesImage-img">
+        <div class="modulesImage"></div>
+        
+        <div class="subsection-text" id="st2">
+          <h1>once you are satisfied<br> with the design,<br> download it freely!</h1>
+          <p>Each generator is carefully being crafted, to offer you original designs with new esthetics and high quality
+            cover artworks. If you like what
+            you see, you can freely download the artwork.
+          </p>
         </div>
-    </div>
-    
-    <div class="section-generator" id="targetSection">
+        <div class="generatorImage-mobile"></div>
+      </div>
+    </section>
+
+    <section class="section-generator" id="targetSection">
       <div class="subsection-text" id="s3">
         <h1>Try a generator right now</h1>
         <p>
@@ -111,41 +110,39 @@
           <div data-generator="teaserGenerator" id="reactComponentRoot"></div>
         </div>
       </div>
+    </section>
 
-    </div>
-
-    <div class="section-socials">
+    <section class="section-socials">
       <div class="subsection-text" id="s4">
         <p>
-          Many other features and generators will be accessible, follow us on social media to be the first to know about the
-          full
-          release!
+          Many other features and generators will be accessible, follow us on social media to be the first to know about the full release!
         </p>
         <h1>
-          you have an idea for a cover design and want to take part in the project?
-          Don’t hesitate to contact us!
+          you have an idea for a cover design and want to take part in the project? Don’t hesitate to contact us!
         </h1>
         <div class="socials-buttons">
-          <div class="button" id="socials">INST<img src="./images/ui/icons/ArrowBasicTopRight.svg" alt="Angle Down icon" class="icon">
-          </div>
-          <div class="button" id="socials">TELEGRAM<img src="./images/ui/icons/ArrowBasicTopRight.svg" alt="Angle Down icon"
-              class="icon"></div>
+          <a href="https://www.instagram.com/coversea.gen?igsh=eTJqYjcxcWRwMHR3" class="button socials">INST<img src="./images/ui/icons/ArrowBasicTopRight.svg" alt="Angle Down icon" class="icon"></a>
+          <a href="https://t.me/coverseagen" class="button socials">TELEGRAM<img src="./images/ui/icons/ArrowBasicTopRight.svg" alt="Angle Down icon" class="icon"></a>
         </div>
       </div>
-    </div>
-    
-  </div>
+    </section>
 
-  <div class="teaserFooter">
+  </main>
+
+  <!-- footer -->
+
+  <footer class="teaserFooter">
     <div class="footer-column">
       <div class="logo logo-footer"></div>
       <p>By Marguerite Lorthiois</p>
     </div>
     <div class="footer-infos">
       <p>math × code × art × design</p>
-      <p>HSE Art&Design School 2024</p>
+      <p>HSE Art & Design School 2024</p>
     </div>
-  </div>
+  </footer>
+
+  <!-- just a smol script for the scroll button -->
 
   <script>
     document.getElementById('scrollButton').addEventListener('click', function () {

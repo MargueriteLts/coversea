@@ -2,9 +2,11 @@ import React, { Component, createRef } from 'react'
 import ReactDOM from 'react-dom'
 import reactCSS from 'reactcss'
 import { SketchPicker } from 'react-color'
-import {rgbToHex} from '../utilities.js'
+import {rgbToHex} from '../../../utilities.js'
 
-export default class AllColorPicker extends Component {
+import A_Text from '../../ATOMS/A_Text.jsx'
+
+export default class M_ColorPicker extends Component {
   constructor(props) {
     super(props)
 
@@ -68,14 +70,15 @@ export default class AllColorPicker extends Component {
         colorSwatch: {
           width: '32px',
           height: '32px',
-          borderRadius: '4px',
+          borderRadius: '6px',
           background: color,
+          border: '1px solid #4d4d4d',
         },
         swatch: {
-          padding: '2px',
-          background: '#2C2C2C',
+          //padding: '1px',
+          //background: '#6d6d6d',
           borderRadius: '4px',
-          boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+          //boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
           display: 'inline-block',
           cursor: 'pointer',
         },
@@ -86,14 +89,21 @@ export default class AllColorPicker extends Component {
       },
     });
     
-    return <div style={{ position: 'relative' }} ref={this.colorpickerRef}>
+    return <div className='M_ColorPicker' ref={this.colorpickerRef}>
       <div className='A_ColorPickerButton' onClick={ this.handleClick }>
 
         <div style={ styles.swatch }>
           <div style={ styles.colorSwatch } />
         </div>
 
-        {text}
+        {/*{text}*/}
+
+        <A_Text
+          text={text}
+          style='titleText'
+          isUpperCase={true}
+        />
+
       </div>
 
       {this.state.displayColorPicker && (

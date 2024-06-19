@@ -90,7 +90,7 @@ export default class M_VinylContent extends Component {
           controlType='Slider'
           isFullWidth={true}
           hasTitle={true}
-          title='Vinyl size'
+          title='Size'
 
           isLocked={this.state.sizeLock}
           setStore={setVinylStore}
@@ -107,7 +107,7 @@ export default class M_VinylContent extends Component {
           controlType='SliderOpacity'
           isFullWidth={true}
           hasTitle={true}
-          title='Vinyl opacity'
+          title='Opacity'
 
           isLocked={this.state.opacityLock}
           setStore={setVinylStore}

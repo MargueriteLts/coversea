@@ -236,7 +236,7 @@
         width: 408px;
       }
 
-      #socials {
+      .socials {
         font-size: 29px;
         line-height: 29px;
       }
@@ -442,15 +442,15 @@
   .section-socials {
     margin-top: 206px;
     margin-bottom: 324px;
+
+    h1 {
+      width: 502px;
+    }
   }
 
-  #socials {
+  .socials {
     font-size: 36px;
     line-height: 100%;
-  }
-
-  h1 {
-    width: 500px;
   }
 }
 

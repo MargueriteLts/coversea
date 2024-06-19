@@ -45,8 +45,8 @@ export default class M_ControlWithSubControl extends Component {
 
     const classNames = classnames({
       'M_TabsWithSubControl': true,
-      [`${orientation}`]: true,
-      fullWidth: isFullWidth
+      //[`${orientation}`]: true,
+      //fullWidth: isFullWidth
     })
 
     return <div className={classNames}>

@@ -5,7 +5,7 @@ import classnames from 'classnames'
 
 import IconToggle from '../../buttons/IconToggle.jsx'
 import A_Text from '../../ATOMS/A_Text.jsx'
-import ColorPicker from '../../ColorPicker.jsx'
+import ColorPicker from './M_ColorPicker.jsx'
 import Slider from '../../Slider.jsx'
 import TabImageSet from '../../TabImageSet.jsx'
 import M_GradientColors from './M_GradientColors.jsx'

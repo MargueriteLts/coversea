@@ -14,11 +14,12 @@ body.index {
     font-weight: 400;
   }
 
-  .headerLandingPage {
+  .navLandingPage {
     width: 100%;
-    display: flex;flex-direction: row;
-    justify-content: space-between;
+    display: flex;
     align-items: center;
+
+    justify-content: space-between;
     padding: 24px;
   
     font-family: bc-novatica-cyr, sans-serif;
