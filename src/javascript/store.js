@@ -1463,7 +1463,10 @@ function randomizeModuleStore(moduleType) {
 
       }
       if (moduleBackgroundStore.preset.Gradient.typeLocked == false) {
-        moduleBackgroundStore.currentGradientType = sample(moduleBackgroundStore.preset.Gradient.gradientTypes)
+        //console.log(moduleBackgroundStore.currentGradientType);
+        //moduleBackgroundStore.currentGradientType = sample(moduleBackgroundStore.preset.Gradient.gradientTypes)
+        let newBackgroundGradientType = sample(moduleBackgroundStore.preset.Gradient.gradientTypes)
+        setBackgroundStore('CurrentGradientType', newBackgroundGradientType)
       }
 
       if (moduleBackgroundStore.preset.Gradient.angle.locked == false) {
@@ -1472,7 +1475,7 @@ function randomizeModuleStore(moduleType) {
       }
 
       if (moduleBackgroundStore.preset.Gradient.stops.locked == false) {
-        let newQuantity = getRandomArbitrary(0, 100)
+        let newQuantity = getRandomArbitrary(0, moduleBackgroundStore.preset.Gradient.stops.max)
         setBackgroundStore('stopQuantity', newQuantity)
       }
 

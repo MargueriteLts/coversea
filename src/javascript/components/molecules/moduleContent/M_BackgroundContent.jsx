@@ -146,7 +146,8 @@ export default class M_BackgroundContent extends Component {
           <M_Control
             orientation="row"
             controlType='GradientColors'
-            hasTitle={false}
+            hasTitle={true}
+            title='Colors'
 
             isLocked={this.state.gradientLock}
             setStore={setBackgroundStore}
@@ -157,45 +158,6 @@ export default class M_BackgroundContent extends Component {
             data2={background.preset.Gradient.color2}
             handleChange={handleChangeBackgroundGradientColor}
           />
-          <div className='gradientDirection'>
-            <M_Control
-              orientation="row"
-              controlType='ToggleIconSet'
-
-              isLocked={this.state.gradientTypeLock}
-              setStore={setBackgroundStore}
-              item='lockGradientType'
-              handleToggle={this.handleToggle}
-
-              handleChange={handleChangeBackgroundGradientType}
-              data={background.preset.Gradient.gradientTypes}
-              data2={background.preset.Gradient.currentGradientType}
-            />
-            { background.preset.Gradient.currentGradientType == 'Linear' ?
-              <M_Control
-                orientation="row"
-                controlType='GradientAngle'
-
-                isLocked={this.state.gradientAngleLock}
-                setStore={setBackgroundStore}
-                item='lockGradientAngle'
-                handleToggle={this.handleToggle}
-
-                handleChange={handleChangeBackgroundAngleGradient}
-              />
-              : null
-            }
-          </div>
-          {/* <M_GradientDirection
-             gradientAngleLock={this.state.gradientAngleLock}
-            //  gradientTypeLock={this.state.gradientTypeLock}
-             setBackgroundStore={setBackgroundStore}
-             handleToggle={this.handleToggle}
-
-             handleChangeBackgroundAngleGradient={handleChangeBackgroundAngleGradient}
-          /> */}
-        </div>
-        <div className='TabContent-column'>
           <M_Control
             orientation="row"
             controlType='NumberInput'
@@ -212,6 +174,41 @@ export default class M_BackgroundContent extends Component {
             handleChange={handleChangeBackgroundGradientStopQuantity}
             
           />
+        </div>
+        <div className='TabContent-column'>
+          {/*<div className='gradientDirection'>*/}
+            <M_Control
+              orientation="row"
+              controlType='ToggleIconSet'
+              hasTitle={true}
+              title='Type'
+
+              isLocked={this.state.gradientTypeLock}
+              setStore={setBackgroundStore}
+              item='lockGradientType'
+              handleToggle={this.handleToggle}
+
+              handleChange={handleChangeBackgroundGradientType}
+              data={background.preset.Gradient.gradientTypes}
+              data2={background.preset.Gradient.currentGradientType}
+            />
+          {/*</div>*/}
+          { background.preset.Gradient.currentGradientType == 'Linear' ?
+            <M_Control
+              orientation="row"
+              controlType='GradientAngle'
+              hasTitle={true}
+              title='Orientation'
+
+              isLocked={this.state.gradientAngleLock}
+              setStore={setBackgroundStore}
+              item='lockGradientAngle'
+              handleToggle={this.handleToggle}
+
+              handleChange={handleChangeBackgroundAngleGradient}
+            />
+            : null
+          }
         </div>
       </div>
     }

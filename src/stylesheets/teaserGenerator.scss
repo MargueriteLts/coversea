@@ -265,7 +265,21 @@ span {
                     font-weight: 300;
                     line-height: 16px;
                     letter-spacing: -0.5px;
-                    min-width: 91px;
+                    //min-width: 91px;
+                    min-width: 76px;
+                  }
+
+                  .colorPickerText {
+                    display: flex;
+                    align-items: center;
+                    color: var(--TEXT-WHITE);
+                    font-family: "neue-haas-unica";
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 300;
+                    line-height: 14px;
+                    letter-spacing: -0.5px;
+                    min-width: 66px;
                   }
 
                   .toUpperCase {
@@ -418,7 +432,7 @@ span {
                 .gradientColors {
                   display: flex;
                   flex-direction: row;
-                  column-gap: 12px;
+                  column-gap: 8px;
                   align-items: center;
                 }
           

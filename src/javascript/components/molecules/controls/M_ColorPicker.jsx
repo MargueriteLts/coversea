@@ -98,11 +98,11 @@ export default class M_ColorPicker extends Component {
 
         {/*{text}*/}
 
-        <A_Text
+        {/*<A_Text
           text={text}
-          style='titleText'
+          style='colorPickerText'
           isUpperCase={true}
-        />
+        />*/}
 
       </div>
 
