@@ -55,10 +55,13 @@ export default class M_BackgroundContent extends Component {
       })
     }
     if (item == 'lockGradientType') {
+      //console.log('toggle');
+      //console.log(this.state.gradientTypeLock);
       setStore(item, !this.state.gradientTypeLock)
       this.setState({
         gradientTypeLock: !this.state.gradientTypeLock
       })
+      //console.log(this.state.gradientTypeLock);
     }
     if (item == 'lockGradientAngle') {
       setStore(item, !this.state.gradientAngleLock)

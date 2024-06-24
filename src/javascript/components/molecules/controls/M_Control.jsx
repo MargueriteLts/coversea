@@ -12,6 +12,7 @@ import M_GradientColors from './M_GradientColors.jsx'
 import M_GradientAngle from './M_GradientAngle.jsx'
 import M_NumberInput from './M_NumberInput.jsx'
 import M_ToggleIconSet from './M_ToggleIconSet.jsx'
+import M_Select from '../M_Select.jsx'
 
 export default class M_Control extends Component {
   constructor(props) {
@@ -101,6 +102,15 @@ export default class M_Control extends Component {
           value = {data}
           handleClick = {handleChange}
           tabBackgrounds={images}
+        />
+      )
+    }
+    if (controlType == 'Select') {
+      return (
+        <M_Select
+          options = {options}
+          value = {data}
+          handleClick = {handleChange}
         />
       )
     }

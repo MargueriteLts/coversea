@@ -382,10 +382,22 @@ span {
         
                   .M_VinylContent {
                     display: flex;
-                    flex-direction: column;
+                    //flex-direction: column;
+                    flex-direction: row;
                     align-items: flex-start;
                     gap: 20px;
                     align-self: stretch;
+                    
+                    .control_Title {
+                      min-height: 40px;
+                    }
+
+                    .TabContent-column {
+                      flex: 1;
+                      display: flex;
+                      flex-direction: column;
+                      gap: 20px;
+                    }
                   }
           
                   .M_LinesContent {

@@ -58,8 +58,8 @@ export default class M_VinylContent extends Component {
 
 
     return <div className="M_VinylContent">
-      <div className='TabContent-column'>
-        {/*<M_TabSetWithSubControl
+      <div className='content_row'>
+        <M_TabSetWithSubControl
           //subControl
           subControlType='ColorPicker'
           hasTitle={true}
@@ -72,43 +72,19 @@ export default class M_VinylContent extends Component {
           object='TintColor'
           handleChangeControl={handleChangeVinylTintColor}
           type='AllColorPicker'
-        />*/}
-        <M_Control
-          orientation='column'
-          hasTitle={true}
-          title='Disc type'
-          controlType='TabImageSet'
-        //lock
+
+          //mainControl
+          mainTitle='Vinyl Disc'
           isLocked={this.state.tabsLock}
-          setStore={setVinylStore}
           item='lockTabs'
-          handleToggle={this.handleToggle}
-        //data
-          data={vinyl.currentVinylType}
           options = {vinyl.preset}
-          handleChange = {handleTabClickVinyl}
+          value={vinyl.currentVinylType}
+          handleTabChange={handleTabClickVinyl}
           images={vinyl.tabBackgrounds}
         />
 
       </div>
-      <div className='TabContent-column'>
-        <M_Control
-          orientation="row"
-          controlType='ColorPicker'
-          isFullWidth={true}
-          hasTitle={true}
-          title='Tint color'
-
-          isLocked={this.state.tintColorLock}
-          setStore={setVinylStore}
-          item='lockTintColor'
-          handleToggle={this.handleToggle}
-          
-          data={vinyl.tintColor}
-          handleChange={handleChangeVinylTintColor}
-          type='AllColorPicker'
-          object='TintColor'
-        />
+      <div className='content_row'>
         <M_Control
           orientation="row"
           controlType='Slider'

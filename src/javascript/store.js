@@ -298,6 +298,9 @@ function setBackgroundStore(type, value) {
     if (type == 'lockGradient') {
       moduleBackgroundStore.preset.Gradient.locked = value
     }
+    if (type == 'lockGradientType') {
+      moduleBackgroundStore.preset.Gradient.typeLocked = value
+    }
     if (type == 'lockGradientAngle') {
       moduleBackgroundStore.preset.Gradient.angle.locked = value
     }
@@ -708,7 +711,9 @@ function setLinesStore(type, value) {
       }
     }
     //
-
+    if (type === 'lockType') {
+      moduleLinesStore.lineTypeLocked = value
+    }
     if (type === 'lockWeight') {
       moduleLinesStore.strokeWeightLocked = value
     }
@@ -1462,11 +1467,13 @@ function randomizeModuleStore(moduleType) {
         setBackgroundStore('Gradient')
 
       }
+      console.log(moduleBackgroundStore.preset.Gradient.typeLocked);
       if (moduleBackgroundStore.preset.Gradient.typeLocked == false) {
+        console.log('yes');
         //console.log(moduleBackgroundStore.currentGradientType);
-        //moduleBackgroundStore.currentGradientType = sample(moduleBackgroundStore.preset.Gradient.gradientTypes)
-        let newBackgroundGradientType = sample(moduleBackgroundStore.preset.Gradient.gradientTypes)
-        setBackgroundStore('CurrentGradientType', newBackgroundGradientType)
+        moduleBackgroundStore.preset.Gradient.currentGradientType = sample(moduleBackgroundStore.preset.Gradient.gradientTypes)
+        //let newBackgroundGradientType = sample(moduleBackgroundStore.preset.Gradient.gradientTypes)
+        //setBackgroundStore('CurrentGradientType', newBackgroundGradientType)
       }
 
       if (moduleBackgroundStore.preset.Gradient.angle.locked == false) {
@@ -1606,6 +1613,9 @@ function randomizeModuleStore(moduleType) {
     ////////
     if (moduleType == 'Lines') {
       
+      if (moduleLinesStore.lineTypeLocked == false) {
+        moduleLinesStore.currentLineType = sample(moduleLinesStore.linesTypes)
+      }
 
       if ( moduleLinesStore.colorLocked == false ) {
         setLinesStore('SolidColor', generateColor())

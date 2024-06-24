@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import M_Control from '../controls/M_Control.jsx'
-import M_Select from '../M_Select.jsx'
+//import M_Select from '../M_Select.jsx'
 
 export default class M_LinesContent extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      // tabsLock: this.props.vinyl.locked,
+      typeLock: this.props.lines.lineTypeLocked,
       weightLock : this.props.lines.strokeWeightLocked,
       solidColorLock: this.props.lines.colorLocked,
       quantityLock: this.props.lines.quantityLocked
@@ -19,11 +19,12 @@ export default class M_LinesContent extends Component {
   handleToggle = (item, setStore) => {
     
     
-    // if (item == 'lockTabs') {
-    //   setStore(item, !this.state.tabsLock)
-    //   this.setState({
-    //     tabsLock: !this.state.tabsLock
-    //   })
+     if (item == 'lockType') {
+       setStore(item, !this.state.typeLock)
+       this.setState({
+         typeLock: !this.state.typeLock
+       })
+     }
     if (item == 'lockWeight') {
       setStore(item, !this.state.weightLock)
       this.setState({
@@ -57,10 +58,26 @@ export default class M_LinesContent extends Component {
 
     return <div className="M_LinesContent">
       <div className='content_Column'>
-        <M_Select
+        {/*<M_Select
           options={lines.linesTypes}
           value={lines.currentLineType}
           handleClick={handleDropDownLinesTypeClick}
+        />*/}
+        <M_Control
+          orientation="row"
+          controlType='Select'
+          isFullWidth={true}
+          hasTitle={true}
+          title='Type'
+        //lock
+          isLocked={this.state.typeLock}
+          setStore={setLinesStore}
+          item='lockType'
+          handleToggle={this.handleToggle}
+        //data
+          options={lines.linesTypes}
+          data={lines.currentLineType}
+          handleChange={handleDropDownLinesTypeClick}
         />
         <M_Control
           orientation="row"
