@@ -13,9 +13,11 @@ export default class BasicTypo extends Component {
     this.state = {
       valueMainText: this.props.basictypo.mainText.value,
       currentFontMainText: this.props.basictypo.mainText.currentFont,
-      sizeMainText: this.props.basictypo.mainText.size.sliderValue,
       // styleMainText: this.props.basictypo.styleMainText,
       colorMainText: this.props.basictypo.mainText.color,
+      sizeMainText: this.props.basictypo.mainText.size.sliderValue,
+      leadingMainText: this.props.basictypo.mainText.leading.sliderValue,
+      //spacingMainText: this.props.basictypo.mainText.spacing.sliderValue,
 
       valueOtherText: this.props.basictypo.otherText.value,
       currentFontOtherText: this.props.basictypo.otherText.currentFont,
@@ -40,7 +42,6 @@ export default class BasicTypo extends Component {
     })
   }
 
-
   handleChangeMainTextColor = (object, value) => {
     // console.log(object);
     this.props.setBasicTypoStore(object, value)
@@ -56,6 +57,16 @@ export default class BasicTypo extends Component {
     this.props.setBasicTypoStore('sizeMainText', e.target.value)
     this.setState({sizeMainText: e.target.value})
   }
+
+  handleLeadingMainText = (e) => {
+    this.props.setBasicTypoStore('LeadingMainText', e.target.value)
+    this.setState({leadingMainText: e.target.value})
+  }
+
+  //handleSpacingMainText = (e) => {
+  //  this.props.setBasicTypoStore('SpacingMainText', e.target.value)
+  //  this.setState({spacingMainText: e.target.value})
+  //}
 
   /// other text
 
@@ -120,10 +131,19 @@ export default class BasicTypo extends Component {
           currentFont={this.state.currentFontMainText}
           handleDropDownClick={this.handleMainTextDropDownClick}
           // handleDropDownStyles={this.handleDropDownStyles}
+          handleTextSize={this.handleSizeMainText}
+          size={this.state.sizeMainText}
           minSize={basictypo.mainText.size.min}
           maxSize={basictypo.mainText.size.max}
-          size={this.state.sizeMainText}
-          handleTextSize={this.handleSizeMainText}
+          
+          handleTextLeading={this.handleLeadingMainText}
+          leading={this.state.leadingMainText}
+          minLeading={basictypo.mainText.leading.min}
+          maxLeading={basictypo.mainText.leading.max}
+          //handleTextSpacing={this.handleSpacingMainText}
+          //spacing={this.state.spacingMainText}
+          //minSpacing={basictypo.mainText.spacing.min}
+          //maxSpacing={basictypo.mainText.spacing.max}
         />
       </div>
 

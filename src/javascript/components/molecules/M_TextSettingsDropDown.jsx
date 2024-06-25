@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom'
 import reactCSS from 'reactcss'
 
 import A_DropDownButton from '../ATOMS/A_DropDownButton.jsx'
-import M_ColorPicker from './controls/M_ColorPicker.jsx'
-import M_Select from './M_Select.jsx'
-import Slider from '../Slider.jsx'
+import M_Control from './controls/M_Control.jsx'
+//import M_ColorPicker from './controls/M_ColorPicker.jsx'
+//import M_Select from './M_Select.jsx'
+//import Slider from '../Slider.jsx'
 
 export default class M_TextSettingsDropDown extends Component {
   constructor(props) {
@@ -63,7 +64,15 @@ export default class M_TextSettingsDropDown extends Component {
       minSize,
       maxSize,
       size,
-      handleTextSize
+      handleTextSize,
+      leading,
+      handleTextLeading,
+      minLeading,
+      maxLeading,
+      spacing,
+      handleTextSpacing,
+      minSpacing,
+      maxSpacing
     } = this.props
 
 
@@ -72,8 +81,8 @@ export default class M_TextSettingsDropDown extends Component {
         popover: {
           position: 'absolute',
           zIndex: '2',
-          top: '44px',
-          right: '0'
+          top: '0',
+          right: '108px'
         },
       },
     });
@@ -90,39 +99,98 @@ export default class M_TextSettingsDropDown extends Component {
       { this.state.displayContent
       
         ? <div style={ styles.popover } className='dropDownPopover'>
-          {/* SHOULD BE COMPONENTS ATOMS */}
           <div className='dropDown-item'>
-            <M_ColorPicker
-              // alpha={false}
+            <M_Control
+              orientation="row"
+              controlType='ColorPicker'
+              hasTitle={false}
+
+              //isLocked={this.state.solidColorLock}
+              //setStore={setBackgroundStore}
+              //item='lockSolidColor'
+              //handleToggle={this.handleToggle}
+
+              data={color}
               object={object}
-              color={color}
               handleChange={handleChange}
-              key='ColorPicker'
+              type='AllColorPicker'
             />
           </div>
           <div className='dropDown-item'>
-            <M_Select
+            <M_Control
+              orientation="row"
+              controlType='Select'
+              isFullWidth={true}
+              hasTitle={true}
+              title='Type'
+            //lock
+              //isLocked={this.state.typeLock}
+              //setStore={setLinesStore}
+              //item='lockType'
+              //handleToggle={this.handleToggle}
+            //data
               options={fontOptions}
-              value={currentFont}
-              handleClick={handleDropDownClick}
+              data={currentFont}
+              handleChange={handleDropDownClick}
             />
           </div>
           <div className='dropDown-item'>
-            <Slider
+            <M_Control
+              orientation="row"
+              controlType='Slider'
+              isFullWidth={true}
+              hasTitle={true}
               title='Size'
+            //lock
+              //isLocked={this.state.quantityLock}
+              //setStore={setLinesStore}
+              //item='lockQuantity'
+              //handleToggle={this.handleToggle}
+            //data
+              data={size}
+              handleChange={handleTextSize}
               min={minSize}
               max={maxSize}
-              value={size}
-              handleChange={handleTextSize}
             />
           </div>
-          {/*<div className='dropDown-item'>
-            <M_Select
-              options={typo.styles}
-              value={this.state.styleMainText}
-              handleClick={handleDropDownStyles}
-            />  
-          </div>*/}
+          <div className='dropDown-item'>
+            <M_Control
+              orientation="row"
+              controlType='Slider'
+              isFullWidth={true}
+              hasTitle={true}
+              title='Leading'
+            //lock
+              //isLocked={this.state.quantityLock}
+              //setStore={setLinesStore}
+              //item='lockQuantity'
+              //handleToggle={this.handleToggle}
+            //data
+              data={leading}
+              handleChange={handleTextLeading}
+              min={minLeading}
+              max={maxLeading}
+            />
+          </div>
+          <div className='dropDown-item'>
+            <M_Control
+              orientation="row"
+              controlType='Slider'
+              isFullWidth={true}
+              hasTitle={true}
+              title='Spacing'
+            //lock
+              //isLocked={this.state.quantityLock}
+              //setStore={setLinesStore}
+              //item='lockQuantity'
+              //handleToggle={this.handleToggle}
+            //data
+              data={spacing}
+              handleChange={handleTextSpacing}
+              min={minSpacing}
+              max={maxSpacing}
+            />
+          </div>
         </div>
 
         : null

@@ -573,11 +573,14 @@ input[type="range"]::-ms-thumb:hover {
   position: relative;
   display: inline-block;
   width: 100%;
+  min-width: 180px;
   font-family: 'neue-haas-unica';
   font-size: 16px;
   font-weight: 300;
   text-align: left;
 }
+
+// DROP DOWN
 
 .dropdown-toggle {
   color: var(--TEXT-WHITE);
@@ -587,6 +590,7 @@ input[type="range"]::-ms-thumb:hover {
   // width: fit-content;
   //width: 180px;
   width: 100%;
+  //min-width: 180px;
   padding: 8px 12px 10px 16px;
   border: none;
   border-radius: 20px;
@@ -608,11 +612,22 @@ input[type="range"]::-ms-thumb:hover {
   //font-size: 16px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   overflow: hidden;
+
+  .selectedItem {
+    background-color: #262626;
+    color: var(--TEXT-WHITE);
+  }
 }
 
 .dropdown-item {
   padding: 8px 12px;
   cursor: pointer;
+
+  .M_Control {
+    .titleText {
+      max-width: 54px;
+    }
+  }
 }
 
 .dropdown-item:hover {

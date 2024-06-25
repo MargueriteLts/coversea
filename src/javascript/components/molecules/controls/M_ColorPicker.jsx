@@ -1,10 +1,12 @@
 import React, { Component, createRef } from 'react'
 import ReactDOM from 'react-dom'
+
 import reactCSS from 'reactcss'
 import { SketchPicker } from 'react-color'
+
 import {rgbToHex} from '../../../utilities.js'
 
-import A_Text from '../../ATOMS/A_Text.jsx'
+//import A_Text from '../../ATOMS/A_Text.jsx'
 
 export default class M_ColorPicker extends Component {
   constructor(props) {

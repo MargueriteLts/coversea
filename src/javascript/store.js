@@ -687,24 +687,28 @@ function setLinesStore(type, value) {
 
       if (moduleLinesStore.currentLineType == 'Straight') {
         moduleLinesStore.preset.Straight.quantity = value
+        //moduleLinesStore.maxQuantity = moduleLinesStore.preset.Straight.max
         moduleLinesStore.preset.Straight.straightLines= generateLines(moduleLinesStore.preset.Straight.quantity, moduleLinesStore.layout)
         resolve([value])
       }
       if (moduleLinesStore.currentLineType == 'Curves') {
-        console.log('yo');
+        console.log(value);
         moduleLinesStore.preset.Curves.quantity = value
         //moduleLinesStore.preset.Curves.pointsSets= generateMultiplePointSets(moduleLinesStore.preset.Curves.quantity, moduleLinesStore.preset.Curves.points)
+        //moduleLinesStore.maxQuantity = moduleLinesStore.preset.Curves.max
         moduleLinesStore.preset.Curves.pointsSets= generateMultiplePointSets(value, moduleLinesStore.preset.Curves.points)
         resolve([value])
       }
       if (moduleLinesStore.currentLineType == 'Arcs') {
         moduleLinesStore.preset.Arcs.quantity = value
+        //moduleLinesStore.maxQuantity = moduleLinesStore.preset.Arcs.max
         moduleLinesStore.preset.Arcs.arcs = generateArcs(moduleLinesStore.preset.Arcs.quantity, moduleLinesStore.layout)
         resolve([value])
       }
       if (moduleLinesStore.currentLineType == 'Bouncing') {
         // console.log('yo');
         moduleLinesStore.preset.Bouncing.quantity = value
+        //moduleLinesStore.maxQuantity = moduleLinesStore.preset.Bouncing.max
         moduleLinesStore.preset.Bouncing.bouncingRandom = bouncingRandom()
         moduleLinesStore.preset.Bouncing.bouncingRange = bouncingRange(2)
         resolve([value])
@@ -1116,13 +1120,21 @@ function setBasicTypoStore(type, nextValue) {
     }
 
 
-    if (type === 'mainText') {
+    if (type == 'mainText') {
       moduleBasicTypoStore.mainText.value = nextValue
     }
-    if (type === 'sizeMainText') {
+    if (type == 'sizeMainText') {
       moduleBasicTypoStore.mainText.size.sliderValue = nextValue
       resolve([nextValue])
     }
+    if (type == 'leadingMainText') {
+      moduleBasicTypoStore.mainText.leading.sliderValue = nextValue
+      resolve([nextValue])
+    }
+    //if (type === 'spacingMainText') {
+    //  moduleBasicTypoStore.mainText.spacing.sliderValue = nextValue
+    //  resolve([nextValue])
+    //}
     if (type === 'sizeOtherText') {
       moduleBasicTypoStore.otherText.size.sliderValue = nextValue
       resolve([nextValue])
@@ -1615,6 +1627,18 @@ function randomizeModuleStore(moduleType) {
       
       if (moduleLinesStore.lineTypeLocked == false) {
         moduleLinesStore.currentLineType = sample(moduleLinesStore.linesTypes)
+        if (moduleLinesStore.currentLineType == 'Straight') {
+          moduleLinesStore.maxQuantity = moduleLinesStore.preset.Straight.max
+        }
+        if (moduleLinesStore.currentLineType == 'Curves') {
+          moduleLinesStore.maxQuantity = moduleLinesStore.preset.Curves.max
+        }
+        if (moduleLinesStore.currentLineType == 'Arcs') {
+          moduleLinesStore.maxQuantity = moduleLinesStore.preset.Arcs.max
+        }
+        if (moduleLinesStore.currentLineType == 'Bouncing') {
+          moduleLinesStore.maxQuantity = moduleLinesStore.preset.Bouncing.max
+        }
       }
 
       if ( moduleLinesStore.colorLocked == false ) {
@@ -1624,12 +1648,18 @@ function randomizeModuleStore(moduleType) {
         setLinesStore('strokeWeight', getRandomArbitrary(moduleLinesStore.min, moduleLinesStore.max))
       }
 
+      console.log('maxQuantity', moduleLinesStore.maxQuantity);
       if (moduleLinesStore.quantityLocked == false) {
+
         let newSliderValue = getRandomArbitrary(1, moduleLinesStore.maxQuantity)
-        moduleLinesStore.sliderValueQuantity = newSliderValue
+        //moduleLinesStore.sliderValueQuantity = newSliderValue
         setLinesStore('linesQuantity', newSliderValue)
       } else {
-        setLinesStore('linesQuantity', moduleLinesStore.sliderValueQuantity)
+        if (moduleLinesStore.sliderValueQuantity > moduleLinesStore.maxQuantity) {
+          setLinesStore('linesQuantity', moduleLinesStore.maxQuantity)
+        } else {
+          setLinesStore('linesQuantity', moduleLinesStore.sliderValueQuantity)
+        }
       }
     }
     ////////

@@ -5,10 +5,10 @@ import TabButtonSet from '../../TabButtonSet.jsx'
 // import ColorPicker from '../../ColorPicker.jsx'
 // import M_GradientOrientation from '../controls/M_GradientAngle.jsx'
 // import M_GradientColors from '../controls/M_GradientColors.jsx'
-import TabImageSet from '../../TabImageSet.jsx'
+//import TabImageSet from '../../TabImageSet.jsx'
 import IconToggle from '../../buttons/IconToggle.jsx'
 import M_Control from '../controls/M_Control.jsx'
-import M_GradientDirection from '../controls/M_GradientDirection.jsx'
+//import M_GradientDirection from '../controls/M_GradientDirection.jsx'
 import M_TabSetWithSubControl from '../controls/M_TabSetWithSubControl.jsx'
 
 

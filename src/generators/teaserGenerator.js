@@ -110,7 +110,16 @@ const preset = {
         min: 1,
         max: 10
       },
-      leading: 2,
+      leading: {
+        sliderValue: 2,
+        min: 1,
+        max: 10
+      }
+      //spacing: {
+      //  sliderValue: 2,
+      //  min: 1,
+      //  max: 10
+      //}
     }
    
     // styles: ['NORMAL', 'LIGHT', 'BOLD'],
