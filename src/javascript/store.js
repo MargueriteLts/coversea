@@ -1139,6 +1139,10 @@ function setBasicTypoStore(type, nextValue) {
       moduleBasicTypoStore.otherText.size.sliderValue = nextValue
       resolve([nextValue])
     }
+    if (type == 'leadingOtherText') {
+      moduleBasicTypoStore.otherText.leading.sliderValue = nextValue
+      resolve([nextValue])
+    }
     // if (type === 'StyleTabChange') {
     //   moduleBasicTypoStore.styleMainText = nextValue
     //   resolve([nextValue])

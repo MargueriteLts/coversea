@@ -1316,7 +1316,7 @@ function drawModules(p) {
       let otherTexts = basicTypo.otherText.values
       
       let presetSizeOtherText = basicTypo.otherText.size.sliderValue
-      let presetLeadingOtherText = basicTypo.otherText.leading
+      let presetLeadingOtherText = basicTypo.otherText.leading.sliderValue
 
       let otherTextSize = (presetSizeOtherText * canvasSize) / 100
       let otherTextLeading = (presetLeadingOtherText * canvasSize) / 100
@@ -1398,6 +1398,7 @@ function drawModules(p) {
 
     let presetSizeMainText = basicTypo.mainText.size.sliderValue
     let presetLeadingMainText = basicTypo.mainText.leading.sliderValue
+    console.log(presetLeadingMainText);
     let MainTextSize = (presetSizeMainText * canvasSize) / 100
     let MainTextLeading = (presetLeadingMainText * canvasSize) / 100
     p.textSize(MainTextSize)

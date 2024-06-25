@@ -21,9 +21,10 @@ export default class BasicTypo extends Component {
 
       valueOtherText: this.props.basictypo.otherText.value,
       currentFontOtherText: this.props.basictypo.otherText.currentFont,
-      sizeOtherText: this.props.basictypo.otherText.size.sliderValue,
       // styleMainText: this.props.basictypo.styleMainText,
-      colorOtherText: this.props.basictypo.otherText.color
+      colorOtherText: this.props.basictypo.otherText.color,
+      sizeOtherText: this.props.basictypo.otherText.size.sliderValue,
+      leadingOtherText: this.props.basictypo.otherText.leading.sliderValue
     }
   }
 
@@ -59,7 +60,8 @@ export default class BasicTypo extends Component {
   }
 
   handleLeadingMainText = (e) => {
-    this.props.setBasicTypoStore('LeadingMainText', e.target.value)
+    console.log('yo');
+    this.props.setBasicTypoStore('leadingMainText', e.target.value)
     this.setState({leadingMainText: e.target.value})
   }
 
@@ -99,6 +101,11 @@ export default class BasicTypo extends Component {
   handleSizeOtherText = (e) => {
     this.props.setBasicTypoStore('sizeOtherText', e.target.value)
     this.setState({sizeOtherText: e.target.value})
+  }
+
+  handleLeadingOtherText = (e) => {
+    this.props.setBasicTypoStore('leadingOtherText', e.target.value)
+    this.setState({leadingOtherText: e.target.value})
   }
 
   //////////////////////////////////////////////////////// RENDER
@@ -168,10 +175,14 @@ export default class BasicTypo extends Component {
             currentFont={this.state.currentFontOtherText}
             handleDropDownClick={this.handleOtherTextDropDownClick}
             // handleDropDownStyles={this.handleDropDownStyles}
+            handleTextSize={this.handleSizeOtherText}
+            size={this.state.sizeOtherText}
             minSize={basictypo.otherText.size.min}
             maxSize={basictypo.otherText.size.max}
-            size={this.state.sizeOtherText}
-            handleTextSize={this.handleSizeOtherText}
+            handleTextLeading={this.handleLeadingOtherText}
+            leading={this.state.leadingOtherText}
+            minLeading={basictypo.otherText.leading.min}
+            maxLeading={basictypo.otherText.leading.max}
           />
         </div>
         : null

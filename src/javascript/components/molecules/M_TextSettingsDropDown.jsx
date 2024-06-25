@@ -172,7 +172,7 @@ export default class M_TextSettingsDropDown extends Component {
               max={maxLeading}
             />
           </div>
-          <div className='dropDown-item'>
+          {/*<div className='dropDown-item'>
             <M_Control
               orientation="row"
               controlType='Slider'
@@ -190,7 +190,7 @@ export default class M_TextSettingsDropDown extends Component {
               min={minSpacing}
               max={maxSpacing}
             />
-          </div>
+          </div>*/}
         </div>
 
         : null

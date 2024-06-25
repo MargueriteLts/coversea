@@ -97,7 +97,11 @@ const preset = {
         min: 5,
         max: 20
       },
-      leading: 8,
+      leading: {
+        sliderValue: 8,
+        min: 1,
+        max: 20
+      }
     },
 
     otherText: {
@@ -110,6 +114,7 @@ const preset = {
         min: 1,
         max: 10
       },
+      //leading: 2
       leading: {
         sliderValue: 2,
         min: 1,
