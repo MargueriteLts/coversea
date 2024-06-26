@@ -1605,10 +1605,10 @@ function randomizeModuleStore(moduleType) {
         setVinylStore('CurrentTabChange', Vinyltype)
       }
       if (moduleVinylStore.sizeLock == false) {
-        setVinylStore('size', getRandomArbitrary(0, 100))
+        setVinylStore('size', getRandomArbitrary(20, 100))
       }
       if (moduleVinylStore.opacityLock == false ){
-        setVinylStore('opacity', getRandomArbitrary(0, 255))
+        setVinylStore('opacity', getRandomArbitrary(50, 255))
       }
       if (moduleVinylStore.tintColorLock == false ){
         let newColor = generateColor()

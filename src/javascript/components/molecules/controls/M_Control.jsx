@@ -76,7 +76,7 @@ export default class M_Control extends Component {
         <Slider
           // title={title}
           type="range"
-          min="0"
+          min="50"
           max="255"
           value={data}
           handleChange={handleChange}
