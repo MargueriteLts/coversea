@@ -1042,8 +1042,12 @@ function setfont(fontType) {
 
   let font
 
-  let sansSerifFonts = ['ADC-Semi-Bold', 'MintSansRegular', 'LiberationSans-Regular']
-  let scriptFonts = ['MeaCulpa-Regular', 'LuxuriousScript-Regular', 'PinyonScript-Regular', 'Italianno-Regular']
+  //let sansSerifFonts = ['ADC-Semi-Bold', 'MintSansRegular', 'LiberationSans-Regular']
+  //let sansSerifFonts = ['aDC', 'mint', 'liberation']
+  let sansSerifFonts = ['Barlow Semi Condensed', 'DM Sans', 'Poppins', 'Space Grotesk', 'Teko']
+  //let scriptFonts = ['MeaCulpa-Regular', 'LuxuriousScript-Regular', 'PinyonScript-Regular', 'Italianno-Regular']
+  //let scriptFonts = ['meaculpa', 'luxuriousScript', 'pinyonScript', 'italianno']
+  let scriptFonts = ['Mea Culpa', 'Luxurious Script', 'Pinyon Script', 'Italianno']
 
   if (fontType == 'Script') {
     font = sample(scriptFonts)

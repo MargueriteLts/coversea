@@ -58,6 +58,14 @@ let ptrootuiReg
 let ptrootuiBold
 let ptrootuiLight
 
+//let aDC
+//let mint
+//let liberation
+//let meaculpa
+//let luxuriousScript
+//let pinyonScript
+//let italianno
+
 let graphics
 let blendedLayer
 let shapesLayer
@@ -1387,6 +1395,8 @@ function drawModules(p) {
 
     //MAIN TEXT
     p.fill(basicTypo.mainText.color)
+    //console.log(basicTypo.fontMainText);
+    //pinyonScript
     p.textFont(basicTypo.fontMainText)
     p.textAlign(p.CENTER, p.CENTER)
 
@@ -1571,15 +1581,25 @@ function sketch(p) {
     //p.loadFont('../fonts/typekini.ttf')
     //p.loadFont('../fonts/AUSRINE.ttf')
 
-    p.loadFont('../fonts/ADC-Semi-Bold.otf')
-    p.loadFont('../fonts/MintSansRegular.otf')
-    p.loadFont('../fonts/LiberationSans-Regular.ttf')
+
+    //////
+
+    //aDC = p.loadFont('../fonts/ADC-Semi-Bold.otf')
+    //mint = p.loadFont('../fonts/MintSansRegular.otf')
+    //liberation = p.loadFont('../fonts/LiberationSans-Regular.ttf')
+
+    //meaculpa = p.loadFont('../fonts/MeaCulpa-Regular.ttf')
+    //luxuriousScript = p.loadFont('../fonts/LuxuriousScript-Regular.ttf')
+    //pinyonScript = p.loadFont('../fonts/PinyonScript-Regular.ttf')
+    //italianno = p.loadFont('../fonts/Italianno-Regular.ttf')
+    
+    
 
 
-    p.loadFont('../fonts/MeaCulpa-Regular.ttf')
-    p.loadFont('../fonts/LuxuriousScript-Regular.ttf')
-    p.loadFont('../fonts/PinyonScript-Regular.ttf')
-    p.loadFont('../fonts/Italianno-Regular.ttf')
+    
+    
+    
+    
 
   }
 
