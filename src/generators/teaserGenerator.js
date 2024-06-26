@@ -90,6 +90,10 @@ const preset = {
     mainText: {
       value: 'Name of your track or album',
       color: '#ffffff',
+      colorLocked: false,
+      typeLocked: false,
+      sizeLocked: false,
+      leadingLocked: false,
       fontOptions: ['Sans Serif', 'Script'],
       currentFont: 'Script',
       size:{
@@ -107,6 +111,10 @@ const preset = {
     otherText: {
       values: ['Music is the answer to everything, music is the key to the world'],
       color: '#ffffff',
+      colorLocked: false,
+      typeLocked: false,
+      sizeLocked: false,
+      leadingLocked: false,
       fontOptions: ['Sans Serif', 'Script'],
       currentFont: 'Sans Serif',
       size:{

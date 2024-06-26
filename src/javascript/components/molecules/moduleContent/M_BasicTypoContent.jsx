@@ -11,6 +11,17 @@ export default class BasicTypo extends Component {
     super(props)
 
     this.state = {
+      mainSolidColorLock: this.props.basictypo.mainText.colorLocked,
+      mainTypeLock: this.props.basictypo.mainText.typeLocked,
+      mainSizeLock: this.props.basictypo.mainText.sizeLocked,
+      mainLeadingLock: this.props.basictypo.mainText.leadingLocked,
+
+      otherSolidColorLock: this.props.basictypo.otherText.colorLocked,
+      otherTypeLock: this.props.basictypo.otherText.typeLocked,
+      otherSizeLock: this.props.basictypo.otherText.sizeLocked,
+      otherLeadingLock: this.props.basictypo.otherText.leadingLocked,
+
+
       valueMainText: this.props.basictypo.mainText.value,
       currentFontMainText: this.props.basictypo.mainText.currentFont,
       // styleMainText: this.props.basictypo.styleMainText,
@@ -60,7 +71,7 @@ export default class BasicTypo extends Component {
   }
 
   handleLeadingMainText = (e) => {
-    console.log('yo');
+    //console.log('yo');
     this.props.setBasicTypoStore('leadingMainText', e.target.value)
     this.setState({leadingMainText: e.target.value})
   }
@@ -108,6 +119,68 @@ export default class BasicTypo extends Component {
     this.setState({leadingOtherText: e.target.value})
   }
 
+
+  handleToggle = (item, setStore, textType) => {
+    //console.log(!this.state.mainSolidColorLock);
+    console.log(textType);
+    if (textType == 'main') {
+      if (item == 'lockColor') {
+        setStore('mainLockColor', !this.state.mainSolidColorLock)
+        this.setState({
+          mainSolidColorLock: !this.state.mainSolidColorLock
+        })
+      }
+      if (item == 'lockType') {
+        setStore('mainLockType', !this.state.mainTypeLock)
+        this.setState({
+          mainTypeLock: !this.state.mainTypeLock
+        })
+      }
+      if (item == 'lockSize') {
+        setStore('mainLockSize', !this.state.mainSizeLock)
+        this.setState({
+          mainSizeLock: !this.state.mainSizeLock
+        })
+      }
+      if (item == 'lockLeading') {
+        setStore('mainLockLeading', !this.state.mainLeadingLock)
+        this.setState({
+          mainLeadingLock: !this.state.mainLeadingLock
+        })
+      }
+    }
+    if (textType == 'other') {
+      if (item == 'lockColor') {
+        setStore('otherLockColor', !this.state.otherSolidColorLock)
+        this.setState({
+          otherSolidColorLock: !this.state.otherSolidColorLock
+        })
+      }
+      if (item == 'lockType') {
+        setStore('otherLockType', !this.state.otherTypeLock)
+        this.setState({
+          otherTypeLock: !this.state.otherTypeLock
+        })
+      }
+      if (item == 'lockSize') {
+        setStore('otherLockSize', !this.state.otherSizeLock)
+        this.setState({
+          otherSizeLock: !this.state.otherSizeLock
+        })
+      }
+      if (item == 'lockLeading') {
+        setStore('otherLockLeading', !this.state.otherLeadingLock)
+        this.setState({
+          otherLeadingLock: !this.state.otherLeadingLock
+        })
+      }
+    }
+
+ }
+
+
+
+
   //////////////////////////////////////////////////////// RENDER
   
   render() {
@@ -130,14 +203,24 @@ export default class BasicTypo extends Component {
         />
 
         <M_TextSettingsDropDown
+          //moduleData={basictypo}
           title='Text settings'
+
+          setStore={setBasicTypoStore}
+          handleToggle={this.handleToggle}
+          solidColorLock={this.state.mainSolidColorLock}
+          typeLock={this.state.mainTypeLock}
+          sizeLock={this.state.mainSizeLock}
+          leadingLock={this.state.mainLeadingLock}
+          typeOfText='main'
+          
           object='colorMainText'
           color={basictypo.mainText.color}
           handleChange={this.handleChangeMainTextColor}
           fontOptions={basictypo.mainText.fontOptions}
           currentFont={this.state.currentFontMainText}
           handleDropDownClick={this.handleMainTextDropDownClick}
-          // handleDropDownStyles={this.handleDropDownStyles}
+          handleDropDownStyles={this.handleDropDownStyles}
           handleTextSize={this.handleSizeMainText}
           size={this.state.sizeMainText}
           minSize={basictypo.mainText.size.min}
@@ -147,10 +230,6 @@ export default class BasicTypo extends Component {
           leading={this.state.leadingMainText}
           minLeading={basictypo.mainText.leading.min}
           maxLeading={basictypo.mainText.leading.max}
-          //handleTextSpacing={this.handleSpacingMainText}
-          //spacing={this.state.spacingMainText}
-          //minSpacing={basictypo.mainText.spacing.min}
-          //maxSpacing={basictypo.mainText.spacing.max}
         />
       </div>
 
@@ -167,14 +246,24 @@ export default class BasicTypo extends Component {
             setStore={setBasicTypoStore}
           />
           <M_TextSettingsDropDown
+            //basictypo={basictypo}
             title='Text settings'
+
+            setStore={setBasicTypoStore}
+            handleToggle={this.handleToggle}
+            solidColorLock={this.state.otherSolidColorLock}
+            typeLock={this.state.otherTypeLock}
+            sizeLock={this.state.otherSizeLock}
+            leadingLock={this.state.otherLeadingLock}
+            textType='other'
+
             object='colorOtherText'
             color={basictypo.otherText.color}
             handleChange={this.handleChangeOtherTextColor}
             fontOptions={basictypo.otherText.fontOptions}
             currentFont={this.state.currentFontOtherText}
             handleDropDownClick={this.handleOtherTextDropDownClick}
-            // handleDropDownStyles={this.handleDropDownStyles}
+            handleDropDownStyles={this.handleDropDownStyles}
             handleTextSize={this.handleSizeOtherText}
             size={this.state.sizeOtherText}
             minSize={basictypo.otherText.size.min}

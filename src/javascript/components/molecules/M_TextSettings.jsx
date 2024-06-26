@@ -13,48 +13,45 @@ export default class M_TextSettingsDropDown extends Component {
     super(props)
 
     this.state = {
-      displayContent: false,
-      popoverPosition: { top: 0, left: 0 }
+      typeLock: this.props.lines.lineTypeLocked,
+      weightLock : this.props.lines.strokeWeightLocked,
+      solidColorLock: this.props.lines.colorLocked,
+      quantityLock: this.props.lines.quantityLocked
     };
-
-    this.dropdownRef = createRef();
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-    this.handleClose = this.handleClose.bind(this);
   }
 
-  handleClick = () => {
-    this.setState({
-      displayContent: !this.state.displayContent,
-    });
-  };
-
-
-  componentDidMount() {
-    document.body.addEventListener('click', this.handleClickOutside);
-  }
-
-  componentWillUnmount() {
-    document.body.removeEventListener('click', this.handleClickOutside);
-  }
-
-  handleClickOutside(event) {
-    if (this.dropdownRef && !this.dropdownRef.current.contains(event.target)) {
-      this.handleClose()
+  handleToggle = (item, setStore) => {
+    
+    
+    if (item == 'lockType') {
+      setStore(item, !this.state.typeLock)
+      this.setState({
+        typeLock: !this.state.typeLock
+      })
     }
-  }
-
-  handleClose() {
-    this.setState({ displayContent: false });
-  }
-
-
+   if (item == 'lockWeight') {
+     setStore(item, !this.state.weightLock)
+     this.setState({
+       weightLock: !this.state.weightLock
+     })
+   }
+   if (item == 'lockColor') {
+     setStore(item, !this.state.solidColorLock)
+     this.setState({
+       solidColorLock: !this.state.solidColorLock
+     })
+   }
+   if (item == 'lockQuantity') {
+     setStore(item, !this.state.quantityLock)
+     this.setState({
+       quantityLock: !this.state.quantityLock
+     })
+   }
+ }
   
 
   render() {
     const {
-      setStore,
-      //handleToggle,
-      title,
       object,
       color,
       handleChange,
@@ -73,50 +70,21 @@ export default class M_TextSettingsDropDown extends Component {
       //spacing,
       //handleTextSpacing,
       //minSpacing,
-      //maxSpacing,
-      solidColorLock,
-      typeLock,
-      sizeLock,
-      leadingLock,
-      textType
+      //maxSpacing
     } = this.props
 
 
-    const styles = reactCSS({
-      'default': {
-        popover: {
-          position: 'absolute',
-          zIndex: '2',
-          top: '0',
-          right: '108px'
-        },
-      },
-    });
-
-
-    return <div className='M_DropDown' ref={this.dropdownRef}>
-      
-      <A_DropDownButton
-        text={title}
-        isOn={this.state.displayContent}
-        handleClick={this.handleClick}
-      />
-
-      { this.state.displayContent
-      
-        ? <div style={ styles.popover } className='dropDownPopover'>
+    return <>
           <div className='dropDown-item'>
             <M_Control
               orientation="row"
               controlType='ColorPicker'
               hasTitle={false}
 
-              isLocked={solidColorLock}
-              setStore={setStore}
-              item='lockColor'
-              //handleToggle={handleToggle}
-              handleToggle={() => this.props.handleToggle(textType)}
-              //textType={textType}
+              //isLocked={this.state.solidColorLock}
+              //setStore={setBackgroundStore}
+              //item='lockSolidColor'
+              //handleToggle={this.handleToggle}
 
               data={color}
               object={object}
@@ -132,12 +100,10 @@ export default class M_TextSettingsDropDown extends Component {
               hasTitle={true}
               title='Type'
             //lock
-              isLocked={typeLock}
-              setStore={setStore}
-              item='lockType'
-              //handleToggle={handleToggle}
-              handleToggle={() => this.props.handleToggle(textType)}
-              //textType={textType}
+              //isLocked={this.state.typeLock}
+              //setStore={setLinesStore}
+              //item='lockType'
+              //handleToggle={this.handleToggle}
             //data
               options={fontOptions}
               data={currentFont}
@@ -152,12 +118,10 @@ export default class M_TextSettingsDropDown extends Component {
               hasTitle={true}
               title='Size'
             //lock
-              isLocked={sizeLock}
-              setStore={setStore}
-              item='lockSize'
-              //handleToggle={handleToggle}
-              handleToggle={() => this.props.handleToggle(textType)}
-              //textType={textType}
+              //isLocked={this.state.quantityLock}
+              //setStore={setLinesStore}
+              //item='lockQuantity'
+              //handleToggle={this.handleToggle}
             //data
               data={size}
               handleChange={handleTextSize}
@@ -173,11 +137,10 @@ export default class M_TextSettingsDropDown extends Component {
               hasTitle={true}
               title='Leading'
             //lock
-              isLocked={leadingLock}
-              setStore={setStore}
-              item='lockLeading'
-              handleToggle={() => this.props.handleToggle(textType)}
-              //textType={textType}
+              //isLocked={this.state.quantityLock}
+              //setStore={setLinesStore}
+              //item='lockQuantity'
+              //handleToggle={this.handleToggle}
             //data
               data={leading}
               handleChange={handleTextLeading}
@@ -185,6 +148,7 @@ export default class M_TextSettingsDropDown extends Component {
               max={maxLeading}
             />
           </div>
+          
           {/*<div className='dropDown-item'>
             <M_Control
               orientation="row"
@@ -204,10 +168,6 @@ export default class M_TextSettingsDropDown extends Component {
               max={maxSpacing}
             />
           </div>*/}
-        </div>
-
-        : null
-      }
-    </div>
+        </>
   }
 }

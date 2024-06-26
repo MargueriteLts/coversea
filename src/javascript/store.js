@@ -1083,7 +1083,7 @@ function initBasicTypoStore(preset) {
 
   preset = Object.assign({}, preset, {
     moduleName: 'Typography',
-    locked: false,
+    //colorLocked: false,
     // textPositions : [[], []]
     textPositions: positions,
     //textPositions: {randomPosition: { x: 60, y: 95 }, randomPositions: [{ x: 5, y: 5 },{ x: 30, y: 5 },{ x: 60, y: 5 },{ x: 5, y: 95 },{ x: 30, y: 95 },{ x: 60, y: 95 }] }
@@ -1171,6 +1171,33 @@ function setBasicTypoStore(type, nextValue) {
     if (type === 'Positions') {
       let positions = generatePositions()
       moduleBasicTypoStore.textPositions = positions
+    }
+
+
+    if (type == 'mainLockColor') {
+      moduleBasicTypoStore.mainText.colorLocked = nextValue
+    }
+    if (type == 'mainLockType') {
+      moduleBasicTypoStore.mainText.typeLocked = nextValue
+    }
+    if (type == 'mainLockSize') {
+      moduleBasicTypoStore.mainText.sizeLocked = nextValue
+    }
+    if (type == 'mainLockLeading') {
+      moduleBasicTypoStore.mainText.leadingLocked = nextValue
+    }
+
+    if (type == 'otherLockColor') {
+      moduleBasicTypoStore.otherText.colorLocked = nextValue
+    }
+    if (type == 'otherLockType') {
+      moduleBasicTypoStore.otherText.typeLocked = nextValue
+    }
+    if (type == 'otherLockSize') {
+      moduleBasicTypoStore.otherText.sizeLocked = nextValue
+    }
+    if (type == 'otherLockLeading') {
+      moduleBasicTypoStore.otherText.leadingLocked = nextValue
     }
   })
 }
@@ -1611,7 +1638,7 @@ function randomizeModuleStore(moduleType) {
     if (moduleType == 'BasicTypo') {
       setBasicTypoStore('Positions')
 
-      if (moduleBasicTypoStore.locked == false) {
+      //if (moduleBasicTypoStore.locked == false) {
         //let newTypeFontMainText = sample(['Sans Serif', 'Script', 'Special'])
         let newTypeFontMainText = sample(['Sans Serif', 'Script'])
         //let newTypeFontOtherText = sample(['Sans Serif', 'Script', 'Special'])
@@ -1619,13 +1646,16 @@ function randomizeModuleStore(moduleType) {
         moduleBasicTypoStore.fontMainText = setfont(newTypeFontMainText)
         moduleBasicTypoStore.fontOtherText = setfont(newTypeFontOtherText)
 
-        moduleBasicTypoStore.mainText.color = generateColor()
+        if (moduleBasicTypoStore.mainText.colorLocked == false) {
+          moduleBasicTypoStore.mainText.color = generateColor()
+        }
+
         moduleBasicTypoStore.otherText.color = generateColor()
 
         moduleBasicTypoStore.mainText.size.sliderValue = getRandomArbitrary(moduleBasicTypoStore.mainText.size.min, moduleBasicTypoStore.mainText.size.max)
         moduleBasicTypoStore.otherText.size.sliderValue = getRandomArbitrary(moduleBasicTypoStore.otherText.size.min, moduleBasicTypoStore.otherText.size.max)
         
-      }
+      //}
 
       setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
     }
