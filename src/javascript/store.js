@@ -911,7 +911,7 @@ function initVinylStore(preset) {
     require.context('../images/sketchGraphics/vinylPics/label', false, /\.(png|jpe?g|svg)$/)
   )
   const collection3 = importAll(
-    require.context('../images/sketchGraphics/vinylPics/Vinyl', false, /\.(png|jpe?g|svg)$/)
+    require.context('../images/sketchGraphics/vinylPics/vinyl', false, /\.(png|jpe?g|svg)$/)
   )
 
   const images = importAll(
