@@ -321,7 +321,6 @@ function setBackgroundStore(type, value) {
 }
 
 function changeGradientAngle() {
-  console.log('rotate click');
   let angle = ''
 
   if (moduleBackgroundStore.preset.Gradient.angle.value === 'angle1') {
@@ -692,7 +691,6 @@ function setLinesStore(type, value) {
         resolve([value])
       }
       if (moduleLinesStore.currentLineType == 'Curves') {
-        console.log(value);
         moduleLinesStore.preset.Curves.quantity = value
         //moduleLinesStore.preset.Curves.pointsSets= generateMultiplePointSets(moduleLinesStore.preset.Curves.quantity, moduleLinesStore.preset.Curves.points)
         //moduleLinesStore.maxQuantity = moduleLinesStore.preset.Curves.max
@@ -956,7 +954,6 @@ function setVinylStore(type, value) {
   return new Promise((resolve, reject) => {
     if (type === 'CurrentTabChange') {
       moduleVinylStore.currentVinylType = value
-      console.log(value);
       resolve([value])
     }
     if (type === 'size') {
@@ -1514,10 +1511,7 @@ function randomizeModuleStore(moduleType) {
         setBackgroundStore('Gradient')
 
       }
-      console.log(moduleBackgroundStore.preset.Gradient.typeLocked);
       if (moduleBackgroundStore.preset.Gradient.typeLocked == false) {
-        console.log('yes');
-        //console.log(moduleBackgroundStore.currentGradientType);
         moduleBackgroundStore.preset.Gradient.currentGradientType = sample(moduleBackgroundStore.preset.Gradient.gradientTypes)
         //let newBackgroundGradientType = sample(moduleBackgroundStore.preset.Gradient.gradientTypes)
         //setBackgroundStore('CurrentGradientType', newBackgroundGradientType)
@@ -1636,28 +1630,68 @@ function randomizeModuleStore(moduleType) {
     }
 
     if (moduleType == 'BasicTypo') {
-      setBasicTypoStore('Positions')
+      return new Promise((resolve, reject) => {
+        setBasicTypoStore('Positions')
 
-      //if (moduleBasicTypoStore.locked == false) {
-        //let newTypeFontMainText = sample(['Sans Serif', 'Script', 'Special'])
-        let newTypeFontMainText = sample(['Sans Serif', 'Script'])
-        //let newTypeFontOtherText = sample(['Sans Serif', 'Script', 'Special'])
-        let newTypeFontOtherText = sample(['Sans Serif', 'Script'])
-        moduleBasicTypoStore.fontMainText = setfont(newTypeFontMainText)
-        moduleBasicTypoStore.fontOtherText = setfont(newTypeFontOtherText)
+        if (moduleBasicTypoStore.mainText.typeLocked == false) {
+          let newMainType = sample(moduleBasicTypoStore.mainText.fontOptions)
+          moduleBasicTypoStore.mainText.currentFont = newMainType
+          resolve([newMainType])
+        }
+        if (moduleBasicTypoStore.otherText.typeLocked == false) {
+          let newOtherType = sample(moduleBasicTypoStore.otherText.fontOptions)
+          moduleBasicTypoStore.otherText.currentFont = newOtherType
+          resolve([newOtherType])
+        }
 
+        if (moduleBasicTypoStore.mainText.currentFont == 'Script') {
+          moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.mainText.currentFont)
+        }
+        if (moduleBasicTypoStore.mainText.currentFont == 'Sans Serif') {
+          moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.mainText.currentFont)
+        }
+  
+        if (moduleBasicTypoStore.otherText.currentFont == 'Script') {
+          moduleBasicTypoStore.fontOtherText = setfont(moduleBasicTypoStore.otherText.currentFont)
+        }
+        if (moduleBasicTypoStore.otherText.currentFont == 'Sans Serif') {
+          moduleBasicTypoStore.fontOtherText = setfont(moduleBasicTypoStore.otherText.currentFont)
+        }
+  
         if (moduleBasicTypoStore.mainText.colorLocked == false) {
           moduleBasicTypoStore.mainText.color = generateColor()
         }
-
-        moduleBasicTypoStore.otherText.color = generateColor()
-
-        moduleBasicTypoStore.mainText.size.sliderValue = getRandomArbitrary(moduleBasicTypoStore.mainText.size.min, moduleBasicTypoStore.mainText.size.max)
-        moduleBasicTypoStore.otherText.size.sliderValue = getRandomArbitrary(moduleBasicTypoStore.otherText.size.min, moduleBasicTypoStore.otherText.size.max)
+        if (moduleBasicTypoStore.otherText.colorLocked == false) {
+          moduleBasicTypoStore.otherText.color = generateColor()
+        }
+        
+        if (moduleBasicTypoStore.mainText.sizeLocked == false) {
+          let newMainSize = getRandomArbitrary(moduleBasicTypoStore.mainText.size.min, moduleBasicTypoStore.mainText.size.max)
+          moduleBasicTypoStore.mainText.size.sliderValue = newMainSize
+          resolve([newMainSize])
+        }
+        if (moduleBasicTypoStore.otherText.sizeLocked == false) {
+          let newOtherSize = getRandomArbitrary(moduleBasicTypoStore.otherText.size.min, moduleBasicTypoStore.otherText.size.max)
+          moduleBasicTypoStore.otherText.size.sliderValue = newOtherSize
+          resolve([newOtherSize])
+        }
+  
+        if (moduleBasicTypoStore.mainText.leadingLocked == false) {
+          let newMainLeading = getRandomArbitrary(moduleBasicTypoStore.mainText.leading.min, moduleBasicTypoStore.mainText.leading.max)
+          moduleBasicTypoStore.mainText.leading.sliderValue = newMainLeading
+          resolve([newMainLeading])
+        }
+        if (moduleBasicTypoStore.otherText.leadingLocked == false) {
+          let newOtherLeading = getRandomArbitrary(moduleBasicTypoStore.otherText.leading.min, moduleBasicTypoStore.otherText.leading.max)
+          moduleBasicTypoStore.otherText.leading.sliderValue = newOtherLeading
+          resolve([newOtherLeading])
+        }
+      })
+        
         
       //}
 
-      setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
+      //setBasicTypoStore('SolidColor', getRandomArbitrary(30, 255))
     }
 
     ////////
@@ -1687,7 +1721,6 @@ function randomizeModuleStore(moduleType) {
       }
 
       //console.log('maxQuantity', moduleLinesStore.maxQuantity);
-      console.log(moduleLinesStore.quantityLocked);
       if (moduleLinesStore.quantityLocked == false) {
 
         let newSliderValue = getRandomArbitrary(1, moduleLinesStore.maxQuantity)

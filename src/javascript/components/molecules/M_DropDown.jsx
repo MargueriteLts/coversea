@@ -1,12 +1,8 @@
 import React, { Component, createRef } from 'react'
-import ReactDOM from 'react-dom'
 import reactCSS from 'reactcss'
 
 import A_DropDownButton from '../ATOMS/A_DropDownButton.jsx'
-import M_Control from './controls/M_Control.jsx'
-//import M_ColorPicker from './controls/M_ColorPicker.jsx'
-//import M_Select from './M_Select.jsx'
-//import Slider from '../Slider.jsx'
+import M_TextSettings from './M_TextSettings.jsx'
 
 export default class M_TextSettingsDropDown extends Component {
   constructor(props) {
@@ -48,14 +44,29 @@ export default class M_TextSettingsDropDown extends Component {
   }
 
   renderDropDownContent() {
-    const { dropDownContent, moduleData, setStore, title, object } = this.props
+    const { dropDownContent, textType, textData, setStore, object, itemLockColor, itemLockType, itemSizeLock, itemLeadingLock, handleChange, handleDropDownClick, handleTextSize, handleTextLeading, currentFont, size, leading } = this.props
+
     if (dropDownContent == 'TextSettings') {
       return (
         <M_TextSettings
-          moduleData={moduleData}
+          textType={textType}
+          textData={textData}
           setStore={setStore}
-          title={title}
           object={object}
+
+          itemLockColor={itemLockColor}
+          itemLockType={itemLockType}
+          itemSizeLock={itemSizeLock}
+          itemLeadingLock={itemLeadingLock}
+
+          handleChange={handleChange}
+          //handleDropDownClick={handleDropDownClick}
+          //handleTextSize={handleTextSize}
+          //handleTextLeading={handleTextLeading}
+
+          currentFont={currentFont}
+          size={size}
+          leading={leading}
         />
       )
     }
@@ -64,26 +75,7 @@ export default class M_TextSettingsDropDown extends Component {
 
   render() {
     const {
-      title,
-      object,
-      color,
-      handleChange,
-      fontOptions,
-      currentFont,
-      handleDropDownClick,
-      // handleDropDownStyles,
-      minSize,
-      maxSize,
-      size,
-      handleTextSize,
-      leading,
-      handleTextLeading,
-      minLeading,
-      maxLeading,
-      spacing,
-      handleTextSpacing,
-      minSpacing,
-      maxSpacing
+      title
     } = this.props
 
 

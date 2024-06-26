@@ -53,7 +53,7 @@ export default class M_TextSettingsDropDown extends Component {
   render() {
     const {
       setStore,
-      //handleToggle,
+      handleToggle,
       title,
       object,
       color,
@@ -110,14 +110,14 @@ export default class M_TextSettingsDropDown extends Component {
               orientation="row"
               controlType='ColorPicker'
               hasTitle={false}
-
+              //
               isLocked={solidColorLock}
               setStore={setStore}
               item='lockColor'
-              //handleToggle={handleToggle}
-              handleToggle={() => this.props.handleToggle(textType)}
-              //textType={textType}
-
+              handleToggle={handleToggle}
+              //handleToggle={() => this.props.handleToggle(textType)}
+              textType={textType}
+              //
               data={color}
               object={object}
               handleChange={handleChange}
@@ -135,9 +135,9 @@ export default class M_TextSettingsDropDown extends Component {
               isLocked={typeLock}
               setStore={setStore}
               item='lockType'
-              //handleToggle={handleToggle}
-              handleToggle={() => this.props.handleToggle(textType)}
-              //textType={textType}
+              handleToggle={handleToggle}
+              //handleToggle={() => this.props.handleToggle(textType)}
+              textType={textType}
             //data
               options={fontOptions}
               data={currentFont}
@@ -155,9 +155,9 @@ export default class M_TextSettingsDropDown extends Component {
               isLocked={sizeLock}
               setStore={setStore}
               item='lockSize'
-              //handleToggle={handleToggle}
-              handleToggle={() => this.props.handleToggle(textType)}
-              //textType={textType}
+              handleToggle={handleToggle}
+              //handleToggle={() => this.props.handleToggle(textType)}
+              textType={textType}
             //data
               data={size}
               handleChange={handleTextSize}
@@ -176,8 +176,9 @@ export default class M_TextSettingsDropDown extends Component {
               isLocked={leadingLock}
               setStore={setStore}
               item='lockLeading'
-              handleToggle={() => this.props.handleToggle(textType)}
-              //textType={textType}
+              handleToggle={handleToggle}
+              //handleToggle={() => this.props.handleToggle(textType)}
+              textType={textType}
             //data
               data={leading}
               handleChange={handleTextLeading}

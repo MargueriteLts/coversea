@@ -11,7 +11,6 @@ export default class M_AddRemoveText extends PureComponent {
       textAreas: this.props.text
     }
 
-    console.log('this props', this.props.text);
   }
 
   handleTextAreaChange = (event, index) => {

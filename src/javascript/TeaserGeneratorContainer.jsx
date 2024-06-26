@@ -64,7 +64,6 @@ export default class GeneratorContainer extends Component {
   }
 
    handleChangeBackgroundGradientType = (type) => {
-    console.log(type);
      this.props.setBackgroundStore('CurrentGradientType', type)
      this.setState({})
   }

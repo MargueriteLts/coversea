@@ -115,7 +115,6 @@ window.resetImages = function() {
 
 window.resetRandoms = function() {
   // allRandoms()
-  console.log('yes');
   randomImages()
 }
 
