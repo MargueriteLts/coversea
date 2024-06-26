@@ -1306,11 +1306,11 @@ function generateAllStore(generatorName, moduleList) {
 
        if (moduleName == 'Background') {
         
-         if (moduleBackgroundStore.currentBackgroundType == 'SolidColor' && moduleBackgroundStore.preset.SolidColor.locked == false) {
-           let newSolidColor=generateColor()
-           setBackgroundStore('SolidColor', newSolidColor)
+        // if (moduleBackgroundStore.currentBackgroundType == 'SolidColor' && moduleBackgroundStore.preset.SolidColor.locked == false) {
+        //   let newSolidColor=generateColor()
+        //   setBackgroundStore('SolidColor', newSolidColor)
            
-         }
+        // }
 
          if (moduleBackgroundStore.currentBackgroundType == 'Gradient' && moduleBackgroundStore.preset.Gradient.locked == false) {
            let newGradientColor1, newGradientColor2
@@ -1652,7 +1652,8 @@ function randomizeModuleStore(moduleType) {
         setLinesStore('strokeWeight', getRandomArbitrary(moduleLinesStore.min, moduleLinesStore.max))
       }
 
-      console.log('maxQuantity', moduleLinesStore.maxQuantity);
+      //console.log('maxQuantity', moduleLinesStore.maxQuantity);
+      console.log(moduleLinesStore.quantityLocked);
       if (moduleLinesStore.quantityLocked == false) {
 
         let newSliderValue = getRandomArbitrary(1, moduleLinesStore.maxQuantity)

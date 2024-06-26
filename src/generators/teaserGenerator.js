@@ -90,7 +90,7 @@ const preset = {
     mainText: {
       value: 'Name of your track or album',
       color: '#ffffff',
-      fontOptions: ['Sans Serif', 'Script', 'Special'],
+      fontOptions: ['Sans Serif', 'Script'],
       currentFont: 'Script',
       size:{
         sliderValue: 10,
@@ -107,7 +107,7 @@ const preset = {
     otherText: {
       values: ['Music is the answer to everything, music is the key to the world'],
       color: '#ffffff',
-      fontOptions: ['Sans Serif', 'Script', 'Special'],
+      fontOptions: ['Sans Serif', 'Script'],
       currentFont: 'Sans Serif',
       size:{
         sliderValue: 2,
