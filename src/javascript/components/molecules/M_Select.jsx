@@ -65,11 +65,6 @@ export default class M_Select extends Component {
       open: isOpen
     })
 
-    //const itemClasses = classnames({
-    //  "dropdown-item": true,
-    //  selectedItem: option==value
-    //})
-
     return (
       <div className="select" ref={this.selectRef}>
 
@@ -77,22 +72,6 @@ export default class M_Select extends Component {
           {value}
           <div className={iconClasses}></div>
         </div>
-
-        {/*{isOpen && (
-          <div className="dropdown-menu">
-            {this.props.options.map(option => (
-              <div
-                className="dropdown-item"
-                //className={itemClasses}
-                //text={option.text}
-                onClick={() => this.handleClick(option)}
-                key={option}
-                >
-                {option}
-              </div>
-            ))}
-          </div>
-        )}*/}
 
         {isOpen && (
           <div className="dropdown-menu">
