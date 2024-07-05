@@ -81,12 +81,12 @@ module.exports = {
         'og:url': { property: 'og:url', content: 'https://margueritelts.github.io/coversea/' },
         'og:title': { property: 'og:title', content: 'Coversea Teaser page' },
         'og:description': { property: 'og:description', content: 'COVERSEA is a website with generators to create unique music cover artworks freely, for your tracks, albums and playlists, built with React and P5.Js.' },
-        'og:image': { property: 'og:image', content: 'src/images/ui/ShareThumbnail.jpg' },
+        'og:image': { property: 'og:image', content: './src/images/ui/websitethumbnail.jpg' },
         'twitter:card': { property: 'twitter:card', content: 'summary_large_image' },
         'twitter:url': { property: 'twitter:url', content: 'https://margueritelts.github.io/coversea/' },
         'twitter:title': { property: 'twitter:title', content: 'Coversea Teaser page' },
         'twitter:description': { property: 'twitter:description', content: 'COVERSEA is a website with generators to create unique music cover artworks freely, for your tracks, albums and playlists, built with React and P5.Js.' },
-        'twitter:image': { property: 'twitter:image', content: 'src/images/ui/ShareThumbnail.jpg' }
+        'twitter:image': { property: 'twitter:image', content: './src/images/ui/websitethumbnail.jpg' }
       }
     }),
 
