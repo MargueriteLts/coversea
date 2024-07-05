@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackPartialsPlugin = require('html-webpack-partials-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 const webpack = require('webpack')
 const path = require('path')
@@ -370,7 +371,7 @@ module.exports = {
         priority: 'replace'
       }
     ]),
-    
+
     new CaseSensitivePathsPlugin()
   ],
   optimization: {
