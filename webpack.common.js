@@ -369,7 +369,9 @@ module.exports = {
         template_filename: '*',
         priority: 'replace'
       }
-    ])
+    ]),
+    
+    new CaseSensitivePathsPlugin()
   ],
   optimization: {
     minimizer: [new CssMinimizerPlugin()]
