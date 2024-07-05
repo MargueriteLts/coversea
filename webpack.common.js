@@ -85,7 +85,7 @@ module.exports = {
       scriptLoading: 'blocking',
       template: './src/index.html',
       filename: './index.html',
-      inject: 'body',
+      //inject: 'body',
       //meta: {
       //  'og:type': { property: 'og:type', content: 'website' },
       //  'og:url': { property: 'og:url', content: 'https://margueritelts.github.io/coversea/' },
