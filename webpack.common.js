@@ -15,7 +15,8 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'docs')
+    path: path.resolve(__dirname, 'docs'),
+    publicPath: '/'
     // clean: true
   },
   module: {
@@ -73,23 +74,6 @@ module.exports = {
   },
   plugins: [
 
-    //new HtmlWebpackPlugin({
-    //  template: './src/index.html',
-    //  inject: 'body',
-    //  meta: {
-    //    'og:type': { property: 'og:type', content: 'website' },
-    //    'og:url': { property: 'og:url', content: 'https://margueritelts.github.io/coversea/' },
-    //    'og:title': { property: 'og:title', content: 'Coversea Teaser page' },
-    //    'og:description': { property: 'og:description', content: 'COVERSEA is a website with generators to create unique music cover artworks freely, for your tracks, albums and playlists, built with React and P5.Js.' },
-    //    'og:image': { property: 'og:image', content: './images/ui/websitethumbnail.jpg' },
-    //    'twitter:card': { property: 'twitter:card', content: 'summary_large_image' },
-    //    'twitter:url': { property: 'twitter:url', content: 'https://margueritelts.github.io/coversea/' },
-    //    'twitter:title': { property: 'twitter:title', content: 'Coversea Teaser page' },
-    //    'twitter:description': { property: 'twitter:description', content: 'COVERSEA is a website with generators to create unique music cover artworks freely, for your tracks, albums and playlists, built with React and P5.Js.' },
-    //    'twitter:image': { property: 'twitter:image', content: './images/ui/websitethumbnail.jpg' }
-    //  }
-    //}),
-
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
@@ -102,18 +86,18 @@ module.exports = {
       template: './src/index.html',
       filename: './index.html',
       inject: 'body',
-      meta: {
-        'og:type': { property: 'og:type', content: 'website' },
-        'og:url': { property: 'og:url', content: 'https://margueritelts.github.io/coversea/' },
-        'og:title': { property: 'og:title', content: 'Coversea Teaser page' },
-        'og:description': { property: 'og:description', content: 'COVERSEA is a website with generators to create unique music cover artworks freely, for your tracks, albums and playlists, built with React and P5.Js.' },
-        'og:image': { property: 'og:image', content: './src/images/ui/websitethumbnail.jpg' },
-        'twitter:card': { property: 'twitter:card', content: 'summary_large_image' },
-        'twitter:url': { property: 'twitter:url', content: 'https://margueritelts.github.io/coversea/' },
-        'twitter:title': { property: 'twitter:title', content: 'Coversea Teaser page' },
-        'twitter:description': { property: 'twitter:description', content: 'COVERSEA is a website with generators to create unique music cover artworks freely, for your tracks, albums and playlists, built with React and P5.Js.' },
-        'twitter:image': { property: 'twitter:image', content: './src/images/ui/websitethumbnail.jpg' }
-      },
+      //meta: {
+      //  'og:type': { property: 'og:type', content: 'website' },
+      //  'og:url': { property: 'og:url', content: 'https://margueritelts.github.io/coversea/' },
+      //  'og:title': { property: 'og:title', content: 'Coversea Teaser page' },
+      //  'og:description': { property: 'og:description', content: 'COVERSEA is a website with generators to create unique music cover artworks freely, for your tracks, albums and playlists, built with React and P5.Js.' },
+      //  'og:image': { property: 'og:image', content: require('./src/images/ui/ShareThumbnail.jpg').default },
+      //  'twitter:card': { property: 'twitter:card', content: 'summary_large_image' },
+      //  'twitter:url': { property: 'twitter:url', content: 'https://margueritelts.github.io/coversea/' },
+      //  'twitter:title': { property: 'twitter:title', content: 'Coversea Teaser page' },
+      //  'twitter:description': { property: 'twitter:description', content: 'COVERSEA is a website with generators to create unique music cover artworks freely, for your tracks, albums and playlists, built with React and P5.Js.' },
+      //  'twitter:image': { property: 'twitter:image', content: require('./src/images/ui/ShareThumbnail.jpg').default }
+      //},
       chunks: ['teasergenerator']
     }),
 
