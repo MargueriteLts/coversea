@@ -90,7 +90,7 @@ module.exports = {
       }
     }),
 
-    new CaseSensitivePathsPlugin(),
+    new CaseSensitivePathsPlugin({debug: true}),
 
     new MiniCssExtractPlugin({
       filename: '[name].css',
