@@ -90,6 +90,8 @@ module.exports = {
       }
     }),
 
+    new CaseSensitivePathsPlugin(),
+
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
@@ -370,9 +372,7 @@ module.exports = {
         template_filename: '*',
         priority: 'replace'
       }
-    ]),
-
-    new CaseSensitivePathsPlugin()
+    ])
   ],
   optimization: {
     minimizer: [new CssMinimizerPlugin()]
