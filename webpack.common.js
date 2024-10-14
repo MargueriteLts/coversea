@@ -3,6 +3,7 @@ const HtmlWebpackPartialsPlugin = require('html-webpack-partials-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin')
 
 const webpack = require('webpack')
 const path = require('path')
@@ -69,14 +70,6 @@ module.exports = {
         options: {
           name: 'fonts/[name].[ext]'
         }
-      },
-      {
-        test: /\.(png|jpg|jpeg)$/i,
-        exclude: /images/,
-        loader: 'file-loader',
-        options: {
-          name: 'share/[name].[ext]'
-        }
       }
     ]
   },
@@ -94,23 +87,14 @@ module.exports = {
       template: './src/index.html',
       filename: './index.html',
       inject: 'body',
-      //meta: {
-      //  'og:type': { property: 'og:type', content: 'website' },
-      //  'og:url': { property: 'og:url', content: 'https://margueritelts.github.io/coversea/' },
-      //  'og:title': { property: 'og:title', content: 'Coversea Teaser page' },
-      //  'og:description': { property: 'og:description', content: 'COVERSEA is a website with generators to create unique music cover artworks freely, for your tracks, albums and playlists, built with React and P5.Js.' },
-      //  //'og:image': { property: 'og:image', content: require('./src/images/ui/ShareThumbnail.jpg').default },
-      //  'og:image': { property: 'og:image', content: './src/images/ui/ShareThumbnail.jpg' },
-      //  'twitter:card': { property: 'twitter:card', content: 'summary_large_image' },
-      //  'twitter:url': { property: 'twitter:url', content: 'https://margueritelts.github.io/coversea/' },
-      //  'twitter:title': { property: 'twitter:title', content: 'Coversea Teaser page' },
-      //  'twitter:description': { property: 'twitter:description', content: 'COVERSEA is a website with generators to create unique music cover artworks freely, for your tracks, albums and playlists, built with React and P5.Js.' },
-      //  //'twitter:image': { property: 'twitter:image', content: require('./src/images/ui/ShareThumbnail.jpg').default }
-      //},
       chunks: ['teasergenerator']
     }),
 
     new CaseSensitivePathsPlugin(),
+
+    new CopyPlugin({
+      patterns: [{ from: 'src/share', to: 'share' }]
+    }),
 
     // Internal pages
     
