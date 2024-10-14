@@ -122,7 +122,6 @@ const preset = {
         min: 1,
         max: 6
       },
-      //leading: 2
       leading: {
         sliderValue: 2,
         min: 1,
