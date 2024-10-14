@@ -498,6 +498,11 @@ export default class GeneratorContainer extends Component {
 
   render() {
 
+    const handleContextMenu = (e) => {
+      e.preventDefault(); // Disable the right-click menu
+      //console.log('Right-click disabled on this div');
+    };
+
     return <div className="generator__content">
       <div className='generator__modules-container'>
         <div className='generator__modules-wrap'>
@@ -505,7 +510,7 @@ export default class GeneratorContainer extends Component {
         </div>
       </div>
       <div className="generator__sketch-wrap">
-        <div className="sketch" id="sketch" ref={this.sketchContainerRef}></div>
+        <div className="sketch" id="sketch" ref={this.sketchContainerRef} onContextMenu={handleContextMenu}></div>
         <div className="generator__sketch-controls">
           <div className="btn--big" onClick={this.generateCover}>GENERATE</div>
           <div className='description-desktop'>

@@ -89,7 +89,7 @@ module.exports = {
       meta: {
         'og:type': { property: 'og:type', content: 'website' },
         'og:url': { property: 'og:url', content: 'https://margueritelts.github.io/coversea/' },
-        'og:title': { property: 'og:title', content: 'Coversea Teaser page' },
+        'og:title': { property: 'og:title', content: 'Teaser page - Coversea' },
         'og:description': { property: 'og:description', content: 'COVERSEA is a website with generators to create unique music cover artworks freely, for your tracks, albums and playlists, built with React and P5.Js.' },
         //'og:image': { property: 'og:image', content: require('./src/images/ui/ShareThumbnail.jpg').default },
         'og:image': { property: 'og:image', content: './src/images/ui/ShareThumbnail.jpg' },
