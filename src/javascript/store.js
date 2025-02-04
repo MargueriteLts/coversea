@@ -1041,7 +1041,10 @@ function setfont(fontType) {
 
   //let sansSerifFonts = ['ADC-Semi-Bold', 'MintSansRegular', 'LiberationSans-Regular']
   //let sansSerifFonts = ['aDC', 'mint', 'liberation']
-  let sansSerifFonts = ['Barlow Semi Condensed', 'DM Sans', 'Poppins', 'Space Grotesk', 'Teko']
+
+  //let sansSerifFonts = ['Aileron-Bold']
+  let sansSerifFonts = ['Barlow Semi Condensed', 'DM Sans', 'Poppins', 'Space Grotesk', 'Teko', 'Aileron-Bold']
+
   //let scriptFonts = ['MeaCulpa-Regular', 'LuxuriousScript-Regular', 'PinyonScript-Regular', 'Italianno-Regular']
   //let scriptFonts = ['meaculpa', 'luxuriousScript', 'pinyonScript', 'italianno']
   let scriptFonts = ['Mea Culpa', 'Luxurious Script', 'Pinyon Script', 'Italianno']
@@ -1804,6 +1807,7 @@ function initFontsStore() {
     const fileName = key.replace(/^.*[\\/]/, ''); // Extracting filename from path
     fonts[fileName] = fontContext(key);
   });
+
 
   return {
     fonts: fonts

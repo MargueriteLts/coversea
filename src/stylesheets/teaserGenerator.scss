@@ -11,6 +11,9 @@ body.teaserGenerator {
   // background-repeat: no-repeat;
 
   width: 100vw;
+  //width: parseInt(100vw);
+  //width: calc(100vw + 1px);
+  //max-width: 100%;
   overflow-x: hidden;
 
   h1, h2 {
@@ -538,7 +541,7 @@ span {
             .sketch {
               width: 100%;
               aspect-ratio: 1;
-              height: auto;
+              //height: auto;
             }
     
             .generator__sketch-controls {

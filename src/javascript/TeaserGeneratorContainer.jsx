@@ -44,8 +44,10 @@ export default class GeneratorContainer extends Component {
   componentDidMount() {
     const sketchContainer = this.sketchContainerRef.current;
     const { clientWidth, clientHeight } = sketchContainer;
+    //console.log(clientWidth, clientHeight)
     // const size = parseInt(Math.min(clientWidth, clientHeight))
     size = parseInt(Math.min(clientWidth, clientHeight))
+    //console.log(size)
 
     // this.saveCanvasSize(size)
 
@@ -265,16 +267,16 @@ export default class GeneratorContainer extends Component {
 
 /////////////////////////// DOWNLOAD COVER ///////////////////////////
 
-  downloadImage = () => {
-    html2canvas(document.getElementById("defaultCanvas0")).then(function (canvas) {
-      let a = document.createElement("a");
-      a.href = canvas.toDataURL("image/jpeg");
-      a.download = `cover-${generateHash()}.jpeg`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    });
-  };
+  //downloadImage = () => {
+  //  html2canvas(document.getElementById("defaultCanvas0")).then(function (canvas) {
+  //    let a = document.createElement("a");
+  //    a.href = canvas.toDataURL("image/jpeg");
+  //    a.download = `cover-${generateHash()}.jpeg`;
+  //    document.body.appendChild(a);
+  //    a.click();
+  //    document.body.removeChild(a);
+  //  });
+  //};
 
 // /////////////////////////// LOCK/UNLOCK ITEMS ///////////////////////////
 
@@ -513,7 +515,7 @@ export default class GeneratorContainer extends Component {
         <div className="sketch" id="sketch" ref={this.sketchContainerRef} onContextMenu={handleContextMenu}></div>
         <div className="generator__sketch-controls">
           <div className="btn--big" onClick={this.generateCover}>GENERATE</div>
-          <div className='description-desktop'>
+          {/*<div className='description-desktop'>
             <p>
               The download feature will be available in the full version. Stay tuned so you don't miss the realease!
             </p>
@@ -522,9 +524,17 @@ export default class GeneratorContainer extends Component {
             <p>
               Please use a computer to have access to all the features inside the generator!
             </p>
-          </div>
+          </div>*/}
+          <A_IconButton
+            onClick={this.props.saveCanvasAsImage}
+            icon='download'
+            size='large'
+            style='filled'
+          />
         </div>
       </div>
     </div>
   }
 }
+
+//this.props.saveCanvasAsImage();

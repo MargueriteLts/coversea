@@ -37,7 +37,7 @@ import {
   // setCanvasSizeStore
 } from './javascript/store.js'
 
-import { initSketch } from './javascript/sketch.js'
+import { initSketch, saveCanvasAsImage } from './javascript/sketch.js'
 //import GeneratorContainer from './javascript/GeneratorContainer.jsx'
 import TeaserGeneratorContainer from './javascript/TeaserGeneratorContainer.jsx'
 
@@ -63,21 +63,12 @@ const actions = {
   // setCanvasSizeStore,
   generateAllStore,
   randomizeModuleStore,
-  initSketch
+  initSketch,
+  saveCanvasAsImage
 }
 
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  //const metaOgImage = document.createElement('meta');
-  //metaOgImage.setAttribute('property', 'og:image');
-  //metaOgImage.setAttribute('content', ogImage);
-  //document.head.appendChild(metaOgImage);
-
-  //const metaTwitterImage = document.createElement('meta');
-  //metaTwitterImage.setAttribute('property', 'twitter:image');
-  //metaTwitterImage.setAttribute('content', ogImage);
-  //document.head.appendChild(metaTwitterImage);
 
   const container = document.getElementById('reactComponentRoot')
   const generatorName = container.dataset.generator

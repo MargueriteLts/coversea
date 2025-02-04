@@ -1394,7 +1394,7 @@ function drawModules(p) {
 
     //MAIN TEXT
     p.fill(basicTypo.mainText.color)
-    //console.log(basicTypo.fontMainText);
+    console.log(basicTypo.fontMainText);
     //pinyonScript
     p.textFont(basicTypo.fontMainText)
     p.textAlign(p.CENTER, p.CENTER)
@@ -1579,7 +1579,8 @@ function sketch(p) {
     //p.loadFont('../fonts/YUNGA-Display.otf')
     //p.loadFont('../fonts/typekini.ttf')
     //p.loadFont('../fonts/AUSRINE.ttf')
-
+    
+    p.loadFont('../fonts/Aileron-Bold.otf')
 
     //////
 
@@ -1684,6 +1685,8 @@ function sketch(p) {
 
 ///////////////////////////////////////////////////
 
+let cover
+
 function initSketch(id, size) {
   canvasContainerId = id
 
@@ -1697,10 +1700,20 @@ function initSketch(id, size) {
   moduleList = getModuleList()
 
   // let utils = new p5.Utils()
-  new p5(sketch)
+  cover = new p5(sketch)
 }
+
+
+
+function saveCanvasAsImage() {
+  if (cover) {
+    cover.saveCanvas('my_cover', 'jpg'); // Calls saveCanvas on the stored instance
+  }
+}
+
+
 
 // utils = new p5.Utils()
 // utils = new p5.Utils(sketch)
 
-export { initSketch }
+export { initSketch, saveCanvasAsImage }

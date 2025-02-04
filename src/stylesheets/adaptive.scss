@@ -219,10 +219,10 @@
               width: 100%;
 
               .generator__sketch-controls {
-                flex-direction: column;
+                flex-direction: row;
                 gap: 16px;
                 align-items: center;
-                justify-content: center;
+                justify-content: space-between;
       
                 .description-mobile {
                   display: block;
@@ -1402,8 +1402,8 @@
 
             .sketch {
               width: 100%;
-              aspect-ratio: 1 / 1;
-              height: auto;
+              aspect-ratio: 1;
+              //height: auto;
             }
 
             .generator__sketch-controls {
