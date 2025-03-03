@@ -7,6 +7,7 @@ import { generateHash } from './utilities.js'
 //UI
 import A_IconButton from './components/buttons/A_IconButton.jsx'
 import A_Text from './components/ATOMS/A_Text.jsx'
+import A_LanguageToggle from './components/ATOMS/A_LanguageToggle.jsx'
 
 ///////////////MODULES
 import O_Module from './components/organisms/O_Module.jsx'
@@ -514,7 +515,11 @@ export default class GeneratorContainer extends Component {
       <div className="generator__sketch-wrap">
         <div className="sketch" id="sketch" ref={this.sketchContainerRef} onContextMenu={handleContextMenu}></div>
         <div className="generator__sketch-controls">
-          <div className="btn--big" onClick={this.generateCover}>GENERATE</div>
+          <div className="btn--big" onClick={this.generateCover}>
+            <span className="lang-en lang-content">GENERATE</span>
+            <span className="lang-fr lang-content">GÉNÉRER</span>
+            <span className="lang-ru lang-content">СОЗДАТЬ</span>
+          </div>
           {/*<div className='description-desktop'>
             <p>
               The download feature will be available in the full version. Stay tuned so you don't miss the realease!

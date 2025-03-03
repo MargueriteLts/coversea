@@ -1,10 +1,12 @@
 // import './generators.css'
 import './teaserGenerator.css'
+import './stylesheets/language.scss'  // Import the language SCSS
 
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 
-//import ogImage from './images/ui/websitethumbnail.jpg';
+import A_LanguageToggle from './javascript/components/ATOMS/A_LanguageToggle.jsx'
+//javascript/components/ATOMS/A_LanguageToggle
 
 import {
   initStore,
@@ -69,6 +71,15 @@ const actions = {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Add lang-en class to body by default
+  document.body.classList.add('lang-en');
+
+  // Mount the language toggle component
+  const toggleContainer = document.getElementById('language-toggle-root');
+  if (toggleContainer) {
+    const root = createRoot(toggleContainer);
+    root.render(<A_LanguageToggle />);
+  }
 
   const container = document.getElementById('reactComponentRoot')
   const generatorName = container.dataset.generator
@@ -131,4 +142,3 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = createRoot(container)
   root.render(<TeaserGeneratorContainer {...props} {...actions} />)
 })
-// 

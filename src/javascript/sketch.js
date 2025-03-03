@@ -1394,7 +1394,7 @@ function drawModules(p) {
 
     //MAIN TEXT
     p.fill(basicTypo.mainText.color)
-    console.log(basicTypo.fontMainText);
+    //console.log(basicTypo.fontMainText);
     //pinyonScript
     p.textFont(basicTypo.fontMainText)
     p.textAlign(p.CENTER, p.CENTER)

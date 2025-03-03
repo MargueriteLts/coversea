@@ -1,0 +1,79 @@
+.language-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px;
+  background-color: rgba(42, 42, 42, 0.8);
+  border-radius: 24px;
+  backdrop-filter: blur(5px);
+  width: auto;
+  height: auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  .language-btn {
+    background: none;
+    border: none;
+    border-radius: 18px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: "bc-novatica-cyr", sans-serif;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    color: var(--TEXT-WHITE);
+    opacity: 0.7;
+    min-width: 35px;
+    min-height: 30px;
+
+    &.active {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: var(--WHITE);
+      opacity: 1;
+    }
+
+    &:hover:not(.active) {
+      opacity: 0.9;
+    }
+  }
+}
+
+// Fixed positioning for the language toggle container
+.language-toggle-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999; // Ensure it's above other elements
+  width: auto;
+  height: auto;
+  min-width: 120px;
+  min-height: 40px;
+  display: block;
+  opacity: 0.8; // Slightly transparent by default
+  transition: opacity 0.3s ease;
+  
+  &:hover {
+    opacity: 1;
+  }
+}
+
+// Ensure the toggle is accessible on smaller screens
+@media (max-width: 768px) {
+  .language-toggle-container {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .language-toggle {
+    padding: 5px;
+    
+    .language-btn {
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+  }
+}
