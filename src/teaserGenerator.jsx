@@ -17,6 +17,8 @@ import {
   setParticlesStore,
   getImageStore,
   setImageStore,
+  getUploadImageStore,
+  setUploadImageStore,
   getBackgroundStore,
   setBackgroundStore,
   getBackgroundImageStore,
@@ -54,6 +56,7 @@ const actions = {
   setShapesStore,
   setParticlesStore,
   setImageStore,
+  setUploadImageStore,
   setBackgroundStore,
   setBackgroundImageStore,
   setVinylStore,
@@ -102,6 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (moduleName == 'Image') {
       props.objects = getImageStore()
+    }
+
+    if (moduleName == 'UploadImage') {
+      props.uploadImage = getUploadImageStore()
     }
 
     if (moduleName == 'Background') {

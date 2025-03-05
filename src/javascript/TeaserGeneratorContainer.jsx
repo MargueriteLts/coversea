@@ -109,6 +109,36 @@ export default class GeneratorContainer extends Component {
     this.setState({})
   }
 
+////////////////////////////////////// MODULE UPLOADIMAGE
+
+  // Handle image size
+  handleUploadImageSize = (e) => {
+    this.props.setUploadImageStore('size', e.target.value);
+    this.setState({});
+  }
+
+  // Handle image opacity
+  handleUploadImageOpacity = (e) => {
+    this.props.setUploadImageStore('opacity', e.target.value);
+    this.setState({});
+  }
+
+  // Handle file upload
+  handleFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      window.handleUploadedImage(file)
+        .then(() => {
+          this.setState({});
+        });
+    }
+  }
+
+  //handleRandomPosition = () => {
+  //  this.props.setUploadImageStore('randomPosition');
+  //  this.setState({});
+  //}
+
 ////////////////////////////////////// MODULE BACKGROUND IMAGE
 
   // Tab -OK
@@ -252,6 +282,11 @@ export default class GeneratorContainer extends Component {
   //ji kompran pas.... sans this.setState ca effectivement n'update pas le state, le soucis... c'est quon a aucun state ici ni dans les modules... et en plus les newValues c'est juste des values, sans aucune keys.... alors comment il comprend ce quil doit updater...????
   // -OK
   handleRandomizeModule = (moduleName) => {
+    //if (moduleName === 'UploadImage') {
+
+    //  // Randomize the position if not locked
+    //  //randomizeImagePosition();
+    //}
     this.props.randomizeModuleStore(moduleName)
     this.setState({})
   }
@@ -261,6 +296,9 @@ export default class GeneratorContainer extends Component {
   generateCover = () => {
     const container = document.getElementById('reactComponentRoot')
     const generatorName = container.dataset.generator
+
+    // Randomize image position if module exists and not locked
+    //randomizeImagePosition();
 
     this.props.generateAllStore(generatorName, this.props.moduleList)
     this.setState({})
@@ -310,6 +348,8 @@ export default class GeneratorContainer extends Component {
       particles,
       setParticlesStore,
       backgroundImage,
+      setUploadImageStore,
+      uploadImage,
       vinyl,
       setVinylStore,
       lines,
@@ -345,6 +385,21 @@ export default class GeneratorContainer extends Component {
             handleChangeNoiseTintColor={this.handleChangeNoiseTintColor}
             setBackgroundStore={setBackgroundStore}
             key={index}
+          />
+        )
+      }
+      if (moduleName == 'UploadImage') {
+        modules.push(
+          <O_Module
+            key={index}
+            moduleType='UploadImage'
+            uploadImage={uploadImage}
+            moduleName={uploadImage.moduleName}
+            handleRandomizeModule={this.handleRandomizeModule}
+            handleUploadImageSize={this.handleUploadImageSize}
+            handleUploadImageOpacity={this.handleUploadImageOpacity}
+            handleFileChange={this.handleFileChange}
+            setUploadImageStore={setUploadImageStore}
           />
         )
       }

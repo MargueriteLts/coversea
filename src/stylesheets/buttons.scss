@@ -220,6 +220,49 @@ input[type="range"]::-ms-thumb:hover {
   background-image: url('images/ui/icons/Rotate.svg');
 }
 
+.upload-button-container {
+  width: 100px;
+  height: 100px;
+  background-color: #1D1D1D;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.upload-button-container:hover {
+  background-color: #2A2A2A;
+}
+
+.upload-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.upload-icon {
+  width: 24px;
+  height: 24px;
+  background-image: url('./images/ui/icons/Upload.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 8px;
+}
+
+.upload-text {
+  color: #838383;
+  font-family: "neue-haas-unica";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+}
+
 // .btn {
 //   cursor: pointer;
 // }

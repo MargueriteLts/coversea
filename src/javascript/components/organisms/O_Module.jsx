@@ -12,6 +12,7 @@ import M_ShapesContent from '../molecules/moduleContent/M_ShapesContent.jsx'
 import M_ObjectsContent from '../molecules/moduleContent/M_ObjectsContent.jsx'
 import M_3DContent from '../molecules/moduleContent/M_3DContent.jsx'
 import M_OverlayContent from '../molecules/moduleContent/M_OverlayContent.jsx'
+import M_UploadImageContent from '../molecules/moduleContent/M_UploadImageContent.jsx'
 
 export default class Module extends Component {
   constructor(props) {
@@ -82,7 +83,12 @@ export default class Module extends Component {
       overlay,
       handleTabClickOverlay,
       handleOverlayOpacity,
-      setOverlayStore
+      setOverlayStore,
+      uploadImage,
+      setUploadImageStore,
+      handleUploadImageSize,
+      handleUploadImageOpacity,
+      handleFileChange
     } = this.props
 
     if (moduleType == 'Background') {
@@ -98,6 +104,17 @@ export default class Module extends Component {
           handleTabClickNoise={handleTabClickNoise}
           setBackgroundStore={setBackgroundStore}
           handleChangeNoiseTintColor={handleChangeNoiseTintColor}
+        />
+      )
+    }
+    if (moduleType == 'UploadImage') {
+      return (
+        <M_UploadImageContent
+          uploadImage={uploadImage}
+          setUploadImageStore={setUploadImageStore}
+          handleUploadImageSize={handleUploadImageSize}
+          handleUploadImageOpacity={handleUploadImageOpacity}
+          handleFileChange={handleFileChange}
         />
       )
     }

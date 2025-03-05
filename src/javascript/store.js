@@ -77,7 +77,8 @@ moduleParticlesStore,
 moduleShapesStore,
 moduleVinylStore,
 moduleOverlayStore,
-allFonts
+allFonts,
+moduleUploadImageStore
 // canvasSize
 
 function initStore(generatorName) {
@@ -98,6 +99,10 @@ function initStore(generatorName) {
 
     if (moduleName == 'Particles') {
       moduleParticlesStore = initParticles(generators[generatorName].preset['Particles'])
+    }
+
+    if (moduleName == 'UploadImage') {
+      moduleUploadImageStore = initUploadImageStore(generators[generatorName].preset['UploadImage']);
     }
 
     if (moduleName == 'Image') {
@@ -402,6 +407,75 @@ function setBackgroundImageStore(type, value) {
 }
 
 // Graphics
+
+////////////////////// UPLOAD IMAGES
+
+function initUploadImageStore(preset) {
+  preset = Object.assign({}, preset, { 
+    moduleName: 'Upload Image', 
+    //size: 50, // Default size as 50% of canvas
+    //opacity: 100, // Default opacity as 100%
+    //positionIndex: 0, // Default position (top-left)
+    //positions: [
+    //  'top-left', 'top-middle', 'top-right',
+    //  'middle-left', 'middle-right',
+    //  'bottom-left', 'bottom-middle', 'bottom-right'
+    //],
+    uploadedImage: null,
+    sizeLock: false,
+    opacityLock: false
+    //positionLock: false
+  });
+  
+  return preset;
+}
+
+function getUploadImageStore() {
+  return moduleUploadImageStore;
+}
+
+function setUploadImageStore(type, value) {
+  return new Promise((resolve, reject) => {
+    if (type === 'size') {
+      moduleUploadImageStore.size = value;
+      resolve([value]);
+    }
+    if (type === 'opacity') {
+      moduleUploadImageStore.opacity = value;
+      resolve([value]);
+    }
+    if (type === 'uploadImage') {
+      moduleUploadImageStore.uploadedImage = value;
+      
+      // Randomize position when a new image is uploaded (if not locked)
+      //if (!moduleUploadImageStore.positionLock) {
+      randomizeImagePosition();
+      //}
+      
+      resolve([value]);
+    }
+    
+    // Lock controls
+    if (type === 'lockSize') {
+      moduleUploadImageStore.sizeLock = value;
+    }
+    if (type === 'lockOpacity') {
+      moduleUploadImageStore.opacityLock = value;
+    }
+    //if (type === 'lockPosition') {
+    //  moduleUploadImageStore.positionLock = value;
+    //}
+  });
+}
+
+// New helper function to randomize the image position
+function randomizeImagePosition() {
+  if (moduleUploadImageStore && moduleUploadImageStore.uploadedImage) {
+    const positions = moduleUploadImageStore.positions;
+    const randomIndex = Math.floor(Math.random() * positions.length);
+    moduleUploadImageStore.positionIndex = randomIndex;
+  }
+}
 
 ////////////////////// IMAGES
 
@@ -1542,6 +1616,25 @@ function randomizeModuleStore(moduleType) {
 
     }
 
+    if (moduleType === 'UploadImage') {
+      // Randomize position if not locked and an image is uploaded
+      if (moduleUploadImageStore.uploadedImage && !moduleUploadImageStore.positionLock) {
+        const positions = moduleUploadImageStore.positions;
+        const randomIndex = Math.floor(Math.random() * positions.length);
+        moduleUploadImageStore.positionIndex = randomIndex;
+      }
+      
+      // Randomize size if not locked
+      if (!moduleUploadImageStore.sizeLock) {
+        moduleUploadImageStore.size = getRandomArbitrary(5, 50);
+      }
+      
+      // Randomize opacity if not locked
+      if (!moduleUploadImageStore.opacityLock) {
+        moduleUploadImageStore.opacity = getRandomArbitrary(50, 255);
+      }
+    }
+
     if (moduleType == 'BackgroundImage') {
       let BackgroundImageType = sample(moduleBackgroundImageStore.backgroundImageCollections)
       setBackgroundImageStore('CurrentTabChange', BackgroundImageType)
@@ -1828,6 +1921,10 @@ export {
   setShapesStore,
   getParticlesStore,
   setParticlesStore,
+  initUploadImageStore,
+  getUploadImageStore,
+  setUploadImageStore,
+  randomizeImagePosition,
   getImageStore,
   setImageStore,
   getBackgroundStore,

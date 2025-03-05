@@ -13,6 +13,8 @@ import M_GradientAngle from './M_GradientAngle.jsx'
 import M_NumberInput from './M_NumberInput.jsx'
 import M_ToggleIconSet from './M_ToggleIconSet.jsx'
 import M_Select from '../M_Select.jsx'
+import M_FileUpload from './M_FileUpload.jsx'
+//import M_Button from './M_Button.jsx'
 
 export default class M_Control extends Component {
   constructor(props) {
@@ -114,6 +116,21 @@ export default class M_Control extends Component {
         />
       )
     }
+    if (controlType == 'FileUpload') {
+      return (
+        <M_FileUpload
+          handleFileChange={this.props.handleFileChange}
+        />
+      )
+    }
+    //if (controlType == 'Button') {
+    //  return (
+    //    <M_Button
+    //      handleClick={this.props.handleClick}
+    //      buttonText={this.props.buttonText}
+    //    />
+    //  )
+    //}
   }
 
   render() {
