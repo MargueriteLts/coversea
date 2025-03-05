@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import M_Control from '../controls/M_Control.jsx'
-//import IconToggle from '../../buttons/IconToggle.jsx'
 
 export default class M_UploadImageContent extends Component {
   constructor(props) {
@@ -10,8 +9,15 @@ export default class M_UploadImageContent extends Component {
 
     this.state = {
       sizeLock: this.props.uploadImage.sizeLock,
-      opacityLock: this.props.uploadImage.opacityLock
-      //positionLock: this.props.uploadImage.positionLock
+      opacityLock: this.props.uploadImage.opacityLock,
+      hasUploadedImage: false
+    }
+  }
+
+  componentDidMount() {
+    // Check if there's already an uploaded image when component mounts
+    if (this.props.uploadImage && this.props.uploadImage.uploadedImage) {
+      this.setState({ hasUploadedImage: true });
     }
   }
 
@@ -28,12 +34,16 @@ export default class M_UploadImageContent extends Component {
         opacityLock: !this.state.opacityLock
       })
     }
-    //if (item == 'lockPosition') {
-    //  setStore(item, !this.state.positionLock)
-    //  this.setState({
-    //    positionLock: !this.state.positionLock
-    //  })
-    //}
+  }
+
+  handleWrappedFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      // Set the state to show we have an image
+      this.setState({ hasUploadedImage: true });
+      
+      // Call the original handler
+      this.props.handleFileChange(e);
+    }
   }
 
   //////////////////////////////////////////////////////// RENDER
@@ -43,8 +53,7 @@ export default class M_UploadImageContent extends Component {
       uploadImage,
       handleUploadImageSize,
       handleUploadImageOpacity,
-      setUploadImageStore,
-      handleFileChange
+      setUploadImageStore
     } = this.props
 
     return <div className="M_UploadImageContent">
@@ -55,47 +64,41 @@ export default class M_UploadImageContent extends Component {
             controlType='FileUpload'
             hasTitle={true}
             title='Upload Image'
-            handleFileChange={handleFileChange}
-          />
-          
-          <M_Control
-            orientation="row"
-            controlType='SliderOpacity'
-            hasTitle={true}
-            title='Image opacity'
-            isLocked={this.state.opacityLock}
-            setStore={setUploadImageStore}
-            item='lockOpacity'
-            handleToggle={this.handleToggle}
-            data={uploadImage.opacity}
-            handleChange={handleUploadImageOpacity}
+            handleFileChange={this.handleWrappedFileChange}
           />
         </div>
         
-        <div className="content_Column">
-          <M_Control
-            orientation="row"
-            controlType='Slider'
-            hasTitle={true}
-            title='Image size'
-            isLocked={this.state.sizeLock}
-            setStore={setUploadImageStore}
-            item='lockSize'
-            handleToggle={this.handleToggle}
-            data={uploadImage.size}
-            handleChange={handleUploadImageSize}
-            min={5}
-            max={50}
-          />
-          
-          {/*<IconToggle
-            isLocked={this.state.positionLock}
-            setStore={setUploadImageStore}
-            item='lockPosition'
-            handleToggle={this.handleToggle}
-          />
-          <span className="titleText">Lock position</span>*/}
-        </div>
+        {this.state.hasUploadedImage && (
+          <div className="content_Column">
+            <M_Control
+              orientation="row"
+              controlType='Slider'
+              hasTitle={true}
+              title='Size'
+              isLocked={this.state.sizeLock}
+              setStore={setUploadImageStore}
+              item='lockSize'
+              handleToggle={this.handleToggle}
+              data={uploadImage.size}
+              handleChange={handleUploadImageSize}
+              min={5}
+              max={50}
+            />
+
+            <M_Control
+              orientation="row"
+              controlType='SliderOpacity'
+              hasTitle={true}
+              title='Opacity'
+              isLocked={this.state.opacityLock}
+              setStore={setUploadImageStore}
+              item='lockOpacity'
+              handleToggle={this.handleToggle}
+              data={uploadImage.opacity}
+              handleChange={handleUploadImageOpacity}
+            />
+          </div>
+        )}
       </div>
     </div>
   }
