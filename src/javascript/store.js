@@ -412,7 +412,7 @@ function setBackgroundImageStore(type, value) {
 
 function initUploadImageStore(preset) {
   preset = Object.assign({}, preset, { 
-    moduleName: 'Upload Image', 
+    moduleName: 'Upload Image',
     //size: 50, // Default size as 50% of canvas
     //opacity: 100, // Default opacity as 100%
     //positionIndex: 0, // Default position (top-left)
@@ -423,8 +423,8 @@ function initUploadImageStore(preset) {
     //],
     uploadedImage: null,
     sizeLock: false,
-    opacityLock: false
-    //positionLock: false
+    opacityLock: false,
+    positionLock: false
   });
   
   return preset;
@@ -448,9 +448,9 @@ function setUploadImageStore(type, value) {
       moduleUploadImageStore.uploadedImage = value;
       
       // Randomize position when a new image is uploaded (if not locked)
-      //if (!moduleUploadImageStore.positionLock) {
+      if (!moduleUploadImageStore.positionLock) {
       randomizeImagePosition();
-      //}
+      }
       
       resolve([value]);
     }
@@ -462,9 +462,9 @@ function setUploadImageStore(type, value) {
     if (type === 'lockOpacity') {
       moduleUploadImageStore.opacityLock = value;
     }
-    //if (type === 'lockPosition') {
-    //  moduleUploadImageStore.positionLock = value;
-    //}
+    if (type === 'lockPosition') {
+      moduleUploadImageStore.positionLock = value;
+    }
   });
 }
 
@@ -1469,6 +1469,12 @@ function generateAllStore(generatorName, moduleList) {
           setImageStore('Shoes')
         } else if (moduleImageStore.collection == 'Electronics') {
           setImageStore('Electronics')
+        }
+      }
+
+      if (moduleName == 'UploadImage') {
+        if (!moduleUploadImageStore.positionLock) {
+          randomizeImagePosition();
         }
       }
 

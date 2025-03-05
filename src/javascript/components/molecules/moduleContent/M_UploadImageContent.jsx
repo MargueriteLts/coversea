@@ -10,6 +10,7 @@ export default class M_UploadImageContent extends Component {
     this.state = {
       sizeLock: this.props.uploadImage.sizeLock,
       opacityLock: this.props.uploadImage.opacityLock,
+      positionLock: this.props.uploadImage.positionLock,
       hasUploadedImage: false
     }
   }
@@ -34,6 +35,12 @@ export default class M_UploadImageContent extends Component {
         opacityLock: !this.state.opacityLock
       })
     }
+    if (item == 'lockPosition') {
+      setStore(item, !this.state.positionLock)
+      this.setState({
+        positionLock: !this.state.positionLock
+      })
+    }
   }
 
   handleWrappedFileChange = (e) => {
@@ -53,6 +60,7 @@ export default class M_UploadImageContent extends Component {
       uploadImage,
       handleUploadImageSize,
       handleUploadImageOpacity,
+      handleRandomPosition,
       setUploadImageStore
     } = this.props
 
@@ -96,6 +104,16 @@ export default class M_UploadImageContent extends Component {
               handleToggle={this.handleToggle}
               data={uploadImage.opacity}
               handleChange={handleUploadImageOpacity}
+            />
+
+            <M_Control
+              orientation="row"
+              hasTitle={true}
+              title='Position'
+              isLocked={this.state.positionLock}
+              setStore={setUploadImageStore}
+              item='lockPosition'
+              handleToggle={this.handleToggle}
             />
           </div>
         )}
