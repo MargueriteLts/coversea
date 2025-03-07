@@ -1718,6 +1718,10 @@ function sketch(p) {
     let canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
 
+    canvas.style('display', 'block');
+    canvas.style('margin', '0');
+    canvas.style('padding', '0');
+
     // random100(p)
     randomsBuffer = p.createGraphics(canvasSize, canvasSize)
     allRandoms()
@@ -1770,10 +1774,19 @@ function sketch(p) {
       // parentDivHeight = parentDivInfo.height;
       
       // canvasSize = Math.min(parentDivWidth, parentDivHeight)
+
+      //myold
+      //getDivSize().then((newCanvasSize) => {
+      //  canvasSize = newCanvasSize
+      //  p.resizeCanvas(canvasSize, canvasSize)
+      //  p.rect(canvasSize, canvasSize, canvasSize, canvasSize)
+      //})
+      //newClaude
       getDivSize().then((newCanvasSize) => {
-        canvasSize = newCanvasSize
+        canvasSize = newCanvasSize[0] // Make sure we get the first element of the array
         p.resizeCanvas(canvasSize, canvasSize)
-        p.rect(canvasSize, canvasSize, canvasSize, canvasSize)
+        // Remove this line:
+        // p.rect(canvasSize, canvasSize, canvasSize, canvasSize)
       })
   }
 

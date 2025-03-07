@@ -460,9 +460,32 @@
     width: 100%;
   }
 
+  //my old
+  //.sketch {
+  //  //my old
+  //  //outline: 1px solid var(--BACKGROUND-MODULE);
+  //  //new claude
+  //  border: 1px solid var(--BACKGROUND-MODULE);
+  //  box-sizing: border-box;
+  //}
+
+  //new claude
   .sketch {
-    //border: 1px solid grey;
-    outline: 1px solid var(--BACKGROUND-MODULE);
+    display: block; /* Ensures the canvas doesn't have extra space */
+    margin: 0 auto; /* Centers the canvas */
+    width: 100%; /* Fill container width */
+    height: auto; /* Maintain aspect ratio */
+    box-sizing: border-box; /* Include border in element size */
+    border: 1px solid var(--BACKGROUND-MODULE);
+  }
+  
+  /* Target the canvas element directly with higher specificity */
+  .sketch canvas {
+    display: block !important; /* Override any inline styles */
+    margin: 0 !important; /* Remove any margin */
+    padding: 0 !important; /* Remove any padding */
+    width: 100% !important; /* Fill container */
+    height: 100% !important; /* Fill container */
   }
 
   .teaserFooter {
