@@ -1,6 +1,7 @@
 // import './generators.css'
 import './teaserGenerator.css'
 import './stylesheets/language.scss'  // Import the language SCSS
+//import './teaserGenerator.css'
 
 import React from 'react'
 import { createRoot } from 'react-dom/client'

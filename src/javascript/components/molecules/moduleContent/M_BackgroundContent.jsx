@@ -144,8 +144,8 @@ export default class M_BackgroundContent extends Component {
     ////////////// GRADIENT
 
     if (background.currentBackgroundType == 'Gradient') {
-      return <div className="BackgroundContent_TabContent row">
-        <div className='TabContent-column'>
+      return <div className="background-content__with-tabs-content row">
+        <div className='tab-content-column'>
           <M_Control
             orientation="row"
             controlType='GradientColors'
@@ -178,7 +178,7 @@ export default class M_BackgroundContent extends Component {
             
           />
         </div>
-        <div className='TabContent-column'>
+        <div className='tab-content-column'>
           {/*<div className='gradientDirection'>*/}
             <M_Control
               orientation="row"
@@ -217,7 +217,7 @@ export default class M_BackgroundContent extends Component {
     }
 
     if (background.currentBackgroundType == 'Noise') {
-      return <div className='TabContent'>
+      return <div className='tab-content'>
 
         {/*<IconToggle
           isLocked={this.state.noiseLock}
@@ -226,7 +226,7 @@ export default class M_BackgroundContent extends Component {
           handleToggle={this.handleToggle}
         />
 
-        <div className='moduleContent-Left'>
+        <div className='module-content-left'>
           <TabImageSet
             options = {background.preset.Noise.preset}
             value = {background.preset.Noise.currentNoiseType}
@@ -263,7 +263,7 @@ export default class M_BackgroundContent extends Component {
     }
 
     if (background.currentBackgroundType == 'Pixels') {
-      return <div className='TabContent'>
+      return <div className='tab-content'>
         <IconToggle
           isLocked={this.state.pixelsLock}
           setStore={setBackgroundStore}
@@ -355,11 +355,11 @@ export default class M_BackgroundContent extends Component {
     const nbBgTypes = background.backgroundTypes.length
 
     return (
-    <div className="M_BackgroundContent">
+    <div className="background-content">
       {nbBgTypes > 1 ? (
 
-        <div className="BackgroundContent_WithTabs">
-          <div className="BackgroundContent_Tabs">
+        <div className="background-content__with-tabs">
+          <div className="background-content__with-tabs-tabs">
             <IconToggle
               isLocked={this.state.tabsLock}
               setStore={setBackgroundStore}

@@ -12,7 +12,7 @@ export default class A_Text extends PureComponent {
 
     const classNames = classnames({
       [`${style}`]: true,
-      toUpperCase: isUpperCase
+      "text--uppercase": isUpperCase
     })
 
 

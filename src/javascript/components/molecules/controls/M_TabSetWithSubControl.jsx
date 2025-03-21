@@ -44,15 +44,15 @@ export default class M_ControlWithSubControl extends Component {
     } = this.props
 
     const classNames = classnames({
-      'M_TabsWithSubControl': true,
+      'module-tabs-with-subcontrol': true,
       //[`${orientation}`]: true,
       //fullWidth: isFullWidth
     })
 
     return <div className={classNames}>
-      <div className='topControls'>
-        <div className='M_Control'>
-          <div className="control_Title">
+      <div className='top-controls'>
+        <div className='module-control'>
+          <div className="module-control__title">
             <IconToggle
               isLocked={isLocked}
               setStore={setStore}
@@ -61,7 +61,7 @@ export default class M_ControlWithSubControl extends Component {
             />
               <A_Text
                 text={mainTitle}
-                style='titleText'
+                style='title-text'
               />
           </div>
         </div>

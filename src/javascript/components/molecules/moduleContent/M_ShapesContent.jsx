@@ -50,7 +50,7 @@ export default class Shapes extends Component {
 
     return <div className="M_ShapesContent">
       
-      <div className="content_Column">
+      <div className="content-column">
         <M_Select
           options={shapes.types}
           value={shapes.currentType}
@@ -58,7 +58,7 @@ export default class Shapes extends Component {
         />
       </div>
 
-      <div className="content_Column">
+      <div className="content-column">
         <M_Control
           orientation="row"
           controlType='Slider'

@@ -412,7 +412,7 @@ function setBackgroundImageStore(type, value) {
 
 function initUploadImageStore(preset) {
   preset = Object.assign({}, preset, { 
-    moduleName: 'Upload Image',
+    moduleName: 'Logo/Sticker',
     //size: 50, // Default size as 50% of canvas
     //opacity: 100, // Default opacity as 100%
     //positionIndex: 0, // Default position (top-left)

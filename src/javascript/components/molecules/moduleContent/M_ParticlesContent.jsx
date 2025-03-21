@@ -49,7 +49,7 @@ export default class Particles extends Component {
     return (
       <div className="M_ParticlesContent">
 
-        <div className="content_Column">
+        <div className="content-column">
           <M_Select
             options={particles.options}
             value={particles.currentParticlesType}
@@ -57,7 +57,7 @@ export default class Particles extends Component {
           />
         </div>
         
-        <div className="content_Column">
+        <div className="content-column">
           <M_Control
             orientation="row"
             controlType='ColorPicker'

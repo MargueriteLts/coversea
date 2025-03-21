@@ -14,7 +14,7 @@ import M_3DContent from '../molecules/moduleContent/M_3DContent.jsx'
 import M_OverlayContent from '../molecules/moduleContent/M_OverlayContent.jsx'
 import M_UploadImageContent from '../molecules/moduleContent/M_UploadImageContent.jsx'
 
-export default class Module extends Component {
+export default class O_Module extends Component {
   constructor(props) {
     super(props)
 
@@ -223,7 +223,7 @@ export default class Module extends Component {
     const { moduleName, moduleType, handleRandomizeModule } = this.props
 
 
-    return <div className="O_Module">
+    return <div className="module">
       <M_ModuleHeader
         title={moduleName}
         handleRandomizeModule={handleRandomizeModule}
@@ -234,7 +234,7 @@ export default class Module extends Component {
       
       { this.state.isOpen ?
 
-          <div className="moduleContent">
+          <div className="module__content">
             {this.renderModuleContent()}
           </div>
 

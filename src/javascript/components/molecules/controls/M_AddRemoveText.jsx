@@ -54,12 +54,12 @@ export default class M_AddRemoveText extends PureComponent {
   }
 
   render() {
-    return <div className='M_AddRemoveText'>
+    return <div className='text-manager'>
 
-      <div className='inputStack'>
+      <div className='text-manager__input-stack'>
 
         {this.state.textAreas.map((textArea, index) => (
-          <div key={index} className='removableInput'>
+          <div key={index} className='text-manager__input-stack-input'>
             <TextArea
               className='textarea'
               rows={3}
@@ -72,7 +72,7 @@ export default class M_AddRemoveText extends PureComponent {
               onClick={() => this.handleRemoveText(index)}
               size='normal'
               style='filled'
-              icon='minus'
+              icon='icon--minus'
             />
           </div>
         ))}
@@ -83,7 +83,7 @@ export default class M_AddRemoveText extends PureComponent {
           onClick={this.handleAddText}
           size='normal'
           style='filled'
-          icon='plus'
+          icon='icon--plus'
         />
       : null}
     </div>

@@ -14,11 +14,11 @@ export default class A_Button extends Component {
   render() {
     const { onClick, text, type, icon, hasIcon} = this.props;
 
-    const buttonClass = classnames('A_Button', {
-      [`A_Button--${type}`]: true
+    const buttonClass = classnames('button', {
+      [`button--${type}`]: true
     });
 
-    const iconClass = classnames('A_Icon', {
+    const iconClass = classnames('icon', {
       [`${icon}`]: true
     })
 

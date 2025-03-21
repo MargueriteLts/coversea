@@ -25,7 +25,7 @@ export default class TabButtonSet extends Component {
     })
 
     return (
-      <div className="TabButtonSet">
+      <div className="tab-button-set">
         {buttonElements}
       </div>
     )

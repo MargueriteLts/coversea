@@ -38,32 +38,23 @@ p {
   color: var(--TEXT-WHITE);
 }
 
+/* Layout Utilities */
+.layout {
+  &--column {
+    display: flex;
+    flex-direction: column;
+  }
 
-
-
-//LAYOUT
-
-.flexColumn {
-  display: flex;
-  flex-direction: column;
+  &--row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  &--bottom-margin {
+    margin-bottom: 24px;
+  }
+  
+  &--align-bottom {
+    align-items: flex-end;
+  }
 }
-
-.flexRow {
-  display: flex;
-  flex-direction: row;
-}
-
-.bottom {
-  margin-bottom: 24px;
-}
-
-.align-bottom {
-  align-items: flex-end;
-}
-
-
-
-//for working on basictypo layout
-//.generator__modules-wrap {
-//  min-width: 700px;
-//}

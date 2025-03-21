@@ -11,7 +11,7 @@ export default class A_DropDownButton extends Component {
     const { text, isOn, handleClick } = this.props
 
     const classes = classnames({
-      dropDownButton: true,
+      dropdown__button: true,
       active: isOn
     })
 

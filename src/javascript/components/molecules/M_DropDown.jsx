@@ -91,7 +91,7 @@ export default class M_TextSettingsDropDown extends Component {
     });
 
 
-    return <div className='M_DropDown' ref={this.dropdownRef}>
+    return <div className='dropdown' ref={this.dropdownRef}>
       
       <A_DropDownButton
         text={title}
@@ -101,7 +101,7 @@ export default class M_TextSettingsDropDown extends Component {
 
       { this.state.displayContent
       
-        ? <div style={ styles.popover } className='dropDownPopover'>
+        ? <div style={ styles.popover } className='dropdown__popover'>
           {this.renderDropDownContent()}
         </div>
 

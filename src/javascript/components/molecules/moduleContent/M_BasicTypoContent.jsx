@@ -68,12 +68,12 @@ export default class BasicTypo extends Component {
   render() {
     const { basictypo, setBasicTypoStore } = this.props
 
-    return <div className="M_BasicTypoContent">
+    return <div className="basic-typo-content">
 
-      <div className="BasicTypo_row">
+      <div className="basic-typo-row">
         <A_Text
           text='Main text'
-          style='basicTypo-title'
+          style='basic-typo-title'
         />
         <TextArea
           className='textarea'
@@ -100,10 +100,10 @@ export default class BasicTypo extends Component {
 
       { basictypo.dopText
         ?
-        <div className="BasicTypo_row">
+        <div className="basic-typo-row">
           <A_Text
             text='Small text'
-            style='basicTypo-title'
+            style='basic-typo-title'
           />
           <M_AddRemoveText
             // text={basictypo.otherText.value}

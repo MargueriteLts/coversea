@@ -14,9 +14,9 @@ export default class A_ToggleOpenClose extends Component {
     const { title, handleClick, isOpen, hasIconRight, hasIconLeft, style, type } = this.props
 
     const classes = classnames({
-      'A_Icon': true,
-      angleDown: !isOpen,
-      angleUp: isOpen
+      'icon': true,
+      "icon--angle-down": !isOpen,
+      "icon--angle-up": isOpen
     })
 
     return <div className={style} onClick={handleClick}>
@@ -36,11 +36,11 @@ export default class A_ToggleOpenClose extends Component {
 
       {hasIconRight ? (
       isOpen ? (
-        <div className='A_Icon AngleUp'></div>
+        <div className='icon icon--angle-up'></div>
         // <img src={icons["AngleUp"]} alt="" />
       ) : (
         // <img src={icons["AngleDown"]} alt="" />
-        <div className='A_Icon AngleDown'></div>
+        <div className='icon icon--angle-down'></div>
       )
     ) : null}
 

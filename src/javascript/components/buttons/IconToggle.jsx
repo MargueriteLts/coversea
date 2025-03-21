@@ -15,9 +15,9 @@ export default class IconToggle extends Component {
     const { isLocked, handleToggle } = this.props;
 
     const classes = classnames({
-      'A_Icon': true,
-      locked: isLocked,
-      unLocked: !isLocked
+      'icon': true,
+      "icon--locked": isLocked,
+      "icon--unlocked": !isLocked
     })
 
     return (

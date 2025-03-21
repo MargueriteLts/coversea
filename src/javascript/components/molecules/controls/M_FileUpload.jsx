@@ -49,7 +49,7 @@ export default class M_FileUpload extends Component {
     } : {};
     
     return (
-      <div className="M_FileUpload">
+      <div className="file-upload">
         <input 
           type="file" 
           accept="image/*" 
@@ -66,8 +66,8 @@ export default class M_FileUpload extends Component {
         >
           {(!previewUrl || (previewUrl && isHovering)) && (
             <div className="upload-button">
-              <div className="upload-icon"></div>
-              <div className="upload-text">jpg/png</div>
+              <div className="upload-button__icon"></div>
+              <div className="upload-button__text">jpg/png</div>
             </div>
           )}
         </div>

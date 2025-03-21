@@ -570,7 +570,7 @@ export default class GeneratorContainer extends Component {
       <div className="generator__sketch-wrap">
         <div className="sketch" id="sketch" ref={this.sketchContainerRef} onContextMenu={handleContextMenu}></div>
         <div className="generator__sketch-controls">
-          <div className="btn--big" onClick={this.generateCover}>
+          <div className="button--large" onClick={this.generateCover}>
             <span className="lang-en lang-content">GENERATE</span>
             <span className="lang-fr lang-content">GÉNÉRER</span>
             <span className="lang-ru lang-content">СОЗДАТЬ</span>
@@ -587,7 +587,7 @@ export default class GeneratorContainer extends Component {
           </div>*/}
           <A_IconButton
             onClick={this.props.saveCanvasAsImage}
-            icon='download'
+            icon='icon--download'
             size='large'
             style='filled'
           />

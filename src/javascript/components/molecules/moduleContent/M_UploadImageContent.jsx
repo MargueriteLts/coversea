@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import M_Control from '../controls/M_Control.jsx'
+import A_Text from '../../ATOMS/A_Text.jsx'
+import M_FileUpload from '../controls/M_FileUpload.jsx'
 
 export default class M_UploadImageContent extends Component {
   constructor(props) {
@@ -64,20 +66,31 @@ export default class M_UploadImageContent extends Component {
       setUploadImageStore
     } = this.props
 
-    return <div className="M_UploadImageContent">
-      <div className="content_row">
-        <div className="content_Column">
-          <M_Control
+    return <div className="upload-image-content">
+      <div className="content-row">
+        <div className="content-column">
+          {/*<M_Control
             orientation="row"
             controlType='FileUpload'
             hasTitle={true}
-            title='Upload Image'
+            title='Upload your logo or sticker'
             handleFileChange={this.handleWrappedFileChange}
-          />
+            />*/}
+          <div className='module-control row'>
+            <A_Text
+              text="Upload your logo or sticker"
+              style='title-text'
+              />
+            <M_FileUpload
+              handleFileChange={this.handleWrappedFileChange}
+              //handleFileChange={this.props.handleFileChange}
+            />
+          </div>
+
         </div>
         
         {this.state.hasUploadedImage && (
-          <div className="content_Column">
+          <div className="content-column">
             <M_Control
               orientation="row"
               controlType='Slider'

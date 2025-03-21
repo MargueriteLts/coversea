@@ -11,7 +11,7 @@ export default class M_GradientColors extends PureComponent {
     const { handleChangeBackgroundGradientColor, color1, color2 } = this.props
 
     return (
-      <div className='gradientColors'>
+      <div className='gradient-colors'>
         <ColorPicker
           title=''
           object='GradientColor1'

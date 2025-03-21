@@ -18,7 +18,7 @@ export default class M_GradientAngle extends PureComponent {
         onClick={handleChangeGradientAngle}
         size='normal'
         style='transparent'
-        icon='Rotate'
+        icon='icon--rotate'
       />
     )
   }
