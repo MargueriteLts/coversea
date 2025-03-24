@@ -5,6 +5,7 @@ body.teaser-generator {
   align-items: center;
 
   background: var(--BACKGROUND-WEBSITE-BLACK);
+  //background: red;
   // background-image: url('./images/ui/maket-teaserPage.jpg');
   // background-position: top center;
   // background-size: cover;
@@ -23,23 +24,18 @@ body.teaser-generator {
   }
 }
 
-//.button {
-//  display: flex;
-//  padding: 12px 16px 12px 16px;
-//  align-items: center;
-//  border-radius: 60px;
-//  color: var(--TEXT-WHITE);
-//  text-align: center;
-//  font-family: "bc-novatica-cyr";
-//  border: 1px solid var(--WHITE);
-//  font-style: normal;
-//  font-weight: 400;
-//  text-transform: uppercase;
-//}
-
-span {
-  font-style: italic;
+.button-teaser {
+  display: flex;
+  padding: 12px 16px 12px 16px;
+  align-items: center;
+  border-radius: 60px;
+  color: var(--TEXT-WHITE);
+  text-align: center;
+  font-family: "bc-novatica-cyr";
+  border: 1px solid var(--WHITE);
+  font-style: normal;
   font-weight: 400;
+  text-transform: uppercase;
 }
 
 .statement {
@@ -74,8 +70,9 @@ span {
   flex-direction: column;
   width: 100%;
   max-width: 1800px;
+
   
-  overflow-x: hidden;
+  //overflow-x: hidden;
 
   .section--subtitle {
     display: flex;
@@ -86,7 +83,9 @@ span {
   .section--cta-desktop {
     position: relative;
     align-items: center;
+    justify-content: center;
     width: 100%;
+    //width: 50%;
 
     .cta {
       position: relative;
@@ -122,16 +121,22 @@ span {
     }
   }
 
-  .subsection-cta {
+  .nudge-position {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    mix-blend-mode: difference;
+    justify-content: left;
+    margin-top: 40px;
 
-    .icon {
-      width: 24px;
-      height: 24px;
+    .nudge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      //justify-content: center;
+      mix-blend-mode: difference;
+  
+      .icon {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 
