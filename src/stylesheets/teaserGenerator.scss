@@ -71,82 +71,86 @@ body.teaser-generator {
   width: 100%;
   max-width: 1800px;
 
-  
   //overflow-x: hidden;
 
-  .section--subtitle {
+  .first-screen {
+    height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-  }
+    justify-content: space-between;
+    padding: 2% 0 2% 0;
 
-  .section--cta-desktop {
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    //width: 50%;
-
-    .cta {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      
-      #scrollButton {
-        font-style: normal;
-        font-weight: 400;
-        text-transform: uppercase;
-        border: 1px solid var(--WHITE);
-
-        &:hover {
-          color: black;
-          background-color: var(--WHITE);
-          cursor: pointer;
-        }
-      }
-
-      .background-logo {
-        position: absolute;
-        aspect-ratio: 1 / 1;
-        max-width: 1707px;
-        max-height: 1707px;
-
-        z-index: -1;
-        background-image: url('./images/ui/logo-bgGlavnaya.svg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
-    }
-  }
-
-  .nudge-position {
-    display: flex;
-    justify-content: left;
-    margin-top: 40px;
-
-    .nudge {
+    .section--subtitle {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      //justify-content: center;
-      mix-blend-mode: difference;
+      gap: 16px;
+    }
+
+    .nudge-position {
+      display: flex;
+      justify-content: left;
+      //margin-top: 40px;
   
-      .icon {
-        width: 24px;
-        height: 24px;
+      .nudge {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        //justify-content: center;
+        mix-blend-mode: difference;
+    
+        .icon {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  
+    .section--cta-desktop {
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      //width: 50%;
+  
+      .cta {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        #scrollButton {
+          font-style: normal;
+          font-weight: 400;
+          text-transform: uppercase;
+          border: 1px solid var(--WHITE);
+  
+          &:hover {
+            color: black;
+            background-color: var(--WHITE);
+            cursor: pointer;
+          }
+        }
+  
+        .background-logo {
+          position: absolute;
+          aspect-ratio: 1 / 1;
+          max-width: 1707px;
+          max-height: 1707px;
+  
+          z-index: -1;
+          background-image: url('./images/ui/logo-bgGlavnaya.svg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
       }
     }
   }
 
-  .subsection__text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    flex: 1 0 0;
-  }
+
+
+  ////////////////
 
   .section--presentation {
     display: flex;
@@ -180,6 +184,14 @@ body.teaser-generator {
         width: 100vw;
       }
     }
+  }
+
+  .subsection__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    flex: 1 0 0;
   }
 
   .section--generator {

@@ -21,7 +21,7 @@
   
   /* Header */
   .teaser-header {
-    padding-top: 16px;
+    //padding-top: 16px;
     
     .logo--header {
       width: 362px;
@@ -36,14 +36,14 @@
   .teaser-content {
     justify-content: center;
     align-items: center;
-    padding: 14px;
+    padding: 0px 14px 0px 14px;
     width: 100%;
     min-width: 390px;
   }
 
-  .section--subtitle {
-    margin-top: 44px;
-  }
+  //.section--subtitle {
+  //  margin-top: 44px;
+  //}
   
   .section--cta-desktop {
     display: none;
@@ -70,7 +70,7 @@
   }
   
   .statement-position {
-    margin-top: 131px;
+    //margin-top: 131px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -283,7 +283,7 @@
 
   /* Header */
   .teaser-header {
-    padding-top: 20px;
+    //padding-top: 20px;
 
     .logo--header {
       width: 541px;
@@ -297,12 +297,12 @@
   /* Content */
   .teaser-content {
     justify-content: left;
-    padding: 22px;
+    padding: 0px 22px 0px 22px;
   }
   
-  .section--subtitle {
-    margin-top: 64px;
-  }
+  //.section--subtitle {
+  //  margin-top: 64px;
+  //}
 
   .section--cta-mobile {
     display: none;
@@ -322,7 +322,7 @@
     display: flex;
     //flex-direction: column;
     flex-direction: row;
-    margin-top: 194px;
+    //margin-top: 194px;
     //gap: 56px;
     justify-content: space-between;
 
@@ -585,7 +585,7 @@
 /* Desktop Styles (min-width: 1024px) */
 @media (min-width: 1024px) {
   .section--subtitle {
-    margin-top: 108px;
+    //margin-top: 108px;
 
     p {
       width: 430px;
@@ -598,10 +598,10 @@
     width: 929px;
   }
 
-  .section--cta-desktop {
-    //margin-top: 230px;
-    margin-top: 50px;
-  }
+  //.section--cta-desktop {
+  //  //margin-top: 230px;
+  //  margin-top: 50px;
+  //}
 
   .background-logo {
     width: 100vw;
@@ -697,10 +697,10 @@
 
 /* Large Desktop Styles (min-width: 1280px) */
 @media (min-width: 1280px) {
-  .statement-position {
-    //margin-top: 370px;
-    margin-top: 135px;
-  }
+  //.statement-position {
+  //  //margin-top: 370px;
+  //  margin-top: 135px;
+  //}
 
   .section--generator {
     margin-top: 144px;
@@ -811,7 +811,8 @@
 /* Extra Large Desktop Styles (min-width: 1708px) */
 @media screen and (min-width: 1708px) {
   .teaser-content {
-    padding: 10%;
+    //padding: 10%;
+    padding: 0px 10% 0px 10%;
   }
 
   .section--presentation {
