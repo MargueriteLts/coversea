@@ -147,7 +147,7 @@ input[type="range"]::-ms-thumb:hover {
   outline: none;
   box-shadow: none;
   border: none;
-  font-family: "bc-novatica-cyr";
+  font-family: "bc-novatica-cyr", sans-serif;
   font-size: 16px;
   line-height: 16px;
 }
@@ -222,7 +222,8 @@ input[type="range"]::-ms-thumb:hover {
 }
 
 .upload-button-container:hover {
-  background-color: #2A2A2A;
+  background-color: var(--BACKGROUND-BTN-HOVER-DARKER);
+  border: 1px solid white;
 }
 
 /* Dimming effect class */
@@ -260,7 +261,7 @@ input[type="range"]::-ms-thumb:hover {
 
 .upload-button__text {
   color: #838383;
-  font-family: "neue-haas-unica";
+  font-family: "neue-haas-unica", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 300;
@@ -275,7 +276,7 @@ input[type="range"]::-ms-thumb:hover {
   border: 1px solid var(--WHITE);
   color: var(--TEXT-WHITE);
   text-align: center;
-  font-family: "bc-novatica-cyr";
+  font-family: "bc-novatica-cyr", sans-serif;
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
@@ -383,6 +384,10 @@ input[type="range"]::-ms-thumb:hover {
   &.active {
     background-color: var(--BACKGROUND-BTN-SELECTED);
   }
+
+  &:hover {
+    background-color: var(--BACKGROUND-BTN-HOVER-DARKER);
+  }
 }
 
 .toggle-icon-set {
@@ -422,7 +427,7 @@ input[type="range"]::-ms-thumb:hover {
   border-radius: 20px;
   color: #838383;
   text-align: center;
-  font-family: "neue-haas-unica";
+  font-family: "neue-haas-unica", sans-serif;
   font-size: 16px;
   line-height: 16px;
   font-style: normal;
@@ -487,7 +492,7 @@ input[type="range"]::-ms-thumb:hover {
 
     color: var(--WHITE);
     text-align: center;
-    font-family: "bc-novatica-cyr";
+    font-family: "bc-novatica-cyr", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -525,7 +530,7 @@ input[type="range"]::-ms-thumb:hover {
     gap: 8px;
     background-color: #1D1D1D;
     color: var(--TEXT-WHITE);
-    font-family: "neue-haas-unica";
+    font-family: "neue-haas-unica", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -540,7 +545,7 @@ input[type="range"]::-ms-thumb:hover {
       background-color: #353537;
     }
 
-    &--active {
+    &.active {
       background-color: #353537;
     }
   }
@@ -570,7 +575,7 @@ input[type="range"]::-ms-thumb:hover {
   display: inline-block;
   width: 100%;
   min-width: 180px;
-  font-family: 'neue-haas-unica';
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 16px;
   font-weight: 300;
   text-align: left;

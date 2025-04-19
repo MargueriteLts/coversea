@@ -573,7 +573,7 @@ export default class GeneratorContainer extends Component {
           <div className="button--large" onClick={this.generateCover}>
             <span className="lang-en lang-content">GENERATE</span>
             <span className="lang-fr lang-content">GÉNÉRER</span>
-            <span className="lang-ru lang-content">СОЗДАТЬ</span>
+            <span className="lang-ru lang-content">ГЕНЕРИРОВАТЬ</span>
           </div>
           {/*<div className='description-desktop'>
             <p>

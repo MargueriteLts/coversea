@@ -21,7 +21,7 @@ export default class IconToggle extends Component {
     })
 
     return (
-      <div onClick={() => handleToggle(this.props.item, this.props.setStore)}>
+      <div className='toggle-icon' onClick={() => handleToggle(this.props.item, this.props.setStore)}>
         <div className={classes}></div>
       </div>
     );

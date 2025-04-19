@@ -6,6 +6,7 @@
 
 // Show only the content for the selected language
 body {
+
   &.lang-en .lang-en {
     display: block !important;
   }

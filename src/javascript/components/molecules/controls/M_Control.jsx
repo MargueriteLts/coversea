@@ -139,8 +139,8 @@ export default class M_Control extends Component {
     const classNames = classnames({
       'module-control': true,
       [`${orientation}`]: true,
-      fullWidth: isFullWidth,
-      halfWidth: isHalfWidth,
+      "full-width": isFullWidth,
+      "half-width": isHalfWidth,
     })
 
     if (orientation == 'row') {
