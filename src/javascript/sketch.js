@@ -16,13 +16,16 @@ import {
   getBasicTypoStore,
   getBasicTypoV2Store,
   getOverlayStore,
-  getFontsStore
+  getFontsStore,
+  getUploadImageStore
   // setCanvasSizeStore,
   // generatePosition
 } from './store'
 
 // let tools = new p5.Utils();
 // let utils
+
+let pendingImageUrl = null;
 
 let moduleList = {}
 
@@ -140,6 +143,27 @@ window.resetLight = function() {
   let b2 = colorArray2[2]
   setLight(r1, r2, g1, g2, b1, b2)
 }
+
+window.handleUploadedImage = function(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        // Just store the URL - we'll load it within the p5 context later
+        pendingImageUrl = e.target.result;
+        resolve({success: true});
+      } catch (err) {
+        console.error("Error processing image:", err);
+        reject(err);
+      }
+    };
+    reader.onerror = (err) => {
+      console.error("File reader error:", err);
+      reject(err);
+    };
+    reader.readAsDataURL(file);
+  });
+};
 
 function setLight(r1, r2, g1, g2, b1, b2) {
   graphics.directionalLight(r1, g1, b1, 100, 0, 0)
@@ -1005,6 +1029,64 @@ function drawModules(p) {
     // p.background(imageVinyl, opacity)
   }
 
+  /////////////////////////////////////////// MODULE UPLOADIMAGE
+
+  if (moduleList.includes('UploadImage')) {
+    const uploadImage = getUploadImageStore();
+    
+    if (uploadImage.uploadedImage) {
+      const margin = 10; // 50px margin from edges
+      let x, y;
+      const positionName = uploadImage.positions[uploadImage.positionIndex];
+      const imgSize = (uploadImage.size * canvasSize) / 100;
+      //const opacity = (uploadImage.opacity / 100) * 255;
+      const opacity = parseFloat(uploadImage.opacity)
+      
+      // Set position based on positionIndex
+      switch(positionName) {
+        case 'top-left':
+          x = margin;
+          y = margin;
+          break;
+        case 'top-middle':
+          x = (canvasSize - imgSize) / 2;
+          y = margin;
+          break;
+        case 'top-right':
+          x = canvasSize - imgSize - margin;
+          y = margin;
+          break;
+        case 'middle-left':
+          x = margin;
+          y = (canvasSize - imgSize) / 2;
+          break;
+        case 'middle-right':
+          x = canvasSize - imgSize - margin;
+          y = (canvasSize - imgSize) / 2;
+          break;
+        case 'bottom-left':
+          x = margin;
+          y = canvasSize - imgSize - margin;
+          break;
+        case 'bottom-middle':
+          x = (canvasSize - imgSize) / 2;
+          y = canvasSize - imgSize - margin;
+          break;
+        case 'bottom-right':
+          x = canvasSize - imgSize - margin;
+          y = canvasSize - imgSize - margin;
+          break;
+        default:
+          x = margin;
+          y = margin;
+      }
+      
+      p.tint(255, opacity);
+      p.image(uploadImage.uploadedImage, x, y, imgSize, imgSize);
+      p.noTint();
+    }
+  }
+
   /////////////////////////////////////////// MODULE IMAGE
 
   if (moduleList.includes('Image')) {
@@ -1579,7 +1661,8 @@ function sketch(p) {
     //p.loadFont('../fonts/YUNGA-Display.otf')
     //p.loadFont('../fonts/typekini.ttf')
     //p.loadFont('../fonts/AUSRINE.ttf')
-
+    
+    p.loadFont('./fonts/Aileron-Bold.otf')
 
     //////
 
@@ -1602,10 +1685,42 @@ function sketch(p) {
 
   }
 
+  function checkPendingImage() {
+    if (pendingImageUrl) {
+      const uploadImage = getUploadImageStore();
+      
+      p.loadImage(pendingImageUrl, 
+        // Success callback
+        loadedImg => {
+          uploadImage.uploadedImage = loadedImg;
+          
+          // Randomize position if not locked
+          if (!uploadImage.positionLock) {
+            const positions = uploadImage.positions;
+            const randomIndex = Math.floor(Math.random() * positions.length);
+            uploadImage.positionIndex = randomIndex;
+          }
+          
+          // Clear the pending URL
+          pendingImageUrl = null;
+        },
+        // Error callback
+        err => {
+          console.error("Failed to load image:", err);
+          pendingImageUrl = null;
+        }
+      );
+    }
+  }
+
   p.setup = () => {
     
     let canvas = p.createCanvas(canvasSize, canvasSize)
     canvas.parent(canvasContainerId)
+
+    canvas.style('display', 'block');
+    canvas.style('margin', '0');
+    canvas.style('padding', '0');
 
     // random100(p)
     randomsBuffer = p.createGraphics(canvasSize, canvasSize)
@@ -1659,16 +1774,28 @@ function sketch(p) {
       // parentDivHeight = parentDivInfo.height;
       
       // canvasSize = Math.min(parentDivWidth, parentDivHeight)
+
+      //myold
+      //getDivSize().then((newCanvasSize) => {
+      //  canvasSize = newCanvasSize
+      //  p.resizeCanvas(canvasSize, canvasSize)
+      //  p.rect(canvasSize, canvasSize, canvasSize, canvasSize)
+      //})
+      //newClaude
       getDivSize().then((newCanvasSize) => {
-        canvasSize = newCanvasSize
+        canvasSize = newCanvasSize[0] // Make sure we get the first element of the array
         p.resizeCanvas(canvasSize, canvasSize)
-        p.rect(canvasSize, canvasSize, canvasSize, canvasSize)
+        // Remove this line:
+        // p.rect(canvasSize, canvasSize, canvasSize, canvasSize)
       })
   }
 
 
   
   p.draw = () => {
+    // Check for any pending image at the start of each frame
+    checkPendingImage();
+
     drawModules(p)
     
     const blend = getBlendStore()
@@ -1684,6 +1811,8 @@ function sketch(p) {
 
 ///////////////////////////////////////////////////
 
+let cover
+
 function initSketch(id, size) {
   canvasContainerId = id
 
@@ -1697,10 +1826,20 @@ function initSketch(id, size) {
   moduleList = getModuleList()
 
   // let utils = new p5.Utils()
-  new p5(sketch)
+  cover = new p5(sketch)
 }
+
+
+
+function saveCanvasAsImage() {
+  if (cover) {
+    cover.saveCanvas('my_cover', 'jpg'); // Calls saveCanvas on the stored instance
+  }
+}
+
+
 
 // utils = new p5.Utils()
 // utils = new p5.Utils(sketch)
 
-export { initSketch }
+export { initSketch, saveCanvasAsImage }

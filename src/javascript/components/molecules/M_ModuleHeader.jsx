@@ -11,20 +11,20 @@ export default class M_ModuleHeader extends Component {
   render() {
     const { title, moduleType, handleOpenModule, isOpen } = this.props
 
-    return <div className="M_ModuleHeader">
-      <div className='moduleheader_controlsleft'>
+    return <div className="module__header">
+      <div className='module__header-controls-left'>
         <A_ToggleOpenClose
           title={title}
           handleClick={handleOpenModule}
           isOpen={isOpen}
-          style='moduleTitle'
+          style='module-title'
           hasIconLeft={true}
         />
       </div>
 
       <A_Button
         onClick={() => this.props.handleRandomizeModule(moduleType)}
-        icon='Dice'
+        icon='icon--dice'
         text='Randomize'
         type='primary'
         hasIcon={true}

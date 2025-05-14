@@ -530,10 +530,10 @@ export default class GeneratorContainer extends Component {
         <div className="sketch" id="sketch" ref={this.sketchContainerRef}>
         </div>
         <div className="generator__sketch-controls">
-          <div className="btn--big" onClick={this.generateCover}>GENERATE</div>
+          <div className="button--large" onClick={this.generateCover}>GENERATE</div>
           <A_IconButton
             onClick={this.downloadImage}
-            icon='download'
+            icon='icon--download'
             size='large'
             style='filled'
           />

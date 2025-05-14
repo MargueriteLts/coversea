@@ -42,14 +42,14 @@ export default class M_3DContent extends Component {
 
     return <div className="M_3DContent">
 
-        <div className="content_Column">
+        <div className="content-column">
           <M_Select
             options={module3D.types}
             value={module3D.current3DType}
             handleClick={handleDropDownClickModule3D}
           />
         </div>
-        <div className="content_Column">
+        <div className="content-column">
           <M_Control
             orientation="row"
             controlType='Slider'

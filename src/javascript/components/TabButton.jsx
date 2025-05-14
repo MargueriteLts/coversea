@@ -11,7 +11,7 @@ export default class TabButton extends Component {
     const { text, isOn, handleClick } = this.props
 
     const classes = classnames({
-      TabButton: true,
+      "tab-button": true,
       active: isOn
     })
 

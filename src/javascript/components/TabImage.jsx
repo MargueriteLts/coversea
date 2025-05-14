@@ -11,14 +11,14 @@ export default class TabImage extends Component {
     const { text, isOn, handleClick, imageLink } = this.props
 
     const classes = classnames({
-      TabImage: true,
+      "tab-image": true,
       active: isOn
     })
 
     return (
       <div className={classes} onClick={handleClick}>
-        <img src={imageLink} className="TabImage--background" />
-        <span className="TabImage--text">{text}</span>
+        <img src={imageLink} className="tab-image__background" />
+        <span className="tab-image__text">{text}</span>
       </div>
     )
   }

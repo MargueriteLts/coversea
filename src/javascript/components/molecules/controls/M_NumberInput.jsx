@@ -14,7 +14,7 @@ export default class M_NumberInput extends PureComponent {
           type="number"
           min={object.min}
           max={object.max}
-          className="A_NumberInput"
+          className="number-input"
           value={value}
           placeholder="..."
           onChange={handleChange}

@@ -9,12 +9,12 @@ import classnames from 'classnames'
   render() {
     const { onClick, size, style, icon } = this.props;
 
-    const buttonClasses = classnames('A_Button_Icon', {
+    const buttonClasses = classnames('button-icon', {
       [`${size}`]: true,
       [`${style}`]: true
     });
 
-    const iconClasses = classnames('A_Icon', {
+    const iconClasses = classnames('icon', {
       [`${icon}`]: true
     });
 

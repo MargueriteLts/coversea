@@ -1,4 +1,4 @@
-const modules = ['Background', 'Vinyl', 'Lines', 'BasicTypo']
+const modules = ['Background', 'Vinyl', 'Lines', 'BasicTypo', 'UploadImage']
 
 const preset = {
   
@@ -122,7 +122,6 @@ const preset = {
         min: 1,
         max: 6
       },
-      //leading: 2
       leading: {
         sliderValue: 2,
         min: 1,
@@ -138,6 +137,17 @@ const preset = {
     // styles: ['NORMAL', 'LIGHT', 'BOLD'],
     // styleMainText: 'NORMAL',
 
+  },
+
+  UploadImage: {
+    size: 50,
+    opacity: 100,
+    positions: [
+      'top-left', 'top-middle', 'top-right',
+      'middle-left', 'middle-right',
+      'bottom-left', 'bottom-middle', 'bottom-right'
+    ],
+    positionIndex: 0
   }
 }
 

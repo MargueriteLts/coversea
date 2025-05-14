@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 import A_ToggleIcon from '../../buttons/A_ToggleIcon.jsx'
 
-export default class TabButtonSet extends Component {
+export default class M_ToggleIconSet extends Component {
   constructor(props) {
     super(props)
   }
@@ -25,7 +25,7 @@ export default class TabButtonSet extends Component {
     })
 
     return (
-      <div className="M_ToggleIconSet">
+      <div className="toggle-icon-set">
         {buttonElements}
       </div>
     )

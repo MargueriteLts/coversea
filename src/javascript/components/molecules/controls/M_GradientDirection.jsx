@@ -11,7 +11,7 @@ export default class M_GradientDirection extends PureComponent {
     const { gradientAngleLock, setBackgroundStore, handleToggle, handleChangeBackgroundAngleGradient } = this.props
 
     return (
-      <div className='gradientDirection'>
+      <div className='gradient-direction'>
         <M_Control
           orientation="row"
           controlType='GradientAngle'

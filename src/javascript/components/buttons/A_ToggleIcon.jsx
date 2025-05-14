@@ -15,12 +15,12 @@ export default class A_ToggleIcon extends Component {
     const { isOn, handleClick, icon } = this.props;
 
     const iconClasses = classnames({
-      'A_Icon': true,
+      'icon': true,
       [`${icon}`]:true,
     })
 
     const buttonClasses = classnames({
-      toggleIcon: true,
+      "toggle-icon": true,
       active: isOn
     })
 

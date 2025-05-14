@@ -57,8 +57,8 @@ export default class M_VinylContent extends Component {
     } = this.props
 
 
-    return <div className="M_VinylContent">
-      <div className='content_row'>
+    return <div className="vinyl-content">
+      <div className='content-row'>
         <M_TabSetWithSubControl
           //subControl
           subControlType='ColorPicker'
@@ -84,7 +84,7 @@ export default class M_VinylContent extends Component {
         />
 
       </div>
-      <div className='content_row'>
+      <div className='content-row'>
         <M_Control
           orientation="row"
           controlType='Slider'

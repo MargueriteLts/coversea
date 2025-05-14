@@ -89,27 +89,43 @@ const preset = {
     mainText: {
       value: 'Name of your track or album',
       color: '#FB7CEB',
-      fontOptions: ['Sans Serif', 'Script', 'Special'],
+      colorLocked: false,
+      typeLocked: false,
+      sizeLocked: false,
+      leadingLocked: false,
+      fontOptions: ['Sans Serif', 'Script'],
       currentFont: 'Sans Serif',
       size:{
         sliderValue: 10,
         min: 5,
         max: 20
       },
-      leading: 8,
+      leading: {
+        sliderValue: 8,
+        min: 1,
+        max: 20
+      },
     },
 
     otherText: {
       values: ['Music is the answer to everything, music is the key to the world'],
       color: '#ABD53B',
-      fontOptions: ['Sans Serif', 'Script', 'Special'],
+      colorLocked: false,
+      typeLocked: false,
+      sizeLocked: false,
+      leadingLocked: false,
+      fontOptions: ['Sans Serif', 'Script'],
       currentFont: 'Sans Serif',
       size:{
         sliderValue: 2,
         min: 1,
         max: 10
       },
-      leading: 2,
+      leading: {
+        sliderValue: 2,
+        min: 1,
+        max: 10
+      },
     }
    
     // styles: ['NORMAL', 'LIGHT', 'BOLD'],

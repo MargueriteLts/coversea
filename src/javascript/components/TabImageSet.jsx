@@ -35,7 +35,7 @@ export default class TabButtonSet extends Component {
     })
 
     return (
-      <div className="TabImageSet">
+      <div className="tab-image-set">
         {buttonElements}
       </div>
     )

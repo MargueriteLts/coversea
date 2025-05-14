@@ -1,0 +1,63 @@
+// Language switching styles
+// Hide all language-specific content by default
+.lang-content {
+  display: none !important;
+}
+
+// Show only the content for the selected language
+body {
+
+  &.lang-en .lang-en {
+    display: block !important;
+  }
+
+  &.lang-fr .lang-fr {
+    display: block !important;
+  }
+
+  &.lang-ru .lang-ru {
+    display: block !important;
+  }
+
+  // For inline elements
+  span.lang-content {
+    display: none !important;
+  }
+
+  &.lang-en span.lang-en {
+    display: inline !important;
+  }
+
+  &.lang-fr span.lang-fr {
+    display: inline !important;
+  }
+
+  &.lang-ru span.lang-ru {
+    display: inline !important;
+  }
+
+  // For flex containers
+  div.lang-content, section.lang-content {
+    display: none !important;
+  }
+
+  &.lang-en div.lang-en,
+  &.lang-fr div.lang-fr,
+  &.lang-ru div.lang-ru,
+  &.lang-en section.lang-en,
+  &.lang-fr section.lang-fr,
+  &.lang-ru section.lang-ru {
+    display: flex !important;
+  }
+
+  // For grid containers
+  .grid.lang-content {
+    display: none !important;
+  }
+
+  &.lang-en .grid.lang-en,
+  &.lang-fr .grid.lang-fr,
+  &.lang-ru .grid.lang-ru {
+    display: grid !important;
+  }
+}

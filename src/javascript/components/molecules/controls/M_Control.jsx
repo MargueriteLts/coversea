@@ -13,6 +13,8 @@ import M_GradientAngle from './M_GradientAngle.jsx'
 import M_NumberInput from './M_NumberInput.jsx'
 import M_ToggleIconSet from './M_ToggleIconSet.jsx'
 import M_Select from '../M_Select.jsx'
+import M_FileUpload from './M_FileUpload.jsx'
+//import M_Button from './M_Button.jsx'
 
 export default class M_Control extends Component {
   constructor(props) {
@@ -114,16 +116,31 @@ export default class M_Control extends Component {
         />
       )
     }
+    if (controlType == 'FileUpload') {
+      return (
+        <M_FileUpload
+          handleFileChange={this.props.handleFileChange}
+        />
+      )
+    }
+    //if (controlType == 'Button') {
+    //  return (
+    //    <M_Button
+    //      handleClick={this.props.handleClick}
+    //      buttonText={this.props.buttonText}
+    //    />
+    //  )
+    //}
   }
 
   render() {
     const { isLocked, setStore, item, handleToggle, title, orientation, hasTitle, isFullWidth, isHalfWidth } = this.props
 
     const classNames = classnames({
-      'M_Control': true,
+      'module-control': true,
       [`${orientation}`]: true,
-      fullWidth: isFullWidth,
-      halfWidth: isHalfWidth,
+      "full-width": isFullWidth,
+      "half-width": isHalfWidth,
     })
 
     if (orientation == 'row') {
@@ -138,7 +155,7 @@ export default class M_Control extends Component {
         {hasTitle ? 
           <A_Text
             text={title}
-            style='titleText'
+            style='title-text'
           />
         : null }
         {this.renderControlType()}
@@ -147,7 +164,7 @@ export default class M_Control extends Component {
     if (orientation == 'column') {
       // return <div className="M_Control column">
       return <div className={classNames}>
-        <div className="control_Title">
+        <div className="module-control__title">
           <IconToggle
             isLocked={isLocked}
             setStore={setStore}
@@ -157,7 +174,7 @@ export default class M_Control extends Component {
           {hasTitle ? 
             <A_Text
               text={title}
-              style='titleText'
+              style='title-text'
             />
           : null }
         </div>

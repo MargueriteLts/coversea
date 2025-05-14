@@ -54,13 +54,13 @@ export default class M_Select extends Component {
     //const availableOptions = options.filter(option => option !== value);
     
     const iconClasses = classnames({
-      'A_Icon': true,
-      angleDown: !isOpen,
-      angleUp: isOpen
+      'icon': true,
+      "icon--angle-down": !isOpen,
+      "icon--angle-up": isOpen
     })
 
     const buttonClasses = classnames({
-      'dropdown-toggle': true,
+      'select__toggle': true,
       closed: !isOpen,
       open: isOpen
     })
@@ -74,10 +74,10 @@ export default class M_Select extends Component {
         </div>
 
         {isOpen && (
-          <div className="dropdown-menu">
+          <div className="select__menu">
             {this.props.options.map((option) => {
-              const itemClasses = classnames('dropdown-item', {
-                selectedItem: option === value,
+              const itemClasses = classnames('select__item', {
+                selected: option === value,
               });
 
               return (

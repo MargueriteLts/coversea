@@ -75,7 +75,7 @@ export default class BasicTypo extends Component {
         moduleType='BasicTypo'
         randomizeModuleStore={randomizeModuleStore}
       />
-      <div className="moduleContent">
+      <div className="module__content">
 
         <div className="module__content--basictypo-maintext flexColumn">
           <Input

@@ -18,7 +18,7 @@ export default class Module3D extends Component {
         moduleType='Module3D'
         handleRandomizeModule={handleRandomizeModule}
       />
-      <div className="moduleContent">
+      <div className="module__content">
         <DropDown
           options={module3D.types}
           value={module3D.current3DType}

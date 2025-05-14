@@ -91,7 +91,7 @@ export default class M_ColorPicker extends Component {
       },
     });
     
-    return <div className='M_ColorPicker' ref={this.colorpickerRef}>
+    return <div className='color-picker' ref={this.colorpickerRef}>
       <div className='A_ColorPickerButton' onClick={ this.handleClick }>
 
         <div style={ styles.swatch }>
@@ -102,7 +102,7 @@ export default class M_ColorPicker extends Component {
 
         {/*<A_Text
           text={text}
-          style='colorPickerText'
+          style='color-picker-text'
           isUpperCase={true}
         />*/}
 

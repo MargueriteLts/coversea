@@ -29,7 +29,7 @@ export default class Overlay extends Component {
         moduleType='Overlay'
         handleRandomizeModule={handleRandomizeModule}
       />
-      <div className="moduleContent">
+      <div className="module__content">
         <TabImageSet
           options = {overlay.preset}
           value = {overlay.currentCollection}

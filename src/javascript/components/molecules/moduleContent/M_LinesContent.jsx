@@ -56,8 +56,8 @@ export default class M_LinesContent extends Component {
     } = this.props
     
 
-    return <div className="M_LinesContent">
-      <div className='content_Column'>
+    return <div className="lines-content">
+      <div className='content-column'>
         {/*<M_Select
           options={lines.linesTypes}
           value={lines.currentLineType}
@@ -97,7 +97,7 @@ export default class M_LinesContent extends Component {
           max={lines.maxQuantity}
         />
       </div>
-      <div className='content_Column'>
+      <div className='content-column'>
         <M_Control
           orientation="row"
           controlType='ColorPicker'
