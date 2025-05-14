@@ -1662,7 +1662,7 @@ function sketch(p) {
     //p.loadFont('../fonts/typekini.ttf')
     //p.loadFont('../fonts/AUSRINE.ttf')
     
-    p.loadFont('../fonts/Aileron-Bold.otf')
+    p.loadFont('./fonts/Aileron-Bold.otf')
 
     //////
 
