@@ -394,8 +394,8 @@
   /* Content */
   .teaser-content {
     //justify-content: left;
-    //padding: 0px 22px 0px 22px;
-    padding: 0px 10% 0px 10%;
+    padding: 0px 22px 0px 22px;
+    //padding: 0px 10% 0px 10%;
   }
   
   //.section--subtitle {
@@ -434,8 +434,10 @@
   /* Presentation Section */
 
   .section--audience {
-    margin-top: 500px;
-    margin-bottom: 44px;
+    //margin-top: 500px;
+    margin-top: 63%;
+    //margin-bottom: 44px;
+    margin-bottom: 88px;
     display: flex;
     padding-left: 50%;
 
@@ -444,7 +446,8 @@
       //width: 35%;
       width: fit-content;
       //margin-left: 50%;
-      margin-left: 22px;
+      //margin-left: 22px;
+      margin-left: 44px;
 
       p {
         max-width: 360px;
@@ -486,9 +489,11 @@
       //}
       #st3 {
         position: relative;
-        left: auto; /* Remove the problematic positioning */
-        right: 0;   /* Align to the right instead */
-        margin-left: auto; /* Push to the right */
+        //left: auto; /* Remove the problematic positioning */
+        left: calc(50% + 44px);
+        //left: calc(50% + 22px);
+        //right: 0;   /* Align to the right instead */
+        //margin-left: auto; /* Push to the right */
         max-width: 287px; /* Control width */
         
         p {
@@ -528,11 +533,11 @@
     position: absolute;
     display: block;
     height: 350px; /* Reduced height */
-    top: -240%;
+    top: -230%;
     width: 80vw; /* Reduced width but still large */
-    right: -30vw; /* Push beyond right edge */
+    right: -2vw; /* Push beyond right edge */
     max-width: none;
-    background-size: contain; /* Change to contain for better proportions */
+    background-size: contain !important; /* Change to contain for better proportions */
     background-position: right center; /* Anchor to right to extend to edge */
   }
 
@@ -832,7 +837,7 @@
   }
 
   .section--audience {
-    margin-top: 50%;
+    margin-top: 63%;
     //margin-bottom: 100px;
     //display: flex;
     //padding-left: 50%;
@@ -872,7 +877,8 @@
         width: fit-content;
         left: 0;
         top: 0;
-        margin-bottom: 150px;
+        //margin-bottom: 150px;
+        margin-bottom: 50px;
     
         p {
           width: 410px;
@@ -904,7 +910,7 @@
         position: relative;
         height: auto;
         object-fit: contain; /* Changed from cover to contain */
-        width: 120%; /* Keep within container */
+        width: 103%; /* Keep within container */
         //max-width: 100%; /* Ensure it doesn't overflow */
       }
 
@@ -1189,7 +1195,8 @@
   }
 
   .section--audience {
-    margin-top: 800px;
+    margin-top: 900px;
+    //margin-top: 63%;
   }
 
   .section--presentation {

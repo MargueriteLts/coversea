@@ -239,8 +239,10 @@ body.teaser-generator {
         .background-logo {
           position: absolute;
           aspect-ratio: 1 / 1;
-          max-width: 100vw;
-          max-height: 100vw;
+          width: 100vw;
+          height: 100vw;
+          max-width: 1800px;
+          max-height: 1800px;
           //max-width: 1707px;
           //max-height: 1707px;
           background-image: url('./images/ui/logo-bgGlavnaya.svg');
@@ -309,8 +311,8 @@ body.teaser-generator {
 
   .section--generator {
     position: relative;
-    //display: flex;
-    display: none;
+    display: flex;
+    //display: none;
     flex-direction: column;
     width: 100%;
     height: auto;
