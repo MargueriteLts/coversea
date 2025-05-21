@@ -142,7 +142,7 @@ body.teaser-generator {
   //  }
   //}
 
-  .first-screen {
+  .first-screen-desktop {
     height: 100vh;
     min-height: 600px;
     width: 100%;
@@ -308,7 +308,6 @@ body.teaser-generator {
   }
 
   .section--generator {
-    display: flex;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -691,7 +690,8 @@ body.teaser-generator {
   
       .socials-buttons {
         display: flex;
-        flex-direction: row;
+        flex-wrap: wrap;
+        //flex-direction: row;
         gap: 16px;
       }
     }
@@ -701,10 +701,12 @@ body.teaser-generator {
 .teaser-footer {
   border-top: solid 1px var(--GREY);
   display: flex;
-  flex-direction: row;
+  //flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  gap: 12px;
 
   p {
     color: var(--TEXT-DIM);

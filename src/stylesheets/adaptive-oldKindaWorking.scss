@@ -1,31 +1,35 @@
-@media screen and (max-width: 430px) {
-  .module-title {
-    font-size: 16px !important;
-  }
-}
-
 /* Mobile Styles (max-width: 743px) */
 @media screen and (max-width: 743px) {
-  body.teaser-generator {
-    width: 100vw;
-    overflow-x: hidden;
-  }
-
-  .first-screen-desktop {
+  .first-screen {
     display: none !important;
   }
 
+  /* Typography */
+  //h1 {
+  //  font-size: 20px;
+  //  line-height: 22px;
+  //}
+  
+  //h2 {
+  //  font-size: 18px;
+  //  line-height: 20px;
+  //}
+  
+  //p {
+  //  font-size: 18px;
+  //  //font-style: normal;
+  //  //font-weight: 200;
+  //  line-height: 20px;
+  //  letter-spacing: -0.18px;
+  //}
   
   /* Header */
   .teaser-header-mobile {
-    //padding-top: 2%;
-    padding-top: 80px;
+    padding-top: 2%;
     
     .logo--header {
-      //width: 362px;
-      //height: 49px;
-      width: 400px;
-      height: 54px;
+      width: 362px;
+      height: 49px;
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
@@ -34,15 +38,70 @@
   
   /* Content */
   .teaser-content {
-    padding: 0 16px;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 14px 0px 14px;
     width: 100%;
-    min-width: 320px;
-    overflow-x: hidden;
+    min-width: 390px;
   }
 
 
 
 
+  //.section--subtitle {
+  //  margin-top: 44px;
+  //  display: flex;
+  //  flex-direction: column;
+  //  gap: 16px;
+  //}
+
+  //.section--cta-mobile {
+  //  margin-top: 64px;
+  //  display: flex;
+  //  flex-direction: column;
+  //  justify-content: center;
+  //  align-items: center;
+  //  gap: 126px;
+
+  //  #scrollButton {
+  //    display: block;
+  //    width: fit-content;
+  //  }
+
+  //  .subsection-cta {
+  //    display: flex;
+  //    align-items: center;
+  //    flex-direction: column;
+  //    justify-content: center;
+  //    mix-blend-mode: difference;
+  //  }
+  //}
+
+  //.statement {
+  //  font-size: 35px;
+  //  line-height: 35px;
+  //  width: 100%;
+  //}
+  
+  //.statement-position {
+  //  //margin-top: 131px;
+  //  display: flex;
+  //  align-items: center;
+  //  justify-content: center;
+  //}
+
+  //#bg-statement {
+  //  aspect-ratio: 1/1;
+  //  background-image: url('./images/ui/logo-symbolWithName.svg');
+  //  background-position: 50%;
+  //  background-repeat: no-repeat;
+  //  background-size: cover;
+  //  display: block;
+  //  height: auto;
+  //  position: absolute;
+  //  width: 780px;
+  //  z-index: -1;
+  //}
 ///////////
   .section-subtitle {
     margin-top: 44px;
@@ -65,7 +124,7 @@
     font-weight: 200;
     line-height: 20px;
     letter-spacing: -0.18px;
-    max-width: 500px;
+    width: 500px;
   }
 
   .section-CTA-mobile {
@@ -163,10 +222,6 @@
     }
   }
 
-  .generator-image-img, .modules-image-img, .generator-image, .modules-image {
-    display: none;
-  }
-
   .section--presentation {
     flex-direction: column;
     //margin-top: 298px;
@@ -176,7 +231,7 @@
       width: 100%;
 
       p {
-        max-width: 315px;
+        width: 315px;
       }
 
       .modules-image-mobile {
@@ -198,7 +253,7 @@
       top: 0;
 
       p {
-        max-width: 300px;
+        width: 300px;
       }
 
       .generator-image-mobile {
@@ -217,13 +272,13 @@
     }
   }
 
-  //.description-desktop {
-  //  display: none;
-  //}
+  .description-desktop {
+    display: none;
+  }
 
-  //.module__content {
-  //  display: none;
-  //}
+  .module__content {
+    display: none;
+  }
 
   /* Generator Section */
   .section--generator {
@@ -232,7 +287,7 @@
 
     #s4 {
       p {
-        max-width: 360px;
+        width: 360px;
       }
     }
 
@@ -315,7 +370,7 @@
 
     #s6 {
       p {
-        max-width: 290px;
+        width: 290px;
       }
 
       h2 {
@@ -1124,6 +1179,120 @@
   }
 }
 
+/* Large Desktop Styles (min-width: 1280px) */
+//@media (min-width: 1280px) {
+//  //.statement-position {
+//  //  //margin-top: 370px;
+//  //  margin-top: 135px;
+//  //}
+
+//  .section--generator {
+//    margin-top: 144px;
+//    gap: 44px;
+//    padding-top: 36px;
+
+//    #s4 {
+//      p {
+//        width: 453px;
+//      }
+//    }
+
+//    .teaser-generator-margin {
+//      display: flex;
+//      align-items: center;
+//      justify-content: center;
+//      width: 100%;
+
+//      .teaser-generator-container {
+//        border-radius: 20px;
+//        position: relative;
+//        width: 100%;
+//        display: flex;
+//        align-items: flex-start;
+//        flex: 1 0 0;
+//        align-items: center;
+//        justify-content: center;
+//        padding: 1vw;
+
+//        #reactComponentRoot {
+//          display: flex;
+//          width: 100%;
+//          align-items: flex-start;
+//          flex: 1 0 0;
+//        }
+
+//        .generator__content {
+//          display: flex;
+//          width: 100%;
+//          align-items: flex-start;
+//          gap: 20px;
+//          flex: 1 0 0;
+
+//          .generator__modules-container {
+//            display: flex;
+//            flex-direction: column;
+//            align-items: flex-start;
+//            flex: 1 0 0;
+//            align-self: stretch;
+//            width: 55%;
+//            min-width: 700px;
+
+//            .generator__modules-wrap {
+//              overflow-y: auto;
+//              display: flex;
+//              flex-direction: column;
+//              align-items: flex-start;
+//              gap: 8px;
+//              flex: 1 0 0;
+//              align-self: stretch;
+//              min-width: 700px;
+//              width: 100%;
+
+//              /* Hide scrollbars */
+//              scrollbar-width: none;
+//              -ms-overflow-style: none;
+              
+//              &::-webkit-scrollbar {
+//                display: none;
+//              }
+//            }
+//          }
+
+//          .generator__sketch-wrap {
+//            display: flex;
+//            flex-direction: column;
+//            align-items: flex-start;
+//            gap: 16px;
+//            flex: 1 1 0;
+//            max-width: 45%;
+
+//            .sketch {
+//              width: 100%;
+//              aspect-ratio: 1;
+//            }
+
+//            .generator__sketch-controls {
+//              display: flex;
+//              justify-content: space-between;
+//              align-items: flex-start;
+//              align-self: stretch;
+//              width: 100%;
+
+//              .description {
+//                padding-bottom: 16px;
+//                width: 50%;
+//                height: fit-content;
+//                font-size: 14px;
+//              }
+//            }
+//          }
+//        }
+//      }
+//    }
+//  }
+//}
+
+/* Extra Large Desktop Styles (min-width: 1708px) */
 @media screen and (min-width: 1708px) {
   .teaser-content {
     //padding: 10%;
