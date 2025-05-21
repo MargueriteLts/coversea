@@ -45,8 +45,8 @@
 // Fixed positioning for the language toggle container
 .language-toggle-container {
   position: fixed;
-  //top: 20px;
-  //right: 20px;
+  top: 20px;
+  right: 20px;
   z-index: 9999; // Ensure it's above other elements
   width: auto;
   height: auto;
