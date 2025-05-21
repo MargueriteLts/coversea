@@ -2,7 +2,7 @@ body.teaser-generator {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  //align-items: center;
   background: var(--BACKGROUND-WEBSITE-BLACK);
   width: 100vw;
   overflow-x: hidden;
@@ -309,7 +309,8 @@ body.teaser-generator {
 
   .section--generator {
     position: relative;
-    display: flex;
+    //display: flex;
+    display: none;
     flex-direction: column;
     width: 100%;
     height: auto;
