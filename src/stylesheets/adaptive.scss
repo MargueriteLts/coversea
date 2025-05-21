@@ -353,7 +353,7 @@
 }
 
 /* Tablet Styles (min-width: 744px) */
-@media (min-width: 744px) {
+@media screen and (min-width: 744px) {
   .first-screen-mobile, .teaser-header-mobile {
     display: none !important;
   }
@@ -395,6 +395,7 @@
   .teaser-content {
     //justify-content: left;
     padding: 0px 22px 0px 22px;
+    //padding: 0px 10% 0px 10%;
   }
   
   //.section--subtitle {
@@ -433,8 +434,10 @@
   /* Presentation Section */
 
   .section--audience {
-    margin-top: 500px;
-    margin-bottom: 44px;
+    //margin-top: 500px;
+    margin-top: 63%;
+    //margin-bottom: 44px;
+    margin-bottom: 88px;
     display: flex;
     padding-left: 50%;
 
@@ -443,7 +446,8 @@
       //width: 35%;
       width: fit-content;
       //margin-left: 50%;
-      margin-left: 22px;
+      //margin-left: 22px;
+      margin-left: 44px;
 
       p {
         max-width: 360px;
@@ -474,13 +478,26 @@
         }
       }
       
+      //#st3 {
+      //  position: relative;
+      //  left: calc(50% + 44px);
+      //  bottom: 0;
+  
+      //  p {
+      //    width: 287px;
+      //  }
+      //}
       #st3 {
         position: relative;
+        //left: auto; /* Remove the problematic positioning */
         left: calc(50% + 44px);
-        bottom: 0;
-  
+        //left: calc(50% + 22px);
+        //right: 0;   /* Align to the right instead */
+        //margin-left: auto; /* Push to the right */
+        max-width: 287px; /* Control width */
+        
         p {
-          width: 287px;
+          width: 100%; /* Let paragraph fill the container */
         }
       }
     }
@@ -494,19 +511,53 @@
     display: block;
   }
 
+  /* First, ensure the parent containers don't clip the images */
+  .teaser-content, .section--presentation, .subsection {
+    overflow: visible;
+  }
+  
+  /* Set the container positioning context */
+  .section--presentation .subsection {
+    position: relative;
+  }
+
+  //.modules-image {
+  //  position: absolute;
+  //  height: 430px;
+  //  top: -250%;
+  //  width: 600px;
+  //  right: -5%;
+  //}
+
   .modules-image {
     position: absolute;
-    height: 430px;
-    top: -250%;
-    width: 600px;
-    right: -5%;
+    display: block;
+    height: 350px; /* Reduced height */
+    top: -230%;
+    width: 80vw; /* Reduced width but still large */
+    right: -2vw; /* Push beyond right edge */
+    max-width: none;
+    background-size: contain !important; /* Change to contain for better proportions */
+    background-position: right center; /* Anchor to right to extend to edge */
   }
+
+  //.generator-image {
+  //  position: absolute;
+  //  height: 304px;
+  //  left: -35%;
+  //  top: 280%;
+  //}
 
   .generator-image {
     position: absolute;
-    height: 304px;
-    left: -35%;
-    top: 280%;
+    display: block;
+    height: 350px; /* Increased height */
+    left: -40vw; /* Push beyond left edge */
+    top: 270%;
+    width: 80vw; /* Increased width */
+    max-width: none;
+    background-size: contain; /* Change to contain for better proportions */
+    background-position: left center; /* Anchor to left to extend to edge */
   }
 
   //.subsection {
@@ -786,7 +837,7 @@
   }
 
   .section--audience {
-    margin-top: 50%;
+    margin-top: 63%;
     //margin-bottom: 100px;
     //display: flex;
     //padding-left: 50%;
@@ -826,7 +877,8 @@
         width: fit-content;
         left: 0;
         top: 0;
-        margin-bottom: 150px;
+        //margin-bottom: 150px;
+        margin-bottom: 50px;
     
         p {
           width: 410px;
@@ -846,12 +898,20 @@
         left: -20%;
       }
 
+      //.modules-image-img {
+      //  display: block;
+      //  position: relative;
+      //  height: auto;
+      //  object-fit: cover;
+      //  width: 150%;
+      //}
       .modules-image-img {
         display: block;
         position: relative;
         height: auto;
-        object-fit: cover;
-        width: 150%;
+        object-fit: contain; /* Changed from cover to contain */
+        width: 103%; /* Keep within container */
+        //max-width: 100%; /* Ensure it doesn't overflow */
       }
 
       #st3 {
@@ -1125,13 +1185,18 @@
 }
 
 @media screen and (min-width: 1708px) {
+  body.teaser-generator {
+    align-items: center;
+  }
   .teaser-content {
     //padding: 10%;
     padding: 0px 10% 0px 10%;
+    max-width: 1800px;
   }
 
   .section--audience {
-    margin-top: 800px;
+    margin-top: 900px;
+    //margin-top: 63%;
   }
 
   .section--presentation {
