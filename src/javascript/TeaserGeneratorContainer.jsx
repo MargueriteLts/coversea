@@ -1,3 +1,7 @@
+//Coversea - Cover Artwork Generator
+//Copyright (c) 2024 Marguerite Lorthiois
+//Tous droits réservés / All rights reserved
+
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 

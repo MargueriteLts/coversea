@@ -1,3 +1,7 @@
+//Coversea - Cover Artwork Generator
+//Copyright (c) 2024 Marguerite Lorthiois
+//Tous droits réservés / All rights reserved
+
 import p5 from 'p5'
 // import utils from './p5.utils.min.js'
 import {hexToRgbArray} from './utilities.js'

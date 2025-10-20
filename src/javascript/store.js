@@ -1,3 +1,7 @@
+//Coversea - Cover Artwork Generator
+//Copyright (c) 2024 Marguerite Lorthiois
+//Tous droits réservés / All rights reserved
+
 import { sample, getRandomArbitrary, importAll } from './utilities'
 
 import * as generator1 from '../generators/generator1.js'
