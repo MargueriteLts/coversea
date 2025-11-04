@@ -675,6 +675,39 @@ function drawModules(p) {
       p.image(pixelsBg, 0, 0)
       p.pixelDensity()
       p.noStroke()
+    } else if (background.backgroundTypes.includes('Photo') && background.currentBackgroundType === 'Photo') {
+      imageBg = background.preset.Photo.uploadedImage
+      //if (imageBg) {
+      //  p.background(imageBg, 255)
+      //} else p.background(0)
+
+      if (imageBg) {
+        //const scaleX = canvasSize / imageBg.width;
+        //const scaleY = canvasSize / imageBg.height;
+        //const scale = Math.max(scaleX, scaleY);
+  
+        //const scaledWidth = imageBg.width * scale;
+        //const scaledHeight = imageBg.height * scale;
+  
+        //const x = (canvasSize - scaledWidth) / 2;
+        //const y = (canvasSize - scaledHeight) / 2;
+  
+        //p.image(imageBg, x, y, scaledWidth, scaledHeight);
+        
+        p.push()
+        p.imageMode(p.CENTER);
+        const scale = Math.max(canvasSize / imageBg.width, canvasSize / imageBg.height);
+        p.image(
+          imageBg, 
+          canvasSize / 2,  // x center
+          canvasSize / 2,  // y center
+          imageBg.width * scale,  // scaled width
+          imageBg.height * scale  // scaled height
+        );
+        p.pop()
+      } else {
+        p.background(0)
+      }
     }
   }
 
@@ -1692,28 +1725,44 @@ function sketch(p) {
   function checkPendingImage() {
     if (pendingImageUrl) {
       const uploadImage = getUploadImageStore();
-      
-      p.loadImage(pendingImageUrl, 
-        // Success callback
-        loadedImg => {
-          uploadImage.uploadedImage = loadedImg;
-          
-          // Randomize position if not locked
-          if (!uploadImage.positionLock) {
-            const positions = uploadImage.positions;
-            const randomIndex = Math.floor(Math.random() * positions.length);
-            uploadImage.positionIndex = randomIndex;
+      const background = getBackgroundStore();
+
+      // Check if we're uploading for UploadImage module or Background Photo
+      if (background.currentBackgroundType === 'Photo' && !uploadImage.uploadedImage) {
+        // This is for background photo
+        p.loadImage(pendingImageUrl, 
+          loadedImg => {
+            background.preset.Photo.uploadedImage = loadedImg;
+            pendingImageUrl = null;
+          },
+          err => {
+            console.error("Failed to load background image:", err);
+            pendingImageUrl = null;
           }
-          
-          // Clear the pending URL
-          pendingImageUrl = null;
-        },
-        // Error callback
-        err => {
-          console.error("Failed to load image:", err);
-          pendingImageUrl = null;
-        }
-      );
+        );
+      } else {
+        p.loadImage(pendingImageUrl, 
+          // Success callback
+          loadedImg => {
+            uploadImage.uploadedImage = loadedImg;
+            
+            // Randomize position if not locked
+            if (!uploadImage.positionLock) {
+              const positions = uploadImage.positions;
+              const randomIndex = Math.floor(Math.random() * positions.length);
+              uploadImage.positionIndex = randomIndex;
+            }
+            
+            // Clear the pending URL
+            pendingImageUrl = null;
+          },
+          // Error callback
+          err => {
+            console.error("Failed to load image:", err);
+            pendingImageUrl = null;
+          }
+        );
+      }
     }
   }
 

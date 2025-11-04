@@ -88,7 +88,8 @@ export default class O_Module extends Component {
       setUploadImageStore,
       handleUploadImageSize,
       handleUploadImageOpacity,
-      handleFileChange
+      handleFileChange,
+      handlePhotoFileChange
     } = this.props
 
     if (moduleType == 'Background') {
@@ -104,6 +105,7 @@ export default class O_Module extends Component {
           handleTabClickNoise={handleTabClickNoise}
           setBackgroundStore={setBackgroundStore}
           handleChangeNoiseTintColor={handleChangeNoiseTintColor}
+          handlePhotoFileChange={handlePhotoFileChange}
         />
       )
     }

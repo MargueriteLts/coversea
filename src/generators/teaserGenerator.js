@@ -8,7 +8,7 @@ const preset = {
   },
   
   Background: {
-    backgroundTypes: ['SolidColor', 'Gradient'],
+    backgroundTypes: ['SolidColor', 'Gradient', 'Photo'],
     currentBackgroundType: 'SolidColor',
 
     preset: {
@@ -28,7 +28,8 @@ const preset = {
         },
         color1: '#ff0000',
         color2:'#00ff00'
-      }
+      },
+      Photo: {}
     }
   },
 
@@ -88,7 +89,7 @@ const preset = {
     textAlign: 'left',
 
     mainText: {
-      value: 'Name of your track or album',
+      value: 'Track title',
       color: '#ffffff',
       colorLocked: false,
       typeLocked: false,
@@ -109,7 +110,7 @@ const preset = {
     },
 
     otherText: {
-      values: ['Music is the answer to everything, music is the key to the world'],
+      values: ['Artist/Label'],
       color: '#ffffff',
       colorLocked: false,
       typeLocked: false,

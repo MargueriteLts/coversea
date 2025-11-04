@@ -113,6 +113,18 @@ export default class GeneratorContainer extends Component {
     this.setState({})
   }
 
+  // PHOTO
+  // Handle file upload
+  handlePhotoFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      window.handleUploadedImage(file)
+        .then(() => {
+          this.setState({});
+        });
+    }
+  }
+
 ////////////////////////////////////// MODULE UPLOADIMAGE
 
   // Handle image size
@@ -387,6 +399,7 @@ export default class GeneratorContainer extends Component {
             handleChangeBackgroundGradientStopQuantity={this.handleChangeBackgroundGradientStopQuantity}
             handleTabClickNoise={this.handleTabClickNoise}
             handleChangeNoiseTintColor={this.handleChangeNoiseTintColor}
+            handlePhotoFileChange={this.handlePhotoFileChange}
             setBackgroundStore={setBackgroundStore}
             key={index}
           />

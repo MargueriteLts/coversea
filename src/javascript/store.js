@@ -225,6 +225,10 @@ function initBackgroundStore(background) {
     if (backgroundType == 'Pixels') {
       background.preset.Pixels = Object.assign({}, background.preset.Pixels, { text: 'Pixels', locked: false })
     }
+
+    if (backgroundType == 'Photo') {
+      background.preset.Photo = Object.assign({}, background.preset.Photo, { text: 'Photo', uploadedImage: null, locked: false})
+    }
   })
 
   return background
@@ -296,6 +300,17 @@ function setBackgroundStore(type, value) {
       window.resetNoise()
     }
 
+    if (type === 'photoUpload') {
+      moduleBackgroundStore.preset.Photo.uploadedImage = value;
+      
+      // Randomize position when a new image is uploaded (if not locked)
+      //if (!moduleUploadImageStore.positionLock) {
+      //randomizeImagePosition();
+      //}
+      
+      resolve([value]);
+    }
+
     //
 
     if (type == 'lockTabs') {
@@ -324,6 +339,9 @@ function setBackgroundStore(type, value) {
     }
     if (type == 'lockPixels') {
       moduleBackgroundStore.preset.Pixels.locked = value
+    }
+    if (type == 'lockPhoto') {
+      moduleBackgroundStore.preset.Photo.locked = value
     }
 
   })
@@ -415,22 +433,7 @@ function setBackgroundImageStore(type, value) {
 ////////////////////// UPLOAD IMAGES
 
 function initUploadImageStore(preset) {
-  preset = Object.assign({}, preset, { 
-    moduleName: 'Logo/Sticker',
-    //size: 50, // Default size as 50% of canvas
-    //opacity: 100, // Default opacity as 100%
-    //positionIndex: 0, // Default position (top-left)
-    //positions: [
-    //  'top-left', 'top-middle', 'top-right',
-    //  'middle-left', 'middle-right',
-    //  'bottom-left', 'bottom-middle', 'bottom-right'
-    //],
-    uploadedImage: null,
-    sizeLock: false,
-    opacityLock: false,
-    positionLock: false
-  });
-  
+  preset = Object.assign({}, preset, { moduleName: 'Logo/Sticker', uploadedImage: null, sizeLock: false, opacityLock: false, positionLock: false });
   return preset;
 }
 
@@ -1160,7 +1163,7 @@ function initBasicTypoStore(preset) {
 
 
   preset = Object.assign({}, preset, {
-    moduleName: 'Typography',
+    moduleName: 'Text',
     //colorLocked: false,
     // textPositions : [[], []]
     textPositions: positions,
@@ -1304,7 +1307,7 @@ function initBasicTypoV2Store(preset) {
 
   // console.log(positions);
   
-  preset = Object.assign({}, preset, { moduleName: 'Typography', txtpositions: positions })
+  preset = Object.assign({}, preset, { moduleName: 'Text', txtpositions: positions })
 
   return preset
 }

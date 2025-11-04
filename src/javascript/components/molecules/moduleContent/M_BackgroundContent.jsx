@@ -10,6 +10,8 @@ import IconToggle from '../../buttons/IconToggle.jsx'
 import M_Control from '../controls/M_Control.jsx'
 //import M_GradientDirection from '../controls/M_GradientDirection.jsx'
 import M_TabSetWithSubControl from '../controls/M_TabSetWithSubControl.jsx'
+import A_Text from '../../ATOMS/A_Text.jsx'
+import M_FileUpload from '../controls/M_FileUpload.jsx'
 
 
 export default class M_BackgroundContent extends Component {
@@ -27,8 +29,17 @@ export default class M_BackgroundContent extends Component {
       noiseTypeLock: this.props.background.preset.Noise?.typeLocked,
       tintColorLock: this.props.background.preset.Noise?.tintColorLock,
       pixelsLock: this.props.background.preset.Pixels?.locked,
+      photoLock: this.props.background.preset.Photo?.locked,
+      hasUploadedImage: false
     }
 
+  }
+
+  componentDidMount() {
+    // Check if there's already an uploaded image when component mounts
+    if (this.props.background.preset.Photo && this.props.background.preset.Photo.uploadedImage) {
+      this.setState({ hasUploadedImage: true });
+    }
   }
 
   /////////////////////////// LOCK/UNLOCK ITEMS ///////////////////////////
@@ -99,7 +110,23 @@ export default class M_BackgroundContent extends Component {
         pixelsLock: !this.state.pixelsLock
       })
     }
+    if (item == 'lockPhoto') {
+      setStore(item, !this.state.photoLock)
+      this.setState({
+        photoLock: !this.state.photoLock
+      })
+    }
   };
+
+  handleWrappedFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      // Set the state to show we have an image
+      this.setState({ hasUploadedImage: true });
+      
+      // Call the original handler
+      this.props.handlePhotoFileChange(e);
+    }
+  }
 
   ///////////////////////// RENDER CONTENT BACKGROUND TAB
 
@@ -114,7 +141,7 @@ export default class M_BackgroundContent extends Component {
       handleChangeBackgroundGradientStopQuantity,
       handleChangeBackgroundGradientType,
       handleTabClickNoise,
-      handleChangeNoiseTintColor
+      handleChangeNoiseTintColor,
     } = this.props
 
     // console.log(gradientTypes);
@@ -216,6 +243,8 @@ export default class M_BackgroundContent extends Component {
       </div>
     }
 
+    ////////////// NOISE
+
     if (background.currentBackgroundType == 'Noise') {
       return <div className='tab-content'>
 
@@ -262,6 +291,8 @@ export default class M_BackgroundContent extends Component {
       </div>
     }
 
+    ////////////// PXELS
+
     if (background.currentBackgroundType == 'Pixels') {
       return <div className='tab-content'>
         <IconToggle
@@ -272,6 +303,27 @@ export default class M_BackgroundContent extends Component {
         />
       </div>
     }
+
+    ////////////// PHOTO
+
+    if (background.currentBackgroundType == 'Photo') {
+      return <div className="upload-image-content">
+            <div className="content-row">
+              <div className="content-column">
+                <div className='module-control row'>
+                  <A_Text
+                    text="Upload your photo"
+                    style='title-text'
+                    />
+                  <M_FileUpload
+                    handleFileChange={this.handleWrappedFileChange}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+    }
+
   }
 
   //////////////////////////////// NO TAB RENDER
