@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
+import TabButtonSet from '../../TabButtonSet.jsx'
 import A_Text from '../../ATOMS/A_Text.jsx'
 import TextArea from '../../TextArea.jsx'
 import M_TextSettingsDropDown from '../M_TextSettingsDropDown.jsx'
@@ -13,13 +14,13 @@ export default class BasicTypo extends Component {
 
     this.state = {
 
-      valueMainText: this.props.basictypo.mainText.value,
+      valueMainText: this.props.basictypo.preset.Track.mainText.value,
 
-      colorMainText: this.props.basictypo.mainText.color,
+      colorMainText: this.props.basictypo.preset.Track.mainText.color,
 
-      valueOtherText: this.props.basictypo.otherText.value,
+      valueOtherText: this.props.basictypo.preset.Track.otherText.value,
 
-      colorOtherText: this.props.basictypo.otherText.color
+      colorOtherText: this.props.basictypo.preset.Track.otherText.color
     }
   }
 
@@ -65,75 +66,106 @@ export default class BasicTypo extends Component {
 
   //////////////////////////////////////////////////////// RENDER
   
-  render() {
+  renderTabContent() {
     const { basictypo, setBasicTypoStore } = this.props
 
-    return <div className="basic-typo-content">
+    ////////////// TRACK
 
-      <div className="basic-typo-row">
-        <A_Text
-          text='Main text'
-          style='basic-typo-title'
-        />
-        <TextArea
-          className='textarea'
-          rows={3}
-          cols={40}
-          value={this.state.valueMainText}
-          onChange={this.handleMainTextChange}
-        />
+    if (basictypo.currentCoverType == 'Track') {
+      return <div className="basic-typo-content">
 
-        <M_DropDown
-          dropDownContent='TextSettings'
-          title='Text settings'
-          textType='main'
-          setStore={setBasicTypoStore}
-          textData={basictypo.mainText}
-          object='colorMainText'
-          itemLockColor='mainLockColor'
-          itemLockType='mainLockType'
-          itemSizeLock='mainLockSize'
-          itemLeadingLock='mainLockLeading'
-          handleChange={this.handleChangeMainTextColor}
-        />
-      </div>
-
-      { basictypo.dopText
-        ?
         <div className="basic-typo-row">
           <A_Text
-            text='Small text'
+            text='Main text'
             style='basic-typo-title'
           />
-          <M_AddRemoveText
-            // text={basictypo.otherText.value}
-            text={basictypo.otherText.values}
-            setStore={setBasicTypoStore}
+          <TextArea
+            className='textarea'
+            rows={3}
+            cols={40}
+            value={this.state.valueMainText}
+            onChange={this.handleMainTextChange}
           />
 
           <M_DropDown
             dropDownContent='TextSettings'
             title='Text settings'
-            textType='other'
+            textType='main'
             setStore={setBasicTypoStore}
-            textData={basictypo.otherText}
-            object='colorOtherText'
-            itemLockColor='otherLockColor'
-            itemLockType='otherLockType'
-            itemSizeLock='otherLockSize'
-            itemLeadingLock='otherLockLeading'
-            handleChange={this.handleChangeOtherTextColor}
-            //handleDropDownClick={this.handleOtherTextDropDownClick}
-            //handleTextSize={this.handleSizeOtherText}
-            //handleTextLeading={this.handleLeadingOtherText}
-            //currentFont={this.state.currentFontOtherText}
-            //size={this.state.sizeOtherText}
-            //leading={this.state.leadingOtherText}
+            textData={basictypo.preset.Track.mainText}
+            object='colorMainText'
+            itemLockColor='mainLockColor'
+            itemLockType='mainLockType'
+            itemSizeLock='mainLockSize'
+            itemLeadingLock='mainLockLeading'
+            handleChange={this.handleChangeMainTextColor}
           />
         </div>
-        : null
-      }
 
+        { basictypo.preset.Track.dopText
+          ?
+          <div className="basic-typo-row">
+            <A_Text
+              text='Small text'
+              style='basic-typo-title'
+            />
+            <M_AddRemoveText
+              // text={basictypo.otherText.value}
+              text={basictypo.preset.Track.otherText.values}
+              setStore={setBasicTypoStore}
+            />
+
+            <M_DropDown
+              dropDownContent='TextSettings'
+              title='Text settings'
+              textType='other'
+              setStore={setBasicTypoStore}
+              textData={basictypo.preset.Track.otherText}
+              object='colorOtherText'
+              itemLockColor='otherLockColor'
+              itemLockType='otherLockType'
+              itemSizeLock='otherLockSize'
+              itemLeadingLock='otherLockLeading'
+              handleChange={this.handleChangeOtherTextColor}
+              //handleDropDownClick={this.handleOtherTextDropDownClick}
+              //handleTextSize={this.handleSizeOtherText}
+              //handleTextLeading={this.handleLeadingOtherText}
+              //currentFont={this.state.currentFontOtherText}
+              //size={this.state.sizeOtherText}
+              //leading={this.state.leadingOtherText}
+            />
+          </div>
+          : null
+        }
+
+      </div>
+    }
+  }
+
+  render() {
+    const { basictypo, setBasicTypoStore, handleTabClickBasicTypoCoverType } = this.props
+
+    const nbCoverTypes = basictypo.coverTypes.length
+
+    return (
+    <div className="background-content">
+      {nbCoverTypes > 1 ? (
+
+        <div className="background-content__with-tabs">
+          <div className="background-content__with-tabs-tabs">
+            <TabButtonSet
+              options={basictypo.preset}
+              value={basictypo.currentCoverType}
+              handleClick={handleTabClickBasicTypoCoverType}
+            />
+          </div>
+          {this.renderTabContent()}
+        </div>
+
+      ) : (
+        this.renderModuleContentUnits()
+      )}
     </div>
+    )
   }
 }

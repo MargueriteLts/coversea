@@ -58,6 +58,7 @@ export default class O_Module extends Component {
       setLinesStore,
       basictypo,
       setBasicTypoStore,
+      handleTabClickBasicTypoCoverType,
       particles,
       setParticlesStore,
       handleDropDownClickParticles,
@@ -151,6 +152,7 @@ export default class O_Module extends Component {
         <M_BasicTypoContent
           basictypo={basictypo}
           setBasicTypoStore={setBasicTypoStore}
+          handleTabClickBasicTypoCoverType={handleTabClickBasicTypoCoverType}
         />
       )
     }

@@ -1436,13 +1436,13 @@ function drawModules(p) {
     // p.textWrap(p.WORD)
     
     ////////////////////////////  OTHER TEXT
-    if (basicTypo.dopText == true) {
-      p.textFont(basicTypo.fontOtherText)
-      p.fill(basicTypo.otherText.color)
-      let otherTexts = basicTypo.otherText.values
+    if (basicTypo.preset.Track.dopText == true) {
+      p.textFont(basicTypo.preset.Track.fontOtherText)
+      p.fill(basicTypo.preset.Track.otherText.color)
+      let otherTexts = basicTypo.preset.Track.otherText.values
       
-      let presetSizeOtherText = basicTypo.otherText.size.sliderValue
-      let presetLeadingOtherText = basicTypo.otherText.leading.sliderValue
+      let presetSizeOtherText = basicTypo.preset.Track.otherText.size.sliderValue
+      let presetLeadingOtherText = basicTypo.preset.Track.otherText.leading.sliderValue
 
       let otherTextSize = (presetSizeOtherText * canvasSize) / 100
       let otherTextLeading = (presetLeadingOtherText * canvasSize) / 100
@@ -1451,7 +1451,7 @@ function drawModules(p) {
       p.textLeading(otherTextLeading)
 
 
-      let positions = basicTypo.textPositions
+      let positions = basicTypo.preset.Track.textPositions
       
       // 
       const offset = canvasSize * 0.1 / 2
@@ -1468,7 +1468,7 @@ function drawModules(p) {
       
       for (let i = 0; i < otherTexts.length; i++) {
 
-        if (basicTypo.upperCase == true) {
+        if (basicTypo.preset.Track.upperCase == true) {
           currentText = otherTexts[i].toUpperCase()
         } else {
           currentText = otherTexts[i];
@@ -1512,20 +1512,20 @@ function drawModules(p) {
     }
 
     //MAIN TEXT
-    p.fill(basicTypo.mainText.color)
+    p.fill(basicTypo.preset.Track.mainText.color)
     //console.log(basicTypo.fontMainText);
     //pinyonScript
-    p.textFont(basicTypo.fontMainText)
+    p.textFont(basicTypo.preset.Track.fontMainText)
     p.textAlign(p.CENTER, p.CENTER)
 
-    if (basicTypo.upperCase == true) {
-      mainText = basicTypo.mainText.value.toUpperCase()
+    if (basicTypo.preset.Track.upperCase == true) {
+      mainText = basicTypo.preset.Track.mainText.value.toUpperCase()
     } else {
-      mainText = basicTypo.mainText.value
+      mainText = basicTypo.preset.Track.mainText.value
     }
 
-    let presetSizeMainText = basicTypo.mainText.size.sliderValue
-    let presetLeadingMainText = basicTypo.mainText.leading.sliderValue
+    let presetSizeMainText = basicTypo.preset.Track.mainText.size.sliderValue
+    let presetLeadingMainText = basicTypo.preset.Track.mainText.leading.sliderValue
     let MainTextSize = (presetSizeMainText * canvasSize) / 100
     let MainTextLeading = (presetLeadingMainText * canvasSize) / 100
     p.textSize(MainTextSize)

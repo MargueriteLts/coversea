@@ -1140,41 +1140,39 @@ function setfont(fontType) {
   return font
 }
 
-function initBasicTypoStore(basicTypo) {
+function initBasicTypoStore(preset) {
 
   let positions = generatePositions()
 
+  //let fontMainText
+  //let fontOtherText
+  
+  //if (preset.mainText.currentFont == 'Script') {
+  //  fontMainText = sample(scriptFonts)
+  //}
+  //if (preset.mainText.currentFont == 'Sans Serif') {
+  //  fontMainText = sample(sansSerifFonts)
+  //}
 
-  basicTypo = Object.assign({}, basicTypo, {
+  //if (preset.otherText.currentFont == 'Script') {
+  //  fontOtherText = sample(scriptFonts)
+  //}
+  //if (preset.otherText.currentFont == 'Sans Serif') {
+  //  fontOtherText = sample(sansSerifFonts)
+  //}
+
+
+  preset = Object.assign({}, preset, {
     moduleName: 'Text',
-    //textPositions: positions,
-    //fontMainText: setfont(preset.mainText.currentFont),
-    //fontOtherText: setfont(preset.otherText.currentFont)
+    //colorLocked: false,
+    // textPositions : [[], []]
+    textPositions: positions,
+    //textPositions: {randomPosition: { x: 60, y: 95 }, randomPositions: [{ x: 5, y: 5 },{ x: 30, y: 5 },{ x: 60, y: 5 },{ x: 5, y: 95 },{ x: 30, y: 95 },{ x: 60, y: 95 }] }
+    fontMainText: setfont(preset.mainText.currentFont),
+    fontOtherText: setfont(preset.otherText.currentFont)
   })
 
-  basicTypo.coverTypes.forEach((coverType) => {
-    if (coverType == 'Track') {
-      basicTypo.preset.Track = Object.assign({}, basicTypo.preset.Track, { text: 'Track/Set/Song',
-      textPositions: positions,
-      fontMainText: setfont(basicTypo.preset.Track.mainText.currentFont),
-      fontOtherText: setfont(basicTypo.preset.Track.otherText.currentFont)
-      })
-    }
-
-    if (coverType == 'VA') {
-      basicTypo.preset.VA = Object.assign({}, basicTypo.preset.VA, { text: 'VA/Compilation'})
-    }
-
-    if (coverType == 'Podcast') {
-      basicTypo.preset.Podcast = Object.assign({}, basicTypo.preset.Podcast, { text: 'Podcast/RadioShow'})
-    }
-
-    if (coverType == 'Vinyl') {
-      basicTypo.preset.Vinyl = Object.assign({}, basicTypo.preset.Vinyl, { text: 'Vinyl/Album/EP'})
-    }
-  })
-
-  return basicTypo
+  return preset
 }
 
 function getBasicTypoStore() {
@@ -1183,46 +1181,39 @@ function getBasicTypoStore() {
 
 function setBasicTypoStore(type, nextValue) {
   return new Promise((resolve, reject) => {
-    if (type === 'CurrentCoverTypeChange') {
-      moduleBasicTypoStore.currentCoverType = nextValue
-      // Update otherText.values array based on the selected cover type
-      //const selectedPreset = moduleBasicTypoStore.preset[nextValue]
-      //moduleBasicTypoStore.otherText.values = selectedPreset.textFields.map(() => '')
-      resolve([nextValue])
-    }
     if (type === 'CurrentMainFontChange') {
-      moduleBasicTypoStore.preset.Track.mainText.currentFont = nextValue
+      moduleBasicTypoStore.mainText.currentFont = nextValue
 
       if (nextValue == 'Script') {
-        moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.preset.Track.mainText.currentFont)
+        moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.mainText.currentFont)
       }
       if (nextValue == 'Sans Serif') {
-        moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.preset.Track.mainText.currentFont)
+        moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.mainText.currentFont)
       }
       resolve([nextValue])
     }
     if (type === 'CurrentOtherFontChange') {
-      moduleBasicTypoStore.preset.Track.otherText.currentFont = nextValue
+      moduleBasicTypoStore.otherText.currentFont = nextValue
 
       if (nextValue == 'Script') {
-        moduleBasicTypoStore.fontOtherText = setfont(moduleBasicTypoStore.preset.Track.otherText.currentFont)
+        moduleBasicTypoStore.fontOtherText = setfont(moduleBasicTypoStore.otherText.currentFont)
       }
       if (nextValue == 'Sans Serif') {
-        moduleBasicTypoStore.fontOtherText = setfont(moduleBasicTypoStore.preset.Track.otherText.currentFont)
+        moduleBasicTypoStore.fontOtherText = setfont(moduleBasicTypoStore.otherText.currentFont)
       }
       resolve([nextValue])
     }
 
 
     if (type == 'mainText') {
-      moduleBasicTypoStore.preset.Track.mainText.value = nextValue
+      moduleBasicTypoStore.mainText.value = nextValue
     }
     if (type == 'sizeMainText') {
-      moduleBasicTypoStore.preset.Track.mainText.size.sliderValue = nextValue
+      moduleBasicTypoStore.mainText.size.sliderValue = nextValue
       resolve([nextValue])
     }
     if (type == 'leadingMainText') {
-      moduleBasicTypoStore.preset.Track.mainText.leading.sliderValue = nextValue
+      moduleBasicTypoStore.mainText.leading.sliderValue = nextValue
       resolve([nextValue])
     }
     //if (type === 'spacingMainText') {
@@ -1230,11 +1221,11 @@ function setBasicTypoStore(type, nextValue) {
     //  resolve([nextValue])
     //}
     if (type === 'sizeOtherText') {
-      moduleBasicTypoStore.preset.Track.otherText.size.sliderValue = nextValue
+      moduleBasicTypoStore.otherText.size.sliderValue = nextValue
       resolve([nextValue])
     }
     if (type == 'leadingOtherText') {
-      moduleBasicTypoStore.preset.Track.otherText.leading.sliderValue = nextValue
+      moduleBasicTypoStore.otherText.leading.sliderValue = nextValue
       resolve([nextValue])
     }
     // if (type === 'StyleTabChange') {
@@ -1242,52 +1233,52 @@ function setBasicTypoStore(type, nextValue) {
     //   resolve([nextValue])
     // } 
     if (type === 'otherText') {
-      moduleBasicTypoStore.preset.Track.otherText.value = nextValue
+      moduleBasicTypoStore.otherText.value = nextValue
     }
 
      if (type === 'textarea') {
-      moduleBasicTypoStore.preset.Track.otherText.values = nextValue
+      moduleBasicTypoStore.otherText.values = nextValue
     }
 
     //COLOR??
     if (type === 'colorMainText') {
-      moduleBasicTypoStore.preset.Track.mainText.color = nextValue
+      moduleBasicTypoStore.mainText.color = nextValue
       resolve([nextValue])
     }
     if (type === 'colorOtherText') {
-      moduleBasicTypoStore.preset.Track.otherText.color = nextValue
+      moduleBasicTypoStore.otherText.color = nextValue
       resolve([nextValue])
     }
     if (type === 'Positions') {
       let positions = generatePositions()
-      moduleBasicTypoStore.preset.Track.textPositions = positions
+      moduleBasicTypoStore.textPositions = positions
     }
 
 
     if (type == 'mainLockColor') {
-      moduleBasicTypoStore.preset.Track.mainText.colorLocked = nextValue
+      moduleBasicTypoStore.mainText.colorLocked = nextValue
     }
     if (type == 'mainLockType') {
-      moduleBasicTypoStore.preset.Track.mainText.typeLocked = nextValue
+      moduleBasicTypoStore.mainText.typeLocked = nextValue
     }
     if (type == 'mainLockSize') {
-      moduleBasicTypoStore.preset.Track.mainText.sizeLocked = nextValue
+      moduleBasicTypoStore.mainText.sizeLocked = nextValue
     }
     if (type == 'mainLockLeading') {
-      moduleBasicTypoStore.preset.Track.mainText.leadingLocked = nextValue
+      moduleBasicTypoStore.mainText.leadingLocked = nextValue
     }
 
     if (type == 'otherLockColor') {
-      moduleBasicTypoStore.preset.Track.otherText.colorLocked = nextValue
+      moduleBasicTypoStore.otherText.colorLocked = nextValue
     }
     if (type == 'otherLockType') {
-      moduleBasicTypoStore.preset.Track.otherText.typeLocked = nextValue
+      moduleBasicTypoStore.otherText.typeLocked = nextValue
     }
     if (type == 'otherLockSize') {
-      moduleBasicTypoStore.preset.Track.otherText.sizeLocked = nextValue
+      moduleBasicTypoStore.otherText.sizeLocked = nextValue
     }
     if (type == 'otherLockLeading') {
-      moduleBasicTypoStore.preset.Track.otherText.leadingLocked = nextValue
+      moduleBasicTypoStore.otherText.leadingLocked = nextValue
     }
   })
 }

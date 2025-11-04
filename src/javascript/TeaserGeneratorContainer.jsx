@@ -276,6 +276,13 @@ export default class GeneratorContainer extends Component {
     this.setState({})
   }
 
+  ////////////////////////////////////// MODULE BACKGROUND
+
+  handleTabClickBasicTypoCoverType = (type) => {
+  this.props.setBasicTypoStore('CurrentCoverTypeChange', type)
+  this.setState({})
+}
+
   ////////////////////////////////////// MODULE OVERLAY
 
   // Tab -OK
@@ -535,6 +542,7 @@ export default class GeneratorContainer extends Component {
             moduleName={basictypo.moduleName}
             setBasicTypoStore={setBasicTypoStore}
             handleRandomizeModule={this.handleRandomizeModule}
+            handleTabClickBasicTypoCoverType={this.handleTabClickBasicTypoCoverType}
             key={index}
           />
         )

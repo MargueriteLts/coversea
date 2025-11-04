@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import M_Control from './controls/M_Control.jsx'
 
-export default class M_TextSettingsDropDown extends Component {
+export default class M_TextSettings extends Component {
   constructor(props) {
     super(props)
 
