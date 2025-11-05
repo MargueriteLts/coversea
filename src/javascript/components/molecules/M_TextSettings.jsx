@@ -148,6 +148,7 @@ export default class M_TextSettings extends Component {
  handleTextDropDownClick = (type) => {
   if (this.props.textType == 'main') {
     this.props.setStore('CurrentMainFontChange', type)
+    console.log('M_TextSettings', type)
   }
   if (this.props.textType == 'other') {
     this.props.setStore('CurrentOtherFontChange', type)

@@ -1118,6 +1118,8 @@ function generatePositions() {
 
 function setfont(fontType) {
 
+  console.log('SETFONT ON')
+
   let font
 
   //let sansSerifFonts = ['ADC-Semi-Bold', 'MintSansRegular', 'LiberationSans-Regular']
@@ -1136,6 +1138,8 @@ function setfont(fontType) {
   if (fontType == 'Sans Serif') {
     font = sample(sansSerifFonts)
   }
+
+  console.log(font)
 
   return font
 }
@@ -1192,12 +1196,14 @@ function setBasicTypoStore(type, nextValue) {
     }
     if (type === 'CurrentMainFontChange') {
       moduleBasicTypoStore.preset.Track.mainText.currentFont = nextValue
-
+      console.log('CLICK setBasicTypoStore', 'next value:', nextValue)
       if (nextValue == 'Script') {
-        moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.preset.Track.mainText.currentFont)
+        moduleBasicTypoStore.preset.Track.fontMainText = setfont(moduleBasicTypoStore.preset.Track.mainText.currentFont)
+        console.log('CLICK SCRIPT')
       }
       if (nextValue == 'Sans Serif') {
-        moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.preset.Track.mainText.currentFont)
+        console.log('CLICK SANSSERIF')
+        moduleBasicTypoStore.preset.Track.fontMainText = setfont(moduleBasicTypoStore.preset.Track.mainText.currentFont)
       }
       resolve([nextValue])
     }
@@ -1540,8 +1546,8 @@ function generateAllStore(generatorName, moduleList) {
       if (moduleName == 'BasicTypo') {
         setBasicTypoStore('Positions')
         
-        moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.mainText.currentFont)
-        moduleBasicTypoStore.fontOtherText = setfont(moduleBasicTypoStore.otherText.currentFont)
+        moduleBasicTypoStore.preset.Track.fontMainText = setfont(moduleBasicTypoStore.preset.Track.mainText.currentFont)
+        moduleBasicTypoStore.preset.Track.fontOtherText = setfont(moduleBasicTypoStore.preset.Track.otherText.currentFont)
       }
 
       if (moduleName == 'Lines') {
@@ -1751,57 +1757,57 @@ function randomizeModuleStore(moduleType) {
       return new Promise((resolve, reject) => {
         setBasicTypoStore('Positions')
 
-        if (moduleBasicTypoStore.mainText.typeLocked == false) {
-          let newMainType = sample(moduleBasicTypoStore.mainText.fontOptions)
-          moduleBasicTypoStore.mainText.currentFont = newMainType
+        if (moduleBasicTypoStore.preset.Track.mainText.typeLocked == false) {
+          let newMainType = sample(moduleBasicTypoStore.preset.Track.mainText.fontOptions)
+          moduleBasicTypoStore.preset.Track.mainText.currentFont = newMainType
           resolve([newMainType])
         }
-        if (moduleBasicTypoStore.otherText.typeLocked == false) {
-          let newOtherType = sample(moduleBasicTypoStore.otherText.fontOptions)
-          moduleBasicTypoStore.otherText.currentFont = newOtherType
+        if (moduleBasicTypoStore.preset.Track.otherText.typeLocked == false) {
+          let newOtherType = sample(moduleBasicTypoStore.preset.Track.otherText.fontOptions)
+          moduleBasicTypoStore.preset.Track.otherText.currentFont = newOtherType
           resolve([newOtherType])
         }
 
-        if (moduleBasicTypoStore.mainText.currentFont == 'Script') {
-          moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.mainText.currentFont)
+        if (moduleBasicTypoStore.preset.Track.mainText.currentFont == 'Script') {
+          moduleBasicTypoStore.preset.Track.fontMainText = setfont(moduleBasicTypoStore.preset.Track.mainText.currentFont)
         }
-        if (moduleBasicTypoStore.mainText.currentFont == 'Sans Serif') {
-          moduleBasicTypoStore.fontMainText = setfont(moduleBasicTypoStore.mainText.currentFont)
-        }
-  
-        if (moduleBasicTypoStore.otherText.currentFont == 'Script') {
-          moduleBasicTypoStore.fontOtherText = setfont(moduleBasicTypoStore.otherText.currentFont)
-        }
-        if (moduleBasicTypoStore.otherText.currentFont == 'Sans Serif') {
-          moduleBasicTypoStore.fontOtherText = setfont(moduleBasicTypoStore.otherText.currentFont)
+        if (moduleBasicTypoStore.preset.Track.mainText.currentFont == 'Sans Serif') {
+          moduleBasicTypoStore.preset.Track.fontMainText = setfont(moduleBasicTypoStore.preset.Track.mainText.currentFont)
         }
   
-        if (moduleBasicTypoStore.mainText.colorLocked == false) {
-          moduleBasicTypoStore.mainText.color = generateColor()
+        if (moduleBasicTypoStore.preset.Track.otherText.currentFont == 'Script') {
+          moduleBasicTypoStore.preset.Track.fontOtherText = setfont(moduleBasicTypoStore.preset.Track.otherText.currentFont)
         }
-        if (moduleBasicTypoStore.otherText.colorLocked == false) {
-          moduleBasicTypoStore.otherText.color = generateColor()
+        if (moduleBasicTypoStore.preset.Track.otherText.currentFont == 'Sans Serif') {
+          moduleBasicTypoStore.preset.Track.fontOtherText = setfont(moduleBasicTypoStore.preset.Track.otherText.currentFont)
+        }
+  
+        if (moduleBasicTypoStore.preset.Track.mainText.colorLocked == false) {
+          moduleBasicTypoStore.preset.Track.mainText.color = generateColor()
+        }
+        if (moduleBasicTypoStore.preset.Track.otherText.colorLocked == false) {
+          moduleBasicTypoStore.preset.Track.otherText.color = generateColor()
         }
         
-        if (moduleBasicTypoStore.mainText.sizeLocked == false) {
-          let newMainSize = getRandomArbitrary(moduleBasicTypoStore.mainText.size.min, moduleBasicTypoStore.mainText.size.max)
-          moduleBasicTypoStore.mainText.size.sliderValue = newMainSize
+        if (moduleBasicTypoStore.preset.Track.mainText.sizeLocked == false) {
+          let newMainSize = getRandomArbitrary(moduleBasicTypoStore.preset.Track.mainText.size.min, moduleBasicTypoStore.preset.Track.mainText.size.max)
+          moduleBasicTypoStore.preset.Track.mainText.size.sliderValue = newMainSize
           resolve([newMainSize])
         }
-        if (moduleBasicTypoStore.otherText.sizeLocked == false) {
-          let newOtherSize = getRandomArbitrary(moduleBasicTypoStore.otherText.size.min, moduleBasicTypoStore.otherText.size.max)
-          moduleBasicTypoStore.otherText.size.sliderValue = newOtherSize
+        if (moduleBasicTypoStore.preset.Track.otherText.sizeLocked == false) {
+          let newOtherSize = getRandomArbitrary(moduleBasicTypoStore.preset.Track.otherText.size.min, moduleBasicTypoStore.preset.Track.otherText.size.max)
+          moduleBasicTypoStore.preset.Track.otherText.size.sliderValue = newOtherSize
           resolve([newOtherSize])
         }
   
-        if (moduleBasicTypoStore.mainText.leadingLocked == false) {
-          let newMainLeading = getRandomArbitrary(moduleBasicTypoStore.mainText.leading.min, moduleBasicTypoStore.mainText.leading.max)
-          moduleBasicTypoStore.mainText.leading.sliderValue = newMainLeading
+        if (moduleBasicTypoStore.preset.Track.mainText.leadingLocked == false) {
+          let newMainLeading = getRandomArbitrary(moduleBasicTypoStore.preset.Track.mainText.leading.min, moduleBasicTypoStore.preset.Track.mainText.leading.max)
+          moduleBasicTypoStore.preset.Track.mainText.leading.sliderValue = newMainLeading
           resolve([newMainLeading])
         }
-        if (moduleBasicTypoStore.otherText.leadingLocked == false) {
-          let newOtherLeading = getRandomArbitrary(moduleBasicTypoStore.otherText.leading.min, moduleBasicTypoStore.otherText.leading.max)
-          moduleBasicTypoStore.otherText.leading.sliderValue = newOtherLeading
+        if (moduleBasicTypoStore.preset.Track.otherText.leadingLocked == false) {
+          let newOtherLeading = getRandomArbitrary(moduleBasicTypoStore.preset.Track.otherText.leading.min, moduleBasicTypoStore.preset.Track.otherText.leading.max)
+          moduleBasicTypoStore.preset.Track.otherText.leading.sliderValue = newOtherLeading
           resolve([newOtherLeading])
         }
       })
