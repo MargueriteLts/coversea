@@ -6,6 +6,8 @@ import M_BackgroundContent from '../molecules/moduleContent/M_BackgroundContent.
 import M_LinesContent from '../molecules/moduleContent/M_LinesContent.jsx'
 import M_VinylContent from '../molecules/moduleContent/M_VinylContent.jsx'
 import M_BasicTypoContent from '../molecules/moduleContent/M_BasicTypoContent.jsx'
+import M_TypographyContent from '../molecules/moduleContent/M_TypographyContent.jsx'
+import M_BasicTypoWithTabsContent from '../molecules/moduleContent/M_BasicTypoWithTabsContent.jsx'
 import M_ParticlesContent from '../molecules/moduleContent/M_ParticlesContent.jsx'
 import M_BackgroundImageContent from '../molecules/moduleContent/M_BackgroundImageContent.jsx'
 import M_ShapesContent from '../molecules/moduleContent/M_ShapesContent.jsx'
@@ -58,6 +60,10 @@ export default class O_Module extends Component {
       setLinesStore,
       basictypo,
       setBasicTypoStore,
+      typography,
+      setTypographyStore,
+      basictypowithtabs,
+      setBasicTypoWithTabsStore,
       handleTabClickBasicTypoCoverType,
       particles,
       setParticlesStore,
@@ -152,6 +158,22 @@ export default class O_Module extends Component {
         <M_BasicTypoContent
           basictypo={basictypo}
           setBasicTypoStore={setBasicTypoStore}
+        />
+      )
+    }
+    if (moduleType == 'Typography') {
+      return (
+        <M_TypographyContent
+          typography={typography}
+          setTypographyStore={setTypographyStore}
+        />
+      )
+    }
+    if (moduleType == 'BasicTypoWithTabs') {
+      return (
+        <M_BasicTypoWithTabsContent
+          basictypowithtabs={basictypowithtabs}
+          setBasicTypoWithTabsStore={setBasicTypoWithTabsStore}
           handleTabClickBasicTypoCoverType={handleTabClickBasicTypoCoverType}
         />
       )

@@ -276,10 +276,10 @@ export default class GeneratorContainer extends Component {
     this.setState({})
   }
 
-  ////////////////////////////////////// MODULE BACKGROUND
+  ////////////////////////////////////// MODULE BASICTYPOWITHTABS
 
   handleTabClickBasicTypoCoverType = (type) => {
-  this.props.setBasicTypoStore('CurrentCoverTypeChange', type)
+  this.props.setBasicTypoWithTabsStore('CurrentCoverTypeChange', type)
   this.setState({})
 }
 
@@ -379,9 +379,13 @@ export default class GeneratorContainer extends Component {
       setLinesStore,
       module3D,
       basictypo,
+      setBasicTypoStore,
+      typography,
+      setTypographyStore,
+      basictypowithtabs,
+      setBasicTypoWithTabsStore,
       basictypoV2,
       setBasicTypoV2Store,
-      setBasicTypoStore,
       overlay
       // setCanvasSizeStore
     } = this.props
@@ -541,6 +545,30 @@ export default class GeneratorContainer extends Component {
             basictypo={basictypo}
             moduleName={basictypo.moduleName}
             setBasicTypoStore={setBasicTypoStore}
+            handleRandomizeModule={this.handleRandomizeModule}
+            key={index}
+          />
+        )
+      }
+      if (moduleName == 'Typography') {
+        modules.push(
+          <O_Module
+            moduleType='Typography'
+            typography={typography}
+            moduleName={typography.moduleName}
+            setTypographyStore={setTypographyStore}
+            handleRandomizeModule={this.handleRandomizeModule}
+            key={index}
+          />
+        )
+      }
+      if (moduleName == 'BasicTypoWithTabs') {
+        modules.push(
+          <O_Module
+            moduleType='BasicTypoWithTabs'
+            basictypowithtabs={basictypowithtabs}
+            moduleName={basictypowithtabs.moduleName}
+            setBasicTypoWithTabsStore={setBasicTypoWithTabsStore}
             handleRandomizeModule={this.handleRandomizeModule}
             handleTabClickBasicTypoCoverType={this.handleTabClickBasicTypoCoverType}
             key={index}

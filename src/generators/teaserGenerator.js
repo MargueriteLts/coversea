@@ -1,4 +1,6 @@
-const modules = ['Background', 'Vinyl', 'Lines', 'BasicTypo', 'UploadImage']
+//const modules = ['Background', 'Vinyl', 'Lines', 'BasicTypoWithTabs', 'UploadImage']
+//const modules = ['Background', 'Vinyl', 'Lines', 'BasicTypo', 'UploadImage']
+const modules = ['Background', 'Vinyl', 'Lines', 'Typography', 'UploadImage']
 
 const preset = {
   
@@ -82,65 +84,125 @@ const preset = {
     max: 100,
   },
 
-  BasicTypo: {
-    coverTypes: ['Track', 'VA', 'Podcast', 'Vinyl'],
-    currentCoverType: 'Track',
+  
 
-    preset: {
-      Track: {
-        dopText: true,
+  //BasicTypoWithTabs: {
+  //  coverTypes: ['Track', 'VA', 'Podcast', 'Vinyl'],
+  //  currentCoverType: 'Track',
 
-        upperCase: true,
-        textAlign: 'left',
+  //  preset: {
+  //    Track: {
+  //      dopText: true,
 
-        mainText: {
-          value: 'Track title',
-          color: '#ffffff',
-          colorLocked: false,
-          typeLocked: false,
-          sizeLocked: false,
-          leadingLocked: false,
-          fontOptions: ['Sans Serif', 'Script'],
-          currentFont: 'Script',
-          size:{
-            sliderValue: 10,
-            min: 5,
-            max: 20
-          },
-          leading: {
-            sliderValue: 8,
-            min: 1,
-            max: 20
-          }
-        },
+  //      upperCase: true,
+  //      textAlign: 'left',
 
-        otherText: {
-          values: ['Artist/Label'],
-          color: '#ffffff',
-          colorLocked: false,
-          typeLocked: false,
-          sizeLocked: false,
-          leadingLocked: false,
-          fontOptions: ['Sans Serif', 'Script'],
-          currentFont: 'Sans Serif',
-          size:{
-            sliderValue: 2,
-            min: 1,
-            max: 6
-          },
-          leading: {
-            sliderValue: 2,
-            min: 1,
-            max: 10
-          }
-        }
+  //      mainText: {
+  //        value: 'Track title',
+  //        color: '#ffffff',
+  //        colorLocked: false,
+  //        typeLocked: false,
+  //        sizeLocked: false,
+  //        leadingLocked: false,
+  //        fontOptions: ['Sans Serif', 'Script'],
+  //        currentFont: 'Script',
+  //        size:{
+  //          sliderValue: 10,
+  //          min: 5,
+  //          max: 20
+  //        },
+  //        leading: {
+  //          sliderValue: 8,
+  //          min: 1,
+  //          max: 20
+  //        }
+  //      },
+
+  //      otherText: {
+  //        values: ['Artist/Label'],
+  //        color: '#ffffff',
+  //        colorLocked: false,
+  //        typeLocked: false,
+  //        sizeLocked: false,
+  //        leadingLocked: false,
+  //        fontOptions: ['Sans Serif', 'Script'],
+  //        currentFont: 'Sans Serif',
+  //        size:{
+  //          sliderValue: 2,
+  //          min: 1,
+  //          max: 6
+  //        },
+  //        leading: {
+  //          sliderValue: 2,
+  //          min: 1,
+  //          max: 10
+  //        }
+  //      }
+  //    },
+  //    VA: {},
+  //    Podcast: {},
+  //    Vinyl: {}
+  //  }
+  //},
+
+  Typography: {
+    dopText: true,
+
+    upperCase: true,
+    textAlign: 'left',
+
+    mainText: {
+      value: 'Track title',
+      color: '#ffffff',
+      colorLocked: false,
+      typeLocked: false,
+      sizeLocked: false,
+      leadingLocked: false,
+      fontOptions: ['Sans Serif', 'Script'],
+      currentFont: 'Script',
+      size:{
+        sliderValue: 10,
+        min: 5,
+        max: 20
       },
-      VA: {},
-      Podcast: {},
-      Vinyl: {}
-    }
-  },
+      leading: {
+        sliderValue: 8,
+        min: 1,
+        max: 20
+      }
+    },
 
+    otherText: {
+      values: ['Artist/Label'],
+      color: '#ffffff',
+      colorLocked: false,
+      typeLocked: false,
+      sizeLocked: false,
+      leadingLocked: false,
+      fontOptions: ['Sans Serif', 'Script'],
+      currentFont: 'Sans Serif',
+      size:{
+        sliderValue: 2,
+        min: 1,
+        max: 6
+      },
+      leading: {
+        sliderValue: 2,
+        min: 1,
+        max: 10
+      }
+      //spacing: {
+      //  sliderValue: 2,
+      //  min: 1,
+      //  max: 10
+      //}
+    }
+   
+    // styles: ['NORMAL', 'LIGHT', 'BOLD'],
+    // styleMainText: 'NORMAL',
+
+  },
+  
   //BasicTypo: {
   //  dopText: true,
 

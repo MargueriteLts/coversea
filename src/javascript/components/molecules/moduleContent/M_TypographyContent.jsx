@@ -7,32 +7,32 @@ import M_TextSettingsDropDown from '../M_TextSettingsDropDown.jsx'
 import M_DropDown from '../M_DropDown.jsx'
 import M_AddRemoveText from '../controls/M_AddRemoveText.jsx'
 
-export default class M_BasicTypo extends Component {
+export default class M_TypographyContent extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
 
-      valueMainText: this.props.basictypo.mainText.value,
+      valueMainText: this.props.typography.mainText.value,
 
-      colorMainText: this.props.basictypo.mainText.color,
+      colorMainText: this.props.typography.mainText.color,
 
-      valueOtherText: this.props.basictypo.otherText.value,
+      valueOtherText: this.props.typography.otherText.value,
 
-      colorOtherText: this.props.basictypo.otherText.color
+      colorOtherText: this.props.typography.otherText.color
     }
   }
 
   handleMainTextChange = (event) => {
     const inputValue = event.target.value
-    this.props.setBasicTypoStore('mainText', inputValue)
+    this.props.setTypographyStore('mainText', inputValue)
     this.setState({
       valueMainText: inputValue
     });
   }
 
   handleChangeMainTextColor = (object, value) => {
-    this.props.setBasicTypoStore(object, value)
+    this.props.setTypographyStore(object, value)
       .then((color) => {
         this.setState({
           colorMainText: color[0]
@@ -46,14 +46,14 @@ export default class M_BasicTypo extends Component {
 
   handleOtherTextChange = (event) => {
     const inputValue = event.target.value
-    this.props.setBasicTypoStore('otherText', inputValue)
+    this.props.setTypographyStore('otherText', inputValue)
     this.setState({
       valueOtherText: inputValue
     });
   }
 
   handleChangeOtherTextColor = (object, value) => {
-    this.props.setBasicTypoStore(object, value)
+    this.props.setTypographyStore(object, value)
       .then((color) => {
         this.setState({
           colorOtherText: color[0]
@@ -66,7 +66,7 @@ export default class M_BasicTypo extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { basictypo, setBasicTypoStore } = this.props
+    const { typography, setTypographyStore } = this.props
 
     return <div className="basic-typo-content">
 
@@ -87,8 +87,8 @@ export default class M_BasicTypo extends Component {
           dropDownContent='TextSettings'
           title='Text settings'
           textType='main'
-          setStore={setBasicTypoStore}
-          textData={basictypo.mainText}
+          setStore={setTypographyStore}
+          textData={typography.mainText}
           object='colorMainText'
           itemLockColor='mainLockColor'
           itemLockType='mainLockType'
@@ -98,7 +98,7 @@ export default class M_BasicTypo extends Component {
         />
       </div>
 
-      { basictypo.dopText
+      { typography.dopText
         ?
         <div className="basic-typo-row">
           <A_Text
@@ -106,17 +106,17 @@ export default class M_BasicTypo extends Component {
             style='basic-typo-title'
           />
           <M_AddRemoveText
-            // text={basictypo.otherText.value}
-            text={basictypo.otherText.values}
-            setStore={setBasicTypoStore}
+            // text={typography.otherText.value}
+            text={typography.otherText.values}
+            setStore={setTypographyStore}
           />
 
           <M_DropDown
             dropDownContent='TextSettings'
             title='Text settings'
             textType='other'
-            setStore={setBasicTypoStore}
-            textData={basictypo.otherText}
+            setStore={setTypographyStore}
+            textData={typography.otherText}
             object='colorOtherText'
             itemLockColor='otherLockColor'
             itemLockType='otherLockType'

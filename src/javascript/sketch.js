@@ -18,6 +18,8 @@ import {
   getLinesStore,
   get3DStore,
   getBasicTypoStore,
+  getTypographyStore,
+  getBasicTypoWithTabsStore,
   getBasicTypoV2Store,
   getOverlayStore,
   getFontsStore,
@@ -1436,13 +1438,13 @@ function drawModules(p) {
     // p.textWrap(p.WORD)
     
     ////////////////////////////  OTHER TEXT
-    if (basicTypo.preset.Track.dopText == true) {
-      p.textFont(basicTypo.preset.Track.fontOtherText)
-      p.fill(basicTypo.preset.Track.otherText.color)
-      let otherTexts = basicTypo.preset.Track.otherText.values
+    if (basicTypo.dopText == true) {
+      p.textFont(basicTypo.fontOtherText)
+      p.fill(basicTypo.otherText.color)
+      let otherTexts = basicTypo.otherText.values
       
-      let presetSizeOtherText = basicTypo.preset.Track.otherText.size.sliderValue
-      let presetLeadingOtherText = basicTypo.preset.Track.otherText.leading.sliderValue
+      let presetSizeOtherText = basicTypo.otherText.size.sliderValue
+      let presetLeadingOtherText = basicTypo.otherText.leading.sliderValue
 
       let otherTextSize = (presetSizeOtherText * canvasSize) / 100
       let otherTextLeading = (presetLeadingOtherText * canvasSize) / 100
@@ -1451,7 +1453,7 @@ function drawModules(p) {
       p.textLeading(otherTextLeading)
 
 
-      let positions = basicTypo.preset.Track.textPositions
+      let positions = basicTypo.textPositions
       
       // 
       const offset = canvasSize * 0.1 / 2
@@ -1468,7 +1470,7 @@ function drawModules(p) {
       
       for (let i = 0; i < otherTexts.length; i++) {
 
-        if (basicTypo.preset.Track.upperCase == true) {
+        if (basicTypo.upperCase == true) {
           currentText = otherTexts[i].toUpperCase()
         } else {
           currentText = otherTexts[i];
@@ -1512,20 +1514,256 @@ function drawModules(p) {
     }
 
     //MAIN TEXT
-    p.fill(basicTypo.preset.Track.mainText.color)
+    p.fill(basicTypo.mainText.color)
     //console.log(basicTypo.fontMainText);
     //pinyonScript
-    p.textFont(basicTypo.preset.Track.fontMainText)
+    p.textFont(basicTypo.fontMainText)
     p.textAlign(p.CENTER, p.CENTER)
 
-    if (basicTypo.preset.Track.upperCase == true) {
-      mainText = basicTypo.preset.Track.mainText.value.toUpperCase()
+    if (basicTypo.upperCase == true) {
+      mainText = basicTypo.mainText.value.toUpperCase()
     } else {
-      mainText = basicTypo.preset.Track.mainText.value
+      mainText = basicTypo.mainText.value
     }
 
-    let presetSizeMainText = basicTypo.preset.Track.mainText.size.sliderValue
-    let presetLeadingMainText = basicTypo.preset.Track.mainText.leading.sliderValue
+    let presetSizeMainText = basicTypo.mainText.size.sliderValue
+    let presetLeadingMainText = basicTypo.mainText.leading.sliderValue
+    let MainTextSize = (presetSizeMainText * canvasSize) / 100
+    let MainTextLeading = (presetLeadingMainText * canvasSize) / 100
+    p.textSize(MainTextSize)
+    p.textLeading(MainTextLeading)
+    p.rectMode(p.CENTER)
+
+    let xmain = canvasSize / 2;
+    let ymain = canvasSize / 2;
+
+    p.text(mainText, xmain, ymain, canvasSize, canvasSize)
+
+
+    p.drawingContext.shadowBlur = 0
+  }
+
+  /////////////////////////////////////////// MODULE TYPOGRAPHY
+
+  if (moduleList.includes('Typography')) {
+    const typography = getTypographyStore()
+    let mainText
+    
+    ////////////////////////////  STYLES
+    
+    p.noStroke()
+    // p.textStyle(typography.styleMainText)
+    // p.textWrap(p.WORD)
+    
+    ////////////////////////////  OTHER TEXT
+    if (typography.dopText == true) {
+      p.textFont(typography.fontOtherText)
+      p.fill(typography.otherText.color)
+      let otherTexts = typography.otherText.values
+      
+      let presetSizeOtherText = typography.otherText.size.sliderValue
+      let presetLeadingOtherText = typography.otherText.leading.sliderValue
+
+      let otherTextSize = (presetSizeOtherText * canvasSize) / 100
+      let otherTextLeading = (presetLeadingOtherText * canvasSize) / 100
+      
+      p.textSize(otherTextSize)
+      p.textLeading(otherTextLeading)
+
+
+      let positions = typography.textPositions
+      
+      // 
+      const offset = canvasSize * 0.1 / 2
+      const textZone = canvasSize - offset * 2
+      const maxWidth = textZone / 3;
+      const center = (canvasSize - maxWidth) / 2
+      const right = canvasSize - maxWidth - offset
+      const bottom = canvasSize - offset
+      //
+
+      p.rectMode(p.CORNER)
+
+      let currentText
+      
+      for (let i = 0; i < otherTexts.length; i++) {
+
+        if (typography.upperCase == true) {
+          currentText = otherTexts[i].toUpperCase()
+        } else {
+          currentText = otherTexts[i];
+        }
+
+        const positionTxt = positions[i]
+
+
+        if (positionTxt[0] == 'left' && positionTxt[1] == 'top') {
+          p.textAlign(p.LEFT, p.TOP);
+          p.text(currentText, offset, offset, maxWidth);
+        }
+
+        if (positionTxt[0] == 'center' && positionTxt[1] == 'top') {
+          p.textAlign(p.CENTER, p.TOP);
+          p.text(currentText, center, offset, maxWidth);
+        }
+
+        if (positionTxt[0] == 'right' && positionTxt[1] == 'top') {
+          p.textAlign(p.RIGHT, p.TOP);
+          p.text(currentText, right, offset, maxWidth);
+        }
+
+        if (positionTxt[0] == 'left' && positionTxt[1] == 'bottom') {
+          p.textAlign(p.LEFT, p.BOTTOM);
+          p.text(currentText, offset, bottom, maxWidth);
+        }
+
+        if (positionTxt[0] == 'center' && positionTxt[1] == 'bottom') {
+          p.textAlign(p.CENTER, p.BOTTOM);
+          p.text(currentText, center, bottom, maxWidth);
+        }
+
+        if (positionTxt[0] == 'right' && positionTxt[1] == 'bottom') {
+          p.textAlign(p.RIGHT, p.BOTTOM);
+          p.text(currentText, right, bottom, maxWidth);
+        }
+      }
+  
+
+    }
+
+    //MAIN TEXT
+    p.fill(typography.mainText.color)
+    //console.log(typography.fontMainText);
+    //pinyonScript
+    p.textFont(typography.fontMainText)
+    p.textAlign(p.CENTER, p.CENTER)
+
+    if (typography.upperCase == true) {
+      mainText = typography.mainText.value.toUpperCase()
+    } else {
+      mainText = typography.mainText.value
+    }
+
+    let presetSizeMainText = typography.mainText.size.sliderValue
+    let presetLeadingMainText = typography.mainText.leading.sliderValue
+    let MainTextSize = (presetSizeMainText * canvasSize) / 100
+    let MainTextLeading = (presetLeadingMainText * canvasSize) / 100
+    p.textSize(MainTextSize)
+    p.textLeading(MainTextLeading)
+    p.rectMode(p.CENTER)
+
+    let xmain = canvasSize / 2;
+    let ymain = canvasSize / 2;
+
+    p.text(mainText, xmain, ymain, canvasSize, canvasSize)
+
+
+    p.drawingContext.shadowBlur = 0
+  }
+
+  /////////////////////////////////////////// MODULE BASICTYPOWITHTABS
+
+  if (moduleList.includes('BasicTypoWithTabs')) {
+    const basicTypoWithTabs = getBasicTypoWithTabsStore()
+    let mainText
+    
+    ////////////////////////////  STYLES
+    
+    p.noStroke()
+    // p.textStyle(basicTypoWithTabs.styleMainText)
+    // p.textWrap(p.WORD)
+    
+    ////////////////////////////  OTHER TEXT
+    if (basicTypoWithTabs.preset.Track.dopText == true) {
+      p.textFont(basicTypoWithTabs.preset.Track.fontOtherText)
+      p.fill(basicTypoWithTabs.preset.Track.otherText.color)
+      let otherTexts = basicTypoWithTabs.preset.Track.otherText.values
+      
+      let presetSizeOtherText = basicTypoWithTabs.preset.Track.otherText.size.sliderValue
+      let presetLeadingOtherText = basicTypoWithTabs.preset.Track.otherText.leading.sliderValue
+
+      let otherTextSize = (presetSizeOtherText * canvasSize) / 100
+      let otherTextLeading = (presetLeadingOtherText * canvasSize) / 100
+      
+      p.textSize(otherTextSize)
+      p.textLeading(otherTextLeading)
+
+
+      let positions = basicTypoWithTabs.preset.Track.textPositions
+      
+      // 
+      const offset = canvasSize * 0.1 / 2
+      const textZone = canvasSize - offset * 2
+      const maxWidth = textZone / 3;
+      const center = (canvasSize - maxWidth) / 2
+      const right = canvasSize - maxWidth - offset
+      const bottom = canvasSize - offset
+      //
+
+      p.rectMode(p.CORNER)
+
+      let currentText
+      
+      for (let i = 0; i < otherTexts.length; i++) {
+
+        if (basicTypoWithTabs.preset.Track.upperCase == true) {
+          currentText = otherTexts[i].toUpperCase()
+        } else {
+          currentText = otherTexts[i];
+        }
+
+        const positionTxt = positions[i]
+
+
+        if (positionTxt[0] == 'left' && positionTxt[1] == 'top') {
+          p.textAlign(p.LEFT, p.TOP);
+          p.text(currentText, offset, offset, maxWidth);
+        }
+
+        if (positionTxt[0] == 'center' && positionTxt[1] == 'top') {
+          p.textAlign(p.CENTER, p.TOP);
+          p.text(currentText, center, offset, maxWidth);
+        }
+
+        if (positionTxt[0] == 'right' && positionTxt[1] == 'top') {
+          p.textAlign(p.RIGHT, p.TOP);
+          p.text(currentText, right, offset, maxWidth);
+        }
+
+        if (positionTxt[0] == 'left' && positionTxt[1] == 'bottom') {
+          p.textAlign(p.LEFT, p.BOTTOM);
+          p.text(currentText, offset, bottom, maxWidth);
+        }
+
+        if (positionTxt[0] == 'center' && positionTxt[1] == 'bottom') {
+          p.textAlign(p.CENTER, p.BOTTOM);
+          p.text(currentText, center, bottom, maxWidth);
+        }
+
+        if (positionTxt[0] == 'right' && positionTxt[1] == 'bottom') {
+          p.textAlign(p.RIGHT, p.BOTTOM);
+          p.text(currentText, right, bottom, maxWidth);
+        }
+      }
+  
+
+    }
+
+    //MAIN TEXT
+    p.fill(basicTypoWithTabs.preset.Track.mainText.color)
+    //console.log(basicTypoWithTabs.fontMainText);
+    //pinyonScript
+    p.textFont(basicTypoWithTabs.preset.Track.fontMainText)
+    p.textAlign(p.CENTER, p.CENTER)
+
+    if (basicTypoWithTabs.preset.Track.upperCase == true) {
+      mainText = basicTypoWithTabs.preset.Track.mainText.value.toUpperCase()
+    } else {
+      mainText = basicTypoWithTabs.preset.Track.mainText.value
+    }
+
+    let presetSizeMainText = basicTypoWithTabs.preset.Track.mainText.size.sliderValue
+    let presetLeadingMainText = basicTypoWithTabs.preset.Track.mainText.leading.sliderValue
     let MainTextSize = (presetSizeMainText * canvasSize) / 100
     let MainTextLeading = (presetLeadingMainText * canvasSize) / 100
     p.textSize(MainTextSize)

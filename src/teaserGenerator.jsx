@@ -36,6 +36,10 @@ import {
   set3DStore,
   getBasicTypoStore,
   setBasicTypoStore,
+  getTypographyStore,
+  setTypographyStore,
+  getBasicTypoWithTabsStore,
+  setBasicTypoWithTabsStore,
   getBasicTypoV2Store,
   setBasicTypoV2Store,
   getOverlayStore,
@@ -68,6 +72,8 @@ const actions = {
   setLinesStore,
   set3DStore,
   setBasicTypoStore,
+  setTypographyStore,
+  setBasicTypoWithTabsStore,
   setBasicTypoV2Store,
   setOverlayStore,
   // setCanvasSizeStore,
@@ -134,6 +140,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (moduleName == 'BasicTypo') {
       props.basictypo = getBasicTypoStore()
+    }
+
+    if (moduleName == 'Typography') {
+      props.typography = getTypographyStore()
+    }
+
+    if (moduleName == 'BasicTypoWithTabs') {
+      props.basictypowithtabs = getBasicTypoWithTabsStore()
     }
 
     if (moduleName == 'BasicTypoV2') {
