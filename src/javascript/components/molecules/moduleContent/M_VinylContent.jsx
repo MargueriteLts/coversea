@@ -79,6 +79,7 @@ export default class M_VinylContent extends Component {
           title='Disc type'
           controlType='TabImageSet'
         //lock
+          hasLock={true}
           isLocked={this.state.tabsLock}
           setStore={setVinylStore}
           item='lockTabs'
@@ -99,6 +100,7 @@ export default class M_VinylContent extends Component {
           hasTitle={true}
           title='Tint color'
 
+          hasLock={true}
           isLocked={this.state.tintColorLock}
           setStore={setVinylStore}
           item='lockTintColor'
@@ -116,6 +118,7 @@ export default class M_VinylContent extends Component {
           hasTitle={true}
           title='Size'
 
+          hasLock={true}
           isLocked={this.state.sizeLock}
           setStore={setVinylStore}
           item='lockSize'
@@ -133,6 +136,7 @@ export default class M_VinylContent extends Component {
           hasTitle={true}
           title='Opacity'
 
+          hasLock={true}
           isLocked={this.state.opacityLock}
           setStore={setVinylStore}
           item='lockOpacity'

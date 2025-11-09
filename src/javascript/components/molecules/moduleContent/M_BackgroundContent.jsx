@@ -155,6 +155,7 @@ export default class M_BackgroundContent extends Component {
           controlType='ColorPicker'
           hasTitle={false}
 
+          hasLock={true}
           isLocked={this.state.solidColorLock}
           setStore={setBackgroundStore}
           item='lockSolidColor'
@@ -179,6 +180,7 @@ export default class M_BackgroundContent extends Component {
             hasTitle={true}
             title='Colors'
 
+            hasLock={true}
             isLocked={this.state.gradientLock}
             setStore={setBackgroundStore}
             item='lockGradient'
@@ -194,6 +196,7 @@ export default class M_BackgroundContent extends Component {
             hasTitle={true}
             title='Color stops'
 
+            hasLock={true}
             isLocked={this.state.gradientStopQuantityLock}
             setStore={setBackgroundStore}
             item='lockGradientStopQuantity'
@@ -213,6 +216,7 @@ export default class M_BackgroundContent extends Component {
               hasTitle={true}
               title='Type'
 
+              hasLock={true}
               isLocked={this.state.gradientTypeLock}
               setStore={setBackgroundStore}
               item='lockGradientType'
@@ -230,6 +234,7 @@ export default class M_BackgroundContent extends Component {
               hasTitle={true}
               title='Orientation'
 
+              hasLock={true}
               isLocked={this.state.gradientAngleLock}
               setStore={setBackgroundStore}
               item='lockGradientAngle'
@@ -271,6 +276,7 @@ export default class M_BackgroundContent extends Component {
           subControlTitle='Tint color'
           isSubControlLocked={this.state.tintColorLock}
           setStore={setBackgroundStore}
+          hasLock={true}
           itemSubControl='lockTintColor'
           handleToggle={this.handleToggle}
           data={background.preset.Noise.tintColor}

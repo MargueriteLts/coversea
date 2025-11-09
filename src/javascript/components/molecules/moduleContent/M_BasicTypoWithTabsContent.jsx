@@ -7,20 +7,36 @@ import TextArea from '../../TextArea.jsx'
 import M_TextSettingsDropDown from '../M_TextSettingsDropDown.jsx'
 import M_DropDown from '../M_DropDown.jsx'
 import M_AddRemoveText from '../controls/M_AddRemoveText.jsx'
+import M_Control from '../controls/M_Control.jsx'
 
-export default class M_BasicTypoWithTabs extends Component {
+export default class M_BasicTypoWithTabsContent extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
 
-      valueMainText: this.props.basictypowithtabs.preset.Track.mainText.value,
+      trackLayoutStyleLock: this.props.basictypowithtabs.preset.Track.layoutStyleLocked,
 
+      valueMainText: this.props.basictypowithtabs.preset.Track.mainText.value,
       colorMainText: this.props.basictypowithtabs.preset.Track.mainText.color,
 
       valueOtherText: this.props.basictypowithtabs.preset.Track.otherText.value,
-
       colorOtherText: this.props.basictypowithtabs.preset.Track.otherText.color
+    }
+  }
+
+  handleToggle = (item, setStore) => {
+    if (item == 'lockTrackLayoutStyle') {
+      setStore(item, !this.state.trackLayoutStyleLock)
+      this.setState({
+        trackLayoutStyleLock: !this.state.trackLayoutStyleLock
+      })
+    }
+    //console.log(this.state.trackLayoutStyleLock)
+
+    // Trigger p5 redraw
+    if (window.triggerRedraw) {
+      window.triggerRedraw()
     }
   }
 
@@ -30,6 +46,11 @@ export default class M_BasicTypoWithTabs extends Component {
     this.setState({
       valueMainText: inputValue
     });
+
+    // Trigger p5 redraw
+    if (window.triggerRedraw) {
+      window.triggerRedraw()
+    }
   }
 
   handleChangeMainTextColor = (object, value) => {
@@ -40,6 +61,11 @@ export default class M_BasicTypoWithTabs extends Component {
         })
       }
     )
+
+    // Trigger p5 redraw
+    if (window.triggerRedraw) {
+      window.triggerRedraw()
+    }
   }
   
 
@@ -51,6 +77,11 @@ export default class M_BasicTypoWithTabs extends Component {
     this.setState({
       valueOtherText: inputValue
     });
+
+    // Trigger p5 redraw
+    if (window.triggerRedraw) {
+      window.triggerRedraw()
+    }
   }
 
   handleChangeOtherTextColor = (object, value) => {
@@ -61,12 +92,47 @@ export default class M_BasicTypoWithTabs extends Component {
         })
       }
     )
+
+    // Trigger p5 redraw
+    if (window.triggerRedraw) {
+      window.triggerRedraw()
+    }
   }
 
 
   //////////////////////////////////////////////////////// RENDER
-  
+
   renderTabContent() {
+    const { basictypowithtabs, setBasicTypoWithTabsStore, handleDropDownLayoutStyleClick } = this.props
+
+    return (
+      
+      <div className='content-colum-fullWidth'>
+        <div className='content-column'>
+          <M_Control
+            orientation="row"
+            controlType='Select'
+            isFullWidth={true}
+            hasTitle={true}
+            title='Layout style'
+          //lock
+            hasLock={true}
+            isLocked={this.state.layoutStyleLocked}
+            setStore={setBasicTypoWithTabsStore}
+            item='lockTrackLayoutStyle'
+            handleToggle={this.handleToggle}
+          //data
+            options={basictypowithtabs.layoutStyles}
+            data={basictypowithtabs.currentLayoutStyle}
+            handleChange={handleDropDownLayoutStyleClick}
+          />
+        </div>
+        {this.renderTextInputs()}
+      </div>
+    )
+  }
+  
+  renderTextInputs() {
     const { basictypowithtabs, setBasicTypoWithTabsStore } = this.props
 
     ////////////// TRACK
@@ -143,7 +209,7 @@ export default class M_BasicTypoWithTabs extends Component {
   }
 
   render() {
-    const { basictypowithtabs, setBasicTypoWithTabsStore, handleTabClickBasicTypoCoverType } = this.props
+    const { basictypowithtabs, handleTabClickBasicTypoCoverType } = this.props
 
     const nbCoverTypes = basictypowithtabs.coverTypes.length
 

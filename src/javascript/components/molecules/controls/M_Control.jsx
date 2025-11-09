@@ -134,7 +134,7 @@ export default class M_Control extends Component {
   }
 
   render() {
-    const { isLocked, setStore, item, handleToggle, title, orientation, hasTitle, isFullWidth, isHalfWidth } = this.props
+    const { isLocked, setStore, item, handleToggle, title, orientation, hasLock, hasTitle, isFullWidth, isHalfWidth } = this.props
 
     const classNames = classnames({
       'module-control': true,
@@ -146,12 +146,14 @@ export default class M_Control extends Component {
     if (orientation == 'row') {
       // return <div className="M_Control row">
       return <div className={classNames}>
-        <IconToggle
-          isLocked={isLocked}
-          setStore={setStore}
-          item={item}
-          handleToggle={handleToggle}
-        />
+        {hasLock ?
+          <IconToggle
+            isLocked={isLocked}
+            setStore={setStore}
+            item={item}
+            handleToggle={handleToggle}
+          />
+        : null }
         {hasTitle ? 
           <A_Text
             text={title}

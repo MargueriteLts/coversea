@@ -13,13 +13,13 @@ export default class M_TypographyContent extends Component {
 
     this.state = {
 
-      valueMainText: this.props.typography.mainText.value,
+      valueMainText: this.props.typography.preset.Track.mainText.value,
 
-      colorMainText: this.props.typography.mainText.color,
+      colorMainText: this.props.typography.preset.Track.mainText.color,
 
-      valueOtherText: this.props.typography.otherText.value,
+      valueOtherText: this.props.typography.preset.Track.otherText.value,
 
-      colorOtherText: this.props.typography.otherText.color
+      colorOtherText: this.props.typography.preset.Track.otherText.color
     }
   }
 
@@ -66,9 +66,43 @@ export default class M_TypographyContent extends Component {
   //////////////////////////////////////////////////////// RENDER
   
   render() {
-    const { typography, setTypographyStore } = this.props
+    const { typography, setTypographyStore, handleDropDownTextTypeClick } = this.props
 
     return <div className="basic-typo-content">
+
+      <div className='content-row'>
+        <M_Control
+          orientation="row"
+          controlType='Select'
+          isFullWidth={true}
+          hasTitle={true}
+          title='Cover type'
+        //lock
+          hasLock={false}
+        //data
+          options={typography.coverTypes}
+          data={typography.currentCoverType}
+          handleChange={handleDropDownTextTypeClick}
+        />
+
+        <M_Control
+          orientation="row"
+          controlType='Select'
+          isFullWidth={true}
+          hasTitle={true}
+          title='text layout'
+        //lock
+          hasLock={true}
+          isLocked={this.state.textLayoutLock}
+          setStore={setTypographyStore}
+          item='lockTextLayout'
+          handleToggle={this.handleToggle}
+        //data
+          options={typography.coverTypes}
+          data={typography.currentCoverType}
+          handleChange={handleDropDownTextTypeClick}
+        />
+      </div>
 
       <div className="basic-typo-row">
         <A_Text
@@ -88,7 +122,7 @@ export default class M_TypographyContent extends Component {
           title='Text settings'
           textType='main'
           setStore={setTypographyStore}
-          textData={typography.mainText}
+          textData={typography.preset.Track.mainText}
           object='colorMainText'
           itemLockColor='mainLockColor'
           itemLockType='mainLockType'
@@ -107,7 +141,7 @@ export default class M_TypographyContent extends Component {
           />
           <M_AddRemoveText
             // text={typography.otherText.value}
-            text={typography.otherText.values}
+            text={typography.preset.Track.otherText.values}
             setStore={setTypographyStore}
           />
 
@@ -116,7 +150,7 @@ export default class M_TypographyContent extends Component {
             title='Text settings'
             textType='other'
             setStore={setTypographyStore}
-            textData={typography.otherText}
+            textData={typography.preset.Track.otherText}
             object='colorOtherText'
             itemLockColor='otherLockColor'
             itemLockType='otherLockType'

@@ -171,6 +171,13 @@ window.handleUploadedImage = function(file) {
   });
 };
 
+// CLAUDE Add this near the top of sketch.js with other window functions
+window.triggerRedraw = function() {
+  if (cover) {
+    cover.redraw()
+  }
+}
+
 function setLight(r1, r2, g1, g2, b1, b2) {
   graphics.directionalLight(r1, g1, b1, 100, 0, 0)
   graphics.directionalLight(r2, g2, b2, -100, 0, 0)
@@ -1558,11 +1565,11 @@ function drawModules(p) {
     ////////////////////////////  OTHER TEXT
     if (typography.dopText == true) {
       p.textFont(typography.fontOtherText)
-      p.fill(typography.otherText.color)
-      let otherTexts = typography.otherText.values
+      p.fill(typography.preset.Track.otherText.color)
+      let otherTexts = typography.preset.Track.otherText.values
       
-      let presetSizeOtherText = typography.otherText.size.sliderValue
-      let presetLeadingOtherText = typography.otherText.leading.sliderValue
+      let presetSizeOtherText = typography.preset.Track.otherText.size.sliderValue
+      let presetLeadingOtherText = typography.preset.Track.otherText.leading.sliderValue
 
       let otherTextSize = (presetSizeOtherText * canvasSize) / 100
       let otherTextLeading = (presetLeadingOtherText * canvasSize) / 100
@@ -1632,20 +1639,20 @@ function drawModules(p) {
     }
 
     //MAIN TEXT
-    p.fill(typography.mainText.color)
+    p.fill(typography.preset.Track.mainText.color)
     //console.log(typography.fontMainText);
     //pinyonScript
     p.textFont(typography.fontMainText)
     p.textAlign(p.CENTER, p.CENTER)
 
     if (typography.upperCase == true) {
-      mainText = typography.mainText.value.toUpperCase()
+      mainText = typography.preset.Track.mainText.value.toUpperCase()
     } else {
-      mainText = typography.mainText.value
+      mainText = typography.preset.Track.mainText.value
     }
 
-    let presetSizeMainText = typography.mainText.size.sliderValue
-    let presetLeadingMainText = typography.mainText.leading.sliderValue
+    let presetSizeMainText = typography.preset.Track.mainText.size.sliderValue
+    let presetLeadingMainText = typography.preset.Track.mainText.leading.sliderValue
     let MainTextSize = (presetSizeMainText * canvasSize) / 100
     let MainTextLeading = (presetLeadingMainText * canvasSize) / 100
     p.textSize(MainTextSize)
@@ -1689,7 +1696,7 @@ function drawModules(p) {
       p.textLeading(otherTextLeading)
 
 
-      let positions = basicTypoWithTabs.preset.Track.textPositions
+      let positions = basicTypoWithTabs.preset.Track.textPositions.simple
       
       // 
       const offset = canvasSize * 0.1 / 2
@@ -1749,12 +1756,10 @@ function drawModules(p) {
 
     }
 
-    //MAIN TEXT
+    ////////////////////////////  MAIN TEXT
     p.fill(basicTypoWithTabs.preset.Track.mainText.color)
-    //console.log(basicTypoWithTabs.fontMainText);
-    //pinyonScript
     p.textFont(basicTypoWithTabs.preset.Track.fontMainText)
-    p.textAlign(p.CENTER, p.CENTER)
+    //p.textAlign(p.CENTER, p.CENTER)
 
     if (basicTypoWithTabs.preset.Track.upperCase == true) {
       mainText = basicTypoWithTabs.preset.Track.mainText.value.toUpperCase()
@@ -1768,12 +1773,30 @@ function drawModules(p) {
     let MainTextLeading = (presetLeadingMainText * canvasSize) / 100
     p.textSize(MainTextSize)
     p.textLeading(MainTextLeading)
-    p.rectMode(p.CENTER)
+    //p.rectMode(p.CENTER)
 
-    let xmain = canvasSize / 2;
-    let ymain = canvasSize / 2;
+    //// LAYOUT STYLES
+    let xmain
+    let ymain
 
-    p.text(mainText, xmain, ymain, canvasSize, canvasSize)
+    if (basicTypoWithTabs.currentLayoutStyle == 'Simple') {
+      p.textAlign(p.CENTER, p.CENTER)
+      p.rectMode(p.CENTER)
+      xmain = canvasSize / 2;
+      ymain = canvasSize / 2;
+      p.text(mainText, xmain, ymain, canvasSize, canvasSize)
+    }
+    if (basicTypoWithTabs.currentLayoutStyle == 'Random') {
+      p.textAlign(p.LEFT, p.TOP)
+      p.rectMode(p.CORNER)
+      //p.textBounds(mainText, )
+      xmain = basicTypoWithTabs.preset.Track.textPositions.random[0].x
+      ymain = basicTypoWithTabs.preset.Track.textPositions.random[0].y
+      //console.log(xmain, ymain)
+      p.text(mainText, xmain, ymain)
+    }
+
+
 
 
     p.drawingContext.shadowBlur = 0
@@ -2056,6 +2079,13 @@ function sketch(p) {
     if (blend) {
       blendedLayer = p.createGraphics(canvasSize, canvasSize)
     }
+
+    // CLAUDE //
+    // Add this at the end of setup
+    p.noLoop() // STOP continuous drawing
+    
+    // Draw the initial frame
+    p.redraw()
   }
   
   p.windowResized = () => {
@@ -2087,7 +2117,8 @@ function sketch(p) {
     // Check for any pending image at the start of each frame
     checkPendingImage();
 
-    drawModules(p)
+    // CLAUDE dit de suppr ca et le mettre dans if
+    //drawModules(p)
     
     const blend = getBlendStore()
     if (blend.difference == true) {

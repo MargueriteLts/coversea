@@ -70,6 +70,7 @@ export default class M_LinesContent extends Component {
           hasTitle={true}
           title='Type'
         //lock
+          hasLock={true}
           isLocked={this.state.typeLock}
           setStore={setLinesStore}
           item='lockType'
@@ -86,6 +87,7 @@ export default class M_LinesContent extends Component {
           hasTitle={true}
           title='Quantity'
         //lock
+          hasLock={true}
           isLocked={this.state.quantityLock}
           setStore={setLinesStore}
           item='lockQuantity'
@@ -103,6 +105,7 @@ export default class M_LinesContent extends Component {
           controlType='ColorPicker'
           title='Lines color'
         //lock
+          hasLock={true}
           isLocked={this.state.solidColorLock}
           setStore={setLinesStore}
           item='lockColor'
@@ -120,6 +123,7 @@ export default class M_LinesContent extends Component {
           hasTitle={true}
           title='Thickness'
         //lock
+          hasLock={true}
           isLocked={this.state.weightLock}
           setStore={setLinesStore}
           item='lockWeight'

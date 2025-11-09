@@ -1,6 +1,6 @@
-//const modules = ['Background', 'Vinyl', 'Lines', 'BasicTypoWithTabs', 'UploadImage']
+const modules = ['Background', 'Vinyl', 'Lines', 'BasicTypoWithTabs', 'UploadImage']
 //const modules = ['Background', 'Vinyl', 'Lines', 'BasicTypo', 'UploadImage']
-const modules = ['Background', 'Vinyl', 'Lines', 'Typography', 'UploadImage']
+//const modules = ['Background', 'Vinyl', 'Lines', 'Typography', 'UploadImage']
 
 const preset = {
   
@@ -86,9 +86,72 @@ const preset = {
 
   
 
-  //BasicTypoWithTabs: {
+  BasicTypoWithTabs: {
+    coverTypes: ['Track', 'VA', 'Podcast', 'Vinyl'],
+    currentCoverType: 'Track',
+    layoutStyles: ['Simple', 'Random', 'Framed'],
+    currentLayoutStyle: 'Simple',
+
+    preset: {
+      Track: {
+        dopText: true,
+
+        upperCase: true,
+        textAlign: 'left',
+
+        mainText: {
+          value: 'Track title',
+          color: '#ffffff',
+          colorLocked: false,
+          typeLocked: false,
+          sizeLocked: false,
+          leadingLocked: false,
+          fontOptions: ['Sans Serif', 'Script'],
+          currentFont: 'Script',
+          size:{
+            sliderValue: 10,
+            min: 5,
+            max: 20
+          },
+          leading: {
+            sliderValue: 8,
+            min: 1,
+            max: 20
+          }
+        },
+
+        otherText: {
+          values: ['Artist/Label'],
+          color: '#ffffff',
+          colorLocked: false,
+          typeLocked: false,
+          sizeLocked: false,
+          leadingLocked: false,
+          fontOptions: ['Sans Serif', 'Script'],
+          currentFont: 'Sans Serif',
+          size:{
+            sliderValue: 2,
+            min: 1,
+            max: 6
+          },
+          leading: {
+            sliderValue: 2,
+            min: 1,
+            max: 10
+          }
+        }
+      },
+      VA: {},
+      Podcast: {},
+      Vinyl: {}
+    }
+  },
+
+  //Typography: {
   //  coverTypes: ['Track', 'VA', 'Podcast', 'Vinyl'],
-  //  currentCoverType: 'Track',
+  //  currentcoverType: 'Track',
+  //  textLayouts: [],
+  //  currentTextLayout: '',
 
   //  preset: {
   //    Track: {
@@ -137,71 +200,19 @@ const preset = {
   //          min: 1,
   //          max: 10
   //        }
+  //        //spacing: {
+  //        //  sliderValue: 2,
+  //        //  min: 1,
+  //        //  max: 10
+  //        //}
   //      }
-  //    },
-  //    VA: {},
-  //    Podcast: {},
-  //    Vinyl: {}
+  //    }
   //  }
-  //},
-
-  Typography: {
-    dopText: true,
-
-    upperCase: true,
-    textAlign: 'left',
-
-    mainText: {
-      value: 'Track title',
-      color: '#ffffff',
-      colorLocked: false,
-      typeLocked: false,
-      sizeLocked: false,
-      leadingLocked: false,
-      fontOptions: ['Sans Serif', 'Script'],
-      currentFont: 'Script',
-      size:{
-        sliderValue: 10,
-        min: 5,
-        max: 20
-      },
-      leading: {
-        sliderValue: 8,
-        min: 1,
-        max: 20
-      }
-    },
-
-    otherText: {
-      values: ['Artist/Label'],
-      color: '#ffffff',
-      colorLocked: false,
-      typeLocked: false,
-      sizeLocked: false,
-      leadingLocked: false,
-      fontOptions: ['Sans Serif', 'Script'],
-      currentFont: 'Sans Serif',
-      size:{
-        sliderValue: 2,
-        min: 1,
-        max: 6
-      },
-      leading: {
-        sliderValue: 2,
-        min: 1,
-        max: 10
-      }
-      //spacing: {
-      //  sliderValue: 2,
-      //  min: 1,
-      //  max: 10
-      //}
-    }
    
-    // styles: ['NORMAL', 'LIGHT', 'BOLD'],
-    // styleMainText: 'NORMAL',
+  //  // styles: ['NORMAL', 'LIGHT', 'BOLD'],
+  //  // styleMainText: 'NORMAL',
 
-  },
+  //},
   
   //BasicTypo: {
   //  dopText: true,

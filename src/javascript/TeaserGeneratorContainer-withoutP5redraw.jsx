@@ -68,32 +68,17 @@ export default class GeneratorContainer extends Component {
   handleTabClickBackground = (type) => {
     this.props.setBackgroundStore('CurrentTabChange', type)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
    handleChangeBackgroundGradientType = (type) => {
      this.props.setBackgroundStore('CurrentGradientType', type)
      this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // SolidColor -OK
   handleChangeBackgroundSolidColor = (object, value) => {
     this.props.setBackgroundStore(object, value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // Gradient
@@ -101,61 +86,31 @@ export default class GeneratorContainer extends Component {
   handleBackgroundRandomizeGradient = () => {
     this.props.setBackgroundStore('Gradient')
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
   // -OK
   handleChangeBackgroundGradientColor = (object, value) => {
     this.props.setBackgroundStore(object, value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
   // -OK (no state update here)
   handleChangeBackgroundGradientAngle = () => {
     this.props.setBackgroundStore('AngleGradient')
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   handleChangeBackgroundGradientStopQuantity = (e) => {
     this.props.setBackgroundStore('stopQuantity', e.target.value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // Noise -OK
    handleTabClickNoise = (type) => {
     this.props.setBackgroundStore('currentTabImageChange', type)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   handleChangeNoiseTintColor = (object, value) => {
     this.props.setBackgroundStore(object, value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // PHOTO
@@ -168,11 +123,6 @@ export default class GeneratorContainer extends Component {
           this.setState({});
         });
     }
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
 ////////////////////////////////////// MODULE UPLOADIMAGE
@@ -181,22 +131,12 @@ export default class GeneratorContainer extends Component {
   handleUploadImageSize = (e) => {
     this.props.setUploadImageStore('size', e.target.value);
     this.setState({});
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // Handle image opacity
   handleUploadImageOpacity = (e) => {
     this.props.setUploadImageStore('opacity', e.target.value);
     this.setState({});
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // Handle file upload
@@ -207,11 +147,6 @@ export default class GeneratorContainer extends Component {
         .then(() => {
           this.setState({});
         });
-    }
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
     }
   }
 
@@ -226,22 +161,12 @@ export default class GeneratorContainer extends Component {
   handleTabClickBackgroundImage = (type) => {
     this.props.setBackgroundImageStore('CurrentTabChange', type)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // Opacity -OK
   handleBackgroundImageOpacity = (e) => {
     this.props.setBackgroundImageStore('opacity', e.target.value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
 ////////////////////////////////////// MODULE IMAGES (OBJECTS)
@@ -250,11 +175,6 @@ export default class GeneratorContainer extends Component {
   handleTabClickObjects = (type) => {
     this.props.setImageStore('CurrentTabChange', type)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
 ////////////////////////////////////// MODULE LINES
@@ -263,21 +183,11 @@ export default class GeneratorContainer extends Component {
   handleLinesColor = (object, value) => {
     this.props.setLinesStore(object, value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
   // Stroke -OK
   handleLinesSize = (e) => {
     this.props.setLinesStore('strokeWeight', e.target.value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   handleLinesQuantity = (e) => {
@@ -286,21 +196,11 @@ export default class GeneratorContainer extends Component {
     //   .then(() => {
     //   }
     // )
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   handleDropDownLinesTypeClick = (type) => {
     this.props.setLinesStore('CurrentTypeChange', type)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
 ////////////////////////////////////// MODULE 3D
@@ -309,11 +209,6 @@ export default class GeneratorContainer extends Component {
   handleDropDownClickModule3D = (type) => {
     this.props.set3DStore('CurrentTabChange', type)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   ////////////////////////////////////// MODULE PARTICLES
@@ -322,33 +217,18 @@ export default class GeneratorContainer extends Component {
   handleDropDownClickParticles = (type) => {
     this.props.setParticlesStore('CurrentTabChange', type)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // Quantity -OK
   handleParticlesQuantity = (e) => {
     this.props.setParticlesStore('quantity', e.target.value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // Color -OK
   handleParticlesColor = (object, value) => {
     this.props.setParticlesStore(object, value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   ////////////////////////////////////// MODULE SHAPES
@@ -357,33 +237,18 @@ export default class GeneratorContainer extends Component {
   handleDropDownClickShapes = (type) => {
     this.props.setShapesStore('CurrentTabChange', type)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // Size -OK
   handleShapesSize = (e) => {
     this.props.setShapesStore('Size', e.target.value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // Color -OK
   handleShapesColor = (object, value) => {
     this.props.setShapesStore(object, value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   ////////////////////////////////////// MODULE VINYL
@@ -392,43 +257,23 @@ export default class GeneratorContainer extends Component {
   handleTabClickVinyl = (type) => {
     this.props.setVinylStore('CurrentTabChange', type)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // Size -OK
   handleVinylSize = (e) => {
     this.props.setVinylStore('size', e.target.value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // Opacity -OK
   handleVinylOpacity = (e) => {
     this.props.setVinylStore('opacity', e.target.value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   handleChangeVinylTintColor = (object, value) => {
     this.props.setVinylStore(object, value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   ////////////////////////////////////// MODULE BASICTYPOWITHTABS
@@ -436,21 +281,11 @@ export default class GeneratorContainer extends Component {
   handleTabClickBasicTypoCoverType = (type) => {
     this.props.setBasicTypoWithTabsStore('CurrentCoverTypeChange', type)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   handleDropDownLayoutStyleClick = (type) => {
     this.props.setBasicTypoWithTabsStore('CurrentLayoutStyleChange', type)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   ////////////////////////////////////// MODULE TYPOGRAPHY
@@ -458,11 +293,6 @@ export default class GeneratorContainer extends Component {
   handleDropDownCoverTypeClick = (type) => {
     this.props.setTypographyStore('CurrentCoverTypeChange', type)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   ////////////////////////////////////// MODULE OVERLAY
@@ -471,22 +301,12 @@ export default class GeneratorContainer extends Component {
   handleTabClickOverlay = (type) => {
     this.props.setOverlayStore('CurrentTabChange', type)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   // Opacity -OK
   handleOverlayOpacity = (e) => {
     this.props.setOverlayStore('opacity', e.target.value)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
 
@@ -504,11 +324,6 @@ export default class GeneratorContainer extends Component {
     //}
     this.props.randomizeModuleStore(moduleName)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
   /////////////////////////// GENERATE COVER ///////////////////////////
@@ -522,11 +337,6 @@ export default class GeneratorContainer extends Component {
 
     this.props.generateAllStore(generatorName, this.props.moduleList)
     this.setState({})
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
   }
 
 /////////////////////////// DOWNLOAD COVER ///////////////////////////

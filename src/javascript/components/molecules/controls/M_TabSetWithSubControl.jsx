@@ -71,6 +71,7 @@ export default class M_ControlWithSubControl extends Component {
           hasTitle={hasTitle}
           title={subControlTitle}
 
+          hasLock={true}
           isLocked={isSubControlLocked}
           setStore={setStore}
           item={itemSubControl}

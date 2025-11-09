@@ -148,13 +148,17 @@ export default class M_TextSettings extends Component {
  handleTextDropDownClick = (type) => {
   if (this.props.textType == 'main') {
     this.props.setStore('CurrentMainFontChange', type)
-    console.log('M_TextSettings', type)
   }
   if (this.props.textType == 'other') {
     this.props.setStore('CurrentOtherFontChange', type)
   }
 
     this.setState({currentFont: type})
+
+    // Trigger p5 redraw
+    if (window.triggerRedraw) {
+      window.triggerRedraw()
+    }
   }
 
   handleSizeText = (e) => {
@@ -166,6 +170,11 @@ export default class M_TextSettings extends Component {
     }
 
     this.setState({size: e.target.value})
+
+    // Trigger p5 redraw
+    if (window.triggerRedraw) {
+      window.triggerRedraw()
+    }
   }
 
   handleLeadingText = (e) => {
@@ -177,6 +186,11 @@ export default class M_TextSettings extends Component {
     }
 
     this.setState({leading: e.target.value})
+
+    // Trigger p5 redraw
+    if (window.triggerRedraw) {
+      window.triggerRedraw()
+    }
   }
 
 

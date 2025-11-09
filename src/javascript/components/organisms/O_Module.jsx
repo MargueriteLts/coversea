@@ -62,9 +62,11 @@ export default class O_Module extends Component {
       setBasicTypoStore,
       typography,
       setTypographyStore,
+      handleDropDownTextTypeClick,
       basictypowithtabs,
       setBasicTypoWithTabsStore,
       handleTabClickBasicTypoCoverType,
+      handleDropDownLayoutStyleClick,
       particles,
       setParticlesStore,
       handleDropDownClickParticles,
@@ -166,6 +168,7 @@ export default class O_Module extends Component {
         <M_TypographyContent
           typography={typography}
           setTypographyStore={setTypographyStore}
+          handleDropDownTextTypeClick={handleDropDownTextTypeClick}
         />
       )
     }
@@ -175,6 +178,7 @@ export default class O_Module extends Component {
           basictypowithtabs={basictypowithtabs}
           setBasicTypoWithTabsStore={setBasicTypoWithTabsStore}
           handleTabClickBasicTypoCoverType={handleTabClickBasicTypoCoverType}
+          handleDropDownLayoutStyleClick={handleDropDownLayoutStyleClick}
         />
       )
     }
