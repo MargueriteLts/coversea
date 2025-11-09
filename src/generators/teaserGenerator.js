@@ -89,11 +89,13 @@ const preset = {
   BasicTypoWithTabs: {
     coverTypes: ['Track', 'VA', 'Podcast', 'Vinyl'],
     currentCoverType: 'Track',
-    layoutStyles: ['Simple', 'Random', 'Framed'],
-    currentLayoutStyle: 'Simple',
+    //layoutStyles: ['Simple', 'Random', 'Framed'],
+    //currentLayoutStyle: 'Simple',
 
     preset: {
       Track: {
+        layoutStyles: ['Simple', 'Random'],
+        currentLayoutStyle: 'Simple',
         dopText: true,
 
         upperCase: true,

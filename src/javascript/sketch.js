@@ -1696,62 +1696,160 @@ function drawModules(p) {
       p.textLeading(otherTextLeading)
 
 
-      let positions = basicTypoWithTabs.preset.Track.textPositions.simple
-      
-      // 
-      const offset = canvasSize * 0.1 / 2
-      const textZone = canvasSize - offset * 2
-      const maxWidth = textZone / 3;
-      const center = (canvasSize - maxWidth) / 2
-      const right = canvasSize - maxWidth - offset
-      const bottom = canvasSize - offset
-      //
+      //let positions = basicTypoWithTabs.preset.Track.textPositions.simple
+      //console.log(positions)
 
-      p.rectMode(p.CORNER)
+      // Get positions based on current layout style
+      //let positions
+      let currentLayoutStyle = basicTypoWithTabs.preset.Track.currentLayoutStyle
 
-      let currentText
-      
-      for (let i = 0; i < otherTexts.length; i++) {
+      if (currentLayoutStyle == 'Simple') {
+        //positions = basicTypoWithTabs.preset.Track.textPositions.simple
+        let positions = basicTypoWithTabs.preset.Track.textPositions.simple
 
-        if (basicTypoWithTabs.preset.Track.upperCase == true) {
-          currentText = otherTexts[i].toUpperCase()
-        } else {
-          currentText = otherTexts[i];
+        // 
+        const offset = canvasSize * 0.1 / 2
+        const textZone = canvasSize - offset * 2
+        const maxWidth = textZone / 3;
+        const center = (canvasSize - maxWidth) / 2
+        const right = canvasSize - maxWidth - offset
+        const bottom = canvasSize - offset
+        //
+
+        p.rectMode(p.CORNER)
+
+        let currentText
+        
+        for (let i = 0; i < otherTexts.length; i++) {
+
+          if (basicTypoWithTabs.preset.Track.upperCase == true) {
+            currentText = otherTexts[i].toUpperCase()
+          } else {
+            currentText = otherTexts[i];
+          }
+
+          const positionTxt = positions[i]
+
+
+          if (positionTxt[0] == 'left' && positionTxt[1] == 'top') {
+            p.textAlign(p.LEFT, p.TOP);
+            p.text(currentText, offset, offset, maxWidth);
+          }
+
+          if (positionTxt[0] == 'center' && positionTxt[1] == 'top') {
+            p.textAlign(p.CENTER, p.TOP);
+            p.text(currentText, center, offset, maxWidth);
+          }
+
+          if (positionTxt[0] == 'right' && positionTxt[1] == 'top') {
+            p.textAlign(p.RIGHT, p.TOP);
+            p.text(currentText, right, offset, maxWidth);
+          }
+
+          if (positionTxt[0] == 'left' && positionTxt[1] == 'bottom') {
+            p.textAlign(p.LEFT, p.BOTTOM);
+            p.text(currentText, offset, bottom, maxWidth);
+          }
+
+          if (positionTxt[0] == 'center' && positionTxt[1] == 'bottom') {
+            p.textAlign(p.CENTER, p.BOTTOM);
+            p.text(currentText, center, bottom, maxWidth);
+          }
+
+          if (positionTxt[0] == 'right' && positionTxt[1] == 'bottom') {
+            p.textAlign(p.RIGHT, p.BOTTOM);
+            p.text(currentText, right, bottom, maxWidth);
+          }
         }
 
-        const positionTxt = positions[i]
 
+      } else if (currentLayoutStyle == 'Random') {
+        // For random layout, we still use simple positions for other texts
+        // Only main text gets the random position
+        //positions = basicTypoWithTabs.preset.Track.textPositions.random
+        // Use random positions for Random layout
+        // Position 0 is for main text, positions 1+ are for other texts
+        let randomPositions = basicTypoWithTabs.preset.Track.textPositions.random
+        
+        p.textAlign(p.LEFT, p.TOP)
+        p.rectMode(p.CORNER)
 
-        if (positionTxt[0] == 'left' && positionTxt[1] == 'top') {
-          p.textAlign(p.LEFT, p.TOP);
-          p.text(currentText, offset, offset, maxWidth);
-        }
+        let currentText
 
-        if (positionTxt[0] == 'center' && positionTxt[1] == 'top') {
-          p.textAlign(p.CENTER, p.TOP);
-          p.text(currentText, center, offset, maxWidth);
-        }
+        for (let i = 0; i < otherTexts.length; i++) {
+          if (basicTypoWithTabs.preset.Track.upperCase == true) {
+            currentText = otherTexts[i].toUpperCase()
+          } else {
+            currentText = otherTexts[i];
+          }
 
-        if (positionTxt[0] == 'right' && positionTxt[1] == 'top') {
-          p.textAlign(p.RIGHT, p.TOP);
-          p.text(currentText, right, offset, maxWidth);
-        }
-
-        if (positionTxt[0] == 'left' && positionTxt[1] == 'bottom') {
-          p.textAlign(p.LEFT, p.BOTTOM);
-          p.text(currentText, offset, bottom, maxWidth);
-        }
-
-        if (positionTxt[0] == 'center' && positionTxt[1] == 'bottom') {
-          p.textAlign(p.CENTER, p.BOTTOM);
-          p.text(currentText, center, bottom, maxWidth);
-        }
-
-        if (positionTxt[0] == 'right' && positionTxt[1] == 'bottom') {
-          p.textAlign(p.RIGHT, p.BOTTOM);
-          p.text(currentText, right, bottom, maxWidth);
+          // Get position from random array (offset by 1 because position 0 is for main text)
+          const randomPos = randomPositions[i + 1]
+          
+          if (randomPos) {
+            // Convert percentage to canvas pixels
+            const xOther = (randomPos.x * canvasSize) / 100
+            const yOther = (randomPos.y * canvasSize) / 100
+            
+            p.text(currentText, xOther, yOther)
+          }
         }
       }
+      
+      //// 
+      //const offset = canvasSize * 0.1 / 2
+      //const textZone = canvasSize - offset * 2
+      //const maxWidth = textZone / 3;
+      //const center = (canvasSize - maxWidth) / 2
+      //const right = canvasSize - maxWidth - offset
+      //const bottom = canvasSize - offset
+      ////
+
+      //p.rectMode(p.CORNER)
+
+      //let currentText
+      
+      //for (let i = 0; i < otherTexts.length; i++) {
+
+      //  if (basicTypoWithTabs.preset.Track.upperCase == true) {
+      //    currentText = otherTexts[i].toUpperCase()
+      //  } else {
+      //    currentText = otherTexts[i];
+      //  }
+
+      //  const positionTxt = positions[i]
+
+
+      //  if (positionTxt[0] == 'left' && positionTxt[1] == 'top') {
+      //    p.textAlign(p.LEFT, p.TOP);
+      //    p.text(currentText, offset, offset, maxWidth);
+      //  }
+
+      //  if (positionTxt[0] == 'center' && positionTxt[1] == 'top') {
+      //    p.textAlign(p.CENTER, p.TOP);
+      //    p.text(currentText, center, offset, maxWidth);
+      //  }
+
+      //  if (positionTxt[0] == 'right' && positionTxt[1] == 'top') {
+      //    p.textAlign(p.RIGHT, p.TOP);
+      //    p.text(currentText, right, offset, maxWidth);
+      //  }
+
+      //  if (positionTxt[0] == 'left' && positionTxt[1] == 'bottom') {
+      //    p.textAlign(p.LEFT, p.BOTTOM);
+      //    p.text(currentText, offset, bottom, maxWidth);
+      //  }
+
+      //  if (positionTxt[0] == 'center' && positionTxt[1] == 'bottom') {
+      //    p.textAlign(p.CENTER, p.BOTTOM);
+      //    p.text(currentText, center, bottom, maxWidth);
+      //  }
+
+      //  if (positionTxt[0] == 'right' && positionTxt[1] == 'bottom') {
+      //    p.textAlign(p.RIGHT, p.BOTTOM);
+      //    p.text(currentText, right, bottom, maxWidth);
+      //  }
+      //}
   
 
     }
@@ -1779,19 +1877,29 @@ function drawModules(p) {
     let xmain
     let ymain
 
-    if (basicTypoWithTabs.currentLayoutStyle == 'Simple') {
+    let currentTab
+    if (basicTypoWithTabs.currentCoverType == 'Track') {
+      currentTab = basicTypoWithTabs.preset.Track
+    } else if (basicTypoWithTabs.currentCoverType == 'VA') {
+      currentTab = basicTypoWithTabs.preset.VA
+    }
+
+    if (currentTab.currentLayoutStyle == 'Simple') {
       p.textAlign(p.CENTER, p.CENTER)
       p.rectMode(p.CENTER)
       xmain = canvasSize / 2;
       ymain = canvasSize / 2;
       p.text(mainText, xmain, ymain, canvasSize, canvasSize)
     }
-    if (basicTypoWithTabs.currentLayoutStyle == 'Random') {
+    if (currentTab.currentLayoutStyle == 'Random') {
       p.textAlign(p.LEFT, p.TOP)
       p.rectMode(p.CORNER)
       //p.textBounds(mainText, )
-      xmain = basicTypoWithTabs.preset.Track.textPositions.random[0].x
-      ymain = basicTypoWithTabs.preset.Track.textPositions.random[0].y
+      //xmain = basicTypoWithTabs.preset.Track.textPositions.random[0].x
+      //ymain = basicTypoWithTabs.preset.Track.textPositions.random[0].y
+      // Convert percentage to canvas pixels
+      xmain = (basicTypoWithTabs.preset.Track.textPositions.random[0].x * canvasSize) / 100
+      ymain = (basicTypoWithTabs.preset.Track.textPositions.random[0].y * canvasSize) / 100
       //console.log(xmain, ymain)
       p.text(mainText, xmain, ymain)
     }

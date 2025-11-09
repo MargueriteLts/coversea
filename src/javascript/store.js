@@ -443,7 +443,7 @@ function setBackgroundImageStore(type, value) {
 ////////////////////// UPLOAD IMAGES
 
 function initUploadImageStore(preset) {
-  preset = Object.assign({}, preset, { moduleName: 'Logo/Sticker', uploadedImage: null, sizeLock: false, opacityLock: false, positionLock: false });
+  preset = Object.assign({}, preset, { moduleName: 'Upload logo/Sticker', uploadedImage: null, sizeLock: false, opacityLock: false, positionLock: false });
   return preset;
 }
 
@@ -1126,13 +1126,25 @@ function generatePositions() {
   return shuffleArray(positions)
 }
 
-function generatePositionsRandom() {
+//function generatePositionsRandom() {
+//  const positions = []
+
+//  let x = parseInt(getRandomArbitrary(0, 100))
+//  let y = parseInt(getRandomArbitrary(0, 100))
+
+//  positions.push({x:x, y:y});
+
+//  return positions
+//}
+
+function generatePositionsRandom(count = 1) {
   const positions = []
 
-  let x = parseInt(getRandomArbitrary(0, 100))
-  let y = parseInt(getRandomArbitrary(0, 100))
-
-  positions.push({x:x, y:y});
+  for (let i = 0; i < count; i++) {
+    let x = parseInt(getRandomArbitrary(0, 100))
+    let y = parseInt(getRandomArbitrary(0, 100))
+    positions.push({x: x, y: y})
+  }
 
   return positions
 }
@@ -1274,6 +1286,7 @@ function setBasicTypoStore(type, nextValue) {
     if (type === 'Positions') {
       let positions = generatePositions()
       moduleBasicTypoStore.textPositions = positions
+      console.log('WTF')
     }
 
 
@@ -1442,8 +1455,8 @@ function setTypographyStore(type, nextValue) {
 
 function initBasicTypoWithTabsStore(basictypowithtabs) {
 
-  let positions = generatePositions()
-  let random = generatePositionsRandom()
+  //let simplePositions = generatePositions()
+  //let randomPositions = generatePositionsRandom()
 
 
   basictypowithtabs = Object.assign({}, basictypowithtabs, {
@@ -1455,13 +1468,21 @@ function initBasicTypoWithTabsStore(basictypowithtabs) {
 
   basictypowithtabs.coverTypes.forEach((coverType) => {
     if (coverType == 'Track') {
-      basictypowithtabs.preset.Track = Object.assign({}, basictypowithtabs.preset.Track, { text: 'Track/Set/Song',
+      // Generate separate positions for each layout style
+      let simplePositions = generatePositions()  // Returns array like [['left', 'top'], ...]
+      
+      // Generate random positions for main text + other texts
+      // Count: 1 for main text + length of otherText.values array
+      const otherTextCount = basictypowithtabs.preset.Track.otherText.values.length
+      let randomPositions = generatePositionsRandom(1 + otherTextCount)  // e.g., 2 positions total
+
+      basictypowithtabs.preset.Track = Object.assign({}, basictypowithtabs.preset.Track, {
+      text: 'Track/Set/Song/Playlist',
       layoutStyleLocked: false,
-      textPositions: {simple: positions, random},
+      textPositions: {simple: simplePositions, random: randomPositions},
       fontMainText: setfont(basictypowithtabs.preset.Track.mainText.currentFont),
       fontOtherText: setfont(basictypowithtabs.preset.Track.otherText.currentFont)
       })
-      console.log(basictypowithtabs.preset.Track.layoutStyleLocked)
     }
 
     if (coverType == 'VA') {
@@ -1494,8 +1515,7 @@ function setBasicTypoWithTabsStore(type, nextValue) {
       resolve([nextValue])
     }
     if (type === 'CurrentLayoutStyleChange') {
-      console.log('STORE')
-      moduleBasicTypoWithTabsStore.currentLayoutStyle = nextValue
+      moduleBasicTypoWithTabsStore.preset.Track.currentLayoutStyle = nextValue
       resolve([nextValue])
     }
     if (type === 'CurrentMainFontChange') {
@@ -1565,9 +1585,25 @@ function setBasicTypoWithTabsStore(type, nextValue) {
       moduleBasicTypoWithTabsStore.preset.Track.otherText.color = nextValue
       resolve([nextValue])
     }
-    if (type === 'Positions') {
-      let positions = generatePositions()
-      moduleBasicTypoWithTabsStore.preset.Track.textPositions = positions
+    //if (type === 'Positions') {
+    //  let positions = generatePositions()
+    //  moduleBasicTypoWithTabsStore.preset.Track.textPositions = positions
+    //}
+    if (type === 'TrackLayoutStyle') {
+      if (moduleBasicTypoWithTabsStore.preset.Track.currentLayoutStyle == 'Simple') {
+        console.log('simple BEFORE', moduleBasicTypoWithTabsStore.preset.Track.textPositions.simple)
+        moduleBasicTypoWithTabsStore.preset.Track.textPositions.simple = generatePositions()
+        console.log('simple AFTER', moduleBasicTypoWithTabsStore.preset.Track.textPositions.simple)
+      }
+      if (moduleBasicTypoWithTabsStore.preset.Track.currentLayoutStyle == 'Random') {
+        console.log('random BEFORE', moduleBasicTypoWithTabsStore.preset.Track.textPositions.random)
+        
+        // Generate random positions for main text + all other texts
+        const otherTextCount = moduleBasicTypoWithTabsStore.preset.Track.otherText.values.length
+        moduleBasicTypoWithTabsStore.preset.Track.textPositions.random = generatePositionsRandom(1 + otherTextCount)
+        
+        console.log('random AFTER', moduleBasicTypoWithTabsStore.preset.Track.textPositions.random)
+      }
     }
 
 
@@ -1857,7 +1893,15 @@ function generateAllStore(generatorName, moduleList) {
       }
 
       if (moduleName == 'BasicTypoWithTabs') {
-        setBasicTypoWithTabsStore('Positions')
+        //setBasicTypoWithTabsStore('Positions')
+
+        //if (moduleBasicTypoWithTabsStore.preset.Track.currentLayoutStyle == 'Simple') {
+        //  let newPositions = generatePositions()
+        //  moduleBasicTypoWithTabsStore.preset.Track.textPositions.simple.positions = newPositions
+        //} else if (moduleBasicTypoWithTabsStore.preset.Track.currentLayoutStyle == 'Random') {
+        //  let newPositions = generatePositionsRandom()
+        //  moduleBasicTypoWithTabsStore.preset.Track.textPositions.random = newPositions
+        //}
         
         moduleBasicTypoWithTabsStore.preset.Track.fontMainText = setfont(moduleBasicTypoWithTabsStore.preset.Track.mainText.currentFont)
         moduleBasicTypoWithTabsStore.preset.Track.fontOtherText = setfont(moduleBasicTypoWithTabsStore.preset.Track.otherText.currentFont)
@@ -2205,7 +2249,7 @@ function randomizeModuleStore(moduleType) {
 
     if (moduleType == 'BasicTypoWithTabs') {
       return new Promise((resolve, reject) => {
-        setBasicTypoStore('Positions')
+        //setBasicTypoStore('Positions')
 
         if (moduleBasicTypoWithTabsStore.preset.Track.mainText.typeLocked == false) {
           let newMainType = sample(moduleBasicTypoWithTabsStore.preset.Track.mainText.fontOptions)
@@ -2259,6 +2303,22 @@ function randomizeModuleStore(moduleType) {
           let newOtherLeading = getRandomArbitrary(moduleBasicTypoWithTabsStore.preset.Track.otherText.leading.min, moduleBasicTypoWithTabsStore.preset.Track.otherText.leading.max)
           moduleBasicTypoWithTabsStore.preset.Track.otherText.leading.sliderValue = newOtherLeading
           resolve([newOtherLeading])
+        }
+
+        if (moduleBasicTypoWithTabsStore.preset.Track.layoutStyleLocked == false) {
+          moduleBasicTypoWithTabsStore.preset.Track.currentLayoutStyle = sample(moduleBasicTypoWithTabsStore.preset.Track.layoutStyles)
+          //setBasicTypoWithTabsStore('TrackLayoutStyle')
+          //if (moduleBasicTypoWithTabsStore.preset.Track.currentLayoutStyle == 'Simple') {
+          //  //let newPositions = generatePositions()
+          //  //moduleBasicTypoWithTabsStore.preset.Track.textPositions.simple.positions = newPositions
+          //  setBasicTypoWithTabsStore('TrackPositionSimple')
+          //} else if (moduleBasicTypoWithTabsStore.preset.Track.currentLayoutStyle == 'Random') {
+          //  let newPositions = generatePositionsRandom()
+          //  moduleBasicTypoWithTabsStore.preset.Track.textPositions.random = newPositions
+          //}
+        }
+        if (moduleBasicTypoWithTabsStore.currentCoverType == 'Track') {
+          setBasicTypoWithTabsStore('TrackLayoutStyle')
         }
       })
         

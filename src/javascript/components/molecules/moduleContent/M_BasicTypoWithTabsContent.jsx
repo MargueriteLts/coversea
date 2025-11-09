@@ -105,108 +105,175 @@ export default class M_BasicTypoWithTabsContent extends Component {
   renderTabContent() {
     const { basictypowithtabs, setBasicTypoWithTabsStore, handleDropDownLayoutStyleClick } = this.props
 
-    return (
-      
-      <div className='content-colum-fullWidth'>
-        <div className='content-column'>
-          <M_Control
-            orientation="row"
-            controlType='Select'
-            isFullWidth={true}
-            hasTitle={true}
-            title='Layout style'
-          //lock
-            hasLock={true}
-            isLocked={this.state.layoutStyleLocked}
-            setStore={setBasicTypoWithTabsStore}
-            item='lockTrackLayoutStyle'
-            handleToggle={this.handleToggle}
-          //data
-            options={basictypowithtabs.layoutStyles}
-            data={basictypowithtabs.currentLayoutStyle}
-            handleChange={handleDropDownLayoutStyleClick}
-          />
-        </div>
-        {this.renderTextInputs()}
-      </div>
-    )
-  }
-  
-  renderTextInputs() {
-    const { basictypowithtabs, setBasicTypoWithTabsStore } = this.props
-
-    ////////////// TRACK
-
     if (basictypowithtabs.currentCoverType == 'Track') {
-      return <div className="basic-typo-content">
-
-        <div className="basic-typo-row">
-          <A_Text
-            text='Main text'
-            style='basic-typo-title'
-          />
-          <TextArea
-            className='textarea'
-            rows={3}
-            cols={40}
-            value={this.state.valueMainText}
-            onChange={this.handleMainTextChange}
-          />
-
-          <M_DropDown
-            dropDownContent='TextSettings'
-            title='Text settings'
-            textType='main'
-            setStore={setBasicTypoWithTabsStore}
-            textData={basictypowithtabs.preset.Track.mainText}
-            object='colorMainText'
-            itemLockColor='mainLockColor'
-            itemLockType='mainLockType'
-            itemSizeLock='mainLockSize'
-            itemLeadingLock='mainLockLeading'
-            handleChange={this.handleChangeMainTextColor}
-          />
-        </div>
-
-        { basictypowithtabs.preset.Track.dopText
-          ?
-          <div className="basic-typo-row">
-            <A_Text
-              text='Small text'
-              style='basic-typo-title'
-            />
-            <M_AddRemoveText
-              // text={basictypowithtabs.otherText.value}
-              text={basictypowithtabs.preset.Track.otherText.values}
+      return (
+        <div className='content-colum-fullWidth'>
+          <div className='content-column'>
+            <M_Control
+              orientation="row"
+              controlType='Select'
+              isFullWidth={true}
+              hasTitle={true}
+              title='Layout style'
+            //lock
+              hasLock={true}
+              isLocked={this.state.trackLayoutStyleLock}
               setStore={setBasicTypoWithTabsStore}
-            />
-
-            <M_DropDown
-              dropDownContent='TextSettings'
-              title='Text settings'
-              textType='other'
-              setStore={setBasicTypoWithTabsStore}
-              textData={basictypowithtabs.preset.Track.otherText}
-              object='colorOtherText'
-              itemLockColor='otherLockColor'
-              itemLockType='otherLockType'
-              itemSizeLock='otherLockSize'
-              itemLeadingLock='otherLockLeading'
-              handleChange={this.handleChangeOtherTextColor}
-              //handleDropDownClick={this.handleOtherTextDropDownClick}
-              //handleTextSize={this.handleSizeOtherText}
-              //handleTextLeading={this.handleLeadingOtherText}
-              //currentFont={this.state.currentFontOtherText}
-              //size={this.state.sizeOtherText}
-              //leading={this.state.leadingOtherText}
+              item='lockTrackLayoutStyle'
+              handleToggle={this.handleToggle}
+            //data
+              options={basictypowithtabs.preset.Track.layoutStyles}
+              data={basictypowithtabs.preset.Track.currentLayoutStyle}
+              handleChange={handleDropDownLayoutStyleClick}
             />
           </div>
-          : null
-        }
+          {/*{this.renderTextInputs()}*/}
+          <div className="basic-typo-content">
+            <div className="basic-typo-row">
+              <A_Text
+                text='Main text'
+                style='basic-typo-title'
+              />
+              <TextArea
+                className='textarea'
+                rows={3}
+                cols={40}
+                value={this.state.valueMainText}
+                onChange={this.handleMainTextChange}
+              />
 
-      </div>
+              <M_DropDown
+                dropDownContent='TextSettings'
+                title='Text settings'
+                textType='main'
+                setStore={setBasicTypoWithTabsStore}
+                textData={basictypowithtabs.preset.Track.mainText}
+                object='colorMainText'
+                itemLockColor='mainLockColor'
+                itemLockType='mainLockType'
+                itemSizeLock='mainLockSize'
+                itemLeadingLock='mainLockLeading'
+                handleChange={this.handleChangeMainTextColor}
+              />
+            </div>
+
+            { basictypowithtabs.preset.Track.dopText
+              ?
+              <div className="basic-typo-row">
+                <A_Text
+                  text='Small text'
+                  style='basic-typo-title'
+                />
+                <M_AddRemoveText
+                  // text={basictypowithtabs.otherText.value}
+                  text={basictypowithtabs.preset.Track.otherText.values}
+                  setStore={setBasicTypoWithTabsStore}
+                />
+
+                <M_DropDown
+                  dropDownContent='TextSettings'
+                  title='Text settings'
+                  textType='other'
+                  setStore={setBasicTypoWithTabsStore}
+                  textData={basictypowithtabs.preset.Track.otherText}
+                  object='colorOtherText'
+                  itemLockColor='otherLockColor'
+                  itemLockType='otherLockType'
+                  itemSizeLock='otherLockSize'
+                  itemLeadingLock='otherLockLeading'
+                  handleChange={this.handleChangeOtherTextColor}
+                  //handleDropDownClick={this.handleOtherTextDropDownClick}
+                  //handleTextSize={this.handleSizeOtherText}
+                  //handleTextLeading={this.handleLeadingOtherText}
+                  //currentFont={this.state.currentFontOtherText}
+                  //size={this.state.sizeOtherText}
+                  //leading={this.state.leadingOtherText}
+                />
+              </div>
+              : null
+            }
+
+          </div>
+        </div>
+      )
     }
   }
+  
+  //renderTextInputs() {
+  //  const { basictypowithtabs, setBasicTypoWithTabsStore } = this.props
+
+  //  ////////////// TRACK
+
+  //  if (basictypowithtabs.currentCoverType == 'Track') {
+  //    return <div className="basic-typo-content">
+
+  //      <div className="basic-typo-row">
+  //        <A_Text
+  //          text='Main text'
+  //          style='basic-typo-title'
+  //        />
+  //        <TextArea
+  //          className='textarea'
+  //          rows={3}
+  //          cols={40}
+  //          value={this.state.valueMainText}
+  //          onChange={this.handleMainTextChange}
+  //        />
+
+  //        <M_DropDown
+  //          dropDownContent='TextSettings'
+  //          title='Text settings'
+  //          textType='main'
+  //          setStore={setBasicTypoWithTabsStore}
+  //          textData={basictypowithtabs.preset.Track.mainText}
+  //          object='colorMainText'
+  //          itemLockColor='mainLockColor'
+  //          itemLockType='mainLockType'
+  //          itemSizeLock='mainLockSize'
+  //          itemLeadingLock='mainLockLeading'
+  //          handleChange={this.handleChangeMainTextColor}
+  //        />
+  //      </div>
+
+  //      { basictypowithtabs.preset.Track.dopText
+  //        ?
+  //        <div className="basic-typo-row">
+  //          <A_Text
+  //            text='Small text'
+  //            style='basic-typo-title'
+  //          />
+  //          <M_AddRemoveText
+  //            // text={basictypowithtabs.otherText.value}
+  //            text={basictypowithtabs.preset.Track.otherText.values}
+  //            setStore={setBasicTypoWithTabsStore}
+  //          />
+
+  //          <M_DropDown
+  //            dropDownContent='TextSettings'
+  //            title='Text settings'
+  //            textType='other'
+  //            setStore={setBasicTypoWithTabsStore}
+  //            textData={basictypowithtabs.preset.Track.otherText}
+  //            object='colorOtherText'
+  //            itemLockColor='otherLockColor'
+  //            itemLockType='otherLockType'
+  //            itemSizeLock='otherLockSize'
+  //            itemLeadingLock='otherLockLeading'
+  //            handleChange={this.handleChangeOtherTextColor}
+  //            //handleDropDownClick={this.handleOtherTextDropDownClick}
+  //            //handleTextSize={this.handleSizeOtherText}
+  //            //handleTextLeading={this.handleLeadingOtherText}
+  //            //currentFont={this.state.currentFontOtherText}
+  //            //size={this.state.sizeOtherText}
+  //            //leading={this.state.leadingOtherText}
+  //          />
+  //        </div>
+  //        : null
+  //      }
+
+  //    </div>
+  //  }
+  //}
 
   render() {
     const { basictypowithtabs, handleTabClickBasicTypoCoverType } = this.props
