@@ -101,6 +101,9 @@ export default class M_BasicTypoWithTabsContent extends Component {
 
 
   //////////////////////////////////////////////////////// RENDER
+  //renderModuleContentUnits() {
+
+  //}
 
   renderTabContent() {
     const { basictypowithtabs, setBasicTypoWithTabsStore, handleDropDownLayoutStyleClick } = this.props
@@ -275,6 +278,33 @@ export default class M_BasicTypoWithTabsContent extends Component {
   //  }
   //}
 
+  //render() {
+  //  const { basictypowithtabs, handleTabClickBasicTypoCoverType } = this.props
+
+  //  const nbCoverTypes = basictypowithtabs.coverTypes.length
+
+  //  return (
+  //  <div className="background-content">
+  //    {nbCoverTypes > 1 ? (
+
+  //      <div className="background-content__with-tabs">
+  //        <div className="background-content__with-tabs-tabs">
+  //          <TabButtonSet
+  //            options={basictypowithtabs.preset}
+  //            value={basictypowithtabs.currentCoverType}
+  //            handleClick={handleTabClickBasicTypoCoverType}
+  //          />
+  //        </div>
+  //        {this.renderTabContent()}
+  //      </div>
+
+  //    ) : (
+  //      this.renderModuleContentUnits()
+  //    )}
+  //  </div>
+  //  )
+  //}
+
   render() {
     const { basictypowithtabs, handleTabClickBasicTypoCoverType } = this.props
 
@@ -282,8 +312,6 @@ export default class M_BasicTypoWithTabsContent extends Component {
 
     return (
     <div className="background-content">
-      {nbCoverTypes > 1 ? (
-
         <div className="background-content__with-tabs">
           <div className="background-content__with-tabs-tabs">
             <TabButtonSet
@@ -294,10 +322,6 @@ export default class M_BasicTypoWithTabsContent extends Component {
           </div>
           {this.renderTabContent()}
         </div>
-
-      ) : (
-        this.renderModuleContentUnits()
-      )}
     </div>
     )
   }

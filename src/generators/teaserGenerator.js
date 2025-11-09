@@ -87,7 +87,9 @@ const preset = {
   
 
   BasicTypoWithTabs: {
-    coverTypes: ['Track', 'VA', 'Podcast', 'Vinyl'],
+    //coverTypes: ['Track', 'VA', 'Podcast', 'Vinyl'],
+    //coverTypes: ['Track', 'VA'],
+    coverTypes: ['Track'],
     currentCoverType: 'Track',
     //layoutStyles: ['Simple', 'Random', 'Framed'],
     //currentLayoutStyle: 'Simple',
@@ -142,10 +144,59 @@ const preset = {
             max: 10
           }
         }
-      },
-      VA: {},
-      Podcast: {},
-      Vinyl: {}
+      }
+      //VA: {
+      //  layoutStyles: ['Simple', 'Random'],
+      //  currentLayoutStyle: 'Simple',
+      //  dopText: true,
+
+      //  upperCase: true,
+      //  textAlign: 'left',
+
+      //  mainText: {
+      //    value: 'Track title',
+      //    color: '#ffffff',
+      //    colorLocked: false,
+      //    typeLocked: false,
+      //    sizeLocked: false,
+      //    leadingLocked: false,
+      //    fontOptions: ['Sans Serif', 'Script'],
+      //    currentFont: 'Script',
+      //    size:{
+      //      sliderValue: 10,
+      //      min: 5,
+      //      max: 20
+      //    },
+      //    leading: {
+      //      sliderValue: 8,
+      //      min: 1,
+      //      max: 20
+      //    }
+      //  },
+
+      //  otherText: {
+      //    values: ['Artist/Label'],
+      //    color: '#ffffff',
+      //    colorLocked: false,
+      //    typeLocked: false,
+      //    sizeLocked: false,
+      //    leadingLocked: false,
+      //    fontOptions: ['Sans Serif', 'Script'],
+      //    currentFont: 'Sans Serif',
+      //    size:{
+      //      sliderValue: 2,
+      //      min: 1,
+      //      max: 6
+      //    },
+      //    leading: {
+      //      sliderValue: 2,
+      //      min: 1,
+      //      max: 10
+      //    }
+      //  }
+      //},
+      //Podcast: {},
+      //Vinyl: {}
     }
   },
 

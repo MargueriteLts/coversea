@@ -1486,7 +1486,9 @@ function initBasicTypoWithTabsStore(basictypowithtabs) {
     }
 
     if (coverType == 'VA') {
-      basictypowithtabs.preset.VA = Object.assign({}, basictypowithtabs.preset.VA, { text: 'VA/Compilation'})
+      basictypowithtabs.preset.VA = Object.assign({}, basictypowithtabs.preset.VA, {
+        text: 'VA/Compilation'
+      })
     }
 
     if (coverType == 'Podcast') {
