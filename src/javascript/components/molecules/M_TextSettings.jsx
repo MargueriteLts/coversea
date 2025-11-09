@@ -218,7 +218,8 @@ export default class M_TextSettings extends Component {
             <M_Control
               orientation="row"
               controlType='ColorPicker'
-              hasTitle={false}
+              hasTitle={true}
+              title= 'Color'
               //
               isLocked={this.state.SolidColorLock}
               setStore={setStore}
