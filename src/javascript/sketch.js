@@ -1968,9 +1968,11 @@ function drawModules(p) {
 
 
     p.drawingContext.shadowBlur = 0
-  }
 
-  p.redraw();
+    setTimeout(() => {
+      p.redraw();
+    }, 1000);
+  }
 
 }
 
@@ -2355,6 +2357,7 @@ function sketch(p) {
       p.redraw();
 
     }
+    p.redraw();
   }
 }
 
