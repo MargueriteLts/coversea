@@ -475,6 +475,12 @@ function setUploadImageStore(type, value) {
       
       resolve([value]);
     }
+
+    if (type === 'deleteImage') {
+      moduleUploadImageStore.uploadedImage = null;
+      moduleUploadImageStore.positionIndex = 0;
+      resolve([null]);
+    }
     
     // Lock controls
     if (type === 'lockSize') {

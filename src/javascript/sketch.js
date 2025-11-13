@@ -1105,22 +1105,104 @@ function drawModules(p) {
 
   /////////////////////////////////////////// MODULE UPLOADIMAGE
 
+  //if (moduleList.includes('UploadImage')) {
+
+  //  //if (window.triggerRedraw) {
+  //  //  console.log('YO2')
+  //  //  window.triggerRedraw()
+  //  //}
+
+  //  const uploadImage = getUploadImageStore();
+    
+  //  if (uploadImage.uploadedImage) {
+  //    const margin = 10; // 50px margin from edges
+  //    let x, y;
+  //    const positionName = uploadImage.positions[uploadImage.positionIndex];
+  //    const imgSize = (uploadImage.size * canvasSize) / 100;
+  //    //const opacity = (uploadImage.opacity / 100) * 255;
+  //    const opacity = parseFloat(uploadImage.opacity)
+      
+  //    // Set position based on positionIndex
+  //    switch(positionName) {
+  //      case 'top-left':
+  //        x = margin;
+  //        y = margin;
+  //        break;
+  //      case 'top-middle':
+  //        x = (canvasSize - imgSize) / 2;
+  //        y = margin;
+  //        break;
+  //      case 'top-right':
+  //        x = canvasSize - imgSize - margin;
+  //        y = margin;
+  //        break;
+  //      case 'middle-left':
+  //        x = margin;
+  //        y = (canvasSize - imgSize) / 2;
+  //        break;
+  //      case 'middle-right':
+  //        x = canvasSize - imgSize - margin;
+  //        y = (canvasSize - imgSize) / 2;
+  //        break;
+  //      case 'bottom-left':
+  //        x = margin;
+  //        y = canvasSize - imgSize - margin;
+  //        break;
+  //      case 'bottom-middle':
+  //        x = (canvasSize - imgSize) / 2;
+  //        y = canvasSize - imgSize - margin;
+  //        break;
+  //      case 'bottom-right':
+  //        x = canvasSize - imgSize - margin;
+  //        y = canvasSize - imgSize - margin;
+  //        break;
+  //      default:
+  //        x = margin;
+  //        y = margin;
+  //    }
+      
+  //    p.tint(255, opacity);
+  //    p.image(uploadImage.uploadedImage, x, y, imgSize, imgSize);
+  //    p.noTint();
+
+  //  }
+
+  //  //if (window.triggerRedraw) {
+  //  //  console.log('YO3')
+  //  //  window.triggerRedraw()
+  //  //}
+  //}
+
+  /////////////////////////////////////////// MODULE UPLOAD IMAGE
+
   if (moduleList.includes('UploadImage')) {
-
-    //if (window.triggerRedraw) {
-    //  console.log('YO2')
-    //  window.triggerRedraw()
-    //}
-
     const uploadImage = getUploadImageStore();
     
     if (uploadImage.uploadedImage) {
-      const margin = 10; // 50px margin from edges
+      const margin = 10; // 10px margin from edges
       let x, y;
       const positionName = uploadImage.positions[uploadImage.positionIndex];
-      const imgSize = (uploadImage.size * canvasSize) / 100;
-      //const opacity = (uploadImage.opacity / 100) * 255;
-      const opacity = parseFloat(uploadImage.opacity)
+      
+      // Get original image dimensions
+      const originalWidth = uploadImage.uploadedImage.width;
+      const originalHeight = uploadImage.uploadedImage.height;
+      const aspectRatio = originalWidth / originalHeight;
+      
+      // Calculate size based on the larger dimension while maintaining aspect ratio
+      const maxSize = (uploadImage.size * canvasSize) / 100;
+      let imgWidth, imgHeight;
+      
+      if (aspectRatio > 1) {
+        // Image is wider than tall
+        imgWidth = maxSize;
+        imgHeight = maxSize / aspectRatio;
+      } else {
+        // Image is taller than wide or square
+        imgHeight = maxSize;
+        imgWidth = maxSize * aspectRatio;
+      }
+      
+      const opacity = parseFloat(uploadImage.opacity);
       
       // Set position based on positionIndex
       switch(positionName) {
@@ -1129,32 +1211,32 @@ function drawModules(p) {
           y = margin;
           break;
         case 'top-middle':
-          x = (canvasSize - imgSize) / 2;
+          x = (canvasSize - imgWidth) / 2;
           y = margin;
           break;
         case 'top-right':
-          x = canvasSize - imgSize - margin;
+          x = canvasSize - imgWidth - margin;
           y = margin;
           break;
         case 'middle-left':
           x = margin;
-          y = (canvasSize - imgSize) / 2;
+          y = (canvasSize - imgHeight) / 2;
           break;
         case 'middle-right':
-          x = canvasSize - imgSize - margin;
-          y = (canvasSize - imgSize) / 2;
+          x = canvasSize - imgWidth - margin;
+          y = (canvasSize - imgHeight) / 2;
           break;
         case 'bottom-left':
           x = margin;
-          y = canvasSize - imgSize - margin;
+          y = canvasSize - imgHeight - margin;
           break;
         case 'bottom-middle':
-          x = (canvasSize - imgSize) / 2;
-          y = canvasSize - imgSize - margin;
+          x = (canvasSize - imgWidth) / 2;
+          y = canvasSize - imgHeight - margin;
           break;
         case 'bottom-right':
-          x = canvasSize - imgSize - margin;
-          y = canvasSize - imgSize - margin;
+          x = canvasSize - imgWidth - margin;
+          y = canvasSize - imgHeight - margin;
           break;
         default:
           x = margin;
@@ -1162,15 +1244,9 @@ function drawModules(p) {
       }
       
       p.tint(255, opacity);
-      p.image(uploadImage.uploadedImage, x, y, imgSize, imgSize);
+      p.image(uploadImage.uploadedImage, x, y, imgWidth, imgHeight);
       p.noTint();
-
     }
-
-    //if (window.triggerRedraw) {
-    //  console.log('YO3')
-    //  window.triggerRedraw()
-    //}
   }
 
   /////////////////////////////////////////// MODULE IMAGE
@@ -1894,6 +1970,8 @@ function drawModules(p) {
     p.drawingContext.shadowBlur = 0
   }
 
+  p.redraw();
+
 }
 
 
@@ -2270,9 +2348,12 @@ function sketch(p) {
       p.clear()
       p.blendMode(p.DIFFERENCE)
       drawModules(p)
+      p.redraw();
     } else {
       p.clear()
       drawModules(p)
+      p.redraw();
+
     }
   }
 }

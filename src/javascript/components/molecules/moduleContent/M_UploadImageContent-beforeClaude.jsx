@@ -4,15 +4,15 @@ import ReactDOM from 'react-dom'
 import M_Control from '../controls/M_Control.jsx'
 import A_Text from '../../ATOMS/A_Text.jsx'
 import M_FileUpload from '../controls/M_FileUpload.jsx'
-import A_Button from '../../buttons/A_Button.jsx'
 
 export default class M_UploadImageContent extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      sizeLock: this.props.uploadImage.sizeLock || false,
-      opacityLock: this.props.uploadImage.opacityLock || false,
+      sizeLock: this.props.uploadImage.sizeLock,
+      opacityLock: this.props.uploadImage.opacityLock,
+      positionLock: this.props.uploadImage.positionLock,
       hasUploadedImage: false
     }
   }
@@ -21,15 +21,6 @@ export default class M_UploadImageContent extends Component {
     // Check if there's already an uploaded image when component mounts
     if (this.props.uploadImage && this.props.uploadImage.uploadedImage) {
       this.setState({ hasUploadedImage: true });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    // Update hasUploadedImage if the uploadedImage prop changes
-    if (prevProps.uploadImage.uploadedImage !== this.props.uploadImage.uploadedImage) {
-      this.setState({ 
-        hasUploadedImage: !!this.props.uploadImage.uploadedImage 
-      });
     }
   }
 
@@ -46,6 +37,12 @@ export default class M_UploadImageContent extends Component {
         opacityLock: !this.state.opacityLock
       })
     }
+    if (item == 'lockPosition') {
+      setStore(item, !this.state.positionLock)
+      this.setState({
+        positionLock: !this.state.positionLock
+      })
+    }
   }
 
   handleImageFileChange = (e) => {
@@ -58,19 +55,6 @@ export default class M_UploadImageContent extends Component {
     }
   }
 
-  handleDeleteImage = () => {
-    // Clear the image from the store
-    this.props.setUploadImageStore('deleteImage', null);
-    
-    // Update local state
-    this.setState({ hasUploadedImage: false });
-    
-    // Trigger redraw to clear from canvas
-    if (window.triggerRedraw) {
-      window.triggerRedraw();
-    }
-  }
-
   //////////////////////////////////////////////////////// RENDER
   
   render() {
@@ -78,29 +62,31 @@ export default class M_UploadImageContent extends Component {
       uploadImage,
       handleUploadImageSize,
       handleUploadImageOpacity,
+      handleRandomPosition,
       setUploadImageStore
     } = this.props
 
     return <div className="upload-image-content">
       <div className="content-row">
         <div className="content-column">
+          {/*<M_Control
+            orientation="row"
+            controlType='FileUpload'
+            hasTitle={true}
+            title='Upload your logo or sticker'
+            handleFileChange={this.handleWrappedFileChange}
+            />*/}
           <div className='module-control row'>
             <A_Text
               text="Upload your logo or sticker"
               style='title-text'
-            />
+              />
             <M_FileUpload
               handleFileChange={this.handleImageFileChange}
+              //handleFileChange={this.props.handleFileChange}
             />
-            {this.state.hasUploadedImage && (
-              <A_Button
-                onClick={this.handleDeleteImage}
-                text='Delete'
-                type='secondary'
-                hasIcon={false}
-              />
-            )}
           </div>
+
         </div>
         
         {this.state.hasUploadedImage && (
@@ -110,7 +96,6 @@ export default class M_UploadImageContent extends Component {
               controlType='Slider'
               hasTitle={true}
               title='Size'
-              hasLock={true}
               isLocked={this.state.sizeLock}
               setStore={setUploadImageStore}
               item='lockSize'
@@ -126,13 +111,22 @@ export default class M_UploadImageContent extends Component {
               controlType='SliderOpacity'
               hasTitle={true}
               title='Opacity'
-              hasLock={true}
               isLocked={this.state.opacityLock}
               setStore={setUploadImageStore}
               item='lockOpacity'
               handleToggle={this.handleToggle}
               data={uploadImage.opacity}
               handleChange={handleUploadImageOpacity}
+            />
+
+            <M_Control
+              orientation="row"
+              hasTitle={true}
+              title='Position'
+              isLocked={this.state.positionLock}
+              setStore={setUploadImageStore}
+              item='lockPosition'
+              handleToggle={this.handleToggle}
             />
           </div>
         )}
