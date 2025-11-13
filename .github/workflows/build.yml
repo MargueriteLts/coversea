@@ -53,7 +53,8 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
-      - name: Build with Next.js
+      #- name: Build with Next.js
+      - name: Build with Webpack
         run: ${{ steps.detect-package-manager.outputs.runner }} build
 
       - name: Upload artifact
