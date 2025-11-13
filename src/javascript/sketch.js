@@ -32,6 +32,7 @@ import {
 // let utils
 
 let pendingImageUrl = null;
+let pendingBackgroundPhotoUrl = null;
 
 let moduleList = {}
 
@@ -160,6 +161,27 @@ window.handleUploadedImage = function(file) {
         resolve({success: true});
       } catch (err) {
         console.error("Error processing image:", err);
+        reject(err);
+      }
+    };
+    reader.onerror = (err) => {
+      console.error("File reader error:", err);
+      reject(err);
+    };
+    reader.readAsDataURL(file);
+  });
+};
+
+// ADD THIS NEW FUNCTION
+window.handleBackgroundPhotoUpload = function(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        pendingBackgroundPhotoUrl = e.target.result;
+        resolve({success: true});
+      } catch (err) {
+        console.error("Error processing background photo:", err);
         reject(err);
       }
     };
@@ -685,6 +707,7 @@ function drawModules(p) {
       p.pixelDensity()
       p.noStroke()
     } else if (background.backgroundTypes.includes('Photo') && background.currentBackgroundType === 'Photo') {
+      //p.clear()
       imageBg = background.preset.Photo.uploadedImage
       //if (imageBg) {
       //  p.background(imageBg, 255)
@@ -714,6 +737,11 @@ function drawModules(p) {
           imageBg.height * scale  // scaled height
         );
         p.pop()
+
+        // Trigger p5 redraw
+        //if (window.triggerRedraw) {
+        //  window.triggerRedraw()
+        //}
       } else {
         p.background(0)
       }
@@ -1078,6 +1106,12 @@ function drawModules(p) {
   /////////////////////////////////////////// MODULE UPLOADIMAGE
 
   if (moduleList.includes('UploadImage')) {
+
+    //if (window.triggerRedraw) {
+    //  console.log('YO2')
+    //  window.triggerRedraw()
+    //}
+
     const uploadImage = getUploadImageStore();
     
     if (uploadImage.uploadedImage) {
@@ -1130,7 +1164,13 @@ function drawModules(p) {
       p.tint(255, opacity);
       p.image(uploadImage.uploadedImage, x, y, imgSize, imgSize);
       p.noTint();
+
     }
+
+    //if (window.triggerRedraw) {
+    //  console.log('YO3')
+    //  window.triggerRedraw()
+    //}
   }
 
   /////////////////////////////////////////// MODULE IMAGE
@@ -2035,47 +2075,100 @@ function sketch(p) {
 
   }
 
+  //function checkPendingImage() {
+  //  if (pendingImageUrl) {
+  //    const uploadImage = getUploadImageStore();
+  //    const background = getBackgroundStore();
+
+  //    // Check if we're uploading for UploadImage module or Background Photo
+  //    if (background.currentBackgroundType === 'Photo' && !uploadImage.uploadedImage) {
+  //      // This is for background photo
+  //      p.loadImage(pendingImageUrl, 
+  //        loadedImg => {
+  //          background.preset.Photo.uploadedImage = loadedImg;
+  //          pendingImageUrl = null;
+
+  //          // Trigger p5 redraw
+  //          if (window.triggerRedraw) {
+  //            window.triggerRedraw()
+  //          }
+  //        },
+  //        err => {
+  //          console.error("Failed to load background image:", err);
+  //          pendingImageUrl = null;
+  //        }
+  //      );
+  //    } else {
+  //      p.loadImage(pendingImageUrl, 
+  //        // Success callback
+  //        loadedImg => {
+  //          uploadImage.uploadedImage = loadedImg;
+            
+  //          // Randomize position if not locked
+  //          if (!uploadImage.positionLock) {
+  //            const positions = uploadImage.positions;
+  //            const randomIndex = Math.floor(Math.random() * positions.length);
+  //            uploadImage.positionIndex = randomIndex;
+  //          }
+            
+  //          // Clear the pending URL
+  //          pendingImageUrl = null;
+
+  //          // Trigger p5 redraw
+  //          if (window.triggerRedraw) {
+  //            window.triggerRedraw()
+  //          }
+  //        },
+  //        // Error callback
+  //        err => {
+  //          console.error("Failed to load image:", err);
+  //          pendingImageUrl = null;
+  //        }
+  //      );
+  //    }
+  //  }
+  //}
+
   function checkPendingImage() {
+    // Check for uploaded logo/sticker
     if (pendingImageUrl) {
       const uploadImage = getUploadImageStore();
+      
+      p.loadImage(pendingImageUrl, 
+        loadedImg => {
+          uploadImage.uploadedImage = loadedImg;
+          
+          if (!uploadImage.positionLock) {
+            const positions = uploadImage.positions;
+            const randomIndex = Math.floor(Math.random() * positions.length);
+            uploadImage.positionIndex = randomIndex;
+          }
+          
+          pendingImageUrl = null;
+          p.redraw();
+        },
+        err => {
+          console.error("Failed to load image:", err);
+          pendingImageUrl = null;
+        }
+      );
+    }
+    
+    // CHECK FOR BACKGROUND PHOTO - ADD THIS
+    if (pendingBackgroundPhotoUrl) {
       const background = getBackgroundStore();
-
-      // Check if we're uploading for UploadImage module or Background Photo
-      if (background.currentBackgroundType === 'Photo' && !uploadImage.uploadedImage) {
-        // This is for background photo
-        p.loadImage(pendingImageUrl, 
-          loadedImg => {
-            background.preset.Photo.uploadedImage = loadedImg;
-            pendingImageUrl = null;
-          },
-          err => {
-            console.error("Failed to load background image:", err);
-            pendingImageUrl = null;
-          }
-        );
-      } else {
-        p.loadImage(pendingImageUrl, 
-          // Success callback
-          loadedImg => {
-            uploadImage.uploadedImage = loadedImg;
-            
-            // Randomize position if not locked
-            if (!uploadImage.positionLock) {
-              const positions = uploadImage.positions;
-              const randomIndex = Math.floor(Math.random() * positions.length);
-              uploadImage.positionIndex = randomIndex;
-            }
-            
-            // Clear the pending URL
-            pendingImageUrl = null;
-          },
-          // Error callback
-          err => {
-            console.error("Failed to load image:", err);
-            pendingImageUrl = null;
-          }
-        );
-      }
+      
+      p.loadImage(pendingBackgroundPhotoUrl,
+        loadedImg => {
+          background.preset.Photo.uploadedImage = loadedImg;
+          pendingBackgroundPhotoUrl = null;
+          p.redraw();
+        },
+        err => {
+          console.error("Failed to load background photo:", err);
+          pendingBackgroundPhotoUrl = null;
+        }
+      );
     }
   }
 
@@ -2178,6 +2271,7 @@ function sketch(p) {
       p.blendMode(p.DIFFERENCE)
       drawModules(p)
     } else {
+      p.clear()
       drawModules(p)
     }
   }
@@ -2201,6 +2295,13 @@ function initSketch(id, size) {
 
   // let utils = new p5.Utils()
   cover = new p5(sketch)
+
+  // ADD THIS - Expose redraw function globally
+  //window.triggerRedraw = function() {
+  //  if (cover) {
+  //    cover.redraw();
+  //  }
+  //}
 }
 
 

@@ -163,15 +163,17 @@ export default class GeneratorContainer extends Component {
   handlePhotoFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      window.handleUploadedImage(file)
+      window.handleBackgroundPhotoUpload(file)
         .then(() => {
           this.setState({});
+          
+          // Add a small delay to ensure image processing completes
+          setTimeout(() => {
+            if (window.triggerRedraw) {
+              window.triggerRedraw();
+            }
+          }, 100);
         });
-    }
-
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
     }
   }
 
@@ -206,13 +208,19 @@ export default class GeneratorContainer extends Component {
       window.handleUploadedImage(file)
         .then(() => {
           this.setState({});
-        });
-    }
 
-    // Trigger p5 redraw
-    if (window.triggerRedraw) {
-      window.triggerRedraw()
-    }
+          // Add a small delay to ensure image processing completes
+          setTimeout(() => {
+            if (window.triggerRedraw) {
+              window.triggerRedraw();
+            }
+          }, 100);
+        });
+        //if (window.triggerRedraw) {
+        //  console.log('YO1')
+        //  window.triggerRedraw()
+        //}
+      }
   }
 
   //handleRandomPosition = () => {

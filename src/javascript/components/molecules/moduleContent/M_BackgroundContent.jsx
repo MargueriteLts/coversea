@@ -39,6 +39,11 @@ export default class M_BackgroundContent extends Component {
     // Check if there's already an uploaded image when component mounts
     if (this.props.background.preset.Photo && this.props.background.preset.Photo.uploadedImage) {
       this.setState({ hasUploadedImage: true });
+        
+      //// Trigger p5 redraw
+      //if (window.triggerRedraw) {
+      //  window.triggerRedraw()
+      //}
     }
   }
 
@@ -118,13 +123,18 @@ export default class M_BackgroundContent extends Component {
     }
   };
 
-  handleWrappedFileChange = (e) => {
+  handlePhotoFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       // Set the state to show we have an image
       this.setState({ hasUploadedImage: true });
       
       // Call the original handler
       this.props.handlePhotoFileChange(e);
+      
+      //// Trigger p5 redraw
+      //if (window.triggerRedraw) {
+      //  window.triggerRedraw()
+      //}
     }
   }
 
@@ -322,7 +332,7 @@ export default class M_BackgroundContent extends Component {
                     style='title-text'
                     />
                   <M_FileUpload
-                    handleFileChange={this.handleWrappedFileChange}
+                    handleFileChange={this.handlePhotoFileChange}
                   />
                 </div>
               </div>

@@ -45,7 +45,7 @@ export default class M_UploadImageContent extends Component {
     }
   }
 
-  handleWrappedFileChange = (e) => {
+  handleImageFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       // Set the state to show we have an image
       this.setState({ hasUploadedImage: true });
@@ -82,7 +82,7 @@ export default class M_UploadImageContent extends Component {
               style='title-text'
               />
             <M_FileUpload
-              handleFileChange={this.handleWrappedFileChange}
+              handleFileChange={this.handleImageFileChange}
               //handleFileChange={this.props.handleFileChange}
             />
           </div>

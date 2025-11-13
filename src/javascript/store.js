@@ -237,7 +237,11 @@ function initBackgroundStore(background) {
     }
 
     if (backgroundType == 'Photo') {
-      background.preset.Photo = Object.assign({}, background.preset.Photo, { text: 'Photo', uploadedImage: null, locked: false})
+      background.preset.Photo = Object.assign({}, background.preset.Photo, {
+        text: 'Photo',
+        uploadedImage: null,
+        locked: false
+      })
     }
   })
 
@@ -1571,10 +1575,12 @@ function setBasicTypoWithTabsStore(type, nextValue) {
     //   resolve([nextValue])
     // } 
     if (type === 'otherText') {
+      console.log('STORE otherText')
       moduleBasicTypoWithTabsStore.preset.Track.otherText.value = nextValue
     }
 
      if (type === 'textarea') {
+      console.log('STORE textarea')
       moduleBasicTypoWithTabsStore.preset.Track.otherText.values = nextValue
     }
 

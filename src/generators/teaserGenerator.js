@@ -327,7 +327,7 @@ const preset = {
 
   UploadImage: {
     size: 50,
-    opacity: 100,
+    opacity: 200,
     positions: [
       'top-left', 'top-middle', 'top-right',
       'middle-left', 'middle-right',

@@ -15,6 +15,8 @@ export default class M_AddRemoveText extends PureComponent {
 
   handleTextAreaChange = (event, index) => {
 
+    console.log('M_AddRemoveText handleTextAreaChange')
+
     const { textAreas } = this.state;
 
     const { value } = event.target;
@@ -27,6 +29,11 @@ export default class M_AddRemoveText extends PureComponent {
     });
     
     this.props.setStore('textarea', updatedTextAreas)
+
+    // Trigger p5 redraw
+    if (window.triggerRedraw) {
+      window.triggerRedraw()
+    }
   }
 
   handleRemoveText = (index) => {
@@ -40,6 +47,11 @@ export default class M_AddRemoveText extends PureComponent {
     })
 
     this.props.setStore('textarea', updatedTextAreas)
+
+    // Trigger p5 redraw
+    if (window.triggerRedraw) {
+      window.triggerRedraw()
+    }
   }
 
   handleAddText = () => {
@@ -51,6 +63,11 @@ export default class M_AddRemoveText extends PureComponent {
     });
 
     this.props.setStore('textarea', updatedTextAreas)
+
+    // Trigger p5 redraw
+    if (window.triggerRedraw) {
+      window.triggerRedraw()
+    }
   }
 
   render() {
