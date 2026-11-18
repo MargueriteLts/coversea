@@ -210,17 +210,20 @@ export default class GeneratorContainer extends Component {
           this.setState({});
 
           // Add a small delay to ensure image processing completes
-          setTimeout(() => {
-            if (window.triggerRedraw) {
-              window.triggerRedraw();
-            }
-          }, 100);
+          //setTimeout(() => {
+          //  if (window.triggerRedraw) {
+          //    window.triggerRedraw();
+          //  }
+          //  console.log('TeaserGenContainer.jsx')
+          //}, 100);
         });
-        //if (window.triggerRedraw) {
-        //  console.log('YO1')
-        //  window.triggerRedraw()
-        //}
-      }
+      setTimeout(() => {
+        if (window.triggerRedraw) {
+          window.triggerRedraw();
+        }
+        console.log('TeaserGenContainer.jsx')
+      }, 100);
+    }
   }
 
   //handleRandomPosition = () => {

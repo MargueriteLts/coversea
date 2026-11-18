@@ -197,6 +197,7 @@ window.handleBackgroundPhotoUpload = function(file) {
 window.triggerRedraw = function() {
   if (cover) {
     cover.redraw()
+    console.log('sketch CALLED')
   }
 }
 
@@ -1969,9 +1970,11 @@ function drawModules(p) {
 
     p.drawingContext.shadowBlur = 0
 
-    setTimeout(() => {
-      p.redraw();
-    }, 1000);
+    //setTimeout(() => {
+    //  p.redraw();
+    //  console.log('Sketch timeOut100')
+    //}, 1000);
+
   }
 
 }
@@ -2225,7 +2228,7 @@ function sketch(p) {
           }
           
           pendingImageUrl = null;
-          p.redraw();
+          //p.redraw();
         },
         err => {
           console.error("Failed to load image:", err);
@@ -2242,7 +2245,7 @@ function sketch(p) {
         loadedImg => {
           background.preset.Photo.uploadedImage = loadedImg;
           pendingBackgroundPhotoUrl = null;
-          p.redraw();
+          //p.redraw();
         },
         err => {
           console.error("Failed to load background photo:", err);
@@ -2304,13 +2307,13 @@ function sketch(p) {
     if (blend) {
       blendedLayer = p.createGraphics(canvasSize, canvasSize)
     }
+    
+    // Draw the initial frame
+    //p.redraw()
 
     // CLAUDE //
     // Add this at the end of setup
     p.noLoop() // STOP continuous drawing
-    
-    // Draw the initial frame
-    p.redraw()
   }
   
   p.windowResized = () => {
@@ -2350,15 +2353,20 @@ function sketch(p) {
       p.clear()
       p.blendMode(p.DIFFERENCE)
       drawModules(p)
-      p.redraw();
+      //p.redraw();
     } else {
       p.clear()
       drawModules(p)
-      p.redraw();
+      //p.redraw();
 
     }
-    p.redraw();
+    //p.redraw();
   }
+  
+  setTimeout(() => {
+    p.redraw();
+    console.log('redrawSketch?')
+  }, 1000);
 }
 
 ///////////////////////////////////////////////////
@@ -2386,6 +2394,14 @@ function initSketch(id, size) {
   //    cover.redraw();
   //  }
   //}
+  setTimeout(() => {
+    window.triggerRedraw = function() {
+      if (cover) {
+        cover.redraw();
+      }
+    }
+    console.log('redrawSketch?')
+  }, 1000);
 }
 
 

@@ -55,6 +55,11 @@ export default class M_UploadImageContent extends Component {
       
       // Call the original handler
       this.props.handleFileChange(e);
+      
+      // Trigger redraw to clear from canvas
+      if (window.triggerRedraw) {
+        window.triggerRedraw();
+      }
     }
   }
 
