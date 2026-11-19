@@ -252,10 +252,11 @@
 
             .module-title {
               user-select: none;
+            }
 
-              .icon {
-                display: none;
-              }
+            // The arrow shows only on the modules that open on phones (Text and logo, see below)
+            .module:not(.module--BasicTypoWithTabs):not(.module--UploadImage) .module-title .icon {
+              display: none;
             }
 
             .generator__modules-container {
@@ -330,7 +331,7 @@
     }
   }
 
-  /* Generator modules on phones: only the Text and logo modules open (hence no arrow next to the module names).
+  /* Generator modules on phones: only the Text and logo modules open (so only they have an arrow next to their name).
      The Text module shows only its two text fields, at full width, and the logo module only its upload button
      (and Delete once a logo is in). The other settings need a bigger screen. */
   #reactComponentRoot {
