@@ -85,8 +85,7 @@ const actions = {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Add lang-en class to body by default
-  document.body.classList.add('lang-en');
+  // The page's language class is set in index.html (English, or the saved choice)
 
   // Mount the language toggle component
   const toggleContainer = document.getElementById('language-toggle-root');

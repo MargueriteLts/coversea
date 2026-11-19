@@ -220,7 +220,8 @@ export default class M_TextSettings extends Component {
               controlType='ColorPicker'
               hasTitle={true}
               title= 'Color'
-              //
+            //lock
+              hasLock={true}
               isLocked={this.state.SolidColorLock}
               setStore={setStore}
               item={itemLockColor}
@@ -240,6 +241,7 @@ export default class M_TextSettings extends Component {
               hasTitle={true}
               title='Type'
             //lock
+              hasLock={true}
               isLocked={this.state.TypeLock}
               setStore={setStore}
               item={itemLockType}
@@ -259,6 +261,7 @@ export default class M_TextSettings extends Component {
               hasTitle={true}
               title='Size'
             //lock
+              hasLock={true}
               isLocked={this.state.SizeLock}
               setStore={setStore}
               item={itemSizeLock}
@@ -279,6 +282,7 @@ export default class M_TextSettings extends Component {
               hasTitle={true}
               title='Leading'
             //lock
+              hasLock={true}
               isLocked={this.state.LeadingLock}
               setStore={setStore}
               item={itemLeadingLock}

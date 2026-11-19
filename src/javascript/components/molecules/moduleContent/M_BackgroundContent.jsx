@@ -29,22 +29,9 @@ export default class M_BackgroundContent extends Component {
       noiseTypeLock: this.props.background.preset.Noise?.typeLocked,
       tintColorLock: this.props.background.preset.Noise?.tintColorLock,
       pixelsLock: this.props.background.preset.Pixels?.locked,
-      photoLock: this.props.background.preset.Photo?.locked,
-      hasUploadedImage: false
+      photoLock: this.props.background.preset.Photo?.locked
     }
 
-  }
-
-  componentDidMount() {
-    // Check if there's already an uploaded image when component mounts
-    if (this.props.background.preset.Photo && this.props.background.preset.Photo.uploadedImage) {
-      this.setState({ hasUploadedImage: true });
-        
-      //// Trigger p5 redraw
-      //if (window.triggerRedraw) {
-      //  window.triggerRedraw()
-      //}
-    }
   }
 
   /////////////////////////// LOCK/UNLOCK ITEMS ///////////////////////////
@@ -123,21 +110,6 @@ export default class M_BackgroundContent extends Component {
     }
   };
 
-  handlePhotoFileChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      // Set the state to show we have an image
-      this.setState({ hasUploadedImage: true });
-      
-      // Call the original handler
-      this.props.handlePhotoFileChange(e);
-      
-      //// Trigger p5 redraw
-      //if (window.triggerRedraw) {
-      //  window.triggerRedraw()
-      //}
-    }
-  }
-
   ///////////////////////// RENDER CONTENT BACKGROUND TAB
 
   renderTabContent() {
@@ -152,6 +124,7 @@ export default class M_BackgroundContent extends Component {
       handleChangeBackgroundGradientType,
       handleTabClickNoise,
       handleChangeNoiseTintColor,
+      handlePhotoFileChange,
     } = this.props
 
     // console.log(gradientTypes);
@@ -332,7 +305,8 @@ export default class M_BackgroundContent extends Component {
                     style='title-text'
                     />
                   <M_FileUpload
-                    handleFileChange={this.handlePhotoFileChange}
+                    previewUrl={background.preset.Photo.uploadedImagePreview}
+                    handleFileChange={handlePhotoFileChange}
                   />
                 </div>
               </div>

@@ -162,18 +162,10 @@ export default class GeneratorContainer extends Component {
   // Handle file upload
   handlePhotoFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      window.handleBackgroundPhotoUpload(file)
-        .then(() => {
-          this.setState({});
-          
-          // Add a small delay to ensure image processing completes
-          setTimeout(() => {
-            if (window.triggerRedraw) {
-              window.triggerRedraw();
-            }
-          }, 100);
-        });
+      // The sketch redraws by itself once the photo has loaded
+      window.handleBackgroundPhotoUpload(e.target.files[0])
+        .then(() => this.setState({}))
+        .catch((err) => console.error('Could not load the background photo:', err))
     }
   }
 
@@ -204,25 +196,10 @@ export default class GeneratorContainer extends Component {
   // Handle file upload
   handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      window.handleUploadedImage(file)
-        .then(() => {
-          this.setState({});
-
-          // Add a small delay to ensure image processing completes
-          //setTimeout(() => {
-          //  if (window.triggerRedraw) {
-          //    window.triggerRedraw();
-          //  }
-          //  console.log('TeaserGenContainer.jsx')
-          //}, 100);
-        });
-      setTimeout(() => {
-        if (window.triggerRedraw) {
-          window.triggerRedraw();
-        }
-        console.log('TeaserGenContainer.jsx')
-      }, 100);
+      // The sketch redraws by itself once the image has loaded
+      window.handleUploadedImage(e.target.files[0])
+        .then(() => this.setState({}))
+        .catch((err) => console.error('Could not load the image:', err))
     }
   }
 

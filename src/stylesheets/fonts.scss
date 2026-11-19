@@ -6,8 +6,34 @@
 
 @font-face {
   font-family: 'Aileron-Bold';
-  src: url('fonts/Aileron-Bold.otf') format('otf');
+  src: url('fonts/Aileron-Bold.otf') format('opentype');
 }
+
+// Cyrillic letters. None of the cover fonts above has them, so each one gets a partner font from Google Fonts,
+// declared under its name and limited to Cyrillic: the browser draws Cyrillic letters with the partner and every
+// other character with the font itself. size-adjust brings the partner to the font's letter height. The weight must
+// match the font's own declaration (see the Google Fonts imports above), or the browser ignores the partner.
+// A partner is only downloaded when Cyrillic text is drawn. Licences: src/fonts/cyrillic/licenses.
+@mixin cyrillic-partner($family, $file, $size: 100%, $weight: normal) {
+  @font-face {
+    font-family: $family;
+    src: url('fonts/cyrillic/#{$file}.woff2') format('woff2');
+    font-weight: $weight;
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    size-adjust: $size;
+  }
+}
+
+@include cyrillic-partner('Barlow Semi Condensed', 'PTSansNarrow-Cyrillic');
+@include cyrillic-partner('DM Sans', 'Manrope-Cyrillic', 97%, 100 1000);
+@include cyrillic-partner('Poppins', 'Montserrat-Cyrillic');
+@include cyrillic-partner('Space Grotesk', 'GolosText-Cyrillic', 100%, 300 700);
+@include cyrillic-partner('Teko', 'TekturCondensed-Cyrillic', 90%, 300 700);
+@include cyrillic-partner('Aileron-Bold', 'ArimoBold-Cyrillic');
+@include cyrillic-partner('Mea Culpa', 'GreatVibes-Cyrillic');
+@include cyrillic-partner('Luxurious Script', 'GreatVibes-Cyrillic', 69%);
+@include cyrillic-partner('Pinyon Script', 'GreatVibes-Cyrillic', 79%);
+@include cyrillic-partner('Italianno', 'Comforter-Cyrillic', 77%);
 
 
 

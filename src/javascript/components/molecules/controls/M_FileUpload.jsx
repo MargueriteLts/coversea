@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
+// Upload button. Its background shows `previewUrl`, the preview the store keeps next to the uploaded image
+// (null when there is none): it goes away when the image is deleted and is still there when the module is reopened.
 export default class M_FileUpload extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      previewUrl: null,
       isHovering: false
     };
     this.fileInputRef = React.createRef();
@@ -17,17 +18,12 @@ export default class M_FileUpload extends Component {
 
   handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      
-      // Create a preview URL for the image
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        this.setState({ previewUrl: event.target.result });
-      };
-      reader.readAsDataURL(file);
-      
       // Pass the file to the parent component
       this.props.handleFileChange(e);
+
+      // Empty the input once the file is passed on, so that picking the same file again
+      // (after Delete, for instance) still counts as a change
+      e.target.value = '';
     }
   }
 
@@ -40,14 +36,15 @@ export default class M_FileUpload extends Component {
   }
 
   render() {
-    const { previewUrl, isHovering } = this.state;
-    
+    const { previewUrl } = this.props;
+    const { isHovering } = this.state;
+
     const buttonStyle = previewUrl ? {
       backgroundImage: `url(${previewUrl})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     } : {};
-    
+
     return (
       <div className="file-upload">
         <input 
@@ -58,7 +55,7 @@ export default class M_FileUpload extends Component {
           onChange={this.handleFileChange} 
         />
         <div 
-          className={`upload-button-container ${previewUrl && isHovering ? 'dimmed' : ''}`}
+          className={`upload-button-container ${previewUrl && isHovering ? 'upload-button-container--dimmed' : ''}`}
           onClick={this.handleClick}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}

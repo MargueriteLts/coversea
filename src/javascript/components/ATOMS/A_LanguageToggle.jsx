@@ -8,6 +8,8 @@ const A_LanguageToggle = () => {
     setCurrentLanguage(language)
     document.body.classList.remove('lang-en', 'lang-fr', 'lang-ru')
     document.body.classList.add(`lang-${language}`)
+    // The page's language for browsers and screen readers: pronunciation, translation offers, hyphenation
+    document.documentElement.lang = language
     localStorage.setItem('preferredLanguage', language)
   }
   

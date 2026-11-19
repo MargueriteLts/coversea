@@ -12,24 +12,7 @@ export default class M_UploadImageContent extends Component {
 
     this.state = {
       sizeLock: this.props.uploadImage.sizeLock || false,
-      opacityLock: this.props.uploadImage.opacityLock || false,
-      hasUploadedImage: false
-    }
-  }
-
-  componentDidMount() {
-    // Check if there's already an uploaded image when component mounts
-    if (this.props.uploadImage && this.props.uploadImage.uploadedImage) {
-      this.setState({ hasUploadedImage: true });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    // Update hasUploadedImage if the uploadedImage prop changes
-    if (prevProps.uploadImage.uploadedImage !== this.props.uploadImage.uploadedImage) {
-      this.setState({ 
-        hasUploadedImage: !!this.props.uploadImage.uploadedImage 
-      });
+      opacityLock: this.props.uploadImage.opacityLock || false
     }
   }
 
@@ -48,27 +31,12 @@ export default class M_UploadImageContent extends Component {
     }
   }
 
-  handleImageFileChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      // Set the state to show we have an image
-      this.setState({ hasUploadedImage: true });
-      
-      // Call the original handler
-      this.props.handleFileChange(e);
-      
-      // Trigger redraw to clear from canvas
-      if (window.triggerRedraw) {
-        window.triggerRedraw();
-      }
-    }
-  }
-
   handleDeleteImage = () => {
     // Clear the image from the store
     this.props.setUploadImageStore('deleteImage', null);
     
-    // Update local state
-    this.setState({ hasUploadedImage: false });
+    // Re-render the module, whose button, Delete and sliders follow the store
+    this.setState({});
     
     // Trigger redraw to clear from canvas
     if (window.triggerRedraw) {
@@ -83,8 +51,13 @@ export default class M_UploadImageContent extends Component {
       uploadImage,
       handleUploadImageSize,
       handleUploadImageOpacity,
-      setUploadImageStore
+      setUploadImageStore,
+      handleFileChange
     } = this.props
+
+    // The store holds the image once it has loaded; the button preview, Delete and the sliders follow it.
+    // The upload itself loads the image, and the sketch redraws once it's ready.
+    const hasUploadedImage = !!uploadImage.uploadedImage
 
     return <div className="upload-image-content">
       <div className="content-row">
@@ -95,9 +68,10 @@ export default class M_UploadImageContent extends Component {
               style='title-text'
             />
             <M_FileUpload
-              handleFileChange={this.handleImageFileChange}
+              previewUrl={uploadImage.uploadedImagePreview}
+              handleFileChange={handleFileChange}
             />
-            {this.state.hasUploadedImage && (
+            {hasUploadedImage && (
               <A_Button
                 onClick={this.handleDeleteImage}
                 text='Delete'
@@ -108,7 +82,7 @@ export default class M_UploadImageContent extends Component {
           </div>
         </div>
         
-        {this.state.hasUploadedImage && (
+        {hasUploadedImage && (
           <div className="content-column">
             <M_Control
               orientation="row"

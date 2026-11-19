@@ -23,16 +23,14 @@ import {
   getBasicTypoV2Store,
   getOverlayStore,
   getFontsStore,
-  getUploadImageStore
+  getUploadImageStore,
+  coverFontFamilies
   // setCanvasSizeStore,
   // generatePosition
 } from './store'
 
 // let tools = new p5.Utils();
 // let utils
-
-let pendingImageUrl = null;
-let pendingBackgroundPhotoUrl = null;
 
 let moduleList = {}
 
@@ -151,54 +149,102 @@ window.resetLight = function() {
   setLight(r1, r2, g1, g2, b1, b2)
 }
 
-window.handleUploadedImage = function(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        // Just store the URL - we'll load it within the p5 context later
-        pendingImageUrl = e.target.result;
-        resolve({success: true});
-      } catch (err) {
-        console.error("Error processing image:", err);
-        reject(err);
-      }
-    };
-    reader.onerror = (err) => {
-      console.error("File reader error:", err);
-      reject(err);
-    };
-    reader.readAsDataURL(file);
-  });
-};
+////////////////////////////////////////////////////////////////////////////         REDRAW
 
-// ADD THIS NEW FUNCTION
-window.handleBackgroundPhotoUpload = function(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        pendingBackgroundPhotoUrl = e.target.result;
-        resolve({success: true});
-      } catch (err) {
-        console.error("Error processing background photo:", err);
-        reject(err);
-      }
-    };
-    reader.onerror = (err) => {
-      console.error("File reader error:", err);
-      reject(err);
-    };
-    reader.readAsDataURL(file);
-  });
-};
+// The sketch runs with noLoop(), so the canvas only changes when something asks for a redraw.
+// requestRedraw() batches those requests: at most one redraw per animation frame.
+let redrawRequested = false
 
-// CLAUDE Add this near the top of sketch.js with other window functions
-window.triggerRedraw = function() {
-  if (cover) {
+function requestRedraw() {
+  if (!cover || redrawRequested) return
+  redrawRequested = true
+  window.requestAnimationFrame(() => {
+    redrawRequested = false
     cover.redraw()
-    console.log('sketch CALLED')
+  })
+}
+
+// Called by the React controls after each change
+window.triggerRedraw = requestRedraw
+
+// Text drawn before its font has arrived uses a fallback font, so redraw as soon as each font arrives:
+// - preloadCoverFonts() starts loading the cover fonts when the page opens, and redraws as each one loads;
+// - drawing can start more downloads (letters such as ą or ł live in another file of the font),
+//   which watchLoadingFonts() picks up after every draw;
+// - 'loadingdone' is the safety net: it fires once every pending font on the page has loaded.
+// If a font fails to load, the canvas keeps its fallback font; nothing else to do.
+const watchedFonts = new WeakSet()
+
+function watchLoadingFonts() {
+  document.fonts.forEach((fontFace) => {
+    if (fontFace.status === 'loading' && !watchedFonts.has(fontFace)) {
+      watchedFonts.add(fontFace)
+      fontFace.loaded.then(requestRedraw, () => {})
+    }
+  })
+}
+
+document.fonts.addEventListener('loadingdone', requestRedraw)
+
+function preloadCoverFonts() {
+  coverFontFamilies.forEach((family) => {
+    document.fonts.load(`40px "${family}"`).then(requestRedraw, () => {})
+  })
+}
+
+////////////////////////////////////////////////////////////////////////////         UPLOADS
+
+// Loads an uploaded file. Resolves with { img, preview }: the p5.Image to draw, and a blob: URL of an
+// in-memory copy of the file, shown on the upload button. The browser decodes that preview off the main
+// thread. (A data: URL froze the page for a moment each time the button showed a big photo, and so did
+// a thumbnail made from the p5.Image.) The copy keeps the preview working if the file changes on disk.
+function loadImageFile(file) {
+  if (!cover) {
+    return Promise.reject(new Error('The sketch is not ready yet'))
   }
+
+  return file.arrayBuffer().then((data) => new Promise((resolve, reject) => {
+    const preview = URL.createObjectURL(new Blob([data], { type: file.type }))
+    cover.loadImage(
+      preview,
+      (img) => resolve({ img, preview }),
+      (err) => {
+        URL.revokeObjectURL(preview)
+        reject(err)
+      }
+    )
+  }))
+}
+
+// Stores a loaded upload in its module's store, freeing the preview of the image it replaces
+function storeUpload(store, { img, preview }) {
+  if (store.uploadedImagePreview) {
+    URL.revokeObjectURL(store.uploadedImagePreview)
+  }
+  store.uploadedImage = img
+  store.uploadedImagePreview = preview
+}
+
+// Logo or sticker (UploadImage module)
+window.handleUploadedImage = function(file) {
+  return loadImageFile(file).then((upload) => {
+    const uploadImage = getUploadImageStore()
+    storeUpload(uploadImage, upload)
+
+    if (!uploadImage.positionLock) {
+      uploadImage.positionIndex = Math.floor(Math.random() * uploadImage.positions.length)
+    }
+
+    requestRedraw()
+  })
+}
+
+// Photo background (Background module)
+window.handleBackgroundPhotoUpload = function(file) {
+  return loadImageFile(file).then((upload) => {
+    storeUpload(getBackgroundStore().preset.Photo, upload)
+    requestRedraw()
+  })
 }
 
 function setLight(r1, r2, g1, g2, b1, b2) {
@@ -1969,12 +2015,6 @@ function drawModules(p) {
 
 
     p.drawingContext.shadowBlur = 0
-
-    //setTimeout(() => {
-    //  p.redraw();
-    //  console.log('Sketch timeOut100')
-    //}, 1000);
-
   }
 
 }
@@ -2117,142 +2157,7 @@ function sketch(p) {
 
     //////////////////////////////////////////////////// FONTS
 
-    // const fontsFiles = getFontsStore()
-    // console.log(fontsFiles);
-
-    //fontEsenin = p.loadFont('../fonts/esenin-script-one.ttf');
-    //mainTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
-    //otherTextFont = p.loadFont('../fonts/esenin-script-one.ttf');
-
-    //ptrootuiReg = p.loadFont('../fonts/PT-Root-UI_Regular.woff')
-    //ptrootuiBold = p.loadFont('../fonts/PT-Root-UI_Bold.woff')
-    //ptrootuiLight = p.loadFont('../fonts/PT-Root-UI_Light.woff')
-    
-    //p.loadFont('../fonts/Acosta.otf')
-    //p.loadFont('../fonts/wonky.otf')
-    //p.loadFont('../fonts/Bolgarus.otf')
-    //p.loadFont('../fonts/YUNGA-Display.otf')
-    //p.loadFont('../fonts/typekini.ttf')
-    //p.loadFont('../fonts/AUSRINE.ttf')
-    
-    p.loadFont('./fonts/Aileron-Bold.otf')
-
-    //////
-
-    //aDC = p.loadFont('../fonts/ADC-Semi-Bold.otf')
-    //mint = p.loadFont('../fonts/MintSansRegular.otf')
-    //liberation = p.loadFont('../fonts/LiberationSans-Regular.ttf')
-
-    //meaculpa = p.loadFont('../fonts/MeaCulpa-Regular.ttf')
-    //luxuriousScript = p.loadFont('../fonts/LuxuriousScript-Regular.ttf')
-    //pinyonScript = p.loadFont('../fonts/PinyonScript-Regular.ttf')
-    //italianno = p.loadFont('../fonts/Italianno-Regular.ttf')
-    
-    
-
-
-    
-    
-    
-    
-
-  }
-
-  //function checkPendingImage() {
-  //  if (pendingImageUrl) {
-  //    const uploadImage = getUploadImageStore();
-  //    const background = getBackgroundStore();
-
-  //    // Check if we're uploading for UploadImage module or Background Photo
-  //    if (background.currentBackgroundType === 'Photo' && !uploadImage.uploadedImage) {
-  //      // This is for background photo
-  //      p.loadImage(pendingImageUrl, 
-  //        loadedImg => {
-  //          background.preset.Photo.uploadedImage = loadedImg;
-  //          pendingImageUrl = null;
-
-  //          // Trigger p5 redraw
-  //          if (window.triggerRedraw) {
-  //            window.triggerRedraw()
-  //          }
-  //        },
-  //        err => {
-  //          console.error("Failed to load background image:", err);
-  //          pendingImageUrl = null;
-  //        }
-  //      );
-  //    } else {
-  //      p.loadImage(pendingImageUrl, 
-  //        // Success callback
-  //        loadedImg => {
-  //          uploadImage.uploadedImage = loadedImg;
-            
-  //          // Randomize position if not locked
-  //          if (!uploadImage.positionLock) {
-  //            const positions = uploadImage.positions;
-  //            const randomIndex = Math.floor(Math.random() * positions.length);
-  //            uploadImage.positionIndex = randomIndex;
-  //          }
-            
-  //          // Clear the pending URL
-  //          pendingImageUrl = null;
-
-  //          // Trigger p5 redraw
-  //          if (window.triggerRedraw) {
-  //            window.triggerRedraw()
-  //          }
-  //        },
-  //        // Error callback
-  //        err => {
-  //          console.error("Failed to load image:", err);
-  //          pendingImageUrl = null;
-  //        }
-  //      );
-  //    }
-  //  }
-  //}
-
-  function checkPendingImage() {
-    // Check for uploaded logo/sticker
-    if (pendingImageUrl) {
-      const uploadImage = getUploadImageStore();
-      
-      p.loadImage(pendingImageUrl, 
-        loadedImg => {
-          uploadImage.uploadedImage = loadedImg;
-          
-          if (!uploadImage.positionLock) {
-            const positions = uploadImage.positions;
-            const randomIndex = Math.floor(Math.random() * positions.length);
-            uploadImage.positionIndex = randomIndex;
-          }
-          
-          pendingImageUrl = null;
-          //p.redraw();
-        },
-        err => {
-          console.error("Failed to load image:", err);
-          pendingImageUrl = null;
-        }
-      );
-    }
-    
-    // CHECK FOR BACKGROUND PHOTO - ADD THIS
-    if (pendingBackgroundPhotoUrl) {
-      const background = getBackgroundStore();
-      
-      p.loadImage(pendingBackgroundPhotoUrl,
-        loadedImg => {
-          background.preset.Photo.uploadedImage = loadedImg;
-          pendingBackgroundPhotoUrl = null;
-          //p.redraw();
-        },
-        err => {
-          console.error("Failed to load background photo:", err);
-          pendingBackgroundPhotoUrl = null;
-        }
-      );
-    }
+    // The cover fonts are CSS web fonts (see fonts.scss), loaded by preloadCoverFonts().
   }
 
   p.setup = () => {
@@ -2308,12 +2213,8 @@ function sketch(p) {
       blendedLayer = p.createGraphics(canvasSize, canvasSize)
     }
     
-    // Draw the initial frame
-    //p.redraw()
-
-    // CLAUDE //
-    // Add this at the end of setup
-    p.noLoop() // STOP continuous drawing
+    // Only draw when asked to (see requestRedraw). p5 still draws the first frame after setup.
+    p.noLoop()
   }
   
   p.windowResized = () => {
@@ -2342,31 +2243,17 @@ function sketch(p) {
 
   
   p.draw = () => {
-    // Check for any pending image at the start of each frame
-    checkPendingImage();
-
-    // CLAUDE dit de suppr ca et le mettre dans if
-    //drawModules(p)
-    
     const blend = getBlendStore()
     if (blend.difference == true) {
       p.clear()
       p.blendMode(p.DIFFERENCE)
       drawModules(p)
-      //p.redraw();
     } else {
       p.clear()
       drawModules(p)
-      //p.redraw();
-
     }
-    //p.redraw();
+    watchLoadingFonts()
   }
-  
-  setTimeout(() => {
-    p.redraw();
-    console.log('redrawSketch?')
-  }, 1000);
 }
 
 ///////////////////////////////////////////////////
@@ -2385,23 +2272,10 @@ function initSketch(id, size) {
 
   moduleList = getModuleList()
 
+  preloadCoverFonts()
+
   // let utils = new p5.Utils()
   cover = new p5(sketch)
-
-  // ADD THIS - Expose redraw function globally
-  //window.triggerRedraw = function() {
-  //  if (cover) {
-  //    cover.redraw();
-  //  }
-  //}
-  setTimeout(() => {
-    window.triggerRedraw = function() {
-      if (cover) {
-        cover.redraw();
-      }
-    }
-    console.log('redrawSketch?')
-  }, 1000);
 }
 
 

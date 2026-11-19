@@ -4,6 +4,20 @@
 - **Version audited:** branch `gh-pages` at commit `358041c` (13 November 2025), plus that day's uncommitted changes to [sketch.js](src/javascript/sketch.js), [TeaserGeneratorContainer.jsx](src/javascript/TeaserGeneratorContainer.jsx) and [M_UploadImageContent.jsx](src/javascript/components/molecules/moduleContent/M_UploadImageContent.jsx).
 - **Line numbers** are from that version and will drift as the code changes. If a link lands on the wrong line, search for the code quoted next to it.
 
+## Progress
+
+Updated 19 November 2026, on branch `work`. Each fix was tested in headless Chrome, before and after the change. Each item that has changed since the audit starts with a status line.
+
+- **Fixed:** items 1 to 4 and 7 to 13, and half of item 21.
+- **Partly fixed:** item 14. The generator's interface isn't translated yet.
+- **Left as is, by decision:** item 5, and the last sentence of item 11.
+- **Later:** item 6.
+- **Still open:** the old generator pages, items 15 to 20, the other half of 21, items 22 to 24, and the Low section.
+- **Also fixed, not in the audit:**
+  - The background photo now stays on its upload button when the Background module is closed and reopened.
+  - The upload buttons' dark overlay on hover now shows. Its class name was misspelled.
+  - Showing a big photo on its upload button no longer freezes the page for a moment.
+
 ## Summary
 
 The teaser generator on the home page, the live part of the site, works. But it has a redraw leak, several controls that silently do nothing, a phone layout that breaks the Text module, low-resolution downloads, and about 20 MB to download on a first visit.
@@ -25,6 +39,8 @@ Each item says how it was confirmed: **tested** means reproduced in the browser;
 
 ### 1. Redraw leak on the live site (tested)
 
+> **Status: fixed.** Nothing redraws on a timer any more: every change goes through `requestRedraw()` in [sketch.js](src/javascript/sketch.js), which draws at most once per screen refresh. Tested: no redraws at rest, and none 10 s after a slider drag.
+
 In the deployed commit, every draw schedules another redraw one second later ([sketch.js:1973](src/javascript/sketch.js#L1973), commented out in the working copy). Each control change starts a chain that never stops.
 
 Measured: 1 redraw per second at rest after load, about 40 per second after one slider drag (40 input events), and still 40 per second ten seconds later. It keeps climbing while someone plays with the controls, which wastes CPU and battery.
@@ -32,6 +48,8 @@ Measured: 1 redraw per second at rest after load, about 40 per second after one 
 **Fix:** see item 2. The timer-based redraws need replacing, not just removing.
 
 ### 2. The uncommitted fix leaves the canvas out of date (tested)
+
+> **Status: fixed**, as suggested below. An uploaded image appears as soon as it has loaded: after 0.12 s for a logo, 0.25 s for a 12-megapixel photo. The 10 cover fonts start loading when the page opens, and the canvas redraws whenever a font file arrives. GENERATE showed the right font 8 times out of 8, against 4 before. The timers and the `checkPendingImage` polling are gone.
 
 - **Uploads:** an uploaded logo or background photo doesn't appear until the next click. The redraws after loading are commented out ([sketch.js:2231](src/javascript/sketch.js#L2231), [2248](src/javascript/sketch.js#L2248)), and the 100 ms timers ([TeaserGeneratorContainer.jsx:171](src/javascript/TeaserGeneratorContainer.jsx#L171), [220](src/javascript/TeaserGeneratorContainer.jsx#L220)) fire before the image has loaded.
 - **Fonts:** cover fonts load on first use, so a newly picked font is first drawn with a fallback. In 4 of 8 GENERATE clicks the cover stayed in the wrong font, and a download at that moment saves it that way.
@@ -44,11 +62,20 @@ Measured: 1 redraw per second at rest after load, about 40 per second after one 
 
 ### 3. The home page has no text until its 2.6 MB script runs (tested)
 
+> **Status: fixed**, both ways suggested below ([index.html](src/index.html)). The `<body>` tag has `lang-en`, and an inline script right after it applies a saved French or Russian choice before the first paint. [teaserGenerator.jsx](src/teaserGenerator.jsx) no longer adds `lang-en`: with Russian saved, that showed English and Russian together for a moment. Tested: the texts show even with the script blocked or JavaScript off, and a visitor who chose Russian no longer sees English first.
+
 [language.scss:3](src/stylesheets/language.scss#L3) hides every translated block, and only the script adds the `lang-en` class ([teaserGenerator.jsx:89](src/teaserGenerator.jsx#L89)). With the script blocked, 0 of 60 text blocks were visible. Visitors who chose FR or RU may also see English briefly before their language is applied (from code).
 
 **Fix:** put the class in the HTML: `<body class="teaser-generator lang-en">` ([index.html:35](src/index.html#L35)). Better still, add a one-line inline script right after `<body>` that applies the saved `preferredLanguage` ([A_LanguageToggle.jsx:15](src/javascript/components/ATOMS/A_LanguageToggle.jsx#L15)) before the first paint.
 
 ### 4. Text module unusable on phones (tested at 390 px wide)
+
+> **Status: fixed by simplifying the generator on phones**, since its full settings aren't meant for small screens ([adaptive.scss](src/stylesheets/adaptive.scss)). Up to 743 px wide:
+> - the Text module shows only the main text and first small text fields, at full width with their label above, and no Text settings buttons;
+> - the logo module shows only its upload button, plus Delete once a logo is in;
+> - Background, Vinyl Disc and Lines don't open, which is why their names have no arrow on phones.
+>
+> Tested at 390 px: each text field is now 326 px wide, against 72 and 40 px before.
 
 - The main-text box is about 3 characters wide and the small-text box 1 character.
 - The second "Text settings" button is off-screen.
@@ -58,9 +85,13 @@ Measured: 1 redraw per second at rest after load, about 40 per second after one 
 
 ### 5. On phones the language switcher covers the Randomize buttons (tested)
 
+> **Status: left as is.** Not considered a problem.
+
 The switcher is pinned on top of everything (`position: fixed`, `z-index: 9999`, [A_LanguageToggle.scss:46-63](src/stylesheets/A_LanguageToggle.scss#L46-L63)), and its small-screen styles are commented out ([lines 65-80](src/stylesheets/A_LanguageToggle.scss#L65-L80)). When a module header is near the top of the screen, tapping its Randomize button hits the switcher instead (5 of 5 modules).
 
 ### 6. Downloads are only as large as the on-screen canvas (tested)
+
+> **Status: to check later.**
 
 [saveCanvasAsImage](src/javascript/sketch.js#L2409-L2413) saves the on-screen canvas:
 
@@ -78,17 +109,25 @@ Some sizes are fixed pixels: line thickness ([sketch.js:1312](src/javascript/ske
 
 ### 7. Changing the small text's font type does nothing (tested)
 
+> **Status: fixed.** The store now saves the font where the sketch reads it. Tested: switching the small text between Sans Serif and Script changes its font straight away.
+
 The store writes the font to `moduleBasicTypoWithTabsStore.fontOtherText` ([store.js:1547](src/javascript/store.js#L1547), [1550](src/javascript/store.js#L1550)), but the sketch reads `preset.Track.fontOtherText` ([sketch.js:1802](src/javascript/sketch.js#L1802)). Changing the main text's font type works.
 
 ### 8. In the "Random" layout, added small texts never appear (tested)
+
+> **Status: fixed.** Adding a small text now gives it a random position too, whatever the current layout. Tested with up to 6 small texts, also after removing one and switching layouts. Removing a text moves each later text into the previous one's spot, as the Simple layout already did.
 
 Random positions are created only for the starting number of texts ([store.js:1486](src/javascript/store.js#L1486), [1616](src/javascript/store.js#L1616)). Adding a text ([store.js:1588-1591](src/javascript/store.js#L1588-L1591)) doesn't add a position, and the sketch skips any text without one ([sketch.js:1894](src/javascript/sketch.js#L1894)).
 
 ### 9. The lock buttons never show in "Text settings" (tested)
 
+> **Status: fixed.** Each popup now has 4 padlocks, and a locked text kept its settings over 10 Randomizes (tested). The Type lock keeps Sans Serif or Script, not the exact font: that's how the store was written.
+
 The popup has 4 controls and 0 lock icons. [M_TextSettings.jsx:218-293](src/javascript/components/molecules/M_TextSettings.jsx#L218-L293) renders `M_Control` without `hasLock`, and [M_Control.jsx:149-156](src/javascript/components/molecules/controls/M_Control.jsx#L149-L156) only shows the lock when it's set.
 
 ### 10. Background → Randomize picks "Photo" when nothing is uploaded (tested)
+
+> **Status: fixed**, as suggested below. Tested over 60 Randomizes: Photo was picked 0 times with no photo uploaded, and 14 times after uploading one.
 
 It landed on Photo 17 times out of 40, which gives a black background. [store.js:1983-1986](src/javascript/store.js#L1983-L1986) picks from every background type.
 
@@ -96,13 +135,23 @@ It landed on Photo 17 times out of 40, which gives a black background. [store.js
 
 ### 11. Deleting the logo is incomplete (tested)
 
+> **Status: fixed, apart from the last sentence.** The upload buttons now show a preview kept in the store next to the image, so Delete clears it. The file picker is emptied after each pick, so the same file can be picked again. The background photo gets no Delete button, by decision: it's only drawn while the Photo tab is selected, so switching to another tab already takes it off the cover.
+
 After Delete, the thumbnail stays and the file picker still holds the file, so picking the same file again does nothing. The upload control keeps its own preview and never resets its input ([M_FileUpload.jsx:18-32](src/javascript/components/molecules/controls/M_FileUpload.jsx#L18-L32)), and Delete ([M_UploadImageContent.jsx:66](src/javascript/components/molecules/moduleContent/M_UploadImageContent.jsx#L66)) can't clear either. There is no way to remove the background photo.
 
 ### 12. The Lines quantity slider shows the wrong value after changing the line type (from code)
 
+> **Status: fixed.** Every line type now sets the slider, and Randomize picks a whole number of lines: before, the slider showed one line fewer than the cover in 40 of 80 Randomizes. Tested: correct after every type switch and Randomize.
+
 Only the "Straight" type updates it ([store.js:759-775](src/javascript/store.js#L759-L775)).
 
 ### 13. Cyrillic titles fall back to a system font (tested)
+
+> **Status: fixed differently.** The 10 fonts stay, and each is paired with a Google Fonts family that has Cyrillic, used only for Cyrillic letters ([fonts.scss](src/stylesheets/fonts.scss); font files and licences in [src/fonts/cyrillic/](src/fonts/cyrillic/)):
+> - PT Sans Narrow for Barlow Semi Condensed, Manrope for DM Sans, Montserrat for Poppins, Golos Text for Space Grotesk, Tektur (condensed) for Teko, and Arimo Bold for Aileron;
+> - Great Vibes for Mea Culpa, Luxurious Script and Pinyon Script, and Comforter for Italianno.
+>
+> A partner is downloaded only when Cyrillic text is drawn. Tested: Cyrillic is drawn with its partner in all 10 fonts, and Latin text is unchanged. Each partner must be declared with the same weights as its font's Google Fonts import, or the browser ignores it (see the comment in fonts.scss).
 
 None of the 10 cover fonts ([store.js:1169](src/javascript/store.js#L1169), [1173](src/javascript/store.js#L1173)) includes Cyrillic letters, on a site offered in Russian.
 
@@ -110,9 +159,13 @@ None of the 10 cover fonts ([store.js:1169](src/javascript/store.js#L1169), [117
 
 ### 14. Some text is never translated (from code)
 
+> **Status: partly fixed.** The mobile first screen is now in all three languages, reusing the desktop texts, and `<html lang>` follows the chosen language. Left for later: the generator interface, the footer's "By …", the browser tab title and three image descriptions (alt texts). On phones, the longer French and Russian statements push the round graphic down, so "Learn more" sits just above it instead of inside its dark band; kept as is.
+
 The mobile first screen ([index.html:63-76](src/index.html#L63-L76)) and the whole generator interface except GENERATE are English-only. `<html lang="en">` ([index.html:2](src/index.html#L2)) never changes when the language does.
 
 ## Old generator pages: deployed but broken
+
+> **Status: still open.** The "Loading…" hang is gone: the fix for item 2 removed that font line, and generator4 now loads (tested). The other problems below remain.
 
 The 29 pages built from [src/generators/](src/generators/) (generator1 to generator10 and their `_2` to `_5` variants) aren't linked from the home page, but anyone with the address can open them. The old home page that lists them, [landing.html](src/landing.html), and its two empty placeholder pages, [about.html](src/about.html) and [socials.html](src/socials.html), are deployed too.
 
@@ -170,6 +223,8 @@ The canvas is also rebuilt on every resize event, even when the size hasn't chan
 
 ### 21. Two font mistakes in the CSS (tested)
 
+> **Status: half fixed.** `format('opentype')` is in, as preloading Aileron for item 2 needed it. The `bc-novatica-cy` misspelling is still there.
+
 - The misspelled `"bc-novatica-cy"` ([teaserGenerator.scss:222](src/stylesheets/teaserGenerator.scss#L222)) makes the desktop "Try our teaser generator" button fall back to a generic font. It should be `bc-novatica-cyr`.
 - `format('otf')` ([fonts.scss:9](src/stylesheets/fonts.scss#L9)) isn't a valid value, so the browser ignores the font file in that rule. Use `format('opentype')`.
 
@@ -203,7 +258,7 @@ The `og:` and `twitter:` URLs ([index.html:20-30](src/index.html#L20-L30)) use `
 - **Most mismatches between the controls and the canvas share one cause.** Values live in mutable module-level objects, get copied into component state, and are re-rendered with `setState({})`, through 30+ near-identical handlers. One shared function that updates a value and redraws once would remove most of these bugs.
 - **Isolate each module's drawing with `p.push()` and `p.pop()`.** Drawing settings (fill, rectMode, blendMode) currently leak from one module to the next. The gradient at [sketch.js:682](src/javascript/sketch.js#L682) only fills the canvas because the text module's `rectMode(CENTER)` carries over from the previous frame.
 - **Accessibility:** the generator has no real buttons or links. Its controls, including the 12 module-header controls, are clickable `<div>`s, so they can't be reached with a keyboard or announced by screen readers. The download button has no label, and the text-box text contrast is about 4.1:1, below the usual 4.5:1 minimum.
-- **Failed uploads are silent:** errors only go to the browser console ([sketch.js:2234](src/javascript/sketch.js#L2234), [2251](src/javascript/sketch.js#L2251)). Show a message instead.
+- **Failed uploads are silent:** errors only go to the browser console (since items 1 and 2, from the upload handlers in [TeaserGeneratorContainer.jsx](src/javascript/TeaserGeneratorContainer.jsx)). Show a message instead.
 - **Outdated build tools** ([package.json:19-43](package.json#L19-L43)): webpack-cli 4, sass-loader 11, css-loader 5 and css-minimizer-webpack-plugin 2 are several major versions behind. file-loader and @babel/plugin-proposal-class-properties are no longer needed (webpack 5's asset modules and @babel/preset-env cover them), and react-color hasn't been updated since 2020.
 - **The webpack config repeats itself:** CopyPlugin is added twice ([webpack.common.js:90](webpack.common.js#L90), [106](webpack.common.js#L106)), and the 29 generator pages are 29 hand-written HtmlWebpackPlugin blocks ([lines 136-366](webpack.common.js#L136-L366)).
 - **CSS leftovers:**
@@ -222,15 +277,15 @@ The `og:` and `twitter:` URLs ([index.html:20-30](src/index.html#L20-L30)) use `
   - [draft](draft) at the project root (303 lines of commented-out code).
   - Unused images in [src/images/ui/](src/images/ui/): generatorExample-TOCHANGE.png (7.4 MB), generatorExample-cut.png, modulesExamples.png, modulesExamples-4.png, modulesExamples-x3.png, maket-teaserPage.jpg and logo-share.svg.
   - Commented-out code: sketch.js has 601 comment lines, mostly old code, and about 20% of TeaserGeneratorContainer.jsx is commented out.
-- **Remove leftover debug messages:** `console.log` calls at [store.js:1299](src/javascript/store.js#L1299) (`'WTF'`), [store.js:1584-1626](src/javascript/store.js#L1584-L1626), [sketch.js:200](src/javascript/sketch.js#L200), [2368](src/javascript/sketch.js#L2368) and [2403](src/javascript/sketch.js#L2403), [TeaserGeneratorContainer.jsx:224](src/javascript/TeaserGeneratorContainer.jsx#L224) and [M_AddRemoveText.jsx:18](src/javascript/components/molecules/controls/M_AddRemoveText.jsx#L18).
+- **Remove leftover debug messages:** `console.log` calls at [store.js:1299](src/javascript/store.js#L1299) (`'WTF'`), [store.js:1584-1626](src/javascript/store.js#L1584-L1626), [sketch.js:200](src/javascript/sketch.js#L200), [2368](src/javascript/sketch.js#L2368) and [2403](src/javascript/sketch.js#L2403), [TeaserGeneratorContainer.jsx:224](src/javascript/TeaserGeneratorContainer.jsx#L224) and [M_AddRemoveText.jsx:18](src/javascript/components/molecules/controls/M_AddRemoveText.jsx#L18). The ones in sketch.js and TeaserGeneratorContainer.jsx were removed with items 1 and 2.
 - **Add `/docs` to [.gitignore](.gitignore).** A local build writes 174 MB there, which is easy to commit by accident.
 - **Branches:** `main` is 33 commits behind `gh-pages`, so the repository's main branch on GitHub shows old code.
 
 ## Suggested order
 
-1. Redo the redraws (items 1 and 2), loading the cover fonts up front, then fix 3 and 7 to 11. These are small fixes to the live page.
-2. Phone layout (4 and 5).
-3. Full-size download (6).
+1. Redo the redraws (items 1 and 2), loading the cover fonts up front, then fix 3 and 7 to 11. These are small fixes to the live page. **Done.**
+2. Phone layout (4 and 5). **Done** (5 left as is).
+3. Full-size download (6). **Later.**
 4. Smaller downloads: one config line plus resized images (15 and 16).
 5. Clean up publishing: delete the duplicate workflow, then tidy the lock files, package.json and .gitignore (17, 18 and 23).
 6. Decide what to do with the old generator pages. Removing them from the build takes about five minutes.

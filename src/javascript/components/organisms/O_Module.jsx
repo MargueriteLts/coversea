@@ -253,7 +253,7 @@ export default class O_Module extends Component {
     const { moduleName, moduleType, handleRandomizeModule } = this.props
 
 
-    return <div className="module">
+    return <div className={`module module--${moduleType}`}>
       <M_ModuleHeader
         title={moduleName}
         handleRandomizeModule={handleRandomizeModule}

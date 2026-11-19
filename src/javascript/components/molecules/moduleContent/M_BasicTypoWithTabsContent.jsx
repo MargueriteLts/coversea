@@ -311,7 +311,7 @@ export default class M_BasicTypoWithTabsContent extends Component {
     const nbCoverTypes = basictypowithtabs.coverTypes.length
 
     return (
-    <div className="background-content">
+    <div className="background-content basic-typo-module">
         <div className="background-content__with-tabs">
           <div className="background-content__with-tabs-tabs">
             <TabButtonSet

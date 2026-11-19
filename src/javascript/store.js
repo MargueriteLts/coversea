@@ -240,6 +240,7 @@ function initBackgroundStore(background) {
       background.preset.Photo = Object.assign({}, background.preset.Photo, {
         text: 'Photo',
         uploadedImage: null,
+        uploadedImagePreview: null,
         locked: false
       })
     }
@@ -447,7 +448,7 @@ function setBackgroundImageStore(type, value) {
 ////////////////////// UPLOAD IMAGES
 
 function initUploadImageStore(preset) {
-  preset = Object.assign({}, preset, { moduleName: 'Upload logo/Sticker', uploadedImage: null, sizeLock: false, opacityLock: false, positionLock: false });
+  preset = Object.assign({}, preset, { moduleName: 'Upload logo/Sticker', uploadedImage: null, uploadedImagePreview: null, sizeLock: false, opacityLock: false, positionLock: false });
   return preset;
 }
 
@@ -477,7 +478,12 @@ function setUploadImageStore(type, value) {
     }
 
     if (type === 'deleteImage') {
+      // The preview is a blob: URL (see loadImageFile in sketch.js): free it along with the image
+      if (moduleUploadImageStore.uploadedImagePreview) {
+        URL.revokeObjectURL(moduleUploadImageStore.uploadedImagePreview);
+      }
       moduleUploadImageStore.uploadedImage = null;
+      moduleUploadImageStore.uploadedImagePreview = null;
       moduleUploadImageStore.positionIndex = 0;
       resolve([null]);
     }
@@ -764,12 +770,15 @@ function setLinesStore(type, value) {
       }
       if (value == 'Curves') {
         moduleLinesStore.maxQuantity = moduleLinesStore.preset.Curves.max
+        moduleLinesStore.sliderValueQuantity = moduleLinesStore.preset.Curves.quantity
       }
       if (value == 'Arcs') {
         moduleLinesStore.maxQuantity = moduleLinesStore.preset.Arcs.max
+        moduleLinesStore.sliderValueQuantity = moduleLinesStore.preset.Arcs.quantity
       }
       if (value == 'Bouncing') {
         moduleLinesStore.maxQuantity = moduleLinesStore.preset.Bouncing.max
+        moduleLinesStore.sliderValueQuantity = moduleLinesStore.preset.Bouncing.quantity
       }
       resolve([value])
     }
@@ -1159,18 +1168,13 @@ function generatePositionsRandom(count = 1) {
   return positions
 }
 
+// The families setfont() picks from. sketch.js starts loading all of them when the page opens.
+const sansSerifFonts = ['Barlow Semi Condensed', 'DM Sans', 'Poppins', 'Space Grotesk', 'Teko', 'Aileron-Bold']
+const scriptFonts = ['Mea Culpa', 'Luxurious Script', 'Pinyon Script', 'Italianno']
+const coverFontFamilies = [...sansSerifFonts, ...scriptFonts]
+
 function setfont(fontType) {
   let font
-
-  //let sansSerifFonts = ['ADC-Semi-Bold', 'MintSansRegular', 'LiberationSans-Regular']
-  //let sansSerifFonts = ['aDC', 'mint', 'liberation']
-
-  //let sansSerifFonts = ['Aileron-Bold']
-  let sansSerifFonts = ['Barlow Semi Condensed', 'DM Sans', 'Poppins', 'Space Grotesk', 'Teko', 'Aileron-Bold']
-
-  //let scriptFonts = ['MeaCulpa-Regular', 'LuxuriousScript-Regular', 'PinyonScript-Regular', 'Italianno-Regular']
-  //let scriptFonts = ['meaculpa', 'luxuriousScript', 'pinyonScript', 'italianno']
-  let scriptFonts = ['Mea Culpa', 'Luxurious Script', 'Pinyon Script', 'Italianno']
 
   if (fontType == 'Script') {
     font = sample(scriptFonts)
@@ -1544,10 +1548,10 @@ function setBasicTypoWithTabsStore(type, nextValue) {
       moduleBasicTypoWithTabsStore.preset.Track.otherText.currentFont = nextValue
 
       if (nextValue == 'Script') {
-        moduleBasicTypoWithTabsStore.fontOtherText = setfont(moduleBasicTypoWithTabsStore.preset.Track.otherText.currentFont)
+        moduleBasicTypoWithTabsStore.preset.Track.fontOtherText = setfont(moduleBasicTypoWithTabsStore.preset.Track.otherText.currentFont)
       }
       if (nextValue == 'Sans Serif') {
-        moduleBasicTypoWithTabsStore.fontOtherText = setfont(moduleBasicTypoWithTabsStore.preset.Track.otherText.currentFont)
+        moduleBasicTypoWithTabsStore.preset.Track.fontOtherText = setfont(moduleBasicTypoWithTabsStore.preset.Track.otherText.currentFont)
       }
       resolve([nextValue])
     }
@@ -1588,6 +1592,14 @@ function setBasicTypoWithTabsStore(type, nextValue) {
      if (type === 'textarea') {
       console.log('STORE textarea')
       moduleBasicTypoWithTabsStore.preset.Track.otherText.values = nextValue
+
+      // The Random layout draws each small text at a position of its own (the first one is the main text's),
+      // and skips a text that has none: give added texts one, whatever the current layout
+      const randomPositions = moduleBasicTypoWithTabsStore.preset.Track.textPositions.random
+      const missing = 1 + nextValue.length - randomPositions.length
+      if (missing > 0) {
+        randomPositions.push(...generatePositionsRandom(missing))
+      }
     }
 
     //COLOR??
@@ -1981,7 +1993,9 @@ function randomizeModuleStore(moduleType) {
       let newBackgroundType = moduleBackgroundStore.currentBackgroundType
 
       if (moduleBackgroundStore.locked == false) {
-        newBackgroundType = sample(moduleBackgroundStore.backgroundTypes)
+        // Photo only once a photo has been uploaded: without one, the Photo background is plain black
+        const backgroundTypes = moduleBackgroundStore.backgroundTypes.filter((type) => type != 'Photo' || moduleBackgroundStore.preset.Photo.uploadedImage)
+        newBackgroundType = sample(backgroundTypes)
         setBackgroundStore('CurrentTabChange', newBackgroundType)
       }
       
@@ -2373,7 +2387,8 @@ function randomizeModuleStore(moduleType) {
       //console.log('maxQuantity', moduleLinesStore.maxQuantity);
       if (moduleLinesStore.quantityLocked == false) {
 
-        let newSliderValue = getRandomArbitrary(1, moduleLinesStore.maxQuantity)
+        // a whole number: the slider rounds to one, while the cover draws one line per started unit
+        let newSliderValue = Math.round(getRandomArbitrary(1, moduleLinesStore.maxQuantity))
         //moduleLinesStore.sliderValueQuantity = newSliderValue
         setLinesStore('linesQuantity', newSliderValue)
       } else {
@@ -2493,6 +2508,7 @@ export {
   get3DStore,
   set3DStore,
   getFontsStore,
+  coverFontFamilies,
   // setCanvasSizeStore,
   // generatePosition,
   getBlendStore,

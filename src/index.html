@@ -32,7 +32,18 @@
   <analytics></analytics>
 </head>
 
-<body class="teaser-generator">
+<body class="teaser-generator lang-en">
+  <!-- Texts show in English from the start; a French or Russian choice saved by the language toggle is applied
+       here, before the page is drawn, so it doesn't wait for the generator script -->
+  <script>
+    try {
+      var savedLanguage = localStorage.getItem('preferredLanguage')
+      if (savedLanguage === 'fr' || savedLanguage === 'ru') {
+        document.body.classList.replace('lang-en', 'lang-' + savedLanguage)
+        document.documentElement.lang = savedLanguage
+      }
+    } catch (e) {}
+  </script>
   <div class="language-toggle-container" id="language-toggle-root"></div>
 
   <!-- header -->
@@ -60,9 +71,17 @@
       </section>
   
       <section  class="section-CTA-mobile">
-        <div id="scrollButton-mobile" class="button">Try our teaser generator</div>
+        <div id="scrollButton-mobile" class="button">
+          <span class="lang-en lang-content">Try our teaser generator</span>
+          <span class="lang-fr lang-content">Essayez notre teaser générateur</span>
+          <span class="lang-ru lang-content">Попробуйте наш тизер генератор</span>
+        </div>
         <div class="subSection-CTA">
-          <p>Learn more</p>
+          <p>
+            <span class="lang-en lang-content">Learn more</span>
+            <span class="lang-fr lang-content">En savoir plus</span>
+            <span class="lang-ru lang-content">Узнать больше</span>
+          </p>
           <img src="./images/ui/icons/AngleDown.svg" alt="Angle Down icon" class="icon">
         </div>
       </section>
@@ -70,9 +89,18 @@
       <div class="statement-position">
           <div id="bg-statement"></div>
         <div class="statement">
+          <span class="lang-en lang-content">
             We seek to make visual expression accessible to all music lovers, and foster a vibrant music landscape,
-            by establishing Coversea as a leading canvas
-            for cover artwork creation
+            by establishing Coversea as a leading canvas for cover artwork creation
+          </span>
+          <span class="lang-fr lang-content">
+            Nous cherchons à rendre l'expression visuelle accessible à tous les amateurs de musique, et à favoriser un paysage musical vibrant,
+            en établissant Coversea comme une plateforme de référence pour la création de pochettes
+          </span>
+          <span class="lang-ru lang-content">
+            Мы стремимся сделать визуальное выражение доступным для всех любителей музыки и способствовать развитию яркого музыкального ландшафта,
+            утверждая Coversea как ведущую платформу для создания обложек
+          </span>
         </div>
       </div>
 
