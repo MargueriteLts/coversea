@@ -26,7 +26,7 @@ export default class A_ToggleIcon extends Component {
 
     return (
       // <div onClick={() => handleToggle(this.props.item, this.props.setStore)}>
-      <div onClick={handleClick} className={buttonClasses}>
+      <div onClick={handleClick} className={buttonClasses} role="button" tabIndex={0}>
         <div className={iconClasses}></div>
       </div>
     );

@@ -19,7 +19,7 @@ import classnames from 'classnames'
     });
 
 
-    return <div className={buttonClasses} onClick={onClick}>
+    return <div className={buttonClasses} onClick={onClick} role="button" tabIndex={0}>
       <div className={iconClasses}></div>
     </div>
 

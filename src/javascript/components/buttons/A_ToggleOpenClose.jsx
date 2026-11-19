@@ -19,7 +19,7 @@ export default class A_ToggleOpenClose extends Component {
       "icon--angle-up": isOpen
     })
 
-    return <div className={style} onClick={handleClick}>
+    return <div className={style} onClick={handleClick} role="button" tabIndex={0}>
       {hasIconLeft ?
     //  isOpen ? (
     //    // <img src={icons["AngleUp"]} alt="" />

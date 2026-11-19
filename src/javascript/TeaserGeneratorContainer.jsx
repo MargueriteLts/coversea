@@ -815,7 +815,7 @@ export default class GeneratorContainer extends Component {
       <div className="generator__sketch-wrap">
         <div className="sketch" id="sketch" ref={this.sketchContainerRef} onContextMenu={handleContextMenu}></div>
         <div className="generator__sketch-controls">
-          <div className="button--large" onClick={this.generateCover}>
+          <div className="button--large" onClick={this.generateCover} role="button" tabIndex={0}>
             <span className="lang-en lang-content">GENERATE</span>
             <span className="lang-fr lang-content">GÉNÉRER</span>
             <span className="lang-ru lang-content">ГЕНЕРИРОВАТЬ</span>

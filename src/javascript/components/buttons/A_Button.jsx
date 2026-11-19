@@ -23,7 +23,7 @@ export default class A_Button extends Component {
     })
 
     return (
-      <div className={buttonClass} onClick={onClick}>
+      <div className={buttonClass} onClick={onClick} role="button" tabIndex={0}>
         {hasIcon ? (
           <div className={iconClass}></div>
         ) : null }
