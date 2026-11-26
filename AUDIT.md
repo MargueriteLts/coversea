@@ -6,17 +6,19 @@
 
 ## Progress
 
-Updated 19 November 2026, on branch `work`. Each fix was tested in headless Chrome, before and after the change. Each item that has changed since the audit starts with a status line.
+Updated 26 November 2026, on branch `work`. Each fix was tested in headless Chrome, before and after the change. Each item that has changed since the audit starts with a status line.
 
 - **Fixed:** items 1 to 4 and 7 to 13, and half of item 21.
 - **Partly fixed:** item 14. The generator's interface isn't translated yet.
 - **Left as is, by decision:** item 5, and the last sentence of item 11.
 - **Later:** item 6.
-- **Still open:** the old generator pages, items 15 to 20, the other half of 21, items 22 to 24, and the Low section.
+- **Still open:** the old generator pages, items 15 to 20, the other half of 21, items 22 to 24, and the Low section (its accessibility point is partly fixed).
 - **Also fixed, not in the audit:**
   - The background photo now stays on its upload button when the Background module is closed and reopened.
   - The upload buttons' dark overlay on hover now shows. Its class name was misspelled.
   - Showing a big photo on its upload button no longer freezes the page for a moment.
+  - On phones, tapping a button such as Randomize or Generate could open a Google search for the word under the finger (Chrome's "Touch to Search" on Android). The buttons are now marked as buttons for the browser, and text selection and the long-press menu are off in the generator, except in the text fields. Not testable in headless Chrome: still to confirm on a phone.
+  - On phones, a tapped button kept its hover look (Generate stayed white) until the next tap elsewhere. Hover effects now apply only on devices with a mouse, and Generate turns white only while it's held down.
 
 ## Summary
 
@@ -73,7 +75,7 @@ Measured: 1 redraw per second at rest after load, about 40 per second after one 
 > **Status: fixed by simplifying the generator on phones**, since its full settings aren't meant for small screens ([adaptive.scss](src/stylesheets/adaptive.scss)). Up to 743 px wide:
 > - the Text module shows only the main text and first small text fields, at full width with their label above, and no Text settings buttons;
 > - the logo module shows only its upload button, plus Delete once a logo is in;
-> - Background, Vinyl Disc and Lines don't open, which is why their names have no arrow on phones.
+> - Background, Vinyl Disc and Lines don't open, so their names have no arrow on phones. Text and logo keep their arrow, so visitors can see that those two open.
 >
 > Tested at 390 px: each text field is now 326 px wide, against 72 and 40 px before.
 
@@ -257,7 +259,10 @@ The `og:` and `twitter:` URLs ([index.html:20-30](src/index.html#L20-L30)) use `
   - [store.js:1848](src/javascript/store.js#L1848) checks `collection` instead of `currentCollection`, so the "Electronics" image collection is never applied.
 - **Most mismatches between the controls and the canvas share one cause.** Values live in mutable module-level objects, get copied into component state, and are re-rendered with `setState({})`, through 30+ near-identical handlers. One shared function that updates a value and redraws once would remove most of these bugs.
 - **Isolate each module's drawing with `p.push()` and `p.pop()`.** Drawing settings (fill, rectMode, blendMode) currently leak from one module to the next. The gradient at [sketch.js:682](src/javascript/sketch.js#L682) only fills the canvas because the text module's `rectMode(CENTER)` carries over from the previous frame.
-- **Accessibility:** the generator has no real buttons or links. Its controls, including the 12 module-header controls, are clickable `<div>`s, so they can't be reached with a keyboard or announced by screen readers. The download button has no label, and the text-box text contrast is about 4.1:1, below the usual 4.5:1 minimum.
+- **Accessibility:**
+  > **Status: partly fixed.** The generator's clickable controls (Randomize, Generate, Download, the module headers and the small icon buttons) now have `role="button"` and `tabIndex={0}`, so screen readers announce them and the Tab key reaches them. Enter and Space don't press them yet, the download button still has no label, and the contrast is unchanged.
+
+  The generator has no real buttons or links. Its controls, including the 12 module-header controls, are clickable `<div>`s, so they can't be reached with a keyboard or announced by screen readers. The download button has no label, and the text-box text contrast is about 4.1:1, below the usual 4.5:1 minimum.
 - **Failed uploads are silent:** errors only go to the browser console (since items 1 and 2, from the upload handlers in [TeaserGeneratorContainer.jsx](src/javascript/TeaserGeneratorContainer.jsx)). Show a message instead.
 - **Outdated build tools** ([package.json:19-43](package.json#L19-L43)): webpack-cli 4, sass-loader 11, css-loader 5 and css-minimizer-webpack-plugin 2 are several major versions behind. file-loader and @babel/plugin-proposal-class-properties are no longer needed (webpack 5's asset modules and @babel/preset-env cover them), and react-color hasn't been updated since 2020.
 - **The webpack config repeats itself:** CopyPlugin is added twice ([webpack.common.js:90](webpack.common.js#L90), [106](webpack.common.js#L106)), and the 29 generator pages are 29 hand-written HtmlWebpackPlugin blocks ([lines 136-366](webpack.common.js#L136-L366)).
